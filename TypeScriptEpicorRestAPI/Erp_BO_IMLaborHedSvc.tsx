@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.IMLaborHedSvc
 // Description: Business Object to handle: Add, Update and Delete of LaborHed, LaborDtl
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method AddIndirectLabor
    Description: Add LaborHed and LaborHed related tables
    OperationID: AddIndirectLabor
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddIndirectLabor_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddIndirectLabor_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddIndirectLabor_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddIndirectLabor(requestBody:any, epicorHeaders?:Headers){
+export function post_AddIndirectLabor(requestBody:AddIndirectLabor_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddIndirectLabor_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IMLaborHedSvc/AddIndirectLabor", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddIndirectLabor_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_AddIndirectLabor(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteIndirectLabor
    Description: Delete LaborHed and LaborHed related tables
    OperationID: DeleteIndirectLabor
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteIndirectLabor_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteIndirectLabor_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteIndirectLabor_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteIndirectLabor(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteIndirectLabor(requestBody:DeleteIndirectLabor_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteIndirectLabor_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IMLaborHedSvc/DeleteIndirectLabor", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteIndirectLabor_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_DeleteIndirectLabor(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method UpdateIndirectLabor
    Description: Update LaborHed and LaborHed related tables
    OperationID: UpdateIndirectLabor
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateIndirectLabor_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateIndirectLabor_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateIndirectLabor_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateIndirectLabor(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateIndirectLabor(requestBody:UpdateIndirectLabor_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateIndirectLabor_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IMLaborHedSvc/UpdateIndirectLabor", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateIndirectLabor_output)
           })
       .catch((error) => {
           reject(error)
@@ -189,11 +260,45 @@ export function post_UpdateIndirectLabor(requestBody:any, epicorHeaders?:Headers
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -221,7 +326,7 @@ export interface AddIndirectLabor_output{
 parameters : {
       /**  output parameters  */  
    errorsOccurred:boolean,
-   imIntegrationKey:Erp_Tablesets_IMIntegrationKeyTableset[],
+   imIntegrationKey:Erp_Tablesets_IMIntegrationKeyTableset,
 }
 }
 

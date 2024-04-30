@@ -1,11 +1,30 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PcInputsSearchSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -14,7 +33,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -32,7 +51,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -46,7 +72,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -64,7 +90,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -84,10 +117,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcInputsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcInputsRow
    */  
 export function get_PcInputsSearches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -102,7 +135,14 @@ export function get_PcInputsSearches(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcInputsRow)
           })
@@ -116,15 +156,15 @@ export function get_PcInputsSearches(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PcInputsSearches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcInputsRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcInputsRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PcInputsRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PcInputsRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PcInputsSearches(requestBody:any, epicorHeaders?:Headers){
+export function post_PcInputsSearches(requestBody:Erp_Tablesets_PcInputsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -138,7 +178,14 @@ export function post_PcInputsSearches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -157,10 +204,10 @@ export function post_PcInputsSearches(requestBody:any, epicorHeaders?:Headers){
       @param InputName Desc: InputName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PcInputsRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PcInputsRow
    */  
 export function get_PcInputsSearches_Company_ConfigID_InputName(Company:string, ConfigID:string, InputName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -175,7 +222,14 @@ export function get_PcInputsSearches_Company_ConfigID_InputName(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PcInputsRow)
           })
@@ -192,15 +246,15 @@ export function get_PcInputsSearches_Company_ConfigID_InputName(Company:string, 
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ConfigID Desc: ConfigID   Required: True   Allow empty value : True
       @param InputName Desc: InputName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcInputsRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcInputsRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PcInputsSearches_Company_ConfigID_InputName(Company:string, ConfigID:string, InputName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PcInputsSearches_Company_ConfigID_InputName(Company:string, ConfigID:string, InputName:string, requestBody:Erp_Tablesets_PcInputsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -214,7 +268,14 @@ export function patch_PcInputsSearches_Company_ConfigID_InputName(Company:string
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_PcInputsSearches_Company_ConfigID_InputName(Company:string
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ConfigID Desc: ConfigID   Required: True   Allow empty value : True
       @param InputName Desc: InputName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_PcInputsSearches_Company_ConfigID_InputName(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -270,10 +338,10 @@ export function delete_PcInputsSearches_Company_ConfigID_InputName(Company:strin
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcInputsListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcInputsListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -288,7 +356,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcInputsListRow)
           })
@@ -301,6 +376,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -311,7 +403,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -353,15 +445,22 @@ export function get_GetRows(whereClausePcInputs:string, pageSize:string, absolut
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcInputsSearchSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -375,7 +474,7 @@ export function get_GetRows(whereClausePcInputs:string, pageSize:string, absolut
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -408,15 +507,22 @@ export function get_GetByID(configID:string, inputName:string, epicorHeaders?:He
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcInputsSearchSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -431,7 +537,7 @@ export function get_GetByID(configID:string, inputName:string, epicorHeaders?:He
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -473,15 +579,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcInputsSearchSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -493,30 +606,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetNewPcInputs
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPcInputs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPcInputs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPcInputs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPcInputs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPcInputs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPcInputs(requestBody:GetNewPcInputs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPcInputs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcInputsSearchSvc/GetNewPcInputs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPcInputs_output)
           })
       .catch((error) => {
           reject(error)
@@ -528,30 +648,37 @@ export function post_GetNewPcInputs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcInputsSearchSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -563,7 +690,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -587,15 +714,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcInputsSearchSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -607,7 +741,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -631,15 +765,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcInputsSearchSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -651,30 +792,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcInputsSearchSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -686,30 +834,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcInputsSearchSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -720,16 +875,33 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcInputsListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PcInputsListRow[],
+   "value":Erp_Tablesets_PcInputsListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcInputsRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PcInputsRow[],
+   "value":Erp_Tablesets_PcInputsRow,
 }
 
 export interface Erp_Tablesets_PcInputsListRow{
@@ -1054,6 +1226,23 @@ export interface Erp_Tablesets_PcInputsRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1472,7 +1661,7 @@ export interface GetNewPcInputs_input{
 export interface GetNewPcInputs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcInputsSearchTableset[],
+   ds:Erp_Tablesets_PcInputsSearchTableset,
 }
 }
 
@@ -1546,7 +1735,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtPcInputsSearchTableset[],
+   ds:Erp_Tablesets_UpdExtPcInputsSearchTableset,
    errorsOccurred:boolean,
 }
 }
@@ -1561,7 +1750,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcInputsSearchTableset[],
+   ds:Erp_Tablesets_PcInputsSearchTableset,
 }
 }
 

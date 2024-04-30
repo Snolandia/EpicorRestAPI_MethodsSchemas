@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.GLAcctDispSvc
 // Description: Business Object Used by GL Searches
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLAcctDispRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLAcctDispRow
    */  
 export function get_GLAcctDisps(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_GLAcctDisps(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLAcctDispRow)
           })
@@ -117,15 +157,15 @@ export function get_GLAcctDisps(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GLAcctDisps
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLAcctDispRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLAcctDispRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GLAcctDispRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GLAcctDispRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLAcctDisps(requestBody:any, epicorHeaders?:Headers){
+export function post_GLAcctDisps(requestBody:Erp_Tablesets_GLAcctDispRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_GLAcctDisps(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -158,10 +205,10 @@ export function post_GLAcctDisps(requestBody:any, epicorHeaders?:Headers){
       @param GLAccount Desc: GLAccount   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLAcctDispRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLAcctDispRow
    */  
 export function get_GLAcctDisps_Company_COACode_GLAccount(Company:string, COACode:string, GLAccount:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -176,7 +223,14 @@ export function get_GLAcctDisps_Company_COACode_GLAccount(Company:string, COACod
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLAcctDispRow)
           })
@@ -193,15 +247,15 @@ export function get_GLAcctDisps_Company_COACode_GLAccount(Company:string, COACod
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param COACode Desc: COACode   Required: True   Allow empty value : True
       @param GLAccount Desc: GLAccount   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLAcctDispRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLAcctDispRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GLAcctDisps_Company_COACode_GLAccount(Company:string, COACode:string, GLAccount:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GLAcctDisps_Company_COACode_GLAccount(Company:string, COACode:string, GLAccount:string, requestBody:Erp_Tablesets_GLAcctDispRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_GLAcctDisps_Company_COACode_GLAccount(Company:string, COAC
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -232,7 +293,7 @@ export function patch_GLAcctDisps_Company_COACode_GLAccount(Company:string, COAC
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param COACode Desc: COACode   Required: True   Allow empty value : True
       @param GLAccount Desc: GLAccount   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -251,7 +312,14 @@ export function delete_GLAcctDisps_Company_COACode_GLAccount(Company:string, COA
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -271,10 +339,10 @@ export function delete_GLAcctDisps_Company_COACode_GLAccount(Company:string, COA
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLAcctDispListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLAcctDispListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -289,7 +357,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLAcctDispListRow)
           })
@@ -302,6 +377,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -312,7 +404,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -354,15 +446,22 @@ export function get_GetRows(whereClauseGLAcctDisp:string, pageSize:string, absol
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -376,7 +475,7 @@ export function get_GetRows(whereClauseGLAcctDisp:string, pageSize:string, absol
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -409,15 +508,22 @@ export function get_GetByID(coACode:string, glAccount:string, epicorHeaders?:Hea
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -432,7 +538,7 @@ export function get_GetByID(coACode:string, glAccount:string, epicorHeaders?:Hea
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -474,15 +580,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -497,30 +610,37 @@ Parameters:
 <param name="WhereClauseGLAcctDisp">GLAcctDisp search clause</param><param name="pageSize">Page size</param><param name="absolutePage">Absolute page</param><param name="morePages">More Pages</param>
 Notes:
    OperationID: InvokeBalanceAcctSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InvokeBalanceAcctSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InvokeBalanceAcctSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InvokeBalanceAcctSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InvokeBalanceAcctSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_InvokeBalanceAcctSearch(requestBody:InvokeBalanceAcctSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InvokeBalanceAcctSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/InvokeBalanceAcctSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InvokeBalanceAcctSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -535,30 +655,37 @@ Parameters:
 <param name="WhereClause">GLAcctDisp search clause</param><param name="pageSize">Page size</param><param name="absolutePage">Absolute page</param><param name="includeInactive">includeInactive</param><param name="morePages">More Pages</param>
 Notes:
    OperationID: GetList2
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetList2_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetList2_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList2_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetList2(requestBody:any, epicorHeaders?:Headers){
+export function post_GetList2(requestBody:GetList2_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList2_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GetList2", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList2_output)
           })
       .catch((error) => {
           reject(error)
@@ -573,30 +700,37 @@ Parameters:
 <param name="WhereClause">GLAcctDisp search clause</param><param name="pageSize">Page size</param><param name="absolutePage">Absolute page</param><param name="includeDynamic">Include Dynamic</param><param name="morePages">More Pages</param>
 Notes:
    OperationID: GetListCBOnly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListCBOnly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListCBOnly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListCBOnly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListCBOnly(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListCBOnly(requestBody:GetListCBOnly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListCBOnly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GetListCBOnly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListCBOnly_output)
           })
       .catch((error) => {
           reject(error)
@@ -608,30 +742,37 @@ export function post_GetListCBOnly(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GLAccountSearchList
    Description: Search GLAccount in DataSetList mode.  This will include dynamic segments unless excluded via where clause.
    OperationID: GLAccountSearchList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GLAccountSearchList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GLAccountSearchList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GLAccountSearchList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLAccountSearchList(requestBody:any, epicorHeaders?:Headers){
+export function post_GLAccountSearchList(requestBody:GLAccountSearchList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GLAccountSearchList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GLAccountSearchList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GLAccountSearchList_output)
           })
       .catch((error) => {
           reject(error)
@@ -643,30 +784,37 @@ export function post_GLAccountSearchList(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method CheckDispAccountGeneral
    Description: Public method for calling GL library - GLAcctLib and method CheckDispAccountGeneral from UI GL plug-in.
    OperationID: CheckDispAccountGeneral
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckDispAccountGeneral_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckDispAccountGeneral_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckDispAccountGeneral_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckDispAccountGeneral(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckDispAccountGeneral(requestBody:CheckDispAccountGeneral_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckDispAccountGeneral_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/CheckDispAccountGeneral", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckDispAccountGeneral_output)
           })
       .catch((error) => {
           reject(error)
@@ -678,30 +826,37 @@ export function post_CheckDispAccountGeneral(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method CheckDispAcctGLB
    Description: Public method for calling GL library - GLAcctLib and method CheckDispAcctGLB from UI GL plug-in.
    OperationID: CheckDispAcctGLB
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckDispAcctGLB_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckDispAcctGLB_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckDispAcctGLB_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckDispAcctGLB(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckDispAcctGLB(requestBody:CheckDispAcctGLB_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckDispAcctGLB_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/CheckDispAcctGLB", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckDispAcctGLB_output)
           })
       .catch((error) => {
           reject(error)
@@ -713,30 +868,37 @@ export function post_CheckDispAcctGLB(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GLAccountSearchListPeriod
    Description: Search GLAccount used by Kinetic. List search type
    OperationID: GLAccountSearchListPeriod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GLAccountSearchListPeriod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GLAccountSearchListPeriod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GLAccountSearchListPeriod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLAccountSearchListPeriod(requestBody:any, epicorHeaders?:Headers){
+export function post_GLAccountSearchListPeriod(requestBody:GLAccountSearchListPeriod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GLAccountSearchListPeriod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GLAccountSearchListPeriod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GLAccountSearchListPeriod_output)
           })
       .catch((error) => {
           reject(error)
@@ -748,30 +910,37 @@ export function post_GLAccountSearchListPeriod(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GLAccountSearchRowsPeriod
    Description: Search GLAccount used by Kinetic. Rows search type
    OperationID: GLAccountSearchRowsPeriod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GLAccountSearchRowsPeriod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GLAccountSearchRowsPeriod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GLAccountSearchRowsPeriod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLAccountSearchRowsPeriod(requestBody:any, epicorHeaders?:Headers){
+export function post_GLAccountSearchRowsPeriod(requestBody:GLAccountSearchRowsPeriod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GLAccountSearchRowsPeriod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GLAccountSearchRowsPeriod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GLAccountSearchRowsPeriod_output)
           })
       .catch((error) => {
           reject(error)
@@ -783,30 +952,37 @@ export function post_GLAccountSearchRowsPeriod(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GLAccountSearchFilter
    Description: Search GLAccount with account filter applied
    OperationID: GLAccountSearchFilter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GLAccountSearchFilter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GLAccountSearchFilter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GLAccountSearchFilter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLAccountSearchFilter(requestBody:any, epicorHeaders?:Headers){
+export function post_GLAccountSearchFilter(requestBody:GLAccountSearchFilter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GLAccountSearchFilter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GLAccountSearchFilter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GLAccountSearchFilter_output)
           })
       .catch((error) => {
           reject(error)
@@ -818,30 +994,37 @@ export function post_GLAccountSearchFilter(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetListCBOnlyPeriod
    Description: Search GLAccount CBOnlyPeriod
    OperationID: GetListCBOnlyPeriod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListCBOnlyPeriod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListCBOnlyPeriod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListCBOnlyPeriod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListCBOnlyPeriod(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListCBOnlyPeriod(requestBody:GetListCBOnlyPeriod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListCBOnlyPeriod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GetListCBOnlyPeriod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListCBOnlyPeriod_output)
           })
       .catch((error) => {
           reject(error)
@@ -853,30 +1036,37 @@ export function post_GetListCBOnlyPeriod(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewGLAcctDisp
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGLAcctDisp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLAcctDisp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLAcctDisp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGLAcctDisp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGLAcctDisp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGLAcctDisp(requestBody:GetNewGLAcctDisp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGLAcctDisp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GetNewGLAcctDisp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGLAcctDisp_output)
           })
       .catch((error) => {
           reject(error)
@@ -888,30 +1078,37 @@ export function post_GetNewGLAcctDisp(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -923,7 +1120,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -947,15 +1144,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -967,7 +1171,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -991,15 +1195,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1011,30 +1222,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1046,30 +1264,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLAcctDispSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1080,16 +1305,33 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLAcctDispListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLAcctDispListRow[],
+   "value":Erp_Tablesets_GLAcctDispListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLAcctDispRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLAcctDispRow[],
+   "value":Erp_Tablesets_GLAcctDispRow,
 }
 
 export interface Erp_Tablesets_GLAcctDispListRow{
@@ -1263,6 +1505,23 @@ I - Income Statement  */
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1736,7 +1995,7 @@ export interface GetNewGLAcctDisp_input{
 export interface GetNewGLAcctDisp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLAcctDispTableset[],
+   ds:Erp_Tablesets_GLAcctDispTableset,
 }
 }
 
@@ -1829,7 +2088,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtGLAcctDispTableset[],
+   ds:Erp_Tablesets_UpdExtGLAcctDispTableset,
    errorsOccurred:boolean,
 }
 }
@@ -1844,7 +2103,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLAcctDispTableset[],
+   ds:Erp_Tablesets_GLAcctDispTableset,
 }
 }
 

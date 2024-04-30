@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.RPT.GLTrialBalanceSvc
 // Description: GL Trial Balance report
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method GetApplicationDefaults
    Description: Load params when form is opened
    OperationID: GetApplicationDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetApplicationDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetApplicationDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetApplicationDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetApplicationDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_GetApplicationDefaults(requestBody:GetApplicationDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetApplicationDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/GetApplicationDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetApplicationDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_GetApplicationDefaults(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnChangeBookID
    Description: This method will set default values based on the book.
    OperationID: OnChangeBookID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBookID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBookID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBookID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBookID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBookID(requestBody:OnChangeBookID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBookID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/OnChangeBookID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBookID_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_OnChangeBookID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeFiscalYear
    Description: Returns data for the first found FiscalYear/FiscalYearSuffix.
    OperationID: OnChangeFiscalYear
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeFiscalYear_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeFiscalYear_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeFiscalYear_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeFiscalYear(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeFiscalYear(requestBody:OnChangeFiscalYear_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeFiscalYear_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/OnChangeFiscalYear", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeFiscalYear_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_OnChangeFiscalYear(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeFiscalYearSuffix
    Description: This method will set default values based on Fiscal Year.
    OperationID: OnChangeFiscalYearSuffix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeFiscalYearSuffix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeFiscalYearSuffix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeFiscalYearSuffix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeFiscalYearSuffix(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeFiscalYearSuffix(requestBody:OnChangeFiscalYearSuffix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeFiscalYearSuffix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/OnChangeFiscalYearSuffix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeFiscalYearSuffix_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,30 +303,37 @@ export function post_OnChangeFiscalYearSuffix(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangeDates
    Description: This method will set default values based on the Start/End Dates.
    OperationID: OnChangeDates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeDates_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeDates_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeDates_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeDates(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeDates(requestBody:OnChangeDates_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeDates_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/OnChangeDates", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeDates_output)
           })
       .catch((error) => {
           reject(error)
@@ -260,30 +345,37 @@ export function post_OnChangeDates(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangePeriods
    Description: This method will set default values based on Fiscal Period.
    OperationID: OnChangePeriods
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePeriods_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePeriods_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePeriods_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePeriods(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePeriods(requestBody:OnChangePeriods_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePeriods_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/OnChangePeriods", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePeriods_output)
           })
       .catch((error) => {
           reject(error)
@@ -296,7 +388,7 @@ export function post_OnChangePeriods(requestBody:any, epicorHeaders?:Headers){
    Description: Returns a comma separated list of valid tokens for the given datatype.
    OperationID: Get_GetTokenList
       @param tokenDataType Desc: Type of token for which you want the list of valid values. Valid Types are; Date, FiscalPeriod, FiscalYear   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTokenList_output
@@ -320,15 +412,22 @@ export function get_GetTokenList(tokenDataType:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTokenList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/GetTokenList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTokenList_output)
           })
       .catch((error) => {
           reject(error)
@@ -341,7 +440,7 @@ export function get_GetTokenList(tokenDataType:string, epicorHeaders?:Headers){
    Description: Returns a token list of values based on a type that is passed in.
    OperationID: Get_GetTokenValue
       @param pcValue Desc: Type of token   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTokenValue_output
@@ -365,15 +464,22 @@ export function get_GetTokenValue(pcValue:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTokenValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/GetTokenValue" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTokenValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -385,7 +491,7 @@ export function get_GetTokenValue(pcValue:string, epicorHeaders?:Headers){
    Summary: Invoke method GetRptArchiveList
    Description: Returns a sub-delimited list of valid archive codes/descriptions.
    OperationID: GetRptArchiveList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRptArchiveList_output
@@ -398,15 +504,22 @@ export function post_GetRptArchiveList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRptArchiveList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/GetRptArchiveList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRptArchiveList_output)
           })
       .catch((error) => {
           reject(error)
@@ -418,30 +531,37 @@ export function post_GetRptArchiveList(epicorHeaders?:Headers){
    Summary: Invoke method SubmitToAgent
    Description: Submits this report to a System Agent. The system agent will run the task based on the defined schedule.
    OperationID: SubmitToAgent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SubmitToAgent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SubmitToAgent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SubmitToAgent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubmitToAgent(requestBody:any, epicorHeaders?:Headers){
+export function post_SubmitToAgent(requestBody:SubmitToAgent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SubmitToAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/SubmitToAgent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SubmitToAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -459,30 +579,37 @@ designated as ParamSetID.
 As is the case in GLFinancial Reports the GLFinancialParam.GLReportID is used as the ParamSetID field.
 Another possible use would be to Reset the screen to default values.
    OperationID: GetDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDefaults(requestBody:GetDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/GetDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -495,7 +622,7 @@ export function post_GetDefaults(requestBody:any, epicorHeaders?:Headers){
    Description: Creates a new (parameter record) in the dataset.
 Note: A parameter dataset should never contain more than one record.
    OperationID: Get_GetNewParameters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewParameters_output
@@ -508,15 +635,22 @@ export function get_GetNewParameters(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewParameters_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/GetNewParameters", {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewParameters_output)
           })
       .catch((error) => {
           reject(error)
@@ -533,7 +667,7 @@ used to retrieve those values and return them in the specific dataset.
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParamsFromAgent_output
@@ -575,15 +709,22 @@ export function get_GetParamsFromAgent(agentID:string, agentSchedNum:string, age
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParamsFromAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/GetParamsFromAgent" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParamsFromAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -597,30 +738,37 @@ export function get_GetParamsFromAgent(agentID:string, agentSchedNum:string, age
 It is provided to provide the ability to get the defaults after the user has enter a value into the field
 designated as ParamSetID.
    OperationID: GetParamTaskDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetParamTaskDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetParamTaskDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParamTaskDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetParamTaskDef(requestBody:any, epicorHeaders?:Headers){
+export function post_GetParamTaskDef(requestBody:GetParamTaskDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParamTaskDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/GetParamTaskDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParamTaskDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -632,30 +780,37 @@ export function post_GetParamTaskDef(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RemoveDefaults
    Description: Use to remove the current parameter defaults that the user has established for this report.
    OperationID: RemoveDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveDefaults(requestBody:RemoveDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/RemoveDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -667,30 +822,37 @@ export function post_RemoveDefaults(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunDirect
    Description: Use to run the process directly from the client instead of submitting to a System Agent.
    OperationID: RunDirect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunDirect_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunDirect_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunDirect_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunDirect(requestBody:any, epicorHeaders?:Headers){
+export function post_RunDirect(requestBody:RunDirect_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunDirect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/RunDirect", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunDirect_output)
           })
       .catch((error) => {
           reject(error)
@@ -702,30 +864,37 @@ export function post_RunDirect(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SaveDefaults
    Description: Use to save the current parameters as the users defaults for this report
    OperationID: SaveDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveDefaults(requestBody:SaveDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/SaveDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -738,30 +907,37 @@ export function post_SaveDefaults(requestBody:any, epicorHeaders?:Headers){
    Description: Use to save the current parameters as the users defaults for this report
 <param name="maintProgram">UI Maintenance program </param><param name="ds" />
    OperationID: SaveProcessTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveProcessTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveProcessTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveProcessTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveProcessTask(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveProcessTask(requestBody:SaveProcessTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveProcessTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.GLTrialBalanceSvc/SaveProcessTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveProcessTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -772,11 +948,45 @@ export function post_SaveProcessTask(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -986,7 +1196,7 @@ export interface GetApplicationDefaults_input{
 export interface GetApplicationDefaults_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLTrialBalanceTableset[],
+   ds:Erp_Tablesets_GLTrialBalanceTableset,
 }
 }
 
@@ -1000,7 +1210,7 @@ export interface GetDefaults_input{
 export interface GetDefaults_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLTrialBalanceTableset[],
+   ds:Erp_Tablesets_GLTrialBalanceTableset,
 }
 }
 
@@ -1018,7 +1228,7 @@ export interface GetParamTaskDef_input{
 export interface GetParamTaskDef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLTrialBalanceTableset[],
+   ds:Erp_Tablesets_GLTrialBalanceTableset,
 }
 }
 
@@ -1103,7 +1313,7 @@ export interface OnChangeBookID_input{
 export interface OnChangeBookID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLTrialBalanceTableset[],
+   ds:Erp_Tablesets_GLTrialBalanceTableset,
 }
 }
 
@@ -1123,7 +1333,7 @@ export interface OnChangeDates_input{
 export interface OnChangeDates_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLTrialBalanceTableset[],
+   ds:Erp_Tablesets_GLTrialBalanceTableset,
 }
 }
 
@@ -1143,7 +1353,7 @@ export interface OnChangeFiscalYearSuffix_input{
 export interface OnChangeFiscalYearSuffix_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLTrialBalanceTableset[],
+   ds:Erp_Tablesets_GLTrialBalanceTableset,
 }
 }
 
@@ -1160,7 +1370,7 @@ export interface OnChangeFiscalYear_input{
 export interface OnChangeFiscalYear_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLTrialBalanceTableset[],
+   ds:Erp_Tablesets_GLTrialBalanceTableset,
 }
 }
 
@@ -1180,7 +1390,7 @@ export interface OnChangePeriods_input{
 export interface OnChangePeriods_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLTrialBalanceTableset[],
+   ds:Erp_Tablesets_GLTrialBalanceTableset,
 }
 }
 

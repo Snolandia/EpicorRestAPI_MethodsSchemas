@@ -1,11 +1,30 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.RoleCdSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -14,7 +33,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -32,7 +51,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -46,7 +72,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -64,7 +90,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RoleCdRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RoleCdRow
    */  
 export function get_RoleCds(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_RoleCds(select?:string, expand?:string, filter?:string, orde
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RoleCdRow)
           })
@@ -117,15 +157,15 @@ export function get_RoleCds(select?:string, expand?:string, filter?:string, orde
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RoleCds
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RoleCdRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RoleCdRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RoleCdRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RoleCdRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RoleCds(requestBody:any, epicorHeaders?:Headers){
+export function post_RoleCds(requestBody:Erp_Tablesets_RoleCdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_RoleCds(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -158,10 +205,10 @@ export function post_RoleCds(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RoleCdRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RoleCdRow
    */  
 export function get_RoleCds_Company_RoleCode(Company:string, RoleCode:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -176,7 +223,14 @@ export function get_RoleCds_Company_RoleCode(Company:string, RoleCode:string, se
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RoleCdRow)
           })
@@ -192,15 +246,15 @@ export function get_RoleCds_Company_RoleCode(Company:string, RoleCode:string, se
    OperationID: UpdateExt_RoleCd
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RoleCode Desc: RoleCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RoleCdRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RoleCdRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RoleCds_Company_RoleCode(Company:string, RoleCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RoleCds_Company_RoleCode(Company:string, RoleCode:string, requestBody:Erp_Tablesets_RoleCdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -214,7 +268,14 @@ export function patch_RoleCds_Company_RoleCode(Company:string, RoleCode:string, 
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -230,7 +291,7 @@ export function patch_RoleCds_Company_RoleCode(Company:string, RoleCode:string, 
    OperationID: DeleteUpdateExt_RoleCd
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RoleCode Desc: RoleCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -249,7 +310,14 @@ export function delete_RoleCds_Company_RoleCode(Company:string, RoleCode:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -271,10 +339,10 @@ export function delete_RoleCds_Company_RoleCode(Company:string, RoleCode:string,
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PrjRoleRtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PrjRoleRtRow
    */  
 export function get_RoleCds_Company_RoleCode_PrjRoleRts(Company:string, RoleCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -289,7 +357,14 @@ export function get_RoleCds_Company_RoleCode_PrjRoleRts(Company:string, RoleCode
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PrjRoleRtRow)
           })
@@ -309,10 +384,10 @@ export function get_RoleCds_Company_RoleCode_PrjRoleRts(Company:string, RoleCode
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PrjRoleRtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PrjRoleRtRow
    */  
 export function get_RoleCds_Company_RoleCode_PrjRoleRts_Company_RoleCd_Seq(Company:string, RoleCode:string, RoleCd:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_RoleCds_Company_RoleCode_PrjRoleRts_Company_RoleCd_Seq(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PrjRoleRtRow)
           })
@@ -347,10 +429,10 @@ export function get_RoleCds_Company_RoleCode_PrjRoleRts_Company_RoleCd_Seq(Compa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PrjRoleRtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PrjRoleRtRow
    */  
 export function get_PrjRoleRts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -365,7 +447,14 @@ export function get_PrjRoleRts(select?:string, filter?:string, orderby?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PrjRoleRtRow)
           })
@@ -379,15 +468,15 @@ export function get_PrjRoleRts(select?:string, filter?:string, orderby?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PrjRoleRts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PrjRoleRtRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PrjRoleRtRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PrjRoleRtRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PrjRoleRtRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PrjRoleRts(requestBody:any, epicorHeaders?:Headers){
+export function post_PrjRoleRts(requestBody:Erp_Tablesets_PrjRoleRtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -401,7 +490,14 @@ export function post_PrjRoleRts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -420,10 +516,10 @@ export function post_PrjRoleRts(requestBody:any, epicorHeaders?:Headers){
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PrjRoleRtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PrjRoleRtRow
    */  
 export function get_PrjRoleRts_Company_RoleCd_Seq(Company:string, RoleCd:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -438,7 +534,14 @@ export function get_PrjRoleRts_Company_RoleCd_Seq(Company:string, RoleCd:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PrjRoleRtRow)
           })
@@ -455,15 +558,15 @@ export function get_PrjRoleRts_Company_RoleCd_Seq(Company:string, RoleCd:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RoleCd Desc: RoleCd   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PrjRoleRtRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PrjRoleRtRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PrjRoleRts_Company_RoleCd_Seq(Company:string, RoleCd:string, Seq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PrjRoleRts_Company_RoleCd_Seq(Company:string, RoleCd:string, Seq:string, requestBody:Erp_Tablesets_PrjRoleRtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -477,7 +580,14 @@ export function patch_PrjRoleRts_Company_RoleCd_Seq(Company:string, RoleCd:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -494,7 +604,7 @@ export function patch_PrjRoleRts_Company_RoleCd_Seq(Company:string, RoleCd:strin
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RoleCd Desc: RoleCd   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -513,7 +623,14 @@ export function delete_PrjRoleRts_Company_RoleCd_Seq(Company:string, RoleCd:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -533,10 +650,10 @@ export function delete_PrjRoleRts_Company_RoleCd_Seq(Company:string, RoleCd:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RoleCdListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RoleCdListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -551,7 +668,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RoleCdListRow)
           })
@@ -564,6 +688,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -575,7 +716,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -626,15 +767,22 @@ export function get_GetRows(whereClauseRoleCd:string, whereClausePrjRoleRt:strin
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -647,7 +795,7 @@ export function get_GetRows(whereClauseRoleCd:string, whereClausePrjRoleRt:strin
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -671,15 +819,22 @@ export function get_GetByID(roleCode:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -694,7 +849,7 @@ export function get_GetByID(roleCode:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -736,15 +891,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -756,30 +918,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method ChangeSupervisorRole
    Description: Method to call when changing supervisor role.
    OperationID: ChangeSupervisorRole
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSupervisorRole_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSupervisorRole_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSupervisorRole_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSupervisorRole(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSupervisorRole(requestBody:ChangeSupervisorRole_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSupervisorRole_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/ChangeSupervisorRole", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSupervisorRole_output)
           })
       .catch((error) => {
           reject(error)
@@ -790,30 +959,37 @@ export function post_ChangeSupervisorRole(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method CheckCapabilityBefUpd
    OperationID: CheckCapabilityBefUpd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckCapabilityBefUpd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckCapabilityBefUpd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckCapabilityBefUpd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckCapabilityBefUpd(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckCapabilityBefUpd(requestBody:CheckCapabilityBefUpd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckCapabilityBefUpd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/CheckCapabilityBefUpd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckCapabilityBefUpd_output)
           })
       .catch((error) => {
           reject(error)
@@ -826,30 +1002,37 @@ export function post_CheckCapabilityBefUpd(requestBody:any, epicorHeaders?:Heade
    Description: Method used to validate if the Role Code is currently in use by operations,
 employees or projects
    OperationID: ValidateOKDelete
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateOKDelete_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateOKDelete_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateOKDelete_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateOKDelete(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateOKDelete(requestBody:ValidateOKDelete_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateOKDelete_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/ValidateOKDelete", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateOKDelete_output)
           })
       .catch((error) => {
           reject(error)
@@ -861,30 +1044,37 @@ export function post_ValidateOKDelete(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewRoleCd
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRoleCd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRoleCd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRoleCd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRoleCd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRoleCd(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRoleCd(requestBody:GetNewRoleCd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRoleCd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/GetNewRoleCd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRoleCd_output)
           })
       .catch((error) => {
           reject(error)
@@ -896,30 +1086,37 @@ export function post_GetNewRoleCd(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewPrjRoleRt
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPrjRoleRt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPrjRoleRt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPrjRoleRt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPrjRoleRt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPrjRoleRt(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPrjRoleRt(requestBody:GetNewPrjRoleRt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPrjRoleRt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/GetNewPrjRoleRt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPrjRoleRt_output)
           })
       .catch((error) => {
           reject(error)
@@ -931,30 +1128,37 @@ export function post_GetNewPrjRoleRt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -966,7 +1170,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -990,15 +1194,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1010,7 +1221,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1034,15 +1245,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1054,30 +1272,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1089,30 +1314,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RoleCdSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1123,21 +1355,38 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PrjRoleRtRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PrjRoleRtRow[],
+   "value":Erp_Tablesets_PrjRoleRtRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RoleCdListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RoleCdListRow[],
+   "value":Erp_Tablesets_RoleCdListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RoleCdRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RoleCdRow[],
+   "value":Erp_Tablesets_RoleCdRow,
 }
 
 export interface Erp_Tablesets_PrjRoleRtRow{
@@ -1275,6 +1524,23 @@ export interface Erp_Tablesets_RoleCdRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1290,7 +1556,7 @@ export interface ChangeSupervisorRole_input{
 export interface ChangeSupervisorRole_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RoleCdTableset[],
+   ds:Erp_Tablesets_RoleCdTableset,
 }
 }
 
@@ -1537,7 +1803,7 @@ export interface GetNewPrjRoleRt_input{
 export interface GetNewPrjRoleRt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RoleCdTableset[],
+   ds:Erp_Tablesets_RoleCdTableset,
 }
 }
 
@@ -1551,7 +1817,7 @@ export interface GetNewRoleCd_input{
 export interface GetNewRoleCd_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RoleCdTableset[],
+   ds:Erp_Tablesets_RoleCdTableset,
 }
 }
 
@@ -1627,7 +1893,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtRoleCdTableset[],
+   ds:Erp_Tablesets_UpdExtRoleCdTableset,
    errorsOccurred:boolean,
 }
 }
@@ -1642,7 +1908,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RoleCdTableset[],
+   ds:Erp_Tablesets_RoleCdTableset,
 }
 }
 

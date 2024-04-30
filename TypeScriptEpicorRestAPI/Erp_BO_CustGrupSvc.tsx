@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.CustGrupSvc
 // Description: Customer Group Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupRow
    */  
 export function get_CustGrups(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_CustGrups(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupRow)
           })
@@ -118,15 +158,15 @@ export function get_CustGrups(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CustGrups
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustGrupRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustGrupRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CustGrupRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CustGrupRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustGrups(requestBody:any, epicorHeaders?:Headers){
+export function post_CustGrups(requestBody:Erp_Tablesets_CustGrupRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_CustGrups(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_CustGrups(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustGrupRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustGrupRow
    */  
 export function get_CustGrups_Company_GroupCode(Company:string, GroupCode:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_CustGrups_Company_GroupCode(Company:string, GroupCode:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustGrupRow)
           })
@@ -193,15 +247,15 @@ export function get_CustGrups_Company_GroupCode(Company:string, GroupCode:string
    OperationID: UpdateExt_CustGrup
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupCode Desc: GroupCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustGrupRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustGrupRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CustGrups_Company_GroupCode(Company:string, GroupCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CustGrups_Company_GroupCode(Company:string, GroupCode:string, requestBody:Erp_Tablesets_CustGrupRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_CustGrups_Company_GroupCode(Company:string, GroupCode:stri
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_CustGrups_Company_GroupCode(Company:string, GroupCode:stri
    OperationID: DeleteUpdateExt_CustGrup
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupCode Desc: GroupCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_CustGrups_Company_GroupCode(Company:string, GroupCode:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_CustGrups_Company_GroupCode(Company:string, GroupCode:str
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupDiscPriceLstRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupDiscPriceLstRow
    */  
 export function get_CustGrups_Company_GroupCode_CustGrupDiscPriceLsts(Company:string, GroupCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_CustGrups_Company_GroupCode_CustGrupDiscPriceLsts(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupDiscPriceLstRow)
           })
@@ -309,10 +384,10 @@ export function get_CustGrups_Company_GroupCode_CustGrupDiscPriceLsts(Company:st
       @param SeqNum Desc: SeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustGrupDiscPriceLstRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustGrupDiscPriceLstRow
    */  
 export function get_CustGrups_Company_GroupCode_CustGrupDiscPriceLsts_Company_GroupCode_SeqNum(Company:string, GroupCode:string, SeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_CustGrups_Company_GroupCode_CustGrupDiscPriceLsts_Company_Gr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustGrupDiscPriceLstRow)
           })
@@ -349,10 +431,10 @@ export function get_CustGrups_Company_GroupCode_CustGrupDiscPriceLsts_Company_Gr
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupPriceLstRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupPriceLstRow
    */  
 export function get_CustGrups_Company_GroupCode_CustGrupPriceLsts(Company:string, GroupCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -367,7 +449,14 @@ export function get_CustGrups_Company_GroupCode_CustGrupPriceLsts(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupPriceLstRow)
           })
@@ -386,10 +475,10 @@ export function get_CustGrups_Company_GroupCode_CustGrupPriceLsts(Company:string
       @param SeqNum Desc: SeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustGrupPriceLstRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustGrupPriceLstRow
    */  
 export function get_CustGrups_Company_GroupCode_CustGrupPriceLsts_Company_GroupCode_SeqNum(Company:string, GroupCode:string, SeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -404,7 +493,14 @@ export function get_CustGrups_Company_GroupCode_CustGrupPriceLsts_Company_GroupC
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustGrupPriceLstRow)
           })
@@ -426,10 +522,10 @@ export function get_CustGrups_Company_GroupCode_CustGrupPriceLsts_Company_GroupC
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupAttchRow
    */  
 export function get_CustGrups_Company_GroupCode_CustGrupAttches(Company:string, GroupCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -444,7 +540,14 @@ export function get_CustGrups_Company_GroupCode_CustGrupAttches(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupAttchRow)
           })
@@ -463,10 +566,10 @@ export function get_CustGrups_Company_GroupCode_CustGrupAttches(Company:string, 
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustGrupAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustGrupAttchRow
    */  
 export function get_CustGrups_Company_GroupCode_CustGrupAttches_Company_GroupCode_DrawingSeq(Company:string, GroupCode:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -481,7 +584,14 @@ export function get_CustGrups_Company_GroupCode_CustGrupAttches_Company_GroupCod
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustGrupAttchRow)
           })
@@ -501,10 +611,10 @@ export function get_CustGrups_Company_GroupCode_CustGrupAttches_Company_GroupCod
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupDiscPriceLstRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupDiscPriceLstRow
    */  
 export function get_CustGrupDiscPriceLsts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -519,7 +629,14 @@ export function get_CustGrupDiscPriceLsts(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupDiscPriceLstRow)
           })
@@ -533,15 +650,15 @@ export function get_CustGrupDiscPriceLsts(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CustGrupDiscPriceLsts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustGrupDiscPriceLstRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustGrupDiscPriceLstRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CustGrupDiscPriceLstRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CustGrupDiscPriceLstRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustGrupDiscPriceLsts(requestBody:any, epicorHeaders?:Headers){
+export function post_CustGrupDiscPriceLsts(requestBody:Erp_Tablesets_CustGrupDiscPriceLstRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -555,7 +672,14 @@ export function post_CustGrupDiscPriceLsts(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -574,10 +698,10 @@ export function post_CustGrupDiscPriceLsts(requestBody:any, epicorHeaders?:Heade
       @param SeqNum Desc: SeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustGrupDiscPriceLstRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustGrupDiscPriceLstRow
    */  
 export function get_CustGrupDiscPriceLsts_Company_GroupCode_SeqNum(Company:string, GroupCode:string, SeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -592,7 +716,14 @@ export function get_CustGrupDiscPriceLsts_Company_GroupCode_SeqNum(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustGrupDiscPriceLstRow)
           })
@@ -609,15 +740,15 @@ export function get_CustGrupDiscPriceLsts_Company_GroupCode_SeqNum(Company:strin
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupCode Desc: GroupCode   Required: True   Allow empty value : True
       @param SeqNum Desc: SeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustGrupDiscPriceLstRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustGrupDiscPriceLstRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CustGrupDiscPriceLsts_Company_GroupCode_SeqNum(Company:string, GroupCode:string, SeqNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CustGrupDiscPriceLsts_Company_GroupCode_SeqNum(Company:string, GroupCode:string, SeqNum:string, requestBody:Erp_Tablesets_CustGrupDiscPriceLstRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -631,7 +762,14 @@ export function patch_CustGrupDiscPriceLsts_Company_GroupCode_SeqNum(Company:str
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -648,7 +786,7 @@ export function patch_CustGrupDiscPriceLsts_Company_GroupCode_SeqNum(Company:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupCode Desc: GroupCode   Required: True   Allow empty value : True
       @param SeqNum Desc: SeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -667,7 +805,14 @@ export function delete_CustGrupDiscPriceLsts_Company_GroupCode_SeqNum(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -687,10 +832,10 @@ export function delete_CustGrupDiscPriceLsts_Company_GroupCode_SeqNum(Company:st
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupPriceLstRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupPriceLstRow
    */  
 export function get_CustGrupPriceLsts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -705,7 +850,14 @@ export function get_CustGrupPriceLsts(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupPriceLstRow)
           })
@@ -719,15 +871,15 @@ export function get_CustGrupPriceLsts(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CustGrupPriceLsts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustGrupPriceLstRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustGrupPriceLstRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CustGrupPriceLstRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CustGrupPriceLstRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustGrupPriceLsts(requestBody:any, epicorHeaders?:Headers){
+export function post_CustGrupPriceLsts(requestBody:Erp_Tablesets_CustGrupPriceLstRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -741,7 +893,14 @@ export function post_CustGrupPriceLsts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -760,10 +919,10 @@ export function post_CustGrupPriceLsts(requestBody:any, epicorHeaders?:Headers){
       @param SeqNum Desc: SeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustGrupPriceLstRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustGrupPriceLstRow
    */  
 export function get_CustGrupPriceLsts_Company_GroupCode_SeqNum(Company:string, GroupCode:string, SeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -778,7 +937,14 @@ export function get_CustGrupPriceLsts_Company_GroupCode_SeqNum(Company:string, G
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustGrupPriceLstRow)
           })
@@ -795,15 +961,15 @@ export function get_CustGrupPriceLsts_Company_GroupCode_SeqNum(Company:string, G
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupCode Desc: GroupCode   Required: True   Allow empty value : True
       @param SeqNum Desc: SeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustGrupPriceLstRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustGrupPriceLstRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CustGrupPriceLsts_Company_GroupCode_SeqNum(Company:string, GroupCode:string, SeqNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CustGrupPriceLsts_Company_GroupCode_SeqNum(Company:string, GroupCode:string, SeqNum:string, requestBody:Erp_Tablesets_CustGrupPriceLstRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -817,7 +983,14 @@ export function patch_CustGrupPriceLsts_Company_GroupCode_SeqNum(Company:string,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -834,7 +1007,7 @@ export function patch_CustGrupPriceLsts_Company_GroupCode_SeqNum(Company:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupCode Desc: GroupCode   Required: True   Allow empty value : True
       @param SeqNum Desc: SeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -853,7 +1026,14 @@ export function delete_CustGrupPriceLsts_Company_GroupCode_SeqNum(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -873,10 +1053,10 @@ export function delete_CustGrupPriceLsts_Company_GroupCode_SeqNum(Company:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupAttchRow
    */  
 export function get_CustGrupAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -891,7 +1071,14 @@ export function get_CustGrupAttches(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupAttchRow)
           })
@@ -905,15 +1092,15 @@ export function get_CustGrupAttches(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CustGrupAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustGrupAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustGrupAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CustGrupAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CustGrupAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustGrupAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_CustGrupAttches(requestBody:Erp_Tablesets_CustGrupAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -927,7 +1114,14 @@ export function post_CustGrupAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -946,10 +1140,10 @@ export function post_CustGrupAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustGrupAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustGrupAttchRow
    */  
 export function get_CustGrupAttches_Company_GroupCode_DrawingSeq(Company:string, GroupCode:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -964,7 +1158,14 @@ export function get_CustGrupAttches_Company_GroupCode_DrawingSeq(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustGrupAttchRow)
           })
@@ -981,15 +1182,15 @@ export function get_CustGrupAttches_Company_GroupCode_DrawingSeq(Company:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupCode Desc: GroupCode   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustGrupAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustGrupAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CustGrupAttches_Company_GroupCode_DrawingSeq(Company:string, GroupCode:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CustGrupAttches_Company_GroupCode_DrawingSeq(Company:string, GroupCode:string, DrawingSeq:string, requestBody:Erp_Tablesets_CustGrupAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1003,7 +1204,14 @@ export function patch_CustGrupAttches_Company_GroupCode_DrawingSeq(Company:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1020,7 +1228,7 @@ export function patch_CustGrupAttches_Company_GroupCode_DrawingSeq(Company:strin
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupCode Desc: GroupCode   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1039,7 +1247,14 @@ export function delete_CustGrupAttches_Company_GroupCode_DrawingSeq(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1059,10 +1274,10 @@ export function delete_CustGrupAttches_Company_GroupCode_DrawingSeq(Company:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustGrupListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1077,7 +1292,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupListRow)
           })
@@ -1089,6 +1311,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1103,7 +1342,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1172,15 +1411,22 @@ export function get_GetRows(whereClauseCustGrup:string, whereClauseCustGrupAttch
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1193,7 +1439,7 @@ export function get_GetRows(whereClauseCustGrup:string, whereClauseCustGrupAttch
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1217,15 +1463,22 @@ export function get_GetByID(groupCode:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1240,7 +1493,7 @@ export function get_GetByID(groupCode:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1282,15 +1535,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1303,30 +1563,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Description: This method validates and populates the ListCode in either CustomerPriceLst
 or ShipToPriceLst
    OperationID: ChangeListCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeListCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeListCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeListCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeListCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeListCode(requestBody:ChangeListCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeListCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/ChangeListCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeListCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1339,30 +1606,37 @@ export function post_ChangeListCode(requestBody:any, epicorHeaders?:Headers){
    Description: This method moves the PriceLst or DiscPriceLst Up/Down one position in the
 grid and returns the whole updated datatable.
    OperationID: MoveOnePosition
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MoveOnePosition_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MoveOnePosition_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MoveOnePosition_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MoveOnePosition(requestBody:any, epicorHeaders?:Headers){
+export function post_MoveOnePosition(requestBody:MoveOnePosition_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MoveOnePosition_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/MoveOnePosition", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MoveOnePosition_output)
           })
       .catch((error) => {
           reject(error)
@@ -1375,30 +1649,37 @@ export function post_MoveOnePosition(requestBody:any, epicorHeaders?:Headers){
    Description: This method moves the PriceLst or DiscPriceLst Up/Down one position in the
 grid and returns the whole updated datatable.
    OperationID: MoveOnePositionDisc
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MoveOnePositionDisc_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MoveOnePositionDisc_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MoveOnePositionDisc_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MoveOnePositionDisc(requestBody:any, epicorHeaders?:Headers){
+export function post_MoveOnePositionDisc(requestBody:MoveOnePositionDisc_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MoveOnePositionDisc_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/MoveOnePositionDisc", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MoveOnePositionDisc_output)
           })
       .catch((error) => {
           reject(error)
@@ -1410,30 +1691,37 @@ export function post_MoveOnePositionDisc(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewCustGrup
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCustGrup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustGrup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustGrup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustGrup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustGrup(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustGrup(requestBody:GetNewCustGrup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustGrup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/GetNewCustGrup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustGrup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1445,30 +1733,37 @@ export function post_GetNewCustGrup(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCustGrupAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCustGrupAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustGrupAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustGrupAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustGrupAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustGrupAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustGrupAttch(requestBody:GetNewCustGrupAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustGrupAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/GetNewCustGrupAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustGrupAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1480,30 +1775,37 @@ export function post_GetNewCustGrupAttch(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewCustGrupDiscPriceLst
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCustGrupDiscPriceLst
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustGrupDiscPriceLst_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustGrupDiscPriceLst_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustGrupDiscPriceLst_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustGrupDiscPriceLst(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustGrupDiscPriceLst(requestBody:GetNewCustGrupDiscPriceLst_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustGrupDiscPriceLst_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/GetNewCustGrupDiscPriceLst", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustGrupDiscPriceLst_output)
           })
       .catch((error) => {
           reject(error)
@@ -1515,30 +1817,37 @@ export function post_GetNewCustGrupDiscPriceLst(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetNewCustGrupPriceLst
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCustGrupPriceLst
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustGrupPriceLst_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustGrupPriceLst_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustGrupPriceLst_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustGrupPriceLst(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustGrupPriceLst(requestBody:GetNewCustGrupPriceLst_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustGrupPriceLst_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/GetNewCustGrupPriceLst", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustGrupPriceLst_output)
           })
       .catch((error) => {
           reject(error)
@@ -1550,30 +1859,37 @@ export function post_GetNewCustGrupPriceLst(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1585,7 +1901,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1609,15 +1925,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1629,7 +1952,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1653,15 +1976,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1673,30 +2003,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1708,30 +2045,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustGrupSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1742,31 +2086,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustGrupAttchRow[],
+   "value":Erp_Tablesets_CustGrupAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupDiscPriceLstRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustGrupDiscPriceLstRow[],
+   "value":Erp_Tablesets_CustGrupDiscPriceLstRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustGrupListRow[],
+   "value":Erp_Tablesets_CustGrupListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupPriceLstRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustGrupPriceLstRow[],
+   "value":Erp_Tablesets_CustGrupPriceLstRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustGrupRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustGrupRow[],
+   "value":Erp_Tablesets_CustGrupRow,
 }
 
 export interface Erp_Tablesets_CustGrupAttchRow{
@@ -1877,6 +2238,23 @@ export interface Erp_Tablesets_CustGrupRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1895,7 +2273,7 @@ export interface ChangeListCode_input{
 export interface ChangeListCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustGrupTableset[],
+   ds:Erp_Tablesets_CustGrupTableset,
 }
 }
 
@@ -2101,7 +2479,7 @@ export interface GetNewCustGrupAttch_input{
 export interface GetNewCustGrupAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustGrupTableset[],
+   ds:Erp_Tablesets_CustGrupTableset,
 }
 }
 
@@ -2117,7 +2495,7 @@ export interface GetNewCustGrupDiscPriceLst_input{
 export interface GetNewCustGrupDiscPriceLst_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustGrupTableset[],
+   ds:Erp_Tablesets_CustGrupTableset,
 }
 }
 
@@ -2133,7 +2511,7 @@ export interface GetNewCustGrupPriceLst_input{
 export interface GetNewCustGrupPriceLst_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustGrupTableset[],
+   ds:Erp_Tablesets_CustGrupTableset,
 }
 }
 
@@ -2147,7 +2525,7 @@ export interface GetNewCustGrup_input{
 export interface GetNewCustGrup_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustGrupTableset[],
+   ds:Erp_Tablesets_CustGrupTableset,
 }
 }
 
@@ -2263,7 +2641,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtCustGrupTableset[],
+   ds:Erp_Tablesets_UpdExtCustGrupTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2278,7 +2656,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustGrupTableset[],
+   ds:Erp_Tablesets_CustGrupTableset,
 }
 }
 

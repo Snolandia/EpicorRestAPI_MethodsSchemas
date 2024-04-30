@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.LIB.SynergySvc
 // Description: Interacts with Synergy.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,7 +135,7 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method GetSynergyUrl
    Description: Retrieves the Synergy URL.
    OperationID: GetSynergyUrl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSynergyUrl_output
@@ -98,15 +148,22 @@ export function post_GetSynergyUrl(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSynergyUrl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetSynergyUrl", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSynergyUrl_output)
           })
       .catch((error) => {
           reject(error)
@@ -118,7 +175,7 @@ export function post_GetSynergyUrl(epicorHeaders?:Headers){
    Summary: Invoke method GetSynergyApiUrl
    Description: Retrieves the Synergy API URL.
    OperationID: GetSynergyApiUrl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSynergyApiUrl_output
@@ -131,15 +188,22 @@ export function post_GetSynergyApiUrl(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSynergyApiUrl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetSynergyApiUrl", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSynergyApiUrl_output)
           })
       .catch((error) => {
           reject(error)
@@ -151,30 +215,37 @@ export function post_GetSynergyApiUrl(epicorHeaders?:Headers){
    Summary: Invoke method Register
    Description: Register for Synergy.
    OperationID: Register
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Register_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Register_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Register_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Register(requestBody:any, epicorHeaders?:Headers){
+export function post_Register(requestBody:Register_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Register_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/Register", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Register_output)
           })
       .catch((error) => {
           reject(error)
@@ -186,30 +257,37 @@ export function post_Register(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Login
    Description: Login to Synergy.
    OperationID: Login
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Login_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Login_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Login_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Login(requestBody:any, epicorHeaders?:Headers){
+export function post_Login(requestBody:Login_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Login_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/Login", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Login_output)
           })
       .catch((error) => {
           reject(error)
@@ -221,30 +299,37 @@ export function post_Login(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DownloadFile
    Description: Download Non ERP file from any DMS
    OperationID: DownloadFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DownloadFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DownloadFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DownloadFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DownloadFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DownloadFile(requestBody:DownloadFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DownloadFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/DownloadFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DownloadFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -256,30 +341,37 @@ export function post_DownloadFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteFile
    Description: Delete Non ERP file from any DMS
    OperationID: DeleteFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteFile(requestBody:DeleteFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/DeleteFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -290,7 +382,7 @@ export function post_DeleteFile(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetDefaultCompanyStorage
    OperationID: GetDefaultCompanyStorage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultCompanyStorage_output
@@ -303,15 +395,22 @@ export function post_GetDefaultCompanyStorage(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultCompanyStorage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetDefaultCompanyStorage", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultCompanyStorage_output)
           })
       .catch((error) => {
           reject(error)
@@ -323,30 +422,37 @@ export function post_GetDefaultCompanyStorage(epicorHeaders?:Headers){
    Summary: Invoke method UploadFile
    Description: Upload Non ERP file to any DMS
    OperationID: UploadFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UploadFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UploadFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UploadFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UploadFile(requestBody:any, epicorHeaders?:Headers){
+export function post_UploadFile(requestBody:UploadFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UploadFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/UploadFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UploadFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -358,7 +464,7 @@ export function post_UploadFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetEnabledStorageTypes
    Description: Gets the enabled storage types.
    OperationID: GetEnabledStorageTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEnabledStorageTypes_output
@@ -371,15 +477,22 @@ export function post_GetEnabledStorageTypes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEnabledStorageTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetEnabledStorageTypes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEnabledStorageTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -391,7 +504,7 @@ export function post_GetEnabledStorageTypes(epicorHeaders?:Headers){
    Summary: Invoke method GetHealthInfo
    Description: Gets information for the health check.
    OperationID: GetHealthInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetHealthInfo_output
@@ -404,15 +517,22 @@ export function post_GetHealthInfo(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetHealthInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetHealthInfo", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetHealthInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -424,30 +544,37 @@ export function post_GetHealthInfo(epicorHeaders?:Headers){
    Summary: Invoke method DeployRules
    Description: Deploy rules.
    OperationID: DeployRules
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeployRules_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeployRules_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeployRules_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeployRules(requestBody:any, epicorHeaders?:Headers){
+export function post_DeployRules(requestBody:DeployRules_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeployRules_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/DeployRules", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeployRules_output)
           })
       .catch((error) => {
           reject(error)
@@ -459,30 +586,37 @@ export function post_DeployRules(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Reconnect
    Description: Reconnect to a previous Collaborate environment.
    OperationID: Reconnect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Reconnect_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Reconnect_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Reconnect_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Reconnect(requestBody:any, epicorHeaders?:Headers){
+export function post_Reconnect(requestBody:Reconnect_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Reconnect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/Reconnect", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Reconnect_output)
           })
       .catch((error) => {
           reject(error)
@@ -494,7 +628,7 @@ export function post_Reconnect(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Disconnect
    Description: Disconnect from the current Collaborate environment.
    OperationID: Disconnect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/Disconnect_output
@@ -507,15 +641,22 @@ export function post_Disconnect(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Disconnect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/Disconnect", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Disconnect_output)
           })
       .catch((error) => {
           reject(error)
@@ -527,30 +668,37 @@ export function post_Disconnect(epicorHeaders?:Headers){
    Summary: Invoke method Configure
    Description: Configure Synergy.
    OperationID: Configure
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Configure_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Configure_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Configure_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Configure(requestBody:any, epicorHeaders?:Headers){
+export function post_Configure(requestBody:Configure_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Configure_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/Configure", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Configure_output)
           })
       .catch((error) => {
           reject(error)
@@ -562,30 +710,37 @@ export function post_Configure(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDetails
    Description: Gets details about a record.
    OperationID: GetDetails
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDetails_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDetails_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDetails_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDetails(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDetails(requestBody:GetDetails_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDetails_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetDetails", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDetails_output)
           })
       .catch((error) => {
           reject(error)
@@ -597,30 +752,37 @@ export function post_GetDetails(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetEntityInfoFromTags
    Description: Get the status of an entity based on the related tags
    OperationID: GetEntityInfoFromTags
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetEntityInfoFromTags_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetEntityInfoFromTags_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEntityInfoFromTags_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetEntityInfoFromTags(requestBody:any, epicorHeaders?:Headers){
+export function post_GetEntityInfoFromTags(requestBody:GetEntityInfoFromTags_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEntityInfoFromTags_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetEntityInfoFromTags", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEntityInfoFromTags_output)
           })
       .catch((error) => {
           reject(error)
@@ -632,30 +794,37 @@ export function post_GetEntityInfoFromTags(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetRuleCategories
    Description: Get Rule Categories currently in use by a specific company
    OperationID: GetRuleCategories
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRuleCategories_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRuleCategories_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRuleCategories_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRuleCategories(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRuleCategories(requestBody:GetRuleCategories_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRuleCategories_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetRuleCategories", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRuleCategories_output)
           })
       .catch((error) => {
           reject(error)
@@ -667,30 +836,37 @@ export function post_GetRuleCategories(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetActivityFeed
    Description: Get the activity feed for the company
    OperationID: GetActivityFeed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetActivityFeed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetActivityFeed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetActivityFeed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetActivityFeed(requestBody:any, epicorHeaders?:Headers){
+export function post_GetActivityFeed(requestBody:GetActivityFeed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetActivityFeed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetActivityFeed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetActivityFeed_output)
           })
       .catch((error) => {
           reject(error)
@@ -702,30 +878,37 @@ export function post_GetActivityFeed(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MarkActivityRead
    Description: Mark an activity read in Collobrate
    OperationID: MarkActivityRead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MarkActivityRead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MarkActivityRead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MarkActivityRead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MarkActivityRead(requestBody:any, epicorHeaders?:Headers){
+export function post_MarkActivityRead(requestBody:MarkActivityRead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MarkActivityRead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/MarkActivityRead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MarkActivityRead_output)
           })
       .catch((error) => {
           reject(error)
@@ -737,30 +920,37 @@ export function post_MarkActivityRead(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MarkActivityUnread
    Description: Mark an activity unread in Collaborate
    OperationID: MarkActivityUnread
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MarkActivityUnread_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MarkActivityUnread_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MarkActivityUnread_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MarkActivityUnread(requestBody:any, epicorHeaders?:Headers){
+export function post_MarkActivityUnread(requestBody:MarkActivityUnread_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MarkActivityUnread_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/MarkActivityUnread", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MarkActivityUnread_output)
           })
       .catch((error) => {
           reject(error)
@@ -772,30 +962,37 @@ export function post_MarkActivityUnread(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetRules
    Description: Get rules for a specific category
    OperationID: GetRules
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRules_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRules_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRules_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRules(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRules(requestBody:GetRules_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRules_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetRules", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRules_output)
           })
       .catch((error) => {
           reject(error)
@@ -807,30 +1004,37 @@ export function post_GetRules(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRulesListWithSecurityCode
    Description: Get rules for a specific category
    OperationID: GetRulesListWithSecurityCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRulesListWithSecurityCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRulesListWithSecurityCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRulesListWithSecurityCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRulesListWithSecurityCode(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRulesListWithSecurityCode(requestBody:GetRulesListWithSecurityCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRulesListWithSecurityCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetRulesListWithSecurityCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRulesListWithSecurityCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -842,30 +1046,37 @@ export function post_GetRulesListWithSecurityCode(requestBody:any, epicorHeaders
    Summary: Invoke method GetAvailableGroups
    Description: Get list of available Collaborate groups (public and private) for current user
    OperationID: GetAvailableGroups
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAvailableGroups_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAvailableGroups_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableGroups_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAvailableGroups(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAvailableGroups(requestBody:GetAvailableGroups_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableGroups_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetAvailableGroups", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableGroups_output)
           })
       .catch((error) => {
           reject(error)
@@ -877,30 +1088,37 @@ export function post_GetAvailableGroups(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method PostContentToCollaborate
    Description: Share message content on Collaborate channel or group
    OperationID: PostContentToCollaborate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PostContentToCollaborate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PostContentToCollaborate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PostContentToCollaborate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PostContentToCollaborate(requestBody:any, epicorHeaders?:Headers){
+export function post_PostContentToCollaborate(requestBody:PostContentToCollaborate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PostContentToCollaborate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/PostContentToCollaborate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PostContentToCollaborate_output)
           })
       .catch((error) => {
           reject(error)
@@ -912,30 +1130,37 @@ export function post_PostContentToCollaborate(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetUsersForCompany
    Description: Gets all users for a company
    OperationID: GetUsersForCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetUsersForCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetUsersForCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetUsersForCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetUsersForCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_GetUsersForCompany(requestBody:GetUsersForCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetUsersForCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetUsersForCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetUsersForCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -947,30 +1172,37 @@ export function post_GetUsersForCompany(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetUsersForGroup
    Description: Gets all members for a group
    OperationID: GetUsersForGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetUsersForGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetUsersForGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetUsersForGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetUsersForGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_GetUsersForGroup(requestBody:GetUsersForGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetUsersForGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetUsersForGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetUsersForGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -982,7 +1214,7 @@ export function post_GetUsersForGroup(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCollaborateUserDefinedRuleSecurityCodes
    Description: Get User Defined Security Code for Collaborate Notification rules
    OperationID: GetCollaborateUserDefinedRuleSecurityCodes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCollaborateUserDefinedRuleSecurityCodes_output
@@ -995,15 +1227,22 @@ export function post_GetCollaborateUserDefinedRuleSecurityCodes(epicorHeaders?:H
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCollaborateUserDefinedRuleSecurityCodes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetCollaborateUserDefinedRuleSecurityCodes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCollaborateUserDefinedRuleSecurityCodes_output)
           })
       .catch((error) => {
           reject(error)
@@ -1015,7 +1254,7 @@ export function post_GetCollaborateUserDefinedRuleSecurityCodes(epicorHeaders?:H
    Summary: Invoke method GetCollaborateSecurityCodes
    Description: Get All Security Code for Collaborate Notification rules
    OperationID: GetCollaborateSecurityCodes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCollaborateSecurityCodes_output
@@ -1028,15 +1267,22 @@ export function post_GetCollaborateSecurityCodes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCollaborateSecurityCodes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetCollaborateSecurityCodes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCollaborateSecurityCodes_output)
           })
       .catch((error) => {
           reject(error)
@@ -1048,30 +1294,37 @@ export function post_GetCollaborateSecurityCodes(epicorHeaders?:Headers){
    Summary: Invoke method GetSecurityAccessForUsers
    Description: Return the list of users and their accessible security codes
    OperationID: GetSecurityAccessForUsers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSecurityAccessForUsers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSecurityAccessForUsers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSecurityAccessForUsers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSecurityAccessForUsers(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSecurityAccessForUsers(requestBody:GetSecurityAccessForUsers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSecurityAccessForUsers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetSecurityAccessForUsers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSecurityAccessForUsers_output)
           })
       .catch((error) => {
           reject(error)
@@ -1083,7 +1336,7 @@ export function post_GetSecurityAccessForUsers(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetCollaborateSecurityCodeAccessRights
    Description: Get Access status for current user for the collaborate security codes
    OperationID: GetCollaborateSecurityCodeAccessRights
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCollaborateSecurityCodeAccessRights_output
@@ -1096,15 +1349,22 @@ export function post_GetCollaborateSecurityCodeAccessRights(epicorHeaders?:Heade
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCollaborateSecurityCodeAccessRights_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetCollaborateSecurityCodeAccessRights", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCollaborateSecurityCodeAccessRights_output)
           })
       .catch((error) => {
           reject(error)
@@ -1116,30 +1376,37 @@ export function post_GetCollaborateSecurityCodeAccessRights(epicorHeaders?:Heade
    Summary: Invoke method GetCollaborateSecurityCodeAccessStatus
    Description: Check the access status for the current user for the given security code
    OperationID: GetCollaborateSecurityCodeAccessStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCollaborateSecurityCodeAccessStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCollaborateSecurityCodeAccessStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCollaborateSecurityCodeAccessStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCollaborateSecurityCodeAccessStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCollaborateSecurityCodeAccessStatus(requestBody:GetCollaborateSecurityCodeAccessStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCollaborateSecurityCodeAccessStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetCollaborateSecurityCodeAccessStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCollaborateSecurityCodeAccessStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -1151,30 +1418,37 @@ export function post_GetCollaborateSecurityCodeAccessStatus(requestBody:any, epi
    Summary: Invoke method GetCollaborateSecurityCodeUserAccessStatus
    Description: Check the access status for a user for the given security code
    OperationID: GetCollaborateSecurityCodeUserAccessStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCollaborateSecurityCodeUserAccessStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCollaborateSecurityCodeUserAccessStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCollaborateSecurityCodeUserAccessStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCollaborateSecurityCodeUserAccessStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCollaborateSecurityCodeUserAccessStatus(requestBody:GetCollaborateSecurityCodeUserAccessStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCollaborateSecurityCodeUserAccessStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/GetCollaborateSecurityCodeUserAccessStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCollaborateSecurityCodeUserAccessStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -1186,30 +1460,37 @@ export function post_GetCollaborateSecurityCodeUserAccessStatus(requestBody:any,
    Summary: Invoke method CreateCollaborateUserDefinedRuleSecurityCode
    Description: Create User Defined Security Code for Collaborate Notification rules
    OperationID: CreateCollaborateUserDefinedRuleSecurityCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateCollaborateUserDefinedRuleSecurityCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateCollaborateUserDefinedRuleSecurityCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateCollaborateUserDefinedRuleSecurityCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateCollaborateUserDefinedRuleSecurityCode(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateCollaborateUserDefinedRuleSecurityCode(requestBody:CreateCollaborateUserDefinedRuleSecurityCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateCollaborateUserDefinedRuleSecurityCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SynergySvc/CreateCollaborateUserDefinedRuleSecurityCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateCollaborateUserDefinedRuleSecurityCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1220,11 +1501,45 @@ export function post_CreateCollaborateUserDefinedRuleSecurityCode(requestBody:an
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

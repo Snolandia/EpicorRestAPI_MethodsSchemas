@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.ECCExtensionSvc
 // Description: ECC Extension service the will allow for custom mappings for configurator processing
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,36 +111,60 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
    /**  
    Summary: Invoke method AltCustomListPart
    OperationID: AltCustomListPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AltCustomListPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AltCustomListPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AltCustomListPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AltCustomListPart(requestBody:any, epicorHeaders?:Headers){
+export function post_AltCustomListPart(requestBody:AltCustomListPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AltCustomListPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AltCustomListPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AltCustomListPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -118,30 +175,37 @@ export function post_AltCustomListPart(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method AltCustomListPartSubs
    OperationID: AltCustomListPartSubs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AltCustomListPartSubs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AltCustomListPartSubs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AltCustomListPartSubs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AltCustomListPartSubs(requestBody:any, epicorHeaders?:Headers){
+export function post_AltCustomListPartSubs(requestBody:AltCustomListPartSubs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AltCustomListPartSubs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AltCustomListPartSubs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AltCustomListPartSubs_output)
           })
       .catch((error) => {
           reject(error)
@@ -152,30 +216,37 @@ export function post_AltCustomListPartSubs(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method AltCustomTagPart
    OperationID: AltCustomTagPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AltCustomTagPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AltCustomTagPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AltCustomTagPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AltCustomTagPart(requestBody:any, epicorHeaders?:Headers){
+export function post_AltCustomTagPart(requestBody:AltCustomTagPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AltCustomTagPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AltCustomTagPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AltCustomTagPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -186,30 +257,37 @@ export function post_AltCustomTagPart(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method AltCustomTagPartSubs
    OperationID: AltCustomTagPartSubs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AltCustomTagPartSubs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AltCustomTagPartSubs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AltCustomTagPartSubs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AltCustomTagPartSubs(requestBody:any, epicorHeaders?:Headers){
+export function post_AltCustomTagPartSubs(requestBody:AltCustomTagPartSubs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AltCustomTagPartSubs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AltCustomTagPartSubs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AltCustomTagPartSubs_output)
           })
       .catch((error) => {
           reject(error)
@@ -220,30 +298,37 @@ export function post_AltCustomTagPartSubs(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method AltCustomXML
    OperationID: AltCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AltCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AltCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AltCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AltCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_AltCustomXML(requestBody:AltCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AltCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AltCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AltCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -256,30 +341,37 @@ export function post_AltCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in STK upload to allow for custom coding of the payload.  The part row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: AltPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AltPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AltPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AltPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AltPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_AltPayload(requestBody:AltPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AltPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AltPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AltPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -290,30 +382,37 @@ export function post_AltPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method AltFinalXml
    OperationID: AltFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AltFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AltFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AltFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AltFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_AltFinalXml(requestBody:AltFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AltFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AltFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AltFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -326,30 +425,37 @@ export function post_AltFinalXml(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Part UD data for STK.
 Note intended to be used by BPM.
    OperationID: GetCpnCustXPrtUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCpnCustXPrtUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCpnCustXPrtUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCpnCustXPrtUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCpnCustXPrtUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCpnCustXPrtUD(requestBody:GetCpnCustXPrtUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCpnCustXPrtUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCpnCustXPrtUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCpnCustXPrtUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -362,30 +468,37 @@ export function post_GetCpnCustXPrtUD(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Part UD data for STK.
 Note intended to be used by BPM.
    OperationID: GetCpnPartXRefIntUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCpnPartXRefIntUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCpnPartXRefIntUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCpnPartXRefIntUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCpnPartXRefIntUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCpnPartXRefIntUD(requestBody:GetCpnPartXRefIntUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCpnPartXRefIntUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCpnPartXRefIntUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCpnPartXRefIntUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -396,30 +509,37 @@ export function post_GetCpnPartXRefIntUD(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method CpnCustomListCustXPrt
    OperationID: CpnCustomListCustXPrt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CpnCustomListCustXPrt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CpnCustomListCustXPrt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CpnCustomListCustXPrt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CpnCustomListCustXPrt(requestBody:any, epicorHeaders?:Headers){
+export function post_CpnCustomListCustXPrt(requestBody:CpnCustomListCustXPrt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CpnCustomListCustXPrt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CpnCustomListCustXPrt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CpnCustomListCustXPrt_output)
           })
       .catch((error) => {
           reject(error)
@@ -430,30 +550,37 @@ export function post_CpnCustomListCustXPrt(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CpnCustomListPartXRefInt
    OperationID: CpnCustomListPartXRefInt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CpnCustomListPartXRefInt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CpnCustomListPartXRefInt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CpnCustomListPartXRefInt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CpnCustomListPartXRefInt(requestBody:any, epicorHeaders?:Headers){
+export function post_CpnCustomListPartXRefInt(requestBody:CpnCustomListPartXRefInt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CpnCustomListPartXRefInt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CpnCustomListPartXRefInt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CpnCustomListPartXRefInt_output)
           })
       .catch((error) => {
           reject(error)
@@ -464,30 +591,37 @@ export function post_CpnCustomListPartXRefInt(requestBody:any, epicorHeaders?:He
    /**  
    Summary: Invoke method CpnCustomTagCustXPrt
    OperationID: CpnCustomTagCustXPrt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CpnCustomTagCustXPrt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CpnCustomTagCustXPrt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CpnCustomTagCustXPrt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CpnCustomTagCustXPrt(requestBody:any, epicorHeaders?:Headers){
+export function post_CpnCustomTagCustXPrt(requestBody:CpnCustomTagCustXPrt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CpnCustomTagCustXPrt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CpnCustomTagCustXPrt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CpnCustomTagCustXPrt_output)
           })
       .catch((error) => {
           reject(error)
@@ -498,30 +632,37 @@ export function post_CpnCustomTagCustXPrt(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method CpnCustomTagPartXRefInt
    OperationID: CpnCustomTagPartXRefInt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CpnCustomTagPartXRefInt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CpnCustomTagPartXRefInt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CpnCustomTagPartXRefInt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CpnCustomTagPartXRefInt(requestBody:any, epicorHeaders?:Headers){
+export function post_CpnCustomTagPartXRefInt(requestBody:CpnCustomTagPartXRefInt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CpnCustomTagPartXRefInt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CpnCustomTagPartXRefInt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CpnCustomTagPartXRefInt_output)
           })
       .catch((error) => {
           reject(error)
@@ -532,30 +673,37 @@ export function post_CpnCustomTagPartXRefInt(requestBody:any, epicorHeaders?:Hea
    /**  
    Summary: Invoke method CpnCustomXMLCustXPrt
    OperationID: CpnCustomXMLCustXPrt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CpnCustomXMLCustXPrt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CpnCustomXMLCustXPrt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CpnCustomXMLCustXPrt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CpnCustomXMLCustXPrt(requestBody:any, epicorHeaders?:Headers){
+export function post_CpnCustomXMLCustXPrt(requestBody:CpnCustomXMLCustXPrt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CpnCustomXMLCustXPrt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CpnCustomXMLCustXPrt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CpnCustomXMLCustXPrt_output)
           })
       .catch((error) => {
           reject(error)
@@ -566,30 +714,37 @@ export function post_CpnCustomXMLCustXPrt(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method CpnCustomXMLPartXRefInt
    OperationID: CpnCustomXMLPartXRefInt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CpnCustomXMLPartXRefInt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CpnCustomXMLPartXRefInt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CpnCustomXMLPartXRefInt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CpnCustomXMLPartXRefInt(requestBody:any, epicorHeaders?:Headers){
+export function post_CpnCustomXMLPartXRefInt(requestBody:CpnCustomXMLPartXRefInt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CpnCustomXMLPartXRefInt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CpnCustomXMLPartXRefInt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CpnCustomXMLPartXRefInt_output)
           })
       .catch((error) => {
           reject(error)
@@ -602,30 +757,37 @@ export function post_CpnCustomXMLPartXRefInt(requestBody:any, epicorHeaders?:Hea
    Description: ECC method used in STK upload to allow for custom coding of the payload.  The part row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: CpnPayloadCustXPrt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CpnPayloadCustXPrt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CpnPayloadCustXPrt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CpnPayloadCustXPrt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CpnPayloadCustXPrt(requestBody:any, epicorHeaders?:Headers){
+export function post_CpnPayloadCustXPrt(requestBody:CpnPayloadCustXPrt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CpnPayloadCustXPrt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CpnPayloadCustXPrt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CpnPayloadCustXPrt_output)
           })
       .catch((error) => {
           reject(error)
@@ -638,30 +800,37 @@ export function post_CpnPayloadCustXPrt(requestBody:any, epicorHeaders?:Headers)
    Description: ECC method used in STK upload to allow for custom coding of the payload.  The part row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: CpnPayloadPartXRefInt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CpnPayloadPartXRefInt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CpnPayloadPartXRefInt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CpnPayloadPartXRefInt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CpnPayloadPartXRefInt(requestBody:any, epicorHeaders?:Headers){
+export function post_CpnPayloadPartXRefInt(requestBody:CpnPayloadPartXRefInt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CpnPayloadPartXRefInt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CpnPayloadPartXRefInt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CpnPayloadPartXRefInt_output)
           })
       .catch((error) => {
           reject(error)
@@ -672,30 +841,37 @@ export function post_CpnPayloadPartXRefInt(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CpnFinalXmlCustXPrt
    OperationID: CpnFinalXmlCustXPrt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CpnFinalXmlCustXPrt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CpnFinalXmlCustXPrt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CpnFinalXmlCustXPrt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CpnFinalXmlCustXPrt(requestBody:any, epicorHeaders?:Headers){
+export function post_CpnFinalXmlCustXPrt(requestBody:CpnFinalXmlCustXPrt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CpnFinalXmlCustXPrt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CpnFinalXmlCustXPrt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CpnFinalXmlCustXPrt_output)
           })
       .catch((error) => {
           reject(error)
@@ -706,30 +882,37 @@ export function post_CpnFinalXmlCustXPrt(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method CpnFinalXmlPartXRefInt
    OperationID: CpnFinalXmlPartXRefInt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CpnFinalXmlPartXRefInt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CpnFinalXmlPartXRefInt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CpnFinalXmlPartXRefInt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CpnFinalXmlPartXRefInt(requestBody:any, epicorHeaders?:Headers){
+export function post_CpnFinalXmlPartXRefInt(requestBody:CpnFinalXmlPartXRefInt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CpnFinalXmlPartXRefInt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CpnFinalXmlPartXRefInt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CpnFinalXmlPartXRefInt_output)
           })
       .catch((error) => {
           reject(error)
@@ -742,30 +925,37 @@ export function post_CpnFinalXmlPartXRefInt(requestBody:any, epicorHeaders?:Head
    Description: Returns all Part UD data for STK.
 Note intended to be used by BPM.
    OperationID: GetSgpPartUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSgpPartUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSgpPartUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSgpPartUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSgpPartUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSgpPartUD(requestBody:GetSgpPartUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSgpPartUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetSgpPartUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSgpPartUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -776,30 +966,37 @@ export function post_GetSgpPartUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SgpCustomListPart
    OperationID: SgpCustomListPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SgpCustomListPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SgpCustomListPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SgpCustomListPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SgpCustomListPart(requestBody:any, epicorHeaders?:Headers){
+export function post_SgpCustomListPart(requestBody:SgpCustomListPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SgpCustomListPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SgpCustomListPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SgpCustomListPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -810,30 +1007,37 @@ export function post_SgpCustomListPart(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SgpCustomTagPart
    OperationID: SgpCustomTagPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SgpCustomTagPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SgpCustomTagPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SgpCustomTagPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SgpCustomTagPart(requestBody:any, epicorHeaders?:Headers){
+export function post_SgpCustomTagPart(requestBody:SgpCustomTagPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SgpCustomTagPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SgpCustomTagPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SgpCustomTagPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -844,30 +1048,37 @@ export function post_SgpCustomTagPart(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SgpCustomXML
    OperationID: SgpCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SgpCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SgpCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SgpCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SgpCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_SgpCustomXML(requestBody:SgpCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SgpCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SgpCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SgpCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -880,30 +1091,37 @@ export function post_SgpCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in STK upload to allow for custom coding of the payload.  The part row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: SgpPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SgpPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SgpPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SgpPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SgpPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_SgpPayload(requestBody:SgpPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SgpPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SgpPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SgpPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -914,30 +1132,37 @@ export function post_SgpPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SgpFinalXml
    OperationID: SgpFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SgpFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SgpFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SgpFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SgpFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_SgpFinalXml(requestBody:SgpFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SgpFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SgpFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SgpFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -950,30 +1175,37 @@ export function post_SgpFinalXml(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Part UD data for STK.
 Note intended to be used by BPM.
    OperationID: GetStgProdGrupUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetStgProdGrupUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetStgProdGrupUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetStgProdGrupUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetStgProdGrupUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetStgProdGrupUD(requestBody:GetStgProdGrupUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetStgProdGrupUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetStgProdGrupUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetStgProdGrupUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -984,30 +1216,37 @@ export function post_GetStgProdGrupUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method StgCustomListProdGrup
    OperationID: StgCustomListProdGrup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StgCustomListProdGrup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StgCustomListProdGrup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StgCustomListProdGrup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StgCustomListProdGrup(requestBody:any, epicorHeaders?:Headers){
+export function post_StgCustomListProdGrup(requestBody:StgCustomListProdGrup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StgCustomListProdGrup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StgCustomListProdGrup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StgCustomListProdGrup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1018,30 +1257,37 @@ export function post_StgCustomListProdGrup(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method StgCustomTagProdGrup
    OperationID: StgCustomTagProdGrup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StgCustomTagProdGrup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StgCustomTagProdGrup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StgCustomTagProdGrup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StgCustomTagProdGrup(requestBody:any, epicorHeaders?:Headers){
+export function post_StgCustomTagProdGrup(requestBody:StgCustomTagProdGrup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StgCustomTagProdGrup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StgCustomTagProdGrup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StgCustomTagProdGrup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1052,30 +1298,37 @@ export function post_StgCustomTagProdGrup(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method StgCustomXML
    OperationID: StgCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StgCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StgCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StgCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StgCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_StgCustomXML(requestBody:StgCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StgCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StgCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StgCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -1088,30 +1341,37 @@ export function post_StgCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in STK upload to allow for custom coding of the payload.  The part row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: StgPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StgPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StgPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StgPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StgPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_StgPayload(requestBody:StgPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StgPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StgPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StgPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -1122,30 +1382,37 @@ export function post_StgPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method StgFinalXml
    OperationID: StgFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StgFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StgFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StgFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StgFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_StgFinalXml(requestBody:StgFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StgFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StgFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StgFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -1158,30 +1425,37 @@ export function post_StgFinalXml(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Part UD data for STK.
 Note intended to be used by BPM.
    OperationID: GetStkPartUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetStkPartUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetStkPartUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetStkPartUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetStkPartUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetStkPartUD(requestBody:GetStkPartUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetStkPartUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetStkPartUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetStkPartUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -1192,30 +1466,37 @@ export function post_GetStkPartUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetStkPartUomUD
    OperationID: GetStkPartUomUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetStkPartUomUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetStkPartUomUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetStkPartUomUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetStkPartUomUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetStkPartUomUD(requestBody:GetStkPartUomUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetStkPartUomUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetStkPartUomUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetStkPartUomUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -1226,30 +1507,37 @@ export function post_GetStkPartUomUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method StkCustomListPart
    OperationID: StkCustomListPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StkCustomListPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StkCustomListPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StkCustomListPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StkCustomListPart(requestBody:any, epicorHeaders?:Headers){
+export function post_StkCustomListPart(requestBody:StkCustomListPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StkCustomListPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StkCustomListPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StkCustomListPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -1260,30 +1548,37 @@ export function post_StkCustomListPart(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method StkCustomListPartUOM
    OperationID: StkCustomListPartUOM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StkCustomListPartUOM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StkCustomListPartUOM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StkCustomListPartUOM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StkCustomListPartUOM(requestBody:any, epicorHeaders?:Headers){
+export function post_StkCustomListPartUOM(requestBody:StkCustomListPartUOM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StkCustomListPartUOM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StkCustomListPartUOM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StkCustomListPartUOM_output)
           })
       .catch((error) => {
           reject(error)
@@ -1294,30 +1589,37 @@ export function post_StkCustomListPartUOM(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method StkCustomTagPart
    OperationID: StkCustomTagPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StkCustomTagPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StkCustomTagPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StkCustomTagPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StkCustomTagPart(requestBody:any, epicorHeaders?:Headers){
+export function post_StkCustomTagPart(requestBody:StkCustomTagPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StkCustomTagPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StkCustomTagPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StkCustomTagPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -1328,30 +1630,37 @@ export function post_StkCustomTagPart(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method StkCustomTagPartUOM
    OperationID: StkCustomTagPartUOM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StkCustomTagPartUOM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StkCustomTagPartUOM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StkCustomTagPartUOM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StkCustomTagPartUOM(requestBody:any, epicorHeaders?:Headers){
+export function post_StkCustomTagPartUOM(requestBody:StkCustomTagPartUOM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StkCustomTagPartUOM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StkCustomTagPartUOM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StkCustomTagPartUOM_output)
           })
       .catch((error) => {
           reject(error)
@@ -1364,30 +1673,37 @@ export function post_StkCustomTagPartUOM(requestBody:any, epicorHeaders?:Headers
    Description: ECC method used in STK upload to allow for custom coding of the attributeSet tag.
 The part row will be supplied for reference to help with the updating of the attributeSet string.
    OperationID: StkAttributeSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StkAttributeSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StkAttributeSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StkAttributeSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StkAttributeSet(requestBody:any, epicorHeaders?:Headers){
+export function post_StkAttributeSet(requestBody:StkAttributeSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StkAttributeSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StkAttributeSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StkAttributeSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1398,30 +1714,37 @@ export function post_StkAttributeSet(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method StkCustomXML
    OperationID: StkCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StkCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StkCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StkCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StkCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_StkCustomXML(requestBody:StkCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StkCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StkCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StkCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -1434,30 +1757,37 @@ export function post_StkCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in STK upload to allow for custom coding of the payload.  The part row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: StkPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StkPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StkPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StkPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StkPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_StkPayload(requestBody:StkPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StkPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StkPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StkPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -1468,30 +1798,37 @@ export function post_StkPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method StkFinalXml
    OperationID: StkFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StkFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StkFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StkFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StkFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_StkFinalXml(requestBody:StkFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StkFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/StkFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StkFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -1504,30 +1841,37 @@ export function post_StkFinalXml(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Part UD data for STK.
 Note intended to be used by BPM.
    OperationID: GetSttPartUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSttPartUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSttPartUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSttPartUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSttPartUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSttPartUD(requestBody:GetSttPartUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSttPartUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetSttPartUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSttPartUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -1538,30 +1882,37 @@ export function post_GetSttPartUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SttCustomListPart
    OperationID: SttCustomListPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SttCustomListPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SttCustomListPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SttCustomListPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SttCustomListPart(requestBody:any, epicorHeaders?:Headers){
+export function post_SttCustomListPart(requestBody:SttCustomListPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SttCustomListPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SttCustomListPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SttCustomListPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -1572,30 +1923,37 @@ export function post_SttCustomListPart(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SttCustomTagPart
    OperationID: SttCustomTagPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SttCustomTagPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SttCustomTagPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SttCustomTagPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SttCustomTagPart(requestBody:any, epicorHeaders?:Headers){
+export function post_SttCustomTagPart(requestBody:SttCustomTagPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SttCustomTagPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SttCustomTagPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SttCustomTagPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -1606,30 +1964,37 @@ export function post_SttCustomTagPart(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SttCustomXML
    OperationID: SttCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SttCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SttCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SttCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SttCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_SttCustomXML(requestBody:SttCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SttCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SttCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SttCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -1642,30 +2007,37 @@ export function post_SttCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in STK upload to allow for custom coding of the payload.  The part row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: SttPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SttPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SttPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SttPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SttPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_SttPayload(requestBody:SttPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SttPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SttPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SttPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -1676,30 +2048,37 @@ export function post_SttPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SttFinalXml
    OperationID: SttFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SttFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SttFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SttFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SttFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_SttFinalXml(requestBody:SttFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SttFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SttFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SttFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -1711,30 +2090,37 @@ export function post_SttFinalXml(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPOHeaderUD
    Description: Return purchase order header UD data
    OperationID: GetPOHeaderUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPOHeaderUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPOHeaderUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPOHeaderUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPOHeaderUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPOHeaderUD(requestBody:GetPOHeaderUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPOHeaderUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetPOHeaderUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPOHeaderUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -1746,30 +2132,37 @@ export function post_GetPOHeaderUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPODetailUD
    Description: Return purchase order Detail UD data
    OperationID: GetPODetailUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPODetailUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPODetailUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPODetailUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPODetailUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPODetailUD(requestBody:GetPODetailUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPODetailUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetPODetailUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPODetailUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -1780,30 +2173,37 @@ export function post_GetPODetailUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SpodCustomListPOHeader
    OperationID: SpodCustomListPOHeader
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpodCustomListPOHeader_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpodCustomListPOHeader_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpodCustomListPOHeader_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpodCustomListPOHeader(requestBody:any, epicorHeaders?:Headers){
+export function post_SpodCustomListPOHeader(requestBody:SpodCustomListPOHeader_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpodCustomListPOHeader_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SpodCustomListPOHeader", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpodCustomListPOHeader_output)
           })
       .catch((error) => {
           reject(error)
@@ -1814,30 +2214,37 @@ export function post_SpodCustomListPOHeader(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method SpodCustomListPODetail
    OperationID: SpodCustomListPODetail
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpodCustomListPODetail_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpodCustomListPODetail_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpodCustomListPODetail_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpodCustomListPODetail(requestBody:any, epicorHeaders?:Headers){
+export function post_SpodCustomListPODetail(requestBody:SpodCustomListPODetail_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpodCustomListPODetail_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SpodCustomListPODetail", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpodCustomListPODetail_output)
           })
       .catch((error) => {
           reject(error)
@@ -1848,30 +2255,37 @@ export function post_SpodCustomListPODetail(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method SpodCustomTagPOHeader
    OperationID: SpodCustomTagPOHeader
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpodCustomTagPOHeader_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpodCustomTagPOHeader_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpodCustomTagPOHeader_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpodCustomTagPOHeader(requestBody:any, epicorHeaders?:Headers){
+export function post_SpodCustomTagPOHeader(requestBody:SpodCustomTagPOHeader_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpodCustomTagPOHeader_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SpodCustomTagPOHeader", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpodCustomTagPOHeader_output)
           })
       .catch((error) => {
           reject(error)
@@ -1882,30 +2296,37 @@ export function post_SpodCustomTagPOHeader(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method SpodCustomTagPODetail
    OperationID: SpodCustomTagPODetail
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpodCustomTagPODetail_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpodCustomTagPODetail_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpodCustomTagPODetail_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpodCustomTagPODetail(requestBody:any, epicorHeaders?:Headers){
+export function post_SpodCustomTagPODetail(requestBody:SpodCustomTagPODetail_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpodCustomTagPODetail_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SpodCustomTagPODetail", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpodCustomTagPODetail_output)
           })
       .catch((error) => {
           reject(error)
@@ -1916,30 +2337,37 @@ export function post_SpodCustomTagPODetail(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method SpodCustomXML
    OperationID: SpodCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpodCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpodCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpodCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpodCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_SpodCustomXML(requestBody:SpodCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpodCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SpodCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpodCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -1950,30 +2378,37 @@ export function post_SpodCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SpodPayload
    OperationID: SpodPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpodPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpodPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpodPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpodPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_SpodPayload(requestBody:SpodPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpodPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SpodPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpodPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -1985,30 +2420,37 @@ export function post_SpodPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignSugPOChgUD
    Description: Assigns payload and UD columns for PO Suggestion records
    OperationID: AssignSugPOChgUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignSugPOChgUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignSugPOChgUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignSugPOChgUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignSugPOChgUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignSugPOChgUD(requestBody:AssignSugPOChgUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignSugPOChgUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignSugPOChgUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignSugPOChgUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -2019,30 +2461,37 @@ export function post_AssignSugPOChgUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SpouCustomListSugPOChg
    OperationID: SpouCustomListSugPOChg
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpouCustomListSugPOChg_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpouCustomListSugPOChg_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpouCustomListSugPOChg_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpouCustomListSugPOChg(requestBody:any, epicorHeaders?:Headers){
+export function post_SpouCustomListSugPOChg(requestBody:SpouCustomListSugPOChg_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpouCustomListSugPOChg_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SpouCustomListSugPOChg", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpouCustomListSugPOChg_output)
           })
       .catch((error) => {
           reject(error)
@@ -2053,30 +2502,37 @@ export function post_SpouCustomListSugPOChg(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method SpouCustomTagSugPOChg
    OperationID: SpouCustomTagSugPOChg
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpouCustomTagSugPOChg_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpouCustomTagSugPOChg_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpouCustomTagSugPOChg_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpouCustomTagSugPOChg(requestBody:any, epicorHeaders?:Headers){
+export function post_SpouCustomTagSugPOChg(requestBody:SpouCustomTagSugPOChg_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpouCustomTagSugPOChg_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SpouCustomTagSugPOChg", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpouCustomTagSugPOChg_output)
           })
       .catch((error) => {
           reject(error)
@@ -2087,30 +2543,37 @@ export function post_SpouCustomTagSugPOChg(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method SpouPayload
    OperationID: SpouPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpouPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpouPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpouPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpouPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_SpouPayload(requestBody:SpouPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpouPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SpouPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpouPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -2122,30 +2585,37 @@ export function post_SpouPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignQuoteDtlUD
    Description: Assigns UD columns for order detail.
    OperationID: AssignQuoteDtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignQuoteDtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignQuoteDtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignQuoteDtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignQuoteDtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignQuoteDtlUD(requestBody:AssignQuoteDtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignQuoteDtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignQuoteDtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignQuoteDtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -2157,30 +2627,37 @@ export function post_AssignQuoteDtlUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignQuoteHedUD
    Description: Assigns payload and UD columns for order head
    OperationID: AssignQuoteHedUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignQuoteHedUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignQuoteHedUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignQuoteHedUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignQuoteHedUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignQuoteHedUD(requestBody:AssignQuoteHedUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignQuoteHedUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignQuoteHedUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignQuoteHedUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -2191,30 +2668,37 @@ export function post_AssignQuoteHedUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrquCustomListQuoteDtl
    OperationID: CrquCustomListQuoteDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrquCustomListQuoteDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrquCustomListQuoteDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrquCustomListQuoteDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrquCustomListQuoteDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CrquCustomListQuoteDtl(requestBody:CrquCustomListQuoteDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrquCustomListQuoteDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrquCustomListQuoteDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrquCustomListQuoteDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2225,30 +2709,37 @@ export function post_CrquCustomListQuoteDtl(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method CrquCustomListQuoteHed
    OperationID: CrquCustomListQuoteHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrquCustomListQuoteHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrquCustomListQuoteHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrquCustomListQuoteHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrquCustomListQuoteHed(requestBody:any, epicorHeaders?:Headers){
+export function post_CrquCustomListQuoteHed(requestBody:CrquCustomListQuoteHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrquCustomListQuoteHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrquCustomListQuoteHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrquCustomListQuoteHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -2259,30 +2750,37 @@ export function post_CrquCustomListQuoteHed(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method CrquCustomTagQuoteDtl
    OperationID: CrquCustomTagQuoteDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrquCustomTagQuoteDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrquCustomTagQuoteDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrquCustomTagQuoteDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrquCustomTagQuoteDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CrquCustomTagQuoteDtl(requestBody:CrquCustomTagQuoteDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrquCustomTagQuoteDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrquCustomTagQuoteDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrquCustomTagQuoteDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2293,30 +2791,37 @@ export function post_CrquCustomTagQuoteDtl(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CrquCustomTagQuoteHed
    OperationID: CrquCustomTagQuoteHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrquCustomTagQuoteHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrquCustomTagQuoteHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrquCustomTagQuoteHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrquCustomTagQuoteHed(requestBody:any, epicorHeaders?:Headers){
+export function post_CrquCustomTagQuoteHed(requestBody:CrquCustomTagQuoteHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrquCustomTagQuoteHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrquCustomTagQuoteHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrquCustomTagQuoteHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -2327,30 +2832,37 @@ export function post_CrquCustomTagQuoteHed(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CrquCustomXML
    OperationID: CrquCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrquCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrquCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrquCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrquCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_CrquCustomXML(requestBody:CrquCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrquCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrquCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrquCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -2361,30 +2873,37 @@ export function post_CrquCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrquPayload
    OperationID: CrquPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrquPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrquPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrquPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrquPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CrquPayload(requestBody:CrquPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrquPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrquPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrquPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -2395,30 +2914,37 @@ export function post_CrquPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GqrCustomListQuoteDtl
    OperationID: GqrCustomListQuoteDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GqrCustomListQuoteDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GqrCustomListQuoteDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GqrCustomListQuoteDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GqrCustomListQuoteDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GqrCustomListQuoteDtl(requestBody:GqrCustomListQuoteDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GqrCustomListQuoteDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GqrCustomListQuoteDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GqrCustomListQuoteDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2429,30 +2955,37 @@ export function post_GqrCustomListQuoteDtl(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method GqrCustomListQuoteHed
    OperationID: GqrCustomListQuoteHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GqrCustomListQuoteHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GqrCustomListQuoteHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GqrCustomListQuoteHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GqrCustomListQuoteHed(requestBody:any, epicorHeaders?:Headers){
+export function post_GqrCustomListQuoteHed(requestBody:GqrCustomListQuoteHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GqrCustomListQuoteHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GqrCustomListQuoteHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GqrCustomListQuoteHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -2463,30 +2996,37 @@ export function post_GqrCustomListQuoteHed(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method GqrCustomTagQuoteDtl
    OperationID: GqrCustomTagQuoteDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GqrCustomTagQuoteDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GqrCustomTagQuoteDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GqrCustomTagQuoteDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GqrCustomTagQuoteDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GqrCustomTagQuoteDtl(requestBody:GqrCustomTagQuoteDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GqrCustomTagQuoteDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GqrCustomTagQuoteDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GqrCustomTagQuoteDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2497,30 +3037,37 @@ export function post_GqrCustomTagQuoteDtl(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method GqrCustomTagQuoteHed
    OperationID: GqrCustomTagQuoteHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GqrCustomTagQuoteHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GqrCustomTagQuoteHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GqrCustomTagQuoteHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GqrCustomTagQuoteHed(requestBody:any, epicorHeaders?:Headers){
+export function post_GqrCustomTagQuoteHed(requestBody:GqrCustomTagQuoteHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GqrCustomTagQuoteHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GqrCustomTagQuoteHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GqrCustomTagQuoteHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -2531,30 +3078,37 @@ export function post_GqrCustomTagQuoteHed(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method GqrCustomXML
    OperationID: GqrCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GqrCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GqrCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GqrCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GqrCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_GqrCustomXML(requestBody:GqrCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GqrCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GqrCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GqrCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -2565,30 +3119,37 @@ export function post_GqrCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GqrPayload
    OperationID: GqrPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GqrPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GqrPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GqrPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GqrPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_GqrPayload(requestBody:GqrPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GqrPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GqrPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GqrPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -2600,30 +3161,37 @@ export function post_GqrPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCrqdQuoteHedUD
    Description: Return order header UD data for order inquiry
    OperationID: GetCrqdQuoteHedUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCrqdQuoteHedUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCrqdQuoteHedUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCrqdQuoteHedUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCrqdQuoteHedUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCrqdQuoteHedUD(requestBody:GetCrqdQuoteHedUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCrqdQuoteHedUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCrqdQuoteHedUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCrqdQuoteHedUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -2635,30 +3203,37 @@ export function post_GetCrqdQuoteHedUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCrqdQuoteDtlUD
    Description: Return order detail UD data for order inquiry
    OperationID: GetCrqdQuoteDtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCrqdQuoteDtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCrqdQuoteDtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCrqdQuoteDtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCrqdQuoteDtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCrqdQuoteDtlUD(requestBody:GetCrqdQuoteDtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCrqdQuoteDtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCrqdQuoteDtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCrqdQuoteDtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -2669,30 +3244,37 @@ export function post_GetCrqdQuoteDtlUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrqdCustomListQuoteDtl
    OperationID: CrqdCustomListQuoteDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrqdCustomListQuoteDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrqdCustomListQuoteDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrqdCustomListQuoteDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrqdCustomListQuoteDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CrqdCustomListQuoteDtl(requestBody:CrqdCustomListQuoteDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrqdCustomListQuoteDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrqdCustomListQuoteDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrqdCustomListQuoteDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2703,30 +3285,37 @@ export function post_CrqdCustomListQuoteDtl(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method CrqdCustomTagQuoteDtl
    OperationID: CrqdCustomTagQuoteDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrqdCustomTagQuoteDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrqdCustomTagQuoteDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrqdCustomTagQuoteDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrqdCustomTagQuoteDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CrqdCustomTagQuoteDtl(requestBody:CrqdCustomTagQuoteDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrqdCustomTagQuoteDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrqdCustomTagQuoteDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrqdCustomTagQuoteDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2737,30 +3326,37 @@ export function post_CrqdCustomTagQuoteDtl(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CrqdCustomListQuoteHed
    OperationID: CrqdCustomListQuoteHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrqdCustomListQuoteHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrqdCustomListQuoteHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrqdCustomListQuoteHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrqdCustomListQuoteHed(requestBody:any, epicorHeaders?:Headers){
+export function post_CrqdCustomListQuoteHed(requestBody:CrqdCustomListQuoteHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrqdCustomListQuoteHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrqdCustomListQuoteHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrqdCustomListQuoteHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -2771,30 +3367,37 @@ export function post_CrqdCustomListQuoteHed(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method CrqdCustomTagQuoteHed
    OperationID: CrqdCustomTagQuoteHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrqdCustomTagQuoteHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrqdCustomTagQuoteHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrqdCustomTagQuoteHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrqdCustomTagQuoteHed(requestBody:any, epicorHeaders?:Headers){
+export function post_CrqdCustomTagQuoteHed(requestBody:CrqdCustomTagQuoteHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrqdCustomTagQuoteHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrqdCustomTagQuoteHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrqdCustomTagQuoteHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -2805,30 +3408,37 @@ export function post_CrqdCustomTagQuoteHed(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CrqdCustomXML
    OperationID: CrqdCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrqdCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrqdCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrqdCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrqdCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_CrqdCustomXML(requestBody:CrqdCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrqdCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrqdCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrqdCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -2839,30 +3449,37 @@ export function post_CrqdCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrqdPayload
    OperationID: CrqdPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrqdPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrqdPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrqdPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrqdPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CrqdPayload(requestBody:CrqdPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrqdPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrqdPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrqdPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -2874,30 +3491,37 @@ export function post_CrqdPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetGqrQuoteHedUD
    Description: Return order header UD data for order inquiry
    OperationID: GetGqrQuoteHedUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetGqrQuoteHedUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetGqrQuoteHedUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetGqrQuoteHedUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetGqrQuoteHedUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetGqrQuoteHedUD(requestBody:GetGqrQuoteHedUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetGqrQuoteHedUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetGqrQuoteHedUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetGqrQuoteHedUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -2909,30 +3533,37 @@ export function post_GetGqrQuoteHedUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetGqrQuoteDtlUD
    Description: Return order detail UD data for order inquiry
    OperationID: GetGqrQuoteDtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetGqrQuoteDtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetGqrQuoteDtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetGqrQuoteDtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetGqrQuoteDtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetGqrQuoteDtlUD(requestBody:GetGqrQuoteDtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetGqrQuoteDtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetGqrQuoteDtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetGqrQuoteDtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -2944,30 +3575,37 @@ export function post_GetGqrQuoteDtlUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRFQHeadUD
    Description: Return RFQ header UD data
    OperationID: GetRFQHeadUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRFQHeadUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRFQHeadUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRFQHeadUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRFQHeadUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRFQHeadUD(requestBody:GetRFQHeadUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRFQHeadUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetRFQHeadUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRFQHeadUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -2979,30 +3617,37 @@ export function post_GetRFQHeadUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRFQItemUD
    Description: Return RFQ Line UD data
    OperationID: GetRFQItemUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRFQItemUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRFQItemUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRFQItemUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRFQItemUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRFQItemUD(requestBody:GetRFQItemUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRFQItemUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetRFQItemUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRFQItemUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -3013,30 +3658,37 @@ export function post_GetRFQItemUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SurdCustomListRFQHead
    OperationID: SurdCustomListRFQHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SurdCustomListRFQHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SurdCustomListRFQHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SurdCustomListRFQHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SurdCustomListRFQHead(requestBody:any, epicorHeaders?:Headers){
+export function post_SurdCustomListRFQHead(requestBody:SurdCustomListRFQHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SurdCustomListRFQHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SurdCustomListRFQHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SurdCustomListRFQHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -3047,30 +3699,37 @@ export function post_SurdCustomListRFQHead(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method SurdCustomListRFQItem
    OperationID: SurdCustomListRFQItem
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SurdCustomListRFQItem_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SurdCustomListRFQItem_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SurdCustomListRFQItem_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SurdCustomListRFQItem(requestBody:any, epicorHeaders?:Headers){
+export function post_SurdCustomListRFQItem(requestBody:SurdCustomListRFQItem_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SurdCustomListRFQItem_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SurdCustomListRFQItem", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SurdCustomListRFQItem_output)
           })
       .catch((error) => {
           reject(error)
@@ -3081,30 +3740,37 @@ export function post_SurdCustomListRFQItem(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method SurdCustomTagRFQHead
    OperationID: SurdCustomTagRFQHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SurdCustomTagRFQHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SurdCustomTagRFQHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SurdCustomTagRFQHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SurdCustomTagRFQHead(requestBody:any, epicorHeaders?:Headers){
+export function post_SurdCustomTagRFQHead(requestBody:SurdCustomTagRFQHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SurdCustomTagRFQHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SurdCustomTagRFQHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SurdCustomTagRFQHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -3115,30 +3781,37 @@ export function post_SurdCustomTagRFQHead(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method SurdCustomTagRFQItem
    OperationID: SurdCustomTagRFQItem
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SurdCustomTagRFQItem_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SurdCustomTagRFQItem_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SurdCustomTagRFQItem_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SurdCustomTagRFQItem(requestBody:any, epicorHeaders?:Headers){
+export function post_SurdCustomTagRFQItem(requestBody:SurdCustomTagRFQItem_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SurdCustomTagRFQItem_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SurdCustomTagRFQItem", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SurdCustomTagRFQItem_output)
           })
       .catch((error) => {
           reject(error)
@@ -3149,30 +3822,37 @@ export function post_SurdCustomTagRFQItem(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method SurdCustomXML
    OperationID: SurdCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SurdCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SurdCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SurdCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SurdCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_SurdCustomXML(requestBody:SurdCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SurdCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SurdCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SurdCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -3183,30 +3863,37 @@ export function post_SurdCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SurdPayload
    OperationID: SurdPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SurdPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SurdPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SurdPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SurdPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_SurdPayload(requestBody:SurdPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SurdPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SurdPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SurdPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -3218,30 +3905,37 @@ export function post_SurdPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignRFQHeadUD
    Description: Assigns payload and UD columns for RFQ Head records
    OperationID: AssignRFQHeadUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignRFQHeadUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignRFQHeadUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignRFQHeadUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignRFQHeadUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignRFQHeadUD(requestBody:AssignRFQHeadUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignRFQHeadUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignRFQHeadUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignRFQHeadUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -3253,30 +3947,37 @@ export function post_AssignRFQHeadUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignRFQItemUD
    Description: Assigns payload and UD columns for RFQ Item records
    OperationID: AssignRFQItemUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignRFQItemUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignRFQItemUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignRFQItemUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignRFQItemUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignRFQItemUD(requestBody:AssignRFQItemUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignRFQItemUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignRFQItemUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignRFQItemUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -3287,30 +3988,37 @@ export function post_AssignRFQItemUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SuruCustomListRFQHead
    OperationID: SuruCustomListRFQHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuruCustomListRFQHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuruCustomListRFQHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuruCustomListRFQHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuruCustomListRFQHead(requestBody:any, epicorHeaders?:Headers){
+export function post_SuruCustomListRFQHead(requestBody:SuruCustomListRFQHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuruCustomListRFQHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SuruCustomListRFQHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuruCustomListRFQHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -3321,30 +4029,37 @@ export function post_SuruCustomListRFQHead(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method SuruCustomListRFQItem
    OperationID: SuruCustomListRFQItem
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuruCustomListRFQItem_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuruCustomListRFQItem_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuruCustomListRFQItem_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuruCustomListRFQItem(requestBody:any, epicorHeaders?:Headers){
+export function post_SuruCustomListRFQItem(requestBody:SuruCustomListRFQItem_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuruCustomListRFQItem_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SuruCustomListRFQItem", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuruCustomListRFQItem_output)
           })
       .catch((error) => {
           reject(error)
@@ -3355,30 +4070,37 @@ export function post_SuruCustomListRFQItem(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method SuruCustomTagRFQHead
    OperationID: SuruCustomTagRFQHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuruCustomTagRFQHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuruCustomTagRFQHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuruCustomTagRFQHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuruCustomTagRFQHead(requestBody:any, epicorHeaders?:Headers){
+export function post_SuruCustomTagRFQHead(requestBody:SuruCustomTagRFQHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuruCustomTagRFQHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SuruCustomTagRFQHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuruCustomTagRFQHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -3389,30 +4111,37 @@ export function post_SuruCustomTagRFQHead(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method SuruCustomTagRFQItem
    OperationID: SuruCustomTagRFQItem
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuruCustomTagRFQItem_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuruCustomTagRFQItem_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuruCustomTagRFQItem_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuruCustomTagRFQItem(requestBody:any, epicorHeaders?:Headers){
+export function post_SuruCustomTagRFQItem(requestBody:SuruCustomTagRFQItem_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuruCustomTagRFQItem_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SuruCustomTagRFQItem", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuruCustomTagRFQItem_output)
           })
       .catch((error) => {
           reject(error)
@@ -3423,30 +4152,37 @@ export function post_SuruCustomTagRFQItem(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method SuruPayload
    OperationID: SuruPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuruPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuruPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuruPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuruPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_SuruPayload(requestBody:SuruPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuruPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SuruPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuruPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -3458,30 +4194,37 @@ export function post_SuruPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignRMADtlUD
    Description: Assigns UD columns for order detail.
    OperationID: AssignRMADtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignRMADtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignRMADtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignRMADtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignRMADtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignRMADtlUD(requestBody:AssignRMADtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignRMADtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignRMADtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignRMADtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -3493,30 +4236,37 @@ export function post_AssignRMADtlUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignRMAHeadUD
    Description: Assigns payload and UD columns for order head
    OperationID: AssignRMAHeadUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignRMAHeadUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignRMAHeadUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignRMAHeadUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignRMAHeadUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignRMAHeadUD(requestBody:AssignRMAHeadUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignRMAHeadUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignRMAHeadUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignRMAHeadUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -3527,30 +4277,37 @@ export function post_AssignRMAHeadUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrruCustomListRMADtl
    OperationID: CrruCustomListRMADtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrruCustomListRMADtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrruCustomListRMADtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrruCustomListRMADtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrruCustomListRMADtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CrruCustomListRMADtl(requestBody:CrruCustomListRMADtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrruCustomListRMADtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrruCustomListRMADtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrruCustomListRMADtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -3561,30 +4318,37 @@ export function post_CrruCustomListRMADtl(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method CrruCustomListRMAHead
    OperationID: CrruCustomListRMAHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrruCustomListRMAHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrruCustomListRMAHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrruCustomListRMAHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrruCustomListRMAHead(requestBody:any, epicorHeaders?:Headers){
+export function post_CrruCustomListRMAHead(requestBody:CrruCustomListRMAHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrruCustomListRMAHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrruCustomListRMAHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrruCustomListRMAHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -3595,30 +4359,37 @@ export function post_CrruCustomListRMAHead(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CrruCustomTagRMADtl
    OperationID: CrruCustomTagRMADtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrruCustomTagRMADtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrruCustomTagRMADtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrruCustomTagRMADtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrruCustomTagRMADtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CrruCustomTagRMADtl(requestBody:CrruCustomTagRMADtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrruCustomTagRMADtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrruCustomTagRMADtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrruCustomTagRMADtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -3629,30 +4400,37 @@ export function post_CrruCustomTagRMADtl(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method CrruCustomTagRMAHead
    OperationID: CrruCustomTagRMAHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrruCustomTagRMAHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrruCustomTagRMAHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrruCustomTagRMAHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrruCustomTagRMAHead(requestBody:any, epicorHeaders?:Headers){
+export function post_CrruCustomTagRMAHead(requestBody:CrruCustomTagRMAHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrruCustomTagRMAHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrruCustomTagRMAHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrruCustomTagRMAHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -3663,30 +4441,37 @@ export function post_CrruCustomTagRMAHead(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method CrruCustomXML
    OperationID: CrruCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrruCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrruCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrruCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrruCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_CrruCustomXML(requestBody:CrruCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrruCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrruCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrruCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -3697,30 +4482,37 @@ export function post_CrruCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrruPayload
    OperationID: CrruPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrruPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrruPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrruPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrruPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CrruPayload(requestBody:CrruPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrruPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrruPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrruPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -3732,30 +4524,37 @@ export function post_CrruPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCrrdRMAHeadUD
    Description: Return order header UD data for order inquiry
    OperationID: GetCrrdRMAHeadUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCrrdRMAHeadUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCrrdRMAHeadUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCrrdRMAHeadUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCrrdRMAHeadUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCrrdRMAHeadUD(requestBody:GetCrrdRMAHeadUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCrrdRMAHeadUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCrrdRMAHeadUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCrrdRMAHeadUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -3767,30 +4566,37 @@ export function post_GetCrrdRMAHeadUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCrrdRMADtlUD
    Description: Return order detail UD data for order inquiry
    OperationID: GetCrrdRMADtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCrrdRMADtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCrrdRMADtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCrrdRMADtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCrrdRMADtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCrrdRMADtlUD(requestBody:GetCrrdRMADtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCrrdRMADtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCrrdRMADtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCrrdRMADtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -3801,30 +4607,37 @@ export function post_GetCrrdRMADtlUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrrdCustomListRMADtl
    OperationID: CrrdCustomListRMADtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrdCustomListRMADtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrdCustomListRMADtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrdCustomListRMADtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrdCustomListRMADtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrdCustomListRMADtl(requestBody:CrrdCustomListRMADtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrdCustomListRMADtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrdCustomListRMADtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrdCustomListRMADtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -3835,30 +4648,37 @@ export function post_CrrdCustomListRMADtl(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method CrrdCustomTagRMADtl
    OperationID: CrrdCustomTagRMADtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrdCustomTagRMADtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrdCustomTagRMADtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrdCustomTagRMADtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrdCustomTagRMADtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrdCustomTagRMADtl(requestBody:CrrdCustomTagRMADtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrdCustomTagRMADtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrdCustomTagRMADtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrdCustomTagRMADtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -3869,30 +4689,37 @@ export function post_CrrdCustomTagRMADtl(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method CrrdCustomListRMAHead
    OperationID: CrrdCustomListRMAHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrdCustomListRMAHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrdCustomListRMAHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrdCustomListRMAHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrdCustomListRMAHead(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrdCustomListRMAHead(requestBody:CrrdCustomListRMAHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrdCustomListRMAHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrdCustomListRMAHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrdCustomListRMAHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -3903,30 +4730,37 @@ export function post_CrrdCustomListRMAHead(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CrrdCustomTagRMAHead
    OperationID: CrrdCustomTagRMAHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrdCustomTagRMAHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrdCustomTagRMAHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrdCustomTagRMAHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrdCustomTagRMAHead(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrdCustomTagRMAHead(requestBody:CrrdCustomTagRMAHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrdCustomTagRMAHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrdCustomTagRMAHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrdCustomTagRMAHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -3937,30 +4771,37 @@ export function post_CrrdCustomTagRMAHead(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method CrrdCustomXML
    OperationID: CrrdCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrdCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrdCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrdCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrdCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrdCustomXML(requestBody:CrrdCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrdCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrdCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrdCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -3971,30 +4812,37 @@ export function post_CrrdCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrrdPayload
    OperationID: CrrdPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrdPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrdPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrdPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrdPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrdPayload(requestBody:CrrdPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrdPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrdPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrdPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -4006,30 +4854,37 @@ export function post_CrrdPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCdmPcECCOrderDtlUD
    Description: Return order detail UD data for order inquiry
    OperationID: GetCdmPcECCOrderDtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCdmPcECCOrderDtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCdmPcECCOrderDtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCdmPcECCOrderDtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCdmPcECCOrderDtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCdmPcECCOrderDtlUD(requestBody:GetCdmPcECCOrderDtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCdmPcECCOrderDtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCdmPcECCOrderDtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCdmPcECCOrderDtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -4041,30 +4896,37 @@ export function post_GetCdmPcECCOrderDtlUD(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetCdmQuoteDtlUD
    Description: Return order detail UD data for order inquiry
    OperationID: GetCdmQuoteDtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCdmQuoteDtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCdmQuoteDtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCdmQuoteDtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCdmQuoteDtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCdmQuoteDtlUD(requestBody:GetCdmQuoteDtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCdmQuoteDtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCdmQuoteDtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCdmQuoteDtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -4075,30 +4937,37 @@ export function post_GetCdmQuoteDtlUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CdmCustomListQuoteDtl
    OperationID: CdmCustomListQuoteDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CdmCustomListQuoteDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CdmCustomListQuoteDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CdmCustomListQuoteDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CdmCustomListQuoteDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CdmCustomListQuoteDtl(requestBody:CdmCustomListQuoteDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CdmCustomListQuoteDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CdmCustomListQuoteDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CdmCustomListQuoteDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -4109,30 +4978,37 @@ export function post_CdmCustomListQuoteDtl(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CdmCustomListPcECCOrderDtl
    OperationID: CdmCustomListPcECCOrderDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CdmCustomListPcECCOrderDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CdmCustomListPcECCOrderDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CdmCustomListPcECCOrderDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CdmCustomListPcECCOrderDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CdmCustomListPcECCOrderDtl(requestBody:CdmCustomListPcECCOrderDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CdmCustomListPcECCOrderDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CdmCustomListPcECCOrderDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CdmCustomListPcECCOrderDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -4143,30 +5019,37 @@ export function post_CdmCustomListPcECCOrderDtl(requestBody:any, epicorHeaders?:
    /**  
    Summary: Invoke method CdmCustomTagQuoteDtl
    OperationID: CdmCustomTagQuoteDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CdmCustomTagQuoteDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CdmCustomTagQuoteDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CdmCustomTagQuoteDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CdmCustomTagQuoteDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CdmCustomTagQuoteDtl(requestBody:CdmCustomTagQuoteDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CdmCustomTagQuoteDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CdmCustomTagQuoteDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CdmCustomTagQuoteDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -4177,30 +5060,37 @@ export function post_CdmCustomTagQuoteDtl(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method CdmCustomTagPcECCOrderDtl
    OperationID: CdmCustomTagPcECCOrderDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CdmCustomTagPcECCOrderDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CdmCustomTagPcECCOrderDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CdmCustomTagPcECCOrderDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CdmCustomTagPcECCOrderDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CdmCustomTagPcECCOrderDtl(requestBody:CdmCustomTagPcECCOrderDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CdmCustomTagPcECCOrderDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CdmCustomTagPcECCOrderDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CdmCustomTagPcECCOrderDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -4212,30 +5102,37 @@ export function post_CdmCustomTagPcECCOrderDtl(requestBody:any, epicorHeaders?:H
    Summary: Invoke method AssignHDCaseUD
    Description: Assigns payload and UD columns for Help Desk Case header
    OperationID: AssignHDCaseUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignHDCaseUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignHDCaseUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignHDCaseUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignHDCaseUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignHDCaseUD(requestBody:AssignHDCaseUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignHDCaseUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignHDCaseUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignHDCaseUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -4247,30 +5144,37 @@ export function post_AssignHDCaseUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDcldHDCaseUD
    Description: Return Help Desk Case UD data for claims inquiry
    OperationID: GetDcldHDCaseUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDcldHDCaseUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDcldHDCaseUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDcldHDCaseUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDcldHDCaseUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDcldHDCaseUD(requestBody:GetDcldHDCaseUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDcldHDCaseUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetDcldHDCaseUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDcldHDCaseUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -4282,30 +5186,37 @@ export function post_GetDcldHDCaseUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignLocationInventoryUD
    Description: Assigns payload and UD columns for order head
    OperationID: AssignLocationInventoryUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignLocationInventoryUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignLocationInventoryUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignLocationInventoryUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignLocationInventoryUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignLocationInventoryUD(requestBody:AssignLocationInventoryUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignLocationInventoryUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignLocationInventoryUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignLocationInventoryUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -4317,30 +5228,37 @@ export function post_AssignLocationInventoryUD(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetDeidLocationInventoryUD
    Description: Return Location Inventory UD data for location inventory inquiry
    OperationID: GetDeidLocationInventoryUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDeidLocationInventoryUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDeidLocationInventoryUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDeidLocationInventoryUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDeidLocationInventoryUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDeidLocationInventoryUD(requestBody:GetDeidLocationInventoryUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDeidLocationInventoryUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetDeidLocationInventoryUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDeidLocationInventoryUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -4352,30 +5270,37 @@ export function post_GetDeidLocationInventoryUD(requestBody:any, epicorHeaders?:
    Summary: Invoke method AssignLocationWarrantyTranUD
    Description: Assigns payload and UD columns for order head
    OperationID: AssignLocationWarrantyTranUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignLocationWarrantyTranUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignLocationWarrantyTranUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignLocationWarrantyTranUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignLocationWarrantyTranUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignLocationWarrantyTranUD(requestBody:AssignLocationWarrantyTranUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignLocationWarrantyTranUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignLocationWarrantyTranUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignLocationWarrantyTranUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -4387,30 +5312,37 @@ export function post_AssignLocationWarrantyTranUD(requestBody:any, epicorHeaders
    Summary: Invoke method GetDebmLocationMtlUD
    Description: Return location material UD data for location BOM inquiry
    OperationID: GetDebmLocationMtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDebmLocationMtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDebmLocationMtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDebmLocationMtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDebmLocationMtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDebmLocationMtlUD(requestBody:GetDebmLocationMtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDebmLocationMtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetDebmLocationMtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDebmLocationMtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -4422,30 +5354,37 @@ export function post_GetDebmLocationMtlUD(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetDebmLocationWarrantyTranUD
    Description: Return location material UD data for location BOM inquiry
    OperationID: GetDebmLocationWarrantyTranUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDebmLocationWarrantyTranUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDebmLocationWarrantyTranUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDebmLocationWarrantyTranUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDebmLocationWarrantyTranUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDebmLocationWarrantyTranUD(requestBody:GetDebmLocationWarrantyTranUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDebmLocationWarrantyTranUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetDebmLocationWarrantyTranUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDebmLocationWarrantyTranUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -4456,30 +5395,37 @@ export function post_GetDebmLocationWarrantyTranUD(requestBody:any, epicorHeader
    /**  
    Summary: Invoke method GetDebmPayloadXml
    OperationID: GetDebmPayloadXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDebmPayloadXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDebmPayloadXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDebmPayloadXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDebmPayloadXml(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDebmPayloadXml(requestBody:GetDebmPayloadXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDebmPayloadXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetDebmPayloadXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDebmPayloadXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -4490,30 +5436,37 @@ export function post_GetDebmPayloadXml(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DcldCustomListHDCase
    OperationID: DcldCustomListHDCase
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DcldCustomListHDCase_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DcldCustomListHDCase_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DcldCustomListHDCase_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DcldCustomListHDCase(requestBody:any, epicorHeaders?:Headers){
+export function post_DcldCustomListHDCase(requestBody:DcldCustomListHDCase_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DcldCustomListHDCase_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DcldCustomListHDCase", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DcldCustomListHDCase_output)
           })
       .catch((error) => {
           reject(error)
@@ -4524,30 +5477,37 @@ export function post_DcldCustomListHDCase(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method DcldCustomTagHDCase
    OperationID: DcldCustomTagHDCase
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DcldCustomTagHDCase_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DcldCustomTagHDCase_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DcldCustomTagHDCase_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DcldCustomTagHDCase(requestBody:any, epicorHeaders?:Headers){
+export function post_DcldCustomTagHDCase(requestBody:DcldCustomTagHDCase_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DcldCustomTagHDCase_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DcldCustomTagHDCase", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DcldCustomTagHDCase_output)
           })
       .catch((error) => {
           reject(error)
@@ -4558,30 +5518,37 @@ export function post_DcldCustomTagHDCase(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method DcldPayload
    OperationID: DcldPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DcldPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DcldPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DcldPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DcldPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_DcldPayload(requestBody:DcldPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DcldPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DcldPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DcldPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -4592,30 +5559,37 @@ export function post_DcldPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DcldCustomXML
    OperationID: DcldCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DcldCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DcldCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DcldCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DcldCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_DcldCustomXML(requestBody:DcldCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DcldCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DcldCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DcldCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -4626,30 +5600,37 @@ export function post_DcldCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DcluCustomListHDCase
    OperationID: DcluCustomListHDCase
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DcluCustomListHDCase_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DcluCustomListHDCase_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DcluCustomListHDCase_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DcluCustomListHDCase(requestBody:any, epicorHeaders?:Headers){
+export function post_DcluCustomListHDCase(requestBody:DcluCustomListHDCase_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DcluCustomListHDCase_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DcluCustomListHDCase", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DcluCustomListHDCase_output)
           })
       .catch((error) => {
           reject(error)
@@ -4660,30 +5641,37 @@ export function post_DcluCustomListHDCase(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method DcluCustomTagHDCase
    OperationID: DcluCustomTagHDCase
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DcluCustomTagHDCase_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DcluCustomTagHDCase_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DcluCustomTagHDCase_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DcluCustomTagHDCase(requestBody:any, epicorHeaders?:Headers){
+export function post_DcluCustomTagHDCase(requestBody:DcluCustomTagHDCase_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DcluCustomTagHDCase_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DcluCustomTagHDCase", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DcluCustomTagHDCase_output)
           })
       .catch((error) => {
           reject(error)
@@ -4694,30 +5682,37 @@ export function post_DcluCustomTagHDCase(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method DcluCustomXML
    OperationID: DcluCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DcluCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DcluCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DcluCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DcluCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_DcluCustomXML(requestBody:DcluCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DcluCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DcluCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DcluCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -4728,30 +5723,37 @@ export function post_DcluCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DcluPayload
    OperationID: DcluPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DcluPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DcluPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DcluPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DcluPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_DcluPayload(requestBody:DcluPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DcluPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DcluPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DcluPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -4762,30 +5764,37 @@ export function post_DcluPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DebmCustomListLocationMtl
    OperationID: DebmCustomListLocationMtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DebmCustomListLocationMtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DebmCustomListLocationMtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DebmCustomListLocationMtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DebmCustomListLocationMtl(requestBody:any, epicorHeaders?:Headers){
+export function post_DebmCustomListLocationMtl(requestBody:DebmCustomListLocationMtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DebmCustomListLocationMtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DebmCustomListLocationMtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DebmCustomListLocationMtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -4796,30 +5805,37 @@ export function post_DebmCustomListLocationMtl(requestBody:any, epicorHeaders?:H
    /**  
    Summary: Invoke method DebmCustomTagLocationMtl
    OperationID: DebmCustomTagLocationMtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DebmCustomTagLocationMtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DebmCustomTagLocationMtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DebmCustomTagLocationMtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DebmCustomTagLocationMtl(requestBody:any, epicorHeaders?:Headers){
+export function post_DebmCustomTagLocationMtl(requestBody:DebmCustomTagLocationMtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DebmCustomTagLocationMtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DebmCustomTagLocationMtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DebmCustomTagLocationMtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -4830,30 +5846,37 @@ export function post_DebmCustomTagLocationMtl(requestBody:any, epicorHeaders?:He
    /**  
    Summary: Invoke method DebmCustomListLocationWarrantyTran
    OperationID: DebmCustomListLocationWarrantyTran
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DebmCustomListLocationWarrantyTran_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DebmCustomListLocationWarrantyTran_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DebmCustomListLocationWarrantyTran_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DebmCustomListLocationWarrantyTran(requestBody:any, epicorHeaders?:Headers){
+export function post_DebmCustomListLocationWarrantyTran(requestBody:DebmCustomListLocationWarrantyTran_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DebmCustomListLocationWarrantyTran_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DebmCustomListLocationWarrantyTran", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DebmCustomListLocationWarrantyTran_output)
           })
       .catch((error) => {
           reject(error)
@@ -4864,30 +5887,37 @@ export function post_DebmCustomListLocationWarrantyTran(requestBody:any, epicorH
    /**  
    Summary: Invoke method DebmCustomTagLocationWarrantyTran
    OperationID: DebmCustomTagLocationWarrantyTran
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DebmCustomTagLocationWarrantyTran_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DebmCustomTagLocationWarrantyTran_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DebmCustomTagLocationWarrantyTran_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DebmCustomTagLocationWarrantyTran(requestBody:any, epicorHeaders?:Headers){
+export function post_DebmCustomTagLocationWarrantyTran(requestBody:DebmCustomTagLocationWarrantyTran_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DebmCustomTagLocationWarrantyTran_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DebmCustomTagLocationWarrantyTran", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DebmCustomTagLocationWarrantyTran_output)
           })
       .catch((error) => {
           reject(error)
@@ -4898,30 +5928,37 @@ export function post_DebmCustomTagLocationWarrantyTran(requestBody:any, epicorHe
    /**  
    Summary: Invoke method DebmCustomXML
    OperationID: DebmCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DebmCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DebmCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DebmCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DebmCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_DebmCustomXML(requestBody:DebmCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DebmCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DebmCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DebmCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -4932,30 +5969,37 @@ export function post_DebmCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DebmPayload
    OperationID: DebmPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DebmPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DebmPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DebmPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DebmPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_DebmPayload(requestBody:DebmPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DebmPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DebmPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DebmPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -4966,30 +6010,37 @@ export function post_DebmPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DmauCustomListLocationWarrantyTran
    OperationID: DmauCustomListLocationWarrantyTran
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DmauCustomListLocationWarrantyTran_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DmauCustomListLocationWarrantyTran_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DmauCustomListLocationWarrantyTran_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DmauCustomListLocationWarrantyTran(requestBody:any, epicorHeaders?:Headers){
+export function post_DmauCustomListLocationWarrantyTran(requestBody:DmauCustomListLocationWarrantyTran_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DmauCustomListLocationWarrantyTran_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DmauCustomListLocationWarrantyTran", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DmauCustomListLocationWarrantyTran_output)
           })
       .catch((error) => {
           reject(error)
@@ -5000,30 +6051,37 @@ export function post_DmauCustomListLocationWarrantyTran(requestBody:any, epicorH
    /**  
    Summary: Invoke method DmauCustomTagLocationWarrantyTran
    OperationID: DmauCustomTagLocationWarrantyTran
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DmauCustomTagLocationWarrantyTran_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DmauCustomTagLocationWarrantyTran_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DmauCustomTagLocationWarrantyTran_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DmauCustomTagLocationWarrantyTran(requestBody:any, epicorHeaders?:Headers){
+export function post_DmauCustomTagLocationWarrantyTran(requestBody:DmauCustomTagLocationWarrantyTran_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DmauCustomTagLocationWarrantyTran_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DmauCustomTagLocationWarrantyTran", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DmauCustomTagLocationWarrantyTran_output)
           })
       .catch((error) => {
           reject(error)
@@ -5034,30 +6092,37 @@ export function post_DmauCustomTagLocationWarrantyTran(requestBody:any, epicorHe
    /**  
    Summary: Invoke method DmauPayload
    OperationID: DmauPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DmauPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DmauPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DmauPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DmauPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_DmauPayload(requestBody:DmauPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DmauPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DmauPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DmauPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -5068,30 +6133,37 @@ export function post_DmauPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DeidCustomListLocationInventory
    OperationID: DeidCustomListLocationInventory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeidCustomListLocationInventory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeidCustomListLocationInventory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeidCustomListLocationInventory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeidCustomListLocationInventory(requestBody:any, epicorHeaders?:Headers){
+export function post_DeidCustomListLocationInventory(requestBody:DeidCustomListLocationInventory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeidCustomListLocationInventory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DeidCustomListLocationInventory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeidCustomListLocationInventory_output)
           })
       .catch((error) => {
           reject(error)
@@ -5102,30 +6174,37 @@ export function post_DeidCustomListLocationInventory(requestBody:any, epicorHead
    /**  
    Summary: Invoke method DeidCustomTagLocationInventory
    OperationID: DeidCustomTagLocationInventory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeidCustomTagLocationInventory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeidCustomTagLocationInventory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeidCustomTagLocationInventory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeidCustomTagLocationInventory(requestBody:any, epicorHeaders?:Headers){
+export function post_DeidCustomTagLocationInventory(requestBody:DeidCustomTagLocationInventory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeidCustomTagLocationInventory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DeidCustomTagLocationInventory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeidCustomTagLocationInventory_output)
           })
       .catch((error) => {
           reject(error)
@@ -5136,30 +6215,37 @@ export function post_DeidCustomTagLocationInventory(requestBody:any, epicorHeade
    /**  
    Summary: Invoke method DeidCustomXML
    OperationID: DeidCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeidCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeidCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeidCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeidCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_DeidCustomXML(requestBody:DeidCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeidCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DeidCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeidCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -5170,30 +6256,37 @@ export function post_DeidCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DeidPayload
    OperationID: DeidPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeidPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeidPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeidPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeidPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_DeidPayload(requestBody:DeidPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeidPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DeidPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeidPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -5204,30 +6297,37 @@ export function post_DeidPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DeiuCustomListLocationInventory
    OperationID: DeiuCustomListLocationInventory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeiuCustomListLocationInventory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeiuCustomListLocationInventory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeiuCustomListLocationInventory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeiuCustomListLocationInventory(requestBody:any, epicorHeaders?:Headers){
+export function post_DeiuCustomListLocationInventory(requestBody:DeiuCustomListLocationInventory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeiuCustomListLocationInventory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DeiuCustomListLocationInventory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeiuCustomListLocationInventory_output)
           })
       .catch((error) => {
           reject(error)
@@ -5238,30 +6338,37 @@ export function post_DeiuCustomListLocationInventory(requestBody:any, epicorHead
    /**  
    Summary: Invoke method DeiuCustomTagLocationInventory
    OperationID: DeiuCustomTagLocationInventory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeiuCustomTagLocationInventory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeiuCustomTagLocationInventory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeiuCustomTagLocationInventory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeiuCustomTagLocationInventory(requestBody:any, epicorHeaders?:Headers){
+export function post_DeiuCustomTagLocationInventory(requestBody:DeiuCustomTagLocationInventory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeiuCustomTagLocationInventory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DeiuCustomTagLocationInventory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeiuCustomTagLocationInventory_output)
           })
       .catch((error) => {
           reject(error)
@@ -5272,30 +6379,37 @@ export function post_DeiuCustomTagLocationInventory(requestBody:any, epicorHeade
    /**  
    Summary: Invoke method DeiuCustomXML
    OperationID: DeiuCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeiuCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeiuCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeiuCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeiuCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_DeiuCustomXML(requestBody:DeiuCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeiuCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DeiuCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeiuCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -5306,30 +6420,37 @@ export function post_DeiuCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DeiuPayload
    OperationID: DeiuPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeiuPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeiuPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeiuPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeiuPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_DeiuPayload(requestBody:DeiuPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeiuPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DeiuPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeiuPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -5341,30 +6462,37 @@ export function post_DeiuPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ECCSvcInbound
    Description: Generic method to allow for custom inbound request message processing.
    OperationID: ECCSvcInbound
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ECCSvcInbound_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ECCSvcInbound_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ECCSvcInbound_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ECCSvcInbound(requestBody:any, epicorHeaders?:Headers){
+export function post_ECCSvcInbound(requestBody:ECCSvcInbound_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ECCSvcInbound_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/ECCSvcInbound", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ECCSvcInbound_output)
           })
       .catch((error) => {
           reject(error)
@@ -5376,30 +6504,37 @@ export function post_ECCSvcInbound(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ExtendedInbound
    Description: Generic method to allow for custom inbound request message processing.
    OperationID: ExtendedInbound
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExtendedInbound_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExtendedInbound_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExtendedInbound_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExtendedInbound(requestBody:any, epicorHeaders?:Headers){
+export function post_ExtendedInbound(requestBody:ExtendedInbound_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExtendedInbound_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/ExtendedInbound", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExtendedInbound_output)
           })
       .catch((error) => {
           reject(error)
@@ -5411,30 +6546,37 @@ export function post_ExtendedInbound(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ExtendedOutbound
    Description: Generic method to allow for custom outbound request message processing.
    OperationID: ExtendedOutbound
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExtendedOutbound_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExtendedOutbound_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExtendedOutbound_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExtendedOutbound(requestBody:any, epicorHeaders?:Headers){
+export function post_ExtendedOutbound(requestBody:ExtendedOutbound_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExtendedOutbound_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/ExtendedOutbound", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExtendedOutbound_output)
           })
       .catch((error) => {
           reject(error)
@@ -5445,30 +6587,37 @@ export function post_ExtendedOutbound(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method UDMapIsEnabled
    OperationID: UDMapIsEnabled
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UDMapIsEnabled_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UDMapIsEnabled_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UDMapIsEnabled_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UDMapIsEnabled(requestBody:any, epicorHeaders?:Headers){
+export function post_UDMapIsEnabled(requestBody:UDMapIsEnabled_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UDMapIsEnabled_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/UDMapIsEnabled", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UDMapIsEnabled_output)
           })
       .catch((error) => {
           reject(error)
@@ -5480,30 +6629,37 @@ export function post_UDMapIsEnabled(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCUIDInvcHeadUD
    Description: Return Invoice header UD data for Invoice Inquiry
    OperationID: GetCUIDInvcHeadUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCUIDInvcHeadUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCUIDInvcHeadUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCUIDInvcHeadUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCUIDInvcHeadUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCUIDInvcHeadUD(requestBody:GetCUIDInvcHeadUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCUIDInvcHeadUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCUIDInvcHeadUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCUIDInvcHeadUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -5515,30 +6671,37 @@ export function post_GetCUIDInvcHeadUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCuidInvcDtlUD
    Description: Return Invoice detail UD data for Invoice inquiry
    OperationID: GetCuidInvcDtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCuidInvcDtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCuidInvcDtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCuidInvcDtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCuidInvcDtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCuidInvcDtlUD(requestBody:GetCuidInvcDtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCuidInvcDtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCuidInvcDtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCuidInvcDtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -5549,30 +6712,37 @@ export function post_GetCuidInvcDtlUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CuidCustomListInvcDtl
    OperationID: CuidCustomListInvcDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuidCustomListInvcDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuidCustomListInvcDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuidCustomListInvcDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuidCustomListInvcDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CuidCustomListInvcDtl(requestBody:CuidCustomListInvcDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuidCustomListInvcDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuidCustomListInvcDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuidCustomListInvcDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -5583,30 +6753,37 @@ export function post_CuidCustomListInvcDtl(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CuidCustomTagInvcDtl
    OperationID: CuidCustomTagInvcDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuidCustomTagInvcDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuidCustomTagInvcDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuidCustomTagInvcDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuidCustomTagInvcDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CuidCustomTagInvcDtl(requestBody:CuidCustomTagInvcDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuidCustomTagInvcDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuidCustomTagInvcDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuidCustomTagInvcDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -5617,30 +6794,37 @@ export function post_CuidCustomTagInvcDtl(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method CuidCustomListInvcHead
    OperationID: CuidCustomListInvcHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuidCustomListInvcHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuidCustomListInvcHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuidCustomListInvcHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuidCustomListInvcHead(requestBody:any, epicorHeaders?:Headers){
+export function post_CuidCustomListInvcHead(requestBody:CuidCustomListInvcHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuidCustomListInvcHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuidCustomListInvcHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuidCustomListInvcHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -5651,30 +6835,37 @@ export function post_CuidCustomListInvcHead(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method CuidCustomTagInvcHead
    OperationID: CuidCustomTagInvcHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuidCustomTagInvcHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuidCustomTagInvcHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuidCustomTagInvcHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuidCustomTagInvcHead(requestBody:any, epicorHeaders?:Headers){
+export function post_CuidCustomTagInvcHead(requestBody:CuidCustomTagInvcHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuidCustomTagInvcHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuidCustomTagInvcHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuidCustomTagInvcHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -5685,30 +6876,37 @@ export function post_CuidCustomTagInvcHead(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CuidCustomXML
    OperationID: CuidCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuidCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuidCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuidCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuidCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_CuidCustomXML(requestBody:CuidCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuidCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuidCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuidCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -5719,30 +6917,37 @@ export function post_CuidCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CuidPayload
    OperationID: CuidPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuidPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuidPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuidPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuidPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CuidPayload(requestBody:CuidPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuidPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuidPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuidPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -5754,30 +6959,37 @@ export function post_CuidPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignCustomerUD
    Description: Assigns UD columns for customer.
    OperationID: AssignCustomerUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignCustomerUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignCustomerUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignCustomerUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignCustomerUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignCustomerUD(requestBody:AssignCustomerUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignCustomerUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignCustomerUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignCustomerUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -5790,30 +7002,37 @@ export function post_AssignCustomerUD(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Customer UD data for CNC request.
 Note intended to be used by BPM.
    OperationID: GetCncCustomerUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCncCustomerUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCncCustomerUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCncCustomerUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCncCustomerUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCncCustomerUD(requestBody:GetCncCustomerUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCncCustomerUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCncCustomerUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCncCustomerUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -5825,30 +7044,37 @@ export function post_GetCncCustomerUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignShipToUD
    Description: Assigns UD columns for ShipTo.
    OperationID: AssignShipToUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignShipToUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignShipToUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignShipToUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignShipToUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignShipToUD(requestBody:AssignShipToUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignShipToUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignShipToUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignShipToUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -5861,30 +7087,37 @@ export function post_AssignShipToUD(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all ShipTo UD data for CNC request.
 Note intended to be used by BPM.
    OperationID: GetCncShipToUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCncShipToUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCncShipToUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCncShipToUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCncShipToUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCncShipToUD(requestBody:GetCncShipToUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCncShipToUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCncShipToUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCncShipToUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -5896,30 +7129,37 @@ export function post_GetCncShipToUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CncCustomListCustomer
    Description: Process Customer custom list for CNC request and response
    OperationID: CncCustomListCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CncCustomListCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CncCustomListCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CncCustomListCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CncCustomListCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_CncCustomListCustomer(requestBody:CncCustomListCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CncCustomListCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CncCustomListCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CncCustomListCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -5931,30 +7171,37 @@ export function post_CncCustomListCustomer(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method CncCustomListShipTo
    Description: Process ShipTo custom list for CNC request and response
    OperationID: CncCustomListShipTo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CncCustomListShipTo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CncCustomListShipTo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CncCustomListShipTo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CncCustomListShipTo(requestBody:any, epicorHeaders?:Headers){
+export function post_CncCustomListShipTo(requestBody:CncCustomListShipTo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CncCustomListShipTo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CncCustomListShipTo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CncCustomListShipTo_output)
           })
       .catch((error) => {
           reject(error)
@@ -5966,30 +7213,37 @@ export function post_CncCustomListShipTo(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method CncCustomTagCustomer
    Description: Process Customer custom tag for CNC request and response
    OperationID: CncCustomTagCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CncCustomTagCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CncCustomTagCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CncCustomTagCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CncCustomTagCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_CncCustomTagCustomer(requestBody:CncCustomTagCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CncCustomTagCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CncCustomTagCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CncCustomTagCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -6001,30 +7255,37 @@ export function post_CncCustomTagCustomer(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method CncCustomTagShipTo
    Description: Process ShipTo custom tag for CNC request and response
    OperationID: CncCustomTagShipTo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CncCustomTagShipTo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CncCustomTagShipTo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CncCustomTagShipTo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CncCustomTagShipTo(requestBody:any, epicorHeaders?:Headers){
+export function post_CncCustomTagShipTo(requestBody:CncCustomTagShipTo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CncCustomTagShipTo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CncCustomTagShipTo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CncCustomTagShipTo_output)
           })
       .catch((error) => {
           reject(error)
@@ -6036,30 +7297,37 @@ export function post_CncCustomTagShipTo(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method CncPayload
    Description: Process payload for CNC request and response
    OperationID: CncPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CncPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CncPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CncPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CncPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CncPayload(requestBody:CncPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CncPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CncPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CncPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -6072,30 +7340,37 @@ export function post_CncPayload(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all ShipTo UD data for CAD sync.
 Note intended to be used by BPM.
    OperationID: GetCadShipToUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCadShipToUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCadShipToUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCadShipToUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCadShipToUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCadShipToUD(requestBody:GetCadShipToUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCadShipToUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCadShipToUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCadShipToUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -6106,30 +7381,37 @@ export function post_GetCadShipToUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CadCustomList
    OperationID: CadCustomList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CadCustomList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CadCustomList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CadCustomList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CadCustomList(requestBody:any, epicorHeaders?:Headers){
+export function post_CadCustomList(requestBody:CadCustomList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CadCustomList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CadCustomList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CadCustomList_output)
           })
       .catch((error) => {
           reject(error)
@@ -6140,30 +7422,37 @@ export function post_CadCustomList(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CadCustomTag
    OperationID: CadCustomTag
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CadCustomTag_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CadCustomTag_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CadCustomTag_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CadCustomTag(requestBody:any, epicorHeaders?:Headers){
+export function post_CadCustomTag(requestBody:CadCustomTag_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CadCustomTag_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CadCustomTag", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CadCustomTag_output)
           })
       .catch((error) => {
           reject(error)
@@ -6174,30 +7463,37 @@ export function post_CadCustomTag(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CadCustomXML
    OperationID: CadCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CadCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CadCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CadCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CadCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_CadCustomXML(requestBody:CadCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CadCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CadCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CadCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -6210,30 +7506,37 @@ export function post_CadCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in STK upload to allow for custom coding of the payload.  The part row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: CadPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CadPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CadPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CadPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CadPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CadPayload(requestBody:CadPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CadPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CadPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CadPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -6244,30 +7547,37 @@ export function post_CadPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CadFinalXml
    OperationID: CadFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CadFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CadFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CadFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CadFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_CadFinalXml(requestBody:CadFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CadFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CadFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CadFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -6280,30 +7590,37 @@ export function post_CadFinalXml(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Part UD data for STK.
 Note intended to be used by BPM.
    OperationID: GetCucoCustCntUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCucoCustCntUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCucoCustCntUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCucoCustCntUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCucoCustCntUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCucoCustCntUD(requestBody:GetCucoCustCntUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCucoCustCntUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCucoCustCntUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCucoCustCntUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -6314,30 +7631,37 @@ export function post_GetCucoCustCntUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CucoCustomList
    OperationID: CucoCustomList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CucoCustomList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CucoCustomList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CucoCustomList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CucoCustomList(requestBody:any, epicorHeaders?:Headers){
+export function post_CucoCustomList(requestBody:CucoCustomList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CucoCustomList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CucoCustomList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CucoCustomList_output)
           })
       .catch((error) => {
           reject(error)
@@ -6348,30 +7672,37 @@ export function post_CucoCustomList(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CucoCustomTag
    OperationID: CucoCustomTag
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CucoCustomTag_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CucoCustomTag_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CucoCustomTag_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CucoCustomTag(requestBody:any, epicorHeaders?:Headers){
+export function post_CucoCustomTag(requestBody:CucoCustomTag_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CucoCustomTag_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CucoCustomTag", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CucoCustomTag_output)
           })
       .catch((error) => {
           reject(error)
@@ -6382,30 +7713,37 @@ export function post_CucoCustomTag(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CucoCustomXML
    OperationID: CucoCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CucoCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CucoCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CucoCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CucoCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_CucoCustomXML(requestBody:CucoCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CucoCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CucoCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CucoCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -6418,30 +7756,37 @@ export function post_CucoCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in STK upload to allow for custom coding of the payload.  The part row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: CucoPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CucoPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CucoPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CucoPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CucoPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CucoPayload(requestBody:CucoPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CucoPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CucoPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CucoPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -6452,30 +7797,37 @@ export function post_CucoPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CucoFinalXml
    OperationID: CucoFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CucoFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CucoFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CucoFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CucoFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_CucoFinalXml(requestBody:CucoFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CucoFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CucoFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CucoFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -6488,30 +7840,37 @@ export function post_CucoFinalXml(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Customer UD data for CUS sync.
 Note intended to be used by BPM.
    OperationID: GetCusCustomerUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCusCustomerUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCusCustomerUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCusCustomerUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCusCustomerUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCusCustomerUD(requestBody:GetCusCustomerUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCusCustomerUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCusCustomerUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCusCustomerUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -6522,30 +7881,37 @@ export function post_GetCusCustomerUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CusCustomList
    OperationID: CusCustomList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CusCustomList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CusCustomList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CusCustomList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CusCustomList(requestBody:any, epicorHeaders?:Headers){
+export function post_CusCustomList(requestBody:CusCustomList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CusCustomList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CusCustomList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CusCustomList_output)
           })
       .catch((error) => {
           reject(error)
@@ -6556,30 +7922,37 @@ export function post_CusCustomList(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CusCustomTag
    OperationID: CusCustomTag
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CusCustomTag_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CusCustomTag_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CusCustomTag_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CusCustomTag(requestBody:any, epicorHeaders?:Headers){
+export function post_CusCustomTag(requestBody:CusCustomTag_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CusCustomTag_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CusCustomTag", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CusCustomTag_output)
           })
       .catch((error) => {
           reject(error)
@@ -6590,30 +7963,37 @@ export function post_CusCustomTag(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CusCustomXML
    OperationID: CusCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CusCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CusCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CusCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CusCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_CusCustomXML(requestBody:CusCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CusCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CusCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CusCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -6626,30 +8006,37 @@ export function post_CusCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in CNC to allow for custom coding of the payload.  The Customer row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: CusPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CusPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CusPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CusPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CusPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CusPayload(requestBody:CusPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CusPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CusPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CusPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -6660,30 +8047,37 @@ export function post_CusPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CusFinalXml
    OperationID: CusFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CusFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CusFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CusFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CusFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_CusFinalXml(requestBody:CusFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CusFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CusFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CusFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -6696,30 +8090,37 @@ export function post_CusFinalXml(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Part UD data for STK.
 Note intended to be used by BPM.
    OperationID: GetCrrcReasonUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCrrcReasonUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCrrcReasonUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCrrcReasonUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCrrcReasonUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCrrcReasonUD(requestBody:GetCrrcReasonUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCrrcReasonUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCrrcReasonUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCrrcReasonUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -6730,30 +8131,37 @@ export function post_GetCrrcReasonUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrrcCustomList
    OperationID: CrrcCustomList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrcCustomList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrcCustomList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrcCustomList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrcCustomList(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrcCustomList(requestBody:CrrcCustomList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrcCustomList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrcCustomList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrcCustomList_output)
           })
       .catch((error) => {
           reject(error)
@@ -6764,30 +8172,37 @@ export function post_CrrcCustomList(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrrcCustomTag
    OperationID: CrrcCustomTag
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrcCustomTag_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrcCustomTag_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrcCustomTag_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrcCustomTag(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrcCustomTag(requestBody:CrrcCustomTag_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrcCustomTag_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrcCustomTag", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrcCustomTag_output)
           })
       .catch((error) => {
           reject(error)
@@ -6798,30 +8213,37 @@ export function post_CrrcCustomTag(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrrcCustomXML
    OperationID: CrrcCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrcCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrcCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrcCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrcCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrcCustomXML(requestBody:CrrcCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrcCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrcCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrcCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -6834,30 +8256,37 @@ export function post_CrrcCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in STK upload to allow for custom coding of the payload.  The part row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: CrrcPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrcPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrcPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrcPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrcPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrcPayload(requestBody:CrrcPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrcPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrcPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrcPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -6868,30 +8297,37 @@ export function post_CrrcPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CrrcFinalXml
    OperationID: CrrcFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CrrcFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CrrcFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CrrcFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CrrcFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_CrrcFinalXml(requestBody:CrrcFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CrrcFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CrrcFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CrrcFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -6904,30 +8340,37 @@ export function post_CrrcFinalXml(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Vendor UD data for SUSP.
 Note intended to be used by BPM.
    OperationID: GetSuspVendorUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSuspVendorUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSuspVendorUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSuspVendorUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSuspVendorUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSuspVendorUD(requestBody:GetSuspVendorUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSuspVendorUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetSuspVendorUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSuspVendorUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -6938,30 +8381,37 @@ export function post_GetSuspVendorUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SuspCustomListVendor
    OperationID: SuspCustomListVendor
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuspCustomListVendor_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuspCustomListVendor_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuspCustomListVendor_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuspCustomListVendor(requestBody:any, epicorHeaders?:Headers){
+export function post_SuspCustomListVendor(requestBody:SuspCustomListVendor_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuspCustomListVendor_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SuspCustomListVendor", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuspCustomListVendor_output)
           })
       .catch((error) => {
           reject(error)
@@ -6972,30 +8422,37 @@ export function post_SuspCustomListVendor(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method SuspCustomTagVendor
    OperationID: SuspCustomTagVendor
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuspCustomTagVendor_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuspCustomTagVendor_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuspCustomTagVendor_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuspCustomTagVendor(requestBody:any, epicorHeaders?:Headers){
+export function post_SuspCustomTagVendor(requestBody:SuspCustomTagVendor_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuspCustomTagVendor_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SuspCustomTagVendor", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuspCustomTagVendor_output)
           })
       .catch((error) => {
           reject(error)
@@ -7006,30 +8463,37 @@ export function post_SuspCustomTagVendor(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method SuspCustomXML
    OperationID: SuspCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuspCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuspCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuspCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuspCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_SuspCustomXML(requestBody:SuspCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuspCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SuspCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuspCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -7042,30 +8506,37 @@ export function post_SuspCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in SUSP upload to allow for custom coding of the payload.  The vendor row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: SuspPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuspPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuspPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuspPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuspPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_SuspPayload(requestBody:SuspPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuspPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SuspPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuspPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -7076,30 +8547,37 @@ export function post_SuspPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SuspFinalXml
    OperationID: SuspFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuspFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuspFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuspFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuspFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_SuspFinalXml(requestBody:SuspFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuspFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SuspFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuspFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -7112,30 +8590,37 @@ export function post_SuspFinalXml(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all VendCnt UD data for SUCO.
 Note intended to be used by BPM.
    OperationID: GetSucoVendCntUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSucoVendCntUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSucoVendCntUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSucoVendCntUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSucoVendCntUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSucoVendCntUD(requestBody:GetSucoVendCntUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSucoVendCntUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetSucoVendCntUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSucoVendCntUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -7146,30 +8631,37 @@ export function post_GetSucoVendCntUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SucoCustomListVendCnt
    OperationID: SucoCustomListVendCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SucoCustomListVendCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SucoCustomListVendCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SucoCustomListVendCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SucoCustomListVendCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_SucoCustomListVendCnt(requestBody:SucoCustomListVendCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SucoCustomListVendCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SucoCustomListVendCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SucoCustomListVendCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -7180,30 +8672,37 @@ export function post_SucoCustomListVendCnt(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method SucoCustomTagVendCnt
    OperationID: SucoCustomTagVendCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SucoCustomTagVendCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SucoCustomTagVendCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SucoCustomTagVendCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SucoCustomTagVendCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_SucoCustomTagVendCnt(requestBody:SucoCustomTagVendCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SucoCustomTagVendCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SucoCustomTagVendCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SucoCustomTagVendCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -7214,30 +8713,37 @@ export function post_SucoCustomTagVendCnt(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method SucoCustomXML
    OperationID: SucoCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SucoCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SucoCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SucoCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SucoCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_SucoCustomXML(requestBody:SucoCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SucoCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SucoCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SucoCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -7250,30 +8756,37 @@ export function post_SucoCustomXML(requestBody:any, epicorHeaders?:Headers){
    Description: ECC method used in SUCO upload to allow for custom coding of the payload.  The vendCnt row will be supplied for reference to help
 with the updating of the payLoad string.
    OperationID: SucoPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SucoPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SucoPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SucoPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SucoPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_SucoPayload(requestBody:SucoPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SucoPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SucoPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SucoPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -7284,30 +8797,37 @@ export function post_SucoPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SucoFinalXml
    OperationID: SucoFinalXml
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SucoFinalXml_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SucoFinalXml_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SucoFinalXml_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SucoFinalXml(requestBody:any, epicorHeaders?:Headers){
+export function post_SucoFinalXml(requestBody:SucoFinalXml_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SucoFinalXml_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/SucoFinalXml", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SucoFinalXml_output)
           })
       .catch((error) => {
           reject(error)
@@ -7319,30 +8839,37 @@ export function post_SucoFinalXml(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignOrderDtlUD
    Description: Assigns UD columns for order detail.
    OperationID: AssignOrderDtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignOrderDtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignOrderDtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignOrderDtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignOrderDtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignOrderDtlUD(requestBody:AssignOrderDtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignOrderDtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignOrderDtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignOrderDtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -7354,30 +8881,37 @@ export function post_AssignOrderDtlUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignOrderHedUD
    Description: Assigns payload and UD columns for order head
    OperationID: AssignOrderHedUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignOrderHedUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignOrderHedUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignOrderHedUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignOrderHedUD(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignOrderHedUD(requestBody:AssignOrderHedUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignOrderHedUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/AssignOrderHedUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignOrderHedUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -7388,30 +8922,37 @@ export function post_AssignOrderHedUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method BsvCustomListOrderDtl
    OperationID: BsvCustomListOrderDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BsvCustomListOrderDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BsvCustomListOrderDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BsvCustomListOrderDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BsvCustomListOrderDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_BsvCustomListOrderDtl(requestBody:BsvCustomListOrderDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BsvCustomListOrderDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/BsvCustomListOrderDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BsvCustomListOrderDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -7422,30 +8963,37 @@ export function post_BsvCustomListOrderDtl(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method BsvCustomListOrderHed
    OperationID: BsvCustomListOrderHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BsvCustomListOrderHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BsvCustomListOrderHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BsvCustomListOrderHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BsvCustomListOrderHed(requestBody:any, epicorHeaders?:Headers){
+export function post_BsvCustomListOrderHed(requestBody:BsvCustomListOrderHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BsvCustomListOrderHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/BsvCustomListOrderHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BsvCustomListOrderHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -7456,30 +9004,37 @@ export function post_BsvCustomListOrderHed(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method BsvCustomTagOrderDtl
    OperationID: BsvCustomTagOrderDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BsvCustomTagOrderDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BsvCustomTagOrderDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BsvCustomTagOrderDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BsvCustomTagOrderDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_BsvCustomTagOrderDtl(requestBody:BsvCustomTagOrderDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BsvCustomTagOrderDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/BsvCustomTagOrderDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BsvCustomTagOrderDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -7490,30 +9045,37 @@ export function post_BsvCustomTagOrderDtl(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method BsvCustomTagOrderHed
    OperationID: BsvCustomTagOrderHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BsvCustomTagOrderHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BsvCustomTagOrderHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BsvCustomTagOrderHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BsvCustomTagOrderHed(requestBody:any, epicorHeaders?:Headers){
+export function post_BsvCustomTagOrderHed(requestBody:BsvCustomTagOrderHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BsvCustomTagOrderHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/BsvCustomTagOrderHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BsvCustomTagOrderHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -7524,30 +9086,37 @@ export function post_BsvCustomTagOrderHed(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method BsvPayload
    OperationID: BsvPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BsvPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BsvPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BsvPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BsvPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_BsvPayload(requestBody:BsvPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BsvPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/BsvPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BsvPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -7558,30 +9127,37 @@ export function post_BsvPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GorCustomListOrderDtl
    OperationID: GorCustomListOrderDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GorCustomListOrderDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GorCustomListOrderDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GorCustomListOrderDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GorCustomListOrderDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GorCustomListOrderDtl(requestBody:GorCustomListOrderDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GorCustomListOrderDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GorCustomListOrderDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GorCustomListOrderDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -7592,30 +9168,37 @@ export function post_GorCustomListOrderDtl(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method GorCustomListOrderHed
    OperationID: GorCustomListOrderHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GorCustomListOrderHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GorCustomListOrderHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GorCustomListOrderHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GorCustomListOrderHed(requestBody:any, epicorHeaders?:Headers){
+export function post_GorCustomListOrderHed(requestBody:GorCustomListOrderHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GorCustomListOrderHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GorCustomListOrderHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GorCustomListOrderHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -7626,30 +9209,37 @@ export function post_GorCustomListOrderHed(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method GorCustomTagOrderDtl
    OperationID: GorCustomTagOrderDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GorCustomTagOrderDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GorCustomTagOrderDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GorCustomTagOrderDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GorCustomTagOrderDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GorCustomTagOrderDtl(requestBody:GorCustomTagOrderDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GorCustomTagOrderDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GorCustomTagOrderDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GorCustomTagOrderDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -7660,30 +9250,37 @@ export function post_GorCustomTagOrderDtl(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method GorCustomTagOrderHed
    OperationID: GorCustomTagOrderHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GorCustomTagOrderHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GorCustomTagOrderHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GorCustomTagOrderHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GorCustomTagOrderHed(requestBody:any, epicorHeaders?:Headers){
+export function post_GorCustomTagOrderHed(requestBody:GorCustomTagOrderHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GorCustomTagOrderHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GorCustomTagOrderHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GorCustomTagOrderHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -7694,30 +9291,37 @@ export function post_GorCustomTagOrderHed(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method GorPayload
    OperationID: GorPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GorPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GorPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GorPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GorPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_GorPayload(requestBody:GorPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GorPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GorPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GorPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -7729,30 +9333,37 @@ export function post_GorPayload(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCuodOrderHedUD
    Description: Return order header UD data for order inquiry
    OperationID: GetCuodOrderHedUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCuodOrderHedUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCuodOrderHedUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCuodOrderHedUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCuodOrderHedUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCuodOrderHedUD(requestBody:GetCuodOrderHedUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCuodOrderHedUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCuodOrderHedUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCuodOrderHedUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -7764,30 +9375,37 @@ export function post_GetCuodOrderHedUD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCuodOrderDtlUD
    Description: Return order detail UD data for order inquiry
    OperationID: GetCuodOrderDtlUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCuodOrderDtlUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCuodOrderDtlUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCuodOrderDtlUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCuodOrderDtlUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCuodOrderDtlUD(requestBody:GetCuodOrderDtlUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCuodOrderDtlUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCuodOrderDtlUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCuodOrderDtlUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -7798,30 +9416,37 @@ export function post_GetCuodOrderDtlUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CuodCustomListOrderDtl
    OperationID: CuodCustomListOrderDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuodCustomListOrderDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuodCustomListOrderDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuodCustomListOrderDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuodCustomListOrderDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CuodCustomListOrderDtl(requestBody:CuodCustomListOrderDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuodCustomListOrderDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuodCustomListOrderDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuodCustomListOrderDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -7832,30 +9457,37 @@ export function post_CuodCustomListOrderDtl(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method CuodCustomTagOrderDtl
    OperationID: CuodCustomTagOrderDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuodCustomTagOrderDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuodCustomTagOrderDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuodCustomTagOrderDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuodCustomTagOrderDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CuodCustomTagOrderDtl(requestBody:CuodCustomTagOrderDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuodCustomTagOrderDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuodCustomTagOrderDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuodCustomTagOrderDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -7866,30 +9498,37 @@ export function post_CuodCustomTagOrderDtl(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CuodCustomListOrderHed
    OperationID: CuodCustomListOrderHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuodCustomListOrderHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuodCustomListOrderHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuodCustomListOrderHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuodCustomListOrderHed(requestBody:any, epicorHeaders?:Headers){
+export function post_CuodCustomListOrderHed(requestBody:CuodCustomListOrderHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuodCustomListOrderHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuodCustomListOrderHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuodCustomListOrderHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -7900,30 +9539,37 @@ export function post_CuodCustomListOrderHed(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method CuodCustomTagOrderHed
    OperationID: CuodCustomTagOrderHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuodCustomTagOrderHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuodCustomTagOrderHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuodCustomTagOrderHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuodCustomTagOrderHed(requestBody:any, epicorHeaders?:Headers){
+export function post_CuodCustomTagOrderHed(requestBody:CuodCustomTagOrderHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuodCustomTagOrderHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuodCustomTagOrderHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuodCustomTagOrderHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -7934,30 +9580,37 @@ export function post_CuodCustomTagOrderHed(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method CuodCustomXML
    OperationID: CuodCustomXML
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuodCustomXML_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuodCustomXML_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuodCustomXML_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuodCustomXML(requestBody:any, epicorHeaders?:Headers){
+export function post_CuodCustomXML(requestBody:CuodCustomXML_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuodCustomXML_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuodCustomXML", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuodCustomXML_output)
           })
       .catch((error) => {
           reject(error)
@@ -7968,30 +9621,37 @@ export function post_CuodCustomXML(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CuodPayload
    OperationID: CuodPayload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuodPayload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuodPayload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuodPayload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuodPayload(requestBody:any, epicorHeaders?:Headers){
+export function post_CuodPayload(requestBody:CuodPayload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuodPayload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuodPayload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuodPayload_output)
           })
       .catch((error) => {
           reject(error)
@@ -8002,30 +9662,37 @@ export function post_CuodPayload(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetCuosOrderHedUD
    OperationID: GetCuosOrderHedUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCuosOrderHedUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCuosOrderHedUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCuosOrderHedUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCuosOrderHedUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCuosOrderHedUD(requestBody:GetCuosOrderHedUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCuosOrderHedUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetCuosOrderHedUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCuosOrderHedUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -8036,30 +9703,37 @@ export function post_GetCuosOrderHedUD(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CuosCustomListOrderHed
    OperationID: CuosCustomListOrderHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuosCustomListOrderHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuosCustomListOrderHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuosCustomListOrderHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuosCustomListOrderHed(requestBody:any, epicorHeaders?:Headers){
+export function post_CuosCustomListOrderHed(requestBody:CuosCustomListOrderHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuosCustomListOrderHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuosCustomListOrderHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuosCustomListOrderHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -8070,30 +9744,37 @@ export function post_CuosCustomListOrderHed(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method CuosCustomTagOrderHed
    OperationID: CuosCustomTagOrderHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CuosCustomTagOrderHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CuosCustomTagOrderHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CuosCustomTagOrderHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CuosCustomTagOrderHed(requestBody:any, epicorHeaders?:Headers){
+export function post_CuosCustomTagOrderHed(requestBody:CuosCustomTagOrderHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CuosCustomTagOrderHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/CuosCustomTagOrderHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CuosCustomTagOrderHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -8107,30 +9788,37 @@ export function post_CuosCustomTagOrderHed(requestBody:any, epicorHeaders?:Heade
 Custom code responsible for created the XML response.
 BPM should not be attached to this method but rather DdaXmlOverride
    OperationID: DdaXmlInbound
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DdaXmlInbound_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DdaXmlInbound_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DdaXmlInbound_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DdaXmlInbound(requestBody:any, epicorHeaders?:Headers){
+export function post_DdaXmlInbound(requestBody:DdaXmlInbound_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DdaXmlInbound_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DdaXmlInbound", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DdaXmlInbound_output)
           })
       .catch((error) => {
           reject(error)
@@ -8143,30 +9831,37 @@ export function post_DdaXmlInbound(requestBody:any, epicorHeaders?:Headers){
    Description: Generic method to allow for complete override of ERP DDA message handling.
 Custom code responsible for created the XML response.
    OperationID: DdaXmlOverride
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DdaXmlOverride_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DdaXmlOverride_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DdaXmlOverride_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DdaXmlOverride(requestBody:any, epicorHeaders?:Headers){
+export function post_DdaXmlOverride(requestBody:DdaXmlOverride_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DdaXmlOverride_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DdaXmlOverride", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DdaXmlOverride_output)
           })
       .catch((error) => {
           reject(error)
@@ -8178,30 +9873,37 @@ export function post_DdaXmlOverride(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DdaLineOverride
    Description: Generic method to allow for override of DDA per line
    OperationID: DdaLineOverride
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DdaLineOverride_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DdaLineOverride_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DdaLineOverride_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DdaLineOverride(requestBody:any, epicorHeaders?:Headers){
+export function post_DdaLineOverride(requestBody:DdaLineOverride_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DdaLineOverride_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/DdaLineOverride", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DdaLineOverride_output)
           })
       .catch((error) => {
           reject(error)
@@ -8213,30 +9915,37 @@ export function post_DdaLineOverride(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MsqOverride
    Description: Generic method to allow for override of MSQ price per part and quantity
    OperationID: MsqOverride
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MsqOverride_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MsqOverride_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MsqOverride_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MsqOverride(requestBody:any, epicorHeaders?:Headers){
+export function post_MsqOverride(requestBody:MsqOverride_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MsqOverride_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/MsqOverride", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MsqOverride_output)
           })
       .catch((error) => {
           reject(error)
@@ -8249,30 +9958,37 @@ export function post_MsqOverride(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Part UD data for ALT.
 Note intended to be used by BPM.
    OperationID: GetAltPartUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAltPartUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAltPartUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAltPartUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAltPartUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAltPartUD(requestBody:GetAltPartUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAltPartUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetAltPartUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAltPartUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -8285,30 +10001,37 @@ export function post_GetAltPartUD(requestBody:any, epicorHeaders?:Headers){
    Description: Returns all Part UD data for STK.
 Note intended to be used by BPM.
    OperationID: GetAltPartSubsUD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAltPartSubsUD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAltPartSubsUD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAltPartSubsUD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAltPartSubsUD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAltPartSubsUD(requestBody:GetAltPartSubsUD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAltPartSubsUD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ECCExtensionSvc/GetAltPartSubsUD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAltPartSubsUD_output)
           })
       .catch((error) => {
           reject(error)
@@ -8319,11 +10042,45 @@ export function post_GetAltPartSubsUD(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -8339,7 +10096,7 @@ export interface AltCustomListPartSubs_input{
 export interface AltCustomListPartSubs_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -8355,7 +10112,7 @@ export interface AltCustomListPart_input{
 export interface AltCustomListPart_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -8463,7 +10220,7 @@ export interface AssignCustomerUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtCustomerRow:Erp_Tablesets_CustomerRow[],
+   eccExtCustomerRow:Erp_Tablesets_CustomerRow,
 }
 }
 
@@ -8484,7 +10241,7 @@ export interface AssignHDCaseUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtHDCaseRow:Erp_Tablesets_HDCaseRow[],
+   eccExtHDCaseRow:Erp_Tablesets_HDCaseRow,
 }
 }
 
@@ -8507,7 +10264,7 @@ export interface AssignLocationInventoryUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtLocationInventoryRow:Erp_Tablesets_LocationInventoryRow[],
+   eccExtLocationInventoryRow:Erp_Tablesets_LocationInventoryRow,
 }
 }
 
@@ -8530,7 +10287,7 @@ export interface AssignLocationWarrantyTranUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtLocationWarrantyTranRow:Erp_Tablesets_LocationWarrantyTranRow[],
+   eccExtLocationWarrantyTranRow:Erp_Tablesets_LocationWarrantyTranRow,
 }
 }
 
@@ -8551,7 +10308,7 @@ export interface AssignOrderDtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtOrderDtlRow:Erp_Tablesets_OrderDtlRow[],
+   eccExtOrderDtlRow:Erp_Tablesets_OrderDtlRow,
 }
 }
 
@@ -8572,7 +10329,7 @@ export interface AssignOrderHedUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtOrderHedRow:Erp_Tablesets_OrderHedRow[],
+   eccExtOrderHedRow:Erp_Tablesets_OrderHedRow,
 }
 }
 
@@ -8593,7 +10350,7 @@ export interface AssignQuoteDtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteDtlRow:Erp_Tablesets_QuoteDtlRow[],
+   eccExtQuoteDtlRow:Erp_Tablesets_QuoteDtlRow,
 }
 }
 
@@ -8614,7 +10371,7 @@ export interface AssignQuoteHedUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteHedRow:Erp_Tablesets_QuoteHedRow[],
+   eccExtQuoteHedRow:Erp_Tablesets_QuoteHedRow,
 }
 }
 
@@ -8635,7 +10392,7 @@ export interface AssignRFQHeadUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtRFQHeadRow:Erp_Tablesets_RFQHeadRow[],
+   eccExtRFQHeadRow:Erp_Tablesets_RFQHeadRow,
 }
 }
 
@@ -8656,7 +10413,7 @@ export interface AssignRFQItemUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtRFQItemRow:Erp_Tablesets_RFQItemRow[],
+   eccExtRFQItemRow:Erp_Tablesets_RFQItemRow,
 }
 }
 
@@ -8677,7 +10434,7 @@ export interface AssignRMADtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtRMADtlRow:Erp_Tablesets_RMADtlRow[],
+   eccExtRMADtlRow:Erp_Tablesets_RMADtlRow,
 }
 }
 
@@ -8698,7 +10455,7 @@ export interface AssignRMAHeadUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtRMAHeadRow:Erp_Tablesets_RMAHeadRow[],
+   eccExtRMAHeadRow:Erp_Tablesets_RMAHeadRow,
 }
 }
 
@@ -8717,7 +10474,7 @@ export interface AssignShipToUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtShipToRow:Erp_Tablesets_ShipToRow[],
+   eccExtShipToRow:Erp_Tablesets_ShipToRow,
 }
 }
 
@@ -8740,7 +10497,7 @@ export interface AssignSugPOChgUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   eccExtSugPOChgRowRow:Erp_Tablesets_SugPOChgRow[],
+   eccExtSugPOChgRowRow:Erp_Tablesets_SugPOChgRow,
 }
 }
 
@@ -8756,8 +10513,8 @@ export interface BsvCustomListOrderDtl_input{
 export interface BsvCustomListOrderDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtOrderDtl:Erp_Tablesets_ECCExtensionOrderDtlTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtOrderDtl:Erp_Tablesets_ECCExtensionOrderDtlTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -8773,8 +10530,8 @@ export interface BsvCustomListOrderHed_input{
 export interface BsvCustomListOrderHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -8792,7 +10549,7 @@ export interface BsvCustomTagOrderDtl_input{
 export interface BsvCustomTagOrderDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtOrderDtl:Erp_Tablesets_ECCExtensionOrderDtlTableset[],
+   eccExtOrderDtl:Erp_Tablesets_ECCExtensionOrderDtlTableset,
    customValue:string,
 }
 }
@@ -8811,7 +10568,7 @@ export interface BsvCustomTagOrderHed_input{
 export interface BsvCustomTagOrderHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset[],
+   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset,
    customValue:string,
 }
 }
@@ -8828,7 +10585,7 @@ export interface BsvPayload_input{
 export interface BsvPayload_output{
 parameters : {
       /**  output parameters  */  
-   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset[],
+   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset,
    payload:string,
 }
 }
@@ -8845,7 +10602,7 @@ export interface CadCustomList_input{
 export interface CadCustomList_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -8930,7 +10687,7 @@ export interface CdmCustomListPcECCOrderDtl_input{
 export interface CdmCustomListPcECCOrderDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -8946,7 +10703,7 @@ export interface CdmCustomListQuoteDtl_input{
 export interface CdmCustomListQuoteDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9001,7 +10758,7 @@ export interface CncCustomListCustomer_input{
 export interface CncCustomListCustomer_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9020,7 +10777,7 @@ export interface CncCustomListShipTo_input{
 export interface CncCustomListShipTo_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9081,7 +10838,7 @@ export interface CncPayload_input{
 export interface CncPayload_output{
 parameters : {
       /**  output parameters  */  
-   eccExtCustomer:Erp_Tablesets_ECCExtensionCustomerTableset[],
+   eccExtCustomer:Erp_Tablesets_ECCExtensionCustomerTableset,
    payload:string,
 }
 }
@@ -9098,7 +10855,7 @@ export interface CpnCustomListCustXPrt_input{
 export interface CpnCustomListCustXPrt_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9114,7 +10871,7 @@ export interface CpnCustomListPartXRefInt_input{
 export interface CpnCustomListPartXRefInt_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9268,7 +11025,7 @@ export interface CrqdCustomListQuoteDtl_input{
 export interface CrqdCustomListQuoteDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9284,7 +11041,7 @@ export interface CrqdCustomListQuoteHed_input{
 export interface CrqdCustomListQuoteHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9368,8 +11125,8 @@ export interface CrquCustomListQuoteDtl_input{
 export interface CrquCustomListQuoteDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteDtl:Erp_Tablesets_ECCExtensionQuoteDtlTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtQuoteDtl:Erp_Tablesets_ECCExtensionQuoteDtlTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9385,8 +11142,8 @@ export interface CrquCustomListQuoteHed_input{
 export interface CrquCustomListQuoteHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9404,7 +11161,7 @@ export interface CrquCustomTagQuoteDtl_input{
 export interface CrquCustomTagQuoteDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteDtl:Erp_Tablesets_ECCExtensionQuoteDtlTableset[],
+   eccExtQuoteDtl:Erp_Tablesets_ECCExtensionQuoteDtlTableset,
    customValue:string,
 }
 }
@@ -9423,7 +11180,7 @@ export interface CrquCustomTagQuoteHed_input{
 export interface CrquCustomTagQuoteHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset[],
+   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset,
    customValue:string,
 }
 }
@@ -9440,7 +11197,7 @@ export interface CrquCustomXML_input{
 export interface CrquCustomXML_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset[],
+   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset,
    xmlDoc:string,
 }
 }
@@ -9457,7 +11214,7 @@ export interface CrquPayload_input{
 export interface CrquPayload_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset[],
+   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset,
    payload:string,
 }
 }
@@ -9474,7 +11231,7 @@ export interface CrrcCustomList_input{
 export interface CrrcCustomList_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9559,7 +11316,7 @@ export interface CrrdCustomListRMADtl_input{
 export interface CrrdCustomListRMADtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9575,7 +11332,7 @@ export interface CrrdCustomListRMAHead_input{
 export interface CrrdCustomListRMAHead_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9659,8 +11416,8 @@ export interface CrruCustomListRMADtl_input{
 export interface CrruCustomListRMADtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtRMADtl:Erp_Tablesets_ECCExtensionRMADtlTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtRMADtl:Erp_Tablesets_ECCExtensionRMADtlTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9676,8 +11433,8 @@ export interface CrruCustomListRMAHead_input{
 export interface CrruCustomListRMAHead_output{
 parameters : {
       /**  output parameters  */  
-   eccExtRMAHead:Erp_Tablesets_ECCExtensionRMAHeadTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtRMAHead:Erp_Tablesets_ECCExtensionRMAHeadTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9695,7 +11452,7 @@ export interface CrruCustomTagRMADtl_input{
 export interface CrruCustomTagRMADtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtRMADtl:Erp_Tablesets_ECCExtensionRMADtlTableset[],
+   eccExtRMADtl:Erp_Tablesets_ECCExtensionRMADtlTableset,
    customValue:string,
 }
 }
@@ -9714,7 +11471,7 @@ export interface CrruCustomTagRMAHead_input{
 export interface CrruCustomTagRMAHead_output{
 parameters : {
       /**  output parameters  */  
-   eccExtRMAHead:Erp_Tablesets_ECCExtensionRMAHeadTableset[],
+   eccExtRMAHead:Erp_Tablesets_ECCExtensionRMAHeadTableset,
    customValue:string,
 }
 }
@@ -9731,7 +11488,7 @@ export interface CrruCustomXML_input{
 export interface CrruCustomXML_output{
 parameters : {
       /**  output parameters  */  
-   eccExtRMAHead:Erp_Tablesets_ECCExtensionRMAHeadTableset[],
+   eccExtRMAHead:Erp_Tablesets_ECCExtensionRMAHeadTableset,
    xmlDoc:string,
 }
 }
@@ -9748,7 +11505,7 @@ export interface CrruPayload_input{
 export interface CrruPayload_output{
 parameters : {
       /**  output parameters  */  
-   eccExtRMAHead:Erp_Tablesets_ECCExtensionRMAHeadTableset[],
+   eccExtRMAHead:Erp_Tablesets_ECCExtensionRMAHeadTableset,
    payload:string,
 }
 }
@@ -9765,7 +11522,7 @@ export interface CucoCustomList_input{
 export interface CucoCustomList_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9850,7 +11607,7 @@ export interface CuidCustomListInvcDtl_input{
 export interface CuidCustomListInvcDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9866,7 +11623,7 @@ export interface CuidCustomListInvcHead_input{
 export interface CuidCustomListInvcHead_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9950,7 +11707,7 @@ export interface CuodCustomListOrderDtl_input{
 export interface CuodCustomListOrderDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -9966,7 +11723,7 @@ export interface CuodCustomListOrderHed_input{
 export interface CuodCustomListOrderHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -10050,7 +11807,7 @@ export interface CuosCustomListOrderHed_input{
 export interface CuosCustomListOrderHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -10084,7 +11841,7 @@ export interface CusCustomList_input{
 export interface CusCustomList_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -10169,7 +11926,7 @@ export interface DcldCustomListHDCase_input{
 export interface DcldCustomListHDCase_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -10235,8 +11992,8 @@ export interface DcluCustomListHDCase_input{
 export interface DcluCustomListHDCase_output{
 parameters : {
       /**  output parameters  */  
-   eccExtHDCase:Erp_Tablesets_ECCExtensionHDCaseTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtHDCase:Erp_Tablesets_ECCExtensionHDCaseTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -10254,7 +12011,7 @@ export interface DcluCustomTagHDCase_input{
 export interface DcluCustomTagHDCase_output{
 parameters : {
       /**  output parameters  */  
-   eccExtHDCase:Erp_Tablesets_ECCExtensionHDCaseTableset[],
+   eccExtHDCase:Erp_Tablesets_ECCExtensionHDCaseTableset,
    customValue:string,
 }
 }
@@ -10271,7 +12028,7 @@ export interface DcluCustomXML_input{
 export interface DcluCustomXML_output{
 parameters : {
       /**  output parameters  */  
-   eccExtHDCase:Erp_Tablesets_ECCExtensionHDCaseTableset[],
+   eccExtHDCase:Erp_Tablesets_ECCExtensionHDCaseTableset,
    xmlDoc:string,
 }
 }
@@ -10288,7 +12045,7 @@ export interface DcluPayload_input{
 export interface DcluPayload_output{
 parameters : {
       /**  output parameters  */  
-   eccExtHDCase:Erp_Tablesets_ECCExtensionHDCaseTableset[],
+   eccExtHDCase:Erp_Tablesets_ECCExtensionHDCaseTableset,
    payload:string,
 }
 }
@@ -10308,8 +12065,8 @@ export interface DdaLineOverride_output{
 parameters : {
       /**  output parameters  */  
    ddaLineOrverride:boolean,
-   ddaRounds:Erp_Tablesets_ECCExtensionDdaRoundsTableset[],
-   ddaDates:Erp_Tablesets_ECCExtensionDdaDatesTableset[],
+   ddaRounds:Erp_Tablesets_ECCExtensionDdaRoundsTableset,
+   ddaDates:Erp_Tablesets_ECCExtensionDdaDatesTableset,
 }
 }
 
@@ -10355,7 +12112,7 @@ export interface DebmCustomListLocationMtl_input{
 export interface DebmCustomListLocationMtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -10371,7 +12128,7 @@ export interface DebmCustomListLocationWarrantyTran_input{
 export interface DebmCustomListLocationWarrantyTran_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -10455,7 +12212,7 @@ export interface DeidCustomListLocationInventory_input{
 export interface DeidCustomListLocationInventory_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -10521,8 +12278,8 @@ export interface DeiuCustomListLocationInventory_input{
 export interface DeiuCustomListLocationInventory_output{
 parameters : {
       /**  output parameters  */  
-   eccExtLocationMtl:Erp_Tablesets_ECCExtensionLocationInventoryTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtLocationMtl:Erp_Tablesets_ECCExtensionLocationInventoryTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -10540,7 +12297,7 @@ export interface DeiuCustomTagLocationInventory_input{
 export interface DeiuCustomTagLocationInventory_output{
 parameters : {
       /**  output parameters  */  
-   eccExtLocationMtl:Erp_Tablesets_ECCExtensionLocationInventoryTableset[],
+   eccExtLocationMtl:Erp_Tablesets_ECCExtensionLocationInventoryTableset,
    customValue:string,
 }
 }
@@ -10557,7 +12314,7 @@ export interface DeiuCustomXML_input{
 export interface DeiuCustomXML_output{
 parameters : {
       /**  output parameters  */  
-   eccExtLocationMtl:Erp_Tablesets_ECCExtensionLocationInventoryTableset[],
+   eccExtLocationMtl:Erp_Tablesets_ECCExtensionLocationInventoryTableset,
    xmlDoc:string,
 }
 }
@@ -10574,7 +12331,7 @@ export interface DeiuPayload_input{
 export interface DeiuPayload_output{
 parameters : {
       /**  output parameters  */  
-   eccExtLocationMtl:Erp_Tablesets_ECCExtensionLocationInventoryTableset[],
+   eccExtLocationMtl:Erp_Tablesets_ECCExtensionLocationInventoryTableset,
    payload:string,
 }
 }
@@ -10591,8 +12348,8 @@ export interface DmauCustomListLocationWarrantyTran_input{
 export interface DmauCustomListLocationWarrantyTran_output{
 parameters : {
       /**  output parameters  */  
-   eccExtLocationWarrantyTran:Erp_Tablesets_ECCExtensionLocationWarrTranTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtLocationWarrantyTran:Erp_Tablesets_ECCExtensionLocationWarrTranTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -10610,7 +12367,7 @@ export interface DmauCustomTagLocationWarrantyTran_input{
 export interface DmauCustomTagLocationWarrantyTran_output{
 parameters : {
       /**  output parameters  */  
-   eccExtLocationWarrantyTran:Erp_Tablesets_ECCExtensionLocationWarrTranTableset[],
+   eccExtLocationWarrantyTran:Erp_Tablesets_ECCExtensionLocationWarrTranTableset,
    customValue:string,
 }
 }
@@ -10627,7 +12384,7 @@ export interface DmauPayload_input{
 export interface DmauPayload_output{
 parameters : {
       /**  output parameters  */  
-   eccExtLocationWarrantyTran:Erp_Tablesets_ECCExtensionLocationWarrTranTableset[],
+   eccExtLocationWarrantyTran:Erp_Tablesets_ECCExtensionLocationWarrTranTableset,
    payload:string,
 }
 }
@@ -22098,7 +23855,7 @@ export interface GetAltPartSubsUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22113,9 +23870,9 @@ export interface GetAltPartUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22130,9 +23887,9 @@ export interface GetCUIDInvcHeadUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22147,9 +23904,9 @@ export interface GetCadShipToUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22164,8 +23921,8 @@ export interface GetCdmPcECCOrderDtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22180,8 +23937,8 @@ export interface GetCdmQuoteDtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22196,9 +23953,9 @@ export interface GetCncCustomerUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22213,7 +23970,7 @@ export interface GetCncShipToUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22228,9 +23985,9 @@ export interface GetCpnCustXPrtUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22245,9 +24002,9 @@ export interface GetCpnPartXRefIntUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22262,8 +24019,8 @@ export interface GetCrqdQuoteDtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22278,9 +24035,9 @@ export interface GetCrqdQuoteHedUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22295,10 +24052,10 @@ export interface GetCrrcReasonUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22313,8 +24070,8 @@ export interface GetCrrdRMADtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22329,9 +24086,9 @@ export interface GetCrrdRMAHeadUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22346,10 +24103,10 @@ export interface GetCucoCustCntUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22364,8 +24121,8 @@ export interface GetCuidInvcDtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22380,8 +24137,8 @@ export interface GetCuodOrderDtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22396,9 +24153,9 @@ export interface GetCuodOrderHedUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22413,7 +24170,7 @@ export interface GetCuosOrderHedUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22428,10 +24185,10 @@ export interface GetCusCustomerUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22446,9 +24203,9 @@ export interface GetDcldHDCaseUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22463,8 +24220,8 @@ export interface GetDebmLocationMtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22479,8 +24236,8 @@ export interface GetDebmLocationWarrantyTranUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22495,8 +24252,8 @@ export interface GetDebmPayloadXml_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22511,10 +24268,10 @@ export interface GetDeidLocationInventoryUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22529,8 +24286,8 @@ export interface GetGqrQuoteDtlUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22545,9 +24302,9 @@ export interface GetGqrQuoteHedUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22562,8 +24319,8 @@ export interface GetPODetailUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22578,9 +24335,9 @@ export interface GetPOHeaderUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22595,9 +24352,9 @@ export interface GetRFQHeadUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22612,8 +24369,8 @@ export interface GetRFQItemUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22628,9 +24385,9 @@ export interface GetSgpPartUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22645,9 +24402,9 @@ export interface GetStgProdGrupUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22663,10 +24420,10 @@ export interface GetStkPartUD_output{
 parameters : {
       /**  output parameters  */  
    attributeSetTagValue:string,
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22681,8 +24438,8 @@ export interface GetStkPartUomUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22697,9 +24454,9 @@ export interface GetSttPartUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
 }
 }
 
@@ -22714,10 +24471,10 @@ export interface GetSucoVendCntUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22732,10 +24489,10 @@ export interface GetSuspVendorUD_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   userDefinedSet:System_Xml_Linq_XElement[],
-   payload:System_Xml_Linq_XElement[],
-   xmlAnything:System_Xml_Linq_XElement[],
-   attributesSet:System_Xml_Linq_XElement[],
+   userDefinedSet:System_Xml_Linq_XElement,
+   payload:System_Xml_Linq_XElement,
+   xmlAnything:System_Xml_Linq_XElement,
+   attributesSet:System_Xml_Linq_XElement,
 }
 }
 
@@ -22751,8 +24508,8 @@ export interface GorCustomListOrderDtl_input{
 export interface GorCustomListOrderDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtOrderDtl:Erp_Tablesets_ECCExtensionOrderDtlTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtOrderDtl:Erp_Tablesets_ECCExtensionOrderDtlTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -22768,8 +24525,8 @@ export interface GorCustomListOrderHed_input{
 export interface GorCustomListOrderHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -22787,7 +24544,7 @@ export interface GorCustomTagOrderDtl_input{
 export interface GorCustomTagOrderDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtOrderDtl:Erp_Tablesets_ECCExtensionOrderDtlTableset[],
+   eccExtOrderDtl:Erp_Tablesets_ECCExtensionOrderDtlTableset,
    customValue:string,
 }
 }
@@ -22806,7 +24563,7 @@ export interface GorCustomTagOrderHed_input{
 export interface GorCustomTagOrderHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset[],
+   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset,
    customValue:string,
 }
 }
@@ -22823,7 +24580,7 @@ export interface GorPayload_input{
 export interface GorPayload_output{
 parameters : {
       /**  output parameters  */  
-   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset[],
+   eccExtOrderHed:Erp_Tablesets_ECCExtensionOrderHedTableset,
    payload:string,
 }
 }
@@ -22840,8 +24597,8 @@ export interface GqrCustomListQuoteDtl_input{
 export interface GqrCustomListQuoteDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteDtl:Erp_Tablesets_ECCExtensionQuoteDtlTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtQuoteDtl:Erp_Tablesets_ECCExtensionQuoteDtlTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -22857,8 +24614,8 @@ export interface GqrCustomListQuoteHed_input{
 export interface GqrCustomListQuoteHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset[],
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset,
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -22876,7 +24633,7 @@ export interface GqrCustomTagQuoteDtl_input{
 export interface GqrCustomTagQuoteDtl_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteDtl:Erp_Tablesets_ECCExtensionQuoteDtlTableset[],
+   eccExtQuoteDtl:Erp_Tablesets_ECCExtensionQuoteDtlTableset,
    customValue:string,
 }
 }
@@ -22895,7 +24652,7 @@ export interface GqrCustomTagQuoteHed_input{
 export interface GqrCustomTagQuoteHed_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset[],
+   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset,
    customValue:string,
 }
 }
@@ -22912,7 +24669,7 @@ export interface GqrCustomXML_input{
 export interface GqrCustomXML_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset[],
+   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset,
    xmlDoc:string,
 }
 }
@@ -22929,7 +24686,7 @@ export interface GqrPayload_input{
 export interface GqrPayload_output{
 parameters : {
       /**  output parameters  */  
-   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset[],
+   eccExtQuoteHed:Erp_Tablesets_ECCExtensionQuoteHedTableset,
    payload:string,
 }
 }
@@ -22996,7 +24753,7 @@ export interface SgpCustomListPart_input{
 export interface SgpCustomListPart_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23081,7 +24838,7 @@ export interface SpodCustomListPODetail_input{
 export interface SpodCustomListPODetail_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23097,7 +24854,7 @@ export interface SpodCustomListPOHeader_input{
 export interface SpodCustomListPOHeader_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23181,7 +24938,7 @@ export interface SpouCustomListSugPOChg_input{
 export interface SpouCustomListSugPOChg_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23231,7 +24988,7 @@ export interface StgCustomListProdGrup_input{
 export interface StgCustomListProdGrup_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23332,7 +25089,7 @@ export interface StkCustomListPartUOM_input{
 export interface StkCustomListPartUOM_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23348,7 +25105,7 @@ export interface StkCustomListPart_input{
 export interface StkCustomListPart_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23451,7 +25208,7 @@ export interface SttCustomListPart_input{
 export interface SttCustomListPart_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23536,7 +25293,7 @@ export interface SucoCustomListVendCnt_input{
 export interface SucoCustomListVendCnt_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23621,7 +25378,7 @@ export interface SurdCustomListRFQHead_input{
 export interface SurdCustomListRFQHead_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23637,7 +25394,7 @@ export interface SurdCustomListRFQItem_input{
 export interface SurdCustomListRFQItem_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23721,7 +25478,7 @@ export interface SuruCustomListRFQHead_input{
 export interface SuruCustomListRFQHead_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23737,7 +25494,7 @@ export interface SuruCustomListRFQItem_input{
 export interface SuruCustomListRFQItem_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 
@@ -23805,7 +25562,7 @@ export interface SuspCustomListVendor_input{
 export interface SuspCustomListVendor_output{
 parameters : {
       /**  output parameters  */  
-   eccExtList:Erp_Tablesets_ECCExtensionTableset[],
+   eccExtList:Erp_Tablesets_ECCExtensionTableset,
 }
 }
 

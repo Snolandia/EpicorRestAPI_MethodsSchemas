@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.IMCustomerSvc
 // Description: Business Object to handle: Count, Get, Ack, Add, Update and Delete of Customer, ShipTo, CustCnt, CustBillTo
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method AckCustomer
    Description: Acknowledges that passed in IntQueIDs have been received and processed and can be removed from the IntQueOut and IM tables.
    OperationID: AckCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AckCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AckCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AckCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AckCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_AckCustomer(requestBody:AckCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AckCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IMCustomerSvc/AckCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AckCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_AckCustomer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CountCustomer
    Description: Returns the count of existing IntQueOut records along with the count of updated customers in the database that IntQueOut records have not yet been created for
    OperationID: CountCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CountCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CountCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CountCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CountCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_CountCustomer(requestBody:CountCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CountCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IMCustomerSvc/CountCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CountCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_CountCustomer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetAllCustomer
    Description: Generates IntQueOut and IMCustomer rows since the last time this was called and then returns these along with any existing
    OperationID: GetAllCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAllCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAllCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAllCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAllCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAllCustomer(requestBody:GetAllCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAllCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IMCustomerSvc/GetAllCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAllCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_GetAllCustomer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCustomer
    Description: Generates IntQueOut and IMCustomer rows since the last time this was called and then returns these along with any existing
    OperationID: GetCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCustomer(requestBody:GetCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IMCustomerSvc/GetCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,30 +303,37 @@ export function post_GetCustomer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AddCustomer
    Description: Add customer and customer related tables
    OperationID: AddCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_AddCustomer(requestBody:AddCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IMCustomerSvc/AddCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -260,30 +345,37 @@ export function post_AddCustomer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteCustomer
    Description: Delete customer and customer related tables
    OperationID: DeleteCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteCustomer(requestBody:DeleteCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IMCustomerSvc/DeleteCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,30 +387,37 @@ export function post_DeleteCustomer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateCustomer
    Description: Update customer and customer related tables
    OperationID: UpdateCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateCustomer(requestBody:UpdateCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IMCustomerSvc/UpdateCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -329,11 +428,45 @@ export function post_UpdateCustomer(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -384,7 +517,7 @@ export interface AddCustomer_output{
 parameters : {
       /**  output parameters  */  
    errorsOccurred:boolean,
-   imIntegrationKey:Erp_Tablesets_IMIntegrationKeyTableset[],
+   imIntegrationKey:Erp_Tablesets_IMIntegrationKeyTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.TaxValidationSvc
 // Description: Tax Id Validation Status Header
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationHeadRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationHeadRow
    */  
 export function get_TaxValidations(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_TaxValidations(select?:string, expand?:string, filter?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationHeadRow)
           })
@@ -118,15 +158,15 @@ export function get_TaxValidations(select?:string, expand?:string, filter?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_TaxValidations
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.TaxValidationHeadRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TaxValidations(requestBody:any, epicorHeaders?:Headers){
+export function post_TaxValidations(requestBody:Erp_Tablesets_TaxValidationHeadRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_TaxValidations(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -161,10 +208,10 @@ export function post_TaxValidations(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaxValidationHeadRow
    */  
 export function get_TaxValidations_Company_LocalName_Key1_Key2(Company:string, LocalName:string, Key1:string, Key2:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -179,7 +226,14 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2(Company:string, L
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaxValidationHeadRow)
           })
@@ -197,15 +251,15 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2(Company:string, L
       @param LocalName Desc: LocalName   Required: True   Allow empty value : True
       @param Key1 Desc: Key1   Required: True   Allow empty value : True
       @param Key2 Desc: Key2   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_TaxValidations_Company_LocalName_Key1_Key2(Company:string, LocalName:string, Key1:string, Key2:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_TaxValidations_Company_LocalName_Key1_Key2(Company:string, LocalName:string, Key1:string, Key2:string, requestBody:Erp_Tablesets_TaxValidationHeadRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -219,7 +273,14 @@ export function patch_TaxValidations_Company_LocalName_Key1_Key2(Company:string,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -237,7 +298,7 @@ export function patch_TaxValidations_Company_LocalName_Key1_Key2(Company:string,
       @param LocalName Desc: LocalName   Required: True   Allow empty value : True
       @param Key1 Desc: Key1   Required: True   Allow empty value : True
       @param Key2 Desc: Key2   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -256,7 +317,14 @@ export function delete_TaxValidations_Company_LocalName_Key1_Key2(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -280,10 +348,10 @@ export function delete_TaxValidations_Company_LocalName_Key1_Key2(Company:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationCustomerRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationCustomerRow
    */  
 export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationCustomers(Company:string, LocalName:string, Key1:string, Key2:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -298,7 +366,14 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationCust
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationCustomerRow)
           })
@@ -320,10 +395,10 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationCust
       @param CustNum Desc: CustNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaxValidationCustomerRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaxValidationCustomerRow
    */  
 export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationCustomers_Company_TaxValidationID_CustNum(Company:string, LocalName:string, Key1:string, Key2:string, TaxValidationID:string, CustNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -338,7 +413,14 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationCust
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaxValidationCustomerRow)
           })
@@ -362,10 +444,10 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationCust
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationVendorRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationVendorRow
    */  
 export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationVendors(Company:string, LocalName:string, Key1:string, Key2:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -380,7 +462,14 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationVend
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationVendorRow)
           })
@@ -402,10 +491,10 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationVend
       @param VendorNum Desc: VendorNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaxValidationVendorRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaxValidationVendorRow
    */  
 export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationVendors_Company_TaxValidationID_VendorNum(Company:string, LocalName:string, Key1:string, Key2:string, TaxValidationID:string, VendorNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -420,7 +509,14 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationVend
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaxValidationVendorRow)
           })
@@ -444,10 +540,10 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationVend
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationHeadAttchRow
    */  
 export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationHeadAttches(Company:string, LocalName:string, Key1:string, Key2:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -462,7 +558,14 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationHead
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationHeadAttchRow)
           })
@@ -483,10 +586,10 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationHead
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaxValidationHeadAttchRow
    */  
 export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationHeadAttches_Company_LocalName_Key1_Key2_DrawingSeq(Company:string, LocalName:string, Key1:string, Key2:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -501,7 +604,14 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationHead
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaxValidationHeadAttchRow)
           })
@@ -521,10 +631,10 @@ export function get_TaxValidations_Company_LocalName_Key1_Key2_TaxValidationHead
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationCustomerRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationCustomerRow
    */  
 export function get_TaxValidationCustomers(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -539,7 +649,14 @@ export function get_TaxValidationCustomers(select?:string, filter?:string, order
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationCustomerRow)
           })
@@ -553,15 +670,15 @@ export function get_TaxValidationCustomers(select?:string, filter?:string, order
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_TaxValidationCustomers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaxValidationCustomerRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaxValidationCustomerRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.TaxValidationCustomerRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.TaxValidationCustomerRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TaxValidationCustomers(requestBody:any, epicorHeaders?:Headers){
+export function post_TaxValidationCustomers(requestBody:Erp_Tablesets_TaxValidationCustomerRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -575,7 +692,14 @@ export function post_TaxValidationCustomers(requestBody:any, epicorHeaders?:Head
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -594,10 +718,10 @@ export function post_TaxValidationCustomers(requestBody:any, epicorHeaders?:Head
       @param CustNum Desc: CustNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaxValidationCustomerRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaxValidationCustomerRow
    */  
 export function get_TaxValidationCustomers_Company_TaxValidationID_CustNum(Company:string, TaxValidationID:string, CustNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -612,7 +736,14 @@ export function get_TaxValidationCustomers_Company_TaxValidationID_CustNum(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaxValidationCustomerRow)
           })
@@ -629,15 +760,15 @@ export function get_TaxValidationCustomers_Company_TaxValidationID_CustNum(Compa
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TaxValidationID Desc: TaxValidationID   Required: True   Allow empty value : True
       @param CustNum Desc: CustNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaxValidationCustomerRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaxValidationCustomerRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_TaxValidationCustomers_Company_TaxValidationID_CustNum(Company:string, TaxValidationID:string, CustNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_TaxValidationCustomers_Company_TaxValidationID_CustNum(Company:string, TaxValidationID:string, CustNum:string, requestBody:Erp_Tablesets_TaxValidationCustomerRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -651,7 +782,14 @@ export function patch_TaxValidationCustomers_Company_TaxValidationID_CustNum(Com
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -668,7 +806,7 @@ export function patch_TaxValidationCustomers_Company_TaxValidationID_CustNum(Com
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TaxValidationID Desc: TaxValidationID   Required: True   Allow empty value : True
       @param CustNum Desc: CustNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -687,7 +825,14 @@ export function delete_TaxValidationCustomers_Company_TaxValidationID_CustNum(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -707,10 +852,10 @@ export function delete_TaxValidationCustomers_Company_TaxValidationID_CustNum(Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationVendorRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationVendorRow
    */  
 export function get_TaxValidationVendors(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -725,7 +870,14 @@ export function get_TaxValidationVendors(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationVendorRow)
           })
@@ -739,15 +891,15 @@ export function get_TaxValidationVendors(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_TaxValidationVendors
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaxValidationVendorRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaxValidationVendorRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.TaxValidationVendorRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.TaxValidationVendorRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TaxValidationVendors(requestBody:any, epicorHeaders?:Headers){
+export function post_TaxValidationVendors(requestBody:Erp_Tablesets_TaxValidationVendorRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -761,7 +913,14 @@ export function post_TaxValidationVendors(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -780,10 +939,10 @@ export function post_TaxValidationVendors(requestBody:any, epicorHeaders?:Header
       @param VendorNum Desc: VendorNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaxValidationVendorRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaxValidationVendorRow
    */  
 export function get_TaxValidationVendors_Company_TaxValidationID_VendorNum(Company:string, TaxValidationID:string, VendorNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -798,7 +957,14 @@ export function get_TaxValidationVendors_Company_TaxValidationID_VendorNum(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaxValidationVendorRow)
           })
@@ -815,15 +981,15 @@ export function get_TaxValidationVendors_Company_TaxValidationID_VendorNum(Compa
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TaxValidationID Desc: TaxValidationID   Required: True   Allow empty value : True
       @param VendorNum Desc: VendorNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaxValidationVendorRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaxValidationVendorRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_TaxValidationVendors_Company_TaxValidationID_VendorNum(Company:string, TaxValidationID:string, VendorNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_TaxValidationVendors_Company_TaxValidationID_VendorNum(Company:string, TaxValidationID:string, VendorNum:string, requestBody:Erp_Tablesets_TaxValidationVendorRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -837,7 +1003,14 @@ export function patch_TaxValidationVendors_Company_TaxValidationID_VendorNum(Com
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -854,7 +1027,7 @@ export function patch_TaxValidationVendors_Company_TaxValidationID_VendorNum(Com
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TaxValidationID Desc: TaxValidationID   Required: True   Allow empty value : True
       @param VendorNum Desc: VendorNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -873,7 +1046,14 @@ export function delete_TaxValidationVendors_Company_TaxValidationID_VendorNum(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -893,10 +1073,10 @@ export function delete_TaxValidationVendors_Company_TaxValidationID_VendorNum(Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationHeadAttchRow
    */  
 export function get_TaxValidationHeadAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -911,7 +1091,14 @@ export function get_TaxValidationHeadAttches(select?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationHeadAttchRow)
           })
@@ -925,15 +1112,15 @@ export function get_TaxValidationHeadAttches(select?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_TaxValidationHeadAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.TaxValidationHeadAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TaxValidationHeadAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_TaxValidationHeadAttches(requestBody:Erp_Tablesets_TaxValidationHeadAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -947,7 +1134,14 @@ export function post_TaxValidationHeadAttches(requestBody:any, epicorHeaders?:He
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -968,10 +1162,10 @@ export function post_TaxValidationHeadAttches(requestBody:any, epicorHeaders?:He
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaxValidationHeadAttchRow
    */  
 export function get_TaxValidationHeadAttches_Company_LocalName_Key1_Key2_DrawingSeq(Company:string, LocalName:string, Key1:string, Key2:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -986,7 +1180,14 @@ export function get_TaxValidationHeadAttches_Company_LocalName_Key1_Key2_Drawing
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaxValidationHeadAttchRow)
           })
@@ -1005,15 +1206,15 @@ export function get_TaxValidationHeadAttches_Company_LocalName_Key1_Key2_Drawing
       @param Key1 Desc: Key1   Required: True   Allow empty value : True
       @param Key2 Desc: Key2   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaxValidationHeadAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_TaxValidationHeadAttches_Company_LocalName_Key1_Key2_DrawingSeq(Company:string, LocalName:string, Key1:string, Key2:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_TaxValidationHeadAttches_Company_LocalName_Key1_Key2_DrawingSeq(Company:string, LocalName:string, Key1:string, Key2:string, DrawingSeq:string, requestBody:Erp_Tablesets_TaxValidationHeadAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1027,7 +1228,14 @@ export function patch_TaxValidationHeadAttches_Company_LocalName_Key1_Key2_Drawi
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1046,7 +1254,7 @@ export function patch_TaxValidationHeadAttches_Company_LocalName_Key1_Key2_Drawi
       @param Key1 Desc: Key1   Required: True   Allow empty value : True
       @param Key2 Desc: Key2   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1065,7 +1273,14 @@ export function delete_TaxValidationHeadAttches_Company_LocalName_Key1_Key2_Draw
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1085,10 +1300,10 @@ export function delete_TaxValidationHeadAttches_Company_LocalName_Key1_Key2_Draw
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationHeadListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxValidationHeadListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1103,7 +1318,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationHeadListRow)
           })
@@ -1115,6 +1337,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1129,7 +1368,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1198,15 +1437,22 @@ export function get_GetRows(whereClauseTaxValidationHead:string, whereClauseTaxV
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1221,7 +1467,7 @@ export function get_GetRows(whereClauseTaxValidationHead:string, whereClauseTaxV
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1263,15 +1509,22 @@ export function get_GetByID(localName:string, key1:string, key2:string, epicorHe
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1286,7 +1539,7 @@ export function get_GetByID(localName:string, key1:string, key2:string, epicorHe
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1328,15 +1581,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1348,30 +1608,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method LookupVendor
    Description: Lookup Vendor
    OperationID: LookupVendor
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LookupVendor_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LookupVendor_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LookupVendor_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LookupVendor(requestBody:any, epicorHeaders?:Headers){
+export function post_LookupVendor(requestBody:LookupVendor_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LookupVendor_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/LookupVendor", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LookupVendor_output)
           })
       .catch((error) => {
           reject(error)
@@ -1383,30 +1650,37 @@ export function post_LookupVendor(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LookupCustomer
    Description: Lookup Customer
    OperationID: LookupCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LookupCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LookupCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LookupCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LookupCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_LookupCustomer(requestBody:LookupCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LookupCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/LookupCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LookupCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1418,30 +1692,37 @@ export function post_LookupCustomer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LookupVendors
    Description: Lookup Vendors
    OperationID: LookupVendors
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LookupVendors_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LookupVendors_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LookupVendors_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LookupVendors(requestBody:any, epicorHeaders?:Headers){
+export function post_LookupVendors(requestBody:LookupVendors_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LookupVendors_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/LookupVendors", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LookupVendors_output)
           })
       .catch((error) => {
           reject(error)
@@ -1453,30 +1734,37 @@ export function post_LookupVendors(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LookupCustomers
    Description: Lookup Customers
    OperationID: LookupCustomers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LookupCustomers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LookupCustomers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LookupCustomers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LookupCustomers(requestBody:any, epicorHeaders?:Headers){
+export function post_LookupCustomers(requestBody:LookupCustomers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LookupCustomers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/LookupCustomers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LookupCustomers_output)
           })
       .catch((error) => {
           reject(error)
@@ -1488,30 +1776,37 @@ export function post_LookupCustomers(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method StartValidate
    Description: Start Tax ID Validation
    OperationID: StartValidate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StartValidate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StartValidate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StartValidate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StartValidate(requestBody:any, epicorHeaders?:Headers){
+export function post_StartValidate(requestBody:StartValidate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StartValidate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/StartValidate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StartValidate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1523,30 +1818,37 @@ export function post_StartValidate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method StartValidateWithFilters
    Description: Start Tax ID Validation
    OperationID: StartValidateWithFilters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StartValidateWithFilters_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StartValidateWithFilters_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StartValidateWithFilters_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StartValidateWithFilters(requestBody:any, epicorHeaders?:Headers){
+export function post_StartValidateWithFilters(requestBody:StartValidateWithFilters_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StartValidateWithFilters_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/StartValidateWithFilters", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StartValidateWithFilters_output)
           })
       .catch((error) => {
           reject(error)
@@ -1558,30 +1860,37 @@ export function post_StartValidateWithFilters(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetNewTaxValidationHead
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewTaxValidationHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewTaxValidationHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewTaxValidationHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewTaxValidationHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewTaxValidationHead(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewTaxValidationHead(requestBody:GetNewTaxValidationHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewTaxValidationHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/GetNewTaxValidationHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewTaxValidationHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -1593,30 +1902,37 @@ export function post_GetNewTaxValidationHead(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewTaxValidationHeadAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewTaxValidationHeadAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewTaxValidationHeadAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewTaxValidationHeadAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewTaxValidationHeadAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewTaxValidationHeadAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewTaxValidationHeadAttch(requestBody:GetNewTaxValidationHeadAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewTaxValidationHeadAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/GetNewTaxValidationHeadAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewTaxValidationHeadAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1628,30 +1944,37 @@ export function post_GetNewTaxValidationHeadAttch(requestBody:any, epicorHeaders
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1663,7 +1986,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1687,15 +2010,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1707,7 +2037,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1731,15 +2061,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1751,30 +2088,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1786,30 +2130,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxValidationSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1820,31 +2171,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationCustomerRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_TaxValidationCustomerRow[],
+   "value":Erp_Tablesets_TaxValidationCustomerRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationHeadAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_TaxValidationHeadAttchRow[],
+   "value":Erp_Tablesets_TaxValidationHeadAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationHeadListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_TaxValidationHeadListRow[],
+   "value":Erp_Tablesets_TaxValidationHeadListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationHeadRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_TaxValidationHeadRow[],
+   "value":Erp_Tablesets_TaxValidationHeadRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxValidationVendorRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_TaxValidationVendorRow[],
+   "value":Erp_Tablesets_TaxValidationVendorRow,
 }
 
 export interface Erp_Tablesets_TaxValidationCustomerRow{
@@ -1988,6 +2356,23 @@ export interface Erp_Tablesets_TaxValidationVendorRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2239,7 +2624,7 @@ export interface GetNewTaxValidationHeadAttch_input{
 export interface GetNewTaxValidationHeadAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaxValidationTableset[],
+   ds:Erp_Tablesets_TaxValidationTableset,
 }
 }
 
@@ -2257,7 +2642,7 @@ export interface GetNewTaxValidationHead_input{
 export interface GetNewTaxValidationHead_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaxValidationTableset[],
+   ds:Erp_Tablesets_TaxValidationTableset,
 }
 }
 
@@ -2335,7 +2720,7 @@ export interface LookupCustomer_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaxValidationTableset[],
+   ds:Erp_Tablesets_TaxValidationTableset,
 }
 }
 
@@ -2353,7 +2738,7 @@ export interface LookupCustomers_input{
 export interface LookupCustomers_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaxValidationTableset[],
+   ds:Erp_Tablesets_TaxValidationTableset,
 }
 }
 
@@ -2370,7 +2755,7 @@ export interface LookupVendor_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaxValidationTableset[],
+   ds:Erp_Tablesets_TaxValidationTableset,
 }
 }
 
@@ -2388,7 +2773,7 @@ export interface LookupVendors_input{
 export interface LookupVendors_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaxValidationTableset[],
+   ds:Erp_Tablesets_TaxValidationTableset,
 }
 }
 
@@ -2402,7 +2787,7 @@ export interface StartValidateWithFilters_input{
 export interface StartValidateWithFilters_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaxValidationTableset[],
+   ds:Erp_Tablesets_TaxValidationTableset,
 }
 }
 
@@ -2416,7 +2801,7 @@ export interface StartValidate_input{
 export interface StartValidate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaxValidationTableset[],
+   ds:Erp_Tablesets_TaxValidationTableset,
 }
 }
 
@@ -2435,7 +2820,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtTaxValidationTableset[],
+   ds:Erp_Tablesets_UpdExtTaxValidationTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2450,7 +2835,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaxValidationTableset[],
+   ds:Erp_Tablesets_TaxValidationTableset,
 }
 }
 

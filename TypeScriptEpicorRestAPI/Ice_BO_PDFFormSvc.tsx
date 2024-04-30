@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.PDFFormSvc
 // Description: PDF Form Service
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormRow
    */  
 export function get_PDFForms(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_PDFForms(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormRow)
           })
@@ -118,15 +158,15 @@ export function get_PDFForms(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PDFForms
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.PDFFormRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.PDFFormRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.PDFFormRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.PDFFormRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PDFForms(requestBody:any, epicorHeaders?:Headers){
+export function post_PDFForms(requestBody:Ice_Tablesets_PDFFormRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_PDFForms(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -160,10 +207,10 @@ export function post_PDFForms(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.PDFFormRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.PDFFormRow
    */  
 export function get_PDFForms_Company_TemplateID_FormSeq(Company:string, TemplateID:string, FormSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -178,7 +225,14 @@ export function get_PDFForms_Company_TemplateID_FormSeq(Company:string, Template
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_PDFFormRow)
           })
@@ -195,15 +249,15 @@ export function get_PDFForms_Company_TemplateID_FormSeq(Company:string, Template
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TemplateID Desc: TemplateID   Required: True   Allow empty value : True
       @param FormSeq Desc: FormSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.PDFFormRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.PDFFormRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PDFForms_Company_TemplateID_FormSeq(Company:string, TemplateID:string, FormSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PDFForms_Company_TemplateID_FormSeq(Company:string, TemplateID:string, FormSeq:string, requestBody:Ice_Tablesets_PDFFormRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_PDFForms_Company_TemplateID_FormSeq(Company:string, Templa
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -234,7 +295,7 @@ export function patch_PDFForms_Company_TemplateID_FormSeq(Company:string, Templa
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TemplateID Desc: TemplateID   Required: True   Allow empty value : True
       @param FormSeq Desc: FormSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -253,7 +314,14 @@ export function delete_PDFForms_Company_TemplateID_FormSeq(Company:string, Templ
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -276,10 +344,10 @@ export function delete_PDFForms_Company_TemplateID_FormSeq(Company:string, Templ
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormEventRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormEventRow
    */  
 export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormEvents(Company:string, TemplateID:string, FormSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -294,7 +362,14 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormEvents(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormEventRow)
           })
@@ -314,10 +389,10 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormEvents(Company:st
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.PDFFormEventRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.PDFFormEventRow
    */  
 export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormEvents_SysRowID(Company:string, TemplateID:string, FormSeq:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -332,7 +407,14 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormEvents_SysRowID(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_PDFFormEventRow)
           })
@@ -355,10 +437,10 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormEvents_SysRowID(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormImageRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormImageRow
    */  
 export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormImages(Company:string, TemplateID:string, FormSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -373,7 +455,14 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormImages(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormImageRow)
           })
@@ -393,10 +482,10 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormImages(Company:st
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.PDFFormImageRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.PDFFormImageRow
    */  
 export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormImages_SysRowID(Company:string, TemplateID:string, FormSeq:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -411,7 +500,14 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormImages_SysRowID(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_PDFFormImageRow)
           })
@@ -434,10 +530,10 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormImages_SysRowID(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormRuleRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormRuleRow
    */  
 export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormRules(Company:string, TemplateID:string, FormSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -452,7 +548,14 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormRules(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormRuleRow)
           })
@@ -472,10 +575,10 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormRules(Company:str
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.PDFFormRuleRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.PDFFormRuleRow
    */  
 export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormRules_SysRowID(Company:string, TemplateID:string, FormSeq:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -490,7 +593,14 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormRules_SysRowID(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_PDFFormRuleRow)
           })
@@ -510,10 +620,10 @@ export function get_PDFForms_Company_TemplateID_FormSeq_PDFFormRules_SysRowID(Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormEventRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormEventRow
    */  
 export function get_PDFFormEvents(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -528,7 +638,14 @@ export function get_PDFFormEvents(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormEventRow)
           })
@@ -542,15 +659,15 @@ export function get_PDFFormEvents(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PDFFormEvents
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.PDFFormEventRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.PDFFormEventRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.PDFFormEventRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.PDFFormEventRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PDFFormEvents(requestBody:any, epicorHeaders?:Headers){
+export function post_PDFFormEvents(requestBody:Ice_Tablesets_PDFFormEventRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -564,7 +681,14 @@ export function post_PDFFormEvents(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -581,10 +705,10 @@ export function post_PDFFormEvents(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.PDFFormEventRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.PDFFormEventRow
    */  
 export function get_PDFFormEvents_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -599,7 +723,14 @@ export function get_PDFFormEvents_SysRowID(SysRowID:string, select?:string, filt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_PDFFormEventRow)
           })
@@ -614,15 +745,15 @@ export function get_PDFFormEvents_SysRowID(SysRowID:string, select?:string, filt
    Description: Calls UpdateExt to update PDFFormEvent. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_PDFFormEvent
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.PDFFormEventRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.PDFFormEventRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PDFFormEvents_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PDFFormEvents_SysRowID(SysRowID:string, requestBody:Ice_Tablesets_PDFFormEventRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -636,7 +767,14 @@ export function patch_PDFFormEvents_SysRowID(SysRowID:string, requestBody:any, e
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -651,7 +789,7 @@ export function patch_PDFFormEvents_SysRowID(SysRowID:string, requestBody:any, e
    Description: Call UpdateExt to delete PDFFormEvent item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_PDFFormEvent
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -670,7 +808,14 @@ export function delete_PDFFormEvents_SysRowID(SysRowID:string, epicorHeaders?:He
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -690,10 +835,10 @@ export function delete_PDFFormEvents_SysRowID(SysRowID:string, epicorHeaders?:He
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormImageRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormImageRow
    */  
 export function get_PDFFormImages(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -708,7 +853,14 @@ export function get_PDFFormImages(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormImageRow)
           })
@@ -722,15 +874,15 @@ export function get_PDFFormImages(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PDFFormImages
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.PDFFormImageRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.PDFFormImageRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.PDFFormImageRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.PDFFormImageRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PDFFormImages(requestBody:any, epicorHeaders?:Headers){
+export function post_PDFFormImages(requestBody:Ice_Tablesets_PDFFormImageRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -744,7 +896,14 @@ export function post_PDFFormImages(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -761,10 +920,10 @@ export function post_PDFFormImages(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.PDFFormImageRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.PDFFormImageRow
    */  
 export function get_PDFFormImages_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -779,7 +938,14 @@ export function get_PDFFormImages_SysRowID(SysRowID:string, select?:string, filt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_PDFFormImageRow)
           })
@@ -794,15 +960,15 @@ export function get_PDFFormImages_SysRowID(SysRowID:string, select?:string, filt
    Description: Calls UpdateExt to update PDFFormImage. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_PDFFormImage
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.PDFFormImageRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.PDFFormImageRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PDFFormImages_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PDFFormImages_SysRowID(SysRowID:string, requestBody:Ice_Tablesets_PDFFormImageRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -816,7 +982,14 @@ export function patch_PDFFormImages_SysRowID(SysRowID:string, requestBody:any, e
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -831,7 +1004,7 @@ export function patch_PDFFormImages_SysRowID(SysRowID:string, requestBody:any, e
    Description: Call UpdateExt to delete PDFFormImage item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_PDFFormImage
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -850,7 +1023,14 @@ export function delete_PDFFormImages_SysRowID(SysRowID:string, epicorHeaders?:He
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -870,10 +1050,10 @@ export function delete_PDFFormImages_SysRowID(SysRowID:string, epicorHeaders?:He
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormRuleRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormRuleRow
    */  
 export function get_PDFFormRules(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -888,7 +1068,14 @@ export function get_PDFFormRules(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormRuleRow)
           })
@@ -902,15 +1089,15 @@ export function get_PDFFormRules(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PDFFormRules
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.PDFFormRuleRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.PDFFormRuleRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.PDFFormRuleRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.PDFFormRuleRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PDFFormRules(requestBody:any, epicorHeaders?:Headers){
+export function post_PDFFormRules(requestBody:Ice_Tablesets_PDFFormRuleRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -924,7 +1111,14 @@ export function post_PDFFormRules(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -941,10 +1135,10 @@ export function post_PDFFormRules(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.PDFFormRuleRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.PDFFormRuleRow
    */  
 export function get_PDFFormRules_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -959,7 +1153,14 @@ export function get_PDFFormRules_SysRowID(SysRowID:string, select?:string, filte
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_PDFFormRuleRow)
           })
@@ -974,15 +1175,15 @@ export function get_PDFFormRules_SysRowID(SysRowID:string, select?:string, filte
    Description: Calls UpdateExt to update PDFFormRule. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_PDFFormRule
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.PDFFormRuleRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.PDFFormRuleRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PDFFormRules_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PDFFormRules_SysRowID(SysRowID:string, requestBody:Ice_Tablesets_PDFFormRuleRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -996,7 +1197,14 @@ export function patch_PDFFormRules_SysRowID(SysRowID:string, requestBody:any, ep
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1011,7 +1219,7 @@ export function patch_PDFFormRules_SysRowID(SysRowID:string, requestBody:any, ep
    Description: Call UpdateExt to delete PDFFormRule item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_PDFFormRule
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1030,7 +1238,14 @@ export function delete_PDFFormRules_SysRowID(SysRowID:string, epicorHeaders?:Hea
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1050,10 +1265,10 @@ export function delete_PDFFormRules_SysRowID(SysRowID:string, epicorHeaders?:Hea
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.PDFFormListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1068,7 +1283,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormListRow)
           })
@@ -1080,6 +1302,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1094,7 +1333,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1163,15 +1402,22 @@ export function get_GetRows(whereClausePDFForm:string, whereClausePDFFormEvent:s
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1185,7 +1431,7 @@ export function get_GetRows(whereClausePDFForm:string, whereClausePDFFormEvent:s
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1218,15 +1464,22 @@ export function get_GetByID(templateID:string, formSeq:string, epicorHeaders?:He
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1241,7 +1494,7 @@ export function get_GetByID(templateID:string, formSeq:string, epicorHeaders?:He
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1283,15 +1536,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1308,7 +1568,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
       @param sysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param context Desc: Context   Required: True   Allow empty value : True
       @param includePublished Desc: Whether to include published PDF Forms   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByRelated_output
@@ -1368,15 +1628,22 @@ export function get_GetByRelated(schemaName:string, tableName:string, sysRowID:s
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByRelated_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/GetByRelated" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByRelated_output)
           })
       .catch((error) => {
           reject(error)
@@ -1394,7 +1661,7 @@ export function get_GetByRelated(schemaName:string, tableName:string, sysRowID:s
       @param context Desc: Context   Required: True   Allow empty value : True
       @param templateID Desc: Template ID   Required: True   Allow empty value : True
       @param includePublished Desc: Whether to include published PDF Forms   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByRelatedOrCreate_output
@@ -1463,15 +1730,22 @@ export function get_GetByRelatedOrCreate(schemaName:string, tableName:string, sy
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByRelatedOrCreate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/GetByRelatedOrCreate" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByRelatedOrCreate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1483,30 +1757,37 @@ export function get_GetByRelatedOrCreate(schemaName:string, tableName:string, sy
    Summary: Invoke method GetImagesForPage
    Description: Get the images on the selected page
    OperationID: GetImagesForPage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetImagesForPage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetImagesForPage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetImagesForPage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetImagesForPage(requestBody:any, epicorHeaders?:Headers){
+export function post_GetImagesForPage(requestBody:GetImagesForPage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetImagesForPage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/GetImagesForPage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetImagesForPage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1518,30 +1799,37 @@ export function post_GetImagesForPage(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method PublishForm
    Description: Publish the form to the entity
    OperationID: PublishForm
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PublishForm_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PublishForm_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PublishForm_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PublishForm(requestBody:any, epicorHeaders?:Headers){
+export function post_PublishForm(requestBody:PublishForm_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PublishForm_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/PublishForm", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PublishForm_output)
           })
       .catch((error) => {
           reject(error)
@@ -1553,30 +1841,37 @@ export function post_PublishForm(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ExecutePageAction
    Description: Execute page action.
    OperationID: ExecutePageAction
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExecutePageAction_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExecutePageAction_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExecutePageAction_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExecutePageAction(requestBody:any, epicorHeaders?:Headers){
+export function post_ExecutePageAction(requestBody:ExecutePageAction_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExecutePageAction_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/ExecutePageAction", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExecutePageAction_output)
           })
       .catch((error) => {
           reject(error)
@@ -1588,30 +1883,37 @@ export function post_ExecutePageAction(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewPDFForm
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPDFForm
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPDFForm_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPDFForm_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPDFForm_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPDFForm(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPDFForm(requestBody:GetNewPDFForm_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPDFForm_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/GetNewPDFForm", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPDFForm_output)
           })
       .catch((error) => {
           reject(error)
@@ -1623,30 +1925,37 @@ export function post_GetNewPDFForm(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1658,7 +1967,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1682,15 +1991,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1702,7 +2018,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1726,15 +2042,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1746,30 +2069,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1781,30 +2111,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.PDFFormSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1815,31 +2152,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormEventRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_PDFFormEventRow[],
+   "value":Ice_Tablesets_PDFFormEventRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormImageRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_PDFFormImageRow[],
+   "value":Ice_Tablesets_PDFFormImageRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_PDFFormListRow[],
+   "value":Ice_Tablesets_PDFFormListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_PDFFormRow[],
+   "value":Ice_Tablesets_PDFFormRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_PDFFormRuleRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_PDFFormRuleRow[],
+   "value":Ice_Tablesets_PDFFormRuleRow,
 }
 
 export interface Ice_Tablesets_PDFFormEventRow{
@@ -1928,6 +2282,23 @@ export interface Ice_Tablesets_PDFFormRuleRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2063,7 +2434,7 @@ export interface GetImagesForPage_input{
 export interface GetImagesForPage_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_PDFFormTableset[],
+   ds:Ice_Tablesets_PDFFormTableset,
 }
 }
 
@@ -2101,7 +2472,7 @@ export interface GetNewPDFForm_input{
 export interface GetNewPDFForm_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_PDFFormTableset[],
+   ds:Ice_Tablesets_PDFFormTableset,
 }
 }
 
@@ -2301,7 +2672,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtPDFFormTableset[],
+   ds:Ice_Tablesets_UpdExtPDFFormTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2316,7 +2687,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_PDFFormTableset[],
+   ds:Ice_Tablesets_PDFFormTableset,
 }
 }
 

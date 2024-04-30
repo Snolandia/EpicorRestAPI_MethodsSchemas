@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PlanContractSvc
 // Description: Plan Contract Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractHdrRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractHdrRow
    */  
 export function get_PlanContracts(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_PlanContracts(select?:string, expand?:string, filter?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractHdrRow)
           })
@@ -118,15 +158,15 @@ export function get_PlanContracts(select?:string, expand?:string, filter?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PlanContracts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractHdrRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractHdrRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PlanContractHdrRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PlanContractHdrRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PlanContracts(requestBody:any, epicorHeaders?:Headers){
+export function post_PlanContracts(requestBody:Erp_Tablesets_PlanContractHdrRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_PlanContracts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_PlanContracts(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractHdrRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractHdrRow
    */  
 export function get_PlanContracts_Company_ContractID(Company:string, ContractID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_PlanContracts_Company_ContractID(Company:string, ContractID:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractHdrRow)
           })
@@ -193,15 +247,15 @@ export function get_PlanContracts_Company_ContractID(Company:string, ContractID:
    OperationID: UpdateExt_PlanContract
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractID Desc: ContractID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractHdrRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractHdrRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PlanContracts_Company_ContractID(Company:string, ContractID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PlanContracts_Company_ContractID(Company:string, ContractID:string, requestBody:Erp_Tablesets_PlanContractHdrRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_PlanContracts_Company_ContractID(Company:string, ContractI
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_PlanContracts_Company_ContractID(Company:string, ContractI
    OperationID: DeleteUpdateExt_PlanContract
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractID Desc: ContractID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_PlanContracts_Company_ContractID(Company:string, Contract
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_PlanContracts_Company_ContractID(Company:string, Contract
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractDtlRow
    */  
 export function get_PlanContracts_Company_ContractID_PlanContractDtls(Company:string, ContractID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_PlanContracts_Company_ContractID_PlanContractDtls(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractDtlRow)
           })
@@ -309,10 +384,10 @@ export function get_PlanContracts_Company_ContractID_PlanContractDtls(Company:st
       @param LineNum Desc: LineNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractDtlRow
    */  
 export function get_PlanContracts_Company_ContractID_PlanContractDtls_Company_ContractID_LineNum(Company:string, ContractID:string, LineNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_PlanContracts_Company_ContractID_PlanContractDtls_Company_Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractDtlRow)
           })
@@ -349,10 +431,10 @@ export function get_PlanContracts_Company_ContractID_PlanContractDtls_Company_Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractWhseBinRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractWhseBinRow
    */  
 export function get_PlanContracts_Company_ContractID_PlanContractWhseBins(Company:string, ContractID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -367,7 +449,14 @@ export function get_PlanContracts_Company_ContractID_PlanContractWhseBins(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractWhseBinRow)
           })
@@ -387,10 +476,10 @@ export function get_PlanContracts_Company_ContractID_PlanContractWhseBins(Compan
       @param BinNum Desc: BinNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractWhseBinRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractWhseBinRow
    */  
 export function get_PlanContracts_Company_ContractID_PlanContractWhseBins_Company_ContractID_WarehouseCode_BinNum(Company:string, ContractID:string, WarehouseCode:string, BinNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -405,7 +494,14 @@ export function get_PlanContracts_Company_ContractID_PlanContractWhseBins_Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractWhseBinRow)
           })
@@ -425,10 +521,10 @@ export function get_PlanContracts_Company_ContractID_PlanContractWhseBins_Compan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractDtlRow
    */  
 export function get_PlanContractDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -443,7 +539,14 @@ export function get_PlanContractDtls(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractDtlRow)
           })
@@ -457,15 +560,15 @@ export function get_PlanContractDtls(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PlanContractDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PlanContractDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PlanContractDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PlanContractDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_PlanContractDtls(requestBody:Erp_Tablesets_PlanContractDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -479,7 +582,14 @@ export function post_PlanContractDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -498,10 +608,10 @@ export function post_PlanContractDtls(requestBody:any, epicorHeaders?:Headers){
       @param LineNum Desc: LineNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractDtlRow
    */  
 export function get_PlanContractDtls_Company_ContractID_LineNum(Company:string, ContractID:string, LineNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -516,7 +626,14 @@ export function get_PlanContractDtls_Company_ContractID_LineNum(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractDtlRow)
           })
@@ -533,15 +650,15 @@ export function get_PlanContractDtls_Company_ContractID_LineNum(Company:string, 
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractID Desc: ContractID   Required: True   Allow empty value : True
       @param LineNum Desc: LineNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PlanContractDtls_Company_ContractID_LineNum(Company:string, ContractID:string, LineNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PlanContractDtls_Company_ContractID_LineNum(Company:string, ContractID:string, LineNum:string, requestBody:Erp_Tablesets_PlanContractDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -555,7 +672,14 @@ export function patch_PlanContractDtls_Company_ContractID_LineNum(Company:string
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -572,7 +696,7 @@ export function patch_PlanContractDtls_Company_ContractID_LineNum(Company:string
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractID Desc: ContractID   Required: True   Allow empty value : True
       @param LineNum Desc: LineNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -591,7 +715,14 @@ export function delete_PlanContractDtls_Company_ContractID_LineNum(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -611,10 +742,10 @@ export function delete_PlanContractDtls_Company_ContractID_LineNum(Company:strin
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractWhseBinRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractWhseBinRow
    */  
 export function get_PlanContractWhseBins(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -629,7 +760,14 @@ export function get_PlanContractWhseBins(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractWhseBinRow)
           })
@@ -643,15 +781,15 @@ export function get_PlanContractWhseBins(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PlanContractWhseBins
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractWhseBinRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractWhseBinRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PlanContractWhseBinRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PlanContractWhseBinRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PlanContractWhseBins(requestBody:any, epicorHeaders?:Headers){
+export function post_PlanContractWhseBins(requestBody:Erp_Tablesets_PlanContractWhseBinRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -665,7 +803,14 @@ export function post_PlanContractWhseBins(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -685,10 +830,10 @@ export function post_PlanContractWhseBins(requestBody:any, epicorHeaders?:Header
       @param BinNum Desc: BinNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractWhseBinRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractWhseBinRow
    */  
 export function get_PlanContractWhseBins_Company_ContractID_WarehouseCode_BinNum(Company:string, ContractID:string, WarehouseCode:string, BinNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -703,7 +848,14 @@ export function get_PlanContractWhseBins_Company_ContractID_WarehouseCode_BinNum
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractWhseBinRow)
           })
@@ -721,15 +873,15 @@ export function get_PlanContractWhseBins_Company_ContractID_WarehouseCode_BinNum
       @param ContractID Desc: ContractID   Required: True   Allow empty value : True
       @param WarehouseCode Desc: WarehouseCode   Required: True   Allow empty value : True
       @param BinNum Desc: BinNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractWhseBinRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractWhseBinRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PlanContractWhseBins_Company_ContractID_WarehouseCode_BinNum(Company:string, ContractID:string, WarehouseCode:string, BinNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PlanContractWhseBins_Company_ContractID_WarehouseCode_BinNum(Company:string, ContractID:string, WarehouseCode:string, BinNum:string, requestBody:Erp_Tablesets_PlanContractWhseBinRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -743,7 +895,14 @@ export function patch_PlanContractWhseBins_Company_ContractID_WarehouseCode_BinN
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -761,7 +920,7 @@ export function patch_PlanContractWhseBins_Company_ContractID_WarehouseCode_BinN
       @param ContractID Desc: ContractID   Required: True   Allow empty value : True
       @param WarehouseCode Desc: WarehouseCode   Required: True   Allow empty value : True
       @param BinNum Desc: BinNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -780,7 +939,14 @@ export function delete_PlanContractWhseBins_Company_ContractID_WarehouseCode_Bin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -800,10 +966,10 @@ export function delete_PlanContractWhseBins_Company_ContractID_WarehouseCode_Bin
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractDmdDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractDmdDtlRow
    */  
 export function get_PlanContractDmdDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -818,7 +984,14 @@ export function get_PlanContractDmdDtls(select?:string, filter?:string, orderby?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractDmdDtlRow)
           })
@@ -832,15 +1005,15 @@ export function get_PlanContractDmdDtls(select?:string, filter?:string, orderby?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PlanContractDmdDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractDmdDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractDmdDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PlanContractDmdDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PlanContractDmdDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PlanContractDmdDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_PlanContractDmdDtls(requestBody:Erp_Tablesets_PlanContractDmdDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -854,7 +1027,14 @@ export function post_PlanContractDmdDtls(requestBody:any, epicorHeaders?:Headers
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -871,10 +1051,10 @@ export function post_PlanContractDmdDtls(requestBody:any, epicorHeaders?:Headers
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractDmdDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractDmdDtlRow
    */  
 export function get_PlanContractDmdDtls_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -889,7 +1069,14 @@ export function get_PlanContractDmdDtls_SysRowID(SysRowID:string, select?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractDmdDtlRow)
           })
@@ -904,15 +1091,15 @@ export function get_PlanContractDmdDtls_SysRowID(SysRowID:string, select?:string
    Description: Calls UpdateExt to update PlanContractDmdDtl. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_PlanContractDmdDtl
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractDmdDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractDmdDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PlanContractDmdDtls_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PlanContractDmdDtls_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_PlanContractDmdDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -926,7 +1113,14 @@ export function patch_PlanContractDmdDtls_SysRowID(SysRowID:string, requestBody:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -941,7 +1135,7 @@ export function patch_PlanContractDmdDtls_SysRowID(SysRowID:string, requestBody:
    Description: Call UpdateExt to delete PlanContractDmdDtl item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_PlanContractDmdDtl
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -960,7 +1154,14 @@ export function delete_PlanContractDmdDtls_SysRowID(SysRowID:string, epicorHeade
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -980,10 +1181,10 @@ export function delete_PlanContractDmdDtls_SysRowID(SysRowID:string, epicorHeade
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractDmdHdrRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractDmdHdrRow
    */  
 export function get_PlanContractDmdHdrs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -998,7 +1199,14 @@ export function get_PlanContractDmdHdrs(select?:string, filter?:string, orderby?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractDmdHdrRow)
           })
@@ -1012,15 +1220,15 @@ export function get_PlanContractDmdHdrs(select?:string, filter?:string, orderby?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PlanContractDmdHdrs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractDmdHdrRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractDmdHdrRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PlanContractDmdHdrRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PlanContractDmdHdrRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PlanContractDmdHdrs(requestBody:any, epicorHeaders?:Headers){
+export function post_PlanContractDmdHdrs(requestBody:Erp_Tablesets_PlanContractDmdHdrRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1034,7 +1242,14 @@ export function post_PlanContractDmdHdrs(requestBody:any, epicorHeaders?:Headers
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1051,10 +1266,10 @@ export function post_PlanContractDmdHdrs(requestBody:any, epicorHeaders?:Headers
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractDmdHdrRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractDmdHdrRow
    */  
 export function get_PlanContractDmdHdrs_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1069,7 +1284,14 @@ export function get_PlanContractDmdHdrs_SysRowID(SysRowID:string, select?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractDmdHdrRow)
           })
@@ -1084,15 +1306,15 @@ export function get_PlanContractDmdHdrs_SysRowID(SysRowID:string, select?:string
    Description: Calls UpdateExt to update PlanContractDmdHdr. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_PlanContractDmdHdr
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractDmdHdrRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractDmdHdrRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PlanContractDmdHdrs_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PlanContractDmdHdrs_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_PlanContractDmdHdrRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1106,7 +1328,14 @@ export function patch_PlanContractDmdHdrs_SysRowID(SysRowID:string, requestBody:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1121,7 +1350,7 @@ export function patch_PlanContractDmdHdrs_SysRowID(SysRowID:string, requestBody:
    Description: Call UpdateExt to delete PlanContractDmdHdr item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_PlanContractDmdHdr
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1140,7 +1369,14 @@ export function delete_PlanContractDmdHdrs_SysRowID(SysRowID:string, epicorHeade
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1160,10 +1396,10 @@ export function delete_PlanContractDmdHdrs_SysRowID(SysRowID:string, epicorHeade
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractSplyDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractSplyDtlRow
    */  
 export function get_PlanContractSplyDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1178,7 +1414,14 @@ export function get_PlanContractSplyDtls(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractSplyDtlRow)
           })
@@ -1192,15 +1435,15 @@ export function get_PlanContractSplyDtls(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PlanContractSplyDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractSplyDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractSplyDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PlanContractSplyDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PlanContractSplyDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PlanContractSplyDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_PlanContractSplyDtls(requestBody:Erp_Tablesets_PlanContractSplyDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1214,7 +1457,14 @@ export function post_PlanContractSplyDtls(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1231,10 +1481,10 @@ export function post_PlanContractSplyDtls(requestBody:any, epicorHeaders?:Header
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractSplyDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractSplyDtlRow
    */  
 export function get_PlanContractSplyDtls_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1249,7 +1499,14 @@ export function get_PlanContractSplyDtls_SysRowID(SysRowID:string, select?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractSplyDtlRow)
           })
@@ -1264,15 +1521,15 @@ export function get_PlanContractSplyDtls_SysRowID(SysRowID:string, select?:strin
    Description: Calls UpdateExt to update PlanContractSplyDtl. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_PlanContractSplyDtl
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractSplyDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractSplyDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PlanContractSplyDtls_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PlanContractSplyDtls_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_PlanContractSplyDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1286,7 +1543,14 @@ export function patch_PlanContractSplyDtls_SysRowID(SysRowID:string, requestBody
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1301,7 +1565,7 @@ export function patch_PlanContractSplyDtls_SysRowID(SysRowID:string, requestBody
    Description: Call UpdateExt to delete PlanContractSplyDtl item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_PlanContractSplyDtl
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1320,7 +1584,14 @@ export function delete_PlanContractSplyDtls_SysRowID(SysRowID:string, epicorHead
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1340,10 +1611,10 @@ export function delete_PlanContractSplyDtls_SysRowID(SysRowID:string, epicorHead
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractSplyHdrRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractSplyHdrRow
    */  
 export function get_PlanContractSplyHdrs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1358,7 +1629,14 @@ export function get_PlanContractSplyHdrs(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractSplyHdrRow)
           })
@@ -1372,15 +1650,15 @@ export function get_PlanContractSplyHdrs(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PlanContractSplyHdrs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractSplyHdrRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractSplyHdrRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PlanContractSplyHdrRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PlanContractSplyHdrRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PlanContractSplyHdrs(requestBody:any, epicorHeaders?:Headers){
+export function post_PlanContractSplyHdrs(requestBody:Erp_Tablesets_PlanContractSplyHdrRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1394,7 +1672,14 @@ export function post_PlanContractSplyHdrs(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1411,10 +1696,10 @@ export function post_PlanContractSplyHdrs(requestBody:any, epicorHeaders?:Header
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractSplyHdrRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractSplyHdrRow
    */  
 export function get_PlanContractSplyHdrs_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1429,7 +1714,14 @@ export function get_PlanContractSplyHdrs_SysRowID(SysRowID:string, select?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractSplyHdrRow)
           })
@@ -1444,15 +1736,15 @@ export function get_PlanContractSplyHdrs_SysRowID(SysRowID:string, select?:strin
    Description: Calls UpdateExt to update PlanContractSplyHdr. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_PlanContractSplyHdr
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractSplyHdrRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractSplyHdrRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PlanContractSplyHdrs_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PlanContractSplyHdrs_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_PlanContractSplyHdrRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1466,7 +1758,14 @@ export function patch_PlanContractSplyHdrs_SysRowID(SysRowID:string, requestBody
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1481,7 +1780,7 @@ export function patch_PlanContractSplyHdrs_SysRowID(SysRowID:string, requestBody
    Description: Call UpdateExt to delete PlanContractSplyHdr item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_PlanContractSplyHdr
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1500,7 +1799,14 @@ export function delete_PlanContractSplyHdrs_SysRowID(SysRowID:string, epicorHead
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1520,10 +1826,10 @@ export function delete_PlanContractSplyHdrs_SysRowID(SysRowID:string, epicorHead
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractTranDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractTranDtlRow
    */  
 export function get_PlanContractTranDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1538,7 +1844,14 @@ export function get_PlanContractTranDtls(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractTranDtlRow)
           })
@@ -1552,15 +1865,15 @@ export function get_PlanContractTranDtls(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PlanContractTranDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractTranDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractTranDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PlanContractTranDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PlanContractTranDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PlanContractTranDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_PlanContractTranDtls(requestBody:Erp_Tablesets_PlanContractTranDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1574,7 +1887,14 @@ export function post_PlanContractTranDtls(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1591,10 +1911,10 @@ export function post_PlanContractTranDtls(requestBody:any, epicorHeaders?:Header
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractTranDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractTranDtlRow
    */  
 export function get_PlanContractTranDtls_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1609,7 +1929,14 @@ export function get_PlanContractTranDtls_SysRowID(SysRowID:string, select?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractTranDtlRow)
           })
@@ -1624,15 +1951,15 @@ export function get_PlanContractTranDtls_SysRowID(SysRowID:string, select?:strin
    Description: Calls UpdateExt to update PlanContractTranDtl. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_PlanContractTranDtl
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractTranDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractTranDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PlanContractTranDtls_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PlanContractTranDtls_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_PlanContractTranDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1646,7 +1973,14 @@ export function patch_PlanContractTranDtls_SysRowID(SysRowID:string, requestBody
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1661,7 +1995,7 @@ export function patch_PlanContractTranDtls_SysRowID(SysRowID:string, requestBody
    Description: Call UpdateExt to delete PlanContractTranDtl item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_PlanContractTranDtl
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1680,7 +2014,14 @@ export function delete_PlanContractTranDtls_SysRowID(SysRowID:string, epicorHead
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1700,10 +2041,10 @@ export function delete_PlanContractTranDtls_SysRowID(SysRowID:string, epicorHead
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractTranHdrRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractTranHdrRow
    */  
 export function get_PlanContractTranHdrs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1718,7 +2059,14 @@ export function get_PlanContractTranHdrs(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractTranHdrRow)
           })
@@ -1732,15 +2080,15 @@ export function get_PlanContractTranHdrs(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PlanContractTranHdrs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractTranHdrRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PlanContractTranHdrRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PlanContractTranHdrRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PlanContractTranHdrRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PlanContractTranHdrs(requestBody:any, epicorHeaders?:Headers){
+export function post_PlanContractTranHdrs(requestBody:Erp_Tablesets_PlanContractTranHdrRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1754,7 +2102,14 @@ export function post_PlanContractTranHdrs(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1771,10 +2126,10 @@ export function post_PlanContractTranHdrs(requestBody:any, epicorHeaders?:Header
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PlanContractTranHdrRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PlanContractTranHdrRow
    */  
 export function get_PlanContractTranHdrs_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1789,7 +2144,14 @@ export function get_PlanContractTranHdrs_SysRowID(SysRowID:string, select?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PlanContractTranHdrRow)
           })
@@ -1804,15 +2166,15 @@ export function get_PlanContractTranHdrs_SysRowID(SysRowID:string, select?:strin
    Description: Calls UpdateExt to update PlanContractTranHdr. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_PlanContractTranHdr
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractTranHdrRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PlanContractTranHdrRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PlanContractTranHdrs_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PlanContractTranHdrs_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_PlanContractTranHdrRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1826,7 +2188,14 @@ export function patch_PlanContractTranHdrs_SysRowID(SysRowID:string, requestBody
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1841,7 +2210,7 @@ export function patch_PlanContractTranHdrs_SysRowID(SysRowID:string, requestBody
    Description: Call UpdateExt to delete PlanContractTranHdr item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_PlanContractTranHdr
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1860,7 +2229,14 @@ export function delete_PlanContractTranHdrs_SysRowID(SysRowID:string, epicorHead
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1880,10 +2256,10 @@ export function delete_PlanContractTranHdrs_SysRowID(SysRowID:string, epicorHead
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractHdrListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PlanContractHdrListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1898,7 +2274,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractHdrListRow)
           })
@@ -1910,6 +2293,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1929,7 +2329,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -2043,15 +2443,22 @@ export function get_GetRows(whereClausePlanContractHdr:string, whereClausePlanCo
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2064,7 +2471,7 @@ export function get_GetRows(whereClausePlanContractHdr:string, whereClausePlanCo
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -2088,15 +2495,22 @@ export function get_GetByID(contractID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2111,7 +2525,7 @@ export function get_GetByID(contractID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -2153,15 +2567,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2174,30 +2595,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Description: Validates PlanContractHdr.Active column changing:
 1.-If a contract is flagged as inactive and there is stock in the warehouse / bin location defined at the contract, then a warning message should be shown.
    OperationID: ExistsInventoryOrReceivingBin
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExistsInventoryOrReceivingBin_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExistsInventoryOrReceivingBin_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExistsInventoryOrReceivingBin_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExistsInventoryOrReceivingBin(requestBody:any, epicorHeaders?:Headers){
+export function post_ExistsInventoryOrReceivingBin(requestBody:ExistsInventoryOrReceivingBin_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExistsInventoryOrReceivingBin_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/ExistsInventoryOrReceivingBin", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExistsInventoryOrReceivingBin_output)
           })
       .catch((error) => {
           reject(error)
@@ -2210,30 +2638,37 @@ export function post_ExistsInventoryOrReceivingBin(requestBody:any, epicorHeader
    Description: Validates PlanContractHdr.Active column changing:
 1.-If a contract is flagged as inactive and there is stock in the warehouse / bin location defined at the contract, then a warning message should be shown.
    OperationID: OnChangeActive
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeActive_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeActive_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeActive_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeActive(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeActive(requestBody:OnChangeActive_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeActive_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangeActive", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeActive_output)
           })
       .catch((error) => {
           reject(error)
@@ -2245,30 +2680,37 @@ export function post_OnChangeActive(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeWhseBinDefaultInvWhseBin
    Description: Validates PlanContractWhseBin.DefaultInvWhseBin column changing:
    OperationID: OnChangeWhseBinDefaultInvWhseBin
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeWhseBinDefaultInvWhseBin_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeWhseBinDefaultInvWhseBin_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeWhseBinDefaultInvWhseBin_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeWhseBinDefaultInvWhseBin(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeWhseBinDefaultInvWhseBin(requestBody:OnChangeWhseBinDefaultInvWhseBin_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeWhseBinDefaultInvWhseBin_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangeWhseBinDefaultInvWhseBin", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeWhseBinDefaultInvWhseBin_output)
           })
       .catch((error) => {
           reject(error)
@@ -2280,30 +2722,37 @@ export function post_OnChangeWhseBinDefaultInvWhseBin(requestBody:any, epicorHea
    Summary: Invoke method OnChangeWhseBinDefaultRcvWhseBin
    Description: Validates PlanContractWhseBin.DefaultRcvWhseBin column changing:
    OperationID: OnChangeWhseBinDefaultRcvWhseBin
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeWhseBinDefaultRcvWhseBin_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeWhseBinDefaultRcvWhseBin_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeWhseBinDefaultRcvWhseBin_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeWhseBinDefaultRcvWhseBin(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeWhseBinDefaultRcvWhseBin(requestBody:OnChangeWhseBinDefaultRcvWhseBin_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeWhseBinDefaultRcvWhseBin_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangeWhseBinDefaultRcvWhseBin", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeWhseBinDefaultRcvWhseBin_output)
           })
       .catch((error) => {
           reject(error)
@@ -2315,30 +2764,37 @@ export function post_OnChangeWhseBinDefaultRcvWhseBin(requestBody:any, epicorHea
    Summary: Invoke method OnChangeWhseBinBackflushBin
    Description: Validates PlanContractWhseBin.BackflushBin column changing:
    OperationID: OnChangeWhseBinBackflushBin
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeWhseBinBackflushBin_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeWhseBinBackflushBin_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeWhseBinBackflushBin_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeWhseBinBackflushBin(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeWhseBinBackflushBin(requestBody:OnChangeWhseBinBackflushBin_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeWhseBinBackflushBin_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangeWhseBinBackflushBin", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeWhseBinBackflushBin_output)
           })
       .catch((error) => {
           reject(error)
@@ -2352,30 +2808,37 @@ export function post_OnChangeWhseBinBackflushBin(requestBody:any, epicorHeaders?
 1.- The WarehouseCode field should only allow warehouses with at least one bin location flagged as contract bin.
 2.-The same combination of warehouse/bin is only allowed once for all the active contracts.
    OperationID: OnChangeWhseBinWarehouseCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeWhseBinWarehouseCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeWhseBinWarehouseCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeWhseBinWarehouseCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeWhseBinWarehouseCode(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeWhseBinWarehouseCode(requestBody:OnChangeWhseBinWarehouseCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeWhseBinWarehouseCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangeWhseBinWarehouseCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeWhseBinWarehouseCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -2389,30 +2852,37 @@ export function post_OnChangeWhseBinWarehouseCode(requestBody:any, epicorHeaders
 1.- The WarehouseCode field should only allow warehouses with at least one bin location flagged as contract bin.
 2.-The same combination of warehouse/bin must exist in PlanContractWhseBin
    OperationID: OnChangePlanContractDtlWarehouseCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePlanContractDtlWarehouseCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePlanContractDtlWarehouseCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePlanContractDtlWarehouseCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePlanContractDtlWarehouseCode(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePlanContractDtlWarehouseCode(requestBody:OnChangePlanContractDtlWarehouseCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePlanContractDtlWarehouseCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangePlanContractDtlWarehouseCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePlanContractDtlWarehouseCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -2426,30 +2896,37 @@ export function post_OnChangePlanContractDtlWarehouseCode(requestBody:any, epico
 1.-The BinNum field should only allow bins that have a “Contract” Type.
 2.-The same combination of warehouse/bin is only allowed once for all the active contracts.
    OperationID: OnChangeDtlBinNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeDtlBinNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeDtlBinNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeDtlBinNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeDtlBinNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeDtlBinNum(requestBody:OnChangeDtlBinNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeDtlBinNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangeDtlBinNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeDtlBinNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -2463,30 +2940,37 @@ export function post_OnChangeDtlBinNum(requestBody:any, epicorHeaders?:Headers){
 1.-The BinNum field should only allow bins that have a “Contract” Type.
 2.-The same combination of warehouse/bin is only allowed once for all the active contracts.
    OperationID: OnChangeWhseBinNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeWhseBinNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeWhseBinNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeWhseBinNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeWhseBinNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeWhseBinNum(requestBody:OnChangeWhseBinNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeWhseBinNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangeWhseBinNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeWhseBinNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -2499,30 +2983,37 @@ export function post_OnChangeWhseBinNum(requestBody:any, epicorHeaders?:Headers)
    Description: Validates PlanContractDtl.PartNum column changing:
 1.-	Sales Kits parts are not allowed in contract lines.
    OperationID: OnChangePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartNum(requestBody:OnChangePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -2534,30 +3025,37 @@ export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangingAttributeSet
    Description: Call this method when the attribute set changes
    OperationID: OnChangingAttributeSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingAttributeSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingAttributeSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingAttributeSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingAttributeSet(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingAttributeSet(requestBody:OnChangingAttributeSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingAttributeSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangingAttributeSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingAttributeSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -2569,30 +3067,37 @@ export function post_OnChangingAttributeSet(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnChangingRevisionNum
    Description: Call this method when the Revision changes to maintain inventory tracking
    OperationID: OnChangingRevisionNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingRevisionNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingRevisionNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingRevisionNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingRevisionNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingRevisionNum(requestBody:OnChangingRevisionNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingRevisionNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/OnChangingRevisionNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingRevisionNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -2604,30 +3109,37 @@ export function post_OnChangingRevisionNum(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetContractHdrDmdRows
    Description: Get the dataset of Contract Demand Header.
    OperationID: GetContractHdrDmdRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContractHdrDmdRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContractHdrDmdRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContractHdrDmdRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContractHdrDmdRows(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContractHdrDmdRows(requestBody:GetContractHdrDmdRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContractHdrDmdRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetContractHdrDmdRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContractHdrDmdRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2639,30 +3151,37 @@ export function post_GetContractHdrDmdRows(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetContractDtlDmdRows
    Description: Get the dataset of Contract Demand Lines.
    OperationID: GetContractDtlDmdRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContractDtlDmdRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContractDtlDmdRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContractDtlDmdRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContractDtlDmdRows(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContractDtlDmdRows(requestBody:GetContractDtlDmdRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContractDtlDmdRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetContractDtlDmdRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContractDtlDmdRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2674,30 +3193,37 @@ export function post_GetContractDtlDmdRows(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetContractHdrTranRows
    Description: Get the dataset of Contract Transaction Header.
    OperationID: GetContractHdrTranRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContractHdrTranRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContractHdrTranRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContractHdrTranRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContractHdrTranRows(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContractHdrTranRows(requestBody:GetContractHdrTranRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContractHdrTranRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetContractHdrTranRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContractHdrTranRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2709,30 +3235,37 @@ export function post_GetContractHdrTranRows(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetContractDtlTranRows
    Description: Get the dataset of Contract Transaction Header.
    OperationID: GetContractDtlTranRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContractDtlTranRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContractDtlTranRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContractDtlTranRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContractDtlTranRows(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContractDtlTranRows(requestBody:GetContractDtlTranRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContractDtlTranRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetContractDtlTranRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContractDtlTranRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2745,30 +3278,37 @@ export function post_GetContractDtlTranRows(requestBody:any, epicorHeaders?:Head
    Description: Get the dataset for Plan Contract Supply (Hdr or Dtl).
 If param sPart has value you get PlanContractSplyDtl table otherwhise PlanContractSplyHdr table(all parts).
    OperationID: GetContractSplyRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContractSplyRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContractSplyRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContractSplyRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContractSplyRows(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContractSplyRows(requestBody:GetContractSplyRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContractSplyRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetContractSplyRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContractSplyRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2780,30 +3320,37 @@ export function post_GetContractSplyRows(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method PartPlantIsLinkedToContract
    Description: Read the Link To Contract flag from PartPlant.
    OperationID: PartPlantIsLinkedToContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PartPlantIsLinkedToContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PartPlantIsLinkedToContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PartPlantIsLinkedToContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartPlantIsLinkedToContract(requestBody:any, epicorHeaders?:Headers){
+export function post_PartPlantIsLinkedToContract(requestBody:PartPlantIsLinkedToContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PartPlantIsLinkedToContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/PartPlantIsLinkedToContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PartPlantIsLinkedToContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -2815,30 +3362,37 @@ export function post_PartPlantIsLinkedToContract(requestBody:any, epicorHeaders?
    Summary: Invoke method ValidatePlanContractHdrinDiffPlant
    Description: Validate whether the ContractID belongs to another plant.
    OperationID: ValidatePlanContractHdrinDiffPlant
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidatePlanContractHdrinDiffPlant_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidatePlanContractHdrinDiffPlant_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidatePlanContractHdrinDiffPlant_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidatePlanContractHdrinDiffPlant(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidatePlanContractHdrinDiffPlant(requestBody:ValidatePlanContractHdrinDiffPlant_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidatePlanContractHdrinDiffPlant_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/ValidatePlanContractHdrinDiffPlant", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidatePlanContractHdrinDiffPlant_output)
           })
       .catch((error) => {
           reject(error)
@@ -2850,30 +3404,37 @@ export function post_ValidatePlanContractHdrinDiffPlant(requestBody:any, epicorH
    Summary: Invoke method ChangeContractDemandQuantities
    Description: Update Plan Contract Detail information when the Contract UOM or Contrcat Qty changes
    OperationID: ChangeContractDemandQuantities
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeContractDemandQuantities_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeContractDemandQuantities_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeContractDemandQuantities_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeContractDemandQuantities(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeContractDemandQuantities(requestBody:ChangeContractDemandQuantities_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeContractDemandQuantities_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/ChangeContractDemandQuantities", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeContractDemandQuantities_output)
           })
       .catch((error) => {
           reject(error)
@@ -2885,30 +3446,37 @@ export function post_ChangeContractDemandQuantities(requestBody:any, epicorHeade
    Summary: Invoke method GetNewPlanContractHdr
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPlanContractHdr
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPlanContractHdr_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPlanContractHdr_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPlanContractHdr_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPlanContractHdr(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPlanContractHdr(requestBody:GetNewPlanContractHdr_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPlanContractHdr_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetNewPlanContractHdr", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPlanContractHdr_output)
           })
       .catch((error) => {
           reject(error)
@@ -2920,30 +3488,37 @@ export function post_GetNewPlanContractHdr(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewPlanContractDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPlanContractDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPlanContractDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPlanContractDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPlanContractDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPlanContractDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPlanContractDtl(requestBody:GetNewPlanContractDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPlanContractDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetNewPlanContractDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPlanContractDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2955,30 +3530,37 @@ export function post_GetNewPlanContractDtl(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewPlanContractWhseBin
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPlanContractWhseBin
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPlanContractWhseBin_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPlanContractWhseBin_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPlanContractWhseBin_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPlanContractWhseBin(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPlanContractWhseBin(requestBody:GetNewPlanContractWhseBin_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPlanContractWhseBin_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetNewPlanContractWhseBin", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPlanContractWhseBin_output)
           })
       .catch((error) => {
           reject(error)
@@ -2990,30 +3572,37 @@ export function post_GetNewPlanContractWhseBin(requestBody:any, epicorHeaders?:H
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3025,7 +3614,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -3049,15 +3638,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3069,7 +3665,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -3093,15 +3689,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -3113,30 +3716,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -3148,30 +3758,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PlanContractSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -3182,56 +3799,73 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractDmdDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PlanContractDmdDtlRow[],
+   "value":Erp_Tablesets_PlanContractDmdDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractDmdHdrRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PlanContractDmdHdrRow[],
+   "value":Erp_Tablesets_PlanContractDmdHdrRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PlanContractDtlRow[],
+   "value":Erp_Tablesets_PlanContractDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractHdrListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PlanContractHdrListRow[],
+   "value":Erp_Tablesets_PlanContractHdrListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractHdrRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PlanContractHdrRow[],
+   "value":Erp_Tablesets_PlanContractHdrRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractSplyDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PlanContractSplyDtlRow[],
+   "value":Erp_Tablesets_PlanContractSplyDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractSplyHdrRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PlanContractSplyHdrRow[],
+   "value":Erp_Tablesets_PlanContractSplyHdrRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractTranDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PlanContractTranDtlRow[],
+   "value":Erp_Tablesets_PlanContractTranDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractTranHdrRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PlanContractTranHdrRow[],
+   "value":Erp_Tablesets_PlanContractTranHdrRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PlanContractWhseBinRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PlanContractWhseBinRow[],
+   "value":Erp_Tablesets_PlanContractWhseBinRow,
 }
 
 export interface Erp_Tablesets_PlanContractDmdDtlRow{
@@ -3798,6 +4432,23 @@ export interface Erp_Tablesets_PlanContractWhseBinRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -4444,7 +5095,7 @@ export interface ExistsInventoryOrReceivingBin_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
    invOrRec:string,
 }
 }
@@ -4593,7 +5244,7 @@ export interface GetNewPlanContractDtl_input{
 export interface GetNewPlanContractDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4607,7 +5258,7 @@ export interface GetNewPlanContractHdr_input{
 export interface GetNewPlanContractHdr_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4625,7 +5276,7 @@ export interface GetNewPlanContractWhseBin_input{
 export interface GetNewPlanContractWhseBin_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4712,7 +5363,7 @@ export interface OnChangeActive_input{
 export interface OnChangeActive_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4728,7 +5379,7 @@ export interface OnChangeDtlBinNum_input{
 export interface OnChangeDtlBinNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
    sBinNum:string,
 }
 }
@@ -4745,7 +5396,7 @@ export interface OnChangePartNum_input{
 export interface OnChangePartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
    sPartNum:string,
 }
 }
@@ -4762,7 +5413,7 @@ export interface OnChangePlanContractDtlWarehouseCode_input{
 export interface OnChangePlanContractDtlWarehouseCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4778,7 +5429,7 @@ export interface OnChangeWhseBinBackflushBin_input{
 export interface OnChangeWhseBinBackflushBin_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4794,7 +5445,7 @@ export interface OnChangeWhseBinDefaultInvWhseBin_input{
 export interface OnChangeWhseBinDefaultInvWhseBin_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4810,7 +5461,7 @@ export interface OnChangeWhseBinDefaultRcvWhseBin_input{
 export interface OnChangeWhseBinDefaultRcvWhseBin_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4826,7 +5477,7 @@ export interface OnChangeWhseBinNum_input{
 export interface OnChangeWhseBinNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
    sBinNum:string,
 }
 }
@@ -4843,7 +5494,7 @@ export interface OnChangeWhseBinWarehouseCode_input{
 export interface OnChangeWhseBinWarehouseCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4859,7 +5510,7 @@ export interface OnChangingAttributeSet_input{
 export interface OnChangingAttributeSet_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4875,7 +5526,7 @@ export interface OnChangingRevisionNum_input{
 export interface OnChangingRevisionNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 
@@ -4909,7 +5560,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtPlanContractTableset[],
+   ds:Erp_Tablesets_UpdExtPlanContractTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4924,7 +5575,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PlanContractTableset[],
+   ds:Erp_Tablesets_PlanContractTableset,
 }
 }
 

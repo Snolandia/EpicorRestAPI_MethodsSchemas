@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.RPT.ProcessPaymentSvc
 // Description: Initializes a new class of "ProcessPaymentSvc" />.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method GenerateBankExportFile
    Description: GetBankExportFile.
    OperationID: GenerateBankExportFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateBankExportFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateBankExportFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateBankExportFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateBankExportFile(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateBankExportFile(requestBody:GenerateBankExportFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateBankExportFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GenerateBankExportFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateBankExportFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -124,30 +181,37 @@ GroupID as input so it can fill the ProcessPaymentDataset with
 relevant data for the GroupID.
 The BL determines whether its a Start / ReStart process payment and sends the data accordingly.
    OperationID: GetNewProcessPayment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewProcessPayment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewProcessPayment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewProcessPayment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewProcessPayment(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewProcessPayment(requestBody:GetNewProcessPayment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewProcessPayment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetNewProcessPayment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewProcessPayment_output)
           })
       .catch((error) => {
           reject(error)
@@ -162,30 +226,37 @@ This method has the functionality of GetNewParameters and it takes
 HeadNum as input so it can fill the ProcessPaymentDataset with
 relevant data for the CHeck.
    OperationID: GetNewProcessPaymentForSingleRemitAdvice
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewProcessPaymentForSingleRemitAdvice_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewProcessPaymentForSingleRemitAdvice_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewProcessPaymentForSingleRemitAdvice_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewProcessPaymentForSingleRemitAdvice(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewProcessPaymentForSingleRemitAdvice(requestBody:GetNewProcessPaymentForSingleRemitAdvice_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewProcessPaymentForSingleRemitAdvice_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetNewProcessPaymentForSingleRemitAdvice", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewProcessPaymentForSingleRemitAdvice_output)
           })
       .catch((error) => {
           reject(error)
@@ -197,30 +268,37 @@ export function post_GetNewProcessPaymentForSingleRemitAdvice(requestBody:any, e
    Summary: Invoke method OnChangeBankAcctID
    Description: Call method when the user changes the Bank account in Process Payment.
    OperationID: OnChangeBankAcctID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBankAcctID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBankAcctID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBankAcctID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBankAcctID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBankAcctID(requestBody:OnChangeBankAcctID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBankAcctID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/OnChangeBankAcctID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBankAcctID_output)
           })
       .catch((error) => {
           reject(error)
@@ -232,30 +310,37 @@ export function post_OnChangeBankAcctID(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeCheckDate
    Description: Call method when the over rides the check # in Process Payment.
    OperationID: OnChangeCheckDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCheckDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCheckDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCheckDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCheckDate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCheckDate(requestBody:OnChangeCheckDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCheckDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/OnChangeCheckDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCheckDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -267,30 +352,37 @@ export function post_OnChangeCheckDate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeLoadedCheckNum
    Description: Call method when the over rides the check # in Process Payment.
    OperationID: OnChangeLoadedCheckNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeLoadedCheckNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeLoadedCheckNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeLoadedCheckNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeLoadedCheckNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeLoadedCheckNum(requestBody:OnChangeLoadedCheckNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeLoadedCheckNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/OnChangeLoadedCheckNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeLoadedCheckNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -302,30 +394,37 @@ export function post_OnChangeLoadedCheckNum(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnChangeBankExportFileName
    Description: Call method when the BankExportFileName changes
    OperationID: OnChangeBankExportFileName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBankExportFileName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBankExportFileName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBankExportFileName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBankExportFileName(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBankExportFileName(requestBody:OnChangeBankExportFileName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBankExportFileName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/OnChangeBankExportFileName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBankExportFileName_output)
           })
       .catch((error) => {
           reject(error)
@@ -340,30 +439,37 @@ Parameters:  none
 Notes:
 <param name="inFileName">File Name</param><param name="vWarningMessage">Overwrite file warning message.</param>
    OperationID: OverwriteFileWarning
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OverwriteFileWarning_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OverwriteFileWarning_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OverwriteFileWarning_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OverwriteFileWarning(requestBody:any, epicorHeaders?:Headers){
+export function post_OverwriteFileWarning(requestBody:OverwriteFileWarning_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OverwriteFileWarning_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/OverwriteFileWarning", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OverwriteFileWarning_output)
           })
       .catch((error) => {
           reject(error)
@@ -375,30 +481,37 @@ export function post_OverwriteFileWarning(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method paymentGroupingPO3
    Description: Process group for PO3
    OperationID: paymentGroupingPO3
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/paymentGroupingPO3_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/paymentGroupingPO3_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/paymentGroupingPO3_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_paymentGroupingPO3(requestBody:any, epicorHeaders?:Headers){
+export function post_paymentGroupingPO3(requestBody:paymentGroupingPO3_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<paymentGroupingPO3_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/paymentGroupingPO3", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as paymentGroupingPO3_output)
           })
       .catch((error) => {
           reject(error)
@@ -410,30 +523,37 @@ export function post_paymentGroupingPO3(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method PreRunDirect
    Description: This method is called when printing or generating and contains extra logic which is run before RunDirect.
    OperationID: PreRunDirect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreRunDirect_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreRunDirect_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreRunDirect_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreRunDirect(requestBody:any, epicorHeaders?:Headers){
+export function post_PreRunDirect(requestBody:PreRunDirect_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreRunDirect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/PreRunDirect", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreRunDirect_output)
           })
       .catch((error) => {
           reject(error)
@@ -445,30 +565,37 @@ export function post_PreRunDirect(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunProcessPayment
    Description: Process Payments.
    OperationID: RunProcessPayment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunProcessPayment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunProcessPayment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunProcessPayment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunProcessPayment(requestBody:any, epicorHeaders?:Headers){
+export function post_RunProcessPayment(requestBody:RunProcessPayment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunProcessPayment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/RunProcessPayment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunProcessPayment_output)
           })
       .catch((error) => {
           reject(error)
@@ -480,30 +607,37 @@ export function post_RunProcessPayment(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ReStartProcessPayment
    Description: Process Payments.
    OperationID: ReStartProcessPayment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ReStartProcessPayment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ReStartProcessPayment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ReStartProcessPayment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ReStartProcessPayment(requestBody:any, epicorHeaders?:Headers){
+export function post_ReStartProcessPayment(requestBody:ReStartProcessPayment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ReStartProcessPayment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/ReStartProcessPayment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ReStartProcessPayment_output)
           })
       .catch((error) => {
           reject(error)
@@ -515,30 +649,37 @@ export function post_ReStartProcessPayment(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method TestGroupProcessing
    Description: Test Group Processing
    OperationID: TestGroupProcessing
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TestGroupProcessing_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TestGroupProcessing_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TestGroupProcessing_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TestGroupProcessing(requestBody:any, epicorHeaders?:Headers){
+export function post_TestGroupProcessing(requestBody:TestGroupProcessing_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TestGroupProcessing_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/TestGroupProcessing", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TestGroupProcessing_output)
           })
       .catch((error) => {
           reject(error)
@@ -550,30 +691,37 @@ export function post_TestGroupProcessing(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ValidateElecIntFile
    Description: Validate Electronic Interface File
    OperationID: ValidateElecIntFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateElecIntFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateElecIntFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateElecIntFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateElecIntFile(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateElecIntFile(requestBody:ValidateElecIntFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateElecIntFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/ValidateElecIntFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateElecIntFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -587,30 +735,37 @@ export function post_ValidateElecIntFile(requestBody:any, epicorHeaders?:Headers
 Parameters:  none
 Notes:
    OperationID: validateProcessPaymentParam
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/validateProcessPaymentParam_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/validateProcessPaymentParam_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/validateProcessPaymentParam_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_validateProcessPaymentParam(requestBody:any, epicorHeaders?:Headers){
+export function post_validateProcessPaymentParam(requestBody:validateProcessPaymentParam_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<validateProcessPaymentParam_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/validateProcessPaymentParam", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as validateProcessPaymentParam_output)
           })
       .catch((error) => {
           reject(error)
@@ -624,7 +779,7 @@ export function post_validateProcessPaymentParam(requestBody:any, epicorHeaders?
 Parameters:  none
 Notes:
    OperationID: GetCodeDescrList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescrList_output
@@ -637,15 +792,22 @@ export function post_GetCodeDescrList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescrList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetCodeDescrList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescrList_output)
           })
       .catch((error) => {
           reject(error)
@@ -659,30 +821,37 @@ export function post_GetCodeDescrList(epicorHeaders?:Headers){
 Parameters:  none
 Notes:
    OperationID: getCurrencyID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/getCurrencyID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/getCurrencyID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/getCurrencyID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_getCurrencyID(requestBody:any, epicorHeaders?:Headers){
+export function post_getCurrencyID(requestBody:getCurrencyID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<getCurrencyID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/getCurrencyID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as getCurrencyID_output)
           })
       .catch((error) => {
           reject(error)
@@ -698,30 +867,37 @@ If this method is being called by a validation process, the inUpdate should
 be assigned to false until ready to post.
 Notes:
    OperationID: getEFTProductionNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/getEFTProductionNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/getEFTProductionNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/getEFTProductionNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_getEFTProductionNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_getEFTProductionNumber(requestBody:getEFTProductionNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<getEFTProductionNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/getEFTProductionNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as getEFTProductionNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -735,30 +911,37 @@ export function post_getEFTProductionNumber(requestBody:any, epicorHeaders?:Head
 Parameters:  none
 Notes:
    OperationID: getNextECheckNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/getNextECheckNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/getNextECheckNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/getNextECheckNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_getNextECheckNum(requestBody:any, epicorHeaders?:Headers){
+export function post_getNextECheckNum(requestBody:getNextECheckNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<getNextECheckNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/getNextECheckNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as getNextECheckNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -773,30 +956,37 @@ increment by 1 to display the starting payment number.
 Parameters:  none
 Notes:
    OperationID: getStartCheckNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/getStartCheckNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/getStartCheckNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/getStartCheckNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_getStartCheckNum(requestBody:any, epicorHeaders?:Headers){
+export function post_getStartCheckNum(requestBody:getStartCheckNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<getStartCheckNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/getStartCheckNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as getStartCheckNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -808,7 +998,7 @@ export function post_getStartCheckNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetSortByList
    Description: Returns a list of SortBy options
    OperationID: GetSortByList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSortByList_output
@@ -821,15 +1011,22 @@ export function post_GetSortByList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSortByList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetSortByList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSortByList_output)
           })
       .catch((error) => {
           reject(error)
@@ -843,30 +1040,37 @@ export function post_GetSortByList(epicorHeaders?:Headers){
 Parameters:  none
 Notes:
    OperationID: validateNegativePaymentExist
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/validateNegativePaymentExist_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/validateNegativePaymentExist_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/validateNegativePaymentExist_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_validateNegativePaymentExist(requestBody:any, epicorHeaders?:Headers){
+export function post_validateNegativePaymentExist(requestBody:validateNegativePaymentExist_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<validateNegativePaymentExist_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/validateNegativePaymentExist", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as validateNegativePaymentExist_output)
           })
       .catch((error) => {
           reject(error)
@@ -878,30 +1082,37 @@ export function post_validateNegativePaymentExist(requestBody:any, epicorHeaders
    Summary: Invoke method LockRecord
    Description: Create the document lock
    OperationID: LockRecord
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LockRecord_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LockRecord_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LockRecord_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LockRecord(requestBody:any, epicorHeaders?:Headers){
+export function post_LockRecord(requestBody:LockRecord_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LockRecord_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/LockRecord", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LockRecord_output)
           })
       .catch((error) => {
           reject(error)
@@ -913,30 +1124,37 @@ export function post_LockRecord(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method IsLocked
    Description: Check is a document lock is in place
    OperationID: IsLocked
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsLocked_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsLocked_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsLocked_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsLocked(requestBody:any, epicorHeaders?:Headers){
+export function post_IsLocked(requestBody:IsLocked_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsLocked_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/IsLocked", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsLocked_output)
           })
       .catch((error) => {
           reject(error)
@@ -948,30 +1166,37 @@ export function post_IsLocked(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method IsGenerated
    Description: Check if the payment has already been generated
    OperationID: IsGenerated
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsGenerated_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsGenerated_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsGenerated_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsGenerated(requestBody:any, epicorHeaders?:Headers){
+export function post_IsGenerated(requestBody:IsGenerated_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsGenerated_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/IsGenerated", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsGenerated_output)
           })
       .catch((error) => {
           reject(error)
@@ -984,7 +1209,7 @@ export function post_IsGenerated(requestBody:any, epicorHeaders?:Headers){
    Description: Returns a comma separated list of valid tokens for the given datatype.
    OperationID: Get_GetTokenList
       @param tokenDataType Desc: Type of token for which you want the list of valid values. Valid Types are; Date, FiscalPeriod, FiscalYear   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTokenList_output
@@ -1008,15 +1233,22 @@ export function get_GetTokenList(tokenDataType:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTokenList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetTokenList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTokenList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1029,7 +1261,7 @@ export function get_GetTokenList(tokenDataType:string, epicorHeaders?:Headers){
    Description: Returns a token list of values based on a type that is passed in.
    OperationID: Get_GetTokenValue
       @param pcValue Desc: Type of token   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTokenValue_output
@@ -1053,15 +1285,22 @@ export function get_GetTokenValue(pcValue:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTokenValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetTokenValue" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTokenValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -1073,7 +1312,7 @@ export function get_GetTokenValue(pcValue:string, epicorHeaders?:Headers){
    Summary: Invoke method GetRptArchiveList
    Description: Returns a sub-delimited list of valid archive codes/descriptions.
    OperationID: GetRptArchiveList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRptArchiveList_output
@@ -1086,15 +1325,22 @@ export function post_GetRptArchiveList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRptArchiveList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetRptArchiveList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRptArchiveList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1106,30 +1352,37 @@ export function post_GetRptArchiveList(epicorHeaders?:Headers){
    Summary: Invoke method SubmitToAgent
    Description: Submits this report to a System Agent. The system agent will run the task based on the defined schedule.
    OperationID: SubmitToAgent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SubmitToAgent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SubmitToAgent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SubmitToAgent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubmitToAgent(requestBody:any, epicorHeaders?:Headers){
+export function post_SubmitToAgent(requestBody:SubmitToAgent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SubmitToAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/SubmitToAgent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SubmitToAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -1147,30 +1400,37 @@ designated as ParamSetID.
 As is the case in GLFinancial Reports the GLFinancialParam.GLReportID is used as the ParamSetID field.
 Another possible use would be to Reset the screen to default values.
    OperationID: GetDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDefaults(requestBody:GetDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -1183,7 +1443,7 @@ export function post_GetDefaults(requestBody:any, epicorHeaders?:Headers){
    Description: Creates a new (parameter record) in the dataset.
 Note: A parameter dataset should never contain more than one record.
    OperationID: Get_GetNewParameters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewParameters_output
@@ -1196,15 +1456,22 @@ export function get_GetNewParameters(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewParameters_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetNewParameters", {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewParameters_output)
           })
       .catch((error) => {
           reject(error)
@@ -1221,7 +1488,7 @@ used to retrieve those values and return them in the specific dataset.
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParamsFromAgent_output
@@ -1263,15 +1530,22 @@ export function get_GetParamsFromAgent(agentID:string, agentSchedNum:string, age
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParamsFromAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetParamsFromAgent" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParamsFromAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -1285,30 +1559,37 @@ export function get_GetParamsFromAgent(agentID:string, agentSchedNum:string, age
 It is provided to provide the ability to get the defaults after the user has enter a value into the field
 designated as ParamSetID.
    OperationID: GetParamTaskDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetParamTaskDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetParamTaskDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParamTaskDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetParamTaskDef(requestBody:any, epicorHeaders?:Headers){
+export function post_GetParamTaskDef(requestBody:GetParamTaskDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParamTaskDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/GetParamTaskDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParamTaskDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -1320,30 +1601,37 @@ export function post_GetParamTaskDef(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RemoveDefaults
    Description: Use to remove the current parameter defaults that the user has established for this report.
    OperationID: RemoveDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveDefaults(requestBody:RemoveDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/RemoveDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -1355,30 +1643,37 @@ export function post_RemoveDefaults(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunDirect
    Description: Use to run the process directly from the client instead of submitting to a System Agent.
    OperationID: RunDirect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunDirect_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunDirect_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunDirect_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunDirect(requestBody:any, epicorHeaders?:Headers){
+export function post_RunDirect(requestBody:RunDirect_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunDirect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/RunDirect", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunDirect_output)
           })
       .catch((error) => {
           reject(error)
@@ -1390,30 +1685,37 @@ export function post_RunDirect(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SaveDefaults
    Description: Use to save the current parameters as the users defaults for this report
    OperationID: SaveDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveDefaults(requestBody:SaveDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/SaveDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -1426,30 +1728,37 @@ export function post_SaveDefaults(requestBody:any, epicorHeaders?:Headers){
    Description: Use to save the current parameters as the users defaults for this report
 <param name="maintProgram">UI Maintenance program </param><param name="ds" />
    OperationID: SaveProcessTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveProcessTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveProcessTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveProcessTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveProcessTask(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveProcessTask(requestBody:SaveProcessTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveProcessTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.ProcessPaymentSvc/SaveProcessTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveProcessTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -1460,11 +1769,45 @@ export function post_SaveProcessTask(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1656,7 +1999,7 @@ export interface GenerateBankExportFile_input{
 export interface GenerateBankExportFile_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProcessPaymentTableset[],
+   ds:Erp_Tablesets_ProcessPaymentTableset,
 }
 }
 
@@ -1674,7 +2017,7 @@ export interface GetDefaults_input{
 export interface GetDefaults_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProcessPaymentTableset[],
+   ds:Erp_Tablesets_ProcessPaymentTableset,
 }
 }
 
@@ -1719,7 +2062,7 @@ export interface GetParamTaskDef_input{
 export interface GetParamTaskDef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProcessPaymentTableset[],
+   ds:Erp_Tablesets_ProcessPaymentTableset,
 }
 }
 
@@ -1851,7 +2194,7 @@ export interface OnChangeBankAcctID_input{
 export interface OnChangeBankAcctID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProcessPaymentTableset[],
+   ds:Erp_Tablesets_ProcessPaymentTableset,
 }
 }
 
@@ -1868,7 +2211,7 @@ export interface OnChangeBankExportFileName_input{
 export interface OnChangeBankExportFileName_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProcessPaymentTableset[],
+   ds:Erp_Tablesets_ProcessPaymentTableset,
 }
 }
 
@@ -1885,7 +2228,7 @@ export interface OnChangeCheckDate_input{
 export interface OnChangeCheckDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProcessPaymentTableset[],
+   ds:Erp_Tablesets_ProcessPaymentTableset,
 }
 }
 
@@ -1902,7 +2245,7 @@ export interface OnChangeLoadedCheckNum_input{
 export interface OnChangeLoadedCheckNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProcessPaymentTableset[],
+   ds:Erp_Tablesets_ProcessPaymentTableset,
 }
 }
 
@@ -1943,7 +2286,7 @@ export interface ReStartProcessPayment_input{
 export interface ReStartProcessPayment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProcessPaymentTableset[],
+   ds:Erp_Tablesets_ProcessPaymentTableset,
 }
 }
 
@@ -1983,7 +2326,7 @@ export interface RunProcessPayment_input{
 export interface RunProcessPayment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProcessPaymentTableset[],
+   ds:Erp_Tablesets_ProcessPaymentTableset,
 }
 }
 

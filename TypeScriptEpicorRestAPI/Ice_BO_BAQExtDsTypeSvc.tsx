@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.BAQExtDsTypeSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsTypeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsTypeRow
    */  
 export function get_BAQExtDsTypes(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_BAQExtDsTypes(select?:string, expand?:string, filter?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsTypeRow)
           })
@@ -118,15 +158,15 @@ export function get_BAQExtDsTypes(select?:string, expand?:string, filter?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BAQExtDsTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BAQExtDsTypeRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BAQExtDsTypeRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.BAQExtDsTypeRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.BAQExtDsTypeRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BAQExtDsTypes(requestBody:any, epicorHeaders?:Headers){
+export function post_BAQExtDsTypes(requestBody:Ice_Tablesets_BAQExtDsTypeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_BAQExtDsTypes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_BAQExtDsTypes(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BAQExtDsTypeRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BAQExtDsTypeRow
    */  
 export function get_BAQExtDsTypes_Company_DatasourceType(Company:string, DatasourceType:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_BAQExtDsTypes_Company_DatasourceType(Company:string, Datasou
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BAQExtDsTypeRow)
           })
@@ -193,15 +247,15 @@ export function get_BAQExtDsTypes_Company_DatasourceType(Company:string, Datasou
    OperationID: UpdateExt_BAQExtDsType
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DatasourceType Desc: DatasourceType   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.BAQExtDsTypeRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.BAQExtDsTypeRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BAQExtDsTypes_Company_DatasourceType(Company:string, DatasourceType:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BAQExtDsTypes_Company_DatasourceType(Company:string, DatasourceType:string, requestBody:Ice_Tablesets_BAQExtDsTypeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_BAQExtDsTypes_Company_DatasourceType(Company:string, Datas
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_BAQExtDsTypes_Company_DatasourceType(Company:string, Datas
    OperationID: DeleteUpdateExt_BAQExtDsType
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DatasourceType Desc: DatasourceType   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_BAQExtDsTypes_Company_DatasourceType(Company:string, Data
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_BAQExtDsTypes_Company_DatasourceType(Company:string, Data
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsColumnFilterRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsColumnFilterRow
    */  
 export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsColumnFilters(Company:string, DatasourceType:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsColumnFilters(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsColumnFilterRow)
           })
@@ -309,10 +384,10 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsColumnFilters(C
       @param FilterID Desc: FilterID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BAQExtDsColumnFilterRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BAQExtDsColumnFilterRow
    */  
 export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsColumnFilters_Company_DatasourceType_FilterID(Company:string, DatasourceType:string, FilterID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsColumnFilters_C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BAQExtDsColumnFilterRow)
           })
@@ -350,10 +432,10 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsColumnFilters_C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsFilterGroupRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsFilterGroupRow
    */  
 export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsFilterGroups(Company:string, DatasourceType:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsFilterGroups(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsFilterGroupRow)
           })
@@ -388,10 +477,10 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsFilterGroups(Co
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterGroupRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BAQExtDsFilterGroupRow
    */  
 export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName(Company:string, DatasourceType:string, FilterGroupName:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -406,7 +495,14 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsFilterGroups_Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BAQExtDsFilterGroupRow)
           })
@@ -428,10 +524,10 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsFilterGroups_Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsTableFilterRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsTableFilterRow
    */  
 export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsTableFilters(Company:string, DatasourceType:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -446,7 +542,14 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsTableFilters(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsTableFilterRow)
           })
@@ -465,10 +568,10 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsTableFilters(Co
       @param FilterID Desc: FilterID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BAQExtDsTableFilterRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BAQExtDsTableFilterRow
    */  
 export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsTableFilters_Company_DatasourceType_FilterID(Company:string, DatasourceType:string, FilterID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -483,7 +586,14 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsTableFilters_Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BAQExtDsTableFilterRow)
           })
@@ -503,10 +613,10 @@ export function get_BAQExtDsTypes_Company_DatasourceType_BAQExtDsTableFilters_Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsColumnFilterRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsColumnFilterRow
    */  
 export function get_BAQExtDsColumnFilters(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -521,7 +631,14 @@ export function get_BAQExtDsColumnFilters(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsColumnFilterRow)
           })
@@ -535,15 +652,15 @@ export function get_BAQExtDsColumnFilters(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BAQExtDsColumnFilters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BAQExtDsColumnFilterRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BAQExtDsColumnFilterRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.BAQExtDsColumnFilterRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.BAQExtDsColumnFilterRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BAQExtDsColumnFilters(requestBody:any, epicorHeaders?:Headers){
+export function post_BAQExtDsColumnFilters(requestBody:Ice_Tablesets_BAQExtDsColumnFilterRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -557,7 +674,14 @@ export function post_BAQExtDsColumnFilters(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -576,10 +700,10 @@ export function post_BAQExtDsColumnFilters(requestBody:any, epicorHeaders?:Heade
       @param FilterID Desc: FilterID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BAQExtDsColumnFilterRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BAQExtDsColumnFilterRow
    */  
 export function get_BAQExtDsColumnFilters_Company_DatasourceType_FilterID(Company:string, DatasourceType:string, FilterID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -594,7 +718,14 @@ export function get_BAQExtDsColumnFilters_Company_DatasourceType_FilterID(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BAQExtDsColumnFilterRow)
           })
@@ -611,15 +742,15 @@ export function get_BAQExtDsColumnFilters_Company_DatasourceType_FilterID(Compan
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DatasourceType Desc: DatasourceType   Required: True   Allow empty value : True
       @param FilterID Desc: FilterID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.BAQExtDsColumnFilterRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.BAQExtDsColumnFilterRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BAQExtDsColumnFilters_Company_DatasourceType_FilterID(Company:string, DatasourceType:string, FilterID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BAQExtDsColumnFilters_Company_DatasourceType_FilterID(Company:string, DatasourceType:string, FilterID:string, requestBody:Ice_Tablesets_BAQExtDsColumnFilterRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -633,7 +764,14 @@ export function patch_BAQExtDsColumnFilters_Company_DatasourceType_FilterID(Comp
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -650,7 +788,7 @@ export function patch_BAQExtDsColumnFilters_Company_DatasourceType_FilterID(Comp
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DatasourceType Desc: DatasourceType   Required: True   Allow empty value : True
       @param FilterID Desc: FilterID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -669,7 +807,14 @@ export function delete_BAQExtDsColumnFilters_Company_DatasourceType_FilterID(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -690,10 +835,10 @@ export function delete_BAQExtDsColumnFilters_Company_DatasourceType_FilterID(Com
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsFilterGroupRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsFilterGroupRow
    */  
 export function get_BAQExtDsFilterGroups(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -708,7 +853,14 @@ export function get_BAQExtDsFilterGroups(select?:string, expand?:string, filter?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsFilterGroupRow)
           })
@@ -722,15 +874,15 @@ export function get_BAQExtDsFilterGroups(select?:string, expand?:string, filter?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BAQExtDsFilterGroups
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterGroupRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterGroupRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterGroupRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.BAQExtDsFilterGroupRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BAQExtDsFilterGroups(requestBody:any, epicorHeaders?:Headers){
+export function post_BAQExtDsFilterGroups(requestBody:Ice_Tablesets_BAQExtDsFilterGroupRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -744,7 +896,14 @@ export function post_BAQExtDsFilterGroups(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -764,10 +923,10 @@ export function post_BAQExtDsFilterGroups(requestBody:any, epicorHeaders?:Header
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterGroupRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BAQExtDsFilterGroupRow
    */  
 export function get_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName(Company:string, DatasourceType:string, FilterGroupName:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -782,7 +941,14 @@ export function get_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BAQExtDsFilterGroupRow)
           })
@@ -799,15 +965,15 @@ export function get_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName(
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DatasourceType Desc: DatasourceType   Required: True   Allow empty value : True
       @param FilterGroupName Desc: FilterGroupName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterGroupRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterGroupRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName(Company:string, DatasourceType:string, FilterGroupName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName(Company:string, DatasourceType:string, FilterGroupName:string, requestBody:Ice_Tablesets_BAQExtDsFilterGroupRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -821,7 +987,14 @@ export function patch_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupNam
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -838,7 +1011,7 @@ export function patch_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupNam
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DatasourceType Desc: DatasourceType   Required: True   Allow empty value : True
       @param FilterGroupName Desc: FilterGroupName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -857,7 +1030,14 @@ export function delete_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupNa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -880,10 +1060,10 @@ export function delete_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupNa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsFilterDefRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsFilterDefRow
    */  
 export function get_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName_BAQExtDsFilterDefs(Company:string, DatasourceType:string, FilterGroupName:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -898,7 +1078,14 @@ export function get_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsFilterDefRow)
           })
@@ -918,10 +1105,10 @@ export function get_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName_
       @param FilterName Desc: FilterName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterDefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BAQExtDsFilterDefRow
    */  
 export function get_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName_BAQExtDsFilterDefs_Company_DatasourceType_FilterGroupName_FilterName(Company:string, DatasourceType:string, FilterGroupName:string, FilterName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -936,7 +1123,14 @@ export function get_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BAQExtDsFilterDefRow)
           })
@@ -956,10 +1150,10 @@ export function get_BAQExtDsFilterGroups_Company_DatasourceType_FilterGroupName_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsFilterDefRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsFilterDefRow
    */  
 export function get_BAQExtDsFilterDefs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -974,7 +1168,14 @@ export function get_BAQExtDsFilterDefs(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsFilterDefRow)
           })
@@ -988,15 +1189,15 @@ export function get_BAQExtDsFilterDefs(select?:string, filter?:string, orderby?:
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BAQExtDsFilterDefs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterDefRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterDefRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterDefRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.BAQExtDsFilterDefRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BAQExtDsFilterDefs(requestBody:any, epicorHeaders?:Headers){
+export function post_BAQExtDsFilterDefs(requestBody:Ice_Tablesets_BAQExtDsFilterDefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1010,7 +1211,14 @@ export function post_BAQExtDsFilterDefs(requestBody:any, epicorHeaders?:Headers)
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1030,10 +1238,10 @@ export function post_BAQExtDsFilterDefs(requestBody:any, epicorHeaders?:Headers)
       @param FilterName Desc: FilterName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterDefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BAQExtDsFilterDefRow
    */  
 export function get_BAQExtDsFilterDefs_Company_DatasourceType_FilterGroupName_FilterName(Company:string, DatasourceType:string, FilterGroupName:string, FilterName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1048,7 +1256,14 @@ export function get_BAQExtDsFilterDefs_Company_DatasourceType_FilterGroupName_Fi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BAQExtDsFilterDefRow)
           })
@@ -1066,15 +1281,15 @@ export function get_BAQExtDsFilterDefs_Company_DatasourceType_FilterGroupName_Fi
       @param DatasourceType Desc: DatasourceType   Required: True   Allow empty value : True
       @param FilterGroupName Desc: FilterGroupName   Required: True   Allow empty value : True
       @param FilterName Desc: FilterName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterDefRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.BAQExtDsFilterDefRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BAQExtDsFilterDefs_Company_DatasourceType_FilterGroupName_FilterName(Company:string, DatasourceType:string, FilterGroupName:string, FilterName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BAQExtDsFilterDefs_Company_DatasourceType_FilterGroupName_FilterName(Company:string, DatasourceType:string, FilterGroupName:string, FilterName:string, requestBody:Ice_Tablesets_BAQExtDsFilterDefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1088,7 +1303,14 @@ export function patch_BAQExtDsFilterDefs_Company_DatasourceType_FilterGroupName_
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1106,7 +1328,7 @@ export function patch_BAQExtDsFilterDefs_Company_DatasourceType_FilterGroupName_
       @param DatasourceType Desc: DatasourceType   Required: True   Allow empty value : True
       @param FilterGroupName Desc: FilterGroupName   Required: True   Allow empty value : True
       @param FilterName Desc: FilterName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1125,7 +1347,14 @@ export function delete_BAQExtDsFilterDefs_Company_DatasourceType_FilterGroupName
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1145,10 +1374,10 @@ export function delete_BAQExtDsFilterDefs_Company_DatasourceType_FilterGroupName
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsTableFilterRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsTableFilterRow
    */  
 export function get_BAQExtDsTableFilters(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1163,7 +1392,14 @@ export function get_BAQExtDsTableFilters(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsTableFilterRow)
           })
@@ -1177,15 +1413,15 @@ export function get_BAQExtDsTableFilters(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BAQExtDsTableFilters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BAQExtDsTableFilterRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BAQExtDsTableFilterRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.BAQExtDsTableFilterRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.BAQExtDsTableFilterRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BAQExtDsTableFilters(requestBody:any, epicorHeaders?:Headers){
+export function post_BAQExtDsTableFilters(requestBody:Ice_Tablesets_BAQExtDsTableFilterRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1199,7 +1435,14 @@ export function post_BAQExtDsTableFilters(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1218,10 +1461,10 @@ export function post_BAQExtDsTableFilters(requestBody:any, epicorHeaders?:Header
       @param FilterID Desc: FilterID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BAQExtDsTableFilterRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BAQExtDsTableFilterRow
    */  
 export function get_BAQExtDsTableFilters_Company_DatasourceType_FilterID(Company:string, DatasourceType:string, FilterID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1236,7 +1479,14 @@ export function get_BAQExtDsTableFilters_Company_DatasourceType_FilterID(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BAQExtDsTableFilterRow)
           })
@@ -1253,15 +1503,15 @@ export function get_BAQExtDsTableFilters_Company_DatasourceType_FilterID(Company
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DatasourceType Desc: DatasourceType   Required: True   Allow empty value : True
       @param FilterID Desc: FilterID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.BAQExtDsTableFilterRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.BAQExtDsTableFilterRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BAQExtDsTableFilters_Company_DatasourceType_FilterID(Company:string, DatasourceType:string, FilterID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BAQExtDsTableFilters_Company_DatasourceType_FilterID(Company:string, DatasourceType:string, FilterID:string, requestBody:Ice_Tablesets_BAQExtDsTableFilterRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1275,7 +1525,14 @@ export function patch_BAQExtDsTableFilters_Company_DatasourceType_FilterID(Compa
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1292,7 +1549,7 @@ export function patch_BAQExtDsTableFilters_Company_DatasourceType_FilterID(Compa
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DatasourceType Desc: DatasourceType   Required: True   Allow empty value : True
       @param FilterID Desc: FilterID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1311,7 +1568,14 @@ export function delete_BAQExtDsTableFilters_Company_DatasourceType_FilterID(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1331,10 +1595,10 @@ export function delete_BAQExtDsTableFilters_Company_DatasourceType_FilterID(Comp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsTypeListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDsTypeListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1349,7 +1613,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsTypeListRow)
           })
@@ -1361,6 +1632,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1376,7 +1664,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1454,15 +1742,22 @@ export function get_GetRows(whereClauseBAQExtDsType:string, whereClauseBAQExtDsC
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1475,7 +1770,7 @@ export function get_GetRows(whereClauseBAQExtDsType:string, whereClauseBAQExtDsC
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1499,15 +1794,22 @@ export function get_GetByID(datasourceType:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1522,7 +1824,7 @@ export function get_GetByID(datasourceType:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1564,15 +1866,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1584,7 +1893,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetGlobalConstantList
    Description: Build a list of global constants
    OperationID: GetGlobalConstantList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetGlobalConstantList_output
@@ -1597,15 +1906,22 @@ export function post_GetGlobalConstantList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetGlobalConstantList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetGlobalConstantList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetGlobalConstantList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1617,30 +1933,37 @@ export function post_GetGlobalConstantList(epicorHeaders?:Headers){
    Summary: Invoke method MoveTableFilter
    Description: Move record up or down
    OperationID: MoveTableFilter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MoveTableFilter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MoveTableFilter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MoveTableFilter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MoveTableFilter(requestBody:any, epicorHeaders?:Headers){
+export function post_MoveTableFilter(requestBody:MoveTableFilter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MoveTableFilter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/MoveTableFilter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MoveTableFilter_output)
           })
       .catch((error) => {
           reject(error)
@@ -1652,30 +1975,37 @@ export function post_MoveTableFilter(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MoveColumnFilter
    Description: Move BAQExtDsColumnFilter record up or down
    OperationID: MoveColumnFilter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MoveColumnFilter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MoveColumnFilter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MoveColumnFilter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MoveColumnFilter(requestBody:any, epicorHeaders?:Headers){
+export function post_MoveColumnFilter(requestBody:MoveColumnFilter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MoveColumnFilter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/MoveColumnFilter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MoveColumnFilter_output)
           })
       .catch((error) => {
           reject(error)
@@ -1687,30 +2017,37 @@ export function post_MoveColumnFilter(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MoveFilterDef
    Description: Move BAQExtDsFilterDef record up or down
    OperationID: MoveFilterDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MoveFilterDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MoveFilterDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MoveFilterDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MoveFilterDef(requestBody:any, epicorHeaders?:Headers){
+export function post_MoveFilterDef(requestBody:MoveFilterDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MoveFilterDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/MoveFilterDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MoveFilterDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -1722,30 +2059,37 @@ export function post_MoveFilterDef(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBAQExtDsType
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBAQExtDsType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBAQExtDsType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBAQExtDsType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBAQExtDsType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBAQExtDsType(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBAQExtDsType(requestBody:GetNewBAQExtDsType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBAQExtDsType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetNewBAQExtDsType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBAQExtDsType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1757,30 +2101,37 @@ export function post_GetNewBAQExtDsType(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewBAQExtDsColumnFilter
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBAQExtDsColumnFilter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBAQExtDsColumnFilter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBAQExtDsColumnFilter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBAQExtDsColumnFilter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBAQExtDsColumnFilter(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBAQExtDsColumnFilter(requestBody:GetNewBAQExtDsColumnFilter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBAQExtDsColumnFilter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetNewBAQExtDsColumnFilter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBAQExtDsColumnFilter_output)
           })
       .catch((error) => {
           reject(error)
@@ -1792,30 +2143,37 @@ export function post_GetNewBAQExtDsColumnFilter(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetNewBAQExtDsFilterGroup
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBAQExtDsFilterGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBAQExtDsFilterGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBAQExtDsFilterGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBAQExtDsFilterGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBAQExtDsFilterGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBAQExtDsFilterGroup(requestBody:GetNewBAQExtDsFilterGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBAQExtDsFilterGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetNewBAQExtDsFilterGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBAQExtDsFilterGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1827,30 +2185,37 @@ export function post_GetNewBAQExtDsFilterGroup(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewBAQExtDsFilterDef
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBAQExtDsFilterDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBAQExtDsFilterDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBAQExtDsFilterDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBAQExtDsFilterDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBAQExtDsFilterDef(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBAQExtDsFilterDef(requestBody:GetNewBAQExtDsFilterDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBAQExtDsFilterDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetNewBAQExtDsFilterDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBAQExtDsFilterDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -1862,30 +2227,37 @@ export function post_GetNewBAQExtDsFilterDef(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewBAQExtDsTableFilter
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBAQExtDsTableFilter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBAQExtDsTableFilter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBAQExtDsTableFilter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBAQExtDsTableFilter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBAQExtDsTableFilter(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBAQExtDsTableFilter(requestBody:GetNewBAQExtDsTableFilter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBAQExtDsTableFilter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetNewBAQExtDsTableFilter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBAQExtDsTableFilter_output)
           })
       .catch((error) => {
           reject(error)
@@ -1897,30 +2269,37 @@ export function post_GetNewBAQExtDsTableFilter(requestBody:any, epicorHeaders?:H
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1932,7 +2311,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1956,15 +2335,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1976,7 +2362,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2000,15 +2386,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2020,30 +2413,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2055,30 +2455,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDsTypeSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2089,36 +2496,53 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsColumnFilterRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BAQExtDsColumnFilterRow[],
+   "value":Ice_Tablesets_BAQExtDsColumnFilterRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsFilterDefRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BAQExtDsFilterDefRow[],
+   "value":Ice_Tablesets_BAQExtDsFilterDefRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsFilterGroupRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BAQExtDsFilterGroupRow[],
+   "value":Ice_Tablesets_BAQExtDsFilterGroupRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsTableFilterRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BAQExtDsTableFilterRow[],
+   "value":Ice_Tablesets_BAQExtDsTableFilterRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsTypeListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BAQExtDsTypeListRow[],
+   "value":Ice_Tablesets_BAQExtDsTypeListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDsTypeRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BAQExtDsTypeRow[],
+   "value":Ice_Tablesets_BAQExtDsTypeRow,
 }
 
 export interface Ice_Tablesets_BAQExtDsColumnFilterRow{
@@ -2275,6 +2699,23 @@ export interface Ice_Tablesets_BAQExtDsTypeRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2359,7 +2800,7 @@ export interface GetNewBAQExtDsColumnFilter_input{
 export interface GetNewBAQExtDsColumnFilter_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BAQExtDsTypeTableset[],
+   ds:Ice_Tablesets_BAQExtDsTypeTableset,
 }
 }
 
@@ -2377,7 +2818,7 @@ export interface GetNewBAQExtDsFilterDef_input{
 export interface GetNewBAQExtDsFilterDef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BAQExtDsTypeTableset[],
+   ds:Ice_Tablesets_BAQExtDsTypeTableset,
 }
 }
 
@@ -2393,7 +2834,7 @@ export interface GetNewBAQExtDsFilterGroup_input{
 export interface GetNewBAQExtDsFilterGroup_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BAQExtDsTypeTableset[],
+   ds:Ice_Tablesets_BAQExtDsTypeTableset,
 }
 }
 
@@ -2409,7 +2850,7 @@ export interface GetNewBAQExtDsTableFilter_input{
 export interface GetNewBAQExtDsTableFilter_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BAQExtDsTypeTableset[],
+   ds:Ice_Tablesets_BAQExtDsTypeTableset,
 }
 }
 
@@ -2423,7 +2864,7 @@ export interface GetNewBAQExtDsType_input{
 export interface GetNewBAQExtDsType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BAQExtDsTypeTableset[],
+   ds:Ice_Tablesets_BAQExtDsTypeTableset,
 }
 }
 
@@ -2677,7 +3118,7 @@ export interface MoveColumnFilter_input{
 export interface MoveColumnFilter_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BAQExtDsTypeTableset[],
+   ds:Ice_Tablesets_BAQExtDsTypeTableset,
 }
 }
 
@@ -2697,7 +3138,7 @@ export interface MoveFilterDef_input{
 export interface MoveFilterDef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BAQExtDsTypeTableset[],
+   ds:Ice_Tablesets_BAQExtDsTypeTableset,
 }
 }
 
@@ -2715,7 +3156,7 @@ export interface MoveTableFilter_input{
 export interface MoveTableFilter_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BAQExtDsTypeTableset[],
+   ds:Ice_Tablesets_BAQExtDsTypeTableset,
 }
 }
 
@@ -2734,7 +3175,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtBAQExtDsTypeTableset[],
+   ds:Ice_Tablesets_UpdExtBAQExtDsTypeTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2749,7 +3190,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BAQExtDsTypeTableset[],
+   ds:Ice_Tablesets_BAQExtDsTypeTableset,
 }
 }
 

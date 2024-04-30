@@ -1,15 +1,34 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.ProjAnalysisSvc
 // Description: Project Analysis Business Object
            Temporary data tables are used to allow export/import of
            projects to/from MS Project.  Public methods are also
            available to build/delete Project Analyis data.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -18,7 +37,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -36,7 +55,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -50,7 +76,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -68,7 +94,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -81,6 +114,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -90,30 +140,37 @@ export function get_metadata(epicorHeaders?:Headers){
 This method expects a LIST-DELIM delimited string of RowIds of all selected
 Project records.
    OperationID: BuildAnalysis
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildAnalysis_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildAnalysis_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildAnalysis_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildAnalysis(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildAnalysis(requestBody:BuildAnalysis_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildAnalysis_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProjAnalysisSvc/BuildAnalysis", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildAnalysis_output)
           })
       .catch((error) => {
           reject(error)
@@ -126,30 +183,37 @@ export function post_BuildAnalysis(requestBody:any, epicorHeaders?:Headers){
    Description: Call this method to delete or clear all ProjectAnalysis records.
 This method expects that the user already confirmed that records will be deleted.
    OperationID: ClearAnalysis
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ClearAnalysis_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ClearAnalysis_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClearAnalysis_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ClearAnalysis(requestBody:any, epicorHeaders?:Headers){
+export function post_ClearAnalysis(requestBody:ClearAnalysis_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClearAnalysis_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProjAnalysisSvc/ClearAnalysis", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClearAnalysis_output)
           })
       .catch((error) => {
           reject(error)
@@ -164,7 +228,7 @@ for the Project Download to MS Project.  Call this method before the user
 manipulate the MSP Download input parameters.  This method will return the
 default value for PctComplete variable.
    OperationID: DefaultPctComplete
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/DefaultPctComplete_output
@@ -177,15 +241,22 @@ export function post_DefaultPctComplete(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DefaultPctComplete_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProjAnalysisSvc/DefaultPctComplete", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DefaultPctComplete_output)
           })
       .catch((error) => {
           reject(error)
@@ -197,30 +268,37 @@ export function post_DefaultPctComplete(epicorHeaders?:Headers){
    Summary: Invoke method GetByProjectID
    Description: This method finds the Project record by ProjectId.
    OperationID: GetByProjectID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByProjectID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByProjectID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByProjectID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByProjectID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByProjectID(requestBody:GetByProjectID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByProjectID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProjAnalysisSvc/GetByProjectID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByProjectID_output)
           })
       .catch((error) => {
           reject(error)
@@ -232,30 +310,37 @@ export function post_GetByProjectID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetProjectBrw
    Description: This method assembles the Project browse for the main data set.
    OperationID: GetProjectBrw
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetProjectBrw_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetProjectBrw_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetProjectBrw_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetProjectBrw(requestBody:any, epicorHeaders?:Headers){
+export function post_GetProjectBrw(requestBody:GetProjectBrw_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetProjectBrw_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProjAnalysisSvc/GetProjectBrw", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetProjectBrw_output)
           })
       .catch((error) => {
           reject(error)
@@ -271,30 +356,37 @@ parameters. This method returns the data table ttMSPDownload containing all
 appropriate project information. The resulting records from the ttMSPDownload
 will then need to be outputted as a CSV file (comma delimited).
    OperationID: ProcessMSPDownload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessMSPDownload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessMSPDownload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessMSPDownload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessMSPDownload(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessMSPDownload(requestBody:ProcessMSPDownload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessMSPDownload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProjAnalysisSvc/ProcessMSPDownload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessMSPDownload_output)
           })
       .catch((error) => {
           reject(error)
@@ -311,30 +403,37 @@ coming from an external comma delimited file.  The ttMSPUpload table should
 only contain data (i.e. if the first line of the external file is just the
 field descriptions then this record should not be included in ttMSPUpload.)
    OperationID: ProcessMSPUpload
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessMSPUpload_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessMSPUpload_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessMSPUpload_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessMSPUpload(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessMSPUpload(requestBody:ProcessMSPUpload_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessMSPUpload_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProjAnalysisSvc/ProcessMSPUpload", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessMSPUpload_output)
           })
       .catch((error) => {
           reject(error)
@@ -345,11 +444,45 @@ export function post_ProcessMSPUpload(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -600,7 +733,7 @@ export interface ProcessMSPUpload_input{
 export interface ProcessMSPUpload_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MSPUploadTableset[],
+   ds:Erp_Tablesets_MSPUploadTableset,
    opMessage:string,
 }
 }

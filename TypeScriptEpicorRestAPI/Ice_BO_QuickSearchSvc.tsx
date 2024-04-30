@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.QuickSearchSvc
 // Description: Provide a way to define and run a user-defined search
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchRow
    */  
 export function get_QuickSearches(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_QuickSearches(select?:string, expand?:string, filter?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuickSearchRow)
           })
@@ -118,15 +158,15 @@ export function get_QuickSearches(select?:string, expand?:string, filter?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuickSearches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.QuickSearchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.QuickSearchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.QuickSearchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.QuickSearchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuickSearches(requestBody:any, epicorHeaders?:Headers){
+export function post_QuickSearches(requestBody:Ice_Tablesets_QuickSearchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_QuickSearches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -160,10 +207,10 @@ export function post_QuickSearches(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QuickSearchRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QuickSearchRow
    */  
 export function get_QuickSearches_Company_GlbCompany_QuickSearchID(Company:string, GlbCompany:string, QuickSearchID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -178,7 +225,14 @@ export function get_QuickSearches_Company_GlbCompany_QuickSearchID(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QuickSearchRow)
           })
@@ -195,15 +249,15 @@ export function get_QuickSearches_Company_GlbCompany_QuickSearchID(Company:strin
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GlbCompany Desc: GlbCompany   Required: True   Allow empty value : True
       @param QuickSearchID Desc: QuickSearchID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.QuickSearchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.QuickSearchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuickSearches_Company_GlbCompany_QuickSearchID(Company:string, GlbCompany:string, QuickSearchID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuickSearches_Company_GlbCompany_QuickSearchID(Company:string, GlbCompany:string, QuickSearchID:string, requestBody:Ice_Tablesets_QuickSearchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_QuickSearches_Company_GlbCompany_QuickSearchID(Company:str
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -234,7 +295,7 @@ export function patch_QuickSearches_Company_GlbCompany_QuickSearchID(Company:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GlbCompany Desc: GlbCompany   Required: True   Allow empty value : True
       @param QuickSearchID Desc: QuickSearchID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -253,7 +314,14 @@ export function delete_QuickSearches_Company_GlbCompany_QuickSearchID(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -277,10 +345,10 @@ export function delete_QuickSearches_Company_GlbCompany_QuickSearchID(Company:st
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchCriteriaRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchCriteriaRow
    */  
 export function get_QuickSearches_Company_GlbCompany_QuickSearchID_QuickSearchCriterias(Company:string, GlbCompany:string, QuickSearchID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -295,7 +363,14 @@ export function get_QuickSearches_Company_GlbCompany_QuickSearchID_QuickSearchCr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuickSearchCriteriaRow)
           })
@@ -316,10 +391,10 @@ export function get_QuickSearches_Company_GlbCompany_QuickSearchID_QuickSearchCr
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QuickSearchCriteriaRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QuickSearchCriteriaRow
    */  
 export function get_QuickSearches_Company_GlbCompany_QuickSearchID_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq(Company:string, GlbCompany:string, QuickSearchID:string, Seq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -334,7 +409,14 @@ export function get_QuickSearches_Company_GlbCompany_QuickSearchID_QuickSearchCr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QuickSearchCriteriaRow)
           })
@@ -355,10 +437,10 @@ export function get_QuickSearches_Company_GlbCompany_QuickSearchID_QuickSearchCr
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchCriteriaRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchCriteriaRow
    */  
 export function get_QuickSearchCriterias(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -373,7 +455,14 @@ export function get_QuickSearchCriterias(select?:string, expand?:string, filter?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuickSearchCriteriaRow)
           })
@@ -387,15 +476,15 @@ export function get_QuickSearchCriterias(select?:string, expand?:string, filter?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuickSearchCriterias
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.QuickSearchCriteriaRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.QuickSearchCriteriaRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.QuickSearchCriteriaRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.QuickSearchCriteriaRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuickSearchCriterias(requestBody:any, epicorHeaders?:Headers){
+export function post_QuickSearchCriterias(requestBody:Ice_Tablesets_QuickSearchCriteriaRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -409,7 +498,14 @@ export function post_QuickSearchCriterias(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -430,10 +526,10 @@ export function post_QuickSearchCriterias(requestBody:any, epicorHeaders?:Header
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QuickSearchCriteriaRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QuickSearchCriteriaRow
    */  
 export function get_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq(Company:string, GlbCompany:string, QuickSearchID:string, Seq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -448,7 +544,14 @@ export function get_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QuickSearchCriteriaRow)
           })
@@ -466,15 +569,15 @@ export function get_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq(Co
       @param GlbCompany Desc: GlbCompany   Required: True   Allow empty value : True
       @param QuickSearchID Desc: QuickSearchID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.QuickSearchCriteriaRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.QuickSearchCriteriaRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq(Company:string, GlbCompany:string, QuickSearchID:string, Seq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq(Company:string, GlbCompany:string, QuickSearchID:string, Seq:string, requestBody:Ice_Tablesets_QuickSearchCriteriaRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -488,7 +591,14 @@ export function patch_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq(
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -506,7 +616,7 @@ export function patch_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq(
       @param GlbCompany Desc: GlbCompany   Required: True   Allow empty value : True
       @param QuickSearchID Desc: QuickSearchID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -525,7 +635,14 @@ export function delete_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -549,10 +666,10 @@ export function delete_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchValueListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchValueListRow
    */  
 export function get_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq_QuickSearchValueLists(Company:string, GlbCompany:string, QuickSearchID:string, Seq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -567,7 +684,14 @@ export function get_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq_Qu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuickSearchValueListRow)
           })
@@ -588,10 +712,10 @@ export function get_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq_Qu
       @param ValueSeq Desc: ValueSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QuickSearchValueListRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QuickSearchValueListRow
    */  
 export function get_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq_QuickSearchValueLists_Company_GlbCompany_QuickSearchID_Seq_ValueSeq(Company:string, GlbCompany:string, QuickSearchID:string, Seq:string, ValueSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -606,7 +730,14 @@ export function get_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq_Qu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QuickSearchValueListRow)
           })
@@ -626,10 +757,10 @@ export function get_QuickSearchCriterias_Company_GlbCompany_QuickSearchID_Seq_Qu
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchValueListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchValueListRow
    */  
 export function get_QuickSearchValueLists(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -644,7 +775,14 @@ export function get_QuickSearchValueLists(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuickSearchValueListRow)
           })
@@ -658,15 +796,15 @@ export function get_QuickSearchValueLists(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuickSearchValueLists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.QuickSearchValueListRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.QuickSearchValueListRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.QuickSearchValueListRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.QuickSearchValueListRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuickSearchValueLists(requestBody:any, epicorHeaders?:Headers){
+export function post_QuickSearchValueLists(requestBody:Ice_Tablesets_QuickSearchValueListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -680,7 +818,14 @@ export function post_QuickSearchValueLists(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -701,10 +846,10 @@ export function post_QuickSearchValueLists(requestBody:any, epicorHeaders?:Heade
       @param ValueSeq Desc: ValueSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QuickSearchValueListRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QuickSearchValueListRow
    */  
 export function get_QuickSearchValueLists_Company_GlbCompany_QuickSearchID_Seq_ValueSeq(Company:string, GlbCompany:string, QuickSearchID:string, Seq:string, ValueSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -719,7 +864,14 @@ export function get_QuickSearchValueLists_Company_GlbCompany_QuickSearchID_Seq_V
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QuickSearchValueListRow)
           })
@@ -738,15 +890,15 @@ export function get_QuickSearchValueLists_Company_GlbCompany_QuickSearchID_Seq_V
       @param QuickSearchID Desc: QuickSearchID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
       @param ValueSeq Desc: ValueSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.QuickSearchValueListRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.QuickSearchValueListRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuickSearchValueLists_Company_GlbCompany_QuickSearchID_Seq_ValueSeq(Company:string, GlbCompany:string, QuickSearchID:string, Seq:string, ValueSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuickSearchValueLists_Company_GlbCompany_QuickSearchID_Seq_ValueSeq(Company:string, GlbCompany:string, QuickSearchID:string, Seq:string, ValueSeq:string, requestBody:Ice_Tablesets_QuickSearchValueListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -760,7 +912,14 @@ export function patch_QuickSearchValueLists_Company_GlbCompany_QuickSearchID_Seq
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -779,7 +938,7 @@ export function patch_QuickSearchValueLists_Company_GlbCompany_QuickSearchID_Seq
       @param QuickSearchID Desc: QuickSearchID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
       @param ValueSeq Desc: ValueSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -798,7 +957,14 @@ export function delete_QuickSearchValueLists_Company_GlbCompany_QuickSearchID_Se
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -818,10 +984,10 @@ export function delete_QuickSearchValueLists_Company_GlbCompany_QuickSearchID_Se
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuickSearchListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -836,7 +1002,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuickSearchListRow)
           })
@@ -848,6 +1021,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -861,7 +1051,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -921,15 +1111,22 @@ export function get_GetRows(whereClauseQuickSearch:string, whereClauseQuickSearc
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -943,7 +1140,7 @@ export function get_GetRows(whereClauseQuickSearch:string, whereClauseQuickSearc
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -976,15 +1173,22 @@ export function get_GetByID(glbCompany:string, quickSearchID:string, epicorHeade
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -999,7 +1203,7 @@ export function get_GetByID(glbCompany:string, quickSearchID:string, epicorHeade
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1041,15 +1245,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1061,7 +1272,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetBAQConstants
    Description: Returns BAQ constant names in an untyped dataset
    OperationID: GetBAQConstants
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBAQConstants_output
@@ -1074,15 +1285,22 @@ export function post_GetBAQConstants(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBAQConstants_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetBAQConstants", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBAQConstants_output)
           })
       .catch((error) => {
           reject(error)
@@ -1094,30 +1312,37 @@ export function post_GetBAQConstants(epicorHeaders?:Headers){
    Summary: Invoke method BAQExists
    Description: This method returns a list of quick searches for this user
    OperationID: BAQExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BAQExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BAQExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BAQExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BAQExists(requestBody:any, epicorHeaders?:Headers){
+export function post_BAQExists(requestBody:BAQExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BAQExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/BAQExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BAQExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -1130,30 +1355,37 @@ export function post_BAQExists(requestBody:any, epicorHeaders?:Headers){
    Description: This method returns a dataset of quick searches indicating if a BAQ exists
 for each Quick Search
    OperationID: BAQsExist
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BAQsExist_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BAQsExist_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BAQsExist_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BAQsExist(requestBody:any, epicorHeaders?:Headers){
+export function post_BAQsExist(requestBody:BAQsExist_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BAQsExist_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/BAQsExist", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BAQsExist_output)
           })
       .catch((error) => {
           reject(error)
@@ -1165,30 +1397,37 @@ export function post_BAQsExist(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CopyQuickSearch
    Description: This method copies a quick search
    OperationID: CopyQuickSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CopyQuickSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CopyQuickSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CopyQuickSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CopyQuickSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_CopyQuickSearch(requestBody:CopyQuickSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CopyQuickSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/CopyQuickSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CopyQuickSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1200,30 +1439,37 @@ export function post_CopyQuickSearch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBaseDefault
    Description: This method returns a quick search dataset with the given like field and call from name.
    OperationID: GetBaseDefault
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBaseDefault_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBaseDefault_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBaseDefault_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBaseDefault(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBaseDefault(requestBody:GetBaseDefault_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBaseDefault_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetBaseDefault", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBaseDefault_output)
           })
       .catch((error) => {
           reject(error)
@@ -1235,30 +1481,37 @@ export function post_GetBaseDefault(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetContextDefault
    Description: This method returns a quick search dataset with the given like field and call from name.
    OperationID: GetContextDefault
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContextDefault_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContextDefault_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextDefault_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContextDefault(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContextDefault(requestBody:GetContextDefault_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextDefault_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetContextDefault", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextDefault_output)
           })
       .catch((error) => {
           reject(error)
@@ -1270,7 +1523,7 @@ export function post_GetContextDefault(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetUserQuickSearches
    Description: This method returns a list of quick searches for this user
    OperationID: GetUserQuickSearches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetUserQuickSearches_output
@@ -1283,15 +1536,22 @@ export function post_GetUserQuickSearches(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetUserQuickSearches_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetUserQuickSearches", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetUserQuickSearches_output)
           })
       .catch((error) => {
           reject(error)
@@ -1303,30 +1563,37 @@ export function post_GetUserQuickSearches(epicorHeaders?:Headers){
    Summary: Invoke method GetVersion
    Description: This method returns the version code of a quick searches
    OperationID: GetVersion
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetVersion_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetVersion_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetVersion_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetVersion(requestBody:any, epicorHeaders?:Headers){
+export function post_GetVersion(requestBody:GetVersion_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetVersion_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetVersion", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetVersion_output)
           })
       .catch((error) => {
           reject(error)
@@ -1339,30 +1606,37 @@ export function post_GetVersion(requestBody:any, epicorHeaders?:Headers){
    Description: This method returns a list of quick searches for a like field
 A like field has a format of table.field
    OperationID: GetLikeFieldSearches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLikeFieldSearches_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLikeFieldSearches_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLikeFieldSearches_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLikeFieldSearches(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLikeFieldSearches(requestBody:GetLikeFieldSearches_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLikeFieldSearches_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetLikeFieldSearches", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLikeFieldSearches_output)
           })
       .catch((error) => {
           reject(error)
@@ -1374,30 +1648,37 @@ export function post_GetLikeFieldSearches(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetListForBAQ
    Description: This method returns a list of quick searches that use a given BAQ
    OperationID: GetListForBAQ
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListForBAQ_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListForBAQ_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListForBAQ_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListForBAQ(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListForBAQ(requestBody:GetListForBAQ_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListForBAQ_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetListForBAQ", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListForBAQ_output)
           })
       .catch((error) => {
           reject(error)
@@ -1409,30 +1690,37 @@ export function post_GetListForBAQ(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunQuickSearch
    Description: This method runs a quick search based on a QuickSearchDataSet.
    OperationID: RunQuickSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunQuickSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunQuickSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunQuickSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunQuickSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_RunQuickSearch(requestBody:RunQuickSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunQuickSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/RunQuickSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunQuickSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1444,30 +1732,37 @@ export function post_RunQuickSearch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunQuickSearchPaged
    Description: This method runs a quick search based on a QuickSearchDataSet.
    OperationID: RunQuickSearchPaged
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunQuickSearchPaged_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunQuickSearchPaged_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunQuickSearchPaged_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunQuickSearchPaged(requestBody:any, epicorHeaders?:Headers){
+export function post_RunQuickSearchPaged(requestBody:RunQuickSearchPaged_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunQuickSearchPaged_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/RunQuickSearchPaged", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunQuickSearchPaged_output)
           })
       .catch((error) => {
           reject(error)
@@ -1479,30 +1774,37 @@ export function post_RunQuickSearchPaged(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewQuickSearch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuickSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuickSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuickSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuickSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuickSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuickSearch(requestBody:GetNewQuickSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuickSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetNewQuickSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuickSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1514,30 +1816,37 @@ export function post_GetNewQuickSearch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewQuickSearchCriteria
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuickSearchCriteria
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuickSearchCriteria_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuickSearchCriteria_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuickSearchCriteria_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuickSearchCriteria(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuickSearchCriteria(requestBody:GetNewQuickSearchCriteria_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuickSearchCriteria_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetNewQuickSearchCriteria", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuickSearchCriteria_output)
           })
       .catch((error) => {
           reject(error)
@@ -1549,30 +1858,37 @@ export function post_GetNewQuickSearchCriteria(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewQuickSearchValueList
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuickSearchValueList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuickSearchValueList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuickSearchValueList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuickSearchValueList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuickSearchValueList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuickSearchValueList(requestBody:GetNewQuickSearchValueList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuickSearchValueList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetNewQuickSearchValueList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuickSearchValueList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1584,30 +1900,37 @@ export function post_GetNewQuickSearchValueList(requestBody:any, epicorHeaders?:
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1619,7 +1942,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1643,15 +1966,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1663,7 +1993,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1687,15 +2017,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1707,30 +2044,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1742,30 +2086,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.QuickSearchSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1776,26 +2127,43 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuickSearchCriteriaRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QuickSearchCriteriaRow[],
+   "value":Ice_Tablesets_QuickSearchCriteriaRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuickSearchListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QuickSearchListRow[],
+   "value":Ice_Tablesets_QuickSearchListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuickSearchRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QuickSearchRow[],
+   "value":Ice_Tablesets_QuickSearchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuickSearchValueListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QuickSearchValueListRow[],
+   "value":Ice_Tablesets_QuickSearchValueListRow,
 }
 
 export interface Ice_Tablesets_QuickSearchCriteriaRow{
@@ -1981,6 +2349,23 @@ export interface Ice_Tablesets_QuickSearchValueListRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2014,7 +2399,7 @@ export interface BAQsExist_input{
 export interface BAQsExist_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_QuickSearchBAQsExistTableset[],
+   ds:Ice_Tablesets_QuickSearchBAQsExistTableset,
 }
 }
 
@@ -2186,7 +2571,7 @@ export interface GetNewQuickSearchCriteria_input{
 export interface GetNewQuickSearchCriteria_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_QuickSearchTableset[],
+   ds:Ice_Tablesets_QuickSearchTableset,
 }
 }
 
@@ -2206,7 +2591,7 @@ export interface GetNewQuickSearchValueList_input{
 export interface GetNewQuickSearchValueList_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_QuickSearchTableset[],
+   ds:Ice_Tablesets_QuickSearchTableset,
 }
 }
 
@@ -2222,7 +2607,7 @@ export interface GetNewQuickSearch_input{
 export interface GetNewQuickSearch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_QuickSearchTableset[],
+   ds:Ice_Tablesets_QuickSearchTableset,
 }
 }
 
@@ -2564,7 +2949,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtQuickSearchTableset[],
+   ds:Ice_Tablesets_UpdExtQuickSearchTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2579,7 +2964,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_QuickSearchTableset[],
+   ds:Ice_Tablesets_QuickSearchTableset,
 }
 }
 

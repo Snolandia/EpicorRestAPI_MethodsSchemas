@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.GlbCurrRateGrpSvc
 // Description: Add your summary for this object here
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrRateGrpRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrRateGrpRow
    */  
 export function get_GlbCurrRateGrps(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_GlbCurrRateGrps(select?:string, expand?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrRateGrpRow)
           })
@@ -118,15 +158,15 @@ export function get_GlbCurrRateGrps(select?:string, expand?:string, filter?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GlbCurrRateGrps
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlbCurrRateGrpRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlbCurrRateGrpRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GlbCurrRateGrpRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GlbCurrRateGrpRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GlbCurrRateGrps(requestBody:any, epicorHeaders?:Headers){
+export function post_GlbCurrRateGrps(requestBody:Erp_Tablesets_GlbCurrRateGrpRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_GlbCurrRateGrps(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -160,10 +207,10 @@ export function post_GlbCurrRateGrps(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GlbCurrRateGrpRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GlbCurrRateGrpRow
    */  
 export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode(Company:string, GlbCompany:string, GlbRateGrpCode:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -178,7 +225,14 @@ export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GlbCurrRateGrpRow)
           })
@@ -195,15 +249,15 @@ export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GlbCompany Desc: GlbCompany   Required: True   Allow empty value : True
       @param GlbRateGrpCode Desc: GlbRateGrpCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlbCurrRateGrpRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlbCurrRateGrpRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode(Company:string, GlbCompany:string, GlbRateGrpCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode(Company:string, GlbCompany:string, GlbRateGrpCode:string, requestBody:Erp_Tablesets_GlbCurrRateGrpRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode(Company:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -234,7 +295,7 @@ export function patch_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode(Company:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GlbCompany Desc: GlbCompany   Required: True   Allow empty value : True
       @param GlbRateGrpCode Desc: GlbRateGrpCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -253,7 +314,14 @@ export function delete_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -277,10 +345,10 @@ export function delete_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrConvRuleRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrConvRuleRow
    */  
 export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrConvRules(Company:string, GlbCompany:string, GlbRateGrpCode:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -295,7 +363,14 @@ export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrCon
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrConvRuleRow)
           })
@@ -317,10 +392,10 @@ export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrCon
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GlbCurrConvRuleRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GlbCurrConvRuleRow
    */  
 export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSourceCurrCode_GlbTargetCurrCode(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSourceCurrCode:string, GlbTargetCurrCode:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -335,7 +410,14 @@ export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrCon
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GlbCurrConvRuleRow)
           })
@@ -358,10 +440,10 @@ export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrCon
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrRateDispRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrRateDispRow
    */  
 export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrRateDisps(Company:string, GlbCompany:string, GlbRateGrpCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -376,7 +458,14 @@ export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrRat
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrRateDispRow)
           })
@@ -396,10 +485,10 @@ export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrRat
       @param GlbSeq Desc: GlbSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GlbCurrRateDispRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GlbCurrRateDispRow
    */  
 export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrRateDisps_Company_GlbCompany_GlbRateGrpCode_GlbSeq(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -414,7 +503,14 @@ export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrRat
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GlbCurrRateDispRow)
           })
@@ -435,10 +531,10 @@ export function get_GlbCurrRateGrps_Company_GlbCompany_GlbRateGrpCode_GlbCurrRat
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrConvRuleRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrConvRuleRow
    */  
 export function get_GlbCurrConvRules(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -453,7 +549,14 @@ export function get_GlbCurrConvRules(select?:string, expand?:string, filter?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrConvRuleRow)
           })
@@ -467,15 +570,15 @@ export function get_GlbCurrConvRules(select?:string, expand?:string, filter?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GlbCurrConvRules
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlbCurrConvRuleRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlbCurrConvRuleRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GlbCurrConvRuleRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GlbCurrConvRuleRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GlbCurrConvRules(requestBody:any, epicorHeaders?:Headers){
+export function post_GlbCurrConvRules(requestBody:Erp_Tablesets_GlbCurrConvRuleRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -489,7 +592,14 @@ export function post_GlbCurrConvRules(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -511,10 +621,10 @@ export function post_GlbCurrConvRules(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GlbCurrConvRuleRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GlbCurrConvRuleRow
    */  
 export function get_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSourceCurrCode_GlbTargetCurrCode(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSourceCurrCode:string, GlbTargetCurrCode:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -529,7 +639,14 @@ export function get_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSource
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GlbCurrConvRuleRow)
           })
@@ -548,15 +665,15 @@ export function get_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSource
       @param GlbRateGrpCode Desc: GlbRateGrpCode   Required: True   Allow empty value : True
       @param GlbSourceCurrCode Desc: GlbSourceCurrCode   Required: True   Allow empty value : True
       @param GlbTargetCurrCode Desc: GlbTargetCurrCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlbCurrConvRuleRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlbCurrConvRuleRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSourceCurrCode_GlbTargetCurrCode(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSourceCurrCode:string, GlbTargetCurrCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSourceCurrCode_GlbTargetCurrCode(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSourceCurrCode:string, GlbTargetCurrCode:string, requestBody:Erp_Tablesets_GlbCurrConvRuleRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -570,7 +687,14 @@ export function patch_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSour
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -589,7 +713,7 @@ export function patch_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSour
       @param GlbRateGrpCode Desc: GlbRateGrpCode   Required: True   Allow empty value : True
       @param GlbSourceCurrCode Desc: GlbSourceCurrCode   Required: True   Allow empty value : True
       @param GlbTargetCurrCode Desc: GlbTargetCurrCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -608,7 +732,14 @@ export function delete_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSou
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -633,10 +764,10 @@ export function delete_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSou
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrExRateRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrExRateRow
    */  
 export function get_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSourceCurrCode_GlbTargetCurrCode_GlbCurrExRates(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSourceCurrCode:string, GlbTargetCurrCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -651,7 +782,14 @@ export function get_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSource
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrExRateRow)
           })
@@ -673,10 +811,10 @@ export function get_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSource
       @param GlbEffectiveDate Desc: GlbEffectiveDate   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GlbCurrExRateRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GlbCurrExRateRow
    */  
 export function get_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSourceCurrCode_GlbTargetCurrCode_GlbCurrExRates_Company_GlbCompany_GlbRateGrpCode_GlbSourceCurrCode_GlbTargetCurrCode_GlbEffectiveDate(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSourceCurrCode:string, GlbTargetCurrCode:string, GlbEffectiveDate:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -691,7 +829,14 @@ export function get_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSource
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GlbCurrExRateRow)
           })
@@ -711,10 +856,10 @@ export function get_GlbCurrConvRules_Company_GlbCompany_GlbRateGrpCode_GlbSource
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrExRateRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrExRateRow
    */  
 export function get_GlbCurrExRates(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -729,7 +874,14 @@ export function get_GlbCurrExRates(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrExRateRow)
           })
@@ -743,15 +895,15 @@ export function get_GlbCurrExRates(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GlbCurrExRates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlbCurrExRateRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlbCurrExRateRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GlbCurrExRateRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GlbCurrExRateRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GlbCurrExRates(requestBody:any, epicorHeaders?:Headers){
+export function post_GlbCurrExRates(requestBody:Erp_Tablesets_GlbCurrExRateRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -765,7 +917,14 @@ export function post_GlbCurrExRates(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -787,10 +946,10 @@ export function post_GlbCurrExRates(requestBody:any, epicorHeaders?:Headers){
       @param GlbEffectiveDate Desc: GlbEffectiveDate   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GlbCurrExRateRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GlbCurrExRateRow
    */  
 export function get_GlbCurrExRates_Company_GlbCompany_GlbRateGrpCode_GlbSourceCurrCode_GlbTargetCurrCode_GlbEffectiveDate(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSourceCurrCode:string, GlbTargetCurrCode:string, GlbEffectiveDate:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -805,7 +964,14 @@ export function get_GlbCurrExRates_Company_GlbCompany_GlbRateGrpCode_GlbSourceCu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GlbCurrExRateRow)
           })
@@ -825,15 +991,15 @@ export function get_GlbCurrExRates_Company_GlbCompany_GlbRateGrpCode_GlbSourceCu
       @param GlbSourceCurrCode Desc: GlbSourceCurrCode   Required: True   Allow empty value : True
       @param GlbTargetCurrCode Desc: GlbTargetCurrCode   Required: True   Allow empty value : True
       @param GlbEffectiveDate Desc: GlbEffectiveDate   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlbCurrExRateRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlbCurrExRateRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GlbCurrExRates_Company_GlbCompany_GlbRateGrpCode_GlbSourceCurrCode_GlbTargetCurrCode_GlbEffectiveDate(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSourceCurrCode:string, GlbTargetCurrCode:string, GlbEffectiveDate:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GlbCurrExRates_Company_GlbCompany_GlbRateGrpCode_GlbSourceCurrCode_GlbTargetCurrCode_GlbEffectiveDate(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSourceCurrCode:string, GlbTargetCurrCode:string, GlbEffectiveDate:string, requestBody:Erp_Tablesets_GlbCurrExRateRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -847,7 +1013,14 @@ export function patch_GlbCurrExRates_Company_GlbCompany_GlbRateGrpCode_GlbSource
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -867,7 +1040,7 @@ export function patch_GlbCurrExRates_Company_GlbCompany_GlbRateGrpCode_GlbSource
       @param GlbSourceCurrCode Desc: GlbSourceCurrCode   Required: True   Allow empty value : True
       @param GlbTargetCurrCode Desc: GlbTargetCurrCode   Required: True   Allow empty value : True
       @param GlbEffectiveDate Desc: GlbEffectiveDate   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -886,7 +1059,14 @@ export function delete_GlbCurrExRates_Company_GlbCompany_GlbRateGrpCode_GlbSourc
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -906,10 +1086,10 @@ export function delete_GlbCurrExRates_Company_GlbCompany_GlbRateGrpCode_GlbSourc
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrRateDispRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrRateDispRow
    */  
 export function get_GlbCurrRateDisps(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -924,7 +1104,14 @@ export function get_GlbCurrRateDisps(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrRateDispRow)
           })
@@ -938,15 +1125,15 @@ export function get_GlbCurrRateDisps(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GlbCurrRateDisps
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlbCurrRateDispRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlbCurrRateDispRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GlbCurrRateDispRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GlbCurrRateDispRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GlbCurrRateDisps(requestBody:any, epicorHeaders?:Headers){
+export function post_GlbCurrRateDisps(requestBody:Erp_Tablesets_GlbCurrRateDispRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -960,7 +1147,14 @@ export function post_GlbCurrRateDisps(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -980,10 +1174,10 @@ export function post_GlbCurrRateDisps(requestBody:any, epicorHeaders?:Headers){
       @param GlbSeq Desc: GlbSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GlbCurrRateDispRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GlbCurrRateDispRow
    */  
 export function get_GlbCurrRateDisps_Company_GlbCompany_GlbRateGrpCode_GlbSeq(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -998,7 +1192,14 @@ export function get_GlbCurrRateDisps_Company_GlbCompany_GlbRateGrpCode_GlbSeq(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GlbCurrRateDispRow)
           })
@@ -1016,15 +1217,15 @@ export function get_GlbCurrRateDisps_Company_GlbCompany_GlbRateGrpCode_GlbSeq(Co
       @param GlbCompany Desc: GlbCompany   Required: True   Allow empty value : True
       @param GlbRateGrpCode Desc: GlbRateGrpCode   Required: True   Allow empty value : True
       @param GlbSeq Desc: GlbSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlbCurrRateDispRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlbCurrRateDispRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GlbCurrRateDisps_Company_GlbCompany_GlbRateGrpCode_GlbSeq(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GlbCurrRateDisps_Company_GlbCompany_GlbRateGrpCode_GlbSeq(Company:string, GlbCompany:string, GlbRateGrpCode:string, GlbSeq:string, requestBody:Erp_Tablesets_GlbCurrRateDispRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1038,7 +1239,14 @@ export function patch_GlbCurrRateDisps_Company_GlbCompany_GlbRateGrpCode_GlbSeq(
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1056,7 +1264,7 @@ export function patch_GlbCurrRateDisps_Company_GlbCompany_GlbRateGrpCode_GlbSeq(
       @param GlbCompany Desc: GlbCompany   Required: True   Allow empty value : True
       @param GlbRateGrpCode Desc: GlbRateGrpCode   Required: True   Allow empty value : True
       @param GlbSeq Desc: GlbSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1075,7 +1283,14 @@ export function delete_GlbCurrRateDisps_Company_GlbCompany_GlbRateGrpCode_GlbSeq
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1095,10 +1310,10 @@ export function delete_GlbCurrRateDisps_Company_GlbCompany_GlbRateGrpCode_GlbSeq
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrRateGrpListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlbCurrRateGrpListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1113,7 +1328,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrRateGrpListRow)
           })
@@ -1125,6 +1347,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1139,7 +1378,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1208,15 +1447,22 @@ export function get_GetRows(whereClauseGlbCurrRateGrp:string, whereClauseGlbCurr
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1230,7 +1476,7 @@ export function get_GetRows(whereClauseGlbCurrRateGrp:string, whereClauseGlbCurr
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1263,15 +1509,22 @@ export function get_GetByID(glbCompany:string, glbRateGrpCode:string, epicorHead
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1286,7 +1539,7 @@ export function get_GetByID(glbCompany:string, glbRateGrpCode:string, epicorHead
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1328,15 +1581,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1348,30 +1608,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetNewGlbCurrRateGrp
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGlbCurrRateGrp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGlbCurrRateGrp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGlbCurrRateGrp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGlbCurrRateGrp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGlbCurrRateGrp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGlbCurrRateGrp(requestBody:GetNewGlbCurrRateGrp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGlbCurrRateGrp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/GetNewGlbCurrRateGrp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGlbCurrRateGrp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1383,30 +1650,37 @@ export function post_GetNewGlbCurrRateGrp(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewGlbCurrConvRule
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGlbCurrConvRule
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGlbCurrConvRule_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGlbCurrConvRule_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGlbCurrConvRule_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGlbCurrConvRule(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGlbCurrConvRule(requestBody:GetNewGlbCurrConvRule_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGlbCurrConvRule_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/GetNewGlbCurrConvRule", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGlbCurrConvRule_output)
           })
       .catch((error) => {
           reject(error)
@@ -1418,30 +1692,37 @@ export function post_GetNewGlbCurrConvRule(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewGlbCurrExRate
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGlbCurrExRate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGlbCurrExRate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGlbCurrExRate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGlbCurrExRate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGlbCurrExRate(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGlbCurrExRate(requestBody:GetNewGlbCurrExRate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGlbCurrExRate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/GetNewGlbCurrExRate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGlbCurrExRate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1453,30 +1734,37 @@ export function post_GetNewGlbCurrExRate(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewGlbCurrRateDisp
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGlbCurrRateDisp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGlbCurrRateDisp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGlbCurrRateDisp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGlbCurrRateDisp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGlbCurrRateDisp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGlbCurrRateDisp(requestBody:GetNewGlbCurrRateDisp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGlbCurrRateDisp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/GetNewGlbCurrRateDisp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGlbCurrRateDisp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1488,30 +1776,37 @@ export function post_GetNewGlbCurrRateDisp(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1523,7 +1818,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1547,15 +1842,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1567,7 +1869,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1591,15 +1893,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1611,30 +1920,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1646,30 +1962,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlbCurrRateGrpSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1680,31 +2003,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrConvRuleRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GlbCurrConvRuleRow[],
+   "value":Erp_Tablesets_GlbCurrConvRuleRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrExRateRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GlbCurrExRateRow[],
+   "value":Erp_Tablesets_GlbCurrExRateRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrRateDispRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GlbCurrRateDispRow[],
+   "value":Erp_Tablesets_GlbCurrRateDispRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrRateGrpListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GlbCurrRateGrpListRow[],
+   "value":Erp_Tablesets_GlbCurrRateGrpListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlbCurrRateGrpRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GlbCurrRateGrpRow[],
+   "value":Erp_Tablesets_GlbCurrRateGrpRow,
 }
 
 export interface Erp_Tablesets_GlbCurrConvRuleRow{
@@ -1913,6 +2253,23 @@ export interface Erp_Tablesets_GlbCurrRateGrpRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2225,7 +2582,7 @@ export interface GetNewGlbCurrConvRule_input{
 export interface GetNewGlbCurrConvRule_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlbCurrRateGrpTableset[],
+   ds:Erp_Tablesets_GlbCurrRateGrpTableset,
 }
 }
 
@@ -2247,7 +2604,7 @@ export interface GetNewGlbCurrExRate_input{
 export interface GetNewGlbCurrExRate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlbCurrRateGrpTableset[],
+   ds:Erp_Tablesets_GlbCurrRateGrpTableset,
 }
 }
 
@@ -2265,7 +2622,7 @@ export interface GetNewGlbCurrRateDisp_input{
 export interface GetNewGlbCurrRateDisp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlbCurrRateGrpTableset[],
+   ds:Erp_Tablesets_GlbCurrRateGrpTableset,
 }
 }
 
@@ -2281,7 +2638,7 @@ export interface GetNewGlbCurrRateGrp_input{
 export interface GetNewGlbCurrRateGrp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlbCurrRateGrpTableset[],
+   ds:Erp_Tablesets_GlbCurrRateGrpTableset,
 }
 }
 
@@ -2361,7 +2718,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtGlbCurrRateGrpTableset[],
+   ds:Erp_Tablesets_UpdExtGlbCurrRateGrpTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2376,7 +2733,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlbCurrRateGrpTableset[],
+   ds:Erp_Tablesets_GlbCurrRateGrpTableset,
 }
 }
 

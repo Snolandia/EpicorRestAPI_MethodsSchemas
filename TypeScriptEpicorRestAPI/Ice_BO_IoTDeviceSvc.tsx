@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.IoTDeviceSvc
 // Description: IoT Device allowing configuration and communication with IoT Hub
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.IoTDeviceRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.IoTDeviceRow
    */  
 export function get_IoTDevices(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_IoTDevices(select?:string, filter?:string, orderby?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_IoTDeviceRow)
           })
@@ -117,15 +157,15 @@ export function get_IoTDevices(select?:string, filter?:string, orderby?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_IoTDevices
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.IoTDeviceRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.IoTDeviceRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.IoTDeviceRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.IoTDeviceRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IoTDevices(requestBody:any, epicorHeaders?:Headers){
+export function post_IoTDevices(requestBody:Ice_Tablesets_IoTDeviceRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_IoTDevices(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -157,10 +204,10 @@ export function post_IoTDevices(requestBody:any, epicorHeaders?:Headers){
       @param DeviceID Desc: DeviceID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.IoTDeviceRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.IoTDeviceRow
    */  
 export function get_IoTDevices_Company_DeviceID(Company:string, DeviceID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -175,7 +222,14 @@ export function get_IoTDevices_Company_DeviceID(Company:string, DeviceID:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_IoTDeviceRow)
           })
@@ -191,15 +245,15 @@ export function get_IoTDevices_Company_DeviceID(Company:string, DeviceID:string,
    OperationID: UpdateExt_IoTDevice
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DeviceID Desc: DeviceID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.IoTDeviceRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.IoTDeviceRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_IoTDevices_Company_DeviceID(Company:string, DeviceID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_IoTDevices_Company_DeviceID(Company:string, DeviceID:string, requestBody:Ice_Tablesets_IoTDeviceRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -213,7 +267,14 @@ export function patch_IoTDevices_Company_DeviceID(Company:string, DeviceID:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -229,7 +290,7 @@ export function patch_IoTDevices_Company_DeviceID(Company:string, DeviceID:strin
    OperationID: DeleteUpdateExt_IoTDevice
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DeviceID Desc: DeviceID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -248,7 +309,14 @@ export function delete_IoTDevices_Company_DeviceID(Company:string, DeviceID:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -268,10 +336,10 @@ export function delete_IoTDevices_Company_DeviceID(Company:string, DeviceID:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.IoTDeviceRuleRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.IoTDeviceRuleRow
    */  
 export function get_IoTDeviceRules(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -286,7 +354,14 @@ export function get_IoTDeviceRules(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_IoTDeviceRuleRow)
           })
@@ -300,15 +375,15 @@ export function get_IoTDeviceRules(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_IoTDeviceRules
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.IoTDeviceRuleRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.IoTDeviceRuleRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.IoTDeviceRuleRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.IoTDeviceRuleRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IoTDeviceRules(requestBody:any, epicorHeaders?:Headers){
+export function post_IoTDeviceRules(requestBody:Ice_Tablesets_IoTDeviceRuleRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -322,7 +397,14 @@ export function post_IoTDeviceRules(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -341,10 +423,10 @@ export function post_IoTDeviceRules(requestBody:any, epicorHeaders?:Headers){
       @param RuleID Desc: RuleID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.IoTDeviceRuleRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.IoTDeviceRuleRow
    */  
 export function get_IoTDeviceRules_Company_DeviceID_RuleID(Company:string, DeviceID:string, RuleID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -359,7 +441,14 @@ export function get_IoTDeviceRules_Company_DeviceID_RuleID(Company:string, Devic
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_IoTDeviceRuleRow)
           })
@@ -376,15 +465,15 @@ export function get_IoTDeviceRules_Company_DeviceID_RuleID(Company:string, Devic
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DeviceID Desc: DeviceID   Required: True   Allow empty value : True
       @param RuleID Desc: RuleID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.IoTDeviceRuleRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.IoTDeviceRuleRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_IoTDeviceRules_Company_DeviceID_RuleID(Company:string, DeviceID:string, RuleID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_IoTDeviceRules_Company_DeviceID_RuleID(Company:string, DeviceID:string, RuleID:string, requestBody:Ice_Tablesets_IoTDeviceRuleRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -398,7 +487,14 @@ export function patch_IoTDeviceRules_Company_DeviceID_RuleID(Company:string, Dev
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -415,7 +511,7 @@ export function patch_IoTDeviceRules_Company_DeviceID_RuleID(Company:string, Dev
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DeviceID Desc: DeviceID   Required: True   Allow empty value : True
       @param RuleID Desc: RuleID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -434,7 +530,14 @@ export function delete_IoTDeviceRules_Company_DeviceID_RuleID(Company:string, De
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -454,10 +557,10 @@ export function delete_IoTDeviceRules_Company_DeviceID_RuleID(Company:string, De
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.IoTDeviceStatusRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.IoTDeviceStatusRow
    */  
 export function get_IoTDeviceStatus(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -472,7 +575,14 @@ export function get_IoTDeviceStatus(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_IoTDeviceStatusRow)
           })
@@ -486,15 +596,15 @@ export function get_IoTDeviceStatus(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_IoTDeviceStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.IoTDeviceStatusRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.IoTDeviceStatusRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.IoTDeviceStatusRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.IoTDeviceStatusRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IoTDeviceStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_IoTDeviceStatus(requestBody:Ice_Tablesets_IoTDeviceStatusRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -508,7 +618,14 @@ export function post_IoTDeviceStatus(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -526,10 +643,10 @@ export function post_IoTDeviceStatus(requestBody:any, epicorHeaders?:Headers){
       @param DeviceID Desc: DeviceID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.IoTDeviceStatusRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.IoTDeviceStatusRow
    */  
 export function get_IoTDeviceStatus_Company_DeviceID(Company:string, DeviceID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -544,7 +661,14 @@ export function get_IoTDeviceStatus_Company_DeviceID(Company:string, DeviceID:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_IoTDeviceStatusRow)
           })
@@ -560,15 +684,15 @@ export function get_IoTDeviceStatus_Company_DeviceID(Company:string, DeviceID:st
    OperationID: UpdateExt_IoTDeviceStatu
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DeviceID Desc: DeviceID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.IoTDeviceStatusRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.IoTDeviceStatusRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_IoTDeviceStatus_Company_DeviceID(Company:string, DeviceID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_IoTDeviceStatus_Company_DeviceID(Company:string, DeviceID:string, requestBody:Ice_Tablesets_IoTDeviceStatusRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -582,7 +706,14 @@ export function patch_IoTDeviceStatus_Company_DeviceID(Company:string, DeviceID:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -598,7 +729,7 @@ export function patch_IoTDeviceStatus_Company_DeviceID(Company:string, DeviceID:
    OperationID: DeleteUpdateExt_IoTDeviceStatu
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DeviceID Desc: DeviceID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -617,7 +748,14 @@ export function delete_IoTDeviceStatus_Company_DeviceID(Company:string, DeviceID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -637,10 +775,10 @@ export function delete_IoTDeviceStatus_Company_DeviceID(Company:string, DeviceID
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.IoTDeviceListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.IoTDeviceListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -655,7 +793,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_IoTDeviceListRow)
           })
@@ -667,6 +812,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -680,7 +842,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -740,15 +902,22 @@ export function get_GetRows(whereClauseIoTDevice:string, whereClauseIoTDeviceRul
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -761,7 +930,7 @@ export function get_GetRows(whereClauseIoTDevice:string, whereClauseIoTDeviceRul
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -785,15 +954,22 @@ export function get_GetByID(deviceID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -808,7 +984,7 @@ export function get_GetByID(deviceID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -850,15 +1026,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -870,7 +1053,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetAvailableRelatedTo
    Description: Gets a list of available related to which have searches available.
    OperationID: GetAvailableRelatedTo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableRelatedTo_output
@@ -883,15 +1066,22 @@ export function post_GetAvailableRelatedTo(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableRelatedTo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetAvailableRelatedTo", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableRelatedTo_output)
           })
       .catch((error) => {
           reject(error)
@@ -905,30 +1095,37 @@ export function post_GetAvailableRelatedTo(epicorHeaders?:Headers){
 Get applicable rules for the Device and whether they are currently active
 This includes any assigned by associated group. Inactive rules are not included.
    OperationID: GetDeviceRules
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDeviceRules_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDeviceRules_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDeviceRules_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDeviceRules(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDeviceRules(requestBody:GetDeviceRules_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDeviceRules_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetDeviceRules", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDeviceRules_output)
           })
       .catch((error) => {
           reject(error)
@@ -941,30 +1138,37 @@ export function post_GetDeviceRules(requestBody:any, epicorHeaders?:Headers){
    Description: Deprecated: the method is used for the classic UI only.
 Get the status of a device from IoT Hub
    OperationID: GetDeviceStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDeviceStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDeviceStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDeviceStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDeviceStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDeviceStatus(requestBody:GetDeviceStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDeviceStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetDeviceStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDeviceStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -976,30 +1180,37 @@ export function post_GetDeviceStatus(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDeviceTwin
    Description: Get all the Device Twin Properties from IoT Hub
    OperationID: GetDeviceTwin
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDeviceTwin_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDeviceTwin_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDeviceTwin_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDeviceTwin(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDeviceTwin(requestBody:GetDeviceTwin_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDeviceTwin_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetDeviceTwin", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDeviceTwin_output)
           })
       .catch((error) => {
           reject(error)
@@ -1011,30 +1222,37 @@ export function post_GetDeviceTwin(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateDeviceTwin
    Description: Update the Device Twin desired properties for a device
    OperationID: UpdateDeviceTwin
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateDeviceTwin_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateDeviceTwin_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateDeviceTwin_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateDeviceTwin(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateDeviceTwin(requestBody:UpdateDeviceTwin_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateDeviceTwin_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/UpdateDeviceTwin", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateDeviceTwin_output)
           })
       .catch((error) => {
           reject(error)
@@ -1046,30 +1264,37 @@ export function post_UpdateDeviceTwin(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SendDeviceMessage
    Description: Sends a Cloud to Device message via the IoT Hub
    OperationID: SendDeviceMessage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SendDeviceMessage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SendDeviceMessage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SendDeviceMessage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SendDeviceMessage(requestBody:any, epicorHeaders?:Headers){
+export function post_SendDeviceMessage(requestBody:SendDeviceMessage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SendDeviceMessage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/SendDeviceMessage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SendDeviceMessage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1081,30 +1306,37 @@ export function post_SendDeviceMessage(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SendDeviceData
    Description: Sends a Cloud to Device message via the IoT Hub
    OperationID: SendDeviceData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SendDeviceData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SendDeviceData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SendDeviceData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SendDeviceData(requestBody:any, epicorHeaders?:Headers){
+export function post_SendDeviceData(requestBody:SendDeviceData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SendDeviceData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/SendDeviceData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SendDeviceData_output)
           })
       .catch((error) => {
           reject(error)
@@ -1116,7 +1348,7 @@ export function post_SendDeviceData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RetrieveMissingDevicesFromIoTHuB
    Description: Get a dataset of devices that exist in IoT Hub but have not been configured within ERP
    OperationID: RetrieveMissingDevicesFromIoTHuB
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/RetrieveMissingDevicesFromIoTHuB_output
@@ -1129,15 +1361,22 @@ export function post_RetrieveMissingDevicesFromIoTHuB(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RetrieveMissingDevicesFromIoTHuB_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/RetrieveMissingDevicesFromIoTHuB", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RetrieveMissingDevicesFromIoTHuB_output)
           })
       .catch((error) => {
           reject(error)
@@ -1150,7 +1389,7 @@ export function post_RetrieveMissingDevicesFromIoTHuB(epicorHeaders?:Headers){
    Description: Deprecated: the method is used for the classic UI only.
 Get a list of devices that exist in IoT Hub but have not been configured within ERP
    OperationID: GetMissingDevicesFromIoTHub
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMissingDevicesFromIoTHub_output
@@ -1163,15 +1402,22 @@ export function post_GetMissingDevicesFromIoTHub(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMissingDevicesFromIoTHub_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetMissingDevicesFromIoTHub", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMissingDevicesFromIoTHub_output)
           })
       .catch((error) => {
           reject(error)
@@ -1183,30 +1429,37 @@ export function post_GetMissingDevicesFromIoTHub(epicorHeaders?:Headers){
    Summary: Invoke method UpdateDevicesToERPFromIoTHub
    Description: Add one or more devices that exist in the IoT Hub but have not yet been created within ERP
    OperationID: UpdateDevicesToERPFromIoTHub
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateDevicesToERPFromIoTHub_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateDevicesToERPFromIoTHub_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateDevicesToERPFromIoTHub_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateDevicesToERPFromIoTHub(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateDevicesToERPFromIoTHub(requestBody:UpdateDevicesToERPFromIoTHub_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateDevicesToERPFromIoTHub_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/UpdateDevicesToERPFromIoTHub", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateDevicesToERPFromIoTHub_output)
           })
       .catch((error) => {
           reject(error)
@@ -1219,30 +1472,37 @@ export function post_UpdateDevicesToERPFromIoTHub(requestBody:any, epicorHeaders
    Description: Deprecated: the method is used for the classic UI only.
 Add one or more devices that exist in the IoT Hub but have not yet been created within ERP
    OperationID: AddMissingDevicesFromIoTHub
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddMissingDevicesFromIoTHub_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddMissingDevicesFromIoTHub_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddMissingDevicesFromIoTHub_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddMissingDevicesFromIoTHub(requestBody:any, epicorHeaders?:Headers){
+export function post_AddMissingDevicesFromIoTHub(requestBody:AddMissingDevicesFromIoTHub_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddMissingDevicesFromIoTHub_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/AddMissingDevicesFromIoTHub", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddMissingDevicesFromIoTHub_output)
           })
       .catch((error) => {
           reject(error)
@@ -1254,30 +1514,37 @@ export function post_AddMissingDevicesFromIoTHub(requestBody:any, epicorHeaders?
    Summary: Invoke method UploadDevicesToIoTHub
    Description: Add one or more devices that exist in ERP but have not yet been created within IoT Hub
    OperationID: UploadDevicesToIoTHub
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UploadDevicesToIoTHub_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UploadDevicesToIoTHub_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UploadDevicesToIoTHub_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UploadDevicesToIoTHub(requestBody:any, epicorHeaders?:Headers){
+export function post_UploadDevicesToIoTHub(requestBody:UploadDevicesToIoTHub_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UploadDevicesToIoTHub_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/UploadDevicesToIoTHub", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UploadDevicesToIoTHub_output)
           })
       .catch((error) => {
           reject(error)
@@ -1290,30 +1557,37 @@ export function post_UploadDevicesToIoTHub(requestBody:any, epicorHeaders?:Heade
    Description: Deprecated: the method is used for the classic UI only.
 Add one or more devices that exist in ERP but have not yet been created within IoT Hub
    OperationID: AddDevicesToIoTHub
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddDevicesToIoTHub_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddDevicesToIoTHub_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddDevicesToIoTHub_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddDevicesToIoTHub(requestBody:any, epicorHeaders?:Headers){
+export function post_AddDevicesToIoTHub(requestBody:AddDevicesToIoTHub_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddDevicesToIoTHub_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/AddDevicesToIoTHub", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddDevicesToIoTHub_output)
           })
       .catch((error) => {
           reject(error)
@@ -1325,30 +1599,37 @@ export function post_AddDevicesToIoTHub(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ValidateDeviceGroupID
    Description: Verifies if a device group ID is valid
    OperationID: ValidateDeviceGroupID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateDeviceGroupID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateDeviceGroupID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateDeviceGroupID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateDeviceGroupID(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateDeviceGroupID(requestBody:ValidateDeviceGroupID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateDeviceGroupID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/ValidateDeviceGroupID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateDeviceGroupID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1360,30 +1641,37 @@ export function post_ValidateDeviceGroupID(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method UploadImage
    Description: Upload an image for the Device to be used on the widget
    OperationID: UploadImage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UploadImage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UploadImage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UploadImage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UploadImage(requestBody:any, epicorHeaders?:Headers){
+export function post_UploadImage(requestBody:UploadImage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UploadImage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/UploadImage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UploadImage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1395,30 +1683,37 @@ export function post_UploadImage(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RemoveImage
    Description: Remove an image for the Device
    OperationID: RemoveImage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveImage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveImage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveImage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveImage(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveImage(requestBody:RemoveImage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveImage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/RemoveImage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveImage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1430,30 +1725,37 @@ export function post_RemoveImage(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DownloadImage
    Description: Download an image assigned to a Device. If there is no image assigned nothing is returned
    OperationID: DownloadImage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DownloadImage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DownloadImage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DownloadImage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DownloadImage(requestBody:any, epicorHeaders?:Headers){
+export function post_DownloadImage(requestBody:DownloadImage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DownloadImage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/DownloadImage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DownloadImage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1464,30 +1766,37 @@ export function post_DownloadImage(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ChangeSysRowID
    OperationID: ChangeSysRowID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSysRowID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSysRowID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSysRowID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSysRowID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSysRowID(requestBody:ChangeSysRowID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/ChangeSysRowID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1500,30 +1809,37 @@ export function post_ChangeSysRowID(requestBody:any, epicorHeaders?:Headers){
    Description: Get applicable rules for the Device and whether they are currently active
 This includes any assigned by associated group. Inactive rules are not included.
    OperationID: RetrieveDeviceRules
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RetrieveDeviceRules_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RetrieveDeviceRules_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RetrieveDeviceRules_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RetrieveDeviceRules(requestBody:any, epicorHeaders?:Headers){
+export function post_RetrieveDeviceRules(requestBody:RetrieveDeviceRules_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RetrieveDeviceRules_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/RetrieveDeviceRules", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RetrieveDeviceRules_output)
           })
       .catch((error) => {
           reject(error)
@@ -1535,30 +1851,37 @@ export function post_RetrieveDeviceRules(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method RetrieveDeviceStatus
    Description: Get the status of a device from IoT Hub
    OperationID: RetrieveDeviceStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RetrieveDeviceStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RetrieveDeviceStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RetrieveDeviceStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RetrieveDeviceStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_RetrieveDeviceStatus(requestBody:RetrieveDeviceStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RetrieveDeviceStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/RetrieveDeviceStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RetrieveDeviceStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -1570,30 +1893,37 @@ export function post_RetrieveDeviceStatus(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetDeviceTwinDatasetForTree
    Description: Get all the Device Twin Properties from IoT Hub
    OperationID: GetDeviceTwinDatasetForTree
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDeviceTwinDatasetForTree_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDeviceTwinDatasetForTree_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDeviceTwinDatasetForTree_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDeviceTwinDatasetForTree(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDeviceTwinDatasetForTree(requestBody:GetDeviceTwinDatasetForTree_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDeviceTwinDatasetForTree_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetDeviceTwinDatasetForTree", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDeviceTwinDatasetForTree_output)
           })
       .catch((error) => {
           reject(error)
@@ -1605,30 +1935,37 @@ export function post_GetDeviceTwinDatasetForTree(requestBody:any, epicorHeaders?
    Summary: Invoke method GetRelatedToKeyDescription
    Description: Get Related To Description
    OperationID: GetRelatedToKeyDescription
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRelatedToKeyDescription_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRelatedToKeyDescription_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRelatedToKeyDescription_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRelatedToKeyDescription(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRelatedToKeyDescription(requestBody:GetRelatedToKeyDescription_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRelatedToKeyDescription_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetRelatedToKeyDescription", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRelatedToKeyDescription_output)
           })
       .catch((error) => {
           reject(error)
@@ -1640,30 +1977,37 @@ export function post_GetRelatedToKeyDescription(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetDefaultSearch
    Description: Get default search for specified table
    OperationID: GetDefaultSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDefaultSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDefaultSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDefaultSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDefaultSearch(requestBody:GetDefaultSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetDefaultSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1675,30 +2019,37 @@ export function post_GetDefaultSearch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewIoTDevice
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewIoTDevice
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewIoTDevice_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewIoTDevice_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewIoTDevice_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewIoTDevice(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewIoTDevice(requestBody:GetNewIoTDevice_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewIoTDevice_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetNewIoTDevice", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewIoTDevice_output)
           })
       .catch((error) => {
           reject(error)
@@ -1710,30 +2061,37 @@ export function post_GetNewIoTDevice(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1745,7 +2103,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1769,15 +2127,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1789,7 +2154,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1813,15 +2178,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1833,30 +2205,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1868,30 +2247,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.IoTDeviceSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1902,26 +2288,43 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_IoTDeviceListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_IoTDeviceListRow[],
+   "value":Ice_Tablesets_IoTDeviceListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_IoTDeviceRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_IoTDeviceRow[],
+   "value":Ice_Tablesets_IoTDeviceRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_IoTDeviceRuleRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_IoTDeviceRuleRow[],
+   "value":Ice_Tablesets_IoTDeviceRuleRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_IoTDeviceStatusRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_IoTDeviceStatusRow[],
+   "value":Ice_Tablesets_IoTDeviceStatusRow,
 }
 
 export interface Ice_Tablesets_IoTDeviceListRow{
@@ -1999,6 +2402,23 @@ export interface Ice_Tablesets_IoTDeviceStatusRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2038,7 +2458,7 @@ export interface ChangeSysRowID_input{
 export interface ChangeSysRowID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_IoTDeviceTableset[],
+   ds:Ice_Tablesets_IoTDeviceTableset,
 }
 }
 
@@ -2139,7 +2559,7 @@ export interface GetDeviceRules_input{
 export interface GetDeviceRules_output{
 parameters : {
       /**  output parameters  */  
-   ts:Ice_Tablesets_IoTDeviceTableset[],
+   ts:Ice_Tablesets_IoTDeviceTableset,
 }
 }
 
@@ -2156,7 +2576,7 @@ export interface GetDeviceStatus_input{
 export interface GetDeviceStatus_output{
 parameters : {
       /**  output parameters  */  
-   ts:Ice_Tablesets_IoTDeviceTableset[],
+   ts:Ice_Tablesets_IoTDeviceTableset,
 }
 }
 
@@ -2228,7 +2648,7 @@ export interface GetNewIoTDevice_input{
 export interface GetNewIoTDevice_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_IoTDeviceTableset[],
+   ds:Ice_Tablesets_IoTDeviceTableset,
 }
 }
 
@@ -2551,7 +2971,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtIoTDeviceTableset[],
+   ds:Ice_Tablesets_UpdExtIoTDeviceTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2566,7 +2986,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_IoTDeviceTableset[],
+   ds:Ice_Tablesets_IoTDeviceTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.APInvGrpSvc
 // Description: AP Invoice Group Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvGrpRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvGrpRow
    */  
 export function get_APInvGrps(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_APInvGrps(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvGrpRow)
           })
@@ -117,15 +157,15 @@ export function get_APInvGrps(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_APInvGrps
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APInvGrpRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APInvGrpRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.APInvGrpRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.APInvGrpRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_APInvGrps(requestBody:any, epicorHeaders?:Headers){
+export function post_APInvGrps(requestBody:Erp_Tablesets_APInvGrpRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_APInvGrps(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -157,10 +204,10 @@ export function post_APInvGrps(requestBody:any, epicorHeaders?:Headers){
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APInvGrpRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APInvGrpRow
    */  
 export function get_APInvGrps_Company_GroupID(Company:string, GroupID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -175,7 +222,14 @@ export function get_APInvGrps_Company_GroupID(Company:string, GroupID:string, se
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APInvGrpRow)
           })
@@ -191,15 +245,15 @@ export function get_APInvGrps_Company_GroupID(Company:string, GroupID:string, se
    OperationID: UpdateExt_APInvGrp
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.APInvGrpRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.APInvGrpRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_APInvGrps_Company_GroupID(Company:string, GroupID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_APInvGrps_Company_GroupID(Company:string, GroupID:string, requestBody:Erp_Tablesets_APInvGrpRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -213,7 +267,14 @@ export function patch_APInvGrps_Company_GroupID(Company:string, GroupID:string, 
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -229,7 +290,7 @@ export function patch_APInvGrps_Company_GroupID(Company:string, GroupID:string, 
    OperationID: DeleteUpdateExt_APInvGrp
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -248,7 +309,14 @@ export function delete_APInvGrps_Company_GroupID(Company:string, GroupID:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -268,10 +336,10 @@ export function delete_APInvGrps_Company_GroupID(Company:string, GroupID:string,
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvGrpListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvGrpListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -286,7 +354,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvGrpListRow)
           })
@@ -299,6 +374,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -309,7 +401,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -351,15 +443,22 @@ export function get_GetRows(whereClauseAPInvGrp:string, pageSize:string, absolut
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -372,7 +471,7 @@ export function get_GetRows(whereClauseAPInvGrp:string, pageSize:string, absolut
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -396,15 +495,22 @@ export function get_GetByID(groupID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -419,7 +525,7 @@ export function get_GetByID(groupID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -461,15 +567,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -481,30 +594,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetRowsUseLockSetting
    Description: Returns the APInvGrp dataset using the automatic group lock configuration setting.
    OperationID: GetRowsUseLockSetting
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsUseLockSetting_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsUseLockSetting_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsUseLockSetting_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsUseLockSetting(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsUseLockSetting(requestBody:GetRowsUseLockSetting_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsUseLockSetting_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetRowsUseLockSetting", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsUseLockSetting_output)
           })
       .catch((error) => {
           reject(error)
@@ -516,30 +636,37 @@ export function post_GetRowsUseLockSetting(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewAPInvGrpNoLock
    Description: Inserts a new row in the DataSet with defaults populated. Active user locking disabled.
    OperationID: GetNewAPInvGrpNoLock
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAPInvGrpNoLock_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAPInvGrpNoLock_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAPInvGrpNoLock_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAPInvGrpNoLock(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAPInvGrpNoLock(requestBody:GetNewAPInvGrpNoLock_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAPInvGrpNoLock_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetNewAPInvGrpNoLock", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAPInvGrpNoLock_output)
           })
       .catch((error) => {
           reject(error)
@@ -551,30 +678,37 @@ export function post_GetNewAPInvGrpNoLock(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewAPInvGrpForBOE
    Description: Creates a new APInvGrp for BOE
    OperationID: GetNewAPInvGrpForBOE
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAPInvGrpForBOE_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAPInvGrpForBOE_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAPInvGrpForBOE_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAPInvGrpForBOE(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAPInvGrpForBOE(requestBody:GetNewAPInvGrpForBOE_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAPInvGrpForBOE_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetNewAPInvGrpForBOE", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAPInvGrpForBOE_output)
           })
       .catch((error) => {
           reject(error)
@@ -587,30 +721,37 @@ export function post_GetNewAPInvGrpForBOE(requestBody:any, epicorHeaders?:Header
    Description: Sets the user lock on the Current group. This method also run GetByID.
 Used for Bill of Exchange Entry
    OperationID: UpdateForBOE
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateForBOE_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateForBOE_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateForBOE_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateForBOE(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateForBOE(requestBody:UpdateForBOE_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateForBOE_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/UpdateForBOE", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateForBOE_output)
           })
       .catch((error) => {
           reject(error)
@@ -623,30 +764,37 @@ export function post_UpdateForBOE(requestBody:any, epicorHeaders?:Headers){
    Description: Sets the user lock on the Current group. This method also run GetByID.
 Used for Bill of Exchange Entry
    OperationID: GetAPInvGrpForBOE
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAPInvGrpForBOE_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAPInvGrpForBOE_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAPInvGrpForBOE_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAPInvGrpForBOE(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAPInvGrpForBOE(requestBody:GetAPInvGrpForBOE_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAPInvGrpForBOE_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetAPInvGrpForBOE", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAPInvGrpForBOE_output)
           })
       .catch((error) => {
           reject(error)
@@ -658,30 +806,37 @@ export function post_GetAPInvGrpForBOE(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListForBOE
    Description: Sets the user lock on the Current group. This method also run GetByID..
    OperationID: GetListForBOE
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListForBOE_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListForBOE_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListForBOE_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListForBOE(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListForBOE(requestBody:GetListForBOE_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListForBOE_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetListForBOE", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListForBOE_output)
           })
       .catch((error) => {
           reject(error)
@@ -695,30 +850,37 @@ export function post_GetListForBOE(requestBody:any, epicorHeaders?:Headers){
 This method will additionally return a message to present to the user if the date is greater than
 the client today date.
    OperationID: OnChangeofApplyDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeofApplyDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeofApplyDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeofApplyDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeofApplyDate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeofApplyDate(requestBody:OnChangeofApplyDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeofApplyDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/OnChangeofApplyDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeofApplyDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -736,30 +898,37 @@ should not be called.  This method can also throw exceptions if certain configur
 do not exist.  This method will also check if variances exist on the header or lines and return
 message text asking the user if they would like to continue nor not with posting.
    OperationID: PrePostGroupInvoices
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PrePostGroupInvoices_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PrePostGroupInvoices_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PrePostGroupInvoices_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PrePostGroupInvoices(requestBody:any, epicorHeaders?:Headers){
+export function post_PrePostGroupInvoices(requestBody:PrePostGroupInvoices_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PrePostGroupInvoices_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/PrePostGroupInvoices", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PrePostGroupInvoices_output)
           })
       .catch((error) => {
           reject(error)
@@ -773,30 +942,37 @@ export function post_PrePostGroupInvoices(requestBody:any, epicorHeaders?:Header
 the group no longer needs to be locked.  The group no longer needs to be locked
 when the invoice object is closed, or when a different group is selected.
    OperationID: UnlockGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnlockGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnlockGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnlockGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnlockGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_UnlockGroup(requestBody:UnlockGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnlockGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/UnlockGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnlockGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -809,30 +985,37 @@ export function post_UnlockGroup(requestBody:any, epicorHeaders?:Headers){
    Description: Clears the lock of a group, only if the user of the current session is the same as the one locking the group.
 This method update the database and refresh the group dataset with the information from the database.
    OperationID: UnlockAPGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnlockAPGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnlockAPGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnlockAPGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnlockAPGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_UnlockAPGroup(requestBody:UnlockAPGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnlockAPGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/UnlockAPGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnlockAPGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -845,30 +1028,37 @@ export function post_UnlockAPGroup(requestBody:any, epicorHeaders?:Headers){
    Description: Locks the groupID for the current user in session only if the group is not locked already
 This method update the database and refresh the group dataset with the information from the database.
    OperationID: LockAPGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LockAPGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LockAPGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LockAPGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LockAPGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_LockAPGroup(requestBody:LockAPGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LockAPGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/LockAPGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LockAPGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -880,30 +1070,37 @@ export function post_LockAPGroup(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAPInvGrp
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAPInvGrp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAPInvGrp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAPInvGrp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAPInvGrp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAPInvGrp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAPInvGrp(requestBody:GetNewAPInvGrp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAPInvGrp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetNewAPInvGrp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAPInvGrp_output)
           })
       .catch((error) => {
           reject(error)
@@ -915,30 +1112,37 @@ export function post_GetNewAPInvGrp(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -950,7 +1154,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -974,15 +1178,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -994,7 +1205,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1018,15 +1229,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1038,30 +1256,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1073,30 +1298,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APInvGrpSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1107,16 +1339,33 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvGrpListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APInvGrpListRow[],
+   "value":Erp_Tablesets_APInvGrpListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvGrpRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APInvGrpRow[],
+   "value":Erp_Tablesets_APInvGrpRow,
 }
 
 export interface Erp_Tablesets_APInvGrpListRow{
@@ -1203,6 +1452,23 @@ export interface Erp_Tablesets_APInvGrpRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1325,7 +1591,7 @@ export interface GetAPInvGrpForBOE_input{
 export interface GetAPInvGrpForBOE_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvGrpTableset[],
+   ds:Erp_Tablesets_APInvGrpTableset,
 }
 }
 
@@ -1416,7 +1682,7 @@ export interface GetNewAPInvGrpForBOE_input{
 export interface GetNewAPInvGrpForBOE_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvGrpTableset[],
+   ds:Erp_Tablesets_APInvGrpTableset,
 }
 }
 
@@ -1430,7 +1696,7 @@ export interface GetNewAPInvGrpNoLock_input{
 export interface GetNewAPInvGrpNoLock_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvGrpTableset[],
+   ds:Erp_Tablesets_APInvGrpTableset,
 }
 }
 
@@ -1444,7 +1710,7 @@ export interface GetNewAPInvGrp_input{
 export interface GetNewAPInvGrp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvGrpTableset[],
+   ds:Erp_Tablesets_APInvGrpTableset,
 }
 }
 
@@ -1537,7 +1803,7 @@ export interface LockAPGroup_input{
 export interface LockAPGroup_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvGrpTableset[],
+   ds:Erp_Tablesets_APInvGrpTableset,
 }
 }
 
@@ -1558,7 +1824,7 @@ export interface OnChangeofApplyDate_output{
 parameters : {
       /**  output parameters  */  
    DateMessage:string,
-   ds:Erp_Tablesets_APInvGrpTableset[],
+   ds:Erp_Tablesets_APInvGrpTableset,
 }
 }
 
@@ -1592,7 +1858,7 @@ export interface UnlockAPGroup_input{
 export interface UnlockAPGroup_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvGrpTableset[],
+   ds:Erp_Tablesets_APInvGrpTableset,
 }
 }
 
@@ -1622,7 +1888,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtAPInvGrpTableset[],
+   ds:Erp_Tablesets_UpdExtAPInvGrpTableset,
    errorsOccurred:boolean,
 }
 }
@@ -1637,7 +1903,7 @@ export interface UpdateForBOE_input{
 export interface UpdateForBOE_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvGrpTableset[],
+   ds:Erp_Tablesets_APInvGrpTableset,
 }
 }
 
@@ -1651,7 +1917,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvGrpTableset[],
+   ds:Erp_Tablesets_APInvGrpTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.APLOCSvc
 // Description: Add your summary for this object here
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APLOCRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APLOCRow
    */  
 export function get_APLOCs(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_APLOCs(select?:string, expand?:string, filter?:string, order
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APLOCRow)
           })
@@ -118,15 +158,15 @@ export function get_APLOCs(select?:string, expand?:string, filter?:string, order
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_APLOCs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APLOCRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APLOCRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.APLOCRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.APLOCRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_APLOCs(requestBody:any, epicorHeaders?:Headers){
+export function post_APLOCs(requestBody:Erp_Tablesets_APLOCRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_APLOCs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_APLOCs(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APLOCRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APLOCRow
    */  
 export function get_APLOCs_Company_LCID(Company:string, LCID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_APLOCs_Company_LCID(Company:string, LCID:string, select?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APLOCRow)
           })
@@ -193,15 +247,15 @@ export function get_APLOCs_Company_LCID(Company:string, LCID:string, select?:str
    OperationID: UpdateExt_APLOC
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LCID Desc: LCID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.APLOCRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.APLOCRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_APLOCs_Company_LCID(Company:string, LCID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_APLOCs_Company_LCID(Company:string, LCID:string, requestBody:Erp_Tablesets_APLOCRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_APLOCs_Company_LCID(Company:string, LCID:string, requestBo
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_APLOCs_Company_LCID(Company:string, LCID:string, requestBo
    OperationID: DeleteUpdateExt_APLOC
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LCID Desc: LCID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_APLOCs_Company_LCID(Company:string, LCID:string, epicorHe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_APLOCs_Company_LCID(Company:string, LCID:string, epicorHe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APLOCAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APLOCAttchRow
    */  
 export function get_APLOCs_Company_LCID_APLOCAttches(Company:string, LCID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_APLOCs_Company_LCID_APLOCAttches(Company:string, LCID:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APLOCAttchRow)
           })
@@ -309,10 +384,10 @@ export function get_APLOCs_Company_LCID_APLOCAttches(Company:string, LCID:string
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APLOCAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APLOCAttchRow
    */  
 export function get_APLOCs_Company_LCID_APLOCAttches_Company_LCID_DrawingSeq(Company:string, LCID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_APLOCs_Company_LCID_APLOCAttches_Company_LCID_DrawingSeq(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APLOCAttchRow)
           })
@@ -347,10 +429,10 @@ export function get_APLOCs_Company_LCID_APLOCAttches_Company_LCID_DrawingSeq(Com
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APLOCAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APLOCAttchRow
    */  
 export function get_APLOCAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -365,7 +447,14 @@ export function get_APLOCAttches(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APLOCAttchRow)
           })
@@ -379,15 +468,15 @@ export function get_APLOCAttches(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_APLOCAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APLOCAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APLOCAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.APLOCAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.APLOCAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_APLOCAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_APLOCAttches(requestBody:Erp_Tablesets_APLOCAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -401,7 +490,14 @@ export function post_APLOCAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -420,10 +516,10 @@ export function post_APLOCAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APLOCAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APLOCAttchRow
    */  
 export function get_APLOCAttches_Company_LCID_DrawingSeq(Company:string, LCID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -438,7 +534,14 @@ export function get_APLOCAttches_Company_LCID_DrawingSeq(Company:string, LCID:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APLOCAttchRow)
           })
@@ -455,15 +558,15 @@ export function get_APLOCAttches_Company_LCID_DrawingSeq(Company:string, LCID:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LCID Desc: LCID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.APLOCAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.APLOCAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_APLOCAttches_Company_LCID_DrawingSeq(Company:string, LCID:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_APLOCAttches_Company_LCID_DrawingSeq(Company:string, LCID:string, DrawingSeq:string, requestBody:Erp_Tablesets_APLOCAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -477,7 +580,14 @@ export function patch_APLOCAttches_Company_LCID_DrawingSeq(Company:string, LCID:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -494,7 +604,7 @@ export function patch_APLOCAttches_Company_LCID_DrawingSeq(Company:string, LCID:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LCID Desc: LCID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -513,7 +623,14 @@ export function delete_APLOCAttches_Company_LCID_DrawingSeq(Company:string, LCID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -533,10 +650,10 @@ export function delete_APLOCAttches_Company_LCID_DrawingSeq(Company:string, LCID
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APLOCListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APLOCListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -551,7 +668,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APLOCListRow)
           })
@@ -564,6 +688,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -575,7 +716,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -626,15 +767,22 @@ export function get_GetRows(whereClauseAPLOC:string, whereClauseAPLOCAttch:strin
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -647,7 +795,7 @@ export function get_GetRows(whereClauseAPLOC:string, whereClauseAPLOCAttch:strin
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -671,15 +819,22 @@ export function get_GetByID(lcID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -694,7 +849,7 @@ export function get_GetByID(lcID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -736,15 +891,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -756,30 +918,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method ChangeCurrencyCode
    Description: Called when the CurrencyCode field has been changed.
    OperationID: ChangeCurrencyCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCurrencyCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCurrencyCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCurrencyCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCurrencyCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCurrencyCode(requestBody:ChangeCurrencyCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCurrencyCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/ChangeCurrencyCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCurrencyCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -791,30 +960,37 @@ export function post_ChangeCurrencyCode(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ChangeIssueDate
    Description: Called when the IssueDate field has been changed.
    OperationID: ChangeIssueDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeIssueDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeIssueDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeIssueDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeIssueDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeIssueDate(requestBody:ChangeIssueDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeIssueDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/ChangeIssueDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeIssueDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -826,30 +1002,37 @@ export function post_ChangeIssueDate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeDocLCValue
    Description: Called when the DocLCValue field has been changed.
    OperationID: ChangeDocLCValue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDocLCValue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDocLCValue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDocLCValue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDocLCValue(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDocLCValue(requestBody:ChangeDocLCValue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDocLCValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/ChangeDocLCValue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDocLCValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -861,30 +1044,37 @@ export function post_ChangeDocLCValue(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeExchangeRate
    Description: Called when the ExchangeRate field has been changed.
    OperationID: ChangeExchangeRate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeExchangeRate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeExchangeRate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeExchangeRate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeExchangeRate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeExchangeRate(requestBody:ChangeExchangeRate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeExchangeRate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/ChangeExchangeRate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeExchangeRate_output)
           })
       .catch((error) => {
           reject(error)
@@ -896,30 +1086,37 @@ export function post_ChangeExchangeRate(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ChangeUseExchangeRate
    Description: Called when the Use ExchangeRate field has been changed.
    OperationID: ChangeUseExchangeRate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeUseExchangeRate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeUseExchangeRate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeUseExchangeRate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeUseExchangeRate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeUseExchangeRate(requestBody:ChangeUseExchangeRate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeUseExchangeRate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/ChangeUseExchangeRate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeUseExchangeRate_output)
           })
       .catch((error) => {
           reject(error)
@@ -931,30 +1128,37 @@ export function post_ChangeUseExchangeRate(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetAPLOCInvc
    Description: This method will retrieve all the information related to AP Invoices
    OperationID: GetAPLOCInvc
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAPLOCInvc_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAPLOCInvc_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAPLOCInvc_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAPLOCInvc(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAPLOCInvc(requestBody:GetAPLOCInvc_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAPLOCInvc_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/GetAPLOCInvc", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAPLOCInvc_output)
           })
       .catch((error) => {
           reject(error)
@@ -966,30 +1170,37 @@ export function post_GetAPLOCInvc(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetAPLOCPO
    Description: This method will retrieve all the information related to Purchase Orders.
    OperationID: GetAPLOCPO
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAPLOCPO_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAPLOCPO_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAPLOCPO_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAPLOCPO(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAPLOCPO(requestBody:GetAPLOCPO_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAPLOCPO_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/GetAPLOCPO", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAPLOCPO_output)
           })
       .catch((error) => {
           reject(error)
@@ -1001,30 +1212,37 @@ export function post_GetAPLOCPO(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeOfCurrencyCode
    Description: Called when the CurrencyCode field is changing.
    OperationID: OnChangeOfCurrencyCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfCurrencyCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfCurrencyCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfCurrencyCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfCurrencyCode(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfCurrencyCode(requestBody:OnChangeOfCurrencyCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfCurrencyCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/OnChangeOfCurrencyCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfCurrencyCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1036,30 +1254,37 @@ export function post_OnChangeOfCurrencyCode(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnChangeOfFromDate
    Description: Called when changing the FromDate field.
    OperationID: OnChangeOfFromDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfFromDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfFromDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfFromDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfFromDate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfFromDate(requestBody:OnChangeOfFromDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfFromDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/OnChangeOfFromDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfFromDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1071,30 +1296,37 @@ export function post_OnChangeOfFromDate(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeOfUseExchangeRate
    Description: Called when changing the FromDate field.
    OperationID: OnChangeOfUseExchangeRate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfUseExchangeRate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfUseExchangeRate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfUseExchangeRate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfUseExchangeRate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfUseExchangeRate(requestBody:OnChangeOfUseExchangeRate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfUseExchangeRate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/OnChangeOfUseExchangeRate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfUseExchangeRate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1106,30 +1338,37 @@ export function post_OnChangeOfUseExchangeRate(requestBody:any, epicorHeaders?:H
    Summary: Invoke method OnChangeOfLCValue
    Description: Called when changing the LCValue field.
    OperationID: OnChangeOfLCValue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfLCValue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfLCValue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfLCValue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfLCValue(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfLCValue(requestBody:OnChangeOfLCValue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfLCValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/OnChangeOfLCValue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfLCValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -1141,30 +1380,37 @@ export function post_OnChangeOfLCValue(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeOfToDate
    Description: Called when changing the ToDate field.
    OperationID: OnChangeOfToDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfToDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfToDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfToDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfToDate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfToDate(requestBody:OnChangeOfToDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfToDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/OnChangeOfToDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfToDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1176,30 +1422,37 @@ export function post_OnChangeOfToDate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeBankAcctID
    Description: Called when changing the BankAcctId field.
    OperationID: OnChangeBankAcctID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBankAcctID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBankAcctID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBankAcctID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBankAcctID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBankAcctID(requestBody:OnChangeBankAcctID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBankAcctID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/OnChangeBankAcctID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBankAcctID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1211,30 +1464,37 @@ export function post_OnChangeBankAcctID(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewAPLOC
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAPLOC
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAPLOC_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAPLOC_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAPLOC_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAPLOC(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAPLOC(requestBody:GetNewAPLOC_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAPLOC_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/GetNewAPLOC", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAPLOC_output)
           })
       .catch((error) => {
           reject(error)
@@ -1246,30 +1506,37 @@ export function post_GetNewAPLOC(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAPLOCAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAPLOCAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAPLOCAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAPLOCAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAPLOCAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAPLOCAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAPLOCAttch(requestBody:GetNewAPLOCAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAPLOCAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/GetNewAPLOCAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAPLOCAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1281,30 +1548,37 @@ export function post_GetNewAPLOCAttch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1316,7 +1590,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1340,15 +1614,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1360,7 +1641,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1384,15 +1665,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1404,30 +1692,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1439,30 +1734,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.APLOCSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1473,21 +1775,38 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APLOCAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APLOCAttchRow[],
+   "value":Erp_Tablesets_APLOCAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APLOCListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APLOCListRow[],
+   "value":Erp_Tablesets_APLOCListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APLOCRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APLOCRow[],
+   "value":Erp_Tablesets_APLOCRow,
 }
 
 export interface Erp_Tablesets_APLOCAttchRow{
@@ -1754,6 +2073,23 @@ export interface Erp_Tablesets_APLOCRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1766,7 +2102,7 @@ export interface ChangeCurrencyCode_input{
 export interface ChangeCurrencyCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -1780,7 +2116,7 @@ export interface ChangeDocLCValue_input{
 export interface ChangeDocLCValue_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -1794,7 +2130,7 @@ export interface ChangeExchangeRate_input{
 export interface ChangeExchangeRate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -1808,7 +2144,7 @@ export interface ChangeIssueDate_input{
 export interface ChangeIssueDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -1822,7 +2158,7 @@ export interface ChangeUseExchangeRate_input{
 export interface ChangeUseExchangeRate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2182,7 +2518,7 @@ export interface GetAPLOCInvc_output{
    returnObj:Erp_Tablesets_APLOCTrackerTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2200,7 +2536,7 @@ export interface GetAPLOCPO_output{
    returnObj:Erp_Tablesets_APLOCTrackerTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2271,7 +2607,7 @@ export interface GetNewAPLOCAttch_input{
 export interface GetNewAPLOCAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2285,7 +2621,7 @@ export interface GetNewAPLOC_input{
 export interface GetNewAPLOC_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2359,7 +2695,7 @@ export interface OnChangeBankAcctID_input{
 export interface OnChangeBankAcctID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2373,7 +2709,7 @@ export interface OnChangeOfCurrencyCode_input{
 export interface OnChangeOfCurrencyCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2390,7 +2726,7 @@ export interface OnChangeOfFromDate_input{
 export interface OnChangeOfFromDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2408,7 +2744,7 @@ export interface OnChangeOfLCValue_output{
 parameters : {
       /**  output parameters  */  
    warningMsg:string,
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2425,7 +2761,7 @@ export interface OnChangeOfToDate_input{
 export interface OnChangeOfToDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2442,7 +2778,7 @@ export interface OnChangeOfUseExchangeRate_input{
 export interface OnChangeOfUseExchangeRate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 
@@ -2461,7 +2797,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtAPLOCTableset[],
+   ds:Erp_Tablesets_UpdExtAPLOCTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2476,7 +2812,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APLOCTableset[],
+   ds:Erp_Tablesets_APLOCTableset,
 }
 }
 

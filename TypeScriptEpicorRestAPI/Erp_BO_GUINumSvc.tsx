@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.GUINumSvc
 // Description: Taiwan GUI Number Service
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GUINumHedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GUINumHedRow
    */  
 export function get_GUINums(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_GUINums(select?:string, expand?:string, filter?:string, orde
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GUINumHedRow)
           })
@@ -118,15 +158,15 @@ export function get_GUINums(select?:string, expand?:string, filter?:string, orde
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GUINums
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GUINumHedRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GUINumHedRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GUINumHedRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GUINumHedRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GUINums(requestBody:any, epicorHeaders?:Headers){
+export function post_GUINums(requestBody:Erp_Tablesets_GUINumHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_GUINums(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -162,10 +209,10 @@ export function post_GUINums(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GUINumHedRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GUINumHedRow
    */  
 export function get_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_TranDocTypeID(Company:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, TranDocTypeID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -180,7 +227,14 @@ export function get_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_Tra
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GUINumHedRow)
           })
@@ -199,15 +253,15 @@ export function get_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_Tra
       @param FiscalYearSuffix Desc: FiscalYearSuffix   Required: True   Allow empty value : True
       @param FiscalPeriod Desc: FiscalPeriod   Required: True
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GUINumHedRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GUINumHedRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_TranDocTypeID(Company:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, TranDocTypeID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_TranDocTypeID(Company:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, TranDocTypeID:string, requestBody:Erp_Tablesets_GUINumHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -221,7 +275,14 @@ export function patch_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_T
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -240,7 +301,7 @@ export function patch_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_T
       @param FiscalYearSuffix Desc: FiscalYearSuffix   Required: True   Allow empty value : True
       @param FiscalPeriod Desc: FiscalPeriod   Required: True
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -259,7 +320,14 @@ export function delete_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -284,10 +352,10 @@ export function delete_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GUINumDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GUINumDtlRow
    */  
 export function get_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_TranDocTypeID_GUINumDtls(Company:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, TranDocTypeID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -302,7 +370,14 @@ export function get_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_Tra
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GUINumDtlRow)
           })
@@ -324,10 +399,10 @@ export function get_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_Tra
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GUINumDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GUINumDtlRow
    */  
 export function get_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_TranDocTypeID_GUINumDtls_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_TranDocTypeID_GroupID(Company:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, TranDocTypeID:string, GroupID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -342,7 +417,14 @@ export function get_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_Tra
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GUINumDtlRow)
           })
@@ -362,10 +444,10 @@ export function get_GUINums_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_Tra
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GUINumDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GUINumDtlRow
    */  
 export function get_GUINumDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -380,7 +462,14 @@ export function get_GUINumDtls(select?:string, filter?:string, orderby?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GUINumDtlRow)
           })
@@ -394,15 +483,15 @@ export function get_GUINumDtls(select?:string, filter?:string, orderby?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GUINumDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GUINumDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GUINumDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GUINumDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GUINumDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GUINumDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_GUINumDtls(requestBody:Erp_Tablesets_GUINumDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -416,7 +505,14 @@ export function post_GUINumDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -438,10 +534,10 @@ export function post_GUINumDtls(requestBody:any, epicorHeaders?:Headers){
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GUINumDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GUINumDtlRow
    */  
 export function get_GUINumDtls_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_TranDocTypeID_GroupID(Company:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, TranDocTypeID:string, GroupID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -456,7 +552,14 @@ export function get_GUINumDtls_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GUINumDtlRow)
           })
@@ -476,15 +579,15 @@ export function get_GUINumDtls_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_
       @param FiscalPeriod Desc: FiscalPeriod   Required: True
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GUINumDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GUINumDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GUINumDtls_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_TranDocTypeID_GroupID(Company:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, TranDocTypeID:string, GroupID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GUINumDtls_Company_FiscalYear_FiscalYearSuffix_FiscalPeriod_TranDocTypeID_GroupID(Company:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, TranDocTypeID:string, GroupID:string, requestBody:Erp_Tablesets_GUINumDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -498,7 +601,14 @@ export function patch_GUINumDtls_Company_FiscalYear_FiscalYearSuffix_FiscalPerio
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -518,7 +628,7 @@ export function patch_GUINumDtls_Company_FiscalYear_FiscalYearSuffix_FiscalPerio
       @param FiscalPeriod Desc: FiscalPeriod   Required: True
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -537,7 +647,14 @@ export function delete_GUINumDtls_Company_FiscalYear_FiscalYearSuffix_FiscalPeri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -557,10 +674,10 @@ export function delete_GUINumDtls_Company_FiscalYear_FiscalYearSuffix_FiscalPeri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GUINumHedListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GUINumHedListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -575,7 +692,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GUINumHedListRow)
           })
@@ -588,6 +712,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -599,7 +740,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -650,15 +791,22 @@ export function get_GetRows(whereClauseGUINumHed:string, whereClauseGUINumDtl:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -674,7 +822,7 @@ export function get_GetRows(whereClauseGUINumHed:string, whereClauseGUINumDtl:st
    Required: True   Allow empty value : True
    Required: True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -725,15 +873,22 @@ export function get_GetByID(fiscalYear:string, fiscalYearSuffix:string, fiscalPe
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -748,7 +903,7 @@ export function get_GetByID(fiscalYear:string, fiscalYearSuffix:string, fiscalPe
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -790,15 +945,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -810,30 +972,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method OnChangeYearPeriod
    Description: OnChangeYearPeriod handler
    OperationID: OnChangeYearPeriod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeYearPeriod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeYearPeriod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeYearPeriod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeYearPeriod(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeYearPeriod(requestBody:OnChangeYearPeriod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeYearPeriod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/OnChangeYearPeriod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeYearPeriod_output)
           })
       .catch((error) => {
           reject(error)
@@ -845,30 +1014,37 @@ export function post_OnChangeYearPeriod(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeTranDocTypeID
    Description: OnChangeTranDocTypeID handler
    OperationID: OnChangeTranDocTypeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeTranDocTypeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeTranDocTypeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeTranDocTypeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeTranDocTypeID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeTranDocTypeID(requestBody:OnChangeTranDocTypeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeTranDocTypeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/OnChangeTranDocTypeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeTranDocTypeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -880,30 +1056,37 @@ export function post_OnChangeTranDocTypeID(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetLegalNumber
    Description: GetLegalNumber method
    OperationID: GetLegalNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLegalNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLegalNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLegalNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLegalNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLegalNumber(requestBody:GetLegalNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLegalNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/GetLegalNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLegalNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -915,30 +1098,37 @@ export function post_GetLegalNumber(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLegalNumberForSalesOrder
    Description: GetLegalNumberForSalesOrder method should be called before showing GUI Legal Number assigning form for Sales Order
    OperationID: GetLegalNumberForSalesOrder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLegalNumberForSalesOrder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLegalNumberForSalesOrder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLegalNumberForSalesOrder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLegalNumberForSalesOrder(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLegalNumberForSalesOrder(requestBody:GetLegalNumberForSalesOrder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLegalNumberForSalesOrder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/GetLegalNumberForSalesOrder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLegalNumberForSalesOrder_output)
           })
       .catch((error) => {
           reject(error)
@@ -950,30 +1140,37 @@ export function post_GetLegalNumberForSalesOrder(requestBody:any, epicorHeaders?
    Summary: Invoke method OnChangeGUIYearOrPeriod
    Description: OnChangeGUIYearOrPeriod handler
    OperationID: OnChangeGUIYearOrPeriod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeGUIYearOrPeriod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeGUIYearOrPeriod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeGUIYearOrPeriod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeGUIYearOrPeriod(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeGUIYearOrPeriod(requestBody:OnChangeGUIYearOrPeriod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeGUIYearOrPeriod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/OnChangeGUIYearOrPeriod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeGUIYearOrPeriod_output)
           })
       .catch((error) => {
           reject(error)
@@ -985,30 +1182,37 @@ export function post_OnChangeGUIYearOrPeriod(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method OnChangeGUIGroup
    Description: OnChangeGUIGroup handler
    OperationID: OnChangeGUIGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeGUIGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeGUIGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeGUIGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeGUIGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeGUIGroup(requestBody:OnChangeGUIGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeGUIGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/OnChangeGUIGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeGUIGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1020,30 +1224,37 @@ export function post_OnChangeGUIGroup(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeSeqNum
    Description: OnChangeSeqNum handler
    OperationID: OnChangeSeqNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeSeqNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeSeqNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeSeqNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeSeqNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeSeqNum(requestBody:OnChangeSeqNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeSeqNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/OnChangeSeqNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeSeqNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1055,30 +1266,37 @@ export function post_OnChangeSeqNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignLegalNumber
    Description: Assigns a legal number.
    OperationID: AssignLegalNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignLegalNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignLegalNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignLegalNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignLegalNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignLegalNumber(requestBody:AssignLegalNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignLegalNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/AssignLegalNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignLegalNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -1090,30 +1308,37 @@ export function post_AssignLegalNumber(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method VoidSalesOrderLegalNumber
    Description: Void Sales Order Legal Number
    OperationID: VoidSalesOrderLegalNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VoidSalesOrderLegalNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VoidSalesOrderLegalNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VoidSalesOrderLegalNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VoidSalesOrderLegalNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_VoidSalesOrderLegalNumber(requestBody:VoidSalesOrderLegalNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VoidSalesOrderLegalNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/VoidSalesOrderLegalNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VoidSalesOrderLegalNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -1125,30 +1350,37 @@ export function post_VoidSalesOrderLegalNumber(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewGUINumHed
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGUINumHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGUINumHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGUINumHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGUINumHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGUINumHed(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGUINumHed(requestBody:GetNewGUINumHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGUINumHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/GetNewGUINumHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGUINumHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -1160,30 +1392,37 @@ export function post_GetNewGUINumHed(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewGUINumDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGUINumDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGUINumDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGUINumDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGUINumDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGUINumDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGUINumDtl(requestBody:GetNewGUINumDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGUINumDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/GetNewGUINumDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGUINumDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1195,30 +1434,37 @@ export function post_GetNewGUINumDtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1230,7 +1476,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1254,15 +1500,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1274,7 +1527,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1298,15 +1551,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1318,30 +1578,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1353,30 +1620,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GUINumSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1387,21 +1661,38 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GUINumDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GUINumDtlRow[],
+   "value":Erp_Tablesets_GUINumDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GUINumHedListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GUINumHedListRow[],
+   "value":Erp_Tablesets_GUINumHedListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GUINumHedRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GUINumHedRow[],
+   "value":Erp_Tablesets_GUINumHedRow,
 }
 
 export interface Erp_Tablesets_GUINumDtlRow{
@@ -1490,6 +1781,23 @@ export interface Erp_Tablesets_GUINumHedRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1502,7 +1810,7 @@ export interface AssignLegalNumber_input{
 export interface AssignLegalNumber_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUILegalNumberTableset[],
+   ds:Erp_Tablesets_GUILegalNumberTableset,
 }
 }
 
@@ -1698,7 +2006,7 @@ export interface GetLegalNumberForSalesOrder_input{
 export interface GetLegalNumberForSalesOrder_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUILegalNumberTableset[],
+   ds:Erp_Tablesets_GUILegalNumberTableset,
 }
 }
 
@@ -1716,7 +2024,7 @@ export interface GetLegalNumber_input{
 export interface GetLegalNumber_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUILegalNumberTableset[],
+   ds:Erp_Tablesets_GUILegalNumberTableset,
 }
 }
 
@@ -1760,7 +2068,7 @@ export interface GetNewGUINumDtl_input{
 export interface GetNewGUINumDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUINumTableset[],
+   ds:Erp_Tablesets_GUINumTableset,
 }
 }
 
@@ -1780,7 +2088,7 @@ export interface GetNewGUINumHed_input{
 export interface GetNewGUINumHed_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUINumTableset[],
+   ds:Erp_Tablesets_GUINumTableset,
 }
 }
 
@@ -1853,7 +2161,7 @@ export interface OnChangeGUIGroup_input{
 export interface OnChangeGUIGroup_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUILegalNumberTableset[],
+   ds:Erp_Tablesets_GUILegalNumberTableset,
 }
 }
 
@@ -1873,7 +2181,7 @@ export interface OnChangeGUIYearOrPeriod_input{
 export interface OnChangeGUIYearOrPeriod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUILegalNumberTableset[],
+   ds:Erp_Tablesets_GUILegalNumberTableset,
 }
 }
 
@@ -1889,7 +2197,7 @@ export interface OnChangeSeqNum_input{
 export interface OnChangeSeqNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUILegalNumberTableset[],
+   ds:Erp_Tablesets_GUILegalNumberTableset,
 }
 }
 
@@ -1903,7 +2211,7 @@ export interface OnChangeTranDocTypeID_input{
 export interface OnChangeTranDocTypeID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUINumTableset[],
+   ds:Erp_Tablesets_GUINumTableset,
 }
 }
 
@@ -1917,7 +2225,7 @@ export interface OnChangeYearPeriod_input{
 export interface OnChangeYearPeriod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUINumTableset[],
+   ds:Erp_Tablesets_GUINumTableset,
 }
 }
 
@@ -1936,7 +2244,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtGUINumTableset[],
+   ds:Erp_Tablesets_UpdExtGUINumTableset,
    errorsOccurred:boolean,
 }
 }
@@ -1951,7 +2259,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GUINumTableset[],
+   ds:Erp_Tablesets_GUINumTableset,
 }
 }
 

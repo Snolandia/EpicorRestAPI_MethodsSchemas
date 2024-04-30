@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PaymentEntrySvc
 // Description: Initialize
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CheckHedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CheckHedRow
    */  
 export function get_PaymentEntries(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_PaymentEntries(select?:string, expand?:string, filter?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CheckHedRow)
           })
@@ -118,15 +158,15 @@ export function get_PaymentEntries(select?:string, expand?:string, filter?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PaymentEntries
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CheckHedRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CheckHedRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CheckHedRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CheckHedRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PaymentEntries(requestBody:any, epicorHeaders?:Headers){
+export function post_PaymentEntries(requestBody:Erp_Tablesets_CheckHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_PaymentEntries(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_PaymentEntries(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CheckHedRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CheckHedRow
    */  
 export function get_PaymentEntries_Company_HeadNum(Company:string, HeadNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_PaymentEntries_Company_HeadNum(Company:string, HeadNum:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CheckHedRow)
           })
@@ -193,15 +247,15 @@ export function get_PaymentEntries_Company_HeadNum(Company:string, HeadNum:strin
    OperationID: UpdateExt_PaymentEntry
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param HeadNum Desc: HeadNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CheckHedRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CheckHedRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PaymentEntries_Company_HeadNum(Company:string, HeadNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PaymentEntries_Company_HeadNum(Company:string, HeadNum:string, requestBody:Erp_Tablesets_CheckHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_PaymentEntries_Company_HeadNum(Company:string, HeadNum:str
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_PaymentEntries_Company_HeadNum(Company:string, HeadNum:str
    OperationID: DeleteUpdateExt_PaymentEntry
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param HeadNum Desc: HeadNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_PaymentEntries_Company_HeadNum(Company:string, HeadNum:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_PaymentEntries_Company_HeadNum(Company:string, HeadNum:st
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTranRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTranRow
    */  
 export function get_PaymentEntries_Company_HeadNum_APTrans(Company:string, HeadNum:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_PaymentEntries_Company_HeadNum_APTrans(Company:string, HeadN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APTranRow)
           })
@@ -313,10 +388,10 @@ export function get_PaymentEntries_Company_HeadNum_APTrans(Company:string, HeadN
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APTranRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APTranRow
    */  
 export function get_PaymentEntries_Company_HeadNum_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -331,7 +406,14 @@ export function get_PaymentEntries_Company_HeadNum_APTrans_Company_HeadNum_APTra
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APTranRow)
           })
@@ -354,10 +436,10 @@ export function get_PaymentEntries_Company_HeadNum_APTrans_Company_HeadNum_APTra
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranRow
    */  
 export function get_PaymentEntries_Company_HeadNum_BankTrans(Company:string, HeadNum:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -372,7 +454,14 @@ export function get_PaymentEntries_Company_HeadNum_BankTrans(Company:string, Hea
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BankTranRow)
           })
@@ -394,10 +483,10 @@ export function get_PaymentEntries_Company_HeadNum_BankTrans(Company:string, Hea
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BankTranRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BankTranRow
    */  
 export function get_PaymentEntries_Company_HeadNum_BankTrans_Company_BankAcctID_TranNum_Voided(Company:string, HeadNum:string, BankAcctID:string, TranNum:string, Voided:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -412,7 +501,14 @@ export function get_PaymentEntries_Company_HeadNum_BankTrans_Company_BankAcctID_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BankTranRow)
           })
@@ -434,10 +530,10 @@ export function get_PaymentEntries_Company_HeadNum_BankTrans_Company_BankAcctID_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxDtlRow
    */  
 export function get_PaymentEntries_Company_HeadNum_TaxDtls(Company:string, HeadNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -452,7 +548,14 @@ export function get_PaymentEntries_Company_HeadNum_TaxDtls(Company:string, HeadN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxDtlRow)
           })
@@ -480,10 +583,10 @@ export function get_PaymentEntries_Company_HeadNum_TaxDtls(Company:string, HeadN
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaxDtlRow
    */  
 export function get_PaymentEntries_Company_HeadNum_TaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, HeadNum:string, SourceModule:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, BankAcctID:string, TranNum:string, Voided:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -498,7 +601,14 @@ export function get_PaymentEntries_Company_HeadNum_TaxDtls_Company_SourceModule_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaxDtlRow)
           })
@@ -520,10 +630,10 @@ export function get_PaymentEntries_Company_HeadNum_TaxDtls_Company_SourceModule_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CheckHedAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CheckHedAttchRow
    */  
 export function get_PaymentEntries_Company_HeadNum_CheckHedAttches(Company:string, HeadNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -538,7 +648,14 @@ export function get_PaymentEntries_Company_HeadNum_CheckHedAttches(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CheckHedAttchRow)
           })
@@ -557,10 +674,10 @@ export function get_PaymentEntries_Company_HeadNum_CheckHedAttches(Company:strin
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CheckHedAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CheckHedAttchRow
    */  
 export function get_PaymentEntries_Company_HeadNum_CheckHedAttches_Company_HeadNum_DrawingSeq(Company:string, HeadNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -575,7 +692,14 @@ export function get_PaymentEntries_Company_HeadNum_CheckHedAttches_Company_HeadN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CheckHedAttchRow)
           })
@@ -596,10 +720,10 @@ export function get_PaymentEntries_Company_HeadNum_CheckHedAttches_Company_HeadN
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTranRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTranRow
    */  
 export function get_APTrans(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -614,7 +738,14 @@ export function get_APTrans(select?:string, expand?:string, filter?:string, orde
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APTranRow)
           })
@@ -628,15 +759,15 @@ export function get_APTrans(select?:string, expand?:string, filter?:string, orde
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_APTrans
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APTranRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APTranRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.APTranRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.APTranRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_APTrans(requestBody:any, epicorHeaders?:Headers){
+export function post_APTrans(requestBody:Erp_Tablesets_APTranRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -650,7 +781,14 @@ export function post_APTrans(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -672,10 +810,10 @@ export function post_APTrans(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APTranRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APTranRow
    */  
 export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -690,7 +828,14 @@ export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APTranRow)
           })
@@ -709,15 +854,15 @@ export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided(Company:s
       @param APTranNo Desc: APTranNo   Required: True
       @param InvoiceNum Desc: InvoiceNum   Required: True   Allow empty value : True
       @param Voided Desc: Voided   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.APTranRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.APTranRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, requestBody:Erp_Tablesets_APTranRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -731,7 +876,14 @@ export function patch_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided(Company
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -750,7 +902,7 @@ export function patch_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided(Company
       @param APTranNo Desc: APTranNo   Required: True
       @param InvoiceNum Desc: InvoiceNum   Required: True   Allow empty value : True
       @param Voided Desc: Voided   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -769,7 +921,14 @@ export function delete_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -794,10 +953,10 @@ export function delete_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided(Compan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTTaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTTaxDtlRow
    */  
 export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTTaxDtls(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -812,7 +971,14 @@ export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTTaxDtl
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APTTaxDtlRow)
           })
@@ -840,10 +1006,10 @@ export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTTaxDtl
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APTTaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APTTaxDtlRow
    */  
 export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, SourceModule:string, InvoiceRef:string, BankAcctID:string, TranNum:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -858,7 +1024,14 @@ export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTTaxDtl
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APTTaxDtlRow)
           })
@@ -883,10 +1056,10 @@ export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTTaxDtl
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTranTGLCRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTranTGLCRow
    */  
 export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTranTGLCs(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -901,7 +1074,14 @@ export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTranTGL
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APTranTGLCRow)
           })
@@ -923,10 +1103,10 @@ export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTranTGL
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APTranTGLCRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APTranTGLCRow
    */  
 export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTranTGLCs_Company_HeadNum_APTranNo_InvoiceNum_Voided_SysRowID(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -941,7 +1121,14 @@ export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTranTGL
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APTranTGLCRow)
           })
@@ -961,10 +1148,10 @@ export function get_APTrans_Company_HeadNum_APTranNo_InvoiceNum_Voided_APTranTGL
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTTaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTTaxDtlRow
    */  
 export function get_APTTaxDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -979,7 +1166,14 @@ export function get_APTTaxDtls(select?:string, filter?:string, orderby?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APTTaxDtlRow)
           })
@@ -993,15 +1187,15 @@ export function get_APTTaxDtls(select?:string, filter?:string, orderby?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_APTTaxDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APTTaxDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APTTaxDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.APTTaxDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.APTTaxDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_APTTaxDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_APTTaxDtls(requestBody:Erp_Tablesets_APTTaxDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1015,7 +1209,14 @@ export function post_APTTaxDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1043,10 +1244,10 @@ export function post_APTTaxDtls(requestBody:any, epicorHeaders?:Headers){
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APTTaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APTTaxDtlRow
    */  
 export function get_APTTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, SourceModule:string, HeadNum:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, BankAcctID:string, TranNum:string, Voided:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1061,7 +1262,14 @@ export function get_APTTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APTTaxDtlRow)
           })
@@ -1087,15 +1295,15 @@ export function get_APTTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_
       @param TaxCode Desc: TaxCode   Required: True   Allow empty value : True
       @param RateCode Desc: RateCode   Required: True   Allow empty value : True
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.APTTaxDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.APTTaxDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_APTTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, SourceModule:string, HeadNum:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, BankAcctID:string, TranNum:string, Voided:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_APTTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, SourceModule:string, HeadNum:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, BankAcctID:string, TranNum:string, Voided:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, requestBody:Erp_Tablesets_APTTaxDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1109,7 +1317,14 @@ export function patch_APTTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNu
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1135,7 +1350,7 @@ export function patch_APTTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNu
       @param TaxCode Desc: TaxCode   Required: True   Allow empty value : True
       @param RateCode Desc: RateCode   Required: True   Allow empty value : True
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1154,7 +1369,14 @@ export function delete_APTTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1174,10 +1396,10 @@ export function delete_APTTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceN
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTranTGLCRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APTranTGLCRow
    */  
 export function get_APTranTGLCs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1192,7 +1414,14 @@ export function get_APTranTGLCs(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APTranTGLCRow)
           })
@@ -1206,15 +1435,15 @@ export function get_APTranTGLCs(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_APTranTGLCs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APTranTGLCRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.APTranTGLCRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.APTranTGLCRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.APTranTGLCRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_APTranTGLCs(requestBody:any, epicorHeaders?:Headers){
+export function post_APTranTGLCs(requestBody:Erp_Tablesets_APTranTGLCRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1228,7 +1457,14 @@ export function post_APTranTGLCs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1250,10 +1486,10 @@ export function post_APTranTGLCs(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APTranTGLCRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APTranTGLCRow
    */  
 export function get_APTranTGLCs_Company_HeadNum_APTranNo_InvoiceNum_Voided_SysRowID(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1268,7 +1504,14 @@ export function get_APTranTGLCs_Company_HeadNum_APTranNo_InvoiceNum_Voided_SysRo
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APTranTGLCRow)
           })
@@ -1288,15 +1531,15 @@ export function get_APTranTGLCs_Company_HeadNum_APTranNo_InvoiceNum_Voided_SysRo
       @param InvoiceNum Desc: InvoiceNum   Required: True   Allow empty value : True
       @param Voided Desc: Voided   Required: True
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.APTranTGLCRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.APTranTGLCRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_APTranTGLCs_Company_HeadNum_APTranNo_InvoiceNum_Voided_SysRowID(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_APTranTGLCs_Company_HeadNum_APTranNo_InvoiceNum_Voided_SysRowID(Company:string, HeadNum:string, APTranNo:string, InvoiceNum:string, Voided:string, SysRowID:string, requestBody:Erp_Tablesets_APTranTGLCRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1310,7 +1553,14 @@ export function patch_APTranTGLCs_Company_HeadNum_APTranNo_InvoiceNum_Voided_Sys
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1330,7 +1580,7 @@ export function patch_APTranTGLCs_Company_HeadNum_APTranNo_InvoiceNum_Voided_Sys
       @param InvoiceNum Desc: InvoiceNum   Required: True   Allow empty value : True
       @param Voided Desc: Voided   Required: True
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1349,7 +1599,14 @@ export function delete_APTranTGLCs_Company_HeadNum_APTranNo_InvoiceNum_Voided_Sy
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1370,10 +1627,10 @@ export function delete_APTranTGLCs_Company_HeadNum_APTranNo_InvoiceNum_Voided_Sy
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranRow
    */  
 export function get_BankTrans(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1388,7 +1645,14 @@ export function get_BankTrans(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BankTranRow)
           })
@@ -1402,15 +1666,15 @@ export function get_BankTrans(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BankTrans
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BankTranRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BankTranRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.BankTranRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.BankTranRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BankTrans(requestBody:any, epicorHeaders?:Headers){
+export function post_BankTrans(requestBody:Erp_Tablesets_BankTranRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1424,7 +1688,14 @@ export function post_BankTrans(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1445,10 +1716,10 @@ export function post_BankTrans(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BankTranRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BankTranRow
    */  
 export function get_BankTrans_Company_BankAcctID_TranNum_Voided(Company:string, BankAcctID:string, TranNum:string, Voided:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1463,7 +1734,14 @@ export function get_BankTrans_Company_BankAcctID_TranNum_Voided(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BankTranRow)
           })
@@ -1481,15 +1759,15 @@ export function get_BankTrans_Company_BankAcctID_TranNum_Voided(Company:string, 
       @param BankAcctID Desc: BankAcctID   Required: True   Allow empty value : True
       @param TranNum Desc: TranNum   Required: True
       @param Voided Desc: Voided   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.BankTranRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.BankTranRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BankTrans_Company_BankAcctID_TranNum_Voided(Company:string, BankAcctID:string, TranNum:string, Voided:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BankTrans_Company_BankAcctID_TranNum_Voided(Company:string, BankAcctID:string, TranNum:string, Voided:string, requestBody:Erp_Tablesets_BankTranRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1503,7 +1781,14 @@ export function patch_BankTrans_Company_BankAcctID_TranNum_Voided(Company:string
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1521,7 +1806,7 @@ export function patch_BankTrans_Company_BankAcctID_TranNum_Voided(Company:string
       @param BankAcctID Desc: BankAcctID   Required: True   Allow empty value : True
       @param TranNum Desc: TranNum   Required: True
       @param Voided Desc: Voided   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1540,7 +1825,14 @@ export function delete_BankTrans_Company_BankAcctID_TranNum_Voided(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1564,10 +1856,10 @@ export function delete_BankTrans_Company_BankAcctID_TranNum_Voided(Company:strin
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranTaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranTaxDtlRow
    */  
 export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTaxDtls(Company:string, BankAcctID:string, TranNum:string, Voided:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1582,7 +1874,14 @@ export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTaxDtls(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BankTranTaxDtlRow)
           })
@@ -1610,10 +1909,10 @@ export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTaxDtls(
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BankTranTaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BankTranTaxDtlRow
    */  
 export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, BankAcctID:string, TranNum:string, Voided:string, SourceModule:string, HeadNum:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1628,7 +1927,14 @@ export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTaxDtls_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BankTranTaxDtlRow)
           })
@@ -1652,10 +1958,10 @@ export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTaxDtls_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranTGLCRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranTGLCRow
    */  
 export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTGLCs(Company:string, BankAcctID:string, TranNum:string, Voided:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1670,7 +1976,14 @@ export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTGLCs(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BankTranTGLCRow)
           })
@@ -1691,10 +2004,10 @@ export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTGLCs(Co
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BankTranTGLCRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BankTranTGLCRow
    */  
 export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTGLCs_Company_BankAcctID_TranNum_Voided_SysRowID(Company:string, BankAcctID:string, TranNum:string, Voided:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1709,7 +2022,14 @@ export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTGLCs_Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BankTranTGLCRow)
           })
@@ -1729,10 +2049,10 @@ export function get_BankTrans_Company_BankAcctID_TranNum_Voided_BankTranTGLCs_Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranTaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranTaxDtlRow
    */  
 export function get_BankTranTaxDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1747,7 +2067,14 @@ export function get_BankTranTaxDtls(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BankTranTaxDtlRow)
           })
@@ -1761,15 +2088,15 @@ export function get_BankTranTaxDtls(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BankTranTaxDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BankTranTaxDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BankTranTaxDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.BankTranTaxDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.BankTranTaxDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BankTranTaxDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_BankTranTaxDtls(requestBody:Erp_Tablesets_BankTranTaxDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1783,7 +2110,14 @@ export function post_BankTranTaxDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1811,10 +2145,10 @@ export function post_BankTranTaxDtls(requestBody:any, epicorHeaders?:Headers){
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BankTranTaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BankTranTaxDtlRow
    */  
 export function get_BankTranTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, SourceModule:string, HeadNum:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, BankAcctID:string, TranNum:string, Voided:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1829,7 +2163,14 @@ export function get_BankTranTaxDtls_Company_SourceModule_HeadNum_APTranNo_Invoic
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BankTranTaxDtlRow)
           })
@@ -1855,15 +2196,15 @@ export function get_BankTranTaxDtls_Company_SourceModule_HeadNum_APTranNo_Invoic
       @param TaxCode Desc: TaxCode   Required: True   Allow empty value : True
       @param RateCode Desc: RateCode   Required: True   Allow empty value : True
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.BankTranTaxDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.BankTranTaxDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BankTranTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, SourceModule:string, HeadNum:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, BankAcctID:string, TranNum:string, Voided:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BankTranTaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, SourceModule:string, HeadNum:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, BankAcctID:string, TranNum:string, Voided:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, requestBody:Erp_Tablesets_BankTranTaxDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1877,7 +2218,14 @@ export function patch_BankTranTaxDtls_Company_SourceModule_HeadNum_APTranNo_Invo
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1903,7 +2251,7 @@ export function patch_BankTranTaxDtls_Company_SourceModule_HeadNum_APTranNo_Invo
       @param TaxCode Desc: TaxCode   Required: True   Allow empty value : True
       @param RateCode Desc: RateCode   Required: True   Allow empty value : True
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1922,7 +2270,14 @@ export function delete_BankTranTaxDtls_Company_SourceModule_HeadNum_APTranNo_Inv
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1942,10 +2297,10 @@ export function delete_BankTranTaxDtls_Company_SourceModule_HeadNum_APTranNo_Inv
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranTGLCRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BankTranTGLCRow
    */  
 export function get_BankTranTGLCs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1960,7 +2315,14 @@ export function get_BankTranTGLCs(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BankTranTGLCRow)
           })
@@ -1974,15 +2336,15 @@ export function get_BankTranTGLCs(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BankTranTGLCs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BankTranTGLCRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BankTranTGLCRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.BankTranTGLCRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.BankTranTGLCRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BankTranTGLCs(requestBody:any, epicorHeaders?:Headers){
+export function post_BankTranTGLCs(requestBody:Erp_Tablesets_BankTranTGLCRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1996,7 +2358,14 @@ export function post_BankTranTGLCs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2017,10 +2386,10 @@ export function post_BankTranTGLCs(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BankTranTGLCRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BankTranTGLCRow
    */  
 export function get_BankTranTGLCs_Company_BankAcctID_TranNum_Voided_SysRowID(Company:string, BankAcctID:string, TranNum:string, Voided:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2035,7 +2404,14 @@ export function get_BankTranTGLCs_Company_BankAcctID_TranNum_Voided_SysRowID(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BankTranTGLCRow)
           })
@@ -2054,15 +2430,15 @@ export function get_BankTranTGLCs_Company_BankAcctID_TranNum_Voided_SysRowID(Com
       @param TranNum Desc: TranNum   Required: True
       @param Voided Desc: Voided   Required: True
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.BankTranTGLCRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.BankTranTGLCRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BankTranTGLCs_Company_BankAcctID_TranNum_Voided_SysRowID(Company:string, BankAcctID:string, TranNum:string, Voided:string, SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BankTranTGLCs_Company_BankAcctID_TranNum_Voided_SysRowID(Company:string, BankAcctID:string, TranNum:string, Voided:string, SysRowID:string, requestBody:Erp_Tablesets_BankTranTGLCRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2076,7 +2452,14 @@ export function patch_BankTranTGLCs_Company_BankAcctID_TranNum_Voided_SysRowID(C
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2095,7 +2478,7 @@ export function patch_BankTranTGLCs_Company_BankAcctID_TranNum_Voided_SysRowID(C
       @param TranNum Desc: TranNum   Required: True
       @param Voided Desc: Voided   Required: True
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2114,7 +2497,14 @@ export function delete_BankTranTGLCs_Company_BankAcctID_TranNum_Voided_SysRowID(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2134,10 +2524,10 @@ export function delete_BankTranTGLCs_Company_BankAcctID_TranNum_Voided_SysRowID(
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaxDtlRow
    */  
 export function get_TaxDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2152,7 +2542,14 @@ export function get_TaxDtls(select?:string, filter?:string, orderby?:string, top
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxDtlRow)
           })
@@ -2166,15 +2563,15 @@ export function get_TaxDtls(select?:string, filter?:string, orderby?:string, top
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_TaxDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaxDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaxDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.TaxDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.TaxDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TaxDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_TaxDtls(requestBody:Erp_Tablesets_TaxDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2188,7 +2585,14 @@ export function post_TaxDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2216,10 +2620,10 @@ export function post_TaxDtls(requestBody:any, epicorHeaders?:Headers){
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaxDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaxDtlRow
    */  
 export function get_TaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, SourceModule:string, HeadNum:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, BankAcctID:string, TranNum:string, Voided:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2234,7 +2638,14 @@ export function get_TaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_Inv
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaxDtlRow)
           })
@@ -2260,15 +2671,15 @@ export function get_TaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_Inv
       @param TaxCode Desc: TaxCode   Required: True   Allow empty value : True
       @param RateCode Desc: RateCode   Required: True   Allow empty value : True
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaxDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaxDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_TaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, SourceModule:string, HeadNum:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, BankAcctID:string, TranNum:string, Voided:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_TaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_InvoiceRef_BankAcctID_TranNum_Voided_TaxCode_RateCode_ECAcquisitionSeq(Company:string, SourceModule:string, HeadNum:string, APTranNo:string, InvoiceNum:string, InvoiceRef:string, BankAcctID:string, TranNum:string, Voided:string, TaxCode:string, RateCode:string, ECAcquisitionSeq:string, requestBody:Erp_Tablesets_TaxDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2282,7 +2693,14 @@ export function patch_TaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_I
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2308,7 +2726,7 @@ export function patch_TaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_I
       @param TaxCode Desc: TaxCode   Required: True   Allow empty value : True
       @param RateCode Desc: RateCode   Required: True   Allow empty value : True
       @param ECAcquisitionSeq Desc: ECAcquisitionSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2327,7 +2745,14 @@ export function delete_TaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2347,10 +2772,10 @@ export function delete_TaxDtls_Company_SourceModule_HeadNum_APTranNo_InvoiceNum_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CheckHedAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CheckHedAttchRow
    */  
 export function get_CheckHedAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2365,7 +2790,14 @@ export function get_CheckHedAttches(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CheckHedAttchRow)
           })
@@ -2379,15 +2811,15 @@ export function get_CheckHedAttches(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CheckHedAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CheckHedAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CheckHedAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CheckHedAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CheckHedAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckHedAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckHedAttches(requestBody:Erp_Tablesets_CheckHedAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2401,7 +2833,14 @@ export function post_CheckHedAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2420,10 +2859,10 @@ export function post_CheckHedAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CheckHedAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CheckHedAttchRow
    */  
 export function get_CheckHedAttches_Company_HeadNum_DrawingSeq(Company:string, HeadNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2438,7 +2877,14 @@ export function get_CheckHedAttches_Company_HeadNum_DrawingSeq(Company:string, H
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CheckHedAttchRow)
           })
@@ -2455,15 +2901,15 @@ export function get_CheckHedAttches_Company_HeadNum_DrawingSeq(Company:string, H
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param HeadNum Desc: HeadNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CheckHedAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CheckHedAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CheckHedAttches_Company_HeadNum_DrawingSeq(Company:string, HeadNum:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CheckHedAttches_Company_HeadNum_DrawingSeq(Company:string, HeadNum:string, DrawingSeq:string, requestBody:Erp_Tablesets_CheckHedAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2477,7 +2923,14 @@ export function patch_CheckHedAttches_Company_HeadNum_DrawingSeq(Company:string,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2494,7 +2947,7 @@ export function patch_CheckHedAttches_Company_HeadNum_DrawingSeq(Company:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param HeadNum Desc: HeadNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2513,7 +2966,14 @@ export function delete_CheckHedAttches_Company_HeadNum_DrawingSeq(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2533,10 +2993,10 @@ export function delete_CheckHedAttches_Company_HeadNum_DrawingSeq(Company:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumGenOptsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumGenOptsRow
    */  
 export function get_LegalNumGenOpts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2551,7 +3011,14 @@ export function get_LegalNumGenOpts(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumGenOptsRow)
           })
@@ -2565,15 +3032,15 @@ export function get_LegalNumGenOpts(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LegalNumGenOpts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LegalNumGenOpts(requestBody:any, epicorHeaders?:Headers){
+export function post_LegalNumGenOpts(requestBody:Erp_Tablesets_LegalNumGenOptsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2587,7 +3054,14 @@ export function post_LegalNumGenOpts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2605,10 +3079,10 @@ export function post_LegalNumGenOpts(requestBody:any, epicorHeaders?:Headers){
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
    */  
 export function get_LegalNumGenOpts_Company_LegalNumberID(Company:string, LegalNumberID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2623,7 +3097,14 @@ export function get_LegalNumGenOpts_Company_LegalNumberID(Company:string, LegalN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumGenOptsRow)
           })
@@ -2639,15 +3120,15 @@ export function get_LegalNumGenOpts_Company_LegalNumberID(Company:string, LegalN
    OperationID: UpdateExt_LegalNumGenOpt
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LegalNumGenOpts_Company_LegalNumberID(Company:string, LegalNumberID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LegalNumGenOpts_Company_LegalNumberID(Company:string, LegalNumberID:string, requestBody:Erp_Tablesets_LegalNumGenOptsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2661,7 +3142,14 @@ export function patch_LegalNumGenOpts_Company_LegalNumberID(Company:string, Lega
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2677,7 +3165,7 @@ export function patch_LegalNumGenOpts_Company_LegalNumberID(Company:string, Lega
    OperationID: DeleteUpdateExt_LegalNumGenOpt
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2696,7 +3184,14 @@ export function delete_LegalNumGenOpts_Company_LegalNumberID(Company:string, Leg
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2716,10 +3211,10 @@ export function delete_LegalNumGenOpts_Company_LegalNumberID(Company:string, Leg
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CheckHedListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CheckHedListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2734,7 +3229,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CheckHedListRow)
           })
@@ -2746,6 +3248,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -2766,7 +3285,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -2889,15 +3408,22 @@ export function get_GetRows(whereClauseCheckHed:string, whereClauseCheckHedAttch
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2910,7 +3436,7 @@ export function get_GetRows(whereClauseCheckHed:string, whereClauseCheckHedAttch
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -2934,15 +3460,22 @@ export function get_GetByID(headNum:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2957,7 +3490,7 @@ export function get_GetByID(headNum:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -2999,15 +3532,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3019,30 +3559,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method AssignLegalNumber
    Description: Assigns a legal number to the payment.
    OperationID: AssignLegalNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignLegalNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignLegalNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignLegalNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignLegalNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignLegalNumber(requestBody:AssignLegalNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignLegalNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/AssignLegalNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignLegalNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -3054,7 +3601,7 @@ export function post_AssignLegalNumber(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetTHWHTCertNoGenerationType
    Description: Gets the Generation Type of Thailand Withholding Tax Certificate Numbers
    OperationID: GetTHWHTCertNoGenerationType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTHWHTCertNoGenerationType_output
@@ -3067,15 +3614,22 @@ export function post_GetTHWHTCertNoGenerationType(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTHWHTCertNoGenerationType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetTHWHTCertNoGenerationType", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTHWHTCertNoGenerationType_output)
           })
       .catch((error) => {
           reject(error)
@@ -3087,30 +3641,37 @@ export function post_GetTHWHTCertNoGenerationType(epicorHeaders?:Headers){
    Summary: Invoke method GetTHWHTCertNoOpts
    Description: Returns a record in the LegalNumGenOpts datatable that will be used to generate a Withholding Tax Certificate Number
    OperationID: GetTHWHTCertNoOpts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTHWHTCertNoOpts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTHWHTCertNoOpts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTHWHTCertNoOpts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTHWHTCertNoOpts(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTHWHTCertNoOpts(requestBody:GetTHWHTCertNoOpts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTHWHTCertNoOpts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetTHWHTCertNoOpts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTHWHTCertNoOpts_output)
           })
       .catch((error) => {
           reject(error)
@@ -3122,30 +3683,37 @@ export function post_GetTHWHTCertNoOpts(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method AssignTHWHTCertNo
    Description: Assigns a Withholding Tax Certificate Number to the payment
    OperationID: AssignTHWHTCertNo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignTHWHTCertNo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignTHWHTCertNo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignTHWHTCertNo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignTHWHTCertNo(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignTHWHTCertNo(requestBody:AssignTHWHTCertNo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignTHWHTCertNo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/AssignTHWHTCertNo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignTHWHTCertNo_output)
           })
       .catch((error) => {
           reject(error)
@@ -3157,30 +3725,37 @@ export function post_AssignTHWHTCertNo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method VoidTHWHTCertNo
    Description: Voids a Withholding Tax Certificate Number
    OperationID: VoidTHWHTCertNo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VoidTHWHTCertNo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VoidTHWHTCertNo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VoidTHWHTCertNo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VoidTHWHTCertNo(requestBody:any, epicorHeaders?:Headers){
+export function post_VoidTHWHTCertNo(requestBody:VoidTHWHTCertNo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VoidTHWHTCertNo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/VoidTHWHTCertNo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VoidTHWHTCertNo_output)
           })
       .catch((error) => {
           reject(error)
@@ -3192,30 +3767,37 @@ export function post_VoidTHWHTCertNo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method VoidSingleWHTCertificateNum
    Description: Void single WHT Certificate Number
    OperationID: VoidSingleWHTCertificateNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VoidSingleWHTCertificateNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VoidSingleWHTCertificateNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VoidSingleWHTCertificateNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VoidSingleWHTCertificateNum(requestBody:any, epicorHeaders?:Headers){
+export function post_VoidSingleWHTCertificateNum(requestBody:VoidSingleWHTCertificateNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VoidSingleWHTCertificateNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/VoidSingleWHTCertificateNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VoidSingleWHTCertificateNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3227,30 +3809,37 @@ export function post_VoidSingleWHTCertificateNum(requestBody:any, epicorHeaders?
    Summary: Invoke method ValidateTHWHTCertNoAssigned
    Description: Checks if all necessary Withholding Tax Certificate Numbers are assigned for manual method
    OperationID: ValidateTHWHTCertNoAssigned
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateTHWHTCertNoAssigned_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateTHWHTCertNoAssigned_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateTHWHTCertNoAssigned_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateTHWHTCertNoAssigned(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateTHWHTCertNoAssigned(requestBody:ValidateTHWHTCertNoAssigned_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateTHWHTCertNoAssigned_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/ValidateTHWHTCertNoAssigned", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateTHWHTCertNoAssigned_output)
           })
       .catch((error) => {
           reject(error)
@@ -3262,30 +3851,37 @@ export function post_ValidateTHWHTCertNoAssigned(requestBody:any, epicorHeaders?
    Summary: Invoke method CalcTranAmtExt
    Description: CalcTranAmtExt
    OperationID: CalcTranAmtExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CalcTranAmtExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CalcTranAmtExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CalcTranAmtExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CalcTranAmtExt(requestBody:any, epicorHeaders?:Headers){
+export function post_CalcTranAmtExt(requestBody:CalcTranAmtExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CalcTranAmtExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/CalcTranAmtExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CalcTranAmtExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -3297,30 +3893,37 @@ export function post_CalcTranAmtExt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeVendorBankBranchCode
    Description: Check if the Bank Branch code changed.
    OperationID: OnChangeVendorBankBranchCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeVendorBankBranchCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeVendorBankBranchCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeVendorBankBranchCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeVendorBankBranchCode(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeVendorBankBranchCode(requestBody:OnChangeVendorBankBranchCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeVendorBankBranchCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeVendorBankBranchCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeVendorBankBranchCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -3333,30 +3936,37 @@ export function post_OnChangeVendorBankBranchCode(requestBody:any, epicorHeaders
    Description: This method updates the BankTran amounts when the adjustment amount changes or
 the currency switch toggles.
    OperationID: ChangeTranAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeTranAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeTranAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeTranAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeTranAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeTranAmt(requestBody:ChangeTranAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeTranAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/ChangeTranAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeTranAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -3368,30 +3978,37 @@ export function post_ChangeTranAmt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckDocumentIsLocked
    Description: Method to call when it is necessary to check if document is lock, before doing smth.
    OperationID: CheckDocumentIsLocked
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckDocumentIsLocked_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckDocumentIsLocked_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckDocumentIsLocked_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckDocumentIsLocked(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckDocumentIsLocked(requestBody:CheckDocumentIsLocked_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckDocumentIsLocked_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/CheckDocumentIsLocked", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckDocumentIsLocked_output)
           })
       .catch((error) => {
           reject(error)
@@ -3403,30 +4020,37 @@ export function post_CheckDocumentIsLocked(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method CheckDocumentsInGroupLocked
    Description: Checking documents in the group if any document is locked
    OperationID: CheckDocumentsInGroupLocked
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckDocumentsInGroupLocked_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckDocumentsInGroupLocked_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckDocumentsInGroupLocked_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckDocumentsInGroupLocked(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckDocumentsInGroupLocked(requestBody:CheckDocumentsInGroupLocked_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckDocumentsInGroupLocked_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/CheckDocumentsInGroupLocked", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckDocumentsInGroupLocked_output)
           })
       .catch((error) => {
           reject(error)
@@ -3438,30 +4062,37 @@ export function post_CheckDocumentsInGroupLocked(requestBody:any, epicorHeaders?
    Summary: Invoke method VerifyBatchID
    Description: Pre-process batch id verification. This method verifies conditions and set a state to display dialog message on OU. UI gets user input and calls further methods depending on the input.
    OperationID: VerifyBatchID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VerifyBatchID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VerifyBatchID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VerifyBatchID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VerifyBatchID(requestBody:any, epicorHeaders?:Headers){
+export function post_VerifyBatchID(requestBody:VerifyBatchID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VerifyBatchID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/VerifyBatchID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VerifyBatchID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3473,30 +4104,37 @@ export function post_VerifyBatchID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CreateChecks
    Description: Create Vendor Checks for selected invoices.
    OperationID: CreateChecks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateChecks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateChecks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateChecks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateChecks(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateChecks(requestBody:CreateChecks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateChecks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/CreateChecks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateChecks_output)
           })
       .catch((error) => {
           reject(error)
@@ -3508,30 +4146,37 @@ export function post_CreateChecks(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CreateNewCheckHed
    Description: Create New CheckHed record.  To be used instead of GetNewCheckHed record.
    OperationID: CreateNewCheckHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateNewCheckHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateNewCheckHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateNewCheckHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateNewCheckHed(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateNewCheckHed(requestBody:CreateNewCheckHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateNewCheckHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/CreateNewCheckHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateNewCheckHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -3544,30 +4189,37 @@ export function post_CreateNewCheckHed(requestBody:any, epicorHeaders?:Headers){
    Description: DeleteNegPayments.  Deletes all checks in the group that have negative check.
 amounts. Works the same as MassDelete but only deletes negative balance checks.
    OperationID: DeleteNegPayments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteNegPayments_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteNegPayments_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteNegPayments_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteNegPayments(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteNegPayments(requestBody:DeleteNegPayments_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteNegPayments_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/DeleteNegPayments", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteNegPayments_output)
           })
       .catch((error) => {
           reject(error)
@@ -3579,30 +4231,37 @@ export function post_DeleteNegPayments(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRegulatoryReportingCodeList
    Description: This method returns a list of valid Regulatory Reporting codes
    OperationID: GetRegulatoryReportingCodeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRegulatoryReportingCodeList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRegulatoryReportingCodeList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRegulatoryReportingCodeList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRegulatoryReportingCodeList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRegulatoryReportingCodeList(requestBody:GetRegulatoryReportingCodeList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRegulatoryReportingCodeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetRegulatoryReportingCodeList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRegulatoryReportingCodeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3614,30 +4273,37 @@ export function post_GetRegulatoryReportingCodeList(requestBody:any, epicorHeade
    Summary: Invoke method GetAPTranReasonList
    Description: This method returns a list of valid AP Transaction Reason codes
    OperationID: GetAPTranReasonList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAPTranReasonList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAPTranReasonList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAPTranReasonList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAPTranReasonList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAPTranReasonList(requestBody:GetAPTranReasonList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAPTranReasonList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetAPTranReasonList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAPTranReasonList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3649,30 +4315,37 @@ export function post_GetAPTranReasonList(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetBankFeeDefaultAccount
    Description: This method is used to get the default account(s) for a Bank Fee
    OperationID: GetBankFeeDefaultAccount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBankFeeDefaultAccount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBankFeeDefaultAccount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBankFeeDefaultAccount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBankFeeDefaultAccount(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBankFeeDefaultAccount(requestBody:GetBankFeeDefaultAccount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBankFeeDefaultAccount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetBankFeeDefaultAccount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBankFeeDefaultAccount_output)
           })
       .catch((error) => {
           reject(error)
@@ -3684,30 +4357,37 @@ export function post_GetBankFeeDefaultAccount(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetElecInterface
    Description: Check if Payment Method is marked as Electronic Interface.
    OperationID: GetElecInterface
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetElecInterface_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetElecInterface_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetElecInterface_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetElecInterface(requestBody:any, epicorHeaders?:Headers){
+export function post_GetElecInterface(requestBody:GetElecInterface_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetElecInterface_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetElecInterface", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetElecInterface_output)
           })
       .catch((error) => {
           reject(error)
@@ -3720,30 +4400,37 @@ export function post_GetElecInterface(requestBody:any, epicorHeaders?:Headers){
    Description: This method will return a record in the LegalNumGenOpts datatable that will
 be used to generate a legal number.
    OperationID: GetLegalNumberOpts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLegalNumberOpts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLegalNumberOpts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLegalNumberOpts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLegalNumberOpts(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLegalNumberOpts(requestBody:GetLegalNumberOpts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLegalNumberOpts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetLegalNumberOpts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLegalNumberOpts_output)
           })
       .catch((error) => {
           reject(error)
@@ -3755,30 +4442,37 @@ export function post_GetLegalNumberOpts(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method VoidLegalNumber
    Description: Method to void legal numbers
    OperationID: VoidLegalNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VoidLegalNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VoidLegalNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VoidLegalNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VoidLegalNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_VoidLegalNumber(requestBody:VoidLegalNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VoidLegalNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/VoidLegalNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VoidLegalNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -3790,30 +4484,37 @@ export function post_VoidLegalNumber(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBankTranByHeadNum
    Description: Get New BankTran record for CheckHead
    OperationID: GetNewBankTranByHeadNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBankTranByHeadNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBankTranByHeadNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBankTranByHeadNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBankTranByHeadNum(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBankTranByHeadNum(requestBody:GetNewBankTranByHeadNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBankTranByHeadNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewBankTranByHeadNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBankTranByHeadNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3825,30 +4526,37 @@ export function post_GetNewBankTranByHeadNum(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewMiscPayment
    Description: Create New Miscellaneous APTran record.
    OperationID: GetNewMiscPayment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMiscPayment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMiscPayment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMiscPayment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMiscPayment(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMiscPayment(requestBody:GetNewMiscPayment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMiscPayment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewMiscPayment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMiscPayment_output)
           })
       .catch((error) => {
           reject(error)
@@ -3860,30 +4568,37 @@ export function post_GetNewMiscPayment(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPaymentRelationshipMap
    Description: Returns a serialized json string to show a Relationship Map for Payment
    OperationID: GetPaymentRelationshipMap
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPaymentRelationshipMap_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPaymentRelationshipMap_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPaymentRelationshipMap_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPaymentRelationshipMap(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPaymentRelationshipMap(requestBody:GetPaymentRelationshipMap_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPaymentRelationshipMap_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetPaymentRelationshipMap", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPaymentRelationshipMap_output)
           })
       .catch((error) => {
           reject(error)
@@ -3895,30 +4610,37 @@ export function post_GetPaymentRelationshipMap(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetRestartProcessPayment
    Description: Gets restart Process Payment
    OperationID: GetRestartProcessPayment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRestartProcessPayment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRestartProcessPayment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRestartProcessPayment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRestartProcessPayment(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRestartProcessPayment(requestBody:GetRestartProcessPayment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRestartProcessPayment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetRestartProcessPayment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRestartProcessPayment_output)
           })
       .catch((error) => {
           reject(error)
@@ -3930,30 +4652,37 @@ export function post_GetRestartProcessPayment(requestBody:any, epicorHeaders?:He
    Summary: Invoke method MassDelete
    Description: Mass Delete.  Delete all checks in the Group.
    OperationID: MassDelete
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MassDelete_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MassDelete_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MassDelete_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MassDelete(requestBody:any, epicorHeaders?:Headers){
+export function post_MassDelete(requestBody:MassDelete_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MassDelete_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/MassDelete", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MassDelete_output)
           })
       .catch((error) => {
           reject(error)
@@ -3965,30 +4694,37 @@ export function post_MassDelete(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MXCheckPaymentIsCheque
    Description: Method to call when it is necessary to check if Payment is Cheque.
    OperationID: MXCheckPaymentIsCheque
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MXCheckPaymentIsCheque_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MXCheckPaymentIsCheque_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MXCheckPaymentIsCheque_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MXCheckPaymentIsCheque(requestBody:any, epicorHeaders?:Headers){
+export function post_MXCheckPaymentIsCheque(requestBody:MXCheckPaymentIsCheque_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MXCheckPaymentIsCheque_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/MXCheckPaymentIsCheque", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MXCheckPaymentIsCheque_output)
           })
       .catch((error) => {
           reject(error)
@@ -3999,30 +4735,37 @@ export function post_MXCheckPaymentIsCheque(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method OnChangeBankFeeID
    OperationID: OnChangeBankFeeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBankFeeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBankFeeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBankFeeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBankFeeID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBankFeeID(requestBody:OnChangeBankFeeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBankFeeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeBankFeeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBankFeeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4034,30 +4777,37 @@ export function post_OnChangeBankFeeID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeBankTotalAmt
    Description: Call method when the user changes Bank Total Amount
    OperationID: OnChangeBankTotalAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBankTotalAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBankTotalAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBankTotalAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBankTotalAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBankTotalAmt(requestBody:OnChangeBankTotalAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBankTotalAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeBankTotalAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBankTotalAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -4069,30 +4819,37 @@ export function post_OnChangeBankTotalAmt(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeCheckDate
    Description: Call method when the user changes CheckHed.CheckDate.
    OperationID: OnChangeCheckDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCheckDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCheckDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCheckDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCheckDate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCheckDate(requestBody:OnChangeCheckDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCheckDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeCheckDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCheckDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4104,30 +4861,37 @@ export function post_OnChangeCheckDate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeCheckNum
    Description: Call method when the user changes CheckHed.CheckNum.
    OperationID: OnChangeCheckNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCheckNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCheckNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCheckNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCheckNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCheckNum(requestBody:OnChangeCheckNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCheckNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeCheckNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCheckNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -4139,30 +4903,37 @@ export function post_OnChangeCheckNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeCurrency
    Description: Call method when the user changes flag CheckHed.IsEnterTotal
    OperationID: OnChangeCurrency
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCurrency_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCurrency_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCurrency_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCurrency(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCurrency(requestBody:OnChangeCurrency_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCurrency_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeCurrency", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCurrency_output)
           })
       .catch((error) => {
           reject(error)
@@ -4175,30 +4946,37 @@ export function post_OnChangeCurrency(requestBody:any, epicorHeaders?:Headers){
    Description: Call method when the user changes the Doc Discount Amount changes in Pay Invoice.
 Use this method with Payment Invoice screen for PaymentEntryDataSet.
    OperationID: OnChangeDocDiscAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeDocDiscAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeDocDiscAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeDocDiscAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeDocDiscAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeDocDiscAmt(requestBody:OnChangeDocDiscAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeDocDiscAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeDocDiscAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeDocDiscAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -4210,30 +4988,37 @@ export function post_OnChangeDocDiscAmt(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeDocPaymentTotal
    Description: Call method when the user changes Payment Total
    OperationID: OnChangeDocPaymentTotal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeDocPaymentTotal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeDocPaymentTotal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeDocPaymentTotal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeDocPaymentTotal(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeDocPaymentTotal(requestBody:OnChangeDocPaymentTotal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeDocPaymentTotal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeDocPaymentTotal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeDocPaymentTotal_output)
           })
       .catch((error) => {
           reject(error)
@@ -4245,30 +5030,37 @@ export function post_OnChangeDocPaymentTotal(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method OnChangeDocTranAmt
    Description: Call method when the user changes the Doc Tran Amount changes in Pay Misc and Invoice.
    OperationID: OnChangeDocTranAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeDocTranAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeDocTranAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeDocTranAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeDocTranAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeDocTranAmt(requestBody:OnChangeDocTranAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeDocTranAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeDocTranAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeDocTranAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -4280,30 +5072,37 @@ export function post_OnChangeDocTranAmt(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeExchangeRate
    Description: Call method when the user changes Rate from Payment Currency to Bank Currency
    OperationID: OnChangeExchangeRate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeExchangeRate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeExchangeRate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeExchangeRate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeExchangeRate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeExchangeRate(requestBody:OnChangeExchangeRate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeExchangeRate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeExchangeRate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeExchangeRate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4316,30 +5115,37 @@ export function post_OnChangeExchangeRate(requestBody:any, epicorHeaders?:Header
    Description: Call method when the user changes the FixedAmount in Tax screen.
 Use this method with Misc. Payment screen for PaymentEntryDataSet.
    OperationID: OnChangeDedTaxAmount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeDedTaxAmount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeDedTaxAmount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeDedTaxAmount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeDedTaxAmount(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeDedTaxAmount(requestBody:OnChangeDedTaxAmount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeDedTaxAmount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeDedTaxAmount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeDedTaxAmount_output)
           })
       .catch((error) => {
           reject(error)
@@ -4352,30 +5158,37 @@ export function post_OnChangeDedTaxAmount(requestBody:any, epicorHeaders?:Header
    Description: Call method when the user changes the FixedAmount in Tax screen.
 Use this method with Misc. Payment screen for PaymentEntryDataSet.
    OperationID: OnChangeFixedAmount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeFixedAmount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeFixedAmount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeFixedAmount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeFixedAmount(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeFixedAmount(requestBody:OnChangeFixedAmount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeFixedAmount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeFixedAmount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeFixedAmount_output)
           })
       .catch((error) => {
           reject(error)
@@ -4387,30 +5200,37 @@ export function post_OnChangeFixedAmount(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method OnChangeInvoiceNum
    Description: Call this method when the user enters the Invoice Number in Pay Invoice screen.
    OperationID: OnChangeInvoiceNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeInvoiceNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeInvoiceNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeInvoiceNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeInvoiceNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeInvoiceNum(requestBody:OnChangeInvoiceNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeInvoiceNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeInvoiceNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeInvoiceNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -4423,30 +5243,37 @@ export function post_OnChangeInvoiceNum(requestBody:any, epicorHeaders?:Headers)
    Description: Call this method when the user changes either Gross Payment or Disc. Taken field.
 Use this method with Payment maintenance screen for APInvSelDataSet.
    OperationID: OnChangeInvSelPayment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeInvSelPayment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeInvSelPayment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeInvSelPayment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeInvSelPayment(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeInvSelPayment(requestBody:OnChangeInvSelPayment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeInvSelPayment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeInvSelPayment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeInvSelPayment_output)
           })
       .catch((error) => {
           reject(error)
@@ -4458,30 +5285,37 @@ export function post_OnChangeInvSelPayment(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method OnChangeIsEnterTotal
    Description: Call method when the user changes flag CheckHed.IsEnterTotal
    OperationID: OnChangeIsEnterTotal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeIsEnterTotal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeIsEnterTotal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeIsEnterTotal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeIsEnterTotal(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeIsEnterTotal(requestBody:OnChangeIsEnterTotal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeIsEnterTotal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeIsEnterTotal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeIsEnterTotal_output)
           })
       .catch((error) => {
           reject(error)
@@ -4493,30 +5327,37 @@ export function post_OnChangeIsEnterTotal(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeManualPrint
    Description: Call method when the user checks / unChecks the Manual Print flag.
    OperationID: OnChangeManualPrint
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeManualPrint_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeManualPrint_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeManualPrint_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeManualPrint(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeManualPrint(requestBody:OnChangeManualPrint_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeManualPrint_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeManualPrint", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeManualPrint_output)
           })
       .catch((error) => {
           reject(error)
@@ -4528,30 +5369,37 @@ export function post_OnChangeManualPrint(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method OnChangePaymentBankRate
    Description: Call method when the user changes Rate from Payment Currency to Bank Currency
    OperationID: OnChangePaymentBankRate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePaymentBankRate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePaymentBankRate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePaymentBankRate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePaymentBankRate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePaymentBankRate(requestBody:OnChangePaymentBankRate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePaymentBankRate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangePaymentBankRate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePaymentBankRate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4563,30 +5411,37 @@ export function post_OnChangePaymentBankRate(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method OnChangePrePayment
    Description: Call this method when the user change flag PrePayment in Misc Payment screen.
    OperationID: OnChangePrePayment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePrePayment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePrePayment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePrePayment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePrePayment(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePrePayment(requestBody:OnChangePrePayment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePrePayment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangePrePayment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePrePayment_output)
           })
       .catch((error) => {
           reject(error)
@@ -4598,30 +5453,37 @@ export function post_OnChangePrePayment(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeRateCode
    Description: This method updates the dataset when the RateCode field changes
    OperationID: OnChangeRateCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeRateCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeRateCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeRateCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeRateCode(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeRateCode(requestBody:OnChangeRateCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeRateCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeRateCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeRateCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -4633,30 +5495,37 @@ export function post_OnChangeRateCode(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeRefPONum
    Description: Call this method when the user enters the RefPONum for PrePayment
    OperationID: OnChangeRefPONum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeRefPONum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeRefPONum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeRefPONum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeRefPONum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeRefPONum(requestBody:OnChangeRefPONum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeRefPONum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeRefPONum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeRefPONum_output)
           })
       .catch((error) => {
           reject(error)
@@ -4669,30 +5538,37 @@ export function post_OnChangeRefPONum(requestBody:any, epicorHeaders?:Headers){
    Description: Call method when the user changes the Taxable Amt in Tax screen.
 Use this method with Misc. Payment screen for PaymentEntryDataSet.
    OperationID: OnChangeTaxableAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeTaxableAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeTaxableAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeTaxableAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeTaxableAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeTaxableAmt(requestBody:OnChangeTaxableAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeTaxableAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeTaxableAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeTaxableAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -4705,30 +5581,37 @@ export function post_OnChangeTaxableAmt(requestBody:any, epicorHeaders?:Headers)
    Description: Call method when the user changes the Tax Amt in Tax screen.
 Use this method with Misc. Payment screen for PaymentEntryDataSet.
    OperationID: OnChangeTaxAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeTaxAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeTaxAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeTaxAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeTaxAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeTaxAmt(requestBody:OnChangeTaxAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeTaxAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeTaxAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeTaxAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -4741,30 +5624,37 @@ export function post_OnChangeTaxAmt(requestBody:any, epicorHeaders?:Headers){
    Description: Call method when the user changes the Tax ID in Tax maintainence.
 Use this method with Misc. Payment screen for PaymentEntryDataSet.
    OperationID: OnChangeTaxCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeTaxCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeTaxCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeTaxCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeTaxCode(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeTaxCode(requestBody:OnChangeTaxCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeTaxCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeTaxCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeTaxCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -4777,30 +5667,37 @@ export function post_OnChangeTaxCode(requestBody:any, epicorHeaders?:Headers){
    Description: Call method when the user changes the Tax Percent in Tax screen.
 Use this method with Misc. Payment screen for PaymentEntryDataSet.
    OperationID: OnChangeTaxPercent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeTaxPercent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeTaxPercent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeTaxPercent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeTaxPercent(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeTaxPercent(requestBody:OnChangeTaxPercent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeTaxPercent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeTaxPercent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeTaxPercent_output)
           })
       .catch((error) => {
           reject(error)
@@ -4812,30 +5709,37 @@ export function post_OnChangeTaxPercent(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeVendor
    Description: Call this method when the user enters the ttCheckHed.VendorNum
    OperationID: OnChangeVendor
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeVendor_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeVendor_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeVendor_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeVendor(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeVendor(requestBody:OnChangeVendor_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeVendor_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeVendor", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeVendor_output)
           })
       .catch((error) => {
           reject(error)
@@ -4847,30 +5751,37 @@ export function post_OnChangeVendor(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeTHRefVendorID
    Description: Verify selected TH Reference Customer
    OperationID: OnChangeTHRefVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeTHRefVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeTHRefVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeTHRefVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeTHRefVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeTHRefVendorID(requestBody:OnChangeTHRefVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeTHRefVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeTHRefVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeTHRefVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4882,30 +5793,37 @@ export function post_OnChangeTHRefVendorID(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method OnChangeTHRefInvoiceNum
    Description: Verify selected Reference Invoice NUmber
    OperationID: OnChangeTHRefInvoiceNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeTHRefInvoiceNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeTHRefInvoiceNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeTHRefInvoiceNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeTHRefInvoiceNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeTHRefInvoiceNum(requestBody:OnChangeTHRefInvoiceNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeTHRefInvoiceNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeTHRefInvoiceNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeTHRefInvoiceNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -4917,30 +5835,37 @@ export function post_OnChangeTHRefInvoiceNum(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method PostAllowed
    Description: Check if Post operation is available.
    OperationID: PostAllowed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PostAllowed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PostAllowed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PostAllowed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PostAllowed(requestBody:any, epicorHeaders?:Headers){
+export function post_PostAllowed(requestBody:PostAllowed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PostAllowed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/PostAllowed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PostAllowed_output)
           })
       .catch((error) => {
           reject(error)
@@ -4957,30 +5882,37 @@ it does, the LegalNumberPrompt business objects needs to be called to
 gather that information.  This method should be called when the user
 saves the record but before the Update method is called.
    OperationID: PreUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_PreUpdate(requestBody:PreUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/PreUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4992,30 +5924,37 @@ export function post_PreUpdate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RefreshBankInfo
    Description: Refresh bank info for selected invoices.
    OperationID: RefreshBankInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshBankInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshBankInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshBankInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshBankInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshBankInfo(requestBody:RefreshBankInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshBankInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/RefreshBankInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshBankInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -5028,30 +5967,37 @@ export function post_RefreshBankInfo(requestBody:any, epicorHeaders?:Headers){
    Description: Clears out the check numbers from all checks in the CheckHed table and refreshes
 the checks data (i.e. the Supplier information, etc.).
    OperationID: ResetProcessPayment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ResetProcessPayment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ResetProcessPayment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ResetProcessPayment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ResetProcessPayment(requestBody:any, epicorHeaders?:Headers){
+export function post_ResetProcessPayment(requestBody:ResetProcessPayment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ResetProcessPayment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/ResetProcessPayment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ResetProcessPayment_output)
           })
       .catch((error) => {
           reject(error)
@@ -5063,30 +6009,37 @@ export function post_ResetProcessPayment(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method SelectInvoices
    Description: Read ApInvHed records and create APInvSel records if they meet the selection criteria.
    OperationID: SelectInvoices
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SelectInvoices_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SelectInvoices_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SelectInvoices_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectInvoices(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectInvoices(requestBody:SelectInvoices_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SelectInvoices_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/SelectInvoices", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SelectInvoices_output)
           })
       .catch((error) => {
           reject(error)
@@ -5098,30 +6051,37 @@ export function post_SelectInvoices(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SelectInvoicesMS
    Description: Read ApInvHed records and create APInvSel records if they meet the selection criteria.
    OperationID: SelectInvoicesMS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SelectInvoicesMS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SelectInvoicesMS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SelectInvoicesMS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectInvoicesMS(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectInvoicesMS(requestBody:SelectInvoicesMS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SelectInvoicesMS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/SelectInvoicesMS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SelectInvoicesMS_output)
           })
       .catch((error) => {
           reject(error)
@@ -5133,30 +6093,37 @@ export function post_SelectInvoicesMS(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetCompleted
    Description: Sets all payments in group status to Completed.
    OperationID: SetCompleted
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetCompleted_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetCompleted_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetCompleted_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetCompleted(requestBody:any, epicorHeaders?:Headers){
+export function post_SetCompleted(requestBody:SetCompleted_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetCompleted_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/SetCompleted", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetCompleted_output)
           })
       .catch((error) => {
           reject(error)
@@ -5168,30 +6135,37 @@ export function post_SetCompleted(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetTransmitted
    Description: Sets all payments in group status to Trasmitted.
    OperationID: SetTransmitted
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetTransmitted_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetTransmitted_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetTransmitted_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetTransmitted(requestBody:any, epicorHeaders?:Headers){
+export function post_SetTransmitted(requestBody:SetTransmitted_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetTransmitted_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/SetTransmitted", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetTransmitted_output)
           })
       .catch((error) => {
           reject(error)
@@ -5207,30 +6181,37 @@ Parameters:  none
 Notes:
 <param name="ipGroupID">ipGroupID </param><param name="ipHeadNum">ipHeadNum </param><param name="ipAPTranNo">ipAPTranNo </param><param name="ipBankAcctID">ipBankAcctID </param><param name="ipTranNum">ipTranNum </param><param name="ipVoided">ipVoided </param><param name="ipCalcAll">ipCalcAll</param><param name="ds" type="Epicor.Mfg.BO.PaymentEntryDataSet">Payment dataset</param>
    OperationID: SetReadyToCalc
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetReadyToCalc_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetReadyToCalc_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetReadyToCalc_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetReadyToCalc(requestBody:any, epicorHeaders?:Headers){
+export function post_SetReadyToCalc(requestBody:SetReadyToCalc_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetReadyToCalc_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/SetReadyToCalc", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetReadyToCalc_output)
           })
       .catch((error) => {
           reject(error)
@@ -5242,30 +6223,37 @@ export function post_SetReadyToCalc(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidatePrintEditList
    Description: This method is called when the Print Group Edit List is selected
    OperationID: ValidatePrintEditList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidatePrintEditList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidatePrintEditList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidatePrintEditList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidatePrintEditList(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidatePrintEditList(requestBody:ValidatePrintEditList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidatePrintEditList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/ValidatePrintEditList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidatePrintEditList_output)
           })
       .catch((error) => {
           reject(error)
@@ -5277,7 +6265,7 @@ export function post_ValidatePrintEditList(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetDfltTranDocTypeID
    Description: Get Default Transaction document for AP Payments
    OperationID: GetDfltTranDocTypeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDfltTranDocTypeID_output
@@ -5290,15 +6278,22 @@ export function post_GetDfltTranDocTypeID(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDfltTranDocTypeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetDfltTranDocTypeID", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDfltTranDocTypeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -5310,30 +6305,37 @@ export function post_GetDfltTranDocTypeID(epicorHeaders?:Headers){
    Summary: Invoke method GetCodeDescList
    Description: Method to call to get a Code Description list.
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -5345,30 +6347,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateAcctForGLControl
    Description: Validates an account has been entered for glcontrol
    OperationID: ValidateAcctForGLControl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateAcctForGLControl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateAcctForGLControl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateAcctForGLControl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateAcctForGLControl(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateAcctForGLControl(requestBody:ValidateAcctForGLControl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateAcctForGLControl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/ValidateAcctForGLControl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateAcctForGLControl_output)
           })
       .catch((error) => {
           reject(error)
@@ -5380,30 +6389,37 @@ export function post_ValidateAcctForGLControl(requestBody:any, epicorHeaders?:He
    Summary: Invoke method Change1099Code
    Description: Method to call when changing the 1099 Code on a detail record, displays the correct description.
    OperationID: Change1099Code
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Change1099Code_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Change1099Code_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Change1099Code_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Change1099Code(requestBody:any, epicorHeaders?:Headers){
+export function post_Change1099Code(requestBody:Change1099Code_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Change1099Code_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/Change1099Code", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Change1099Code_output)
           })
       .catch((error) => {
           reject(error)
@@ -5415,30 +6431,37 @@ export function post_Change1099Code(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method JPSelectPaymentStatements
    Description: Read JPAPPerBillStmtHead records and create APInvSel records if they meet the selection criteria.
    OperationID: JPSelectPaymentStatements
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/JPSelectPaymentStatements_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/JPSelectPaymentStatements_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/JPSelectPaymentStatements_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_JPSelectPaymentStatements(requestBody:any, epicorHeaders?:Headers){
+export function post_JPSelectPaymentStatements(requestBody:JPSelectPaymentStatements_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<JPSelectPaymentStatements_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/JPSelectPaymentStatements", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as JPSelectPaymentStatements_output)
           })
       .catch((error) => {
           reject(error)
@@ -5450,30 +6473,37 @@ export function post_JPSelectPaymentStatements(requestBody:any, epicorHeaders?:H
    Summary: Invoke method JPCreateChecks
    Description: Create Vendor Checks for selected invoices.
    OperationID: JPCreateChecks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/JPCreateChecks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/JPCreateChecks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/JPCreateChecks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_JPCreateChecks(requestBody:any, epicorHeaders?:Headers){
+export function post_JPCreateChecks(requestBody:JPCreateChecks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<JPCreateChecks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/JPCreateChecks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as JPCreateChecks_output)
           })
       .catch((error) => {
           reject(error)
@@ -5485,30 +6515,37 @@ export function post_JPCreateChecks(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDefault1099Code
    Description: Method to call when changing the 1099 Code on a detail record, displays the correct description.
    OperationID: GetDefault1099Code
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDefault1099Code_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDefault1099Code_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefault1099Code_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDefault1099Code(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDefault1099Code(requestBody:GetDefault1099Code_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefault1099Code_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetDefault1099Code", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefault1099Code_output)
           })
       .catch((error) => {
           reject(error)
@@ -5520,30 +6557,37 @@ export function post_GetDefault1099Code(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeFormType
    Description: Call this method when the user enters the ttAPTran.FormTypeID
    OperationID: OnChangeFormType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeFormType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeFormType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeFormType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeFormType(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeFormType(requestBody:OnChangeFormType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeFormType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/OnChangeFormType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeFormType_output)
           })
       .catch((error) => {
           reject(error)
@@ -5555,30 +6599,37 @@ export function post_OnChangeFormType(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckVendorTaxID
    Description: Supplier Tax Id check
    OperationID: CheckVendorTaxID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckVendorTaxID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckVendorTaxID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckVendorTaxID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckVendorTaxID(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckVendorTaxID(requestBody:CheckVendorTaxID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckVendorTaxID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/CheckVendorTaxID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckVendorTaxID_output)
           })
       .catch((error) => {
           reject(error)
@@ -5590,30 +6641,37 @@ export function post_CheckVendorTaxID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckGroupTaxID
    Description: Check for Vendor TaxId in Payments Group
    OperationID: CheckGroupTaxID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckGroupTaxID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckGroupTaxID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckGroupTaxID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckGroupTaxID(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckGroupTaxID(requestBody:CheckGroupTaxID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckGroupTaxID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/CheckGroupTaxID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckGroupTaxID_output)
           })
       .catch((error) => {
           reject(error)
@@ -5625,30 +6683,37 @@ export function post_CheckGroupTaxID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckNegPaymentExist
    Description: Check if Negative Payments exist
    OperationID: CheckNegPaymentExist
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckNegPaymentExist_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckNegPaymentExist_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckNegPaymentExist_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckNegPaymentExist(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckNegPaymentExist(requestBody:CheckNegPaymentExist_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckNegPaymentExist_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/CheckNegPaymentExist", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckNegPaymentExist_output)
           })
       .catch((error) => {
           reject(error)
@@ -5660,30 +6725,37 @@ export function post_CheckNegPaymentExist(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method composeNegPaymentMessage
    Description: compose a Negative Payment message
    OperationID: composeNegPaymentMessage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/composeNegPaymentMessage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/composeNegPaymentMessage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/composeNegPaymentMessage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_composeNegPaymentMessage(requestBody:any, epicorHeaders?:Headers){
+export function post_composeNegPaymentMessage(requestBody:composeNegPaymentMessage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<composeNegPaymentMessage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/composeNegPaymentMessage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as composeNegPaymentMessage_output)
           })
       .catch((error) => {
           reject(error)
@@ -5695,30 +6767,37 @@ export function post_composeNegPaymentMessage(requestBody:any, epicorHeaders?:He
    Summary: Invoke method CheckAllCheckNumsAssigned
    Description: Checks if there unassigned checknums in the group
    OperationID: CheckAllCheckNumsAssigned
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckAllCheckNumsAssigned_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckAllCheckNumsAssigned_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckAllCheckNumsAssigned_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckAllCheckNumsAssigned(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckAllCheckNumsAssigned(requestBody:CheckAllCheckNumsAssigned_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckAllCheckNumsAssigned_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/CheckAllCheckNumsAssigned", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckAllCheckNumsAssigned_output)
           })
       .catch((error) => {
           reject(error)
@@ -5730,30 +6809,37 @@ export function post_CheckAllCheckNumsAssigned(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewCheckHed
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCheckHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCheckHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCheckHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCheckHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCheckHed(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCheckHed(requestBody:GetNewCheckHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCheckHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewCheckHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCheckHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -5765,30 +6851,37 @@ export function post_GetNewCheckHed(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCheckHedAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCheckHedAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCheckHedAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCheckHedAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCheckHedAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCheckHedAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCheckHedAttch(requestBody:GetNewCheckHedAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCheckHedAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewCheckHedAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCheckHedAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -5800,30 +6893,37 @@ export function post_GetNewCheckHedAttch(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewAPTran
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAPTran
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAPTran_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAPTran_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAPTran_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAPTran(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAPTran(requestBody:GetNewAPTran_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAPTran_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewAPTran", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAPTran_output)
           })
       .catch((error) => {
           reject(error)
@@ -5835,30 +6935,37 @@ export function post_GetNewAPTran(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAPTranTGLC
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAPTranTGLC
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAPTranTGLC_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAPTranTGLC_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAPTranTGLC_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAPTranTGLC(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAPTranTGLC(requestBody:GetNewAPTranTGLC_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAPTranTGLC_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewAPTranTGLC", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAPTranTGLC_output)
           })
       .catch((error) => {
           reject(error)
@@ -5870,30 +6977,37 @@ export function post_GetNewAPTranTGLC(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAPTTaxDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAPTTaxDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAPTTaxDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAPTTaxDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAPTTaxDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAPTTaxDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAPTTaxDtl(requestBody:GetNewAPTTaxDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAPTTaxDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewAPTTaxDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAPTTaxDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -5905,30 +7019,37 @@ export function post_GetNewAPTTaxDtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBankTran
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBankTran
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBankTran_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBankTran_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBankTran_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBankTran(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBankTran(requestBody:GetNewBankTran_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBankTran_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewBankTran", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBankTran_output)
           })
       .catch((error) => {
           reject(error)
@@ -5940,30 +7061,37 @@ export function post_GetNewBankTran(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBankTranTaxDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBankTranTaxDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBankTranTaxDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBankTranTaxDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBankTranTaxDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBankTranTaxDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBankTranTaxDtl(requestBody:GetNewBankTranTaxDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBankTranTaxDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewBankTranTaxDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBankTranTaxDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -5975,30 +7103,37 @@ export function post_GetNewBankTranTaxDtl(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewBankTranTGLC
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBankTranTGLC
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBankTranTGLC_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBankTranTGLC_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBankTranTGLC_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBankTranTGLC(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBankTranTGLC(requestBody:GetNewBankTranTGLC_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBankTranTGLC_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewBankTranTGLC", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBankTranTGLC_output)
           })
       .catch((error) => {
           reject(error)
@@ -6010,30 +7145,37 @@ export function post_GetNewBankTranTGLC(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewTaxDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewTaxDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewTaxDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewTaxDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewTaxDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewTaxDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewTaxDtl(requestBody:GetNewTaxDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewTaxDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetNewTaxDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewTaxDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -6045,30 +7187,37 @@ export function post_GetNewTaxDtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -6080,7 +7229,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -6104,15 +7253,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -6124,7 +7280,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -6148,15 +7304,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -6168,30 +7331,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -6203,30 +7373,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PaymentEntrySvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -6237,61 +7414,78 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APTTaxDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APTTaxDtlRow[],
+   "value":Erp_Tablesets_APTTaxDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APTranRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APTranRow[],
+   "value":Erp_Tablesets_APTranRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APTranTGLCRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APTranTGLCRow[],
+   "value":Erp_Tablesets_APTranTGLCRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BankTranRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_BankTranRow[],
+   "value":Erp_Tablesets_BankTranRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BankTranTGLCRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_BankTranTGLCRow[],
+   "value":Erp_Tablesets_BankTranTGLCRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BankTranTaxDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_BankTranTaxDtlRow[],
+   "value":Erp_Tablesets_BankTranTaxDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CheckHedAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CheckHedAttchRow[],
+   "value":Erp_Tablesets_CheckHedAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CheckHedListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CheckHedListRow[],
+   "value":Erp_Tablesets_CheckHedListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CheckHedRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CheckHedRow[],
+   "value":Erp_Tablesets_CheckHedRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumGenOptsRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LegalNumGenOptsRow[],
+   "value":Erp_Tablesets_LegalNumGenOptsRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaxDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_TaxDtlRow[],
+   "value":Erp_Tablesets_TaxDtlRow,
 }
 
 export interface Erp_Tablesets_APTTaxDtlRow{
@@ -8720,6 +9914,23 @@ NOTE:  This field is now used in VAT Reverse Charge logic.  If an invoice line i
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -8736,7 +9947,7 @@ export interface AssignLegalNumber_output{
 parameters : {
       /**  output parameters  */  
    opLegalNumMsg:string,
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -8754,7 +9965,7 @@ export interface AssignTHWHTCertNo_output{
 parameters : {
       /**  output parameters  */  
    opLegalNumMsg:string,
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -8790,7 +10001,7 @@ export interface Change1099Code_input{
 export interface Change1099Code_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -8811,7 +10022,7 @@ export interface ChangeTranAmt_input{
 export interface ChangeTranAmt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -8903,7 +10114,7 @@ export interface CreateChecks_input{
 export interface CreateChecks_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvSelTableset[],
+   ds:Erp_Tablesets_APInvSelTableset,
    outLNMsg:string,
    outVBMsg:string,
 }
@@ -8922,7 +10133,7 @@ export interface CreateNewCheckHed_input{
 export interface CreateNewCheckHed_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11625,7 +12836,7 @@ export interface GetBankFeeDefaultAccount_input{
 export interface GetBankFeeDefaultAccount_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11687,7 +12898,7 @@ export interface GetDefault1099Code_input{
 export interface GetDefault1099Code_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11724,7 +12935,7 @@ export interface GetLegalNumberOpts_input{
 export interface GetLegalNumberOpts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
    requiresUserInput:boolean,
 }
 }
@@ -11781,7 +12992,7 @@ export interface GetNewAPTTaxDtl_input{
 export interface GetNewAPTTaxDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11803,7 +13014,7 @@ export interface GetNewAPTranTGLC_input{
 export interface GetNewAPTranTGLC_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11823,7 +13034,7 @@ export interface GetNewAPTran_input{
 export interface GetNewAPTran_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11843,7 +13054,7 @@ export interface GetNewBankTranByHeadNum_input{
 export interface GetNewBankTranByHeadNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11863,7 +13074,7 @@ export interface GetNewBankTranTGLC_input{
 export interface GetNewBankTranTGLC_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11897,7 +13108,7 @@ export interface GetNewBankTranTaxDtl_input{
 export interface GetNewBankTranTaxDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11915,7 +13126,7 @@ export interface GetNewBankTran_input{
 export interface GetNewBankTran_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11931,7 +13142,7 @@ export interface GetNewCheckHedAttch_input{
 export interface GetNewCheckHedAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11945,7 +13156,7 @@ export interface GetNewCheckHed_input{
 export interface GetNewCheckHed_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11962,7 +13173,7 @@ export interface GetNewMiscPayment_input{
 export interface GetNewMiscPayment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -11996,7 +13207,7 @@ export interface GetNewTaxDtl_input{
 export interface GetNewTaxDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12101,7 +13312,7 @@ export interface GetTHWHTCertNoOpts_output{
 parameters : {
       /**  output parameters  */  
    requiresUserInput:boolean,
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12154,7 +13365,7 @@ export interface JPCreateChecks_input{
 export interface JPCreateChecks_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvSelTableset[],
+   ds:Erp_Tablesets_APInvSelTableset,
    outLNMsg:string,
    outVBMsg:string,
 }
@@ -12219,7 +13430,7 @@ export interface OnChangeBankFeeID_input{
 export interface OnChangeBankFeeID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12240,7 +13451,7 @@ export interface OnChangeBankTotalAmt_output{
 parameters : {
       /**  output parameters  */  
    pQuestion:string,
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12257,7 +13468,7 @@ export interface OnChangeCheckDate_input{
 export interface OnChangeCheckDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12274,7 +13485,7 @@ export interface OnChangeCheckNum_input{
 export interface OnChangeCheckNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12291,7 +13502,7 @@ export interface OnChangeCurrency_input{
 export interface OnChangeCurrency_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12314,7 +13525,7 @@ export interface OnChangeDedTaxAmount_input{
 export interface OnChangeDedTaxAmount_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12331,7 +13542,7 @@ export interface OnChangeDocDiscAmt_input{
 export interface OnChangeDocDiscAmt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12348,7 +13559,7 @@ export interface OnChangeDocPaymentTotal_input{
 export interface OnChangeDocPaymentTotal_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12365,7 +13576,7 @@ export interface OnChangeDocTranAmt_input{
 export interface OnChangeDocTranAmt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12383,7 +13594,7 @@ export interface OnChangeExchangeRate_output{
 parameters : {
       /**  output parameters  */  
    pQuestion:string,
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12406,7 +13617,7 @@ export interface OnChangeFixedAmount_input{
 export interface OnChangeFixedAmount_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12423,7 +13634,7 @@ export interface OnChangeFormType_input{
 export interface OnChangeFormType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12446,7 +13657,7 @@ export interface OnChangeInvSelPayment_input{
 export interface OnChangeInvSelPayment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvSelTableset[],
+   ds:Erp_Tablesets_APInvSelTableset,
 }
 }
 
@@ -12466,7 +13677,7 @@ export interface OnChangeInvoiceNum_input{
 export interface OnChangeInvoiceNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
    pcQuestion:string,
 }
 }
@@ -12500,7 +13711,7 @@ export interface OnChangeIsEnterTotal_output{
 parameters : {
       /**  output parameters  */  
    pQuestion:string,
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12517,7 +13728,7 @@ export interface OnChangeManualPrint_input{
 export interface OnChangeManualPrint_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12538,7 +13749,7 @@ export interface OnChangePaymentBankRate_output{
 parameters : {
       /**  output parameters  */  
    pQuestion:string,
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12552,7 +13763,7 @@ export interface OnChangePrePayment_input{
 export interface OnChangePrePayment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12572,7 +13783,7 @@ export interface OnChangeRateCode_input{
 export interface OnChangeRateCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12589,7 +13800,7 @@ export interface OnChangeRefPONum_input{
 export interface OnChangeRefPONum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12606,7 +13817,7 @@ export interface OnChangeTHRefInvoiceNum_input{
 export interface OnChangeTHRefInvoiceNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12623,7 +13834,7 @@ export interface OnChangeTHRefVendorID_input{
 export interface OnChangeTHRefVendorID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12646,7 +13857,7 @@ export interface OnChangeTaxAmt_input{
 export interface OnChangeTaxAmt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12666,7 +13877,7 @@ export interface OnChangeTaxCode_input{
 export interface OnChangeTaxCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12689,7 +13900,7 @@ export interface OnChangeTaxPercent_input{
 export interface OnChangeTaxPercent_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12712,7 +13923,7 @@ export interface OnChangeTaxableAmt_input{
 export interface OnChangeTaxableAmt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12729,7 +13940,7 @@ export interface OnChangeVendorBankBranchCode_input{
 export interface OnChangeVendorBankBranchCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12746,7 +13957,7 @@ export interface OnChangeVendor_input{
 export interface OnChangeVendor_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12775,7 +13986,7 @@ export interface PreUpdate_input{
 export interface PreUpdate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
    requiresUserInput:boolean,
 }
 }
@@ -12959,7 +14170,7 @@ export interface SetReadyToCalc_input{
 export interface SetReadyToCalc_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -12990,7 +14201,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtPaymentEntryTableset[],
+   ds:Erp_Tablesets_UpdExtPaymentEntryTableset,
    errorsOccurred:boolean,
 }
 }
@@ -13005,7 +14216,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 
@@ -13114,7 +14325,7 @@ export interface VoidTHWHTCertNo_input{
 export interface VoidTHWHTCertNo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PaymentEntryTableset[],
+   ds:Erp_Tablesets_PaymentEntryTableset,
 }
 }
 

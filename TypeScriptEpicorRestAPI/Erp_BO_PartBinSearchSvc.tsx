@@ -1,13 +1,32 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PartBinSearchSvc
 // Description: Searches plants, warehouses, and part bins based on input parameters.
 PartOnHandWhse was used as a template.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -16,7 +35,7 @@ PartOnHandWhse was used as a template.
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -34,7 +53,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -48,7 +74,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -66,7 +92,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -79,6 +112,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -86,30 +136,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method CheckBin
    Description: Validate the bin and warehouse for the current plant..
    OperationID: CheckBin
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckBin_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckBin_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckBin_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckBin(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckBin(requestBody:CheckBin_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckBin_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/CheckBin", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckBin_output)
           })
       .catch((error) => {
           reject(error)
@@ -121,30 +178,37 @@ export function post_CheckBin(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBinContents
    Description: Gets a listing of parts in a particular whse/bin.
    OperationID: GetBinContents
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBinContents_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBinContents_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBinContents_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBinContents(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBinContents(requestBody:GetBinContents_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBinContents_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/GetBinContents", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBinContents_output)
           })
       .catch((error) => {
           reject(error)
@@ -157,30 +221,37 @@ export function post_GetBinContents(requestBody:any, epicorHeaders?:Headers){
    Description: Gets the dataset of bins, in difference with GetPartBinSearch, this one includes All bins whether they have
 a dimension or lot number or neither of both.
    OperationID: GetFullBinSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFullBinSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFullBinSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFullBinSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFullBinSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFullBinSearch(requestBody:GetFullBinSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFullBinSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/GetFullBinSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFullBinSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -192,30 +263,37 @@ export function post_GetFullBinSearch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetInventoryAttributeValues
    Description: Create InventoryDynAttrValues table and populate it with inventory attribute values
    OperationID: GetInventoryAttributeValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetInventoryAttributeValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetInventoryAttributeValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInventoryAttributeValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetInventoryAttributeValues(requestBody:any, epicorHeaders?:Headers){
+export function post_GetInventoryAttributeValues(requestBody:GetInventoryAttributeValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInventoryAttributeValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/GetInventoryAttributeValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInventoryAttributeValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -226,30 +304,37 @@ export function post_GetInventoryAttributeValues(requestBody:any, epicorHeaders?
    /**  
    Summary: Invoke method GetInventoryAttributeValuesOutDS
    OperationID: GetInventoryAttributeValuesOutDS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetInventoryAttributeValuesOutDS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetInventoryAttributeValuesOutDS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInventoryAttributeValuesOutDS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetInventoryAttributeValuesOutDS(requestBody:any, epicorHeaders?:Headers){
+export function post_GetInventoryAttributeValuesOutDS(requestBody:GetInventoryAttributeValuesOutDS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInventoryAttributeValuesOutDS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/GetInventoryAttributeValuesOutDS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInventoryAttributeValuesOutDS_output)
           })
       .catch((error) => {
           reject(error)
@@ -261,30 +346,37 @@ export function post_GetInventoryAttributeValuesOutDS(requestBody:any, epicorHea
    Summary: Invoke method GetPartBinByLotAndPlant
    Description: Gets the warehouse/bin information for a specific lot, filtered by plant
    OperationID: GetPartBinByLotAndPlant
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartBinByLotAndPlant_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartBinByLotAndPlant_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartBinByLotAndPlant_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartBinByLotAndPlant(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartBinByLotAndPlant(requestBody:GetPartBinByLotAndPlant_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartBinByLotAndPlant_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/GetPartBinByLotAndPlant", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartBinByLotAndPlant_output)
           })
       .catch((error) => {
           reject(error)
@@ -296,30 +388,37 @@ export function post_GetPartBinByLotAndPlant(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetPartBinByLot
    Description: Gets the warehouse/bin information for a specific lot.
    OperationID: GetPartBinByLot
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartBinByLot_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartBinByLot_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartBinByLot_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartBinByLot(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartBinByLot(requestBody:GetPartBinByLot_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartBinByLot_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/GetPartBinByLot", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartBinByLot_output)
           })
       .catch((error) => {
           reject(error)
@@ -333,30 +432,37 @@ export function post_GetPartBinByLot(requestBody:any, epicorHeaders?:Headers){
 If a change is made to this method the same change should be applied to
 the GetSpecificBinSearch method.
    OperationID: GetPartBinSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartBinSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartBinSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartBinSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartBinSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartBinSearch(requestBody:GetPartBinSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartBinSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/GetPartBinSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartBinSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -368,30 +474,37 @@ export function post_GetPartBinSearch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPartXRefInfo
    Description: This method defaults PartAdvisor fields when the PartNum field changes
    OperationID: GetPartXRefInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartXRefInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartXRefInfo(requestBody:GetPartXRefInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartXRefInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/GetPartXRefInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartXRefInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -405,30 +518,37 @@ export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
 If a change is made to this method the same change should be applied to
 the GetPartBinSearch method.
    OperationID: GetSpecificBinSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSpecificBinSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSpecificBinSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSpecificBinSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSpecificBinSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSpecificBinSearch(requestBody:GetSpecificBinSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSpecificBinSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/GetSpecificBinSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSpecificBinSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -440,30 +560,37 @@ export function post_GetSpecificBinSearch(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method FindPart
    Description: Invokes Internal.Lib.FindPart which checks for the existence of a part.
    OperationID: FindPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindPart(requestBody:any, epicorHeaders?:Headers){
+export function post_FindPart(requestBody:FindPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartBinSearchSvc/FindPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -474,11 +601,45 @@ export function post_FindPart(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -679,7 +840,7 @@ export interface GetInventoryAttributeValuesOutDS_output{
    returnObj:any,      //schema had no properties on an object.
 parameters : {
       /**  output parameters  */  
-   dynamicMetadataTableset:Erp_Tablesets_DynamicMetadataTableset[],
+   dynamicMetadataTableset:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.JPPerBillStmtSvc
 // Description: Japan Localization - Periodic Billing Statement Entry
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtGrpRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtGrpRow
    */  
 export function get_JPPerBillStmts(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_JPPerBillStmts(select?:string, expand?:string, filter?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtGrpRow)
           })
@@ -118,15 +158,15 @@ export function get_JPPerBillStmts(select?:string, expand?:string, filter?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_JPPerBillStmts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PerBillStmtGrpRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PerBillStmtGrpRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PerBillStmtGrpRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PerBillStmtGrpRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_JPPerBillStmts(requestBody:any, epicorHeaders?:Headers){
+export function post_JPPerBillStmts(requestBody:Erp_Tablesets_PerBillStmtGrpRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_JPPerBillStmts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_JPPerBillStmts(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PerBillStmtGrpRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PerBillStmtGrpRow
    */  
 export function get_JPPerBillStmts_Company_PerBillStmtGrpID(Company:string, PerBillStmtGrpID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_JPPerBillStmts_Company_PerBillStmtGrpID(Company:string, PerB
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PerBillStmtGrpRow)
           })
@@ -193,15 +247,15 @@ export function get_JPPerBillStmts_Company_PerBillStmtGrpID(Company:string, PerB
    OperationID: UpdateExt_JPPerBillStmt
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PerBillStmtGrpID Desc: PerBillStmtGrpID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PerBillStmtGrpRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PerBillStmtGrpRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_JPPerBillStmts_Company_PerBillStmtGrpID(Company:string, PerBillStmtGrpID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_JPPerBillStmts_Company_PerBillStmtGrpID(Company:string, PerBillStmtGrpID:string, requestBody:Erp_Tablesets_PerBillStmtGrpRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_JPPerBillStmts_Company_PerBillStmtGrpID(Company:string, Pe
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_JPPerBillStmts_Company_PerBillStmtGrpID(Company:string, Pe
    OperationID: DeleteUpdateExt_JPPerBillStmt
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PerBillStmtGrpID Desc: PerBillStmtGrpID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_JPPerBillStmts_Company_PerBillStmtGrpID(Company:string, P
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_JPPerBillStmts_Company_PerBillStmtGrpID(Company:string, P
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtHeadRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtHeadRow
    */  
 export function get_JPPerBillStmts_Company_PerBillStmtGrpID_PerBillStmtHeads(Company:string, PerBillStmtGrpID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_JPPerBillStmts_Company_PerBillStmtGrpID_PerBillStmtHeads(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtHeadRow)
           })
@@ -311,10 +386,10 @@ export function get_JPPerBillStmts_Company_PerBillStmtGrpID_PerBillStmtHeads(Com
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PerBillStmtHeadRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PerBillStmtHeadRow
    */  
 export function get_JPPerBillStmts_Company_PerBillStmtGrpID_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum(Company:string, PerBillStmtGrpID:string, CustNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_JPPerBillStmts_Company_PerBillStmtGrpID_PerBillStmtHeads_Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PerBillStmtHeadRow)
           })
@@ -350,10 +432,10 @@ export function get_JPPerBillStmts_Company_PerBillStmtGrpID_PerBillStmtHeads_Com
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtHeadRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtHeadRow
    */  
 export function get_PerBillStmtHeads(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_PerBillStmtHeads(select?:string, expand?:string, filter?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtHeadRow)
           })
@@ -382,15 +471,15 @@ export function get_PerBillStmtHeads(select?:string, expand?:string, filter?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PerBillStmtHeads
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PerBillStmtHeadRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PerBillStmtHeadRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PerBillStmtHeadRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PerBillStmtHeadRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PerBillStmtHeads(requestBody:any, epicorHeaders?:Headers){
+export function post_PerBillStmtHeads(requestBody:Erp_Tablesets_PerBillStmtHeadRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -404,7 +493,14 @@ export function post_PerBillStmtHeads(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -424,10 +520,10 @@ export function post_PerBillStmtHeads(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PerBillStmtHeadRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PerBillStmtHeadRow
    */  
 export function get_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum(Company:string, PerBillStmtGrpID:string, CustNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -442,7 +538,14 @@ export function get_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PerBillStmtHeadRow)
           })
@@ -459,15 +562,15 @@ export function get_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PerBillStmtGrpID Desc: PerBillStmtGrpID   Required: True   Allow empty value : True
       @param CustNum Desc: CustNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PerBillStmtHeadRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PerBillStmtHeadRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum(Company:string, PerBillStmtGrpID:string, CustNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum(Company:string, PerBillStmtGrpID:string, CustNum:string, requestBody:Erp_Tablesets_PerBillStmtHeadRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -481,7 +584,14 @@ export function patch_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum(Company:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -498,7 +608,7 @@ export function patch_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum(Company:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PerBillStmtGrpID Desc: PerBillStmtGrpID   Required: True   Allow empty value : True
       @param CustNum Desc: CustNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -517,7 +627,14 @@ export function delete_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -540,10 +657,10 @@ export function delete_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtPayRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtPayRow
    */  
 export function get_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum_PerBillStmtPays(Company:string, PerBillStmtGrpID:string, CustNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -558,7 +675,14 @@ export function get_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum_PerBillStm
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtPayRow)
           })
@@ -578,10 +702,10 @@ export function get_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum_PerBillStm
       @param StmtPayLineNum Desc: StmtPayLineNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PerBillStmtPayRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PerBillStmtPayRow
    */  
 export function get_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum_PerBillStmtPays_Company_PerBillStmtGrpID_CustNum_StmtPayLineNum(Company:string, PerBillStmtGrpID:string, CustNum:string, StmtPayLineNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -596,7 +720,14 @@ export function get_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum_PerBillStm
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PerBillStmtPayRow)
           })
@@ -616,10 +747,10 @@ export function get_PerBillStmtHeads_Company_PerBillStmtGrpID_CustNum_PerBillStm
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtPayRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtPayRow
    */  
 export function get_PerBillStmtPays(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -634,7 +765,14 @@ export function get_PerBillStmtPays(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtPayRow)
           })
@@ -648,15 +786,15 @@ export function get_PerBillStmtPays(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PerBillStmtPays
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PerBillStmtPayRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PerBillStmtPayRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PerBillStmtPayRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PerBillStmtPayRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PerBillStmtPays(requestBody:any, epicorHeaders?:Headers){
+export function post_PerBillStmtPays(requestBody:Erp_Tablesets_PerBillStmtPayRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -670,7 +808,14 @@ export function post_PerBillStmtPays(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -690,10 +835,10 @@ export function post_PerBillStmtPays(requestBody:any, epicorHeaders?:Headers){
       @param StmtPayLineNum Desc: StmtPayLineNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PerBillStmtPayRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PerBillStmtPayRow
    */  
 export function get_PerBillStmtPays_Company_PerBillStmtGrpID_CustNum_StmtPayLineNum(Company:string, PerBillStmtGrpID:string, CustNum:string, StmtPayLineNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -708,7 +853,14 @@ export function get_PerBillStmtPays_Company_PerBillStmtGrpID_CustNum_StmtPayLine
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PerBillStmtPayRow)
           })
@@ -726,15 +878,15 @@ export function get_PerBillStmtPays_Company_PerBillStmtGrpID_CustNum_StmtPayLine
       @param PerBillStmtGrpID Desc: PerBillStmtGrpID   Required: True   Allow empty value : True
       @param CustNum Desc: CustNum   Required: True
       @param StmtPayLineNum Desc: StmtPayLineNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PerBillStmtPayRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PerBillStmtPayRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PerBillStmtPays_Company_PerBillStmtGrpID_CustNum_StmtPayLineNum(Company:string, PerBillStmtGrpID:string, CustNum:string, StmtPayLineNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PerBillStmtPays_Company_PerBillStmtGrpID_CustNum_StmtPayLineNum(Company:string, PerBillStmtGrpID:string, CustNum:string, StmtPayLineNum:string, requestBody:Erp_Tablesets_PerBillStmtPayRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -748,7 +900,14 @@ export function patch_PerBillStmtPays_Company_PerBillStmtGrpID_CustNum_StmtPayLi
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -766,7 +925,7 @@ export function patch_PerBillStmtPays_Company_PerBillStmtGrpID_CustNum_StmtPayLi
       @param PerBillStmtGrpID Desc: PerBillStmtGrpID   Required: True   Allow empty value : True
       @param CustNum Desc: CustNum   Required: True
       @param StmtPayLineNum Desc: StmtPayLineNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -785,7 +944,14 @@ export function delete_PerBillStmtPays_Company_PerBillStmtGrpID_CustNum_StmtPayL
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -805,10 +971,10 @@ export function delete_PerBillStmtPays_Company_PerBillStmtGrpID_CustNum_StmtPayL
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtDtlRow
    */  
 export function get_PerBillStmtDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -823,7 +989,14 @@ export function get_PerBillStmtDtls(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtDtlRow)
           })
@@ -837,15 +1010,15 @@ export function get_PerBillStmtDtls(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PerBillStmtDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PerBillStmtDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PerBillStmtDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PerBillStmtDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PerBillStmtDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PerBillStmtDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_PerBillStmtDtls(requestBody:Erp_Tablesets_PerBillStmtDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -859,7 +1032,14 @@ export function post_PerBillStmtDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -879,10 +1059,10 @@ export function post_PerBillStmtDtls(requestBody:any, epicorHeaders?:Headers){
       @param InvoiceNum Desc: InvoiceNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PerBillStmtDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PerBillStmtDtlRow
    */  
 export function get_PerBillStmtDtls_Company_PerBillStmtGrpID_CustNum_InvoiceNum(Company:string, PerBillStmtGrpID:string, CustNum:string, InvoiceNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -897,7 +1077,14 @@ export function get_PerBillStmtDtls_Company_PerBillStmtGrpID_CustNum_InvoiceNum(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PerBillStmtDtlRow)
           })
@@ -915,15 +1102,15 @@ export function get_PerBillStmtDtls_Company_PerBillStmtGrpID_CustNum_InvoiceNum(
       @param PerBillStmtGrpID Desc: PerBillStmtGrpID   Required: True   Allow empty value : True
       @param CustNum Desc: CustNum   Required: True
       @param InvoiceNum Desc: InvoiceNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PerBillStmtDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PerBillStmtDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PerBillStmtDtls_Company_PerBillStmtGrpID_CustNum_InvoiceNum(Company:string, PerBillStmtGrpID:string, CustNum:string, InvoiceNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PerBillStmtDtls_Company_PerBillStmtGrpID_CustNum_InvoiceNum(Company:string, PerBillStmtGrpID:string, CustNum:string, InvoiceNum:string, requestBody:Erp_Tablesets_PerBillStmtDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -937,7 +1124,14 @@ export function patch_PerBillStmtDtls_Company_PerBillStmtGrpID_CustNum_InvoiceNu
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -955,7 +1149,7 @@ export function patch_PerBillStmtDtls_Company_PerBillStmtGrpID_CustNum_InvoiceNu
       @param PerBillStmtGrpID Desc: PerBillStmtGrpID   Required: True   Allow empty value : True
       @param CustNum Desc: CustNum   Required: True
       @param InvoiceNum Desc: InvoiceNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -974,7 +1168,14 @@ export function delete_PerBillStmtDtls_Company_PerBillStmtGrpID_CustNum_InvoiceN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -994,10 +1195,10 @@ export function delete_PerBillStmtDtls_Company_PerBillStmtGrpID_CustNum_InvoiceN
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtGrpListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PerBillStmtGrpListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1012,7 +1213,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtGrpListRow)
           })
@@ -1024,6 +1232,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1038,7 +1263,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1107,15 +1332,22 @@ export function get_GetRows(whereClausePerBillStmtGrp:string, whereClausePerBill
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1128,7 +1360,7 @@ export function get_GetRows(whereClausePerBillStmtGrp:string, whereClausePerBill
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1152,15 +1384,22 @@ export function get_GetByID(perBillStmtGrpID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1175,7 +1414,7 @@ export function get_GetByID(perBillStmtGrpID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1217,15 +1456,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1237,30 +1483,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetCustomers
    Description: Syncronize the DueDate and Billing date HeadInvoice with the values of the  PerBillStmtDtl table.
    OperationID: GetCustomers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCustomers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCustomers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCustomers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCustomers(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCustomers(requestBody:GetCustomers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCustomers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/GetCustomers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCustomers_output)
           })
       .catch((error) => {
           reject(error)
@@ -1271,30 +1524,37 @@ export function post_GetCustomers(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ValidateBillingDate
    OperationID: ValidateBillingDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateBillingDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateBillingDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateBillingDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateBillingDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateBillingDate(requestBody:ValidateBillingDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateBillingDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/ValidateBillingDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateBillingDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1306,30 +1566,37 @@ export function post_ValidateBillingDate(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ValidateCustID
    Description: Receives CustId, returns CustNum
    OperationID: ValidateCustID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCustID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCustID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCustID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCustID(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCustID(requestBody:ValidateCustID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCustID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/ValidateCustID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCustID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1341,30 +1608,37 @@ export function post_ValidateCustID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateDueDate
    Description: Validate that the due date is not lower than the billing date.
    OperationID: ValidateDueDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateDueDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateDueDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateDueDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateDueDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateDueDate(requestBody:ValidateDueDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateDueDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/ValidateDueDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateDueDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1376,30 +1650,37 @@ export function post_ValidateDueDate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateReadyToBill
    Description: Validate that all the invoices are syncronized before setting the customer to "ready to bill.
    OperationID: ValidateReadyToBill
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateReadyToBill_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateReadyToBill_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateReadyToBill_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateReadyToBill(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateReadyToBill(requestBody:ValidateReadyToBill_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateReadyToBill_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/ValidateReadyToBill", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateReadyToBill_output)
           })
       .catch((error) => {
           reject(error)
@@ -1411,7 +1692,7 @@ export function post_ValidateReadyToBill(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method CheckJPConsumptionTax
    Description: Check Japan Consumption Tax exists.
    OperationID: CheckJPConsumptionTax
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckJPConsumptionTax_output
@@ -1424,15 +1705,22 @@ export function post_CheckJPConsumptionTax(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckJPConsumptionTax_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/CheckJPConsumptionTax", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckJPConsumptionTax_output)
           })
       .catch((error) => {
           reject(error)
@@ -1444,30 +1732,37 @@ export function post_CheckJPConsumptionTax(epicorHeaders?:Headers){
    Summary: Invoke method GetNewPerBillStmtGrp
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPerBillStmtGrp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPerBillStmtGrp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPerBillStmtGrp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPerBillStmtGrp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPerBillStmtGrp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPerBillStmtGrp(requestBody:GetNewPerBillStmtGrp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPerBillStmtGrp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/GetNewPerBillStmtGrp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPerBillStmtGrp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1479,30 +1774,37 @@ export function post_GetNewPerBillStmtGrp(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewPerBillStmtHead
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPerBillStmtHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPerBillStmtHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPerBillStmtHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPerBillStmtHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPerBillStmtHead(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPerBillStmtHead(requestBody:GetNewPerBillStmtHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPerBillStmtHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/GetNewPerBillStmtHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPerBillStmtHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -1514,30 +1816,37 @@ export function post_GetNewPerBillStmtHead(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewPerBillStmtDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPerBillStmtDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPerBillStmtDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPerBillStmtDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPerBillStmtDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPerBillStmtDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPerBillStmtDtl(requestBody:GetNewPerBillStmtDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPerBillStmtDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/GetNewPerBillStmtDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPerBillStmtDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1549,30 +1858,37 @@ export function post_GetNewPerBillStmtDtl(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewPerBillStmtPay
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPerBillStmtPay
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPerBillStmtPay_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPerBillStmtPay_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPerBillStmtPay_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPerBillStmtPay(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPerBillStmtPay(requestBody:GetNewPerBillStmtPay_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPerBillStmtPay_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/GetNewPerBillStmtPay", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPerBillStmtPay_output)
           })
       .catch((error) => {
           reject(error)
@@ -1584,30 +1900,37 @@ export function post_GetNewPerBillStmtPay(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1619,7 +1942,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1643,15 +1966,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1663,7 +1993,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1687,15 +2017,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1707,30 +2044,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1742,30 +2086,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JPPerBillStmtSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1776,31 +2127,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PerBillStmtDtlRow[],
+   "value":Erp_Tablesets_PerBillStmtDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtGrpListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PerBillStmtGrpListRow[],
+   "value":Erp_Tablesets_PerBillStmtGrpListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtGrpRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PerBillStmtGrpRow[],
+   "value":Erp_Tablesets_PerBillStmtGrpRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtHeadRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PerBillStmtHeadRow[],
+   "value":Erp_Tablesets_PerBillStmtHeadRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PerBillStmtPayRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PerBillStmtPayRow[],
+   "value":Erp_Tablesets_PerBillStmtPayRow,
 }
 
 export interface Erp_Tablesets_PerBillStmtDtlRow{
@@ -1951,6 +2319,23 @@ export interface Erp_Tablesets_PerBillStmtPayRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2180,7 +2565,7 @@ export interface GetCustomers_output{
 parameters : {
       /**  output parameters  */  
    opMessage:string,
-   ds:Erp_Tablesets_JPPerBillStmtTableset[],
+   ds:Erp_Tablesets_JPPerBillStmtTableset,
 }
 }
 
@@ -2220,7 +2605,7 @@ export interface GetNewPerBillStmtDtl_input{
 export interface GetNewPerBillStmtDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JPPerBillStmtTableset[],
+   ds:Erp_Tablesets_JPPerBillStmtTableset,
 }
 }
 
@@ -2234,7 +2619,7 @@ export interface GetNewPerBillStmtGrp_input{
 export interface GetNewPerBillStmtGrp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JPPerBillStmtTableset[],
+   ds:Erp_Tablesets_JPPerBillStmtTableset,
 }
 }
 
@@ -2250,7 +2635,7 @@ export interface GetNewPerBillStmtHead_input{
 export interface GetNewPerBillStmtHead_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JPPerBillStmtTableset[],
+   ds:Erp_Tablesets_JPPerBillStmtTableset,
 }
 }
 
@@ -2268,7 +2653,7 @@ export interface GetNewPerBillStmtPay_input{
 export interface GetNewPerBillStmtPay_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JPPerBillStmtTableset[],
+   ds:Erp_Tablesets_JPPerBillStmtTableset,
 }
 }
 
@@ -2348,7 +2733,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtJPPerBillStmtTableset[],
+   ds:Erp_Tablesets_UpdExtJPPerBillStmtTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2363,7 +2748,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JPPerBillStmtTableset[],
+   ds:Erp_Tablesets_JPPerBillStmtTableset,
 }
 }
 
@@ -2380,7 +2765,7 @@ export interface ValidateBillingDate_output{
 parameters : {
       /**  output parameters  */  
    opDueDate:string,
-   ds:Erp_Tablesets_JPPerBillStmtTableset[],
+   ds:Erp_Tablesets_JPPerBillStmtTableset,
 }
 }
 
@@ -2398,7 +2783,7 @@ export interface ValidateCustID_output{
 parameters : {
       /**  output parameters  */  
    opCustNum:number,
-   ds:Erp_Tablesets_JPPerBillStmtTableset[],
+   ds:Erp_Tablesets_JPPerBillStmtTableset,
 }
 }
 
@@ -2415,7 +2800,7 @@ export interface ValidateDueDate_input{
 export interface ValidateDueDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JPPerBillStmtTableset[],
+   ds:Erp_Tablesets_JPPerBillStmtTableset,
 }
 }
 
@@ -2432,7 +2817,7 @@ export interface ValidateReadyToBill_input{
 export interface ValidateReadyToBill_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JPPerBillStmtTableset[],
+   ds:Erp_Tablesets_JPPerBillStmtTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.MESMenuSvc
 // Description: Business object to interact with Handheld/MES Menu Security
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,7 +135,7 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method CheckMESMenuInitializedStatus
    Description: Checks whether the current company has any MESMenu data initialized.
    OperationID: CheckMESMenuInitializedStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckMESMenuInitializedStatus_output
@@ -98,15 +148,22 @@ export function post_CheckMESMenuInitializedStatus(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckMESMenuInitializedStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MESMenuSvc/CheckMESMenuInitializedStatus", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckMESMenuInitializedStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -118,7 +175,7 @@ export function post_CheckMESMenuInitializedStatus(epicorHeaders?:Headers){
    Summary: Invoke method CheckCurrentUserSecurityMgr
    Description: Checks whether the current user is a security manager.
    OperationID: CheckCurrentUserSecurityMgr
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckCurrentUserSecurityMgr_output
@@ -131,15 +188,22 @@ export function post_CheckCurrentUserSecurityMgr(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckCurrentUserSecurityMgr_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MESMenuSvc/CheckCurrentUserSecurityMgr", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckCurrentUserSecurityMgr_output)
           })
       .catch((error) => {
           reject(error)
@@ -151,30 +215,37 @@ export function post_CheckCurrentUserSecurityMgr(epicorHeaders?:Headers){
    Summary: Invoke method CheckEmployeeID
    Description: Checks whether the specified employee is a valid, active employee.
    OperationID: CheckEmployeeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckEmployeeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckEmployeeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckEmployeeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckEmployeeID(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckEmployeeID(requestBody:CheckEmployeeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckEmployeeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MESMenuSvc/CheckEmployeeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckEmployeeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -186,30 +257,37 @@ export function post_CheckEmployeeID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckUserSiteAccess
    Description: Checks whether the specified user has access to the site defined in MES.
    OperationID: CheckUserSiteAccess
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckUserSiteAccess_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckUserSiteAccess_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckUserSiteAccess_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckUserSiteAccess(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckUserSiteAccess(requestBody:CheckUserSiteAccess_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckUserSiteAccess_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MESMenuSvc/CheckUserSiteAccess", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckUserSiteAccess_output)
           })
       .catch((error) => {
           reject(error)
@@ -221,30 +299,37 @@ export function post_CheckUserSiteAccess(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetMenuData
    Description: Gets MESMenu data
    OperationID: GetMenuData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMenuData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMenuData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMenuData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMenuData(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMenuData(requestBody:GetMenuData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMenuData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MESMenuSvc/GetMenuData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMenuData_output)
           })
       .catch((error) => {
           reject(error)
@@ -256,30 +341,37 @@ export function post_GetMenuData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateMenuData
    Description: Updates MESMenu and MESMenuSecurity tables
    OperationID: UpdateMenuData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateMenuData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateMenuData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateMenuData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateMenuData(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateMenuData(requestBody:UpdateMenuData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateMenuData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MESMenuSvc/UpdateMenuData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateMenuData_output)
           })
       .catch((error) => {
           reject(error)
@@ -291,30 +383,37 @@ export function post_UpdateMenuData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method InitializeMESMenu
    Description: Initializes or reinitializes the MESMenu data for the current company.
    OperationID: InitializeMESMenu
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InitializeMESMenu_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InitializeMESMenu_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InitializeMESMenu_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InitializeMESMenu(requestBody:any, epicorHeaders?:Headers){
+export function post_InitializeMESMenu(requestBody:InitializeMESMenu_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InitializeMESMenu_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MESMenuSvc/InitializeMESMenu", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InitializeMESMenu_output)
           })
       .catch((error) => {
           reject(error)
@@ -326,30 +425,37 @@ export function post_InitializeMESMenu(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetEmployeeID
    Description: Call to change EmployeeID if allowed by EmpBasic settings
    OperationID: SetEmployeeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetEmployeeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetEmployeeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetEmployeeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetEmployeeID(requestBody:any, epicorHeaders?:Headers){
+export function post_SetEmployeeID(requestBody:SetEmployeeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetEmployeeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MESMenuSvc/SetEmployeeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetEmployeeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -361,30 +467,37 @@ export function post_SetEmployeeID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ImportMESMenuData
    Description: Import MESMenu data received in a MESMenuTableset, and add it into MESMenu and MESMenuSecurity tables.
    OperationID: ImportMESMenuData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportMESMenuData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportMESMenuData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportMESMenuData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportMESMenuData(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportMESMenuData(requestBody:ImportMESMenuData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportMESMenuData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MESMenuSvc/ImportMESMenuData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportMESMenuData_output)
           })
       .catch((error) => {
           reject(error)
@@ -395,11 +508,45 @@ export function post_ImportMESMenuData(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -610,7 +757,7 @@ export interface UpdateMenuData_input{
 export interface UpdateMenuData_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MESMenuTableset[],
+   ds:Erp_Tablesets_MESMenuTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PkgControlIDSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlHeaderRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlHeaderRow
    */  
 export function get_PkgControlIDs(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_PkgControlIDs(select?:string, expand?:string, filter?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PkgControlHeaderRow)
           })
@@ -118,15 +158,15 @@ export function get_PkgControlIDs(select?:string, expand?:string, filter?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PkgControlIDs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PkgControlHeaderRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PkgControlHeaderRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PkgControlHeaderRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PkgControlHeaderRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PkgControlIDs(requestBody:any, epicorHeaders?:Headers){
+export function post_PkgControlIDs(requestBody:Erp_Tablesets_PkgControlHeaderRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_PkgControlIDs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_PkgControlIDs(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PkgControlHeaderRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PkgControlHeaderRow
    */  
 export function get_PkgControlIDs_Company_PCID(Company:string, PCID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_PkgControlIDs_Company_PCID(Company:string, PCID:string, sele
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PkgControlHeaderRow)
           })
@@ -193,15 +247,15 @@ export function get_PkgControlIDs_Company_PCID(Company:string, PCID:string, sele
    OperationID: UpdateExt_PkgControlID
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PCID Desc: PCID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PkgControlHeaderRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PkgControlHeaderRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PkgControlIDs_Company_PCID(Company:string, PCID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PkgControlIDs_Company_PCID(Company:string, PCID:string, requestBody:Erp_Tablesets_PkgControlHeaderRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_PkgControlIDs_Company_PCID(Company:string, PCID:string, re
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_PkgControlIDs_Company_PCID(Company:string, PCID:string, re
    OperationID: DeleteUpdateExt_PkgControlID
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PCID Desc: PCID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_PkgControlIDs_Company_PCID(Company:string, PCID:string, e
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_PkgControlIDs_Company_PCID(Company:string, PCID:string, e
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlCustPartNumRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlCustPartNumRow
    */  
 export function get_PkgControlIDs_Company_PCID_PkgControlCustPartNums(Company:string, PCID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_PkgControlIDs_Company_PCID_PkgControlCustPartNums(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PkgControlCustPartNumRow)
           })
@@ -309,10 +384,10 @@ export function get_PkgControlIDs_Company_PCID_PkgControlCustPartNums(Company:st
       @param PCIDCustPartSeq Desc: PCIDCustPartSeq   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PkgControlCustPartNumRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PkgControlCustPartNumRow
    */  
 export function get_PkgControlIDs_Company_PCID_PkgControlCustPartNums_Company_PCID_PCIDCustPartSeq(Company:string, PCID:string, PCIDCustPartSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_PkgControlIDs_Company_PCID_PkgControlCustPartNums_Company_PC
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PkgControlCustPartNumRow)
           })
@@ -349,10 +431,10 @@ export function get_PkgControlIDs_Company_PCID_PkgControlCustPartNums_Company_PC
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PCLabelValuesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PCLabelValuesRow
    */  
 export function get_PkgControlIDs_Company_PCID_PCLabelValues(Company:string, PCID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -367,7 +449,14 @@ export function get_PkgControlIDs_Company_PCID_PCLabelValues(Company:string, PCI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PCLabelValuesRow)
           })
@@ -386,10 +475,10 @@ export function get_PkgControlIDs_Company_PCID_PCLabelValues(Company:string, PCI
       @param LabelSeq Desc: LabelSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PCLabelValuesRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PCLabelValuesRow
    */  
 export function get_PkgControlIDs_Company_PCID_PCLabelValues_Company_PCID_LabelSeq(Company:string, PCID:string, LabelSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -404,7 +493,14 @@ export function get_PkgControlIDs_Company_PCID_PCLabelValues_Company_PCID_LabelS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PCLabelValuesRow)
           })
@@ -426,10 +522,10 @@ export function get_PkgControlIDs_Company_PCID_PCLabelValues_Company_PCID_LabelS
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlItemRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlItemRow
    */  
 export function get_PkgControlIDs_Company_PCID_PkgControlItems(Company:string, PCID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -444,7 +540,14 @@ export function get_PkgControlIDs_Company_PCID_PkgControlItems(Company:string, P
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PkgControlItemRow)
           })
@@ -463,10 +566,10 @@ export function get_PkgControlIDs_Company_PCID_PkgControlItems(Company:string, P
       @param PCIDItemSeq Desc: PCIDItemSeq   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PkgControlItemRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PkgControlItemRow
    */  
 export function get_PkgControlIDs_Company_PCID_PkgControlItems_Company_PCID_PCIDItemSeq(Company:string, PCID:string, PCIDItemSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -481,7 +584,14 @@ export function get_PkgControlIDs_Company_PCID_PkgControlItems_Company_PCID_PCID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PkgControlItemRow)
           })
@@ -501,10 +611,10 @@ export function get_PkgControlIDs_Company_PCID_PkgControlItems_Company_PCID_PCID
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlCustPartNumRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlCustPartNumRow
    */  
 export function get_PkgControlCustPartNums(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -519,7 +629,14 @@ export function get_PkgControlCustPartNums(select?:string, filter?:string, order
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PkgControlCustPartNumRow)
           })
@@ -533,15 +650,15 @@ export function get_PkgControlCustPartNums(select?:string, filter?:string, order
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PkgControlCustPartNums
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PkgControlCustPartNumRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PkgControlCustPartNumRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PkgControlCustPartNumRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PkgControlCustPartNumRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PkgControlCustPartNums(requestBody:any, epicorHeaders?:Headers){
+export function post_PkgControlCustPartNums(requestBody:Erp_Tablesets_PkgControlCustPartNumRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -555,7 +672,14 @@ export function post_PkgControlCustPartNums(requestBody:any, epicorHeaders?:Head
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -574,10 +698,10 @@ export function post_PkgControlCustPartNums(requestBody:any, epicorHeaders?:Head
       @param PCIDCustPartSeq Desc: PCIDCustPartSeq   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PkgControlCustPartNumRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PkgControlCustPartNumRow
    */  
 export function get_PkgControlCustPartNums_Company_PCID_PCIDCustPartSeq(Company:string, PCID:string, PCIDCustPartSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -592,7 +716,14 @@ export function get_PkgControlCustPartNums_Company_PCID_PCIDCustPartSeq(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PkgControlCustPartNumRow)
           })
@@ -609,15 +740,15 @@ export function get_PkgControlCustPartNums_Company_PCID_PCIDCustPartSeq(Company:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PCID Desc: PCID   Required: True   Allow empty value : True
       @param PCIDCustPartSeq Desc: PCIDCustPartSeq   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PkgControlCustPartNumRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PkgControlCustPartNumRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PkgControlCustPartNums_Company_PCID_PCIDCustPartSeq(Company:string, PCID:string, PCIDCustPartSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PkgControlCustPartNums_Company_PCID_PCIDCustPartSeq(Company:string, PCID:string, PCIDCustPartSeq:string, requestBody:Erp_Tablesets_PkgControlCustPartNumRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -631,7 +762,14 @@ export function patch_PkgControlCustPartNums_Company_PCID_PCIDCustPartSeq(Compan
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -648,7 +786,7 @@ export function patch_PkgControlCustPartNums_Company_PCID_PCIDCustPartSeq(Compan
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PCID Desc: PCID   Required: True   Allow empty value : True
       @param PCIDCustPartSeq Desc: PCIDCustPartSeq   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -667,7 +805,14 @@ export function delete_PkgControlCustPartNums_Company_PCID_PCIDCustPartSeq(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -687,10 +832,10 @@ export function delete_PkgControlCustPartNums_Company_PCID_PCIDCustPartSeq(Compa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PCLabelValuesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PCLabelValuesRow
    */  
 export function get_PCLabelValues(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -705,7 +850,14 @@ export function get_PCLabelValues(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PCLabelValuesRow)
           })
@@ -719,15 +871,15 @@ export function get_PCLabelValues(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PCLabelValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PCLabelValuesRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PCLabelValuesRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PCLabelValuesRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PCLabelValuesRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PCLabelValues(requestBody:any, epicorHeaders?:Headers){
+export function post_PCLabelValues(requestBody:Erp_Tablesets_PCLabelValuesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -741,7 +893,14 @@ export function post_PCLabelValues(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -760,10 +919,10 @@ export function post_PCLabelValues(requestBody:any, epicorHeaders?:Headers){
       @param LabelSeq Desc: LabelSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PCLabelValuesRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PCLabelValuesRow
    */  
 export function get_PCLabelValues_Company_PCID_LabelSeq(Company:string, PCID:string, LabelSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -778,7 +937,14 @@ export function get_PCLabelValues_Company_PCID_LabelSeq(Company:string, PCID:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PCLabelValuesRow)
           })
@@ -795,15 +961,15 @@ export function get_PCLabelValues_Company_PCID_LabelSeq(Company:string, PCID:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PCID Desc: PCID   Required: True   Allow empty value : True
       @param LabelSeq Desc: LabelSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PCLabelValuesRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PCLabelValuesRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PCLabelValues_Company_PCID_LabelSeq(Company:string, PCID:string, LabelSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PCLabelValues_Company_PCID_LabelSeq(Company:string, PCID:string, LabelSeq:string, requestBody:Erp_Tablesets_PCLabelValuesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -817,7 +983,14 @@ export function patch_PCLabelValues_Company_PCID_LabelSeq(Company:string, PCID:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -834,7 +1007,7 @@ export function patch_PCLabelValues_Company_PCID_LabelSeq(Company:string, PCID:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PCID Desc: PCID   Required: True   Allow empty value : True
       @param LabelSeq Desc: LabelSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -853,7 +1026,14 @@ export function delete_PCLabelValues_Company_PCID_LabelSeq(Company:string, PCID:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -873,10 +1053,10 @@ export function delete_PCLabelValues_Company_PCID_LabelSeq(Company:string, PCID:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlItemRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlItemRow
    */  
 export function get_PkgControlItems(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -891,7 +1071,14 @@ export function get_PkgControlItems(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PkgControlItemRow)
           })
@@ -905,15 +1092,15 @@ export function get_PkgControlItems(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PkgControlItems
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PkgControlItemRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PkgControlItemRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PkgControlItemRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PkgControlItemRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PkgControlItems(requestBody:any, epicorHeaders?:Headers){
+export function post_PkgControlItems(requestBody:Erp_Tablesets_PkgControlItemRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -927,7 +1114,14 @@ export function post_PkgControlItems(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -946,10 +1140,10 @@ export function post_PkgControlItems(requestBody:any, epicorHeaders?:Headers){
       @param PCIDItemSeq Desc: PCIDItemSeq   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PkgControlItemRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PkgControlItemRow
    */  
 export function get_PkgControlItems_Company_PCID_PCIDItemSeq(Company:string, PCID:string, PCIDItemSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -964,7 +1158,14 @@ export function get_PkgControlItems_Company_PCID_PCIDItemSeq(Company:string, PCI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PkgControlItemRow)
           })
@@ -981,15 +1182,15 @@ export function get_PkgControlItems_Company_PCID_PCIDItemSeq(Company:string, PCI
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PCID Desc: PCID   Required: True   Allow empty value : True
       @param PCIDItemSeq Desc: PCIDItemSeq   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PkgControlItemRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PkgControlItemRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PkgControlItems_Company_PCID_PCIDItemSeq(Company:string, PCID:string, PCIDItemSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PkgControlItems_Company_PCID_PCIDItemSeq(Company:string, PCID:string, PCIDItemSeq:string, requestBody:Erp_Tablesets_PkgControlItemRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1003,7 +1204,14 @@ export function patch_PkgControlItems_Company_PCID_PCIDItemSeq(Company:string, P
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1020,7 +1228,7 @@ export function patch_PkgControlItems_Company_PCID_PCIDItemSeq(Company:string, P
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PCID Desc: PCID   Required: True   Allow empty value : True
       @param PCIDItemSeq Desc: PCIDItemSeq   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1039,7 +1247,14 @@ export function delete_PkgControlItems_Company_PCID_PCIDItemSeq(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1059,10 +1274,10 @@ export function delete_PkgControlItems_Company_PCID_PCIDItemSeq(Company:string, 
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlHeaderListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PkgControlHeaderListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1077,7 +1292,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PkgControlHeaderListRow)
           })
@@ -1089,6 +1311,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1103,7 +1342,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1172,15 +1411,22 @@ export function get_GetRows(whereClausePkgControlHeader:string, whereClausePkgCo
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1193,7 +1439,7 @@ export function get_GetRows(whereClausePkgControlHeader:string, whereClausePkgCo
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1217,15 +1463,22 @@ export function get_GetByID(pcID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1240,7 +1493,7 @@ export function get_GetByID(pcID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1282,15 +1535,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1302,30 +1562,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetListCoreStageHX
    Description: Get list of PCIDs from Core, Stage and History tables.
    OperationID: GetListCoreStageHX
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListCoreStageHX_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListCoreStageHX_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListCoreStageHX_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListCoreStageHX(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListCoreStageHX(requestBody:GetListCoreStageHX_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListCoreStageHX_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/GetListCoreStageHX", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListCoreStageHX_output)
           })
       .catch((error) => {
           reject(error)
@@ -1337,30 +1604,37 @@ export function post_GetListCoreStageHX(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetPCIDList
    Description: Purpose:  To find PCID's that are shipped on a given shipment
    OperationID: GetPCIDList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPCIDList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPCIDList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPCIDList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPCIDList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPCIDList(requestBody:GetPCIDList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPCIDList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/GetPCIDList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPCIDList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1372,30 +1646,37 @@ export function post_GetPCIDList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method PCIDExists
    Description: Purpose:  Test if a given PCID already exists in the PkgControlHeader table.
    OperationID: PCIDExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PCIDExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PCIDExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PCIDExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PCIDExists(requestBody:any, epicorHeaders?:Headers){
+export function post_PCIDExists(requestBody:PCIDExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PCIDExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/PCIDExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PCIDExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -1407,30 +1688,37 @@ export function post_PCIDExists(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method WarehseEnforcePkgControlRulesExists
    Description: This method is udes to verify if a Warehouse with EnforcePkgControlRules exists
    OperationID: WarehseEnforcePkgControlRulesExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/WarehseEnforcePkgControlRulesExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/WarehseEnforcePkgControlRulesExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/WarehseEnforcePkgControlRulesExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_WarehseEnforcePkgControlRulesExists(requestBody:any, epicorHeaders?:Headers){
+export function post_WarehseEnforcePkgControlRulesExists(requestBody:WarehseEnforcePkgControlRulesExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<WarehseEnforcePkgControlRulesExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/WarehseEnforcePkgControlRulesExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as WarehseEnforcePkgControlRulesExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -1442,30 +1730,37 @@ export function post_WarehseEnforcePkgControlRulesExists(requestBody:any, epicor
    Summary: Invoke method WhseBinExists
    Description: This method is udes to verify if a WhseBin exists
    OperationID: WhseBinExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/WhseBinExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/WhseBinExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/WhseBinExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_WhseBinExists(requestBody:any, epicorHeaders?:Headers){
+export function post_WhseBinExists(requestBody:WhseBinExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<WhseBinExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/WhseBinExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as WhseBinExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -1477,30 +1772,37 @@ export function post_WhseBinExists(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangePCID
    Description: Call this method when the value of Epicor.Mfg.BO.PkgControlIDDataSet.PCID changes.
    OperationID: OnChangePCID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePCID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePCID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePCID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePCID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePCID(requestBody:OnChangePCID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePCID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/OnChangePCID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePCID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1512,30 +1814,37 @@ export function post_OnChangePCID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CommitPCIDTransfer
    Description: This method will commit the inventory transfer.
    OperationID: CommitPCIDTransfer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CommitPCIDTransfer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CommitPCIDTransfer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CommitPCIDTransfer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CommitPCIDTransfer(requestBody:any, epicorHeaders?:Headers){
+export function post_CommitPCIDTransfer(requestBody:CommitPCIDTransfer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CommitPCIDTransfer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/CommitPCIDTransfer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CommitPCIDTransfer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1547,7 +1856,7 @@ export function post_CommitPCIDTransfer(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method PasswordConfigured
    Description: this method returns if the supervisor password is configured
    OperationID: PasswordConfigured
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/PasswordConfigured_output
@@ -1560,15 +1869,22 @@ export function post_PasswordConfigured(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PasswordConfigured_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/PasswordConfigured", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PasswordConfigured_output)
           })
       .catch((error) => {
           reject(error)
@@ -1581,30 +1897,37 @@ export function post_PasswordConfigured(epicorHeaders?:Headers){
    Description: This method is used to confirm if the User/Supervisor Password provided is correct.
 This is called from PackageControlLib.
    OperationID: ConfirmSupervisorPassword
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ConfirmSupervisorPassword_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ConfirmSupervisorPassword_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ConfirmSupervisorPassword_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ConfirmSupervisorPassword(requestBody:any, epicorHeaders?:Headers){
+export function post_ConfirmSupervisorPassword(requestBody:ConfirmSupervisorPassword_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ConfirmSupervisorPassword_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/ConfirmSupervisorPassword", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ConfirmSupervisorPassword_output)
           })
       .catch((error) => {
           reject(error)
@@ -1616,30 +1939,37 @@ export function post_ConfirmSupervisorPassword(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewPkgControlHeader
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPkgControlHeader
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPkgControlHeader_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPkgControlHeader_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPkgControlHeader_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPkgControlHeader(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPkgControlHeader(requestBody:GetNewPkgControlHeader_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPkgControlHeader_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/GetNewPkgControlHeader", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPkgControlHeader_output)
           })
       .catch((error) => {
           reject(error)
@@ -1651,30 +1981,37 @@ export function post_GetNewPkgControlHeader(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetNewPkgControlCustPartNum
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPkgControlCustPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPkgControlCustPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPkgControlCustPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPkgControlCustPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPkgControlCustPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPkgControlCustPartNum(requestBody:GetNewPkgControlCustPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPkgControlCustPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/GetNewPkgControlCustPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPkgControlCustPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1686,30 +2023,37 @@ export function post_GetNewPkgControlCustPartNum(requestBody:any, epicorHeaders?
    Summary: Invoke method GetNewPkgControlItem
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPkgControlItem
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPkgControlItem_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPkgControlItem_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPkgControlItem_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPkgControlItem(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPkgControlItem(requestBody:GetNewPkgControlItem_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPkgControlItem_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/GetNewPkgControlItem", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPkgControlItem_output)
           })
       .catch((error) => {
           reject(error)
@@ -1721,30 +2065,37 @@ export function post_GetNewPkgControlItem(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1756,7 +2107,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1780,15 +2131,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1800,7 +2158,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1824,15 +2182,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1844,30 +2209,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1879,30 +2251,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlIDSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1913,31 +2292,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PCLabelValuesRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PCLabelValuesRow[],
+   "value":Erp_Tablesets_PCLabelValuesRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PkgControlCustPartNumRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PkgControlCustPartNumRow[],
+   "value":Erp_Tablesets_PkgControlCustPartNumRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PkgControlHeaderListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PkgControlHeaderListRow[],
+   "value":Erp_Tablesets_PkgControlHeaderListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PkgControlHeaderRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PkgControlHeaderRow[],
+   "value":Erp_Tablesets_PkgControlHeaderRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PkgControlItemRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PkgControlItemRow[],
+   "value":Erp_Tablesets_PkgControlItemRow,
 }
 
 export interface Erp_Tablesets_PCLabelValuesRow{
@@ -2920,6 +3316,23 @@ export interface Erp_Tablesets_PkgControlItemRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2936,7 +3349,7 @@ export interface CommitPCIDTransfer_input{
 export interface CommitPCIDTransfer_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlIDTableset[],
+   ds:Erp_Tablesets_PkgControlIDTableset,
 }
 }
 
@@ -4051,7 +4464,7 @@ export interface GetNewPkgControlCustPartNum_input{
 export interface GetNewPkgControlCustPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlIDTableset[],
+   ds:Erp_Tablesets_PkgControlIDTableset,
 }
 }
 
@@ -4065,7 +4478,7 @@ export interface GetNewPkgControlHeader_input{
 export interface GetNewPkgControlHeader_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlIDTableset[],
+   ds:Erp_Tablesets_PkgControlIDTableset,
 }
 }
 
@@ -4081,7 +4494,7 @@ export interface GetNewPkgControlItem_input{
 export interface GetNewPkgControlItem_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlIDTableset[],
+   ds:Erp_Tablesets_PkgControlIDTableset,
 }
 }
 
@@ -4172,7 +4585,7 @@ export interface OnChangePCID_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlIDTableset[],
+   ds:Erp_Tablesets_PkgControlIDTableset,
 }
 }
 
@@ -4208,7 +4621,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtPkgControlIDTableset[],
+   ds:Erp_Tablesets_UpdExtPkgControlIDTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4223,7 +4636,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlIDTableset[],
+   ds:Erp_Tablesets_PkgControlIDTableset,
 }
 }
 

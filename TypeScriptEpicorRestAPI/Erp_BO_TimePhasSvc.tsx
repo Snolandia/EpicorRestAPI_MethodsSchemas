@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.TimePhasSvc
 // Description: Time Phase Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,7 +135,7 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method EnableDisableWhatIfAndTFSugTogs
    Description: SET Enable or Disable WhatIf And TFSugTogs
    OperationID: EnableDisableWhatIfAndTFSugTogs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/EnableDisableWhatIfAndTFSugTogs_output
@@ -98,15 +148,22 @@ export function post_EnableDisableWhatIfAndTFSugTogs(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<EnableDisableWhatIfAndTFSugTogs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/EnableDisableWhatIfAndTFSugTogs", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as EnableDisableWhatIfAndTFSugTogs_output)
           })
       .catch((error) => {
           reject(error)
@@ -117,30 +174,37 @@ export function post_EnableDisableWhatIfAndTFSugTogs(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetFrameTitle
    OperationID: GetFrameTitle
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFrameTitle_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFrameTitle_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFrameTitle_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFrameTitle(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFrameTitle(requestBody:GetFrameTitle_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFrameTitle_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/GetFrameTitle", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFrameTitle_output)
           })
       .catch((error) => {
           reject(error)
@@ -152,30 +216,37 @@ export function post_GetFrameTitle(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetFrameTitleWithTime
    Description: Geting of FrameTitle by Plant. It called from Kinetic UI to get time portion separately
    OperationID: GetFrameTitleWithTime
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFrameTitleWithTime_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFrameTitleWithTime_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFrameTitleWithTime_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFrameTitleWithTime(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFrameTitleWithTime(requestBody:GetFrameTitleWithTime_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFrameTitleWithTime_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/GetFrameTitleWithTime", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFrameTitleWithTime_output)
           })
       .catch((error) => {
           reject(error)
@@ -187,30 +258,37 @@ export function post_GetFrameTitleWithTime(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetLastRunDateTimes
    Description: Gets the last mrp run date and time and the last scheduled date
    OperationID: GetLastRunDateTimes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLastRunDateTimes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLastRunDateTimes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLastRunDateTimes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLastRunDateTimes(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLastRunDateTimes(requestBody:GetLastRunDateTimes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLastRunDateTimes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/GetLastRunDateTimes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLastRunDateTimes_output)
           })
       .catch((error) => {
           reject(error)
@@ -222,30 +300,37 @@ export function post_GetLastRunDateTimes(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetPartXRefInfo
    Description: This method defaults PartAdvisor fields when the PartNum field changes
    OperationID: GetPartXRefInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartXRefInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartXRefInfo(requestBody:GetPartXRefInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartXRefInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/GetPartXRefInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartXRefInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -257,30 +342,37 @@ export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetContractByID
    Description: This method retrieve an active and approved planning contract
    OperationID: GetContractByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContractByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContractByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContractByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContractByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContractByID(requestBody:GetContractByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContractByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/GetContractByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContractByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -292,30 +384,37 @@ export function post_GetContractByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GoProcessTimePhase
    Description: Creating the TimePhase by PartNum and Plant
    OperationID: GoProcessTimePhase
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GoProcessTimePhase_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GoProcessTimePhase_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GoProcessTimePhase_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GoProcessTimePhase(requestBody:any, epicorHeaders?:Headers){
+export function post_GoProcessTimePhase(requestBody:GoProcessTimePhase_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GoProcessTimePhase_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/GoProcessTimePhase", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GoProcessTimePhase_output)
           })
       .catch((error) => {
           reject(error)
@@ -328,30 +427,37 @@ export function post_GoProcessTimePhase(requestBody:any, epicorHeaders?:Headers)
    Description: Get the AttributeSetID of the Planning Attribute Set of any Attribute Set
 by passing in its AttributeSetID.
    OperationID: GetPlanningAttributeSetID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPlanningAttributeSetID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPlanningAttributeSetID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPlanningAttributeSetID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPlanningAttributeSetID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPlanningAttributeSetID(requestBody:GetPlanningAttributeSetID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPlanningAttributeSetID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/GetPlanningAttributeSetID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPlanningAttributeSetID_output)
           })
       .catch((error) => {
           reject(error)
@@ -363,30 +469,37 @@ export function post_GetPlanningAttributeSetID(requestBody:any, epicorHeaders?:H
    Summary: Invoke method FindPart
    Description: Find part.
    OperationID: FindPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindPart(requestBody:any, epicorHeaders?:Headers){
+export function post_FindPart(requestBody:FindPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/FindPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -398,30 +511,37 @@ export function post_FindPart(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPartFromRowID
    Description: GetPartFromRowID.
    OperationID: GetPartFromRowID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartFromRowID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartFromRowID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartFromRowID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartFromRowID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartFromRowID(requestBody:GetPartFromRowID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartFromRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/GetPartFromRowID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartFromRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -433,30 +553,37 @@ export function post_GetPartFromRowID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method FindPlanningAttributeSet
    Description: Resolve Attribute ID passed into form
    OperationID: FindPlanningAttributeSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindPlanningAttributeSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindPlanningAttributeSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindPlanningAttributeSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindPlanningAttributeSet(requestBody:any, epicorHeaders?:Headers){
+export function post_FindPlanningAttributeSet(requestBody:FindPlanningAttributeSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindPlanningAttributeSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/FindPlanningAttributeSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindPlanningAttributeSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -468,30 +595,37 @@ export function post_FindPlanningAttributeSet(requestBody:any, epicorHeaders?:He
    Summary: Invoke method FindAttributeSet
    Description: Find attribute short description and attributeSetDesc
    OperationID: FindAttributeSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindAttributeSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindAttributeSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindAttributeSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindAttributeSet(requestBody:any, epicorHeaders?:Headers){
+export function post_FindAttributeSet(requestBody:FindAttributeSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindAttributeSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/FindAttributeSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindAttributeSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -503,30 +637,37 @@ export function post_FindAttributeSet(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateAttributeSetIDFromRevisionNum
    Description: This method updates attributeSetID and planningAttributeSetSeq when new revision is selected.
    OperationID: UpdateAttributeSetIDFromRevisionNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateAttributeSetIDFromRevisionNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateAttributeSetIDFromRevisionNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateAttributeSetIDFromRevisionNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateAttributeSetIDFromRevisionNum(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateAttributeSetIDFromRevisionNum(requestBody:UpdateAttributeSetIDFromRevisionNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateAttributeSetIDFromRevisionNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/UpdateAttributeSetIDFromRevisionNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateAttributeSetIDFromRevisionNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -538,30 +679,37 @@ export function post_UpdateAttributeSetIDFromRevisionNum(requestBody:any, epicor
    Summary: Invoke method UpdateRevisionNumFromAttributeSetID
    Description: This method updates the revision number from an attributeSetID when new attributeSetID is selected.
    OperationID: UpdateRevisionNumFromAttributeSetID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateRevisionNumFromAttributeSetID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateRevisionNumFromAttributeSetID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateRevisionNumFromAttributeSetID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateRevisionNumFromAttributeSetID(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateRevisionNumFromAttributeSetID(requestBody:UpdateRevisionNumFromAttributeSetID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateRevisionNumFromAttributeSetID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/UpdateRevisionNumFromAttributeSetID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateRevisionNumFromAttributeSetID_output)
           })
       .catch((error) => {
           reject(error)
@@ -573,30 +721,37 @@ export function post_UpdateRevisionNumFromAttributeSetID(requestBody:any, epicor
    Summary: Invoke method PartsAttributeClassHasRevisionAndIsMRPTracked
    Description: This method determines whether revision is Used in Planning.
    OperationID: PartsAttributeClassHasRevisionAndIsMRPTracked
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PartsAttributeClassHasRevisionAndIsMRPTracked_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PartsAttributeClassHasRevisionAndIsMRPTracked_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PartsAttributeClassHasRevisionAndIsMRPTracked_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartsAttributeClassHasRevisionAndIsMRPTracked(requestBody:any, epicorHeaders?:Headers){
+export function post_PartsAttributeClassHasRevisionAndIsMRPTracked(requestBody:PartsAttributeClassHasRevisionAndIsMRPTracked_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PartsAttributeClassHasRevisionAndIsMRPTracked_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TimePhasSvc/PartsAttributeClassHasRevisionAndIsMRPTracked", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PartsAttributeClassHasRevisionAndIsMRPTracked_output)
           })
       .catch((error) => {
           reject(error)
@@ -607,11 +762,45 @@ export function post_PartsAttributeClassHasRevisionAndIsMRPTracked(requestBody:a
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

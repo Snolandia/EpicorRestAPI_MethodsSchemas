@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.BAQExtDBSearchSvc
 // Description: The BAQ external database search service.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDSNRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BAQExtDSNRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDSNRow)
           })
@@ -116,36 +156,60 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
    /**  
    Summary: Invoke method GetRows
    OperationID: GetRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRows(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRows(requestBody:GetRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDSNRow>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDSNRow)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -157,7 +221,7 @@ export function post_GetRows(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDSNList
    Description: Get full list of ODBC DSN
    OperationID: GetDSNList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDSNList_output
@@ -170,15 +234,22 @@ export function post_GetDSNList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDSNList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetDSNList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDSNList_output)
           })
       .catch((error) => {
           reject(error)
@@ -193,7 +264,7 @@ export function post_GetDSNList(epicorHeaders?:Headers){
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -235,15 +306,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -255,30 +333,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetSqlDatabasesList
    Description: Get MS SQL server databases
    OperationID: GetSqlDatabasesList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSqlDatabasesList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSqlDatabasesList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSqlDatabasesList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSqlDatabasesList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSqlDatabasesList(requestBody:GetSqlDatabasesList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSqlDatabasesList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetSqlDatabasesList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSqlDatabasesList_output)
           })
       .catch((error) => {
           reject(error)
@@ -289,30 +374,37 @@ export function post_GetSqlDatabasesList(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method GetProperties
    OperationID: GetProperties
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetProperties_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetProperties_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetProperties_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetProperties(requestBody:any, epicorHeaders?:Headers){
+export function post_GetProperties(requestBody:GetProperties_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetProperties_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetProperties", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetProperties_output)
           })
       .catch((error) => {
           reject(error)
@@ -324,7 +416,7 @@ export function post_GetProperties(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDbProviderList
    Description: Gets the database provider list.
    OperationID: GetDbProviderList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDbProviderList_output
@@ -337,15 +429,22 @@ export function post_GetDbProviderList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDbProviderList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetDbProviderList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDbProviderList_output)
           })
       .catch((error) => {
           reject(error)
@@ -356,30 +455,37 @@ export function post_GetDbProviderList(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method TestConnection
    OperationID: TestConnection
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TestConnection_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TestConnection_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TestConnection_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TestConnection(requestBody:any, epicorHeaders?:Headers){
+export function post_TestConnection(requestBody:TestConnection_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TestConnection_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/TestConnection", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TestConnection_output)
           })
       .catch((error) => {
           reject(error)
@@ -390,30 +496,37 @@ export function post_TestConnection(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method TestServiceConnectivity
    OperationID: TestServiceConnectivity
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TestServiceConnectivity_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TestServiceConnectivity_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TestServiceConnectivity_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TestServiceConnectivity(requestBody:any, epicorHeaders?:Headers){
+export function post_TestServiceConnectivity(requestBody:TestServiceConnectivity_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TestServiceConnectivity_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/TestServiceConnectivity", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TestServiceConnectivity_output)
           })
       .catch((error) => {
           reject(error)
@@ -425,30 +538,37 @@ export function post_TestServiceConnectivity(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method TestDatasourceConnection
    Description: Test connection to the external data source by name
    OperationID: TestDatasourceConnection
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TestDatasourceConnection_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TestDatasourceConnection_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TestDatasourceConnection_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TestDatasourceConnection(requestBody:any, epicorHeaders?:Headers){
+export function post_TestDatasourceConnection(requestBody:TestDatasourceConnection_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TestDatasourceConnection_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/TestDatasourceConnection", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TestDatasourceConnection_output)
           })
       .catch((error) => {
           reject(error)
@@ -460,30 +580,37 @@ export function post_TestDatasourceConnection(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetTableListFromSearch
    Description: Get full list of tables from Recordset.Open for palette and code editor
    OperationID: GetTableListFromSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTableListFromSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTableListFromSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTableListFromSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTableListFromSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTableListFromSearch(requestBody:GetTableListFromSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTableListFromSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetTableListFromSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTableListFromSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -495,30 +622,37 @@ export function post_GetTableListFromSearch(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetTableList
    Description: Get full list of tables from Recordset.Open for palette and code editor
    OperationID: GetTableList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTableList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTableList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTableList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTableList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTableList(requestBody:GetTableList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTableList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetTableList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTableList_output)
           })
       .catch((error) => {
           reject(error)
@@ -530,30 +664,37 @@ export function post_GetTableList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method TableExists
    Description: Checks is the table exists in the database
    OperationID: TableExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TableExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TableExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TableExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TableExists(requestBody:any, epicorHeaders?:Headers){
+export function post_TableExists(requestBody:TableExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TableExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/TableExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TableExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -564,30 +705,37 @@ export function post_TableExists(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method TableSchemaList
    OperationID: TableSchemaList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TableSchemaList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TableSchemaList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TableSchemaList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TableSchemaList(requestBody:any, epicorHeaders?:Headers){
+export function post_TableSchemaList(requestBody:TableSchemaList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TableSchemaList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/TableSchemaList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TableSchemaList_output)
           })
       .catch((error) => {
           reject(error)
@@ -600,30 +748,37 @@ export function post_TableSchemaList(requestBody:any, epicorHeaders?:Headers){
    Description: Get full list of columns for the specified table
 datatableID can contain tables divided by commas
    OperationID: GetFieldList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFieldList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFieldList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFieldList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFieldList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFieldList(requestBody:GetFieldList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFieldList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetFieldList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFieldList_output)
           })
       .catch((error) => {
           reject(error)
@@ -634,30 +789,37 @@ export function post_GetFieldList(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetConnectedTables
    OperationID: GetConnectedTables
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetConnectedTables_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetConnectedTables_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetConnectedTables_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetConnectedTables(requestBody:any, epicorHeaders?:Headers){
+export function post_GetConnectedTables(requestBody:GetConnectedTables_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetConnectedTables_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetConnectedTables", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetConnectedTables_output)
           })
       .catch((error) => {
           reject(error)
@@ -668,30 +830,37 @@ export function post_GetConnectedTables(requestBody:any, epicorHeaders?:Headers)
    /**  
    Summary: Invoke method GetConnectionKeys
    OperationID: GetConnectionKeys
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetConnectionKeys_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetConnectionKeys_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetConnectionKeys_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetConnectionKeys(requestBody:any, epicorHeaders?:Headers){
+export function post_GetConnectionKeys(requestBody:GetConnectionKeys_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetConnectionKeys_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetConnectionKeys", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetConnectionKeys_output)
           })
       .catch((error) => {
           reject(error)
@@ -703,30 +872,37 @@ export function post_GetConnectionKeys(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetFunctionList
    Description: MS SQL Functions
    OperationID: GetFunctionList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFunctionList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFunctionList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFunctionList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFunctionList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFunctionList(requestBody:GetFunctionList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFunctionList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetFunctionList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFunctionList_output)
           })
       .catch((error) => {
           reject(error)
@@ -739,30 +915,37 @@ export function post_GetFunctionList(requestBody:any, epicorHeaders?:Headers){
    Description: Get full list of columns for the specified table-value function
 functionName can contain functions divided by commas
    OperationID: GetTableFunctionFieldList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTableFunctionFieldList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTableFunctionFieldList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTableFunctionFieldList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTableFunctionFieldList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTableFunctionFieldList(requestBody:GetTableFunctionFieldList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTableFunctionFieldList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetTableFunctionFieldList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTableFunctionFieldList_output)
           })
       .catch((error) => {
           reject(error)
@@ -775,30 +958,37 @@ export function post_GetTableFunctionFieldList(requestBody:any, epicorHeaders?:H
    Description: Get full list of paramters for the specified  function call
 functionName can contain functions divided by commas
    OperationID: GetFunctionParameterList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFunctionParameterList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFunctionParameterList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFunctionParameterList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFunctionParameterList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFunctionParameterList(requestBody:GetFunctionParameterList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFunctionParameterList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetFunctionParameterList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFunctionParameterList_output)
           })
       .catch((error) => {
           reject(error)
@@ -810,30 +1000,37 @@ export function post_GetFunctionParameterList(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetExecutionSettings
    Description: Execution settings required or supported by the external query system
    OperationID: GetExecutionSettings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetExecutionSettings_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetExecutionSettings_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetExecutionSettings_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetExecutionSettings(requestBody:any, epicorHeaders?:Headers){
+export function post_GetExecutionSettings(requestBody:GetExecutionSettings_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetExecutionSettings_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BAQExtDBSearchSvc/GetExecutionSettings", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetExecutionSettings_output)
           })
       .catch((error) => {
           reject(error)
@@ -844,11 +1041,28 @@ export function post_GetExecutionSettings(requestBody:any, epicorHeaders?:Header
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BAQExtDSNRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BAQExtDSNRow[],
+   "value":Ice_Tablesets_BAQExtDSNRow,
 }
 
 export interface Ice_Tablesets_BAQExtDSNRow{
@@ -863,6 +1077,23 @@ export interface Ice_Tablesets_BAQExtDSNRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

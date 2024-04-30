@@ -1,13 +1,32 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.LIB.EcfToolsSvc
 // Description: ATTENTION: This service is for internal use only.
 It can be changed or even removed without any public announces.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -16,7 +35,7 @@ It can be changed or even removed without any public announces.
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -34,7 +53,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -48,7 +74,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -66,7 +92,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -79,36 +112,60 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
    /**  
    Summary: Invoke method GetAssemblyBytes
    OperationID: GetAssemblyBytes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAssemblyBytes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAssemblyBytes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAssemblyBytes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAssemblyBytes(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAssemblyBytes(requestBody:GetAssemblyBytes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAssemblyBytes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetAssemblyBytes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAssemblyBytes_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,7 +177,7 @@ export function post_GetAssemblyBytes(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetAvailableServiceKinds
    Description: Method returns Service Kinds (BO, Lib, etc.) available per System Code
    OperationID: GetAvailableServiceKinds
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableServiceKinds_output
@@ -133,15 +190,22 @@ export function post_GetAvailableServiceKinds(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableServiceKinds_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetAvailableServiceKinds", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableServiceKinds_output)
           })
       .catch((error) => {
           reject(error)
@@ -153,30 +217,37 @@ export function post_GetAvailableServiceKinds(epicorHeaders?:Headers){
    Summary: Invoke method GetAvailableServices
    Description: Method returns an array of ServiceInfo items of specified kind available for the specified system code.
    OperationID: GetAvailableServices
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAvailableServices_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAvailableServices_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableServices_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAvailableServices(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAvailableServices(requestBody:GetAvailableServices_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableServices_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetAvailableServices", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableServices_output)
           })
       .catch((error) => {
           reject(error)
@@ -188,30 +259,37 @@ export function post_GetAvailableServices(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetServiceApi
    Description: Method returns service API description (e.g. methods with their signatures)
    OperationID: GetServiceApi
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetServiceApi_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetServiceApi_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetServiceApi_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetServiceApi(requestBody:any, epicorHeaders?:Headers){
+export function post_GetServiceApi(requestBody:GetServiceApi_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetServiceApi_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetServiceApi", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetServiceApi_output)
           })
       .catch((error) => {
           reject(error)
@@ -227,30 +305,37 @@ If tableset is unknown, then method returns null
 If ignoreExtensions == false, then method loads information about extension tables
 available for the current company (if any).
    OperationID: GetTablesetInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTablesetInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTablesetInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTablesetInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTablesetInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTablesetInfo(requestBody:GetTablesetInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTablesetInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetTablesetInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTablesetInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -266,30 +351,37 @@ If tableset is unknown, then method returns null
 If inCompany parameter is specified, then method tries to provide information
 about extension tables available in the company.
    OperationID: GetTablesetInfoInCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTablesetInfoInCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTablesetInfoInCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTablesetInfoInCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTablesetInfoInCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTablesetInfoInCompany(requestBody:GetTablesetInfoInCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTablesetInfoInCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetTablesetInfoInCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTablesetInfoInCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -301,30 +393,37 @@ export function post_GetTablesetInfoInCompany(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetDBModel
    Description: Method returns definition of the product DB model.
    OperationID: GetDBModel
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDBModel_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDBModel_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDBModel_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDBModel(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDBModel(requestBody:GetDBModel_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDBModel_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetDBModel", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDBModel_output)
           })
       .catch((error) => {
           reject(error)
@@ -336,30 +435,37 @@ export function post_GetDBModel(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDBEntity
    Description: Method returns entity definition of the product DB model.
    OperationID: GetDBEntity
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDBEntity_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDBEntity_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDBEntity_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDBEntity(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDBEntity(requestBody:GetDBEntity_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDBEntity_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetDBEntity", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDBEntity_output)
           })
       .catch((error) => {
           reject(error)
@@ -370,7 +476,7 @@ export function post_GetDBEntity(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CanCallWorkato
    OperationID: CanCallWorkato
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CanCallWorkato_output
@@ -383,15 +489,22 @@ export function post_CanCallWorkato(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CanCallWorkato_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/CanCallWorkato", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CanCallWorkato_output)
           })
       .catch((error) => {
           reject(error)
@@ -402,7 +515,7 @@ export function post_CanCallWorkato(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetWorkatoApiCollections
    OperationID: GetWorkatoApiCollections
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetWorkatoApiCollections_output
@@ -415,15 +528,22 @@ export function post_GetWorkatoApiCollections(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetWorkatoApiCollections_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetWorkatoApiCollections", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetWorkatoApiCollections_output)
           })
       .catch((error) => {
           reject(error)
@@ -434,30 +554,37 @@ export function post_GetWorkatoApiCollections(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetWorkatoEndpoints
    OperationID: GetWorkatoEndpoints
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetWorkatoEndpoints_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetWorkatoEndpoints_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetWorkatoEndpoints_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetWorkatoEndpoints(requestBody:any, epicorHeaders?:Headers){
+export function post_GetWorkatoEndpoints(requestBody:GetWorkatoEndpoints_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetWorkatoEndpoints_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetWorkatoEndpoints", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetWorkatoEndpoints_output)
           })
       .catch((error) => {
           reject(error)
@@ -468,30 +595,37 @@ export function post_GetWorkatoEndpoints(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method GetWorkatoEndpointSignature
    OperationID: GetWorkatoEndpointSignature
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetWorkatoEndpointSignature_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetWorkatoEndpointSignature_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetWorkatoEndpointSignature_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetWorkatoEndpointSignature(requestBody:any, epicorHeaders?:Headers){
+export function post_GetWorkatoEndpointSignature(requestBody:GetWorkatoEndpointSignature_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetWorkatoEndpointSignature_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EcfToolsSvc/GetWorkatoEndpointSignature", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetWorkatoEndpointSignature_output)
           })
       .catch((error) => {
           reject(error)
@@ -502,11 +636,45 @@ export function post_GetWorkatoEndpointSignature(requestBody:any, epicorHeaders?
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

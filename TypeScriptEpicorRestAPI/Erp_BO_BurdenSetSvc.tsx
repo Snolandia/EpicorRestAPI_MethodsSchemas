@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.BurdenSetSvc
 // Description: The Burden Set BO used by Burden Set Maintenance.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BdnSetRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BdnSetRow
    */  
 export function get_BurdenSets(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_BurdenSets(select?:string, expand?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BdnSetRow)
           })
@@ -118,15 +158,15 @@ export function get_BurdenSets(select?:string, expand?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BurdenSets
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BdnSetRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BdnSetRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.BdnSetRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.BdnSetRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BurdenSets(requestBody:any, epicorHeaders?:Headers){
+export function post_BurdenSets(requestBody:Erp_Tablesets_BdnSetRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_BurdenSets(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_BurdenSets(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BdnSetRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BdnSetRow
    */  
 export function get_BurdenSets_Company_BdnSetID(Company:string, BdnSetID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_BurdenSets_Company_BdnSetID(Company:string, BdnSetID:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BdnSetRow)
           })
@@ -193,15 +247,15 @@ export function get_BurdenSets_Company_BdnSetID(Company:string, BdnSetID:string,
    OperationID: UpdateExt_BurdenSet
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param BdnSetID Desc: BdnSetID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.BdnSetRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.BdnSetRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BurdenSets_Company_BdnSetID(Company:string, BdnSetID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BurdenSets_Company_BdnSetID(Company:string, BdnSetID:string, requestBody:Erp_Tablesets_BdnSetRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_BurdenSets_Company_BdnSetID(Company:string, BdnSetID:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_BurdenSets_Company_BdnSetID(Company:string, BdnSetID:strin
    OperationID: DeleteUpdateExt_BurdenSet
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param BdnSetID Desc: BdnSetID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_BurdenSets_Company_BdnSetID(Company:string, BdnSetID:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_BurdenSets_Company_BdnSetID(Company:string, BdnSetID:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnCdRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnCdRow
    */  
 export function get_BurdenSets_Company_BdnSetID_BSBdnCds(Company:string, BdnSetID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_BurdenSets_Company_BdnSetID_BSBdnCds(Company:string, BdnSetI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BSBdnCdRow)
           })
@@ -311,10 +386,10 @@ export function get_BurdenSets_Company_BdnSetID_BSBdnCds(Company:string, BdnSetI
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BSBdnCdRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BSBdnCdRow
    */  
 export function get_BurdenSets_Company_BdnSetID_BSBdnCds_Company_BdnSetID_BdnCd(Company:string, BdnSetID:string, BdnCd:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_BurdenSets_Company_BdnSetID_BSBdnCds_Company_BdnSetID_BdnCd(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BSBdnCdRow)
           })
@@ -351,10 +433,10 @@ export function get_BurdenSets_Company_BdnSetID_BSBdnCds_Company_BdnSetID_BdnCd(
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BdnSetAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BdnSetAttchRow
    */  
 export function get_BurdenSets_Company_BdnSetID_BdnSetAttches(Company:string, BdnSetID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -369,7 +451,14 @@ export function get_BurdenSets_Company_BdnSetID_BdnSetAttches(Company:string, Bd
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BdnSetAttchRow)
           })
@@ -388,10 +477,10 @@ export function get_BurdenSets_Company_BdnSetID_BdnSetAttches(Company:string, Bd
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BdnSetAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BdnSetAttchRow
    */  
 export function get_BurdenSets_Company_BdnSetID_BdnSetAttches_Company_BdnSetID_DrawingSeq(Company:string, BdnSetID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -406,7 +495,14 @@ export function get_BurdenSets_Company_BdnSetID_BdnSetAttches_Company_BdnSetID_D
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BdnSetAttchRow)
           })
@@ -427,10 +523,10 @@ export function get_BurdenSets_Company_BdnSetID_BdnSetAttches_Company_BdnSetID_D
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnCdRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnCdRow
    */  
 export function get_BSBdnCds(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -445,7 +541,14 @@ export function get_BSBdnCds(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BSBdnCdRow)
           })
@@ -459,15 +562,15 @@ export function get_BSBdnCds(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BSBdnCds
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BSBdnCdRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BSBdnCdRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.BSBdnCdRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.BSBdnCdRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BSBdnCds(requestBody:any, epicorHeaders?:Headers){
+export function post_BSBdnCds(requestBody:Erp_Tablesets_BSBdnCdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -481,7 +584,14 @@ export function post_BSBdnCds(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -501,10 +611,10 @@ export function post_BSBdnCds(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BSBdnCdRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BSBdnCdRow
    */  
 export function get_BSBdnCds_Company_BdnSetID_BdnCd(Company:string, BdnSetID:string, BdnCd:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -519,7 +629,14 @@ export function get_BSBdnCds_Company_BdnSetID_BdnCd(Company:string, BdnSetID:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BSBdnCdRow)
           })
@@ -536,15 +653,15 @@ export function get_BSBdnCds_Company_BdnSetID_BdnCd(Company:string, BdnSetID:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param BdnSetID Desc: BdnSetID   Required: True   Allow empty value : True
       @param BdnCd Desc: BdnCd   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.BSBdnCdRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.BSBdnCdRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BSBdnCds_Company_BdnSetID_BdnCd(Company:string, BdnSetID:string, BdnCd:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BSBdnCds_Company_BdnSetID_BdnCd(Company:string, BdnSetID:string, BdnCd:string, requestBody:Erp_Tablesets_BSBdnCdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -558,7 +675,14 @@ export function patch_BSBdnCds_Company_BdnSetID_BdnCd(Company:string, BdnSetID:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -575,7 +699,7 @@ export function patch_BSBdnCds_Company_BdnSetID_BdnCd(Company:string, BdnSetID:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param BdnSetID Desc: BdnSetID   Required: True   Allow empty value : True
       @param BdnCd Desc: BdnCd   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -594,7 +718,14 @@ export function delete_BSBdnCds_Company_BdnSetID_BdnCd(Company:string, BdnSetID:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -617,10 +748,10 @@ export function delete_BSBdnCds_Company_BdnSetID_BdnCd(Company:string, BdnSetID:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnRtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnRtRow
    */  
 export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnRts(Company:string, BdnSetID:string, BdnCd:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -635,7 +766,14 @@ export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnRts(Company:string, Bdn
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BSBdnRtRow)
           })
@@ -655,10 +793,10 @@ export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnRts(Company:string, Bdn
       @param EffDte Desc: EffDte   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BSBdnRtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BSBdnRtRow
    */  
 export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnRts_Company_BdnSetID_BdnCd_EffDte(Company:string, BdnSetID:string, BdnCd:string, EffDte:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -673,7 +811,14 @@ export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnRts_Company_BdnSetID_Bd
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BSBdnRtRow)
           })
@@ -696,10 +841,10 @@ export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnRts_Company_BdnSetID_Bd
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnCdAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnCdAttchRow
    */  
 export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnCdAttches(Company:string, BdnSetID:string, BdnCd:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -714,7 +859,14 @@ export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnCdAttches(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BSBdnCdAttchRow)
           })
@@ -734,10 +886,10 @@ export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnCdAttches(Company:strin
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BSBdnCdAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BSBdnCdAttchRow
    */  
 export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnCdAttches_Company_BdnSetID_BdnCd_DrawingSeq(Company:string, BdnSetID:string, BdnCd:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -752,7 +904,14 @@ export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnCdAttches_Company_BdnSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BSBdnCdAttchRow)
           })
@@ -772,10 +931,10 @@ export function get_BSBdnCds_Company_BdnSetID_BdnCd_BSBdnCdAttches_Company_BdnSe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnRtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnRtRow
    */  
 export function get_BSBdnRts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -790,7 +949,14 @@ export function get_BSBdnRts(select?:string, filter?:string, orderby?:string, to
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BSBdnRtRow)
           })
@@ -804,15 +970,15 @@ export function get_BSBdnRts(select?:string, filter?:string, orderby?:string, to
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BSBdnRts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BSBdnRtRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BSBdnRtRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.BSBdnRtRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.BSBdnRtRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BSBdnRts(requestBody:any, epicorHeaders?:Headers){
+export function post_BSBdnRts(requestBody:Erp_Tablesets_BSBdnRtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -826,7 +992,14 @@ export function post_BSBdnRts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -846,10 +1019,10 @@ export function post_BSBdnRts(requestBody:any, epicorHeaders?:Headers){
       @param EffDte Desc: EffDte   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BSBdnRtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BSBdnRtRow
    */  
 export function get_BSBdnRts_Company_BdnSetID_BdnCd_EffDte(Company:string, BdnSetID:string, BdnCd:string, EffDte:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -864,7 +1037,14 @@ export function get_BSBdnRts_Company_BdnSetID_BdnCd_EffDte(Company:string, BdnSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BSBdnRtRow)
           })
@@ -882,15 +1062,15 @@ export function get_BSBdnRts_Company_BdnSetID_BdnCd_EffDte(Company:string, BdnSe
       @param BdnSetID Desc: BdnSetID   Required: True   Allow empty value : True
       @param BdnCd Desc: BdnCd   Required: True   Allow empty value : True
       @param EffDte Desc: EffDte   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.BSBdnRtRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.BSBdnRtRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BSBdnRts_Company_BdnSetID_BdnCd_EffDte(Company:string, BdnSetID:string, BdnCd:string, EffDte:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BSBdnRts_Company_BdnSetID_BdnCd_EffDte(Company:string, BdnSetID:string, BdnCd:string, EffDte:string, requestBody:Erp_Tablesets_BSBdnRtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -904,7 +1084,14 @@ export function patch_BSBdnRts_Company_BdnSetID_BdnCd_EffDte(Company:string, Bdn
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -922,7 +1109,7 @@ export function patch_BSBdnRts_Company_BdnSetID_BdnCd_EffDte(Company:string, Bdn
       @param BdnSetID Desc: BdnSetID   Required: True   Allow empty value : True
       @param BdnCd Desc: BdnCd   Required: True   Allow empty value : True
       @param EffDte Desc: EffDte   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -941,7 +1128,14 @@ export function delete_BSBdnRts_Company_BdnSetID_BdnCd_EffDte(Company:string, Bd
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -961,10 +1155,10 @@ export function delete_BSBdnRts_Company_BdnSetID_BdnCd_EffDte(Company:string, Bd
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnCdAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BSBdnCdAttchRow
    */  
 export function get_BSBdnCdAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -979,7 +1173,14 @@ export function get_BSBdnCdAttches(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BSBdnCdAttchRow)
           })
@@ -993,15 +1194,15 @@ export function get_BSBdnCdAttches(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BSBdnCdAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BSBdnCdAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BSBdnCdAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.BSBdnCdAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.BSBdnCdAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BSBdnCdAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_BSBdnCdAttches(requestBody:Erp_Tablesets_BSBdnCdAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1015,7 +1216,14 @@ export function post_BSBdnCdAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1035,10 +1243,10 @@ export function post_BSBdnCdAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BSBdnCdAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BSBdnCdAttchRow
    */  
 export function get_BSBdnCdAttches_Company_BdnSetID_BdnCd_DrawingSeq(Company:string, BdnSetID:string, BdnCd:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1053,7 +1261,14 @@ export function get_BSBdnCdAttches_Company_BdnSetID_BdnCd_DrawingSeq(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BSBdnCdAttchRow)
           })
@@ -1071,15 +1286,15 @@ export function get_BSBdnCdAttches_Company_BdnSetID_BdnCd_DrawingSeq(Company:str
       @param BdnSetID Desc: BdnSetID   Required: True   Allow empty value : True
       @param BdnCd Desc: BdnCd   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.BSBdnCdAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.BSBdnCdAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BSBdnCdAttches_Company_BdnSetID_BdnCd_DrawingSeq(Company:string, BdnSetID:string, BdnCd:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BSBdnCdAttches_Company_BdnSetID_BdnCd_DrawingSeq(Company:string, BdnSetID:string, BdnCd:string, DrawingSeq:string, requestBody:Erp_Tablesets_BSBdnCdAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1093,7 +1308,14 @@ export function patch_BSBdnCdAttches_Company_BdnSetID_BdnCd_DrawingSeq(Company:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1111,7 +1333,7 @@ export function patch_BSBdnCdAttches_Company_BdnSetID_BdnCd_DrawingSeq(Company:s
       @param BdnSetID Desc: BdnSetID   Required: True   Allow empty value : True
       @param BdnCd Desc: BdnCd   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1130,7 +1352,14 @@ export function delete_BSBdnCdAttches_Company_BdnSetID_BdnCd_DrawingSeq(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1150,10 +1379,10 @@ export function delete_BSBdnCdAttches_Company_BdnSetID_BdnCd_DrawingSeq(Company:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BdnSetAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BdnSetAttchRow
    */  
 export function get_BdnSetAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1168,7 +1397,14 @@ export function get_BdnSetAttches(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BdnSetAttchRow)
           })
@@ -1182,15 +1418,15 @@ export function get_BdnSetAttches(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BdnSetAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BdnSetAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.BdnSetAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.BdnSetAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.BdnSetAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BdnSetAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_BdnSetAttches(requestBody:Erp_Tablesets_BdnSetAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1204,7 +1440,14 @@ export function post_BdnSetAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1223,10 +1466,10 @@ export function post_BdnSetAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.BdnSetAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.BdnSetAttchRow
    */  
 export function get_BdnSetAttches_Company_BdnSetID_DrawingSeq(Company:string, BdnSetID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1241,7 +1484,14 @@ export function get_BdnSetAttches_Company_BdnSetID_DrawingSeq(Company:string, Bd
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_BdnSetAttchRow)
           })
@@ -1258,15 +1508,15 @@ export function get_BdnSetAttches_Company_BdnSetID_DrawingSeq(Company:string, Bd
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param BdnSetID Desc: BdnSetID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.BdnSetAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.BdnSetAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BdnSetAttches_Company_BdnSetID_DrawingSeq(Company:string, BdnSetID:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BdnSetAttches_Company_BdnSetID_DrawingSeq(Company:string, BdnSetID:string, DrawingSeq:string, requestBody:Erp_Tablesets_BdnSetAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1280,7 +1530,14 @@ export function patch_BdnSetAttches_Company_BdnSetID_DrawingSeq(Company:string, 
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1297,7 +1554,7 @@ export function patch_BdnSetAttches_Company_BdnSetID_DrawingSeq(Company:string, 
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param BdnSetID Desc: BdnSetID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1316,7 +1573,14 @@ export function delete_BdnSetAttches_Company_BdnSetID_DrawingSeq(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1336,10 +1600,10 @@ export function delete_BdnSetAttches_Company_BdnSetID_DrawingSeq(Company:string,
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BdnSetListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.BdnSetListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1354,7 +1618,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BdnSetListRow)
           })
@@ -1366,6 +1637,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1381,7 +1669,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1459,15 +1747,22 @@ export function get_GetRows(whereClauseBdnSet:string, whereClauseBdnSetAttch:str
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1480,7 +1775,7 @@ export function get_GetRows(whereClauseBdnSet:string, whereClauseBdnSetAttch:str
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1504,15 +1799,22 @@ export function get_GetByID(bdnSetID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1527,7 +1829,7 @@ export function get_GetByID(bdnSetID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1569,15 +1871,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1589,30 +1898,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method OnChangingInactive
    Description: Performed when Inactive flag is changed.
    OperationID: OnChangingInactive
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingInactive_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingInactive_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingInactive_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingInactive(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingInactive(requestBody:OnChangingInactive_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingInactive_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/OnChangingInactive", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingInactive_output)
           })
       .catch((error) => {
           reject(error)
@@ -1624,30 +1940,37 @@ export function post_OnChangingInactive(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangingBdnCd
    Description: Executed when Burden Code is changed.
    OperationID: OnChangingBdnCd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingBdnCd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingBdnCd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingBdnCd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingBdnCd(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingBdnCd(requestBody:OnChangingBdnCd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingBdnCd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/OnChangingBdnCd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingBdnCd_output)
           })
       .catch((error) => {
           reject(error)
@@ -1659,30 +1982,37 @@ export function post_OnChangingBdnCd(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangingEffDte
    Description: Executed when Effective Date is changed.
    OperationID: OnChangingEffDte
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingEffDte_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingEffDte_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingEffDte_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingEffDte(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingEffDte(requestBody:OnChangingEffDte_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingEffDte_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/OnChangingEffDte", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingEffDte_output)
           })
       .catch((error) => {
           reject(error)
@@ -1694,30 +2024,37 @@ export function post_OnChangingEffDte(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBdnSet
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBdnSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBdnSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBdnSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBdnSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBdnSet(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBdnSet(requestBody:GetNewBdnSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBdnSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/GetNewBdnSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBdnSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1729,30 +2066,37 @@ export function post_GetNewBdnSet(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBdnSetAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBdnSetAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBdnSetAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBdnSetAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBdnSetAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBdnSetAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBdnSetAttch(requestBody:GetNewBdnSetAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBdnSetAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/GetNewBdnSetAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBdnSetAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1764,30 +2108,37 @@ export function post_GetNewBdnSetAttch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBSBdnCd
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBSBdnCd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBSBdnCd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBSBdnCd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBSBdnCd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBSBdnCd(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBSBdnCd(requestBody:GetNewBSBdnCd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBSBdnCd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/GetNewBSBdnCd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBSBdnCd_output)
           })
       .catch((error) => {
           reject(error)
@@ -1799,30 +2150,37 @@ export function post_GetNewBSBdnCd(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBSBdnCdAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBSBdnCdAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBSBdnCdAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBSBdnCdAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBSBdnCdAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBSBdnCdAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBSBdnCdAttch(requestBody:GetNewBSBdnCdAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBSBdnCdAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/GetNewBSBdnCdAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBSBdnCdAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1834,30 +2192,37 @@ export function post_GetNewBSBdnCdAttch(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewBSBdnRt
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBSBdnRt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBSBdnRt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBSBdnRt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBSBdnRt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBSBdnRt(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBSBdnRt(requestBody:GetNewBSBdnRt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBSBdnRt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/GetNewBSBdnRt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBSBdnRt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1869,30 +2234,37 @@ export function post_GetNewBSBdnRt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1904,7 +2276,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1928,15 +2300,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1948,7 +2327,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1972,15 +2351,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1992,30 +2378,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2027,30 +2420,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BurdenSetSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2061,36 +2461,53 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BSBdnCdAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_BSBdnCdAttchRow[],
+   "value":Erp_Tablesets_BSBdnCdAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BSBdnCdRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_BSBdnCdRow[],
+   "value":Erp_Tablesets_BSBdnCdRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BSBdnRtRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_BSBdnRtRow[],
+   "value":Erp_Tablesets_BSBdnRtRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BdnSetAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_BdnSetAttchRow[],
+   "value":Erp_Tablesets_BdnSetAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BdnSetListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_BdnSetListRow[],
+   "value":Erp_Tablesets_BdnSetListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_BdnSetRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_BdnSetRow[],
+   "value":Erp_Tablesets_BdnSetRow,
 }
 
 export interface Erp_Tablesets_BSBdnCdAttchRow{
@@ -2241,6 +2658,23 @@ export interface Erp_Tablesets_BdnSetRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2491,7 +2925,7 @@ export interface GetNewBSBdnCdAttch_input{
 export interface GetNewBSBdnCdAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BurdenSetTableset[],
+   ds:Erp_Tablesets_BurdenSetTableset,
 }
 }
 
@@ -2507,7 +2941,7 @@ export interface GetNewBSBdnCd_input{
 export interface GetNewBSBdnCd_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BurdenSetTableset[],
+   ds:Erp_Tablesets_BurdenSetTableset,
 }
 }
 
@@ -2525,7 +2959,7 @@ export interface GetNewBSBdnRt_input{
 export interface GetNewBSBdnRt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BurdenSetTableset[],
+   ds:Erp_Tablesets_BurdenSetTableset,
 }
 }
 
@@ -2541,7 +2975,7 @@ export interface GetNewBdnSetAttch_input{
 export interface GetNewBdnSetAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BurdenSetTableset[],
+   ds:Erp_Tablesets_BurdenSetTableset,
 }
 }
 
@@ -2555,7 +2989,7 @@ export interface GetNewBdnSet_input{
 export interface GetNewBdnSet_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BurdenSetTableset[],
+   ds:Erp_Tablesets_BurdenSetTableset,
 }
 }
 
@@ -2634,7 +3068,7 @@ export interface OnChangingBdnCd_input{
 export interface OnChangingBdnCd_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BurdenSetTableset[],
+   ds:Erp_Tablesets_BurdenSetTableset,
 }
 }
 
@@ -2650,7 +3084,7 @@ export interface OnChangingEffDte_input{
 export interface OnChangingEffDte_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BurdenSetTableset[],
+   ds:Erp_Tablesets_BurdenSetTableset,
 }
 }
 
@@ -2666,7 +3100,7 @@ export interface OnChangingInactive_input{
 export interface OnChangingInactive_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BurdenSetTableset[],
+   ds:Erp_Tablesets_BurdenSetTableset,
 }
 }
 
@@ -2685,7 +3119,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtBurdenSetTableset[],
+   ds:Erp_Tablesets_UpdExtBurdenSetTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2700,7 +3134,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BurdenSetTableset[],
+   ds:Erp_Tablesets_BurdenSetTableset,
 }
 }
 

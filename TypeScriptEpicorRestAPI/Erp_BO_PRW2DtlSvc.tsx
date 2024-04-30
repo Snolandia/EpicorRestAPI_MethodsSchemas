@@ -1,14 +1,33 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PRW2DtlSvc
 // Description: Payroll W2 detail file.  Each record in this file represents one W2.
 IMPORTANT NOTE: THE REPORT NAME FOR W2EXPORT SHOULD BE 'W2REPORT'.
 IT IS A IRS REQUIREMENT.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -17,7 +36,7 @@ IT IS A IRS REQUIREMENT.
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -35,7 +54,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -49,7 +75,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -67,7 +93,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -88,10 +121,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PRW2DtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PRW2DtlRow
    */  
 export function get_PRW2Dtls(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -106,7 +139,14 @@ export function get_PRW2Dtls(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PRW2DtlRow)
           })
@@ -120,15 +160,15 @@ export function get_PRW2Dtls(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PRW2Dtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PRW2DtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PRW2DtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PRW2DtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PRW2DtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PRW2Dtls(requestBody:any, epicorHeaders?:Headers){
+export function post_PRW2Dtls(requestBody:Erp_Tablesets_PRW2DtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -142,7 +182,14 @@ export function post_PRW2Dtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -162,10 +209,10 @@ export function post_PRW2Dtls(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PRW2DtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PRW2DtlRow
    */  
 export function get_PRW2Dtls_Company_TaxYear_ControlNum(Company:string, TaxYear:string, ControlNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -180,7 +227,14 @@ export function get_PRW2Dtls_Company_TaxYear_ControlNum(Company:string, TaxYear:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PRW2DtlRow)
           })
@@ -197,15 +251,15 @@ export function get_PRW2Dtls_Company_TaxYear_ControlNum(Company:string, TaxYear:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TaxYear Desc: TaxYear   Required: True
       @param ControlNum Desc: ControlNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PRW2DtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PRW2DtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PRW2Dtls_Company_TaxYear_ControlNum(Company:string, TaxYear:string, ControlNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PRW2Dtls_Company_TaxYear_ControlNum(Company:string, TaxYear:string, ControlNum:string, requestBody:Erp_Tablesets_PRW2DtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -219,7 +273,14 @@ export function patch_PRW2Dtls_Company_TaxYear_ControlNum(Company:string, TaxYea
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -236,7 +297,7 @@ export function patch_PRW2Dtls_Company_TaxYear_ControlNum(Company:string, TaxYea
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TaxYear Desc: TaxYear   Required: True
       @param ControlNum Desc: ControlNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -255,7 +316,14 @@ export function delete_PRW2Dtls_Company_TaxYear_ControlNum(Company:string, TaxYe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -278,10 +346,10 @@ export function delete_PRW2Dtls_Company_TaxYear_ControlNum(Company:string, TaxYe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PRW2DtlBoxRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PRW2DtlBoxRow
    */  
 export function get_PRW2Dtls_Company_TaxYear_ControlNum_PRW2DtlBoxs(Company:string, TaxYear:string, ControlNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -296,7 +364,14 @@ export function get_PRW2Dtls_Company_TaxYear_ControlNum_PRW2DtlBoxs(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PRW2DtlBoxRow)
           })
@@ -317,10 +392,10 @@ export function get_PRW2Dtls_Company_TaxYear_ControlNum_PRW2DtlBoxs(Company:stri
       @param BoxSeq Desc: BoxSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PRW2DtlBoxRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PRW2DtlBoxRow
    */  
 export function get_PRW2Dtls_Company_TaxYear_ControlNum_PRW2DtlBoxs_Company_TaxYear_ControlNum_BoxType_BoxSeq(Company:string, TaxYear:string, ControlNum:string, BoxType:string, BoxSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -335,7 +410,14 @@ export function get_PRW2Dtls_Company_TaxYear_ControlNum_PRW2DtlBoxs_Company_TaxY
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PRW2DtlBoxRow)
           })
@@ -355,10 +437,10 @@ export function get_PRW2Dtls_Company_TaxYear_ControlNum_PRW2DtlBoxs_Company_TaxY
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PRW2DtlBoxRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PRW2DtlBoxRow
    */  
 export function get_PRW2DtlBoxs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -373,7 +455,14 @@ export function get_PRW2DtlBoxs(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PRW2DtlBoxRow)
           })
@@ -387,15 +476,15 @@ export function get_PRW2DtlBoxs(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PRW2DtlBoxs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PRW2DtlBoxRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PRW2DtlBoxRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PRW2DtlBoxRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PRW2DtlBoxRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PRW2DtlBoxs(requestBody:any, epicorHeaders?:Headers){
+export function post_PRW2DtlBoxs(requestBody:Erp_Tablesets_PRW2DtlBoxRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -409,7 +498,14 @@ export function post_PRW2DtlBoxs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -430,10 +526,10 @@ export function post_PRW2DtlBoxs(requestBody:any, epicorHeaders?:Headers){
       @param BoxSeq Desc: BoxSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PRW2DtlBoxRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PRW2DtlBoxRow
    */  
 export function get_PRW2DtlBoxs_Company_TaxYear_ControlNum_BoxType_BoxSeq(Company:string, TaxYear:string, ControlNum:string, BoxType:string, BoxSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -448,7 +544,14 @@ export function get_PRW2DtlBoxs_Company_TaxYear_ControlNum_BoxType_BoxSeq(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PRW2DtlBoxRow)
           })
@@ -467,15 +570,15 @@ export function get_PRW2DtlBoxs_Company_TaxYear_ControlNum_BoxType_BoxSeq(Compan
       @param ControlNum Desc: ControlNum   Required: True
       @param BoxType Desc: BoxType   Required: True   Allow empty value : True
       @param BoxSeq Desc: BoxSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PRW2DtlBoxRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PRW2DtlBoxRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PRW2DtlBoxs_Company_TaxYear_ControlNum_BoxType_BoxSeq(Company:string, TaxYear:string, ControlNum:string, BoxType:string, BoxSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PRW2DtlBoxs_Company_TaxYear_ControlNum_BoxType_BoxSeq(Company:string, TaxYear:string, ControlNum:string, BoxType:string, BoxSeq:string, requestBody:Erp_Tablesets_PRW2DtlBoxRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -489,7 +592,14 @@ export function patch_PRW2DtlBoxs_Company_TaxYear_ControlNum_BoxType_BoxSeq(Comp
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -508,7 +618,7 @@ export function patch_PRW2DtlBoxs_Company_TaxYear_ControlNum_BoxType_BoxSeq(Comp
       @param ControlNum Desc: ControlNum   Required: True
       @param BoxType Desc: BoxType   Required: True   Allow empty value : True
       @param BoxSeq Desc: BoxSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -527,7 +637,14 @@ export function delete_PRW2DtlBoxs_Company_TaxYear_ControlNum_BoxType_BoxSeq(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -547,10 +664,10 @@ export function delete_PRW2DtlBoxs_Company_TaxYear_ControlNum_BoxType_BoxSeq(Com
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PRW2DtlListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PRW2DtlListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -565,7 +682,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PRW2DtlListRow)
           })
@@ -578,6 +702,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -589,7 +730,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -640,15 +781,22 @@ export function get_GetRows(whereClausePRW2Dtl:string, whereClausePRW2DtlBox:str
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -662,7 +810,7 @@ export function get_GetRows(whereClausePRW2Dtl:string, whereClausePRW2DtlBox:str
    OperationID: Get_GetByID
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -695,15 +843,22 @@ export function get_GetByID(taxYear:string, controlNum:string, epicorHeaders?:He
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -718,7 +873,7 @@ export function get_GetByID(taxYear:string, controlNum:string, epicorHeaders?:He
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -760,15 +915,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -780,30 +942,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method CheckPRW2DtlExists
    Description: Checks if a W2 form exists for the year.
    OperationID: CheckPRW2DtlExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPRW2DtlExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPRW2DtlExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPRW2DtlExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPRW2DtlExists(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPRW2DtlExists(requestBody:CheckPRW2DtlExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPRW2DtlExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/CheckPRW2DtlExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPRW2DtlExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -815,30 +984,37 @@ export function post_CheckPRW2DtlExists(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method CheckPRChecksExist
    Description: Checks if there are posted payroll checks for the entered year
    OperationID: CheckPRChecksExist
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPRChecksExist_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPRChecksExist_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPRChecksExist_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPRChecksExist(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPRChecksExist(requestBody:CheckPRChecksExist_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPRChecksExist_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/CheckPRChecksExist", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPRChecksExist_output)
           })
       .catch((error) => {
           reject(error)
@@ -850,7 +1026,7 @@ export function post_CheckPRChecksExist(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ValidateUser
    Description: Validate if the user has the rights to proceed.
    OperationID: ValidateUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateUser_output
@@ -863,15 +1039,22 @@ export function post_ValidateUser(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/ValidateUser", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -883,30 +1066,37 @@ export function post_ValidateUser(epicorHeaders?:Headers){
    Summary: Invoke method DeletePRW2Dtls
    Description: This procedure deletes the PRW2Dtl records from the database.
    OperationID: DeletePRW2Dtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeletePRW2Dtls_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeletePRW2Dtls_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeletePRW2Dtls_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeletePRW2Dtls(requestBody:any, epicorHeaders?:Headers){
+export function post_DeletePRW2Dtls(requestBody:DeletePRW2Dtls_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeletePRW2Dtls_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/DeletePRW2Dtls", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeletePRW2Dtls_output)
           })
       .catch((error) => {
           reject(error)
@@ -921,30 +1111,37 @@ and returns the PRW2DtlExportDataSet.  The UI person has to read the records
 in the data set and export it in the LineNum order.  It is very important
 that the export order be in the line number ascending order.
    OperationID: ExportPRW2Dtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportPRW2Dtls_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportPRW2Dtls_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportPRW2Dtls_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportPRW2Dtls(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportPRW2Dtls(requestBody:ExportPRW2Dtls_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportPRW2Dtls_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/ExportPRW2Dtls", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportPRW2Dtls_output)
           })
       .catch((error) => {
           reject(error)
@@ -955,30 +1152,37 @@ export function post_ExportPRW2Dtls(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ExportPRW2DtlsFile
    OperationID: ExportPRW2DtlsFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportPRW2DtlsFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportPRW2DtlsFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportPRW2DtlsFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportPRW2DtlsFile(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportPRW2DtlsFile(requestBody:ExportPRW2DtlsFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportPRW2DtlsFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/ExportPRW2DtlsFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportPRW2DtlsFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -990,30 +1194,37 @@ export function post_ExportPRW2DtlsFile(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method DeleteFile
    Description: Deletes file from UserData storage
    OperationID: DeleteFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteFile(requestBody:DeleteFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/DeleteFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -1026,30 +1237,37 @@ export function post_DeleteFile(requestBody:any, epicorHeaders?:Headers){
    Description: Returns the available controlnums for an employee on w2 file
 takes taxyear and empid as input parameters
    OperationID: GetAvailableControlNums
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAvailableControlNums_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAvailableControlNums_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableControlNums_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAvailableControlNums(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAvailableControlNums(requestBody:GetAvailableControlNums_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableControlNums_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetAvailableControlNums", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableControlNums_output)
           })
       .catch((error) => {
           reject(error)
@@ -1061,30 +1279,37 @@ export function post_GetAvailableControlNums(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetEmployeeAddress
    Description: Gets Employee Adress
    OperationID: GetEmployeeAddress
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetEmployeeAddress_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetEmployeeAddress_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEmployeeAddress_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetEmployeeAddress(requestBody:any, epicorHeaders?:Headers){
+export function post_GetEmployeeAddress(requestBody:GetEmployeeAddress_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEmployeeAddress_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetEmployeeAddress", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEmployeeAddress_output)
           })
       .catch((error) => {
           reject(error)
@@ -1096,7 +1321,7 @@ export function post_GetEmployeeAddress(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetEmployerAddress
    Description: Gets Employer Adress
    OperationID: GetEmployerAddress
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEmployerAddress_output
@@ -1109,15 +1334,22 @@ export function post_GetEmployerAddress(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEmployerAddress_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetEmployerAddress", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEmployerAddress_output)
           })
       .catch((error) => {
           reject(error)
@@ -1129,7 +1361,7 @@ export function post_GetEmployerAddress(epicorHeaders?:Headers){
    Summary: Invoke method GetEmployerEIN
    Description: Gets Employer FIN
    OperationID: GetEmployerEIN
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEmployerEIN_output
@@ -1142,15 +1374,22 @@ export function post_GetEmployerEIN(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEmployerEIN_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetEmployerEIN", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEmployerEIN_output)
           })
       .catch((error) => {
           reject(error)
@@ -1162,30 +1401,37 @@ export function post_GetEmployerEIN(epicorHeaders?:Headers){
    Summary: Invoke method LeaveTaxYear
    Description: This procedrue must be called on leave of TaxYear field.
    OperationID: LeaveTaxYear
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveTaxYear_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveTaxYear_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveTaxYear_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveTaxYear(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveTaxYear(requestBody:LeaveTaxYear_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveTaxYear_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/LeaveTaxYear", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveTaxYear_output)
           })
       .catch((error) => {
           reject(error)
@@ -1197,30 +1443,37 @@ export function post_LeaveTaxYear(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewPRW2Dtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPRW2Dtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPRW2Dtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPRW2Dtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPRW2Dtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPRW2Dtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPRW2Dtl(requestBody:GetNewPRW2Dtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPRW2Dtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetNewPRW2Dtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPRW2Dtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1232,30 +1485,37 @@ export function post_GetNewPRW2Dtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewPRW2DtlBox
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPRW2DtlBox
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPRW2DtlBox_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPRW2DtlBox_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPRW2DtlBox_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPRW2DtlBox(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPRW2DtlBox(requestBody:GetNewPRW2DtlBox_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPRW2DtlBox_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetNewPRW2DtlBox", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPRW2DtlBox_output)
           })
       .catch((error) => {
           reject(error)
@@ -1267,30 +1527,37 @@ export function post_GetNewPRW2DtlBox(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1302,7 +1569,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1326,15 +1593,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1346,7 +1620,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1370,15 +1644,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1390,30 +1671,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1425,30 +1713,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PRW2DtlSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1459,21 +1754,38 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PRW2DtlBoxRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PRW2DtlBoxRow[],
+   "value":Erp_Tablesets_PRW2DtlBoxRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PRW2DtlListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PRW2DtlListRow[],
+   "value":Erp_Tablesets_PRW2DtlListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PRW2DtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PRW2DtlRow[],
+   "value":Erp_Tablesets_PRW2DtlRow,
 }
 
 export interface Erp_Tablesets_PRW2DtlBoxRow{
@@ -1813,6 +2125,23 @@ export interface Erp_Tablesets_PRW2DtlRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1878,7 +2207,7 @@ export interface DeletePRW2Dtls_input{
 export interface DeletePRW2Dtls_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PRW2DtlTableset[],
+   ds:Erp_Tablesets_PRW2DtlTableset,
 }
 }
 
@@ -2393,7 +2722,7 @@ export interface GetNewPRW2DtlBox_input{
 export interface GetNewPRW2DtlBox_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PRW2DtlTableset[],
+   ds:Erp_Tablesets_PRW2DtlTableset,
 }
 }
 
@@ -2409,7 +2738,7 @@ export interface GetNewPRW2Dtl_input{
 export interface GetNewPRW2Dtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PRW2DtlTableset[],
+   ds:Erp_Tablesets_PRW2DtlTableset,
 }
 }
 
@@ -2496,7 +2825,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtPRW2DtlTableset[],
+   ds:Erp_Tablesets_UpdExtPRW2DtlTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2511,7 +2840,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PRW2DtlTableset[],
+   ds:Erp_Tablesets_PRW2DtlTableset,
 }
 }
 

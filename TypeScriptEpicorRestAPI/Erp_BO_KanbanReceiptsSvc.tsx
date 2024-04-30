@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.KanbanReceiptsSvc
 // Description: Kanban Receipts Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method CalculateLotPartSelectedQuantities
    Description: Calculate the correct quantities when selecting quantity for a Lot Bin part.
    OperationID: CalculateLotPartSelectedQuantities
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CalculateLotPartSelectedQuantities_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CalculateLotPartSelectedQuantities_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CalculateLotPartSelectedQuantities_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CalculateLotPartSelectedQuantities(requestBody:any, epicorHeaders?:Headers){
+export function post_CalculateLotPartSelectedQuantities(requestBody:CalculateLotPartSelectedQuantities_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CalculateLotPartSelectedQuantities_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/CalculateLotPartSelectedQuantities", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CalculateLotPartSelectedQuantities_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_CalculateLotPartSelectedQuantities(requestBody:any, epicorH
    Summary: Invoke method ChangeProposedBinNum
    Description: Set proposed bin num when binnum is changing
    OperationID: ChangeProposedBinNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeProposedBinNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeProposedBinNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeProposedBinNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeProposedBinNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeProposedBinNum(requestBody:ChangeProposedBinNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeProposedBinNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeProposedBinNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeProposedBinNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_ChangeProposedBinNum(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ChangeBin
    Description: Update default information based on the bin changing
    OperationID: ChangeBin
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeBin_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeBin_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeBin_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeBin(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeBin(requestBody:ChangeBin_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeBin_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeBin", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeBin_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_ChangeBin(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeEmployee
    Description: Update default information based on the employee changing
    OperationID: ChangeEmployee
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeEmployee_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeEmployee_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeEmployee_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeEmployee(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeEmployee(requestBody:ChangeEmployee_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeEmployee_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeEmployee", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeEmployee_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,30 +303,37 @@ export function post_ChangeEmployee(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeInventoryUM
    Description: Procedure for changing KanbanReceipts.InventoryUM field
    OperationID: ChangeInventoryUM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeInventoryUM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeInventoryUM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeInventoryUM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeInventoryUM(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeInventoryUM(requestBody:ChangeInventoryUM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeInventoryUM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeInventoryUM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeInventoryUM_output)
           })
       .catch((error) => {
           reject(error)
@@ -260,30 +345,37 @@ export function post_ChangeInventoryUM(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeProposedLotNum
    Description: Set proposed lot num when lot num is changing
    OperationID: ChangeProposedLotNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeProposedLotNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeProposedLotNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeProposedLotNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeProposedLotNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeProposedLotNum(requestBody:ChangeProposedLotNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeProposedLotNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeProposedLotNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeProposedLotNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,30 +387,37 @@ export function post_ChangeProposedLotNum(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ChangeLotNum
    Description: Update default information based on the lot changing
    OperationID: ChangeLotNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeLotNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeLotNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeLotNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeLotNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeLotNum(requestBody:ChangeLotNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeLotNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeLotNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeLotNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -330,30 +429,37 @@ export function post_ChangeLotNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeNonConfReason
    Description: Update default information based on the bin changing
    OperationID: ChangeNonConfReason
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeNonConfReason_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeNonConfReason_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeNonConfReason_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeNonConfReason(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeNonConfReason(requestBody:ChangeNonConfReason_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeNonConfReason_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeNonConfReason", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeNonConfReason_output)
           })
       .catch((error) => {
           reject(error)
@@ -365,30 +471,37 @@ export function post_ChangeNonConfReason(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ChangeProposedPart
    Description: Set a proposed part num when part number is changing
    OperationID: ChangeProposedPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeProposedPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeProposedPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeProposedPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeProposedPart(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeProposedPart(requestBody:ChangeProposedPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeProposedPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeProposedPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeProposedPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -400,30 +513,37 @@ export function post_ChangeProposedPart(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ChangePart
    Description: Update default information based on the part number changing
    OperationID: ChangePart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangePart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangePart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangePart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangePart(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangePart(requestBody:ChangePart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangePart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangePart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangePart_output)
           })
       .catch((error) => {
           reject(error)
@@ -435,30 +555,37 @@ export function post_ChangePart(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeRevision
    Description: Update default information based on the revision number changing
    OperationID: ChangeRevision
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRevision_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRevision_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRevision_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRevision(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRevision(requestBody:ChangeRevision_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRevision_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeRevision", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRevision_output)
           })
       .catch((error) => {
           reject(error)
@@ -470,30 +597,37 @@ export function post_ChangeRevision(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeContractID
    Description: Update information based on the ContractID changed.
    OperationID: ChangeContractID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeContractID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeContractID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeContractID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeContractID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeContractID(requestBody:ChangeContractID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeContractID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeContractID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeContractID_output)
           })
       .catch((error) => {
           reject(error)
@@ -505,30 +639,37 @@ export function post_ChangeContractID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeScrapReason
    Description: Update default information based on the scrap reason changing
    OperationID: ChangeScrapReason
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeScrapReason_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeScrapReason_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeScrapReason_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeScrapReason(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeScrapReason(requestBody:ChangeScrapReason_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeScrapReason_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeScrapReason", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeScrapReason_output)
           })
       .catch((error) => {
           reject(error)
@@ -540,30 +681,37 @@ export function post_ChangeScrapReason(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeUsePartNumForLot
    Description: Update lot number and description if the value is changed to true.
    OperationID: ChangeUsePartNumForLot
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeUsePartNumForLot_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeUsePartNumForLot_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeUsePartNumForLot_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeUsePartNumForLot(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeUsePartNumForLot(requestBody:ChangeUsePartNumForLot_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeUsePartNumForLot_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeUsePartNumForLot", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeUsePartNumForLot_output)
           })
       .catch((error) => {
           reject(error)
@@ -575,30 +723,37 @@ export function post_ChangeUsePartNumForLot(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ChangeProposedWarehosue
    Description: Set a proposed part num when part number is changing
    OperationID: ChangeProposedWarehosue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeProposedWarehosue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeProposedWarehosue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeProposedWarehosue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeProposedWarehosue(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeProposedWarehosue(requestBody:ChangeProposedWarehosue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeProposedWarehosue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeProposedWarehosue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeProposedWarehosue_output)
           })
       .catch((error) => {
           reject(error)
@@ -610,30 +765,37 @@ export function post_ChangeProposedWarehosue(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ChangeWarehouse
    Description: Update default information based on the warehouse changing
    OperationID: ChangeWarehouse
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeWarehouse_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeWarehouse_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeWarehouse_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeWarehouse(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeWarehouse(requestBody:ChangeWarehouse_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeWarehouse_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ChangeWarehouse", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeWarehouse_output)
           })
       .catch((error) => {
           reject(error)
@@ -645,30 +807,37 @@ export function post_ChangeWarehouse(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckProcessRunning
    Description: Verify if a similar process is running for the same part.
    OperationID: CheckProcessRunning
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckProcessRunning_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckProcessRunning_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckProcessRunning_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckProcessRunning(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckProcessRunning(requestBody:CheckProcessRunning_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckProcessRunning_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/CheckProcessRunning", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckProcessRunning_output)
           })
       .catch((error) => {
           reject(error)
@@ -681,30 +850,37 @@ export function post_CheckProcessRunning(requestBody:any, epicorHeaders?:Headers
    Description: This procedure will update the OnhandQty for the LotPartBin record where the qty is retrived and also will update the Total Selected Qty
 from LotPartMtl in the correct UOM.
    OperationID: ConvertUOM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ConvertUOM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ConvertUOM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ConvertUOM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ConvertUOM(requestBody:any, epicorHeaders?:Headers){
+export function post_ConvertUOM(requestBody:ConvertUOM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ConvertUOM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ConvertUOM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ConvertUOM_output)
           })
       .catch((error) => {
           reject(error)
@@ -717,30 +893,37 @@ export function post_ConvertUOM(requestBody:any, epicorHeaders?:Headers){
    Description: Validates if the Total Selected Qty for Each Part Mtl match with Required Qty. If not
 a message is returned to used to inform that case.
    OperationID: DoesMtlsMatch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DoesMtlsMatch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DoesMtlsMatch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DoesMtlsMatch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DoesMtlsMatch(requestBody:any, epicorHeaders?:Headers){
+export function post_DoesMtlsMatch(requestBody:DoesMtlsMatch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DoesMtlsMatch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/DoesMtlsMatch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DoesMtlsMatch_output)
           })
       .catch((error) => {
           reject(error)
@@ -752,30 +935,37 @@ export function post_DoesMtlsMatch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPartXRefInfo
    Description: This method defaults PartAdvisor fields when the PartNum field changes
    OperationID: GetPartXRefInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartXRefInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartXRefInfo(requestBody:GetPartXRefInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartXRefInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/GetPartXRefInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartXRefInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -787,30 +977,37 @@ export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetSelectSerialNumbersParams
    Description: Gets parameters required for launching Select Serial Numbers
    OperationID: GetSelectSerialNumbersParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSelectSerialNumbersParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSelectSerialNumbersParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSelectSerialNumbersParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSelectSerialNumbersParams(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSelectSerialNumbersParams(requestBody:GetSelectSerialNumbersParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSelectSerialNumbersParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/GetSelectSerialNumbersParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSelectSerialNumbersParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -822,7 +1019,7 @@ export function post_GetSelectSerialNumbersParams(requestBody:any, epicorHeaders
    Summary: Invoke method KanbanReceiptsGetNew
    Description: Creates a temporary record to store information needed for the receipt process.
    OperationID: KanbanReceiptsGetNew
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/KanbanReceiptsGetNew_output
@@ -835,15 +1032,22 @@ export function post_KanbanReceiptsGetNew(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<KanbanReceiptsGetNew_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/KanbanReceiptsGetNew", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as KanbanReceiptsGetNew_output)
           })
       .catch((error) => {
           reject(error)
@@ -860,30 +1064,37 @@ the LegalNumberPrompt business objects needs to be called to gather that informa
 Note - You cannot currently cater for manual StockWIP LN's as this will generate multiple PartTransactions
 This method should be called when the user saves the record but before the Update method is called.
    OperationID: PreProcessKanbanReceipts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreProcessKanbanReceipts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreProcessKanbanReceipts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreProcessKanbanReceipts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreProcessKanbanReceipts(requestBody:any, epicorHeaders?:Headers){
+export function post_PreProcessKanbanReceipts(requestBody:PreProcessKanbanReceipts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreProcessKanbanReceipts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/PreProcessKanbanReceipts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreProcessKanbanReceipts_output)
           })
       .catch((error) => {
           reject(error)
@@ -895,30 +1106,37 @@ export function post_PreProcessKanbanReceipts(requestBody:any, epicorHeaders?:He
    Summary: Invoke method ProcessKanbanReceipts
    Description: Processes the Kanban Receipt.
    OperationID: ProcessKanbanReceipts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessKanbanReceipts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessKanbanReceipts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessKanbanReceipts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessKanbanReceipts(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessKanbanReceipts(requestBody:ProcessKanbanReceipts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessKanbanReceipts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ProcessKanbanReceipts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessKanbanReceipts_output)
           })
       .catch((error) => {
           reject(error)
@@ -930,30 +1148,37 @@ export function post_ProcessKanbanReceipts(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method SetActionToSelSerNum
    Description: Gets parameters required for launching Select Serial Numbers
    OperationID: SetActionToSelSerNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetActionToSelSerNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetActionToSelSerNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetActionToSelSerNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetActionToSelSerNum(requestBody:any, epicorHeaders?:Headers){
+export function post_SetActionToSelSerNum(requestBody:SetActionToSelSerNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetActionToSelSerNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/SetActionToSelSerNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetActionToSelSerNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -965,30 +1190,37 @@ export function post_SetActionToSelSerNum(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method Submit
    Description: Submit the Kanban Receipt Process.
    OperationID: Submit
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Submit_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Submit_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Submit_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Submit(requestBody:any, epicorHeaders?:Headers){
+export function post_Submit(requestBody:Submit_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Submit_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/Submit", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Submit_output)
           })
       .catch((error) => {
           reject(error)
@@ -1000,30 +1232,37 @@ export function post_Submit(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateNegQtyAction
    Description: Checks if the Selected Qty from PartBin will result into a negative Onhand Quantity and returns this value to UI
    OperationID: ValidateNegQtyAction
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateNegQtyAction_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateNegQtyAction_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateNegQtyAction_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateNegQtyAction(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateNegQtyAction(requestBody:ValidateNegQtyAction_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateNegQtyAction_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ValidateNegQtyAction", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateNegQtyAction_output)
           })
       .catch((error) => {
           reject(error)
@@ -1037,30 +1276,37 @@ export function post_ValidateNegQtyAction(requestBody:any, epicorHeaders?:Header
 is filled with those records and returned to UI to prompt the user to select form which lot he wants to
 get the Required Qty.
    OperationID: ValidateLowerLevelLotTrackedParts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateLowerLevelLotTrackedParts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateLowerLevelLotTrackedParts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateLowerLevelLotTrackedParts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateLowerLevelLotTrackedParts(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateLowerLevelLotTrackedParts(requestBody:ValidateLowerLevelLotTrackedParts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateLowerLevelLotTrackedParts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ValidateLowerLevelLotTrackedParts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateLowerLevelLotTrackedParts_output)
           })
       .catch((error) => {
           reject(error)
@@ -1072,30 +1318,37 @@ export function post_ValidateLowerLevelLotTrackedParts(requestBody:any, epicorHe
    Summary: Invoke method ValidateSelectedSerNum
    Description: Gets parameters required for launching Select Serial Numbers
    OperationID: ValidateSelectedSerNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSelectedSerNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSelectedSerNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSelectedSerNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSelectedSerNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSelectedSerNum(requestBody:ValidateSelectedSerNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSelectedSerNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ValidateSelectedSerNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSelectedSerNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1107,30 +1360,37 @@ export function post_ValidateSelectedSerNum(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ValidateSN
    Description: Validates that a single serial number manually entered is valid for this transaction
    OperationID: ValidateSN
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSN_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSN_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSN_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSN(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSN(requestBody:ValidateSN_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSN_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ValidateSN", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSN_output)
           })
       .catch((error) => {
           reject(error)
@@ -1142,30 +1402,37 @@ export function post_ValidateSN(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RestoreKanbanReceipt
    Description: This procedure will reset the KanbanRecetips fields related with process of Lot Tracked Mtl feature.
    OperationID: RestoreKanbanReceipt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RestoreKanbanReceipt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RestoreKanbanReceipt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RestoreKanbanReceipt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RestoreKanbanReceipt(requestBody:any, epicorHeaders?:Headers){
+export function post_RestoreKanbanReceipt(requestBody:RestoreKanbanReceipt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RestoreKanbanReceipt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/RestoreKanbanReceipt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RestoreKanbanReceipt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1177,30 +1444,37 @@ export function post_RestoreKanbanReceipt(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method FindPart
    Description: Find Part
    OperationID: FindPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindPart(requestBody:any, epicorHeaders?:Headers){
+export function post_FindPart(requestBody:FindPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/FindPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -1212,30 +1486,37 @@ export function post_FindPart(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPartFromRowID
    Description: GetPartFromRowID
    OperationID: GetPartFromRowID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartFromRowID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartFromRowID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartFromRowID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartFromRowID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartFromRowID(requestBody:GetPartFromRowID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartFromRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/GetPartFromRowID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartFromRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1248,30 +1529,37 @@ export function post_GetPartFromRowID(requestBody:any, epicorHeaders?:Headers){
    Description: This method validates status of the MOM before proceed to generate the Kanban Job
 More validations can be added here.
    OperationID: ValidatePartMOM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidatePartMOM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidatePartMOM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidatePartMOM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidatePartMOM(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidatePartMOM(requestBody:ValidatePartMOM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidatePartMOM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ValidatePartMOM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidatePartMOM_output)
           })
       .catch((error) => {
           reject(error)
@@ -1283,30 +1571,37 @@ export function post_ValidatePartMOM(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateParts_Kit_NonStock_Phantom
    Description: This method validates NonStock Phantoms
    OperationID: ValidateParts_Kit_NonStock_Phantom
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateParts_Kit_NonStock_Phantom_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateParts_Kit_NonStock_Phantom_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateParts_Kit_NonStock_Phantom_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateParts_Kit_NonStock_Phantom(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateParts_Kit_NonStock_Phantom(requestBody:ValidateParts_Kit_NonStock_Phantom_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateParts_Kit_NonStock_Phantom_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/ValidateParts_Kit_NonStock_Phantom", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateParts_Kit_NonStock_Phantom_output)
           })
       .catch((error) => {
           reject(error)
@@ -1318,7 +1613,7 @@ export function post_ValidateParts_Kit_NonStock_Phantom(requestBody:any, epicorH
    Summary: Invoke method GetAvailAutoTranDocTypes
    Description: Method to get available automatic tran doc types.
    OperationID: GetAvailAutoTranDocTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailAutoTranDocTypes_output
@@ -1331,15 +1626,22 @@ export function post_GetAvailAutoTranDocTypes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailAutoTranDocTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/GetAvailAutoTranDocTypes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailAutoTranDocTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -1351,30 +1653,37 @@ export function post_GetAvailAutoTranDocTypes(epicorHeaders?:Headers){
    Summary: Invoke method CalculateLotPartSelectedDecimalQuantities
    Description: Calculate the correct quantities with decimals when selecting quantity for a Lot Bin part.
    OperationID: CalculateLotPartSelectedDecimalQuantities
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CalculateLotPartSelectedDecimalQuantities_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CalculateLotPartSelectedDecimalQuantities_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CalculateLotPartSelectedDecimalQuantities_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CalculateLotPartSelectedDecimalQuantities(requestBody:any, epicorHeaders?:Headers){
+export function post_CalculateLotPartSelectedDecimalQuantities(requestBody:CalculateLotPartSelectedDecimalQuantities_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CalculateLotPartSelectedDecimalQuantities_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.KanbanReceiptsSvc/CalculateLotPartSelectedDecimalQuantities", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CalculateLotPartSelectedDecimalQuantities_output)
           })
       .catch((error) => {
           reject(error)
@@ -1385,11 +1694,45 @@ export function post_CalculateLotPartSelectedDecimalQuantities(requestBody:any, 
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1427,7 +1770,7 @@ export interface CalculateLotPartSelectedDecimalQuantities_input{
 export interface CalculateLotPartSelectedDecimalQuantities_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -1465,7 +1808,7 @@ export interface CalculateLotPartSelectedQuantities_input{
 export interface CalculateLotPartSelectedQuantities_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -1479,7 +1822,7 @@ export interface ChangeBin_input{
 export interface ChangeBin_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidBin:boolean,
 }
 }
@@ -1494,7 +1837,7 @@ export interface ChangeContractID_input{
 export interface ChangeContractID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -1508,7 +1851,7 @@ export interface ChangeEmployee_input{
 export interface ChangeEmployee_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidEmployee:boolean,
 }
 }
@@ -1526,7 +1869,7 @@ export interface ChangeInventoryUM_input{
 export interface ChangeInventoryUM_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -1540,7 +1883,7 @@ export interface ChangeLotNum_input{
 export interface ChangeLotNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidLot:boolean,
 }
 }
@@ -1555,7 +1898,7 @@ export interface ChangeNonConfReason_input{
 export interface ChangeNonConfReason_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidNonConfReason:boolean,
 }
 }
@@ -1573,7 +1916,7 @@ export interface ChangePart_input{
 export interface ChangePart_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidPart:boolean,
 }
 }
@@ -1590,7 +1933,7 @@ export interface ChangeProposedBinNum_input{
 export interface ChangeProposedBinNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidLot:boolean,
 }
 }
@@ -1607,7 +1950,7 @@ export interface ChangeProposedLotNum_input{
 export interface ChangeProposedLotNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidLot:boolean,
 }
 }
@@ -1626,7 +1969,7 @@ export interface ChangeProposedPart_input{
 export interface ChangeProposedPart_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidPart:boolean,
 }
 }
@@ -1643,7 +1986,7 @@ export interface ChangeProposedWarehosue_input{
 export interface ChangeProposedWarehosue_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidPart:boolean,
 }
 }
@@ -1658,7 +2001,7 @@ export interface ChangeRevision_input{
 export interface ChangeRevision_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -1672,7 +2015,7 @@ export interface ChangeScrapReason_input{
 export interface ChangeScrapReason_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidScrapReason:boolean,
 }
 }
@@ -1687,7 +2030,7 @@ export interface ChangeUsePartNumForLot_input{
 export interface ChangeUsePartNumForLot_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -1701,7 +2044,7 @@ export interface ChangeWarehouse_input{
 export interface ChangeWarehouse_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    lValidWarehouse:boolean,
 }
 }
@@ -1758,7 +2101,7 @@ export interface DoesMtlsMatch_input{
 export interface DoesMtlsMatch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    cMessageText:string,
 }
 }
@@ -2165,7 +2508,7 @@ export interface GetSelectSerialNumbersParams_output{
    returnObj:Erp_Tablesets_SelectSerialNumbersParamsTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -2204,7 +2547,7 @@ export interface PreProcessKanbanReceipts_input{
 export interface PreProcessKanbanReceipts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    promptWIPStock:boolean,
    promptNonConf:boolean,
 }
@@ -2223,7 +2566,7 @@ export interface ProcessKanbanReceipts_input{
 export interface ProcessKanbanReceipts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    cMessageText:string,
 }
 }
@@ -2238,7 +2581,7 @@ export interface RestoreKanbanReceipt_input{
 export interface RestoreKanbanReceipt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -2261,7 +2604,7 @@ export interface SetActionToSelSerNum_input{
 export interface SetActionToSelSerNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -2278,7 +2621,7 @@ export interface Submit_input{
 export interface Submit_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -2295,7 +2638,7 @@ export interface ValidateLowerLevelLotTrackedParts_input{
 export interface ValidateLowerLevelLotTrackedParts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
    cMessageText:string,
    lLotTrackedMtlExist:boolean,
 }
@@ -2369,7 +2712,7 @@ export interface ValidateSN_input{
 export interface ValidateSN_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 
@@ -2392,7 +2735,7 @@ export interface ValidateSelectedSerNum_input{
 export interface ValidateSelectedSerNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_KanbanReceiptsTableset[],
+   ds:Erp_Tablesets_KanbanReceiptsTableset,
 }
 }
 

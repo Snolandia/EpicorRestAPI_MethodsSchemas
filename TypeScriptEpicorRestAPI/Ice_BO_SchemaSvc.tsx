@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.SchemaSvc
 // Description: This is the Schema main business object.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.FileSchemaRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.FileSchemaRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_FileSchemaRow)
           })
@@ -116,6 +156,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -126,7 +183,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
       @param whereClause Desc: Data Table Where Clause   Required: True   Allow empty value : True
       @param pageSize Desc: Page Size   Required: True
       @param absolutePage Desc: Absolute Page   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -168,15 +225,22 @@ export function get_GetRows(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -188,30 +252,37 @@ export function get_GetRows(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetFieldByID
    Description: This method returns a field dataset for the given table/field
    OperationID: GetFieldByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFieldByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFieldByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFieldByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFieldByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFieldByID(requestBody:GetFieldByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFieldByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetFieldByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFieldByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -223,30 +294,37 @@ export function post_GetFieldByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetFieldList
    Description: This method returns a list of fields for the given table
    OperationID: GetFieldList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFieldList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFieldList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFieldList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFieldList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFieldList(requestBody:GetFieldList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFieldList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetFieldList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFieldList_output)
           })
       .catch((error) => {
           reject(error)
@@ -258,30 +336,37 @@ export function post_GetFieldList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateTableName
    Description: This method returns true if the table name is exist
    OperationID: ValidateTableName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateTableName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateTableName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateTableName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateTableName(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateTableName(requestBody:ValidateTableName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateTableName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/ValidateTableName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateTableName_output)
           })
       .catch((error) => {
           reject(error)
@@ -293,30 +378,37 @@ export function post_ValidateTableName(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateFieldName
    Description: This method returns true if the table name is exist
    OperationID: ValidateFieldName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateFieldName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateFieldName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateFieldName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateFieldName(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateFieldName(requestBody:ValidateFieldName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateFieldName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/ValidateFieldName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateFieldName_output)
           })
       .catch((error) => {
           reject(error)
@@ -328,30 +420,37 @@ export function post_ValidateFieldName(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetFileByID
    Description: This method returns a fileSchema dataset for the given table
    OperationID: GetFileByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFileByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFileByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFileByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFileByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFileByID(requestBody:GetFileByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFileByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetFileByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFileByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -363,30 +462,37 @@ export function post_GetFileByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetFileList
    Description: This method returns a fileSchema dataset for the given criteria
    OperationID: GetFileList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFileList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFileList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFileList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFileList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFileList(requestBody:GetFileList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFileList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetFileList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFileList_output)
           })
       .catch((error) => {
           reject(error)
@@ -398,30 +504,37 @@ export function post_GetFileList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetIndexByID
    Description: This method returns an index dataset for the given table/index
    OperationID: GetIndexByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetIndexByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetIndexByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetIndexByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetIndexByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetIndexByID(requestBody:GetIndexByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetIndexByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetIndexByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetIndexByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -433,30 +546,37 @@ export function post_GetIndexByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetIndexFieldByID
    Description: This method returns an index field dataset for the given table/index/sequence
    OperationID: GetIndexFieldByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetIndexFieldByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetIndexFieldByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetIndexFieldByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetIndexFieldByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetIndexFieldByID(requestBody:GetIndexFieldByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetIndexFieldByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetIndexFieldByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetIndexFieldByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -468,30 +588,37 @@ export function post_GetIndexFieldByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetIndexFieldList
    Description: This method returns a list of index fields for the given table/index
    OperationID: GetIndexFieldList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetIndexFieldList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetIndexFieldList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetIndexFieldList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetIndexFieldList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetIndexFieldList(requestBody:GetIndexFieldList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetIndexFieldList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetIndexFieldList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetIndexFieldList_output)
           })
       .catch((error) => {
           reject(error)
@@ -503,30 +630,37 @@ export function post_GetIndexFieldList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetIndexList
    Description: This method returns a list of indexes in a table
    OperationID: GetIndexList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetIndexList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetIndexList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetIndexList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetIndexList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetIndexList(requestBody:GetIndexList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetIndexList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetIndexList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetIndexList_output)
           })
       .catch((error) => {
           reject(error)
@@ -541,7 +675,7 @@ export function post_GetIndexList(requestBody:any, epicorHeaders?:Headers){
       @param whereClause Desc: Data Table Where Clause   Required: True   Allow empty value : True
       @param pageSize Desc: Page Size   Required: True
       @param absolutePage Desc: Absolute Page   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -583,15 +717,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -603,7 +744,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method TableSchemaList
    Description: This method returns the Data Schema records
    OperationID: TableSchemaList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/TableSchemaList_output
@@ -616,15 +757,22 @@ export function post_TableSchemaList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TableSchemaList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/TableSchemaList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TableSchemaList_output)
           })
       .catch((error) => {
           reject(error)
@@ -635,30 +783,37 @@ export function post_TableSchemaList(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetTableInfo
    OperationID: GetTableInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTableInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTableInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTableInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTableInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTableInfo(requestBody:GetTableInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTableInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetTableInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTableInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -670,30 +825,37 @@ export function post_GetTableInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDictionaryTableByID
    Description: This method returns a fileSchema dataset for the given table
    OperationID: GetDictionaryTableByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDictionaryTableByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDictionaryTableByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDictionaryTableByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDictionaryTableByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDictionaryTableByID(requestBody:GetDictionaryTableByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDictionaryTableByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetDictionaryTableByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDictionaryTableByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -705,30 +867,37 @@ export function post_GetDictionaryTableByID(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetDictionaryTableByIDWithSortingFields
    Description: This method returns a fileSchema dataset for the given table
    OperationID: GetDictionaryTableByIDWithSortingFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDictionaryTableByIDWithSortingFields_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDictionaryTableByIDWithSortingFields_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDictionaryTableByIDWithSortingFields_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDictionaryTableByIDWithSortingFields(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDictionaryTableByIDWithSortingFields(requestBody:GetDictionaryTableByIDWithSortingFields_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDictionaryTableByIDWithSortingFields_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SchemaSvc/GetDictionaryTableByIDWithSortingFields", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDictionaryTableByIDWithSortingFields_output)
           })
       .catch((error) => {
           reject(error)
@@ -739,11 +908,28 @@ export function post_GetDictionaryTableByIDWithSortingFields(requestBody:any, ep
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_FileSchemaRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_FileSchemaRow[],
+   "value":Ice_Tablesets_FileSchemaRow,
 }
 
 export interface Ice_Tablesets_FileSchemaRow{
@@ -765,6 +951,23 @@ export interface Ice_Tablesets_FileSchemaRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

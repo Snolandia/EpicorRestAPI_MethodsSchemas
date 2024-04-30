@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.ExtensionSvc
 // Description: Extensions.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionRow
    */  
 export function get_Extensions(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_Extensions(select?:string, expand?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionRow)
           })
@@ -118,15 +158,15 @@ export function get_Extensions(select?:string, expand?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_Extensions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ExtensionRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ExtensionRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Extensions(requestBody:any, epicorHeaders?:Headers){
+export function post_Extensions(requestBody:Ice_Tablesets_ExtensionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_Extensions(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -158,10 +205,10 @@ export function post_Extensions(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionRow
    */  
 export function get_Extensions_ExtensionSetID(ExtensionSetID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -176,7 +223,14 @@ export function get_Extensions_ExtensionSetID(ExtensionSetID:string, select?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionRow)
           })
@@ -191,15 +245,15 @@ export function get_Extensions_ExtensionSetID(ExtensionSetID:string, select?:str
    Description: Calls UpdateExt to update Extension. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_Extension
       @param ExtensionSetID Desc: ExtensionSetID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_Extensions_ExtensionSetID(ExtensionSetID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_Extensions_ExtensionSetID(ExtensionSetID:string, requestBody:Ice_Tablesets_ExtensionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -213,7 +267,14 @@ export function patch_Extensions_ExtensionSetID(ExtensionSetID:string, requestBo
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -228,7 +289,7 @@ export function patch_Extensions_ExtensionSetID(ExtensionSetID:string, requestBo
    Description: Call UpdateExt to delete Extension item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_Extension
       @param ExtensionSetID Desc: ExtensionSetID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -247,7 +308,14 @@ export function delete_Extensions_ExtensionSetID(ExtensionSetID:string, epicorHe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -268,10 +336,10 @@ export function delete_Extensions_ExtensionSetID(ExtensionSetID:string, epicorHe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionSetMappingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionSetMappingRow
    */  
 export function get_Extensions_ExtensionSetID_ExtensionSetMappings(ExtensionSetID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -286,7 +354,14 @@ export function get_Extensions_ExtensionSetID_ExtensionSetMappings(ExtensionSetI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionSetMappingRow)
           })
@@ -304,10 +379,10 @@ export function get_Extensions_ExtensionSetID_ExtensionSetMappings(ExtensionSetI
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionSetMappingRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionSetMappingRow
    */  
 export function get_Extensions_ExtensionSetID_ExtensionSetMappings_Company_ExtensionSetID(ExtensionSetID:string, Company:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -322,7 +397,14 @@ export function get_Extensions_ExtensionSetID_ExtensionSetMappings_Company_Exten
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionSetMappingRow)
           })
@@ -344,10 +426,10 @@ export function get_Extensions_ExtensionSetID_ExtensionSetMappings_Company_Exten
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionTableRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionTableRow
    */  
 export function get_Extensions_ExtensionSetID_ExtensionTables(ExtensionSetID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -362,7 +444,14 @@ export function get_Extensions_ExtensionSetID_ExtensionTables(ExtensionSetID:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionTableRow)
           })
@@ -382,10 +471,10 @@ export function get_Extensions_ExtensionSetID_ExtensionTables(ExtensionSetID:str
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionTableRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionTableRow
    */  
 export function get_Extensions_ExtensionSetID_ExtensionTables_ExtensionSetID_SystemCode_DataTableID(ExtensionSetID:string, SystemCode:string, DataTableID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -400,7 +489,14 @@ export function get_Extensions_ExtensionSetID_ExtensionTables_ExtensionSetID_Sys
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionTableRow)
           })
@@ -420,10 +516,10 @@ export function get_Extensions_ExtensionSetID_ExtensionTables_ExtensionSetID_Sys
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionSetMappingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionSetMappingRow
    */  
 export function get_ExtensionSetMappings(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -438,7 +534,14 @@ export function get_ExtensionSetMappings(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionSetMappingRow)
           })
@@ -452,15 +555,15 @@ export function get_ExtensionSetMappings(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ExtensionSetMappings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionSetMappingRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionSetMappingRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ExtensionSetMappingRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ExtensionSetMappingRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExtensionSetMappings(requestBody:any, epicorHeaders?:Headers){
+export function post_ExtensionSetMappings(requestBody:Ice_Tablesets_ExtensionSetMappingRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -474,7 +577,14 @@ export function post_ExtensionSetMappings(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -492,10 +602,10 @@ export function post_ExtensionSetMappings(requestBody:any, epicorHeaders?:Header
       @param ExtensionSetID Desc: ExtensionSetID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionSetMappingRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionSetMappingRow
    */  
 export function get_ExtensionSetMappings_Company_ExtensionSetID(Company:string, ExtensionSetID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -510,7 +620,14 @@ export function get_ExtensionSetMappings_Company_ExtensionSetID(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionSetMappingRow)
           })
@@ -526,15 +643,15 @@ export function get_ExtensionSetMappings_Company_ExtensionSetID(Company:string, 
    OperationID: UpdateExt_ExtensionSetMapping
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ExtensionSetID Desc: ExtensionSetID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionSetMappingRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionSetMappingRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ExtensionSetMappings_Company_ExtensionSetID(Company:string, ExtensionSetID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ExtensionSetMappings_Company_ExtensionSetID(Company:string, ExtensionSetID:string, requestBody:Ice_Tablesets_ExtensionSetMappingRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -548,7 +665,14 @@ export function patch_ExtensionSetMappings_Company_ExtensionSetID(Company:string
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -564,7 +688,7 @@ export function patch_ExtensionSetMappings_Company_ExtensionSetID(Company:string
    OperationID: DeleteUpdateExt_ExtensionSetMapping
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ExtensionSetID Desc: ExtensionSetID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -583,7 +707,14 @@ export function delete_ExtensionSetMappings_Company_ExtensionSetID(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -604,10 +735,10 @@ export function delete_ExtensionSetMappings_Company_ExtensionSetID(Company:strin
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionTableRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionTableRow
    */  
 export function get_ExtensionTables(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -622,7 +753,14 @@ export function get_ExtensionTables(select?:string, expand?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionTableRow)
           })
@@ -636,15 +774,15 @@ export function get_ExtensionTables(select?:string, expand?:string, filter?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ExtensionTables
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionTableRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionTableRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ExtensionTableRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ExtensionTableRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExtensionTables(requestBody:any, epicorHeaders?:Headers){
+export function post_ExtensionTables(requestBody:Ice_Tablesets_ExtensionTableRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -658,7 +796,14 @@ export function post_ExtensionTables(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -678,10 +823,10 @@ export function post_ExtensionTables(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionTableRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionTableRow
    */  
 export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID(ExtensionSetID:string, SystemCode:string, DataTableID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -696,7 +841,14 @@ export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID(Extens
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionTableRow)
           })
@@ -713,15 +865,15 @@ export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID(Extens
       @param ExtensionSetID Desc: ExtensionSetID   Required: True   Allow empty value : True
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionTableRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionTableRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ExtensionTables_ExtensionSetID_SystemCode_DataTableID(ExtensionSetID:string, SystemCode:string, DataTableID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ExtensionTables_ExtensionSetID_SystemCode_DataTableID(ExtensionSetID:string, SystemCode:string, DataTableID:string, requestBody:Ice_Tablesets_ExtensionTableRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -735,7 +887,14 @@ export function patch_ExtensionTables_ExtensionSetID_SystemCode_DataTableID(Exte
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -752,7 +911,7 @@ export function patch_ExtensionTables_ExtensionSetID_SystemCode_DataTableID(Exte
       @param ExtensionSetID Desc: ExtensionSetID   Required: True   Allow empty value : True
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -771,7 +930,14 @@ export function delete_ExtensionTables_ExtensionSetID_SystemCode_DataTableID(Ext
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -794,10 +960,10 @@ export function delete_ExtensionTables_ExtensionSetID_SystemCode_DataTableID(Ext
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionColumnRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionColumnRow
    */  
 export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_ExtensionColumns(ExtensionSetID:string, SystemCode:string, DataTableID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -812,7 +978,14 @@ export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_Extens
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionColumnRow)
           })
@@ -832,10 +1005,10 @@ export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_Extens
       @param FieldName Desc: FieldName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionColumnRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionColumnRow
    */  
 export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_ExtensionColumns_ExtensionSetID_SystemCode_DataTableID_FieldName(ExtensionSetID:string, SystemCode:string, DataTableID:string, FieldName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -850,7 +1023,14 @@ export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_Extens
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionColumnRow)
           })
@@ -873,10 +1053,10 @@ export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_Extens
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionTableKeyRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionTableKeyRow
    */  
 export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_ExtensionTableKeys(ExtensionSetID:string, SystemCode:string, DataTableID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -891,7 +1071,14 @@ export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_Extens
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionTableKeyRow)
           })
@@ -911,10 +1098,10 @@ export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_Extens
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionTableKeyRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionTableKeyRow
    */  
 export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_ExtensionTableKeys_ExtensionSetID_SystemCode_DataTableID_Seq(ExtensionSetID:string, SystemCode:string, DataTableID:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -929,7 +1116,14 @@ export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_Extens
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionTableKeyRow)
           })
@@ -949,10 +1143,10 @@ export function get_ExtensionTables_ExtensionSetID_SystemCode_DataTableID_Extens
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionColumnRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionColumnRow
    */  
 export function get_ExtensionColumns(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -967,7 +1161,14 @@ export function get_ExtensionColumns(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionColumnRow)
           })
@@ -981,15 +1182,15 @@ export function get_ExtensionColumns(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ExtensionColumns
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionColumnRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionColumnRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ExtensionColumnRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ExtensionColumnRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExtensionColumns(requestBody:any, epicorHeaders?:Headers){
+export function post_ExtensionColumns(requestBody:Ice_Tablesets_ExtensionColumnRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1003,7 +1204,14 @@ export function post_ExtensionColumns(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1023,10 +1231,10 @@ export function post_ExtensionColumns(requestBody:any, epicorHeaders?:Headers){
       @param FieldName Desc: FieldName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionColumnRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionColumnRow
    */  
 export function get_ExtensionColumns_ExtensionSetID_SystemCode_DataTableID_FieldName(ExtensionSetID:string, SystemCode:string, DataTableID:string, FieldName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1041,7 +1249,14 @@ export function get_ExtensionColumns_ExtensionSetID_SystemCode_DataTableID_Field
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionColumnRow)
           })
@@ -1059,15 +1274,15 @@ export function get_ExtensionColumns_ExtensionSetID_SystemCode_DataTableID_Field
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param FieldName Desc: FieldName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionColumnRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionColumnRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ExtensionColumns_ExtensionSetID_SystemCode_DataTableID_FieldName(ExtensionSetID:string, SystemCode:string, DataTableID:string, FieldName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ExtensionColumns_ExtensionSetID_SystemCode_DataTableID_FieldName(ExtensionSetID:string, SystemCode:string, DataTableID:string, FieldName:string, requestBody:Ice_Tablesets_ExtensionColumnRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1081,7 +1296,14 @@ export function patch_ExtensionColumns_ExtensionSetID_SystemCode_DataTableID_Fie
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1099,7 +1321,7 @@ export function patch_ExtensionColumns_ExtensionSetID_SystemCode_DataTableID_Fie
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param FieldName Desc: FieldName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1118,7 +1340,14 @@ export function delete_ExtensionColumns_ExtensionSetID_SystemCode_DataTableID_Fi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1138,10 +1367,10 @@ export function delete_ExtensionColumns_ExtensionSetID_SystemCode_DataTableID_Fi
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionTableKeyRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionTableKeyRow
    */  
 export function get_ExtensionTableKeys(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1156,7 +1385,14 @@ export function get_ExtensionTableKeys(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionTableKeyRow)
           })
@@ -1170,15 +1406,15 @@ export function get_ExtensionTableKeys(select?:string, filter?:string, orderby?:
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ExtensionTableKeys
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionTableKeyRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionTableKeyRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ExtensionTableKeyRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ExtensionTableKeyRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExtensionTableKeys(requestBody:any, epicorHeaders?:Headers){
+export function post_ExtensionTableKeys(requestBody:Ice_Tablesets_ExtensionTableKeyRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1192,7 +1428,14 @@ export function post_ExtensionTableKeys(requestBody:any, epicorHeaders?:Headers)
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1212,10 +1455,10 @@ export function post_ExtensionTableKeys(requestBody:any, epicorHeaders?:Headers)
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionTableKeyRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionTableKeyRow
    */  
 export function get_ExtensionTableKeys_ExtensionSetID_SystemCode_DataTableID_Seq(ExtensionSetID:string, SystemCode:string, DataTableID:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1230,7 +1473,14 @@ export function get_ExtensionTableKeys_ExtensionSetID_SystemCode_DataTableID_Seq
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionTableKeyRow)
           })
@@ -1248,15 +1498,15 @@ export function get_ExtensionTableKeys_ExtensionSetID_SystemCode_DataTableID_Seq
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionTableKeyRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionTableKeyRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ExtensionTableKeys_ExtensionSetID_SystemCode_DataTableID_Seq(ExtensionSetID:string, SystemCode:string, DataTableID:string, Seq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ExtensionTableKeys_ExtensionSetID_SystemCode_DataTableID_Seq(ExtensionSetID:string, SystemCode:string, DataTableID:string, Seq:string, requestBody:Ice_Tablesets_ExtensionTableKeyRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1270,7 +1520,14 @@ export function patch_ExtensionTableKeys_ExtensionSetID_SystemCode_DataTableID_S
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1288,7 +1545,7 @@ export function patch_ExtensionTableKeys_ExtensionSetID_SystemCode_DataTableID_S
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1307,7 +1564,14 @@ export function delete_ExtensionTableKeys_ExtensionSetID_SystemCode_DataTableID_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1328,10 +1592,10 @@ export function delete_ExtensionTableKeys_ExtensionSetID_SystemCode_DataTableID_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionRelationRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionRelationRow
    */  
 export function get_ExtensionRelations(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1346,7 +1610,14 @@ export function get_ExtensionRelations(select?:string, expand?:string, filter?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionRelationRow)
           })
@@ -1360,15 +1631,15 @@ export function get_ExtensionRelations(select?:string, expand?:string, filter?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ExtensionRelations
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionRelationRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionRelationRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ExtensionRelationRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ExtensionRelationRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExtensionRelations(requestBody:any, epicorHeaders?:Headers){
+export function post_ExtensionRelations(requestBody:Ice_Tablesets_ExtensionRelationRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1382,7 +1653,14 @@ export function post_ExtensionRelations(requestBody:any, epicorHeaders?:Headers)
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1403,10 +1681,10 @@ export function post_ExtensionRelations(requestBody:any, epicorHeaders?:Headers)
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionRelationRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionRelationRow
    */  
 export function get_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_RelationID(ExtensionSetID:string, SystemCode:string, DataSetID:string, RelationID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1421,7 +1699,14 @@ export function get_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_Relat
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionRelationRow)
           })
@@ -1439,15 +1724,15 @@ export function get_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_Relat
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataSetID Desc: DataSetID   Required: True   Allow empty value : True
       @param RelationID Desc: RelationID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionRelationRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionRelationRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_RelationID(ExtensionSetID:string, SystemCode:string, DataSetID:string, RelationID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_RelationID(ExtensionSetID:string, SystemCode:string, DataSetID:string, RelationID:string, requestBody:Ice_Tablesets_ExtensionRelationRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1461,7 +1746,14 @@ export function patch_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_Rel
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1479,7 +1771,7 @@ export function patch_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_Rel
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataSetID Desc: DataSetID   Required: True   Allow empty value : True
       @param RelationID Desc: RelationID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1498,7 +1790,14 @@ export function delete_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_Re
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1522,10 +1821,10 @@ export function delete_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_Re
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionRelationColumnRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionRelationColumnRow
    */  
 export function get_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_RelationID_ExtensionRelationColumns(ExtensionSetID:string, SystemCode:string, DataSetID:string, RelationID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1540,7 +1839,14 @@ export function get_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_Relat
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionRelationColumnRow)
           })
@@ -1561,10 +1867,10 @@ export function get_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_Relat
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionRelationColumnRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionRelationColumnRow
    */  
 export function get_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_RelationID_ExtensionRelationColumns_ExtensionSetID_SystemCode_DataSetID_RelationID_Seq(ExtensionSetID:string, SystemCode:string, DataSetID:string, RelationID:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1579,7 +1885,14 @@ export function get_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_Relat
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionRelationColumnRow)
           })
@@ -1599,10 +1912,10 @@ export function get_ExtensionRelations_ExtensionSetID_SystemCode_DataSetID_Relat
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionRelationColumnRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionRelationColumnRow
    */  
 export function get_ExtensionRelationColumns(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1617,7 +1930,14 @@ export function get_ExtensionRelationColumns(select?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionRelationColumnRow)
           })
@@ -1631,15 +1951,15 @@ export function get_ExtensionRelationColumns(select?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ExtensionRelationColumns
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionRelationColumnRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ExtensionRelationColumnRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ExtensionRelationColumnRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ExtensionRelationColumnRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExtensionRelationColumns(requestBody:any, epicorHeaders?:Headers){
+export function post_ExtensionRelationColumns(requestBody:Ice_Tablesets_ExtensionRelationColumnRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1653,7 +1973,14 @@ export function post_ExtensionRelationColumns(requestBody:any, epicorHeaders?:He
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1674,10 +2001,10 @@ export function post_ExtensionRelationColumns(requestBody:any, epicorHeaders?:He
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExtensionRelationColumnRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExtensionRelationColumnRow
    */  
 export function get_ExtensionRelationColumns_ExtensionSetID_SystemCode_DataSetID_RelationID_Seq(ExtensionSetID:string, SystemCode:string, DataSetID:string, RelationID:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1692,7 +2019,14 @@ export function get_ExtensionRelationColumns_ExtensionSetID_SystemCode_DataSetID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExtensionRelationColumnRow)
           })
@@ -1711,15 +2045,15 @@ export function get_ExtensionRelationColumns_ExtensionSetID_SystemCode_DataSetID
       @param DataSetID Desc: DataSetID   Required: True   Allow empty value : True
       @param RelationID Desc: RelationID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionRelationColumnRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ExtensionRelationColumnRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ExtensionRelationColumns_ExtensionSetID_SystemCode_DataSetID_RelationID_Seq(ExtensionSetID:string, SystemCode:string, DataSetID:string, RelationID:string, Seq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ExtensionRelationColumns_ExtensionSetID_SystemCode_DataSetID_RelationID_Seq(ExtensionSetID:string, SystemCode:string, DataSetID:string, RelationID:string, Seq:string, requestBody:Ice_Tablesets_ExtensionRelationColumnRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1733,7 +2067,14 @@ export function patch_ExtensionRelationColumns_ExtensionSetID_SystemCode_DataSet
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1752,7 +2093,7 @@ export function patch_ExtensionRelationColumns_ExtensionSetID_SystemCode_DataSet
       @param DataSetID Desc: DataSetID   Required: True   Allow empty value : True
       @param RelationID Desc: RelationID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1771,7 +2112,14 @@ export function delete_ExtensionRelationColumns_ExtensionSetID_SystemCode_DataSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1791,10 +2139,10 @@ export function delete_ExtensionRelationColumns_ExtensionSetID_SystemCode_DataSe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExtensionListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1809,7 +2157,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionListRow)
           })
@@ -1821,6 +2176,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1838,7 +2210,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1934,15 +2306,22 @@ export function get_GetRows(whereClauseExtension:string, whereClauseExtensionSet
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1955,7 +2334,7 @@ export function get_GetRows(whereClauseExtension:string, whereClauseExtensionSet
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1979,15 +2358,22 @@ export function get_GetByID(extensionSetID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2002,7 +2388,7 @@ export function get_GetByID(extensionSetID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -2044,15 +2430,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2064,30 +2457,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetExtensionSetAssembly
    Description: Returns object representing extension set assembly body with optional debug symbols.
    OperationID: GetExtensionSetAssembly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetExtensionSetAssembly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetExtensionSetAssembly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetExtensionSetAssembly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetExtensionSetAssembly(requestBody:any, epicorHeaders?:Headers){
+export function post_GetExtensionSetAssembly(requestBody:GetExtensionSetAssembly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetExtensionSetAssembly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetExtensionSetAssembly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetExtensionSetAssembly_output)
           })
       .catch((error) => {
           reject(error)
@@ -2099,30 +2499,37 @@ export function post_GetExtensionSetAssembly(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewExtensionTable
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewExtensionTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewExtensionTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewExtensionTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewExtensionTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewExtensionTable(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewExtensionTable(requestBody:GetNewExtensionTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewExtensionTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetNewExtensionTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewExtensionTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -2134,30 +2541,37 @@ export function post_GetNewExtensionTable(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewExtensionColumn
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewExtensionColumn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewExtensionColumn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewExtensionColumn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewExtensionColumn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewExtensionColumn(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewExtensionColumn(requestBody:GetNewExtensionColumn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewExtensionColumn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetNewExtensionColumn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewExtensionColumn_output)
           })
       .catch((error) => {
           reject(error)
@@ -2169,30 +2583,37 @@ export function post_GetNewExtensionColumn(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewExtensionTableKey
    Description: Creates a new pk row for the extension table
    OperationID: GetNewExtensionTableKey
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewExtensionTableKey_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewExtensionTableKey_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewExtensionTableKey_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewExtensionTableKey(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewExtensionTableKey(requestBody:GetNewExtensionTableKey_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewExtensionTableKey_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetNewExtensionTableKey", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewExtensionTableKey_output)
           })
       .catch((error) => {
           reject(error)
@@ -2204,30 +2625,37 @@ export function post_GetNewExtensionTableKey(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method SetupPeerTable
    Description: Create structure for peer table - primary key and relationship
    OperationID: SetupPeerTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetupPeerTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetupPeerTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetupPeerTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetupPeerTable(requestBody:any, epicorHeaders?:Headers){
+export function post_SetupPeerTable(requestBody:SetupPeerTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetupPeerTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/SetupPeerTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetupPeerTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -2239,30 +2667,37 @@ export function post_SetupPeerTable(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ExtensionSetExists
    Description: Checks whether extension set with provided ID exists.
    OperationID: ExtensionSetExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExtensionSetExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExtensionSetExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExtensionSetExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExtensionSetExists(requestBody:any, epicorHeaders?:Headers){
+export function post_ExtensionSetExists(requestBody:ExtensionSetExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExtensionSetExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/ExtensionSetExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExtensionSetExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -2274,30 +2709,37 @@ export function post_ExtensionSetExists(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method IsRestrictedSystemCode
    Description: Checks whether SystemCode is Epicor Delivered SystemCode.
    OperationID: IsRestrictedSystemCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsRestrictedSystemCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsRestrictedSystemCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsRestrictedSystemCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsRestrictedSystemCode(requestBody:any, epicorHeaders?:Headers){
+export function post_IsRestrictedSystemCode(requestBody:IsRestrictedSystemCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsRestrictedSystemCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/IsRestrictedSystemCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsRestrictedSystemCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -2309,30 +2751,37 @@ export function post_IsRestrictedSystemCode(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method InstallExtensionSet
    Description: Installs provided assembly alongside with optional symbols info.
    OperationID: InstallExtensionSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InstallExtensionSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InstallExtensionSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InstallExtensionSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InstallExtensionSet(requestBody:any, epicorHeaders?:Headers){
+export function post_InstallExtensionSet(requestBody:InstallExtensionSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InstallExtensionSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/InstallExtensionSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InstallExtensionSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -2344,30 +2793,37 @@ export function post_InstallExtensionSet(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method MapExtensionSetToCompany
    Description: Associates extension set related to the specified ID to the specified company.
    OperationID: MapExtensionSetToCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MapExtensionSetToCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MapExtensionSetToCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MapExtensionSetToCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MapExtensionSetToCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_MapExtensionSetToCompany(requestBody:MapExtensionSetToCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MapExtensionSetToCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/MapExtensionSetToCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MapExtensionSetToCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -2379,7 +2835,7 @@ export function post_MapExtensionSetToCompany(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetMapping
    Description: Returns extensions registered in companies as well as productizations from global level
    OperationID: GetMapping
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMapping_output
@@ -2392,15 +2848,22 @@ export function post_GetMapping(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMapping_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetMapping", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMapping_output)
           })
       .catch((error) => {
           reject(error)
@@ -2412,30 +2875,37 @@ export function post_GetMapping(epicorHeaders?:Headers){
    Summary: Invoke method RemoveExtensionSet
    Description: Removes extension set assembly alongside with related metadata
    OperationID: RemoveExtensionSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveExtensionSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveExtensionSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveExtensionSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveExtensionSet(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveExtensionSet(requestBody:RemoveExtensionSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveExtensionSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/RemoveExtensionSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveExtensionSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -2447,30 +2917,37 @@ export function post_RemoveExtensionSet(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetDataSetTables
    Description: Gets the list of tables (both base and extension) in a dataset.
    OperationID: GetDataSetTables
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDataSetTables_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDataSetTables_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDataSetTables_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDataSetTables(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDataSetTables(requestBody:GetDataSetTables_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDataSetTables_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetDataSetTables", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDataSetTables_output)
           })
       .catch((error) => {
           reject(error)
@@ -2482,30 +2959,37 @@ export function post_GetDataSetTables(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ExportExtensionSet
    Description: Returns byte[] representing extension set tableset and assembly body with optional debug symbols.
    OperationID: ExportExtensionSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportExtensionSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportExtensionSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportExtensionSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportExtensionSet(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportExtensionSet(requestBody:ExportExtensionSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportExtensionSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/ExportExtensionSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportExtensionSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -2517,30 +3001,37 @@ export function post_ExportExtensionSet(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ImportExtensionSet
    Description: Returns byte[] representing extension set tableset and assembly body with optional debug symbols.
    OperationID: ImportExtensionSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportExtensionSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportExtensionSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportExtensionSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportExtensionSet(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportExtensionSet(requestBody:ImportExtensionSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportExtensionSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/ImportExtensionSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportExtensionSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -2552,30 +3043,37 @@ export function post_ImportExtensionSet(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method CheckExtensionTable
    Description: Validates the structure of the extension table definition.
    OperationID: CheckExtensionTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckExtensionTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckExtensionTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckExtensionTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckExtensionTable(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckExtensionTable(requestBody:CheckExtensionTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckExtensionTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/CheckExtensionTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckExtensionTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -2587,30 +3085,37 @@ export function post_CheckExtensionTable(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method CheckExtensionTableStatus
    Description: Validates the structure of the extension table definition.
    OperationID: CheckExtensionTableStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckExtensionTableStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckExtensionTableStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckExtensionTableStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckExtensionTableStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckExtensionTableStatus(requestBody:CheckExtensionTableStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckExtensionTableStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/CheckExtensionTableStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckExtensionTableStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -2622,30 +3127,37 @@ export function post_CheckExtensionTableStatus(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetCompaniesUsingTheExtension
    Description: Gets the companies using the extensionSetID.
    OperationID: GetCompaniesUsingTheExtension
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCompaniesUsingTheExtension_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCompaniesUsingTheExtension_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCompaniesUsingTheExtension_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCompaniesUsingTheExtension(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCompaniesUsingTheExtension(requestBody:GetCompaniesUsingTheExtension_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCompaniesUsingTheExtension_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetCompaniesUsingTheExtension", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCompaniesUsingTheExtension_output)
           })
       .catch((error) => {
           reject(error)
@@ -2657,30 +3169,37 @@ export function post_GetCompaniesUsingTheExtension(requestBody:any, epicorHeader
    Summary: Invoke method DeleteExtensionSetMappingForCurrentCompany
    Description: Deletes the extension set mapping for company in session.
    OperationID: DeleteExtensionSetMappingForCurrentCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteExtensionSetMappingForCurrentCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteExtensionSetMappingForCurrentCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteExtensionSetMappingForCurrentCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteExtensionSetMappingForCurrentCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteExtensionSetMappingForCurrentCompany(requestBody:DeleteExtensionSetMappingForCurrentCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteExtensionSetMappingForCurrentCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/DeleteExtensionSetMappingForCurrentCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteExtensionSetMappingForCurrentCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -2692,30 +3211,37 @@ export function post_DeleteExtensionSetMappingForCurrentCompany(requestBody:any,
    Summary: Invoke method GetExtensionSetID
    Description: Generates the Extension ID for a given provider, level and product
    OperationID: GetExtensionSetID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetExtensionSetID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetExtensionSetID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetExtensionSetID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetExtensionSetID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetExtensionSetID(requestBody:GetExtensionSetID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetExtensionSetID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetExtensionSetID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetExtensionSetID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2727,30 +3253,37 @@ export function post_GetExtensionSetID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckPeerTable
    Description: Validates or check the status of a peer table relation.
    OperationID: CheckPeerTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPeerTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPeerTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPeerTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPeerTable(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPeerTable(requestBody:CheckPeerTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPeerTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/CheckPeerTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPeerTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -2762,30 +3295,37 @@ export function post_CheckPeerTable(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewExtension
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewExtension
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewExtension_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewExtension_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewExtension_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewExtension(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewExtension(requestBody:GetNewExtension_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewExtension_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetNewExtension", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewExtension_output)
           })
       .catch((error) => {
           reject(error)
@@ -2797,30 +3337,37 @@ export function post_GetNewExtension(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewExtensionSetMapping
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewExtensionSetMapping
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewExtensionSetMapping_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewExtensionSetMapping_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewExtensionSetMapping_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewExtensionSetMapping(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewExtensionSetMapping(requestBody:GetNewExtensionSetMapping_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewExtensionSetMapping_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetNewExtensionSetMapping", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewExtensionSetMapping_output)
           })
       .catch((error) => {
           reject(error)
@@ -2832,30 +3379,37 @@ export function post_GetNewExtensionSetMapping(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewExtensionRelation
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewExtensionRelation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewExtensionRelation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewExtensionRelation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewExtensionRelation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewExtensionRelation(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewExtensionRelation(requestBody:GetNewExtensionRelation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewExtensionRelation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetNewExtensionRelation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewExtensionRelation_output)
           })
       .catch((error) => {
           reject(error)
@@ -2867,30 +3421,37 @@ export function post_GetNewExtensionRelation(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewExtensionRelationColumn
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewExtensionRelationColumn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewExtensionRelationColumn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewExtensionRelationColumn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewExtensionRelationColumn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewExtensionRelationColumn(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewExtensionRelationColumn(requestBody:GetNewExtensionRelationColumn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewExtensionRelationColumn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetNewExtensionRelationColumn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewExtensionRelationColumn_output)
           })
       .catch((error) => {
           reject(error)
@@ -2902,30 +3463,37 @@ export function post_GetNewExtensionRelationColumn(requestBody:any, epicorHeader
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2937,7 +3505,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2961,15 +3529,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2981,7 +3556,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -3005,15 +3580,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -3025,30 +3607,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -3060,30 +3649,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExtensionSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -3094,46 +3690,63 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionColumnRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ExtensionColumnRow[],
+   "value":Ice_Tablesets_ExtensionColumnRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ExtensionListRow[],
+   "value":Ice_Tablesets_ExtensionListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionRelationColumnRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ExtensionRelationColumnRow[],
+   "value":Ice_Tablesets_ExtensionRelationColumnRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionRelationRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ExtensionRelationRow[],
+   "value":Ice_Tablesets_ExtensionRelationRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ExtensionRow[],
+   "value":Ice_Tablesets_ExtensionRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionSetMappingRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ExtensionSetMappingRow[],
+   "value":Ice_Tablesets_ExtensionSetMappingRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionTableKeyRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ExtensionTableKeyRow[],
+   "value":Ice_Tablesets_ExtensionTableKeyRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExtensionTableRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ExtensionTableRow[],
+   "value":Ice_Tablesets_ExtensionTableRow,
 }
 
 export interface Ice_Tablesets_ExtensionColumnRow{
@@ -3342,6 +3955,23 @@ export interface Ice_Tablesets_ExtensionTableRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -3589,7 +4219,7 @@ export interface GetNewExtensionColumn_input{
 export interface GetNewExtensionColumn_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExtensionTableset[],
+   ds:Ice_Tablesets_ExtensionTableset,
 }
 }
 
@@ -3611,7 +4241,7 @@ export interface GetNewExtensionRelationColumn_input{
 export interface GetNewExtensionRelationColumn_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExtensionTableset[],
+   ds:Ice_Tablesets_ExtensionTableset,
 }
 }
 
@@ -3631,7 +4261,7 @@ export interface GetNewExtensionRelation_input{
 export interface GetNewExtensionRelation_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExtensionTableset[],
+   ds:Ice_Tablesets_ExtensionTableset,
 }
 }
 
@@ -3647,7 +4277,7 @@ export interface GetNewExtensionSetMapping_input{
 export interface GetNewExtensionSetMapping_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExtensionTableset[],
+   ds:Ice_Tablesets_ExtensionTableset,
 }
 }
 
@@ -3667,7 +4297,7 @@ export interface GetNewExtensionTableKey_input{
 export interface GetNewExtensionTableKey_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExtensionTableset[],
+   ds:Ice_Tablesets_ExtensionTableset,
 }
 }
 
@@ -3685,7 +4315,7 @@ export interface GetNewExtensionTable_input{
 export interface GetNewExtensionTable_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExtensionTableset[],
+   ds:Ice_Tablesets_ExtensionTableset,
 }
 }
 
@@ -3699,7 +4329,7 @@ export interface GetNewExtension_input{
 export interface GetNewExtension_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExtensionTableset[],
+   ds:Ice_Tablesets_ExtensionTableset,
 }
 }
 
@@ -4171,7 +4801,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtExtensionTableset[],
+   ds:Ice_Tablesets_UpdExtExtensionTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4186,7 +4816,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExtensionTableset[],
+   ds:Ice_Tablesets_ExtensionTableset,
 }
 }
 

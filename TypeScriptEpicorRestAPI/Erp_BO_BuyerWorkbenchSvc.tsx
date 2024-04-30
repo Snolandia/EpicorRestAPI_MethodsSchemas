@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.BuyerWorkbenchSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method AddSuggSupplier
    Description: This methods will add supplier record for an individual suggestion.
    OperationID: AddSuggSupplier
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddSuggSupplier_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddSuggSupplier_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddSuggSupplier_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddSuggSupplier(requestBody:any, epicorHeaders?:Headers){
+export function post_AddSuggSupplier(requestBody:AddSuggSupplier_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddSuggSupplier_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/AddSuggSupplier", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddSuggSupplier_output)
           })
       .catch((error) => {
           reject(error)
@@ -121,30 +178,37 @@ export function post_AddSuggSupplier(requestBody:any, epicorHeaders?:Headers){
    Description: This method validates the RFQSuggVend.PurPoint when it changes.
 This method should run when changing the RFQSuggVend.PurPoint.
    OperationID: ChangeRFQSuggVendPurPoint
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRFQSuggVendPurPoint_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRFQSuggVendPurPoint_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRFQSuggVendPurPoint_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRFQSuggVendPurPoint(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRFQSuggVendPurPoint(requestBody:ChangeRFQSuggVendPurPoint_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRFQSuggVendPurPoint_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/ChangeRFQSuggVendPurPoint", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRFQSuggVendPurPoint_output)
           })
       .catch((error) => {
           reject(error)
@@ -158,30 +222,37 @@ export function post_ChangeRFQSuggVendPurPoint(requestBody:any, epicorHeaders?:H
 with value based on the vendornum.
 This method should run when changing the RFQSuggVend.VendorNum.
    OperationID: ChangeRFQSuggVendVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRFQSuggVendVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRFQSuggVendVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRFQSuggVendVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRFQSuggVendVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRFQSuggVendVendorID(requestBody:ChangeRFQSuggVendVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRFQSuggVendVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/ChangeRFQSuggVendVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRFQSuggVendVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -195,30 +266,37 @@ export function post_ChangeRFQSuggVendVendorID(requestBody:any, epicorHeaders?:H
 RFQSuggVend.VendorNum and validates the value.
 This method should run before changing the RFQSuggVend.VendorNum.
    OperationID: CheckRFQSuggVendVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckRFQSuggVendVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckRFQSuggVendVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckRFQSuggVendVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckRFQSuggVendVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckRFQSuggVendVendorID(requestBody:CheckRFQSuggVendVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckRFQSuggVendVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/CheckRFQSuggVendVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckRFQSuggVendVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -230,30 +308,37 @@ export function post_CheckRFQSuggVendVendorID(requestBody:any, epicorHeaders?:He
    Summary: Invoke method CreateDatasetWithCounters
    Description: This methods will return all of the records for the Buyer Workbench.
    OperationID: CreateDatasetWithCounters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateDatasetWithCounters_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateDatasetWithCounters_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateDatasetWithCounters_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateDatasetWithCounters(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateDatasetWithCounters(requestBody:CreateDatasetWithCounters_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateDatasetWithCounters_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/CreateDatasetWithCounters", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateDatasetWithCounters_output)
           })
       .catch((error) => {
           reject(error)
@@ -265,30 +350,37 @@ export function post_CreateDatasetWithCounters(requestBody:any, epicorHeaders?:H
    Summary: Invoke method CreateDataset
    Description: This methods will return all of the records for the Buyer Workbench.
    OperationID: CreateDataset
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateDataset_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateDataset_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateDataset_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateDataset(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateDataset(requestBody:CreateDataset_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateDataset_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/CreateDataset", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateDataset_output)
           })
       .catch((error) => {
           reject(error)
@@ -300,30 +392,37 @@ export function post_CreateDataset(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteSuggSupplier
    Description: This methods will delete supplier record for an individual suggestion.
    OperationID: DeleteSuggSupplier
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteSuggSupplier_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteSuggSupplier_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteSuggSupplier_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteSuggSupplier(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteSuggSupplier(requestBody:DeleteSuggSupplier_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteSuggSupplier_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/DeleteSuggSupplier", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteSuggSupplier_output)
           })
       .catch((error) => {
           reject(error)
@@ -336,30 +435,37 @@ export function post_DeleteSuggSupplier(requestBody:any, epicorHeaders?:Headers)
    Description: This method will change the ProcessRFQ field in the RFQSugg table and the
 RFQSuggBWB temp table to false (deselected) for the inputted buyerid.
    OperationID: DeselectAll
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeselectAll_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeselectAll_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeselectAll_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeselectAll(requestBody:any, epicorHeaders?:Headers){
+export function post_DeselectAll(requestBody:DeselectAll_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeselectAll_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/DeselectAll", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeselectAll_output)
           })
       .catch((error) => {
           reject(error)
@@ -374,30 +480,37 @@ suggestions for a buyer by only entering a buyerid or a specific suggestion by
 also entering a suggestion number.  This method will call CreateDataset at the
 end of running to refresh the dataset.
    OperationID: Generate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Generate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Generate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Generate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Generate(requestBody:any, epicorHeaders?:Headers){
+export function post_Generate(requestBody:Generate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Generate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/Generate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Generate_output)
           })
       .catch((error) => {
           reject(error)
@@ -409,30 +522,37 @@ export function post_Generate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetSugPOChgCount
    Description: This methods will return a count of Change PO Suggestions for the selected Buyer
    OperationID: GetSugPOChgCount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSugPOChgCount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSugPOChgCount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSugPOChgCount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSugPOChgCount(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSugPOChgCount(requestBody:GetSugPOChgCount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSugPOChgCount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/GetSugPOChgCount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSugPOChgCount_output)
           })
       .catch((error) => {
           reject(error)
@@ -444,30 +564,37 @@ export function post_GetSugPOChgCount(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetSugPoDtlCount
    Description: This methods will return a count of NEW PO Suggestions for the selected Buyer
    OperationID: GetSugPoDtlCount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSugPoDtlCount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSugPoDtlCount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSugPoDtlCount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSugPoDtlCount(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSugPoDtlCount(requestBody:GetSugPoDtlCount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSugPoDtlCount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/GetSugPoDtlCount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSugPoDtlCount_output)
           })
       .catch((error) => {
           reject(error)
@@ -480,30 +607,37 @@ export function post_GetSugPoDtlCount(requestBody:any, epicorHeaders?:Headers){
    Description: This methods will create a blank RFQSuggVend record for an individual suggestion
 and allow the user to type in field values through the grid.
    OperationID: GetNewSuggSupp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSuggSupp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSuggSupp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSuggSupp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSuggSupp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSuggSupp(requestBody:GetNewSuggSupp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSuggSupp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/GetNewSuggSupp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSuggSupp_output)
           })
       .catch((error) => {
           reject(error)
@@ -516,30 +650,37 @@ export function post_GetNewSuggSupp(requestBody:any, epicorHeaders?:Headers){
    Description: This method will change the ProcessRFQ field in the RFQSugg table and the
 RFQSuggBWB temp table to true (selected) for the inputted buyerid.
    OperationID: SelectAll
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SelectAll_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SelectAll_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SelectAll_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectAll(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectAll(requestBody:SelectAll_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SelectAll_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/SelectAll", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SelectAll_output)
           })
       .catch((error) => {
           reject(error)
@@ -551,30 +692,37 @@ export function post_SelectAll(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SupplierWizard
    Description: This methods will return suppliers for the suggestion
    OperationID: SupplierWizard
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SupplierWizard_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SupplierWizard_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SupplierWizard_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SupplierWizard(requestBody:any, epicorHeaders?:Headers){
+export function post_SupplierWizard(requestBody:SupplierWizard_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SupplierWizard_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BuyerWorkbenchSvc/SupplierWizard", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SupplierWizard_output)
           })
       .catch((error) => {
           reject(error)
@@ -585,11 +733,45 @@ export function post_SupplierWizard(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -616,7 +798,7 @@ export interface AddSuggSupplier_output{
 parameters : {
       /**  output parameters  */  
    opStatusMsg:string,
-   ds:Erp_Tablesets_BuyerWorkbenchTableset[],
+   ds:Erp_Tablesets_BuyerWorkbenchTableset,
 }
 }
 
@@ -633,7 +815,7 @@ export interface ChangeRFQSuggVendPurPoint_input{
 export interface ChangeRFQSuggVendPurPoint_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BuyerWorkbenchTableset[],
+   ds:Erp_Tablesets_BuyerWorkbenchTableset,
 }
 }
 
@@ -654,7 +836,7 @@ export interface ChangeRFQSuggVendVendorID_output{
 parameters : {
       /**  output parameters  */  
    opStatusMsg:string,
-   ds:Erp_Tablesets_BuyerWorkbenchTableset[],
+   ds:Erp_Tablesets_BuyerWorkbenchTableset,
 }
 }
 
@@ -674,7 +856,7 @@ export interface CheckRFQSuggVendVendorID_input{
 export interface CheckRFQSuggVendVendorID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BuyerWorkbenchTableset[],
+   ds:Erp_Tablesets_BuyerWorkbenchTableset,
 }
 }
 
@@ -724,7 +906,7 @@ export interface DeleteSuggSupplier_output{
 parameters : {
       /**  output parameters  */  
    opStatusMsg:string,
-   ds:Erp_Tablesets_BuyerWorkbenchTableset[],
+   ds:Erp_Tablesets_BuyerWorkbenchTableset,
 }
 }
 
@@ -741,7 +923,7 @@ export interface DeselectAll_input{
 export interface DeselectAll_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BuyerWorkbenchTableset[],
+   ds:Erp_Tablesets_BuyerWorkbenchTableset,
 }
 }
 
@@ -1401,7 +1583,7 @@ export interface Generate_input{
 export interface Generate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BuyerWorkbenchTableset[],
+   ds:Erp_Tablesets_BuyerWorkbenchTableset,
 }
 }
 
@@ -1421,7 +1603,7 @@ export interface GetNewSuggSupp_input{
 export interface GetNewSuggSupp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BuyerWorkbenchTableset[],
+   ds:Erp_Tablesets_BuyerWorkbenchTableset,
 }
 }
 
@@ -1485,7 +1667,7 @@ export interface SelectAll_input{
 export interface SelectAll_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BuyerWorkbenchTableset[],
+   ds:Erp_Tablesets_BuyerWorkbenchTableset,
 }
 }
 
@@ -1521,7 +1703,7 @@ export interface SupplierWizard_output{
 parameters : {
       /**  output parameters  */  
    opStatusMsg:string,
-   ds:Erp_Tablesets_BuyerWorkbenchTableset[],
+   ds:Erp_Tablesets_BuyerWorkbenchTableset,
 }
 }
 

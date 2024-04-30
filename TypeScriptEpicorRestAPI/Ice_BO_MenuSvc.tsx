@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.MenuSvc
 // Description: Identifies the menu items that are displayed on the main menu.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.MenuRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.MenuRow
    */  
 export function get_Menus(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_Menus(select?:string, filter?:string, orderby?:string, top?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_MenuRow)
           })
@@ -117,15 +157,15 @@ export function get_Menus(select?:string, filter?:string, orderby?:string, top?:
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_Menus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.MenuRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.MenuRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.MenuRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.MenuRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Menus(requestBody:any, epicorHeaders?:Headers){
+export function post_Menus(requestBody:Ice_Tablesets_MenuRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_Menus(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -157,10 +204,10 @@ export function post_Menus(requestBody:any, epicorHeaders?:Headers){
       @param MenuID Desc: MenuID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.MenuRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.MenuRow
    */  
 export function get_Menus_Company_MenuID(Company:string, MenuID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -175,7 +222,14 @@ export function get_Menus_Company_MenuID(Company:string, MenuID:string, select?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_MenuRow)
           })
@@ -191,15 +245,15 @@ export function get_Menus_Company_MenuID(Company:string, MenuID:string, select?:
    OperationID: UpdateExt_Menu
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param MenuID Desc: MenuID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.MenuRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.MenuRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_Menus_Company_MenuID(Company:string, MenuID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_Menus_Company_MenuID(Company:string, MenuID:string, requestBody:Ice_Tablesets_MenuRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -213,7 +267,14 @@ export function patch_Menus_Company_MenuID(Company:string, MenuID:string, reques
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -229,7 +290,7 @@ export function patch_Menus_Company_MenuID(Company:string, MenuID:string, reques
    OperationID: DeleteUpdateExt_Menu
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param MenuID Desc: MenuID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -248,7 +309,14 @@ export function delete_Menus_Company_MenuID(Company:string, MenuID:string, epico
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -268,10 +336,10 @@ export function delete_Menus_Company_MenuID(Company:string, MenuID:string, epico
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.MenuListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.MenuListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -286,7 +354,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_MenuListRow)
           })
@@ -299,6 +374,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -309,7 +401,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -351,15 +443,22 @@ export function get_GetRows(whereClauseMenu:string, pageSize:string, absolutePag
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -373,7 +472,7 @@ export function get_GetRows(whereClauseMenu:string, pageSize:string, absolutePag
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -406,15 +505,22 @@ export function get_GetByID(company:string, menuID:string, epicorHeaders?:Header
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -429,7 +535,7 @@ export function get_GetByID(company:string, menuID:string, epicorHeaders?:Header
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -471,15 +577,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -491,30 +604,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetRowsTranslated
    Description: Gets translation for each existing Row
    OperationID: GetRowsTranslated
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsTranslated_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsTranslated_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsTranslated_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsTranslated(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsTranslated(requestBody:GetRowsTranslated_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsTranslated_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetRowsTranslated", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsTranslated_output)
           })
       .catch((error) => {
           reject(error)
@@ -526,30 +646,37 @@ export function post_GetRowsTranslated(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRowsWebAccess
    Description: Gets Rows that that are accessible from the WEB
    OperationID: GetRowsWebAccess
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsWebAccess_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsWebAccess_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsWebAccess_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsWebAccess(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsWebAccess(requestBody:GetRowsWebAccess_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsWebAccess_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetRowsWebAccess", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsWebAccess_output)
           })
       .catch((error) => {
           reject(error)
@@ -561,30 +688,37 @@ export function post_GetRowsWebAccess(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetMenuID
    Description: Returns a DataSet given the primary key.
    OperationID: GetMenuID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMenuID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMenuID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMenuID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMenuID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMenuID(requestBody:GetMenuID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMenuID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetMenuID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMenuID_output)
           })
       .catch((error) => {
           reject(error)
@@ -596,30 +730,37 @@ export function post_GetMenuID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRowsWebAccessTranslated
    Description: Gets Rows that that are accessible from the WEB
    OperationID: GetRowsWebAccessTranslated
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsWebAccessTranslated_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsWebAccessTranslated_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsWebAccessTranslated_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsWebAccessTranslated(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsWebAccessTranslated(requestBody:GetRowsWebAccessTranslated_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsWebAccessTranslated_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetRowsWebAccessTranslated", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsWebAccessTranslated_output)
           })
       .catch((error) => {
           reject(error)
@@ -631,30 +772,37 @@ export function post_GetRowsWebAccessTranslated(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetRowsCRM
    Description: Gets Rows that that are accessible from the WEB
    OperationID: GetRowsCRM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCRM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCRM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCRM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCRM(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCRM(requestBody:GetRowsCRM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCRM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetRowsCRM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCRM_output)
           })
       .catch((error) => {
           reject(error)
@@ -666,30 +814,37 @@ export function post_GetRowsCRM(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRowsCRMTranslated
    Description: Gets Rows that that are accessible from the WEB
    OperationID: GetRowsCRMTranslated
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCRMTranslated_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCRMTranslated_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCRMTranslated_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCRMTranslated(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCRMTranslated(requestBody:GetRowsCRMTranslated_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCRMTranslated_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetRowsCRMTranslated", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCRMTranslated_output)
           })
       .catch((error) => {
           reject(error)
@@ -701,30 +856,37 @@ export function post_GetRowsCRMTranslated(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method CopyBeforeMenuItem
    Description: Move or Copy one menu item (source) before another (Target)
    OperationID: CopyBeforeMenuItem
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CopyBeforeMenuItem_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CopyBeforeMenuItem_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CopyBeforeMenuItem_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CopyBeforeMenuItem(requestBody:any, epicorHeaders?:Headers){
+export function post_CopyBeforeMenuItem(requestBody:CopyBeforeMenuItem_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CopyBeforeMenuItem_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/CopyBeforeMenuItem", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CopyBeforeMenuItem_output)
           })
       .catch((error) => {
           reject(error)
@@ -736,30 +898,37 @@ export function post_CopyBeforeMenuItem(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method CopyMenuRow
    Description: Copy an existing Menu to a new menu row
    OperationID: CopyMenuRow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CopyMenuRow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CopyMenuRow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CopyMenuRow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CopyMenuRow(requestBody:any, epicorHeaders?:Headers){
+export function post_CopyMenuRow(requestBody:CopyMenuRow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CopyMenuRow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/CopyMenuRow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CopyMenuRow_output)
           })
       .catch((error) => {
           reject(error)
@@ -771,30 +940,37 @@ export function post_CopyMenuRow(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CopyToParentMenu
    Description: Move or Copy one menu item to the last menu item of the parent
    OperationID: CopyToParentMenu
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CopyToParentMenu_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CopyToParentMenu_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CopyToParentMenu_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CopyToParentMenu(requestBody:any, epicorHeaders?:Headers){
+export function post_CopyToParentMenu(requestBody:CopyToParentMenu_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CopyToParentMenu_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/CopyToParentMenu", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CopyToParentMenu_output)
           })
       .catch((error) => {
           reject(error)
@@ -806,30 +982,37 @@ export function post_CopyToParentMenu(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetMenuForLicenseType
    Description: Gets the type of the menu for the license type that the client is running under.
    OperationID: GetMenuForLicenseType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMenuForLicenseType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMenuForLicenseType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMenuForLicenseType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMenuForLicenseType(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMenuForLicenseType(requestBody:GetMenuForLicenseType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMenuForLicenseType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetMenuForLicenseType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMenuForLicenseType_output)
           })
       .catch((error) => {
           reject(error)
@@ -841,30 +1024,37 @@ export function post_GetMenuForLicenseType(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ValidateMenuBeforeLaunch
    Description: Validates if the UI represented by the Url can be launched by calling an ERP menu extension.
    OperationID: ValidateMenuBeforeLaunch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateMenuBeforeLaunch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateMenuBeforeLaunch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateMenuBeforeLaunch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateMenuBeforeLaunch(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateMenuBeforeLaunch(requestBody:ValidateMenuBeforeLaunch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateMenuBeforeLaunch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/ValidateMenuBeforeLaunch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateMenuBeforeLaunch_output)
           })
       .catch((error) => {
           reject(error)
@@ -876,30 +1066,37 @@ export function post_ValidateMenuBeforeLaunch(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetMenuAllowedForUserByView
    Description: Determines whether the user has access to a Menu based on the ViewID.
    OperationID: GetMenuAllowedForUserByView
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMenuAllowedForUserByView_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMenuAllowedForUserByView_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMenuAllowedForUserByView_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMenuAllowedForUserByView(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMenuAllowedForUserByView(requestBody:GetMenuAllowedForUserByView_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMenuAllowedForUserByView_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetMenuAllowedForUserByView", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMenuAllowedForUserByView_output)
           })
       .catch((error) => {
           reject(error)
@@ -911,30 +1108,37 @@ export function post_GetMenuAllowedForUserByView(requestBody:any, epicorHeaders?
    Summary: Invoke method CheckMenuSecurityForUser
    Description: Determines if the user has access to the given MenuID or ViewID
    OperationID: CheckMenuSecurityForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckMenuSecurityForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckMenuSecurityForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckMenuSecurityForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckMenuSecurityForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckMenuSecurityForUser(requestBody:CheckMenuSecurityForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckMenuSecurityForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/CheckMenuSecurityForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckMenuSecurityForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -945,30 +1149,37 @@ export function post_CheckMenuSecurityForUser(requestBody:any, epicorHeaders?:He
    /**  
    Summary: Invoke method GlobalRecordFound
    OperationID: GlobalRecordFound
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GlobalRecordFound_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GlobalRecordFound_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GlobalRecordFound_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GlobalRecordFound(requestBody:any, epicorHeaders?:Headers){
+export function post_GlobalRecordFound(requestBody:GlobalRecordFound_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GlobalRecordFound_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GlobalRecordFound", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GlobalRecordFound_output)
           })
       .catch((error) => {
           reject(error)
@@ -979,30 +1190,37 @@ export function post_GlobalRecordFound(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ProgamFoundInMenu
    OperationID: ProgamFoundInMenu
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProgamFoundInMenu_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProgamFoundInMenu_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProgamFoundInMenu_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProgamFoundInMenu(requestBody:any, epicorHeaders?:Headers){
+export function post_ProgamFoundInMenu(requestBody:ProgamFoundInMenu_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProgamFoundInMenu_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/ProgamFoundInMenu", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProgamFoundInMenu_output)
           })
       .catch((error) => {
           reject(error)
@@ -1014,30 +1232,37 @@ export function post_ProgamFoundInMenu(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetKineticCustomizations
    Description: Gets the kinetic customizations allowed for provided view.
    OperationID: GetKineticCustomizations
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetKineticCustomizations_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetKineticCustomizations_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetKineticCustomizations_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetKineticCustomizations(requestBody:any, epicorHeaders?:Headers){
+export function post_GetKineticCustomizations(requestBody:GetKineticCustomizations_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetKineticCustomizations_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetKineticCustomizations", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetKineticCustomizations_output)
           })
       .catch((error) => {
           reject(error)
@@ -1049,7 +1274,7 @@ export function post_GetKineticCustomizations(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetKineticViews
    Description: Gets the kinetic views.
    OperationID: GetKineticViews
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetKineticViews_output
@@ -1062,15 +1287,22 @@ export function post_GetKineticViews(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetKineticViews_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetKineticViews", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetKineticViews_output)
           })
       .catch((error) => {
           reject(error)
@@ -1082,7 +1314,7 @@ export function post_GetKineticViews(epicorHeaders?:Headers){
    Summary: Invoke method GetCompaniesKineticStatus
    Description: Lists all companies that the user has access to and whether Kinetic UI is enabled
    OperationID: GetCompaniesKineticStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCompaniesKineticStatus_output
@@ -1095,15 +1327,22 @@ export function post_GetCompaniesKineticStatus(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCompaniesKineticStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetCompaniesKineticStatus", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCompaniesKineticStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -1116,30 +1355,37 @@ export function post_GetCompaniesKineticStatus(epicorHeaders?:Headers){
    Description: Gets the number of days the Kinetic alert to use new UI is not shown after the user "snoozes" it.
 This setting is per company.
    OperationID: GetBannerSnoozeDays
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBannerSnoozeDays_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBannerSnoozeDays_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBannerSnoozeDays_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBannerSnoozeDays(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBannerSnoozeDays(requestBody:GetBannerSnoozeDays_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBannerSnoozeDays_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetBannerSnoozeDays", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBannerSnoozeDays_output)
           })
       .catch((error) => {
           reject(error)
@@ -1151,30 +1397,37 @@ export function post_GetBannerSnoozeDays(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method UpdateDefaultFormType
    Description: Update a menu default form type to the target type
    OperationID: UpdateDefaultFormType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateDefaultFormType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateDefaultFormType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateDefaultFormType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateDefaultFormType(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateDefaultFormType(requestBody:UpdateDefaultFormType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateDefaultFormType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/UpdateDefaultFormType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateDefaultFormType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1186,30 +1439,37 @@ export function post_UpdateDefaultFormType(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method EnableKineticUIOnRelatedMenus
    Description: Enable Kinetic UI on related menus
    OperationID: EnableKineticUIOnRelatedMenus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/EnableKineticUIOnRelatedMenus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/EnableKineticUIOnRelatedMenus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/EnableKineticUIOnRelatedMenus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_EnableKineticUIOnRelatedMenus(requestBody:any, epicorHeaders?:Headers){
+export function post_EnableKineticUIOnRelatedMenus(requestBody:EnableKineticUIOnRelatedMenus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<EnableKineticUIOnRelatedMenus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/EnableKineticUIOnRelatedMenus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as EnableKineticUIOnRelatedMenus_output)
           })
       .catch((error) => {
           reject(error)
@@ -1221,30 +1481,37 @@ export function post_EnableKineticUIOnRelatedMenus(requestBody:any, epicorHeader
    Summary: Invoke method UpdateKineticBannerSnooze
    Description: Update the Kinetic Banner snooze duration
    OperationID: UpdateKineticBannerSnooze
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateKineticBannerSnooze_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateKineticBannerSnooze_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateKineticBannerSnooze_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateKineticBannerSnooze(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateKineticBannerSnooze(requestBody:UpdateKineticBannerSnooze_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateKineticBannerSnooze_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/UpdateKineticBannerSnooze", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateKineticBannerSnooze_output)
           })
       .catch((error) => {
           reject(error)
@@ -1256,30 +1523,37 @@ export function post_UpdateKineticBannerSnooze(requestBody:any, epicorHeaders?:H
    Summary: Invoke method EnableKineticUIForDynamicReport
    Description: Enables the Kinetic UI for a dynamic report menu item
    OperationID: EnableKineticUIForDynamicReport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/EnableKineticUIForDynamicReport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/EnableKineticUIForDynamicReport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/EnableKineticUIForDynamicReport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_EnableKineticUIForDynamicReport(requestBody:any, epicorHeaders?:Headers){
+export function post_EnableKineticUIForDynamicReport(requestBody:EnableKineticUIForDynamicReport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<EnableKineticUIForDynamicReport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/EnableKineticUIForDynamicReport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as EnableKineticUIForDynamicReport_output)
           })
       .catch((error) => {
           reject(error)
@@ -1291,30 +1565,37 @@ export function post_EnableKineticUIForDynamicReport(requestBody:any, epicorHead
    Summary: Invoke method GetNewMenu
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMenu
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMenu_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMenu_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMenu_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMenu(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMenu(requestBody:GetNewMenu_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMenu_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetNewMenu", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMenu_output)
           })
       .catch((error) => {
           reject(error)
@@ -1326,30 +1607,37 @@ export function post_GetNewMenu(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1361,7 +1649,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1385,15 +1673,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1405,7 +1700,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1429,15 +1724,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1449,30 +1751,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1484,30 +1793,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1519,7 +1835,7 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetModuleList
    Description: Create list of modules
    OperationID: GetModuleList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetModuleList_output
@@ -1532,15 +1848,22 @@ export function post_GetModuleList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetModuleList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetModuleList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetModuleList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1552,7 +1875,7 @@ export function post_GetModuleList(epicorHeaders?:Headers){
    Summary: Invoke method CGCCodeList
    Description: Build cgccode list.
    OperationID: CGCCodeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CGCCodeList_output
@@ -1565,15 +1888,22 @@ export function post_CGCCodeList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CGCCodeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/CGCCodeList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CGCCodeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1585,30 +1915,37 @@ export function post_CGCCodeList(epicorHeaders?:Headers){
    Summary: Invoke method GetRowsMenuMaint
    Description: Prepare menu row for editing
    OperationID: GetRowsMenuMaint
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsMenuMaint_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsMenuMaint_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsMenuMaint_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsMenuMaint(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsMenuMaint(requestBody:GetRowsMenuMaint_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsMenuMaint_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetRowsMenuMaint", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsMenuMaint_output)
           })
       .catch((error) => {
           reject(error)
@@ -1620,30 +1957,37 @@ export function post_GetRowsMenuMaint(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRowsMenuMaintCustom
    Description: Support for searching menu.
    OperationID: GetRowsMenuMaintCustom
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsMenuMaintCustom_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsMenuMaintCustom_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsMenuMaintCustom_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsMenuMaintCustom(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsMenuMaintCustom(requestBody:GetRowsMenuMaintCustom_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsMenuMaintCustom_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetRowsMenuMaintCustom", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsMenuMaintCustom_output)
           })
       .catch((error) => {
           reject(error)
@@ -1655,30 +1999,37 @@ export function post_GetRowsMenuMaintCustom(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method CreateNewMenu
    Description: Add a new menu with defaults
    OperationID: CreateNewMenu
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateNewMenu_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateNewMenu_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateNewMenu_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateNewMenu(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateNewMenu(requestBody:CreateNewMenu_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateNewMenu_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/CreateNewMenu", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateNewMenu_output)
           })
       .catch((error) => {
           reject(error)
@@ -1690,7 +2041,7 @@ export function post_CreateNewMenu(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetTopLevelMenus
    Description: Return top level menus only if a security manager
    OperationID: GetTopLevelMenus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTopLevelMenus_output
@@ -1703,15 +2054,22 @@ export function post_GetTopLevelMenus(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTopLevelMenus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/GetTopLevelMenus", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTopLevelMenus_output)
           })
       .catch((error) => {
           reject(error)
@@ -1723,7 +2081,7 @@ export function post_GetTopLevelMenus(epicorHeaders?:Headers){
    Summary: Invoke method KineticPreviewEnabled
    Description: Return true if Kinetic preview is enabled
    OperationID: KineticPreviewEnabled
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/KineticPreviewEnabled_output
@@ -1736,15 +2094,22 @@ export function post_KineticPreviewEnabled(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<KineticPreviewEnabled_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/KineticPreviewEnabled", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as KineticPreviewEnabled_output)
           })
       .catch((error) => {
           reject(error)
@@ -1756,30 +2121,37 @@ export function post_KineticPreviewEnabled(epicorHeaders?:Headers){
    Summary: Invoke method PreUpdate
    Description: verify/Update menu fields before calling standard update event.  In place to handle code that was in the classic UI.
    OperationID: PreUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_PreUpdate(requestBody:PreUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/PreUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1791,30 +2163,37 @@ export function post_PreUpdate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method KineticChanged
    Description: Update fields if Kinetic flag changes.
    OperationID: KineticChanged
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/KineticChanged_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/KineticChanged_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/KineticChanged_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_KineticChanged(requestBody:any, epicorHeaders?:Headers){
+export function post_KineticChanged(requestBody:KineticChanged_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<KineticChanged_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/KineticChanged", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as KineticChanged_output)
           })
       .catch((error) => {
           reject(error)
@@ -1826,30 +2205,37 @@ export function post_KineticChanged(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method KineticProgamChanged
    Description: Update fields if Kinetic flag changes.
    OperationID: KineticProgamChanged
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/KineticProgamChanged_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/KineticProgamChanged_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/KineticProgamChanged_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_KineticProgamChanged(requestBody:any, epicorHeaders?:Headers){
+export function post_KineticProgamChanged(requestBody:KineticProgamChanged_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<KineticProgamChanged_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/KineticProgamChanged", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as KineticProgamChanged_output)
           })
       .catch((error) => {
           reject(error)
@@ -1861,30 +2247,37 @@ export function post_KineticProgamChanged(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OptioTypeChanged
    Description: Update menu fields when field optionType is changed.
    OperationID: OptioTypeChanged
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OptioTypeChanged_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OptioTypeChanged_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OptioTypeChanged_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OptioTypeChanged(requestBody:any, epicorHeaders?:Headers){
+export function post_OptioTypeChanged(requestBody:OptioTypeChanged_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OptioTypeChanged_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/OptioTypeChanged", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OptioTypeChanged_output)
           })
       .catch((error) => {
           reject(error)
@@ -1896,30 +2289,37 @@ export function post_OptioTypeChanged(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method BAQReportChanging
    Description: Validate Dynamic Report
    OperationID: BAQReportChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BAQReportChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BAQReportChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BAQReportChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BAQReportChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_BAQReportChanging(requestBody:BAQReportChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BAQReportChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/BAQReportChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BAQReportChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -1931,30 +2331,37 @@ export function post_BAQReportChanging(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DyanmicReportChanging
    Description: Validate Dynamic Report
    OperationID: DyanmicReportChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DyanmicReportChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DyanmicReportChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DyanmicReportChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DyanmicReportChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_DyanmicReportChanging(requestBody:DyanmicReportChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DyanmicReportChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.MenuSvc/DyanmicReportChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DyanmicReportChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -1965,16 +2372,33 @@ export function post_DyanmicReportChanging(requestBody:any, epicorHeaders?:Heade
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_MenuListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_MenuListRow[],
+   "value":Ice_Tablesets_MenuListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_MenuRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_MenuRow[],
+   "value":Ice_Tablesets_MenuRow,
 }
 
 export interface Ice_Tablesets_MenuListRow{
@@ -2140,6 +2564,23 @@ E = Entry  */
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2211,7 +2652,7 @@ export interface CopyMenuRow_input{
 export interface CopyMenuRow_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_MenuTableset[],
+   ds:Ice_Tablesets_MenuTableset,
 }
 }
 
@@ -2248,7 +2689,7 @@ export interface CreateNewMenu_input{
 export interface CreateNewMenu_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_MenuTableset[],
+   ds:Ice_Tablesets_MenuTableset,
 }
 }
 
@@ -2448,7 +2889,7 @@ export interface GetNewMenu_input{
 export interface GetNewMenu_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_MenuTableset[],
+   ds:Ice_Tablesets_MenuTableset,
 }
 }
 
@@ -2854,7 +3295,7 @@ export interface KineticChanged_input{
 export interface KineticChanged_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_MenuTableset[],
+   ds:Ice_Tablesets_MenuTableset,
 }
 }
 
@@ -2872,7 +3313,7 @@ export interface KineticProgamChanged_input{
 export interface KineticProgamChanged_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_MenuTableset[],
+   ds:Ice_Tablesets_MenuTableset,
 }
 }
 
@@ -2886,7 +3327,7 @@ export interface OptioTypeChanged_input{
 export interface OptioTypeChanged_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_MenuTableset[],
+   ds:Ice_Tablesets_MenuTableset,
 }
 }
 
@@ -2900,7 +3341,7 @@ export interface PreUpdate_input{
 export interface PreUpdate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_MenuTableset[],
+   ds:Ice_Tablesets_MenuTableset,
 }
 }
 
@@ -2956,7 +3397,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtMenuTableset[],
+   ds:Ice_Tablesets_UpdExtMenuTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2985,7 +3426,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_MenuTableset[],
+   ds:Ice_Tablesets_MenuTableset,
 }
 }
 

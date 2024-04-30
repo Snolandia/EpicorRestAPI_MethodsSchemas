@@ -1,11 +1,30 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.PROC.NatAcctMassUpdateSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -14,7 +33,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -32,7 +51,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -46,7 +72,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -64,7 +90,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -77,6 +110,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -84,30 +134,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method EditListValidateParam
    Description: Validates parameters prior to opening the Print Edit List
    OperationID: EditListValidateParam
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/EditListValidateParam_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/EditListValidateParam_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/EditListValidateParam_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_EditListValidateParam(requestBody:any, epicorHeaders?:Headers){
+export function post_EditListValidateParam(requestBody:EditListValidateParam_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<EditListValidateParam_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/EditListValidateParam", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as EditListValidateParam_output)
           })
       .catch((error) => {
           reject(error)
@@ -119,30 +176,37 @@ export function post_EditListValidateParam(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method checkForNaturalAccountControl
    Description: checkForNaturalAccountControl
    OperationID: checkForNaturalAccountControl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/checkForNaturalAccountControl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/checkForNaturalAccountControl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/checkForNaturalAccountControl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_checkForNaturalAccountControl(requestBody:any, epicorHeaders?:Headers){
+export function post_checkForNaturalAccountControl(requestBody:checkForNaturalAccountControl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<checkForNaturalAccountControl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/checkForNaturalAccountControl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as checkForNaturalAccountControl_output)
           })
       .catch((error) => {
           reject(error)
@@ -154,30 +218,37 @@ export function post_checkForNaturalAccountControl(requestBody:any, epicorHeader
    Summary: Invoke method ChangeCOA_Type
    Description: Assign values to COACat
    OperationID: ChangeCOA_Type
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCOA_Type_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCOA_Type_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCOA_Type_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCOA_Type(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCOA_Type(requestBody:ChangeCOA_Type_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCOA_Type_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/ChangeCOA_Type", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCOA_Type_output)
           })
       .catch((error) => {
           reject(error)
@@ -189,30 +260,37 @@ export function post_ChangeCOA_Type(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnCOACodeChanging
    Description: Validate COACode
    OperationID: OnCOACodeChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnCOACodeChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnCOACodeChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnCOACodeChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnCOACodeChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_OnCOACodeChanging(requestBody:OnCOACodeChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnCOACodeChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/OnCOACodeChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnCOACodeChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -224,30 +302,37 @@ export function post_OnCOACodeChanging(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnCOASegValuesChanging
    Description: Validate Segment Values
    OperationID: OnCOASegValuesChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnCOASegValuesChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnCOASegValuesChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnCOASegValuesChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnCOASegValuesChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_OnCOASegValuesChanging(requestBody:OnCOASegValuesChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnCOASegValuesChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/OnCOASegValuesChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnCOASegValuesChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -259,30 +344,37 @@ export function post_OnCOASegValuesChanging(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnAnalysisCodeChange
    Description: Validate Analysis Code
    OperationID: OnAnalysisCodeChange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnAnalysisCodeChange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnAnalysisCodeChange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnAnalysisCodeChange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnAnalysisCodeChange(requestBody:any, epicorHeaders?:Headers){
+export function post_OnAnalysisCodeChange(requestBody:OnAnalysisCodeChange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnAnalysisCodeChange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/OnAnalysisCodeChange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnAnalysisCodeChange_output)
           })
       .catch((error) => {
           reject(error)
@@ -294,30 +386,37 @@ export function post_OnAnalysisCodeChange(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnCategoryChanging
    Description: This method convert the document currency to the journal currency.
    OperationID: OnCategoryChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnCategoryChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnCategoryChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnCategoryChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnCategoryChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_OnCategoryChanging(requestBody:OnCategoryChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnCategoryChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/OnCategoryChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnCategoryChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -332,30 +431,37 @@ Parameters:
 <param name="ipCOACode"> COA Code</param><param name="ipSubSegmentNbr"> Segment Number to check for existence</param><param name="ipSegmentCode">Segment Code to search for </param>
 Notes:
    OperationID: ValidateDefaultSegment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateDefaultSegment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateDefaultSegment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateDefaultSegment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateDefaultSegment(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateDefaultSegment(requestBody:ValidateDefaultSegment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateDefaultSegment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/ValidateDefaultSegment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateDefaultSegment_output)
           })
       .catch((error) => {
           reject(error)
@@ -370,30 +476,37 @@ Parameters:
 <param name="ipCOACode"> COA Code</param><param name="ipSubSegmentNbr"> Segment Code to search for </param>
 Notes:
    OperationID: ValidateSubSegment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSubSegment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSubSegment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSubSegment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSubSegment(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSubSegment(requestBody:ValidateSubSegment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSubSegment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/ValidateSubSegment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSubSegment_output)
           })
       .catch((error) => {
           reject(error)
@@ -405,30 +518,37 @@ export function post_ValidateSubSegment(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method COACatofSegValues
    Description: Return category type of segments
    OperationID: COACatofSegValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/COACatofSegValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/COACatofSegValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/COACatofSegValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_COACatofSegValues(requestBody:any, epicorHeaders?:Headers){
+export function post_COACatofSegValues(requestBody:COACatofSegValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<COACatofSegValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/COACatofSegValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as COACatofSegValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -440,30 +560,37 @@ export function post_COACatofSegValues(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeCurrencyAccount
    Description: On currency account change all related currencies should be updated to allowed/not allowed
    OperationID: ChangeCurrencyAccount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCurrencyAccount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCurrencyAccount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCurrencyAccount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCurrencyAccount(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCurrencyAccount(requestBody:ChangeCurrencyAccount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCurrencyAccount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/ChangeCurrencyAccount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCurrencyAccount_output)
           })
       .catch((error) => {
           reject(error)
@@ -475,30 +602,37 @@ export function post_ChangeCurrencyAccount(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ChangeRevalueOpt
    Description: On Revalue Option change
    OperationID: ChangeRevalueOpt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRevalueOpt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRevalueOpt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRevalueOpt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRevalueOpt(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRevalueOpt(requestBody:ChangeRevalueOpt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRevalueOpt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/ChangeRevalueOpt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRevalueOpt_output)
           })
       .catch((error) => {
           reject(error)
@@ -510,30 +644,37 @@ export function post_ChangeRevalueOpt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeRateType
    Description: On Rate Type changing
    OperationID: ChangeRateType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRateType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRateType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRateType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRateType(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRateType(requestBody:ChangeRateType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRateType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/ChangeRateType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRateType_output)
           })
       .catch((error) => {
           reject(error)
@@ -545,30 +686,37 @@ export function post_ChangeRateType(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeAccountContext
    Description: On Account context changing
    OperationID: ChangeAccountContext
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeAccountContext_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeAccountContext_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeAccountContext_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeAccountContext(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeAccountContext(requestBody:ChangeAccountContext_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeAccountContext_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/ChangeAccountContext", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeAccountContext_output)
           })
       .catch((error) => {
           reject(error)
@@ -580,30 +728,37 @@ export function post_ChangeAccountContext(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DefaultsOnAdd
    Description: Set Default creating a new account
    OperationID: DefaultsOnAdd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DefaultsOnAdd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DefaultsOnAdd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DefaultsOnAdd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DefaultsOnAdd(requestBody:any, epicorHeaders?:Headers){
+export function post_DefaultsOnAdd(requestBody:DefaultsOnAdd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DefaultsOnAdd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/DefaultsOnAdd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DefaultsOnAdd_output)
           })
       .catch((error) => {
           reject(error)
@@ -615,30 +770,37 @@ export function post_DefaultsOnAdd(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateCurrencyAccountType
    Description: Validate Currency Account Type
    OperationID: ValidateCurrencyAccountType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCurrencyAccountType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCurrencyAccountType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCurrencyAccountType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCurrencyAccountType(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCurrencyAccountType(requestBody:ValidateCurrencyAccountType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCurrencyAccountType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/ValidateCurrencyAccountType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCurrencyAccountType_output)
           })
       .catch((error) => {
           reject(error)
@@ -650,30 +812,37 @@ export function post_ValidateCurrencyAccountType(requestBody:any, epicorHeaders?
    Summary: Invoke method ValidateCurrencyAccounts
    Description: Validate Currency Accounts book default data.
    OperationID: ValidateCurrencyAccounts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCurrencyAccounts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCurrencyAccounts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCurrencyAccounts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCurrencyAccounts(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCurrencyAccounts(requestBody:ValidateCurrencyAccounts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCurrencyAccounts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/ValidateCurrencyAccounts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCurrencyAccounts_output)
           })
       .catch((error) => {
           reject(error)
@@ -686,7 +855,7 @@ export function post_ValidateCurrencyAccounts(requestBody:any, epicorHeaders?:He
    Description: Returns a comma separated list of valid tokens for the given datatype.
    OperationID: Get_GetTokenList
       @param tokenDataType Desc: Type of token for which you want the list of valid values. Valid Types are; Date, FiscalPeriod, FiscalYear   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTokenList_output
@@ -710,15 +879,22 @@ export function get_GetTokenList(tokenDataType:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTokenList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/GetTokenList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTokenList_output)
           })
       .catch((error) => {
           reject(error)
@@ -731,7 +907,7 @@ export function get_GetTokenList(tokenDataType:string, epicorHeaders?:Headers){
    Description: Returns a token list of values based on a type that is passed in.
    OperationID: Get_GetTokenValue
       @param pcValue Desc: Type of token   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTokenValue_output
@@ -755,15 +931,22 @@ export function get_GetTokenValue(pcValue:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTokenValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/GetTokenValue" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTokenValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -775,30 +958,37 @@ export function get_GetTokenValue(pcValue:string, epicorHeaders?:Headers){
    Summary: Invoke method SubmitToAgent
    Description: Submits this report to a System Agent. The system agent will run the task based on the defined schedule.
    OperationID: SubmitToAgent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SubmitToAgent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SubmitToAgent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SubmitToAgent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubmitToAgent(requestBody:any, epicorHeaders?:Headers){
+export function post_SubmitToAgent(requestBody:SubmitToAgent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SubmitToAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/SubmitToAgent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SubmitToAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -816,30 +1006,37 @@ designated as ParamSetID.
 As is the case in GLFinancial Reports the GLFinancialParam.GLReportID is used as the ParamSetID field.
 Another possible use would be to Reset the screen to default values.
    OperationID: GetDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDefaults(requestBody:GetDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/GetDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -852,7 +1049,7 @@ export function post_GetDefaults(requestBody:any, epicorHeaders?:Headers){
    Description: Creates a new (parameter record) in the dataset.
 Note: A parameter dataset should never contain more than one record.
    OperationID: Get_GetNewParameters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewParameters_output
@@ -865,15 +1062,22 @@ export function get_GetNewParameters(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewParameters_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/GetNewParameters", {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewParameters_output)
           })
       .catch((error) => {
           reject(error)
@@ -890,7 +1094,7 @@ used to retrieve those values and return them in the specific dataset.
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParamsFromAgent_output
@@ -932,15 +1136,22 @@ export function get_GetParamsFromAgent(agentID:string, agentSchedNum:string, age
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParamsFromAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/GetParamsFromAgent" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParamsFromAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -954,30 +1165,37 @@ export function get_GetParamsFromAgent(agentID:string, agentSchedNum:string, age
 It is provided to provide the ability to get the defaults after the user has enter a value into the field
 designated as ParamSetID.
    OperationID: GetParamTaskDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetParamTaskDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetParamTaskDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParamTaskDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetParamTaskDef(requestBody:any, epicorHeaders?:Headers){
+export function post_GetParamTaskDef(requestBody:GetParamTaskDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParamTaskDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/GetParamTaskDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParamTaskDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -989,30 +1207,37 @@ export function post_GetParamTaskDef(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RemoveDefaults
    Description: Use to remove the current parameter defaults that the user has established for this report.
    OperationID: RemoveDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveDefaults(requestBody:RemoveDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/RemoveDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -1024,30 +1249,37 @@ export function post_RemoveDefaults(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunDirect
    Description: Use to run the process directly from the client instead of submitting to a System Agent.
    OperationID: RunDirect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunDirect_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunDirect_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunDirect_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunDirect(requestBody:any, epicorHeaders?:Headers){
+export function post_RunDirect(requestBody:RunDirect_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunDirect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/RunDirect", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunDirect_output)
           })
       .catch((error) => {
           reject(error)
@@ -1059,30 +1291,37 @@ export function post_RunDirect(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SaveDefaults
    Description: Use to save the current parameters as the users defaults for this report
    OperationID: SaveDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveDefaults(requestBody:SaveDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/SaveDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -1095,30 +1334,37 @@ export function post_SaveDefaults(requestBody:any, epicorHeaders?:Headers){
    Description: Use to save the current parameters as the users defaults for this report
 <param name="maintProgram">UI Maintenance program </param><param name="ds" />
    OperationID: SaveProcessTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveProcessTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveProcessTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveProcessTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveProcessTask(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveProcessTask(requestBody:SaveProcessTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveProcessTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.PROC.NatAcctMassUpdateSvc/SaveProcessTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveProcessTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -1129,11 +1375,45 @@ export function post_SaveProcessTask(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1188,7 +1468,7 @@ export interface ChangeCOA_Type_input{
 export interface ChangeCOA_Type_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1205,7 +1485,7 @@ export interface ChangeCurrencyAccount_input{
 export interface ChangeCurrencyAccount_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1236,7 +1516,7 @@ export interface ChangeRevalueOpt_input{
 export interface ChangeRevalueOpt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1256,7 +1536,7 @@ export interface DefaultsOnAdd_input{
 export interface DefaultsOnAdd_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1270,7 +1550,7 @@ export interface EditListValidateParam_input{
 export interface EditListValidateParam_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1583,7 +1863,7 @@ export interface GetDefaults_input{
 export interface GetDefaults_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1601,7 +1881,7 @@ export interface GetParamTaskDef_input{
 export interface GetParamTaskDef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1682,7 +1962,7 @@ export interface OnAnalysisCodeChange_input{
 export interface OnAnalysisCodeChange_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1699,7 +1979,7 @@ export interface OnCOACodeChanging_input{
 export interface OnCOACodeChanging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1737,7 +2017,7 @@ export interface OnCategoryChanging_input{
 export interface OnCategoryChanging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1837,7 +2117,7 @@ export interface ValidateCurrencyAccounts_input{
 export interface ValidateCurrencyAccounts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 
@@ -1877,7 +2157,7 @@ export interface checkForNaturalAccountControl_input{
 export interface checkForNaturalAccountControl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_NatAcctMassUpdateTableset[],
+   ds:Erp_Tablesets_NatAcctMassUpdateTableset,
 }
 }
 

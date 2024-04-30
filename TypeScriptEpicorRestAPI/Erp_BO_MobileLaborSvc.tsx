@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.MobileLaborSvc
 // Description: MobileLaborSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborHedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborHedRow
    */  
 export function get_MobileLabors(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_MobileLabors(select?:string, expand?:string, filter?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborHedRow)
           })
@@ -118,15 +158,15 @@ export function get_MobileLabors(select?:string, expand?:string, filter?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileLabors
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileLaborHedRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileLaborHedRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileLaborHedRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileLaborHedRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileLabors(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileLabors(requestBody:Erp_Tablesets_MobileLaborHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_MobileLabors(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_MobileLabors(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileLaborHedRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileLaborHedRow
    */  
 export function get_MobileLabors_Company_LaborHedSeq(Company:string, LaborHedSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_MobileLabors_Company_LaborHedSeq(Company:string, LaborHedSeq
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileLaborHedRow)
           })
@@ -193,15 +247,15 @@ export function get_MobileLabors_Company_LaborHedSeq(Company:string, LaborHedSeq
    OperationID: UpdateExt_MobileLabor
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LaborHedSeq Desc: LaborHedSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileLaborHedRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileLaborHedRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileLabors_Company_LaborHedSeq(Company:string, LaborHedSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileLabors_Company_LaborHedSeq(Company:string, LaborHedSeq:string, requestBody:Erp_Tablesets_MobileLaborHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_MobileLabors_Company_LaborHedSeq(Company:string, LaborHedS
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_MobileLabors_Company_LaborHedSeq(Company:string, LaborHedS
    OperationID: DeleteUpdateExt_MobileLabor
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LaborHedSeq Desc: LaborHedSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_MobileLabors_Company_LaborHedSeq(Company:string, LaborHed
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_MobileLabors_Company_LaborHedSeq(Company:string, LaborHed
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlRow
    */  
 export function get_MobileLabors_Company_LaborHedSeq_MobileLaborDtls(Company:string, LaborHedSeq:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_MobileLabors_Company_LaborHedSeq_MobileLaborDtls(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborDtlRow)
           })
@@ -311,10 +386,10 @@ export function get_MobileLabors_Company_LaborHedSeq_MobileLaborDtls(Company:str
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileLaborDtlRow
    */  
 export function get_MobileLabors_Company_LaborHedSeq_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq(Company:string, LaborHedSeq:string, LaborDtlSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_MobileLabors_Company_LaborHedSeq_MobileLaborDtls_Company_Lab
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileLaborDtlRow)
           })
@@ -350,10 +432,10 @@ export function get_MobileLabors_Company_LaborHedSeq_MobileLaborDtls_Company_Lab
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlRow
    */  
 export function get_MobileLaborDtls(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_MobileLaborDtls(select?:string, expand?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborDtlRow)
           })
@@ -382,15 +471,15 @@ export function get_MobileLaborDtls(select?:string, expand?:string, filter?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileLaborDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileLaborDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileLaborDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileLaborDtls(requestBody:Erp_Tablesets_MobileLaborDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -404,7 +493,14 @@ export function post_MobileLaborDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -424,10 +520,10 @@ export function post_MobileLaborDtls(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileLaborDtlRow
    */  
 export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq(Company:string, LaborHedSeq:string, LaborDtlSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -442,7 +538,14 @@ export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileLaborDtlRow)
           })
@@ -459,15 +562,15 @@ export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq(Company:stri
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LaborHedSeq Desc: LaborHedSeq   Required: True
       @param LaborDtlSeq Desc: LaborDtlSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq(Company:string, LaborHedSeq:string, LaborDtlSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq(Company:string, LaborHedSeq:string, LaborDtlSeq:string, requestBody:Erp_Tablesets_MobileLaborDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -481,7 +584,14 @@ export function patch_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq(Company:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -498,7 +608,7 @@ export function patch_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LaborHedSeq Desc: LaborHedSeq   Required: True
       @param LaborDtlSeq Desc: LaborDtlSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -517,7 +627,14 @@ export function delete_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -540,10 +657,10 @@ export function delete_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq(Company:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlCommentRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlCommentRow
    */  
 export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborDtlComments(Company:string, LaborHedSeq:string, LaborDtlSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -558,7 +675,14 @@ export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborD
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborDtlCommentRow)
           })
@@ -578,10 +702,10 @@ export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborD
       @param CommentNum Desc: CommentNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlCommentRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileLaborDtlCommentRow
    */  
 export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborDtlComments_Company_LaborHedSeq_LaborDtlSeq_CommentNum(Company:string, LaborHedSeq:string, LaborDtlSeq:string, CommentNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -596,7 +720,14 @@ export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborD
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileLaborDtlCommentRow)
           })
@@ -619,10 +750,10 @@ export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborD
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlAttchRow
    */  
 export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborDtlAttches(Company:string, LaborHedSeq:string, LaborDtlSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -637,7 +768,14 @@ export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborD
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborDtlAttchRow)
           })
@@ -657,10 +795,10 @@ export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborD
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileLaborDtlAttchRow
    */  
 export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborDtlAttches_Company_LaborHedSeq_LaborDtlSeq_DrawingSeq(Company:string, LaborHedSeq:string, LaborDtlSeq:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -675,7 +813,14 @@ export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborD
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileLaborDtlAttchRow)
           })
@@ -695,10 +840,10 @@ export function get_MobileLaborDtls_Company_LaborHedSeq_LaborDtlSeq_MobileLaborD
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlCommentRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlCommentRow
    */  
 export function get_MobileLaborDtlComments(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -713,7 +858,14 @@ export function get_MobileLaborDtlComments(select?:string, filter?:string, order
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborDtlCommentRow)
           })
@@ -727,15 +879,15 @@ export function get_MobileLaborDtlComments(select?:string, filter?:string, order
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileLaborDtlComments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlCommentRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlCommentRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlCommentRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileLaborDtlCommentRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileLaborDtlComments(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileLaborDtlComments(requestBody:Erp_Tablesets_MobileLaborDtlCommentRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -749,7 +901,14 @@ export function post_MobileLaborDtlComments(requestBody:any, epicorHeaders?:Head
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -769,10 +928,10 @@ export function post_MobileLaborDtlComments(requestBody:any, epicorHeaders?:Head
       @param CommentNum Desc: CommentNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlCommentRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileLaborDtlCommentRow
    */  
 export function get_MobileLaborDtlComments_Company_LaborHedSeq_LaborDtlSeq_CommentNum(Company:string, LaborHedSeq:string, LaborDtlSeq:string, CommentNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -787,7 +946,14 @@ export function get_MobileLaborDtlComments_Company_LaborHedSeq_LaborDtlSeq_Comme
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileLaborDtlCommentRow)
           })
@@ -805,15 +971,15 @@ export function get_MobileLaborDtlComments_Company_LaborHedSeq_LaborDtlSeq_Comme
       @param LaborHedSeq Desc: LaborHedSeq   Required: True
       @param LaborDtlSeq Desc: LaborDtlSeq   Required: True
       @param CommentNum Desc: CommentNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlCommentRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlCommentRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileLaborDtlComments_Company_LaborHedSeq_LaborDtlSeq_CommentNum(Company:string, LaborHedSeq:string, LaborDtlSeq:string, CommentNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileLaborDtlComments_Company_LaborHedSeq_LaborDtlSeq_CommentNum(Company:string, LaborHedSeq:string, LaborDtlSeq:string, CommentNum:string, requestBody:Erp_Tablesets_MobileLaborDtlCommentRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -827,7 +993,14 @@ export function patch_MobileLaborDtlComments_Company_LaborHedSeq_LaborDtlSeq_Com
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -845,7 +1018,7 @@ export function patch_MobileLaborDtlComments_Company_LaborHedSeq_LaborDtlSeq_Com
       @param LaborHedSeq Desc: LaborHedSeq   Required: True
       @param LaborDtlSeq Desc: LaborDtlSeq   Required: True
       @param CommentNum Desc: CommentNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -864,7 +1037,14 @@ export function delete_MobileLaborDtlComments_Company_LaborHedSeq_LaborDtlSeq_Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -884,10 +1064,10 @@ export function delete_MobileLaborDtlComments_Company_LaborHedSeq_LaborDtlSeq_Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborDtlAttchRow
    */  
 export function get_MobileLaborDtlAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -902,7 +1082,14 @@ export function get_MobileLaborDtlAttches(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborDtlAttchRow)
           })
@@ -916,15 +1103,15 @@ export function get_MobileLaborDtlAttches(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileLaborDtlAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileLaborDtlAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileLaborDtlAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileLaborDtlAttches(requestBody:Erp_Tablesets_MobileLaborDtlAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -938,7 +1125,14 @@ export function post_MobileLaborDtlAttches(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -958,10 +1152,10 @@ export function post_MobileLaborDtlAttches(requestBody:any, epicorHeaders?:Heade
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileLaborDtlAttchRow
    */  
 export function get_MobileLaborDtlAttches_Company_LaborHedSeq_LaborDtlSeq_DrawingSeq(Company:string, LaborHedSeq:string, LaborDtlSeq:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -976,7 +1170,14 @@ export function get_MobileLaborDtlAttches_Company_LaborHedSeq_LaborDtlSeq_Drawin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileLaborDtlAttchRow)
           })
@@ -994,15 +1195,15 @@ export function get_MobileLaborDtlAttches_Company_LaborHedSeq_LaborDtlSeq_Drawin
       @param LaborHedSeq Desc: LaborHedSeq   Required: True
       @param LaborDtlSeq Desc: LaborDtlSeq   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileLaborDtlAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileLaborDtlAttches_Company_LaborHedSeq_LaborDtlSeq_DrawingSeq(Company:string, LaborHedSeq:string, LaborDtlSeq:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileLaborDtlAttches_Company_LaborHedSeq_LaborDtlSeq_DrawingSeq(Company:string, LaborHedSeq:string, LaborDtlSeq:string, DrawingSeq:string, requestBody:Erp_Tablesets_MobileLaborDtlAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1016,7 +1217,14 @@ export function patch_MobileLaborDtlAttches_Company_LaborHedSeq_LaborDtlSeq_Draw
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1034,7 +1242,7 @@ export function patch_MobileLaborDtlAttches_Company_LaborHedSeq_LaborDtlSeq_Draw
       @param LaborHedSeq Desc: LaborHedSeq   Required: True
       @param LaborDtlSeq Desc: LaborDtlSeq   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1053,7 +1261,14 @@ export function delete_MobileLaborDtlAttches_Company_LaborHedSeq_LaborDtlSeq_Dra
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1073,10 +1288,10 @@ export function delete_MobileLaborDtlAttches_Company_LaborHedSeq_LaborDtlSeq_Dra
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileApproverListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileApproverListRow
    */  
 export function get_MobileApproverLists(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1091,7 +1306,14 @@ export function get_MobileApproverLists(select?:string, filter?:string, orderby?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileApproverListRow)
           })
@@ -1105,15 +1327,15 @@ export function get_MobileApproverLists(select?:string, filter?:string, orderby?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileApproverLists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileApproverListRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileApproverLists(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileApproverLists(requestBody:Erp_Tablesets_MobileApproverListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1127,7 +1349,14 @@ export function post_MobileApproverLists(requestBody:any, epicorHeaders?:Headers
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1144,10 +1373,10 @@ export function post_MobileApproverLists(requestBody:any, epicorHeaders?:Headers
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileApproverListRow
    */  
 export function get_MobileApproverLists_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1162,7 +1391,14 @@ export function get_MobileApproverLists_SysRowID(SysRowID:string, select?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileApproverListRow)
           })
@@ -1177,15 +1413,15 @@ export function get_MobileApproverLists_SysRowID(SysRowID:string, select?:string
    Description: Calls UpdateExt to update MobileApproverList. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_MobileApproverList
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileApproverLists_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileApproverLists_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_MobileApproverListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1199,7 +1435,14 @@ export function patch_MobileApproverLists_SysRowID(SysRowID:string, requestBody:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1214,7 +1457,7 @@ export function patch_MobileApproverLists_SysRowID(SysRowID:string, requestBody:
    Description: Call UpdateExt to delete MobileApproverList item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_MobileApproverList
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1233,7 +1476,14 @@ export function delete_MobileApproverLists_SysRowID(SysRowID:string, epicorHeade
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1253,10 +1503,10 @@ export function delete_MobileApproverLists_SysRowID(SysRowID:string, epicorHeade
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileQuickEntryViewRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileQuickEntryViewRow
    */  
 export function get_MobileQuickEntryViews(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1271,7 +1521,14 @@ export function get_MobileQuickEntryViews(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileQuickEntryViewRow)
           })
@@ -1285,15 +1542,15 @@ export function get_MobileQuickEntryViews(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileQuickEntryViews
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileQuickEntryViewRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileQuickEntryViewRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileQuickEntryViewRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileQuickEntryViewRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileQuickEntryViews(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileQuickEntryViews(requestBody:Erp_Tablesets_MobileQuickEntryViewRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1307,7 +1564,14 @@ export function post_MobileQuickEntryViews(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1324,10 +1588,10 @@ export function post_MobileQuickEntryViews(requestBody:any, epicorHeaders?:Heade
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileQuickEntryViewRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileQuickEntryViewRow
    */  
 export function get_MobileQuickEntryViews_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1342,7 +1606,14 @@ export function get_MobileQuickEntryViews_SysRowID(SysRowID:string, select?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileQuickEntryViewRow)
           })
@@ -1357,15 +1628,15 @@ export function get_MobileQuickEntryViews_SysRowID(SysRowID:string, select?:stri
    Description: Calls UpdateExt to update MobileQuickEntryView. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_MobileQuickEntryView
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileQuickEntryViewRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileQuickEntryViewRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileQuickEntryViews_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileQuickEntryViews_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_MobileQuickEntryViewRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1379,7 +1650,14 @@ export function patch_MobileQuickEntryViews_SysRowID(SysRowID:string, requestBod
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1394,7 +1672,7 @@ export function patch_MobileQuickEntryViews_SysRowID(SysRowID:string, requestBod
    Description: Call UpdateExt to delete MobileQuickEntryView item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_MobileQuickEntryView
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1413,7 +1691,14 @@ export function delete_MobileQuickEntryViews_SysRowID(SysRowID:string, epicorHea
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1433,10 +1718,10 @@ export function delete_MobileQuickEntryViews_SysRowID(SysRowID:string, epicorHea
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileTimeWeeklyViewRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileTimeWeeklyViewRow
    */  
 export function get_MobileTimeWeeklyViews(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1451,7 +1736,14 @@ export function get_MobileTimeWeeklyViews(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileTimeWeeklyViewRow)
           })
@@ -1465,15 +1757,15 @@ export function get_MobileTimeWeeklyViews(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileTimeWeeklyViews
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileTimeWeeklyViewRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileTimeWeeklyViewRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileTimeWeeklyViewRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileTimeWeeklyViewRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileTimeWeeklyViews(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileTimeWeeklyViews(requestBody:Erp_Tablesets_MobileTimeWeeklyViewRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1487,7 +1779,14 @@ export function post_MobileTimeWeeklyViews(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1504,10 +1803,10 @@ export function post_MobileTimeWeeklyViews(requestBody:any, epicorHeaders?:Heade
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileTimeWeeklyViewRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileTimeWeeklyViewRow
    */  
 export function get_MobileTimeWeeklyViews_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1522,7 +1821,14 @@ export function get_MobileTimeWeeklyViews_SysRowID(SysRowID:string, select?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileTimeWeeklyViewRow)
           })
@@ -1537,15 +1843,15 @@ export function get_MobileTimeWeeklyViews_SysRowID(SysRowID:string, select?:stri
    Description: Calls UpdateExt to update MobileTimeWeeklyView. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_MobileTimeWeeklyView
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileTimeWeeklyViewRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileTimeWeeklyViewRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileTimeWeeklyViews_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileTimeWeeklyViews_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_MobileTimeWeeklyViewRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1559,7 +1865,14 @@ export function patch_MobileTimeWeeklyViews_SysRowID(SysRowID:string, requestBod
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1574,7 +1887,7 @@ export function patch_MobileTimeWeeklyViews_SysRowID(SysRowID:string, requestBod
    Description: Call UpdateExt to delete MobileTimeWeeklyView item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_MobileTimeWeeklyView
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1593,7 +1906,14 @@ export function delete_MobileTimeWeeklyViews_SysRowID(SysRowID:string, epicorHea
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1613,10 +1933,10 @@ export function delete_MobileTimeWeeklyViews_SysRowID(SysRowID:string, epicorHea
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileLaborListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1631,7 +1951,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborListRow)
           })
@@ -1643,6 +1970,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1660,7 +2004,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1756,15 +2100,22 @@ export function get_GetRows(whereClauseMobileLaborHed:string, whereClauseMobileL
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1777,7 +2128,7 @@ export function get_GetRows(whereClauseMobileLaborHed:string, whereClauseMobileL
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1801,15 +2152,22 @@ export function get_GetByID(laborHedSeq:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1824,7 +2182,7 @@ export function get_GetByID(laborHedSeq:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1866,15 +2224,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1886,30 +2251,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method MobileGetApprovalStatus
    Description: Populates the MobileApproverList Temp Table with the current expense's approver data.
    OperationID: MobileGetApprovalStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetApprovalStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetApprovalStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetApprovalStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetApprovalStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetApprovalStatus(requestBody:MobileGetApprovalStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetApprovalStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetApprovalStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetApprovalStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -1921,30 +2293,37 @@ export function post_MobileGetApprovalStatus(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method MobileGetQuickEntry
    Description: Populates the MobileQuickEntryView Temp Table with the current employee QuickEntry data.
    OperationID: MobileGetQuickEntry
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetQuickEntry_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetQuickEntry_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetQuickEntry_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetQuickEntry(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetQuickEntry(requestBody:MobileGetQuickEntry_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetQuickEntry_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetQuickEntry", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetQuickEntry_output)
           })
       .catch((error) => {
           reject(error)
@@ -1956,30 +2335,37 @@ export function post_MobileGetQuickEntry(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method MobileGetRows
    Description: Returns a dataset containing all rows that satisfy the where clauses.
    OperationID: MobileGetRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetRows(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetRows(requestBody:MobileGetRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1991,30 +2377,37 @@ export function post_MobileGetRows(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileGetRowsWithFilter
    Description: Returns a dataset containing all rows that satisfy the where clauses and filters.
    OperationID: MobileGetRowsWithFilter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetRowsWithFilter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetRowsWithFilter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetRowsWithFilter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetRowsWithFilter(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetRowsWithFilter(requestBody:MobileGetRowsWithFilter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetRowsWithFilter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetRowsWithFilter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetRowsWithFilter_output)
           })
       .catch((error) => {
           reject(error)
@@ -2026,30 +2419,37 @@ export function post_MobileGetRowsWithFilter(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method MobileGetByID
    Description: Returns a DataSet given the primary key.
    OperationID: MobileGetByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetByID(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetByID(requestBody:MobileGetByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2061,30 +2461,37 @@ export function post_MobileGetByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileLaborGetList
    Description: Returns a list of rows that satisfy the where clause.
    OperationID: MobileLaborGetList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileLaborGetList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileLaborGetList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileLaborGetList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileLaborGetList(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileLaborGetList(requestBody:MobileLaborGetList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileLaborGetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileLaborGetList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileLaborGetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2096,30 +2503,37 @@ export function post_MobileLaborGetList(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetMobileLaborDtlAttchs
    Description: Custom Method to retrieve only the MobileLaborDtlAttch records for the current labor
    OperationID: GetMobileLaborDtlAttchs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMobileLaborDtlAttchs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMobileLaborDtlAttchs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMobileLaborDtlAttchs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMobileLaborDtlAttchs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMobileLaborDtlAttchs(requestBody:GetMobileLaborDtlAttchs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMobileLaborDtlAttchs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetMobileLaborDtlAttchs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMobileLaborDtlAttchs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2131,30 +2545,37 @@ export function post_GetMobileLaborDtlAttchs(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetMobileLaborDtlComments
    Description: Custom Method to retrieve only the MobileLaborDtlComment records for the current labor
    OperationID: GetMobileLaborDtlComments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMobileLaborDtlComments_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMobileLaborDtlComments_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMobileLaborDtlComments_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMobileLaborDtlComments(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMobileLaborDtlComments(requestBody:GetMobileLaborDtlComments_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMobileLaborDtlComments_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetMobileLaborDtlComments", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMobileLaborDtlComments_output)
           })
       .catch((error) => {
           reject(error)
@@ -2166,30 +2587,37 @@ export function post_GetMobileLaborDtlComments(requestBody:any, epicorHeaders?:H
    Summary: Invoke method MobileGetNewLaborHed
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: MobileGetNewLaborHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewLaborHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewLaborHed(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewLaborHed(requestBody:MobileGetNewLaborHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewLaborHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetNewLaborHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewLaborHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -2201,30 +2629,37 @@ export function post_MobileGetNewLaborHed(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method MobileGetNewLaborDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: MobileGetNewLaborDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewLaborDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewLaborDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewLaborDtl(requestBody:MobileGetNewLaborDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewLaborDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetNewLaborDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewLaborDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2236,30 +2671,37 @@ export function post_MobileGetNewLaborDtl(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method MobileGetNewLaborDtlComment
    Description: Calls GetNewLaborDtlComment base method then assign selected and default values.
    OperationID: MobileGetNewLaborDtlComment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtlComment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtlComment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewLaborDtlComment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewLaborDtlComment(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewLaborDtlComment(requestBody:MobileGetNewLaborDtlComment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewLaborDtlComment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetNewLaborDtlComment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewLaborDtlComment_output)
           })
       .catch((error) => {
           reject(error)
@@ -2271,30 +2713,37 @@ export function post_MobileGetNewLaborDtlComment(requestBody:any, epicorHeaders?
    Summary: Invoke method MobileGetNewLaborDtlAttch
    Description: Calls GetNewLaborDtlAttch base method then assign selected and default values.
    OperationID: MobileGetNewLaborDtlAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtlAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtlAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewLaborDtlAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewLaborDtlAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewLaborDtlAttch(requestBody:MobileGetNewLaborDtlAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewLaborDtlAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetNewLaborDtlAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewLaborDtlAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -2306,30 +2755,37 @@ export function post_MobileGetNewLaborDtlAttch(requestBody:any, epicorHeaders?:H
    Summary: Invoke method MobileGetNewLaborDtlOnSelectForWork
    Description: Call GetNewLaborDtl base method then assign selected values and default values
    OperationID: MobileGetNewLaborDtlOnSelectForWork
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtlOnSelectForWork_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtlOnSelectForWork_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewLaborDtlOnSelectForWork_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewLaborDtlOnSelectForWork(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewLaborDtlOnSelectForWork(requestBody:MobileGetNewLaborDtlOnSelectForWork_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewLaborDtlOnSelectForWork_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetNewLaborDtlOnSelectForWork", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewLaborDtlOnSelectForWork_output)
           })
       .catch((error) => {
           reject(error)
@@ -2341,30 +2797,37 @@ export function post_MobileGetNewLaborDtlOnSelectForWork(requestBody:any, epicor
    Summary: Invoke method MobileGetNewLaborDtlNoHdr
    Description: This method is called to add a new labor detail without having a labor header
    OperationID: MobileGetNewLaborDtlNoHdr
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtlNoHdr_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtlNoHdr_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewLaborDtlNoHdr_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewLaborDtlNoHdr(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewLaborDtlNoHdr(requestBody:MobileGetNewLaborDtlNoHdr_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewLaborDtlNoHdr_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetNewLaborDtlNoHdr", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewLaborDtlNoHdr_output)
           })
       .catch((error) => {
           reject(error)
@@ -2376,30 +2839,37 @@ export function post_MobileGetNewLaborDtlNoHdr(requestBody:any, epicorHeaders?:H
    Summary: Invoke method MobileGetNewLaborDtlWithHdr
    Description: This method is called to add a new labor detail without having a labor header record available
    OperationID: MobileGetNewLaborDtlWithHdr
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtlWithHdr_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewLaborDtlWithHdr_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewLaborDtlWithHdr_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewLaborDtlWithHdr(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewLaborDtlWithHdr(requestBody:MobileGetNewLaborDtlWithHdr_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewLaborDtlWithHdr_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetNewLaborDtlWithHdr", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewLaborDtlWithHdr_output)
           })
       .catch((error) => {
           reject(error)
@@ -2411,30 +2881,37 @@ export function post_MobileGetNewLaborDtlWithHdr(requestBody:any, epicorHeaders?
    Summary: Invoke method MobileGetNewTimeWeeklyView
    Description: Gets a new TimeWeeklyView record for the current week
    OperationID: MobileGetNewTimeWeeklyView
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewTimeWeeklyView_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewTimeWeeklyView_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewTimeWeeklyView_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewTimeWeeklyView(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewTimeWeeklyView(requestBody:MobileGetNewTimeWeeklyView_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewTimeWeeklyView_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetNewTimeWeeklyView", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewTimeWeeklyView_output)
           })
       .catch((error) => {
           reject(error)
@@ -2446,30 +2923,37 @@ export function post_MobileGetNewTimeWeeklyView(requestBody:any, epicorHeaders?:
    Summary: Invoke method MobileDeleteLaborDtl
    Description: This method delete records related to HCM PTO.
    OperationID: MobileDeleteLaborDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDeleteLaborDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDeleteLaborDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDeleteLaborDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDeleteLaborDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDeleteLaborDtl(requestBody:MobileDeleteLaborDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDeleteLaborDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDeleteLaborDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDeleteLaborDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2481,30 +2965,37 @@ export function post_MobileDeleteLaborDtl(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method MobileDelete
    Description: Method to call to delete expense records
    OperationID: MobileDelete
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDelete_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDelete_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDelete_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDelete(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDelete(requestBody:MobileDelete_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDelete_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDelete", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDelete_output)
           })
       .catch((error) => {
           reject(error)
@@ -2516,30 +3007,37 @@ export function post_MobileDelete(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileLaborUpdate
    Description: Commits the DataSet changes to the data store.
    OperationID: MobileLaborUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileLaborUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileLaborUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileLaborUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileLaborUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileLaborUpdate(requestBody:MobileLaborUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileLaborUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileLaborUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileLaborUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -2551,30 +3049,37 @@ export function post_MobileLaborUpdate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileChangeEquipID
    Description: This method should call when EquipID is changed
    OperationID: MobileChangeEquipID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileChangeEquipID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileChangeEquipID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileChangeEquipID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileChangeEquipID(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileChangeEquipID(requestBody:MobileChangeEquipID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileChangeEquipID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileChangeEquipID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileChangeEquipID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2586,30 +3091,37 @@ export function post_MobileChangeEquipID(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method MobileChangeIndirectCode
    Description: This method should call when IndirectCode is changed
    OperationID: MobileChangeIndirectCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileChangeIndirectCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileChangeIndirectCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileChangeIndirectCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileChangeIndirectCode(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileChangeIndirectCode(requestBody:MobileChangeIndirectCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileChangeIndirectCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileChangeIndirectCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileChangeIndirectCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -2621,30 +3133,37 @@ export function post_MobileChangeIndirectCode(requestBody:any, epicorHeaders?:He
    Summary: Invoke method MobileChangeLaborType
    Description: This method should call when LaborType is changed
    OperationID: MobileChangeLaborType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileChangeLaborType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileChangeLaborType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileChangeLaborType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileChangeLaborType(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileChangeLaborType(requestBody:MobileChangeLaborType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileChangeLaborType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileChangeLaborType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileChangeLaborType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2656,30 +3175,37 @@ export function post_MobileChangeLaborType(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method MobileChangeResourceId
    Description: This method should call when ResourceID is changed
    OperationID: MobileChangeResourceId
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileChangeResourceId_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileChangeResourceId_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileChangeResourceId_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileChangeResourceId(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileChangeResourceId(requestBody:MobileChangeResourceId_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileChangeResourceId_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileChangeResourceId", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileChangeResourceId_output)
           })
       .catch((error) => {
           reject(error)
@@ -2691,30 +3217,37 @@ export function post_MobileChangeResourceId(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method MobileCheckResourceGroup
    Description: This method should call when ResourceGroup is changed
    OperationID: MobileCheckResourceGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileCheckResourceGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileCheckResourceGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileCheckResourceGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileCheckResourceGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileCheckResourceGroup(requestBody:MobileCheckResourceGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileCheckResourceGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileCheckResourceGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileCheckResourceGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -2729,30 +3262,37 @@ needs to be aware of. This needs to be run right before the update method. If
 the user answers okay to all of the questions, then the update method can be
 run. Otherwise the labor record needs to be corrected
    OperationID: MobileCheckWarnings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileCheckWarnings_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileCheckWarnings_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileCheckWarnings_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileCheckWarnings(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileCheckWarnings(requestBody:MobileCheckWarnings_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileCheckWarnings_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileCheckWarnings", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileCheckWarnings_output)
           })
       .catch((error) => {
           reject(error)
@@ -2764,30 +3304,37 @@ export function post_MobileCheckWarnings(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method MobileDefaultDtlTime
    Description: Sets Default DtlTime
    OperationID: MobileDefaultDtlTime
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDefaultDtlTime_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDefaultDtlTime_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDefaultDtlTime_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDefaultDtlTime(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDefaultDtlTime(requestBody:MobileDefaultDtlTime_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDefaultDtlTime_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDefaultDtlTime", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDefaultDtlTime_output)
           })
       .catch((error) => {
           reject(error)
@@ -2799,30 +3346,37 @@ export function post_MobileDefaultDtlTime(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method MobileDefaultIndirect
    Description: Sets Default Indirect
    OperationID: MobileDefaultIndirect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDefaultIndirect_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDefaultIndirect_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDefaultIndirect_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDefaultIndirect(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDefaultIndirect(requestBody:MobileDefaultIndirect_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDefaultIndirect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDefaultIndirect", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDefaultIndirect_output)
           })
       .catch((error) => {
           reject(error)
@@ -2834,30 +3388,37 @@ export function post_MobileDefaultIndirect(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method MobileDefaultJobNum
    Description: Sets Default JobNum
    OperationID: MobileDefaultJobNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDefaultJobNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDefaultJobNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDefaultJobNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDefaultJobNum(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDefaultJobNum(requestBody:MobileDefaultJobNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDefaultJobNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDefaultJobNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDefaultJobNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -2869,30 +3430,37 @@ export function post_MobileDefaultJobNum(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method MobileDefaultLaborHrs
    Description: Sets Default LaborHrs
    OperationID: MobileDefaultLaborHrs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDefaultLaborHrs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDefaultLaborHrs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDefaultLaborHrs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDefaultLaborHrs(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDefaultLaborHrs(requestBody:MobileDefaultLaborHrs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDefaultLaborHrs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDefaultLaborHrs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDefaultLaborHrs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2904,30 +3472,37 @@ export function post_MobileDefaultLaborHrs(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method MobileDefaultLaborQty
    Description: Sets Default LaborQty
    OperationID: MobileDefaultLaborQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDefaultLaborQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDefaultLaborQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDefaultLaborQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDefaultLaborQty(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDefaultLaborQty(requestBody:MobileDefaultLaborQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDefaultLaborQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDefaultLaborQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDefaultLaborQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -2939,30 +3514,37 @@ export function post_MobileDefaultLaborQty(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method MobileDefaultPhaseOprSeq
    Description: Sets Default PhaseOprSeq
    OperationID: MobileDefaultPhaseOprSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDefaultPhaseOprSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDefaultPhaseOprSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDefaultPhaseOprSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDefaultPhaseOprSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDefaultPhaseOprSeq(requestBody:MobileDefaultPhaseOprSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDefaultPhaseOprSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDefaultPhaseOprSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDefaultPhaseOprSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -2974,30 +3556,37 @@ export function post_MobileDefaultPhaseOprSeq(requestBody:any, epicorHeaders?:He
    Summary: Invoke method MobileDefaultOprSeq
    Description: Sets Default OprSeq
    OperationID: MobileDefaultOprSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDefaultOprSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDefaultOprSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDefaultOprSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDefaultOprSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDefaultOprSeq(requestBody:MobileDefaultOprSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDefaultOprSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDefaultOprSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDefaultOprSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -3009,30 +3598,37 @@ export function post_MobileDefaultOprSeq(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method MobileVerifyScrapQty
    Description: This method defaults fields when the scrap qty field changes. Also checks for any labor warnings the user needs to be aware of
    OperationID: MobileVerifyScrapQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileVerifyScrapQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileVerifyScrapQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileVerifyScrapQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileVerifyScrapQty(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileVerifyScrapQty(requestBody:MobileVerifyScrapQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileVerifyScrapQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileVerifyScrapQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileVerifyScrapQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -3044,30 +3640,37 @@ export function post_MobileVerifyScrapQty(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method MobileDefaultLaborType
    Description: Sets Default LaborType
    OperationID: MobileDefaultLaborType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDefaultLaborType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDefaultLaborType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDefaultLaborType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDefaultLaborType(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDefaultLaborType(requestBody:MobileDefaultLaborType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDefaultLaborType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDefaultLaborType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDefaultLaborType_output)
           })
       .catch((error) => {
           reject(error)
@@ -3081,30 +3684,37 @@ export function post_MobileDefaultLaborType(requestBody:any, epicorHeaders?:Head
 if subsequent approvals have occurred.  If they have the user
 will have the opportunity to cancel the recall.
    OperationID: CheckRecall
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckRecall_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckRecall_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckRecall_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckRecall(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckRecall(requestBody:CheckRecall_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckRecall_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/CheckRecall", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckRecall_output)
           })
       .catch((error) => {
           reject(error)
@@ -3116,30 +3726,37 @@ export function post_CheckRecall(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RecallTrans
    Description: Method to call when recalling from approval entry
    OperationID: RecallTrans
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RecallTrans_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RecallTrans_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RecallTrans_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RecallTrans(requestBody:any, epicorHeaders?:Headers){
+export function post_RecallTrans(requestBody:RecallTrans_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RecallTrans_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/RecallTrans", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RecallTrans_output)
           })
       .catch((error) => {
           reject(error)
@@ -3151,30 +3768,37 @@ export function post_RecallTrans(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CopyLaborDetail
    Description: Method to copy the values from one LaborDtl record to a new LaborDtl record.
    OperationID: CopyLaborDetail
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CopyLaborDetail_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CopyLaborDetail_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CopyLaborDetail_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CopyLaborDetail(requestBody:any, epicorHeaders?:Headers){
+export function post_CopyLaborDetail(requestBody:CopyLaborDetail_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CopyLaborDetail_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/CopyLaborDetail", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CopyLaborDetail_output)
           })
       .catch((error) => {
           reject(error)
@@ -3186,30 +3810,37 @@ export function post_CopyLaborDetail(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileSync
    Description: Method to call to synchronize draft records to the database
    OperationID: MobileSync
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileSync_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileSync_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileSync_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileSync(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileSync(requestBody:MobileSync_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileSync_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileSync", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileSync_output)
           })
       .catch((error) => {
           reject(error)
@@ -3221,30 +3852,37 @@ export function post_MobileSync(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileSyncSuccessful
    Description: Receives the fields needed to find and delete the validation record created when synchronization is successful
    OperationID: MobileSyncSuccessful
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileSyncSuccessful_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileSyncSuccessful_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileSyncSuccessful_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileSyncSuccessful(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileSyncSuccessful(requestBody:MobileSyncSuccessful_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileSyncSuccessful_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileSyncSuccessful", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileSyncSuccessful_output)
           })
       .catch((error) => {
           reject(error)
@@ -3256,30 +3894,37 @@ export function post_MobileSyncSuccessful(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method MobileAttachmentUpdate
    Description: Method to call to update attachment record and upload file to the storage defined by document type (or default company storage)
    OperationID: MobileAttachmentUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileAttachmentUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileAttachmentUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileAttachmentUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileAttachmentUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileAttachmentUpdate(requestBody:MobileAttachmentUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileAttachmentUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileAttachmentUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileAttachmentUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -3290,30 +3935,37 @@ export function post_MobileAttachmentUpdate(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method MobileGetHomePageData
    OperationID: MobileGetHomePageData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetHomePageData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetHomePageData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetHomePageData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetHomePageData(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetHomePageData(requestBody:MobileGetHomePageData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetHomePageData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetHomePageData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetHomePageData_output)
           })
       .catch((error) => {
           reject(error)
@@ -3325,30 +3977,37 @@ export function post_MobileGetHomePageData(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method MobileOverrides
    Description: Method to be called by Mobile Time entry. Overrides the Resource Group and Operation Code in a job.
    OperationID: MobileOverrides
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileOverrides_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileOverrides_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileOverrides_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileOverrides(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileOverrides(requestBody:MobileOverrides_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileOverrides_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileOverrides", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileOverrides_output)
           })
       .catch((error) => {
           reject(error)
@@ -3360,30 +4019,37 @@ export function post_MobileOverrides(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileDefaultPhaseID
    Description: This method to be called by Mobile Time entry. Defaults dataset fields when the PhaseID field changes.
    OperationID: MobileDefaultPhaseID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDefaultPhaseID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDefaultPhaseID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDefaultPhaseID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDefaultPhaseID(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDefaultPhaseID(requestBody:MobileDefaultPhaseID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDefaultPhaseID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileDefaultPhaseID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDefaultPhaseID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3395,30 +4061,37 @@ export function post_MobileDefaultPhaseID(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method MobileRecallFromApproval
    Description: Method to recall Labor for Approval.
    OperationID: MobileRecallFromApproval
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileRecallFromApproval_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileRecallFromApproval_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileRecallFromApproval_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileRecallFromApproval(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileRecallFromApproval(requestBody:MobileRecallFromApproval_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileRecallFromApproval_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileRecallFromApproval", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileRecallFromApproval_output)
           })
       .catch((error) => {
           reject(error)
@@ -3430,7 +4103,7 @@ export function post_MobileRecallFromApproval(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetVersion
    Description: Returns BO Version
    OperationID: GetVersion
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetVersion_output
@@ -3443,15 +4116,22 @@ export function post_GetVersion(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetVersion_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetVersion", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetVersion_output)
           })
       .catch((error) => {
           reject(error)
@@ -3463,30 +4143,37 @@ export function post_GetVersion(epicorHeaders?:Headers){
    Summary: Invoke method SubmitSelected
    Description: Method to call to submit selected time
    OperationID: SubmitSelected
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SubmitSelected_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SubmitSelected_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SubmitSelected_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubmitSelected(requestBody:any, epicorHeaders?:Headers){
+export function post_SubmitSelected(requestBody:SubmitSelected_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SubmitSelected_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/SubmitSelected", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SubmitSelected_output)
           })
       .catch((error) => {
           reject(error)
@@ -3498,30 +4185,37 @@ export function post_SubmitSelected(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ApproveReject
    Description: The procedure is called when the user selects EmpExpense records for reject or approve
    OperationID: ApproveReject
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ApproveReject_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ApproveReject_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ApproveReject_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ApproveReject(requestBody:any, epicorHeaders?:Headers){
+export function post_ApproveReject(requestBody:ApproveReject_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ApproveReject_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/ApproveReject", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ApproveReject_output)
           })
       .catch((error) => {
           reject(error)
@@ -3532,30 +4226,37 @@ export function post_ApproveReject(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method MobileGetRowsPendingApproval
    OperationID: MobileGetRowsPendingApproval
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetRowsPendingApproval_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetRowsPendingApproval_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetRowsPendingApproval_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetRowsPendingApproval(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetRowsPendingApproval(requestBody:MobileGetRowsPendingApproval_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetRowsPendingApproval_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetRowsPendingApproval", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetRowsPendingApproval_output)
           })
       .catch((error) => {
           reject(error)
@@ -3566,30 +4267,37 @@ export function post_MobileGetRowsPendingApproval(requestBody:any, epicorHeaders
    /**  
    Summary: Invoke method MobileGetRowsPendingApprovalWithFilter
    OperationID: MobileGetRowsPendingApprovalWithFilter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetRowsPendingApprovalWithFilter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetRowsPendingApprovalWithFilter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetRowsPendingApprovalWithFilter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetRowsPendingApprovalWithFilter(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetRowsPendingApprovalWithFilter(requestBody:MobileGetRowsPendingApprovalWithFilter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetRowsPendingApprovalWithFilter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/MobileGetRowsPendingApprovalWithFilter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetRowsPendingApprovalWithFilter_output)
           })
       .catch((error) => {
           reject(error)
@@ -3601,30 +4309,37 @@ export function post_MobileGetRowsPendingApprovalWithFilter(requestBody:any, epi
    Summary: Invoke method GetNewMobileLaborHed
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMobileLaborHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMobileLaborHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMobileLaborHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMobileLaborHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMobileLaborHed(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMobileLaborHed(requestBody:GetNewMobileLaborHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMobileLaborHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetNewMobileLaborHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMobileLaborHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -3636,30 +4351,37 @@ export function post_GetNewMobileLaborHed(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewMobileLaborDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMobileLaborDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMobileLaborDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMobileLaborDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMobileLaborDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMobileLaborDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMobileLaborDtl(requestBody:GetNewMobileLaborDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMobileLaborDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetNewMobileLaborDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMobileLaborDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -3671,30 +4393,37 @@ export function post_GetNewMobileLaborDtl(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewMobileLaborDtlAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMobileLaborDtlAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMobileLaborDtlAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMobileLaborDtlAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMobileLaborDtlAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMobileLaborDtlAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMobileLaborDtlAttch(requestBody:GetNewMobileLaborDtlAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMobileLaborDtlAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetNewMobileLaborDtlAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMobileLaborDtlAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -3706,30 +4435,37 @@ export function post_GetNewMobileLaborDtlAttch(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewMobileLaborDtlComment
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMobileLaborDtlComment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMobileLaborDtlComment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMobileLaborDtlComment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMobileLaborDtlComment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMobileLaborDtlComment(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMobileLaborDtlComment(requestBody:GetNewMobileLaborDtlComment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMobileLaborDtlComment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetNewMobileLaborDtlComment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMobileLaborDtlComment_output)
           })
       .catch((error) => {
           reject(error)
@@ -3741,30 +4477,37 @@ export function post_GetNewMobileLaborDtlComment(requestBody:any, epicorHeaders?
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3776,7 +4519,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -3800,15 +4543,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3820,7 +4570,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -3844,15 +4594,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -3864,30 +4621,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -3899,30 +4663,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileLaborSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -3933,46 +4704,63 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileApproverListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileApproverListRow[],
+   "value":Erp_Tablesets_MobileApproverListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborDtlAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileLaborDtlAttchRow[],
+   "value":Erp_Tablesets_MobileLaborDtlAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborDtlCommentRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileLaborDtlCommentRow[],
+   "value":Erp_Tablesets_MobileLaborDtlCommentRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileLaborDtlRow[],
+   "value":Erp_Tablesets_MobileLaborDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborHedRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileLaborHedRow[],
+   "value":Erp_Tablesets_MobileLaborHedRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileLaborListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileLaborListRow[],
+   "value":Erp_Tablesets_MobileLaborListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileQuickEntryViewRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileQuickEntryViewRow[],
+   "value":Erp_Tablesets_MobileQuickEntryViewRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileTimeWeeklyViewRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileTimeWeeklyViewRow[],
+   "value":Erp_Tablesets_MobileTimeWeeklyViewRow,
 }
 
 export interface Erp_Tablesets_MobileApproverListRow{
@@ -4754,6 +5542,23 @@ Enable for new records only  */
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -4775,7 +5580,7 @@ export interface ApproveReject_input{
 export interface ApproveReject_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    outMessage:string,
 }
 }
@@ -4793,7 +5598,7 @@ export interface CheckRecall_input{
 export interface CheckRecall_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    outRecallMsg:string,
 }
 }
@@ -4808,7 +5613,7 @@ export interface CopyLaborDetail_input{
 export interface CopyLaborDetail_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    messageText:string,
 }
 }
@@ -5724,7 +6529,7 @@ export interface GetNewMobileLaborDtlAttch_input{
 export interface GetNewMobileLaborDtlAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -5742,7 +6547,7 @@ export interface GetNewMobileLaborDtlComment_input{
 export interface GetNewMobileLaborDtlComment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -5758,7 +6563,7 @@ export interface GetNewMobileLaborDtl_input{
 export interface GetNewMobileLaborDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -5772,7 +6577,7 @@ export interface GetNewMobileLaborHed_input{
 export interface GetNewMobileLaborHed_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -5872,7 +6677,7 @@ export interface MobileAttachmentUpdate_input{
 export interface MobileAttachmentUpdate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -5889,7 +6694,7 @@ export interface MobileChangeEquipID_input{
 export interface MobileChangeEquipID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -5903,7 +6708,7 @@ export interface MobileChangeIndirectCode_input{
 export interface MobileChangeIndirectCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -5917,7 +6722,7 @@ export interface MobileChangeLaborType_input{
 export interface MobileChangeLaborType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -5934,7 +6739,7 @@ export interface MobileChangeResourceId_input{
 export interface MobileChangeResourceId_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    pcMsg:string,
 }
 }
@@ -5952,7 +6757,7 @@ export interface MobileCheckResourceGroup_input{
 export interface MobileCheckResourceGroup_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    vMessage:string,
 }
 }
@@ -5967,7 +6772,7 @@ export interface MobileCheckWarnings_input{
 export interface MobileCheckWarnings_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    vMessage:string,
 }
 }
@@ -5982,7 +6787,7 @@ export interface MobileDefaultDtlTime_input{
 export interface MobileDefaultDtlTime_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -5999,7 +6804,7 @@ export interface MobileDefaultIndirect_input{
 export interface MobileDefaultIndirect_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6016,7 +6821,7 @@ export interface MobileDefaultJobNum_input{
 export interface MobileDefaultJobNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6033,7 +6838,7 @@ export interface MobileDefaultLaborHrs_input{
 export interface MobileDefaultLaborHrs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6050,7 +6855,7 @@ export interface MobileDefaultLaborQty_input{
 export interface MobileDefaultLaborQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    vMessage:string,
 }
 }
@@ -6068,7 +6873,7 @@ export interface MobileDefaultLaborType_input{
 export interface MobileDefaultLaborType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6085,7 +6890,7 @@ export interface MobileDefaultOprSeq_input{
 export interface MobileDefaultOprSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    vMessage:string,
 }
 }
@@ -6103,7 +6908,7 @@ export interface MobileDefaultPhaseID_input{
 export interface MobileDefaultPhaseID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6120,7 +6925,7 @@ export interface MobileDefaultPhaseOprSeq_input{
 export interface MobileDefaultPhaseOprSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    vMessage:string,
 }
 }
@@ -6156,7 +6961,7 @@ export interface MobileDelete_input{
 export interface MobileDelete_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6233,7 +7038,7 @@ export interface MobileGetNewLaborDtlAttch_input{
 export interface MobileGetNewLaborDtlAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6253,7 +7058,7 @@ export interface MobileGetNewLaborDtlComment_input{
 export interface MobileGetNewLaborDtlComment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6285,7 +7090,7 @@ export interface MobileGetNewLaborDtlNoHdr_input{
 export interface MobileGetNewLaborDtlNoHdr_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6317,7 +7122,7 @@ export interface MobileGetNewLaborDtlOnSelectForWork_input{
 export interface MobileGetNewLaborDtlOnSelectForWork_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    bMachinePrompt:boolean,
 }
 }
@@ -6347,7 +7152,7 @@ export interface MobileGetNewLaborDtlWithHdr_input{
 export interface MobileGetNewLaborDtlWithHdr_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6364,7 +7169,7 @@ export interface MobileGetNewLaborDtl_input{
 export interface MobileGetNewLaborDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6378,7 +7183,7 @@ export interface MobileGetNewLaborHed_input{
 export interface MobileGetNewLaborHed_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6398,7 +7203,7 @@ export interface MobileGetNewTimeWeeklyView_input{
 export interface MobileGetNewTimeWeeklyView_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6579,7 +7384,7 @@ export interface MobileLaborUpdate_input{
 export interface MobileLaborUpdate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6599,7 +7404,7 @@ export interface MobileOverrides_input{
 export interface MobileOverrides_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 
@@ -6616,7 +7421,7 @@ export interface MobileRecallFromApproval_input{
 export interface MobileRecallFromApproval_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    cMessageText:string,
 }
 }
@@ -6660,7 +7465,7 @@ export interface MobileSync_input{
 export interface MobileSync_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    outMessage:string,
 }
 }
@@ -6678,7 +7483,7 @@ export interface MobileVerifyScrapQty_input{
 export interface MobileVerifyScrapQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    vMessage:string,
 }
 }
@@ -6696,7 +7501,7 @@ export interface RecallTrans_input{
 export interface RecallTrans_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    outMessage:string,
 }
 }
@@ -6714,7 +7519,7 @@ export interface SubmitSelected_input{
 export interface SubmitSelected_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
    outMessage:string,
 }
 }
@@ -6734,7 +7539,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtMobileLaborTableset[],
+   ds:Erp_Tablesets_UpdExtMobileLaborTableset,
    errorsOccurred:boolean,
 }
 }
@@ -6749,7 +7554,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileLaborTableset[],
+   ds:Erp_Tablesets_MobileLaborTableset,
 }
 }
 

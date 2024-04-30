@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.JobClosingSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -86,7 +136,7 @@ export function get_metadata(epicorHeaders?:Headers){
    Description: This method exists soley for the purpose of allowing security for
 availability of the close job field to be defined.
    OperationID: AllowCloseJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/AllowCloseJob_output
@@ -99,15 +149,22 @@ export function post_AllowCloseJob(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AllowCloseJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/AllowCloseJob", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AllowCloseJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_AllowCloseJob(epicorHeaders?:Headers){
    Description: Call this method to close or complete the job.  The Job database is not updated
 till this method is successfully executed.
    OperationID: CloseJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CloseJob_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CloseJob_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CloseJob_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CloseJob(requestBody:any, epicorHeaders?:Headers){
+export function post_CloseJob(requestBody:CloseJob_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CloseJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/CloseJob", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CloseJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_CloseJob(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method EnableSerialMatching
    Description: Call this method when it is necessary to know in UI if the Serial Matching option should be enabled.
    OperationID: EnableSerialMatching
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/EnableSerialMatching_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/EnableSerialMatching_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/EnableSerialMatching_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_EnableSerialMatching(requestBody:any, epicorHeaders?:Headers){
+export function post_EnableSerialMatching(requestBody:EnableSerialMatching_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<EnableSerialMatching_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/EnableSerialMatching", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as EnableSerialMatching_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_EnableSerialMatching(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewJobClosing
    Description: Returns a new , empty Call JobClosingDataSet row.
    OperationID: GetNewJobClosing
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewJobClosing_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewJobClosing_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewJobClosing_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewJobClosing(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewJobClosing(requestBody:GetNewJobClosing_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewJobClosing_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/GetNewJobClosing", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewJobClosing_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,30 +303,37 @@ export function post_GetNewJobClosing(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewJobClosingList
    Description: This method creates a new JobClosingListDataSet row entry.
    OperationID: GetNewJobClosingList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewJobClosingList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewJobClosingList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewJobClosingList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewJobClosingList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewJobClosingList(requestBody:GetNewJobClosingList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewJobClosingList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/GetNewJobClosingList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewJobClosingList_output)
           })
       .catch((error) => {
           reject(error)
@@ -260,30 +345,37 @@ export function post_GetNewJobClosingList(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeJobClosed
    Description: Call this method when the value of Epicor.Mfg.BO.JobClosingDataSet.JobClosed changes.
    OperationID: OnChangeJobClosed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeJobClosed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeJobClosed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeJobClosed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeJobClosed(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeJobClosed(requestBody:OnChangeJobClosed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeJobClosed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/OnChangeJobClosed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeJobClosed_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,30 +387,37 @@ export function post_OnChangeJobClosed(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeJobCompletion
    Description: Call this method when the value of Epicor.Mfg.BO.JobClosingDataSet.JobComplete changes.
    OperationID: OnChangeJobCompletion
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeJobCompletion_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeJobCompletion_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeJobCompletion_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeJobCompletion(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeJobCompletion(requestBody:OnChangeJobCompletion_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeJobCompletion_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/OnChangeJobCompletion", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeJobCompletion_output)
           })
       .catch((error) => {
           reject(error)
@@ -331,30 +430,37 @@ export function post_OnChangeJobCompletion(requestBody:any, epicorHeaders?:Heade
    Description: Call this method when the user selects a job.  This method populates
 the Epicor.Mfg.BO.JobClosingDataSet dataset with Job , JobOper and JobMtl information.
    OperationID: OnChangeJobNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeJobNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeJobNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeJobNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeJobNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeJobNum(requestBody:OnChangeJobNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeJobNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/OnChangeJobNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeJobNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -371,30 +477,37 @@ it does, the LegalNumberPrompt business objects needs to be called to
 gather that information.  This method should be called when the user
 saves the record but before the Update method is called.
    OperationID: PreCloseJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreCloseJob_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreCloseJob_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreCloseJob_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreCloseJob(requestBody:any, epicorHeaders?:Headers){
+export function post_PreCloseJob(requestBody:PreCloseJob_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreCloseJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/PreCloseJob", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreCloseJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -407,30 +520,37 @@ export function post_PreCloseJob(requestBody:any, epicorHeaders?:Headers){
    Description: Call this method when the user selects multiple jobs.  This method populates
 the Epicor.Mfg.BO.JobClosingDataSet dataset with Job , JobOper and JobMtl information.
    OperationID: SelectMultipleJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SelectMultipleJob_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SelectMultipleJob_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SelectMultipleJob_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectMultipleJob(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectMultipleJob(requestBody:SelectMultipleJob_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SelectMultipleJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/SelectMultipleJob", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SelectMultipleJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -443,30 +563,37 @@ export function post_SelectMultipleJob(requestBody:any, epicorHeaders?:Headers){
    Description: Call this method when the user selects multiple jobs.  This method populates
 the Epicor.Mfg.BO.JobClosingDataSet dataset with Job , JobOper and JobMtl information.
    OperationID: SelectJobByJobNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SelectJobByJobNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SelectJobByJobNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SelectJobByJobNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectJobByJobNum(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectJobByJobNum(requestBody:SelectJobByJobNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SelectJobByJobNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.JobClosingSvc/SelectJobByJobNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SelectJobByJobNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -477,11 +604,45 @@ export function post_SelectJobByJobNum(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -498,7 +659,7 @@ export interface CloseJob_input{
 export interface CloseJob_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JobClosingTableset[],
+   ds:Erp_Tablesets_JobClosingTableset,
    pcMessage:string,
 }
 }
@@ -513,7 +674,7 @@ export interface EnableSerialMatching_input{
 export interface EnableSerialMatching_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JobClosingTableset[],
+   ds:Erp_Tablesets_JobClosingTableset,
    plEnable:boolean,
 }
 }
@@ -1773,7 +1934,7 @@ export interface GetNewJobClosingList_input{
 export interface GetNewJobClosingList_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JobClosingListTableset[],
+   ds:Erp_Tablesets_JobClosingListTableset,
 }
 }
 
@@ -1787,7 +1948,7 @@ export interface GetNewJobClosing_input{
 export interface GetNewJobClosing_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JobClosingTableset[],
+   ds:Erp_Tablesets_JobClosingTableset,
 }
 }
 
@@ -1822,7 +1983,7 @@ export interface OnChangeJobClosed_input{
 export interface OnChangeJobClosed_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JobClosingTableset[],
+   ds:Erp_Tablesets_JobClosingTableset,
 }
 }
 
@@ -1836,7 +1997,7 @@ export interface OnChangeJobCompletion_input{
 export interface OnChangeJobCompletion_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JobClosingTableset[],
+   ds:Erp_Tablesets_JobClosingTableset,
 }
 }
 
@@ -1853,7 +2014,7 @@ export interface OnChangeJobNum_input{
 export interface OnChangeJobNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JobClosingTableset[],
+   ds:Erp_Tablesets_JobClosingTableset,
    pcMessage:string,
 }
 }
@@ -1868,7 +2029,7 @@ export interface PreCloseJob_input{
 export interface PreCloseJob_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JobClosingTableset[],
+   ds:Erp_Tablesets_JobClosingTableset,
    RequiresUserInput:boolean,
 }
 }
@@ -1896,7 +2057,7 @@ export interface SelectMultipleJob_output{
    returnObj:Erp_Tablesets_JobClosingTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_JobClosingListTableset[],
+   ds:Erp_Tablesets_JobClosingListTableset,
 }
 }
 

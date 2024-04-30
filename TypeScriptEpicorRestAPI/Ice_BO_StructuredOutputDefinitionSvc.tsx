@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.StructuredOutputDefinitionSvc
 // Description: BO for the Structured Output Definition UI.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputDefRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputDefRow
    */  
 export function get_StructuredOutputDefinitions(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_StructuredOutputDefinitions(select?:string, expand?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputDefRow)
           })
@@ -118,15 +158,15 @@ export function get_StructuredOutputDefinitions(select?:string, expand?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_StructuredOutputDefinitions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputDefRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputDefRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputDefRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputDefRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StructuredOutputDefinitions(requestBody:any, epicorHeaders?:Headers){
+export function post_StructuredOutputDefinitions(requestBody:Ice_Tablesets_RptStructuredOutputDefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_StructuredOutputDefinitions(requestBody:any, epicorHeaders?
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -158,10 +205,10 @@ export function post_StructuredOutputDefinitions(requestBody:any, epicorHeaders?
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputDefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputDefRow
    */  
 export function get_StructuredOutputDefinitions_RptStructuredOutputDefID(RptStructuredOutputDefID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -176,7 +223,14 @@ export function get_StructuredOutputDefinitions_RptStructuredOutputDefID(RptStru
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_RptStructuredOutputDefRow)
           })
@@ -191,15 +245,15 @@ export function get_StructuredOutputDefinitions_RptStructuredOutputDefID(RptStru
    Description: Calls UpdateExt to update StructuredOutputDefinition. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_StructuredOutputDefinition
       @param RptStructuredOutputDefID Desc: RptStructuredOutputDefID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputDefRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputDefRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_StructuredOutputDefinitions_RptStructuredOutputDefID(RptStructuredOutputDefID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_StructuredOutputDefinitions_RptStructuredOutputDefID(RptStructuredOutputDefID:string, requestBody:Ice_Tablesets_RptStructuredOutputDefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -213,7 +267,14 @@ export function patch_StructuredOutputDefinitions_RptStructuredOutputDefID(RptSt
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -228,7 +289,7 @@ export function patch_StructuredOutputDefinitions_RptStructuredOutputDefID(RptSt
    Description: Call UpdateExt to delete StructuredOutputDefinition item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_StructuredOutputDefinition
       @param RptStructuredOutputDefID Desc: RptStructuredOutputDefID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -247,7 +308,14 @@ export function delete_StructuredOutputDefinitions_RptStructuredOutputDefID(RptS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -269,10 +337,10 @@ export function delete_StructuredOutputDefinitions_RptStructuredOutputDefID(RptS
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileRow
    */  
 export function get_StructuredOutputDefinitions_RptStructuredOutputDefID_RptStructuredOutputFiles(RptStructuredOutputDefID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -287,7 +355,14 @@ export function get_StructuredOutputDefinitions_RptStructuredOutputDefID_RptStru
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputFileRow)
           })
@@ -306,10 +381,10 @@ export function get_StructuredOutputDefinitions_RptStructuredOutputDefID_RptStru
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputFileRow
    */  
 export function get_StructuredOutputDefinitions_RptStructuredOutputDefID_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructuredOutputFileID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -324,7 +399,14 @@ export function get_StructuredOutputDefinitions_RptStructuredOutputDefID_RptStru
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_RptStructuredOutputFileRow)
           })
@@ -345,10 +427,10 @@ export function get_StructuredOutputDefinitions_RptStructuredOutputDefID_RptStru
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileRow
    */  
 export function get_RptStructuredOutputFiles(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -363,7 +445,14 @@ export function get_RptStructuredOutputFiles(select?:string, expand?:string, fil
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputFileRow)
           })
@@ -377,15 +466,15 @@ export function get_RptStructuredOutputFiles(select?:string, expand?:string, fil
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RptStructuredOutputFiles
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputFileRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RptStructuredOutputFiles(requestBody:any, epicorHeaders?:Headers){
+export function post_RptStructuredOutputFiles(requestBody:Ice_Tablesets_RptStructuredOutputFileRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -399,7 +488,14 @@ export function post_RptStructuredOutputFiles(requestBody:any, epicorHeaders?:He
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -418,10 +514,10 @@ export function post_RptStructuredOutputFiles(requestBody:any, epicorHeaders?:He
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputFileRow
    */  
 export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructuredOutputFileID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -436,7 +532,14 @@ export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_RptStructuredOutputFileRow)
           })
@@ -452,15 +555,15 @@ export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructu
    OperationID: UpdateExt_RptStructuredOutputFile
       @param RptStructuredOutputDefID Desc: RptStructuredOutputDefID   Required: True   Allow empty value : True
       @param RptStructuredOutputFileID Desc: RptStructuredOutputFileID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructuredOutputFileID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructuredOutputFileID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, requestBody:Ice_Tablesets_RptStructuredOutputFileRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -474,7 +577,14 @@ export function patch_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStruc
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -490,7 +600,7 @@ export function patch_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStruc
    OperationID: DeleteUpdateExt_RptStructuredOutputFile
       @param RptStructuredOutputDefID Desc: RptStructuredOutputDefID   Required: True   Allow empty value : True
       @param RptStructuredOutputFileID Desc: RptStructuredOutputFileID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -509,7 +619,14 @@ export function delete_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStru
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -531,10 +648,10 @@ export function delete_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStru
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileElementRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileElementRow
    */  
 export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructuredOutputFileID_RptStructuredOutputFileElements(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -549,7 +666,14 @@ export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputFileElementRow)
           })
@@ -568,10 +692,10 @@ export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructu
       @param ElementID Desc: ElementID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileElementRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputFileElementRow
    */  
 export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructuredOutputFileID_RptStructuredOutputFileElements_RptStructuredOutputDefID_RptStructuredOutputFileID_ElementID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, ElementID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -586,7 +710,14 @@ export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_RptStructuredOutputFileElementRow)
           })
@@ -608,10 +739,10 @@ export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructu
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileXMLNSRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileXMLNSRow
    */  
 export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructuredOutputFileID_RptStructuredOutputFileXMLNS(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -626,7 +757,14 @@ export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputFileXMLNSRow)
           })
@@ -645,10 +783,10 @@ export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructu
       @param RptStructuredOutputFileNamespaceID Desc: RptStructuredOutputFileNamespaceID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileXMLNSRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputFileXMLNSRow
    */  
 export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructuredOutputFileID_RptStructuredOutputFileXMLNS_RptStructuredOutputDefID_RptStructuredOutputFileID_RptStructuredOutputFileNamespaceID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, RptStructuredOutputFileNamespaceID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -663,7 +801,14 @@ export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_RptStructuredOutputFileXMLNSRow)
           })
@@ -683,10 +828,10 @@ export function get_RptStructuredOutputFiles_RptStructuredOutputDefID_RptStructu
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileElementRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileElementRow
    */  
 export function get_RptStructuredOutputFileElements(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -701,7 +846,14 @@ export function get_RptStructuredOutputFileElements(select?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputFileElementRow)
           })
@@ -715,15 +867,15 @@ export function get_RptStructuredOutputFileElements(select?:string, filter?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RptStructuredOutputFileElements
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileElementRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileElementRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileElementRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputFileElementRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RptStructuredOutputFileElements(requestBody:any, epicorHeaders?:Headers){
+export function post_RptStructuredOutputFileElements(requestBody:Ice_Tablesets_RptStructuredOutputFileElementRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -737,7 +889,14 @@ export function post_RptStructuredOutputFileElements(requestBody:any, epicorHead
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -756,10 +915,10 @@ export function post_RptStructuredOutputFileElements(requestBody:any, epicorHead
       @param ElementID Desc: ElementID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileElementRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputFileElementRow
    */  
 export function get_RptStructuredOutputFileElements_RptStructuredOutputDefID_RptStructuredOutputFileID_ElementID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, ElementID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -774,7 +933,14 @@ export function get_RptStructuredOutputFileElements_RptStructuredOutputDefID_Rpt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_RptStructuredOutputFileElementRow)
           })
@@ -791,15 +957,15 @@ export function get_RptStructuredOutputFileElements_RptStructuredOutputDefID_Rpt
       @param RptStructuredOutputDefID Desc: RptStructuredOutputDefID   Required: True   Allow empty value : True
       @param RptStructuredOutputFileID Desc: RptStructuredOutputFileID   Required: True   Allow empty value : True
       @param ElementID Desc: ElementID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileElementRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileElementRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RptStructuredOutputFileElements_RptStructuredOutputDefID_RptStructuredOutputFileID_ElementID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, ElementID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RptStructuredOutputFileElements_RptStructuredOutputDefID_RptStructuredOutputFileID_ElementID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, ElementID:string, requestBody:Ice_Tablesets_RptStructuredOutputFileElementRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -813,7 +979,14 @@ export function patch_RptStructuredOutputFileElements_RptStructuredOutputDefID_R
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -830,7 +1003,7 @@ export function patch_RptStructuredOutputFileElements_RptStructuredOutputDefID_R
       @param RptStructuredOutputDefID Desc: RptStructuredOutputDefID   Required: True   Allow empty value : True
       @param RptStructuredOutputFileID Desc: RptStructuredOutputFileID   Required: True   Allow empty value : True
       @param ElementID Desc: ElementID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -849,7 +1022,14 @@ export function delete_RptStructuredOutputFileElements_RptStructuredOutputDefID_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -869,10 +1049,10 @@ export function delete_RptStructuredOutputFileElements_RptStructuredOutputDefID_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileXMLNSRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputFileXMLNSRow
    */  
 export function get_RptStructuredOutputFileXMLNS(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -887,7 +1067,14 @@ export function get_RptStructuredOutputFileXMLNS(select?:string, filter?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputFileXMLNSRow)
           })
@@ -901,15 +1088,15 @@ export function get_RptStructuredOutputFileXMLNS(select?:string, filter?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RptStructuredOutputFileXMLNS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileXMLNSRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileXMLNSRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileXMLNSRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputFileXMLNSRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RptStructuredOutputFileXMLNS(requestBody:any, epicorHeaders?:Headers){
+export function post_RptStructuredOutputFileXMLNS(requestBody:Ice_Tablesets_RptStructuredOutputFileXMLNSRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -923,7 +1110,14 @@ export function post_RptStructuredOutputFileXMLNS(requestBody:any, epicorHeaders
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -942,10 +1136,10 @@ export function post_RptStructuredOutputFileXMLNS(requestBody:any, epicorHeaders
       @param RptStructuredOutputFileNamespaceID Desc: RptStructuredOutputFileNamespaceID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileXMLNSRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.RptStructuredOutputFileXMLNSRow
    */  
 export function get_RptStructuredOutputFileXMLNS_RptStructuredOutputDefID_RptStructuredOutputFileID_RptStructuredOutputFileNamespaceID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, RptStructuredOutputFileNamespaceID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -960,7 +1154,14 @@ export function get_RptStructuredOutputFileXMLNS_RptStructuredOutputDefID_RptStr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_RptStructuredOutputFileXMLNSRow)
           })
@@ -977,15 +1178,15 @@ export function get_RptStructuredOutputFileXMLNS_RptStructuredOutputDefID_RptStr
       @param RptStructuredOutputDefID Desc: RptStructuredOutputDefID   Required: True   Allow empty value : True
       @param RptStructuredOutputFileID Desc: RptStructuredOutputFileID   Required: True   Allow empty value : True
       @param RptStructuredOutputFileNamespaceID Desc: RptStructuredOutputFileNamespaceID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileXMLNSRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.RptStructuredOutputFileXMLNSRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RptStructuredOutputFileXMLNS_RptStructuredOutputDefID_RptStructuredOutputFileID_RptStructuredOutputFileNamespaceID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, RptStructuredOutputFileNamespaceID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RptStructuredOutputFileXMLNS_RptStructuredOutputDefID_RptStructuredOutputFileID_RptStructuredOutputFileNamespaceID(RptStructuredOutputDefID:string, RptStructuredOutputFileID:string, RptStructuredOutputFileNamespaceID:string, requestBody:Ice_Tablesets_RptStructuredOutputFileXMLNSRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -999,7 +1200,14 @@ export function patch_RptStructuredOutputFileXMLNS_RptStructuredOutputDefID_RptS
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1016,7 +1224,7 @@ export function patch_RptStructuredOutputFileXMLNS_RptStructuredOutputDefID_RptS
       @param RptStructuredOutputDefID Desc: RptStructuredOutputDefID   Required: True   Allow empty value : True
       @param RptStructuredOutputFileID Desc: RptStructuredOutputFileID   Required: True   Allow empty value : True
       @param RptStructuredOutputFileNamespaceID Desc: RptStructuredOutputFileNamespaceID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1035,7 +1243,14 @@ export function delete_RptStructuredOutputFileXMLNS_RptStructuredOutputDefID_Rpt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1055,10 +1270,10 @@ export function delete_RptStructuredOutputFileXMLNS_RptStructuredOutputDefID_Rpt
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputDefListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.RptStructuredOutputDefListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1073,7 +1288,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputDefListRow)
           })
@@ -1085,6 +1307,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1099,7 +1338,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1168,15 +1407,22 @@ export function get_GetRows(whereClauseRptStructuredOutputDef:string, whereClaus
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1189,7 +1435,7 @@ export function get_GetRows(whereClauseRptStructuredOutputDef:string, whereClaus
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1213,15 +1459,22 @@ export function get_GetByID(rptStructuredOutputDefID:string, epicorHeaders?:Head
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1236,7 +1489,7 @@ export function get_GetByID(rptStructuredOutputDefID:string, epicorHeaders?:Head
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1278,15 +1531,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1298,30 +1558,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method OnChangeReportDataDefinition
    Description: Called when user changes the report data definition for the structured output definition.
    OperationID: OnChangeReportDataDefinition
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeReportDataDefinition_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeReportDataDefinition_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeReportDataDefinition_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeReportDataDefinition(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeReportDataDefinition(requestBody:OnChangeReportDataDefinition_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeReportDataDefinition_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/OnChangeReportDataDefinition", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeReportDataDefinition_output)
           })
       .catch((error) => {
           reject(error)
@@ -1333,30 +1600,37 @@ export function post_OnChangeReportDataDefinition(requestBody:any, epicorHeaders
    Summary: Invoke method DeleteAllOutputFileElements
    Description: Deletes all output file elements.
    OperationID: DeleteAllOutputFileElements
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteAllOutputFileElements_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteAllOutputFileElements_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteAllOutputFileElements_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteAllOutputFileElements(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteAllOutputFileElements(requestBody:DeleteAllOutputFileElements_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteAllOutputFileElements_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/DeleteAllOutputFileElements", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteAllOutputFileElements_output)
           })
       .catch((error) => {
           reject(error)
@@ -1368,30 +1642,37 @@ export function post_DeleteAllOutputFileElements(requestBody:any, epicorHeaders?
    Summary: Invoke method OnChangeOutputLocation
    Description: Called when user changes the output location for the structured output file.
    OperationID: OnChangeOutputLocation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOutputLocation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOutputLocation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOutputLocation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOutputLocation(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOutputLocation(requestBody:OnChangeOutputLocation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOutputLocation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/OnChangeOutputLocation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOutputLocation_output)
           })
       .catch((error) => {
           reject(error)
@@ -1403,30 +1684,37 @@ export function post_OnChangeOutputLocation(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetDataSourceList
    Description: Get data source list (for data source combo box). Column table will be empty.
    OperationID: GetDataSourceList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDataSourceList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDataSourceList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDataSourceList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDataSourceList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDataSourceList(requestBody:GetDataSourceList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDataSourceList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetDataSourceList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDataSourceList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1438,30 +1726,37 @@ export function post_GetDataSourceList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDataSourceColumns
    Description: Get columns for data source (for data column combo box). Data source table will be empty.
    OperationID: GetDataSourceColumns
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDataSourceColumns_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDataSourceColumns_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDataSourceColumns_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDataSourceColumns(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDataSourceColumns(requestBody:GetDataSourceColumns_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDataSourceColumns_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetDataSourceColumns", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDataSourceColumns_output)
           })
       .catch((error) => {
           reject(error)
@@ -1473,30 +1768,37 @@ export function post_GetDataSourceColumns(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetDataSourceListWithIsUsedSet
    Description: Get data source list with IsUsed set
    OperationID: GetDataSourceListWithIsUsedSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDataSourceListWithIsUsedSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDataSourceListWithIsUsedSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDataSourceListWithIsUsedSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDataSourceListWithIsUsedSet(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDataSourceListWithIsUsedSet(requestBody:GetDataSourceListWithIsUsedSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDataSourceListWithIsUsedSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetDataSourceListWithIsUsedSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDataSourceListWithIsUsedSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1508,30 +1810,37 @@ export function post_GetDataSourceListWithIsUsedSet(requestBody:any, epicorHeade
    Summary: Invoke method GetDataSourceColumnType
    Description: Get data source column data type.
    OperationID: GetDataSourceColumnType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDataSourceColumnType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDataSourceColumnType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDataSourceColumnType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDataSourceColumnType(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDataSourceColumnType(requestBody:GetDataSourceColumnType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDataSourceColumnType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetDataSourceColumnType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDataSourceColumnType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1543,30 +1852,37 @@ export function post_GetDataSourceColumnType(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ValidateOutputFileElements
    Description: Validate structured output file elements.
    OperationID: ValidateOutputFileElements
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateOutputFileElements_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateOutputFileElements_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateOutputFileElements_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateOutputFileElements(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateOutputFileElements(requestBody:ValidateOutputFileElements_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateOutputFileElements_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/ValidateOutputFileElements", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateOutputFileElements_output)
           })
       .catch((error) => {
           reject(error)
@@ -1578,30 +1894,37 @@ export function post_ValidateOutputFileElements(requestBody:any, epicorHeaders?:
    Summary: Invoke method ValidateOutputFileElement
    Description: Validate structured output file element.
    OperationID: ValidateOutputFileElement
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateOutputFileElement_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateOutputFileElement_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateOutputFileElement_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateOutputFileElement(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateOutputFileElement(requestBody:ValidateOutputFileElement_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateOutputFileElement_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/ValidateOutputFileElement", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateOutputFileElement_output)
           })
       .catch((error) => {
           reject(error)
@@ -1613,30 +1936,37 @@ export function post_ValidateOutputFileElement(requestBody:any, epicorHeaders?:H
    Summary: Invoke method ImportFile
    Description: Imports file with XML data or json schema.
    OperationID: ImportFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportFile(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportFile(requestBody:ImportFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/ImportFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -1648,30 +1978,37 @@ export function post_ImportFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ImportJSONSchema
    Description: Imports the json schema.
    OperationID: ImportJSONSchema
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportJSONSchema_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportJSONSchema_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportJSONSchema_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportJSONSchema(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportJSONSchema(requestBody:ImportJSONSchema_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportJSONSchema_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/ImportJSONSchema", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportJSONSchema_output)
           })
       .catch((error) => {
           reject(error)
@@ -1683,30 +2020,37 @@ export function post_ImportJSONSchema(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DuplicateStructuredOutputDef
    Description: Duplicates a Structured Output Definition
    OperationID: DuplicateStructuredOutputDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DuplicateStructuredOutputDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DuplicateStructuredOutputDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DuplicateStructuredOutputDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DuplicateStructuredOutputDef(requestBody:any, epicorHeaders?:Headers){
+export function post_DuplicateStructuredOutputDef(requestBody:DuplicateStructuredOutputDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DuplicateStructuredOutputDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/DuplicateStructuredOutputDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DuplicateStructuredOutputDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -1718,30 +2062,37 @@ export function post_DuplicateStructuredOutputDef(requestBody:any, epicorHeaders
    Summary: Invoke method DuplicateStructuredOutputFile
    Description: Duplicates a Structured Output File
    OperationID: DuplicateStructuredOutputFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DuplicateStructuredOutputFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DuplicateStructuredOutputFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DuplicateStructuredOutputFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DuplicateStructuredOutputFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DuplicateStructuredOutputFile(requestBody:DuplicateStructuredOutputFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DuplicateStructuredOutputFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/DuplicateStructuredOutputFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DuplicateStructuredOutputFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -1753,30 +2104,37 @@ export function post_DuplicateStructuredOutputFile(requestBody:any, epicorHeader
    Summary: Invoke method ImportXmlDataWithValues
    Description: Imports the XML data.
    OperationID: ImportXmlDataWithValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportXmlDataWithValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportXmlDataWithValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportXmlDataWithValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportXmlDataWithValues(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportXmlDataWithValues(requestBody:ImportXmlDataWithValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportXmlDataWithValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/ImportXmlDataWithValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportXmlDataWithValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -1788,30 +2146,37 @@ export function post_ImportXmlDataWithValues(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ImportXmlDataWithNoValues
    Description: Imports the XML data.
    OperationID: ImportXmlDataWithNoValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportXmlDataWithNoValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportXmlDataWithNoValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportXmlDataWithNoValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportXmlDataWithNoValues(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportXmlDataWithNoValues(requestBody:ImportXmlDataWithNoValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportXmlDataWithNoValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/ImportXmlDataWithNoValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportXmlDataWithNoValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -1823,30 +2188,37 @@ export function post_ImportXmlDataWithNoValues(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetEICalculators
    Description: Get Electronic Interface Calculator Names in tilde-separated string (for calculation name combo box)
    OperationID: GetEICalculators
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetEICalculators_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetEICalculators_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEICalculators_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetEICalculators(requestBody:any, epicorHeaders?:Headers){
+export function post_GetEICalculators(requestBody:GetEICalculators_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEICalculators_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetEICalculators", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEICalculators_output)
           })
       .catch((error) => {
           reject(error)
@@ -1858,30 +2230,37 @@ export function post_GetEICalculators(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetAncestorDataSource
    Description: Get the DataSource value from the most immediate ancestor of the file element
    OperationID: GetAncestorDataSource
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAncestorDataSource_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAncestorDataSource_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAncestorDataSource_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAncestorDataSource(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAncestorDataSource(requestBody:GetAncestorDataSource_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAncestorDataSource_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetAncestorDataSource", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAncestorDataSource_output)
           })
       .catch((error) => {
           reject(error)
@@ -1893,30 +2272,37 @@ export function post_GetAncestorDataSource(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method DescendantsWithDataSourceIdExist
    Description: Check if descendants with DataSourceId = original DataSourceId value exist
    OperationID: DescendantsWithDataSourceIdExist
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DescendantsWithDataSourceIdExist_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DescendantsWithDataSourceIdExist_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DescendantsWithDataSourceIdExist_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DescendantsWithDataSourceIdExist(requestBody:any, epicorHeaders?:Headers){
+export function post_DescendantsWithDataSourceIdExist(requestBody:DescendantsWithDataSourceIdExist_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DescendantsWithDataSourceIdExist_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/DescendantsWithDataSourceIdExist", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DescendantsWithDataSourceIdExist_output)
           })
       .catch((error) => {
           reject(error)
@@ -1928,30 +2314,37 @@ export function post_DescendantsWithDataSourceIdExist(requestBody:any, epicorHea
    Summary: Invoke method UpdateDescendantsWithNewDataSourceId
    Description: Update descendants having DataSourceId = original DataSourceId value with new DataSourceID value
    OperationID: UpdateDescendantsWithNewDataSourceId
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateDescendantsWithNewDataSourceId_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateDescendantsWithNewDataSourceId_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateDescendantsWithNewDataSourceId_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateDescendantsWithNewDataSourceId(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateDescendantsWithNewDataSourceId(requestBody:UpdateDescendantsWithNewDataSourceId_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateDescendantsWithNewDataSourceId_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/UpdateDescendantsWithNewDataSourceId", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateDescendantsWithNewDataSourceId_output)
           })
       .catch((error) => {
           reject(error)
@@ -1963,30 +2356,37 @@ export function post_UpdateDescendantsWithNewDataSourceId(requestBody:any, epico
    Summary: Invoke method GetNewRptStructuredOutputDef
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRptStructuredOutputDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRptStructuredOutputDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRptStructuredOutputDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRptStructuredOutputDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRptStructuredOutputDef(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRptStructuredOutputDef(requestBody:GetNewRptStructuredOutputDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRptStructuredOutputDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetNewRptStructuredOutputDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRptStructuredOutputDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -1998,30 +2398,37 @@ export function post_GetNewRptStructuredOutputDef(requestBody:any, epicorHeaders
    Summary: Invoke method GetNewRptStructuredOutputFile
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRptStructuredOutputFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRptStructuredOutputFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRptStructuredOutputFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRptStructuredOutputFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRptStructuredOutputFile(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRptStructuredOutputFile(requestBody:GetNewRptStructuredOutputFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRptStructuredOutputFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetNewRptStructuredOutputFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRptStructuredOutputFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2033,30 +2440,37 @@ export function post_GetNewRptStructuredOutputFile(requestBody:any, epicorHeader
    Summary: Invoke method GetNewRptStructuredOutputFileElement
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRptStructuredOutputFileElement
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRptStructuredOutputFileElement_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRptStructuredOutputFileElement_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRptStructuredOutputFileElement_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRptStructuredOutputFileElement(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRptStructuredOutputFileElement(requestBody:GetNewRptStructuredOutputFileElement_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRptStructuredOutputFileElement_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetNewRptStructuredOutputFileElement", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRptStructuredOutputFileElement_output)
           })
       .catch((error) => {
           reject(error)
@@ -2068,30 +2482,37 @@ export function post_GetNewRptStructuredOutputFileElement(requestBody:any, epico
    Summary: Invoke method GetNewRptStructuredOutputFileXMLNS
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRptStructuredOutputFileXMLNS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRptStructuredOutputFileXMLNS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRptStructuredOutputFileXMLNS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRptStructuredOutputFileXMLNS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRptStructuredOutputFileXMLNS(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRptStructuredOutputFileXMLNS(requestBody:GetNewRptStructuredOutputFileXMLNS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRptStructuredOutputFileXMLNS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetNewRptStructuredOutputFileXMLNS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRptStructuredOutputFileXMLNS_output)
           })
       .catch((error) => {
           reject(error)
@@ -2103,30 +2524,37 @@ export function post_GetNewRptStructuredOutputFileXMLNS(requestBody:any, epicorH
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2138,7 +2566,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2162,15 +2590,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2182,7 +2617,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2206,15 +2641,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2226,30 +2668,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2261,30 +2710,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.StructuredOutputDefinitionSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2295,31 +2751,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputDefListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_RptStructuredOutputDefListRow[],
+   "value":Ice_Tablesets_RptStructuredOutputDefListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputDefRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_RptStructuredOutputDefRow[],
+   "value":Ice_Tablesets_RptStructuredOutputDefRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputFileElementRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_RptStructuredOutputFileElementRow[],
+   "value":Ice_Tablesets_RptStructuredOutputFileElementRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputFileRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_RptStructuredOutputFileRow[],
+   "value":Ice_Tablesets_RptStructuredOutputFileRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_RptStructuredOutputFileXMLNSRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_RptStructuredOutputFileXMLNSRow[],
+   "value":Ice_Tablesets_RptStructuredOutputFileXMLNSRow,
 }
 
 export interface Ice_Tablesets_RptStructuredOutputDefListRow{
@@ -2591,6 +3064,23 @@ export interface Ice_Tablesets_RptStructuredOutputFileXMLNSRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2640,7 +3130,7 @@ export interface DescendantsWithDataSourceIdExist_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -2844,7 +3334,7 @@ export interface GetNewRptStructuredOutputDef_input{
 export interface GetNewRptStructuredOutputDef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   ds:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -2862,7 +3352,7 @@ export interface GetNewRptStructuredOutputFileElement_input{
 export interface GetNewRptStructuredOutputFileElement_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   ds:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -2880,7 +3370,7 @@ export interface GetNewRptStructuredOutputFileXMLNS_input{
 export interface GetNewRptStructuredOutputFileXMLNS_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   ds:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -2896,7 +3386,7 @@ export interface GetNewRptStructuredOutputFile_input{
 export interface GetNewRptStructuredOutputFile_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   ds:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -3296,7 +3786,7 @@ export interface ImportFile_input{
 export interface ImportFile_output{
 parameters : {
       /**  output parameters  */  
-   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -3319,7 +3809,7 @@ export interface ImportJSONSchema_input{
 export interface ImportJSONSchema_output{
 parameters : {
       /**  output parameters  */  
-   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -3342,7 +3832,7 @@ export interface ImportXmlDataWithNoValues_input{
 export interface ImportXmlDataWithNoValues_output{
 parameters : {
       /**  output parameters  */  
-   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -3365,7 +3855,7 @@ export interface ImportXmlDataWithValues_input{
 export interface ImportXmlDataWithValues_output{
 parameters : {
       /**  output parameters  */  
-   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -3396,7 +3886,7 @@ export interface OnChangeReportDataDefinition_input{
 export interface OnChangeReportDataDefinition_output{
 parameters : {
       /**  output parameters  */  
-   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -3425,7 +3915,7 @@ export interface UpdateDescendantsWithNewDataSourceId_input{
 export interface UpdateDescendantsWithNewDataSourceId_output{
 parameters : {
       /**  output parameters  */  
-   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -3444,7 +3934,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtRptStructuredOutputDefTableset[],
+   ds:Ice_Tablesets_UpdExtRptStructuredOutputDefTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3459,7 +3949,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   ds:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -3476,7 +3966,7 @@ export interface ValidateOutputFileElement_input{
 export interface ValidateOutputFileElement_output{
 parameters : {
       /**  output parameters  */  
-   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 
@@ -3490,7 +3980,7 @@ export interface ValidateOutputFileElements_input{
 export interface ValidateOutputFileElements_output{
 parameters : {
       /**  output parameters  */  
-   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset[],
+   structuredDefTS:Ice_Tablesets_RptStructuredOutputDefTableset,
 }
 }
 

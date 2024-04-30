@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.QuickJobEntrySvc
 // Description: Quick Job Entry
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method ChangeAttributeSetID
    Description: Call this method when the attribute set changes
    OperationID: ChangeAttributeSetID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeAttributeSetID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeAttributeSetID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeAttributeSetID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeAttributeSetID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeAttributeSetID(requestBody:ChangeAttributeSetID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeAttributeSetID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/ChangeAttributeSetID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeAttributeSetID_output)
           })
       .catch((error) => {
           reject(error)
@@ -121,30 +178,37 @@ export function post_ChangeAttributeSetID(requestBody:any, epicorHeaders?:Header
    Description: This method validates the QuickJob.Engineered and potentially changes the Released field.
 This method should run when the QuickJob.Engineered field changes.
    OperationID: ChangeQuickJobEngineered
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobEngineered_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobEngineered_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuickJobEngineered_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuickJobEngineered(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuickJobEngineered(requestBody:ChangeQuickJobEngineered_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuickJobEngineered_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/ChangeQuickJobEngineered", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuickJobEngineered_output)
           })
       .catch((error) => {
           reject(error)
@@ -158,30 +222,37 @@ export function post_ChangeQuickJobEngineered(requestBody:any, epicorHeaders?:He
 Engineered fields.
 This method should run when the QuickJob.Firm field changes.
    OperationID: ChangeQuickJobFirm
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobFirm_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobFirm_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuickJobFirm_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuickJobFirm(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuickJobFirm(requestBody:ChangeQuickJobFirm_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuickJobFirm_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/ChangeQuickJobFirm", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuickJobFirm_output)
           })
       .catch((error) => {
           reject(error)
@@ -194,30 +265,37 @@ export function post_ChangeQuickJobFirm(requestBody:any, epicorHeaders?:Headers)
    Description: This method validates the QuickJob.PartNum and defaults fields associated with the partnum.
 This method should run when the QuickJob.PartNum field changes.
    OperationID: ChangeQuickJobPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuickJobPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuickJobPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuickJobPartNum(requestBody:ChangeQuickJobPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuickJobPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/ChangeQuickJobPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuickJobPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -230,30 +308,37 @@ export function post_ChangeQuickJobPartNum(requestBody:any, epicorHeaders?:Heade
    Description: This method validates the QuickJob.Released and potentially changes the firm and engineered fields.
 This method should run when the QuickJob.Released field changes.
    OperationID: ChangeQuickJobReleased
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobReleased_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobReleased_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuickJobReleased_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuickJobReleased(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuickJobReleased(requestBody:ChangeQuickJobReleased_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuickJobReleased_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/ChangeQuickJobReleased", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuickJobReleased_output)
           })
       .catch((error) => {
           reject(error)
@@ -267,30 +352,37 @@ export function post_ChangeQuickJobReleased(requestBody:any, epicorHeaders?:Head
 associated with the warehousecode.
 This method should run when the QuickJob.WarehouseCode field changes.
    OperationID: ChangeQuickJobWarehouseCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobWarehouseCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobWarehouseCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuickJobWarehouseCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuickJobWarehouseCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuickJobWarehouseCode(requestBody:ChangeQuickJobWarehouseCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuickJobWarehouseCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/ChangeQuickJobWarehouseCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuickJobWarehouseCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -302,30 +394,37 @@ export function post_ChangeQuickJobWarehouseCode(requestBody:any, epicorHeaders?
    Summary: Invoke method ChangeQuickJobContract
    Description: Update Quick Job information with WarehouseCode from the Planning Contract
    OperationID: ChangeQuickJobContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuickJobContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuickJobContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuickJobContract(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuickJobContract(requestBody:ChangeQuickJobContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuickJobContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/ChangeQuickJobContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuickJobContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -337,30 +436,37 @@ export function post_ChangeQuickJobContract(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ChangeRevisionNum
    Description: Call this method when Revision changes to maintain inventory tracking
    OperationID: ChangeRevisionNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRevisionNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRevisionNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRevisionNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRevisionNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRevisionNum(requestBody:ChangeRevisionNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRevisionNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/ChangeRevisionNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRevisionNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -372,30 +478,37 @@ export function post_ChangeRevisionNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateJobNum
    Description: Check if the jobnum exists
    OperationID: ValidateJobNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateJobNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateJobNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateJobNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateJobNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateJobNum(requestBody:ValidateJobNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateJobNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/ValidateJobNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateJobNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -407,30 +520,37 @@ export function post_ValidateJobNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GenerateJob
    Description: Generate the job.
    OperationID: GenerateJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateJob_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateJob_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateJob_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateJob(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateJob(requestBody:GenerateJob_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/GenerateJob", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -446,30 +566,37 @@ creates the record and assigns the next job number, date, firm, released,enginee
 and returns the dataset with the one record.  This dataset is not a database dataset, it
 is a temporary dataset with the only record ever in the dataset is the one that you create here.
    OperationID: GetNewQuickJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuickJob_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuickJob_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuickJob_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuickJob(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuickJob(requestBody:GetNewQuickJob_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuickJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/GetNewQuickJob", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuickJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -481,30 +608,37 @@ export function post_GetNewQuickJob(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPartXRefInfo
    Description: This method defaults PartAdvisor fields when the PartNum field changes
    OperationID: GetPartXRefInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartXRefInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartXRefInfo(requestBody:GetPartXRefInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartXRefInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/GetPartXRefInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartXRefInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -515,30 +649,37 @@ export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method FindPart
    OperationID: FindPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindPart(requestBody:any, epicorHeaders?:Headers){
+export function post_FindPart(requestBody:FindPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/FindPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -549,30 +690,37 @@ export function post_FindPart(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetPartFromRowID
    OperationID: GetPartFromRowID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartFromRowID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartFromRowID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartFromRowID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartFromRowID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartFromRowID(requestBody:GetPartFromRowID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartFromRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/GetPartFromRowID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartFromRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -584,30 +732,37 @@ export function post_GetPartFromRowID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateJobInfo
    Description: Validates Job Information before create it.
    OperationID: ValidateJobInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateJobInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateJobInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateJobInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateJobInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateJobInfo(requestBody:ValidateJobInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateJobInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/ValidateJobInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateJobInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -624,30 +779,37 @@ it does, the LegalNumberPrompt business objects needs to be called to
 gather that information.  This method should be called when the user
 saves the record but before the Update method is called.
    OperationID: PreGenerateJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreGenerateJob_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreGenerateJob_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreGenerateJob_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreGenerateJob(requestBody:any, epicorHeaders?:Headers){
+export function post_PreGenerateJob(requestBody:PreGenerateJob_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreGenerateJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickJobEntrySvc/PreGenerateJob", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreGenerateJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -658,11 +820,45 @@ export function post_PreGenerateJob(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -678,7 +874,7 @@ export interface ChangeAttributeSetID_input{
 export interface ChangeAttributeSetID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
 }
 }
 
@@ -696,7 +892,7 @@ export interface ChangeQuickJobContract_output{
 parameters : {
       /**  output parameters  */  
    ipContractID:string,
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
 }
 }
 
@@ -710,7 +906,7 @@ export interface ChangeQuickJobEngineered_input{
 export interface ChangeQuickJobEngineered_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
 }
 }
 
@@ -724,7 +920,7 @@ export interface ChangeQuickJobFirm_input{
 export interface ChangeQuickJobFirm_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
 }
 }
 
@@ -741,7 +937,7 @@ export interface ChangeQuickJobPartNum_input{
 export interface ChangeQuickJobPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
 }
 }
 
@@ -755,7 +951,7 @@ export interface ChangeQuickJobReleased_input{
 export interface ChangeQuickJobReleased_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
 }
 }
 
@@ -769,7 +965,7 @@ export interface ChangeQuickJobWarehouseCode_input{
 export interface ChangeQuickJobWarehouseCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
 }
 }
 
@@ -786,7 +982,7 @@ export interface ChangeRevisionNum_input{
 export interface ChangeRevisionNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
 }
 }
 
@@ -1026,7 +1222,7 @@ export interface GenerateJob_input{
 export interface GenerateJob_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
    cMessageText:string,
 }
 }
@@ -1118,7 +1314,7 @@ export interface PreGenerateJob_input{
 export interface PreGenerateJob_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
    requiresUserInput:boolean,
 }
 }
@@ -1133,7 +1329,7 @@ export interface ValidateJobInfo_input{
 export interface ValidateJobInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickJobEntryTableset[],
+   ds:Erp_Tablesets_QuickJobEntryTableset,
 }
 }
 

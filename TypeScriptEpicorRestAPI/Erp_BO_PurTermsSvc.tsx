@@ -1,6 +1,7 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PurTermsSvc
 // Description: Purchasing PurTerms master. Used by Purchase Order management and Accounts Payable modules.
 DELETE: Not allowed if referenced in the Vendor, POHeader or APInvHed file.
@@ -8,9 +9,27 @@ Since the delete of a PurTerms code should be a very rare occurence, these files
 be indexed by the code. This is done so not to put undue overhead on the system for
 maintaining indexes. A Message will be displayed "Please Wait...Validating delete Request".
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -19,7 +38,7 @@ maintaining indexes. A Message will be displayed "Please Wait...Validating delet
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -37,7 +56,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -51,7 +77,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -69,7 +95,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -90,10 +123,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsRow
    */  
 export function get_PurTerms(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -108,7 +141,14 @@ export function get_PurTerms(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsRow)
           })
@@ -122,15 +162,15 @@ export function get_PurTerms(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PurTerms
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PurTermsRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PurTermsRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PurTermsRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PurTermsRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PurTerms(requestBody:any, epicorHeaders?:Headers){
+export function post_PurTerms(requestBody:Erp_Tablesets_PurTermsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -144,7 +184,14 @@ export function post_PurTerms(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -163,10 +210,10 @@ export function post_PurTerms(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PurTermsRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PurTermsRow
    */  
 export function get_PurTerms_Company_TermsCode(Company:string, TermsCode:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -181,7 +228,14 @@ export function get_PurTerms_Company_TermsCode(Company:string, TermsCode:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PurTermsRow)
           })
@@ -197,15 +251,15 @@ export function get_PurTerms_Company_TermsCode(Company:string, TermsCode:string,
    OperationID: UpdateExt_PurTerm
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TermsCode Desc: TermsCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PurTermsRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PurTermsRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PurTerms_Company_TermsCode(Company:string, TermsCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PurTerms_Company_TermsCode(Company:string, TermsCode:string, requestBody:Erp_Tablesets_PurTermsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -219,7 +273,14 @@ export function patch_PurTerms_Company_TermsCode(Company:string, TermsCode:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -235,7 +296,7 @@ export function patch_PurTerms_Company_TermsCode(Company:string, TermsCode:strin
    OperationID: DeleteUpdateExt_PurTerm
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TermsCode Desc: TermsCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -254,7 +315,14 @@ export function delete_PurTerms_Company_TermsCode(Company:string, TermsCode:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -276,10 +344,10 @@ export function delete_PurTerms_Company_TermsCode(Company:string, TermsCode:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsDtlRow
    */  
 export function get_PurTerms_Company_TermsCode_PurTermsDtls(Company:string, TermsCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -294,7 +362,14 @@ export function get_PurTerms_Company_TermsCode_PurTermsDtls(Company:string, Term
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsDtlRow)
           })
@@ -313,10 +388,10 @@ export function get_PurTerms_Company_TermsCode_PurTermsDtls(Company:string, Term
       @param TermsSeq Desc: TermsSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PurTermsDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PurTermsDtlRow
    */  
 export function get_PurTerms_Company_TermsCode_PurTermsDtls_Company_TermsCode_TermsSeq(Company:string, TermsCode:string, TermsSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -331,7 +406,14 @@ export function get_PurTerms_Company_TermsCode_PurTermsDtls_Company_TermsCode_Te
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PurTermsDtlRow)
           })
@@ -353,10 +435,10 @@ export function get_PurTerms_Company_TermsCode_PurTermsDtls_Company_TermsCode_Te
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsSchedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsSchedRow
    */  
 export function get_PurTerms_Company_TermsCode_PurTermsScheds(Company:string, TermsCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -371,7 +453,14 @@ export function get_PurTerms_Company_TermsCode_PurTermsScheds(Company:string, Te
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsSchedRow)
           })
@@ -390,10 +479,10 @@ export function get_PurTerms_Company_TermsCode_PurTermsScheds(Company:string, Te
       @param PaySeq Desc: PaySeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PurTermsSchedRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PurTermsSchedRow
    */  
 export function get_PurTerms_Company_TermsCode_PurTermsScheds_Company_TermsCode_PaySeq(Company:string, TermsCode:string, PaySeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -408,7 +497,14 @@ export function get_PurTerms_Company_TermsCode_PurTermsScheds_Company_TermsCode_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PurTermsSchedRow)
           })
@@ -430,10 +526,10 @@ export function get_PurTerms_Company_TermsCode_PurTermsScheds_Company_TermsCode_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsAttchRow
    */  
 export function get_PurTerms_Company_TermsCode_PurTermsAttches(Company:string, TermsCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -448,7 +544,14 @@ export function get_PurTerms_Company_TermsCode_PurTermsAttches(Company:string, T
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsAttchRow)
           })
@@ -467,10 +570,10 @@ export function get_PurTerms_Company_TermsCode_PurTermsAttches(Company:string, T
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PurTermsAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PurTermsAttchRow
    */  
 export function get_PurTerms_Company_TermsCode_PurTermsAttches_Company_TermsCode_DrawingSeq(Company:string, TermsCode:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -485,7 +588,14 @@ export function get_PurTerms_Company_TermsCode_PurTermsAttches_Company_TermsCode
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PurTermsAttchRow)
           })
@@ -505,10 +615,10 @@ export function get_PurTerms_Company_TermsCode_PurTermsAttches_Company_TermsCode
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsDtlRow
    */  
 export function get_PurTermsDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -523,7 +633,14 @@ export function get_PurTermsDtls(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsDtlRow)
           })
@@ -537,15 +654,15 @@ export function get_PurTermsDtls(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PurTermsDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PurTermsDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PurTermsDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PurTermsDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PurTermsDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PurTermsDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_PurTermsDtls(requestBody:Erp_Tablesets_PurTermsDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -559,7 +676,14 @@ export function post_PurTermsDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -578,10 +702,10 @@ export function post_PurTermsDtls(requestBody:any, epicorHeaders?:Headers){
       @param TermsSeq Desc: TermsSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PurTermsDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PurTermsDtlRow
    */  
 export function get_PurTermsDtls_Company_TermsCode_TermsSeq(Company:string, TermsCode:string, TermsSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -596,7 +720,14 @@ export function get_PurTermsDtls_Company_TermsCode_TermsSeq(Company:string, Term
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PurTermsDtlRow)
           })
@@ -613,15 +744,15 @@ export function get_PurTermsDtls_Company_TermsCode_TermsSeq(Company:string, Term
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TermsCode Desc: TermsCode   Required: True   Allow empty value : True
       @param TermsSeq Desc: TermsSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PurTermsDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PurTermsDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PurTermsDtls_Company_TermsCode_TermsSeq(Company:string, TermsCode:string, TermsSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PurTermsDtls_Company_TermsCode_TermsSeq(Company:string, TermsCode:string, TermsSeq:string, requestBody:Erp_Tablesets_PurTermsDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -635,7 +766,14 @@ export function patch_PurTermsDtls_Company_TermsCode_TermsSeq(Company:string, Te
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -652,7 +790,7 @@ export function patch_PurTermsDtls_Company_TermsCode_TermsSeq(Company:string, Te
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TermsCode Desc: TermsCode   Required: True   Allow empty value : True
       @param TermsSeq Desc: TermsSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -671,7 +809,14 @@ export function delete_PurTermsDtls_Company_TermsCode_TermsSeq(Company:string, T
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -691,10 +836,10 @@ export function delete_PurTermsDtls_Company_TermsCode_TermsSeq(Company:string, T
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsSchedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsSchedRow
    */  
 export function get_PurTermsScheds(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -709,7 +854,14 @@ export function get_PurTermsScheds(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsSchedRow)
           })
@@ -723,15 +875,15 @@ export function get_PurTermsScheds(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PurTermsScheds
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PurTermsSchedRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PurTermsSchedRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PurTermsSchedRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PurTermsSchedRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PurTermsScheds(requestBody:any, epicorHeaders?:Headers){
+export function post_PurTermsScheds(requestBody:Erp_Tablesets_PurTermsSchedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -745,7 +897,14 @@ export function post_PurTermsScheds(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -764,10 +923,10 @@ export function post_PurTermsScheds(requestBody:any, epicorHeaders?:Headers){
       @param PaySeq Desc: PaySeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PurTermsSchedRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PurTermsSchedRow
    */  
 export function get_PurTermsScheds_Company_TermsCode_PaySeq(Company:string, TermsCode:string, PaySeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -782,7 +941,14 @@ export function get_PurTermsScheds_Company_TermsCode_PaySeq(Company:string, Term
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PurTermsSchedRow)
           })
@@ -799,15 +965,15 @@ export function get_PurTermsScheds_Company_TermsCode_PaySeq(Company:string, Term
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TermsCode Desc: TermsCode   Required: True   Allow empty value : True
       @param PaySeq Desc: PaySeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PurTermsSchedRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PurTermsSchedRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PurTermsScheds_Company_TermsCode_PaySeq(Company:string, TermsCode:string, PaySeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PurTermsScheds_Company_TermsCode_PaySeq(Company:string, TermsCode:string, PaySeq:string, requestBody:Erp_Tablesets_PurTermsSchedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -821,7 +987,14 @@ export function patch_PurTermsScheds_Company_TermsCode_PaySeq(Company:string, Te
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -838,7 +1011,7 @@ export function patch_PurTermsScheds_Company_TermsCode_PaySeq(Company:string, Te
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TermsCode Desc: TermsCode   Required: True   Allow empty value : True
       @param PaySeq Desc: PaySeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -857,7 +1030,14 @@ export function delete_PurTermsScheds_Company_TermsCode_PaySeq(Company:string, T
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -877,10 +1057,10 @@ export function delete_PurTermsScheds_Company_TermsCode_PaySeq(Company:string, T
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsAttchRow
    */  
 export function get_PurTermsAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -895,7 +1075,14 @@ export function get_PurTermsAttches(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsAttchRow)
           })
@@ -909,15 +1096,15 @@ export function get_PurTermsAttches(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PurTermsAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PurTermsAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PurTermsAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PurTermsAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PurTermsAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PurTermsAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_PurTermsAttches(requestBody:Erp_Tablesets_PurTermsAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -931,7 +1118,14 @@ export function post_PurTermsAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -950,10 +1144,10 @@ export function post_PurTermsAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PurTermsAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PurTermsAttchRow
    */  
 export function get_PurTermsAttches_Company_TermsCode_DrawingSeq(Company:string, TermsCode:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -968,7 +1162,14 @@ export function get_PurTermsAttches_Company_TermsCode_DrawingSeq(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PurTermsAttchRow)
           })
@@ -985,15 +1186,15 @@ export function get_PurTermsAttches_Company_TermsCode_DrawingSeq(Company:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TermsCode Desc: TermsCode   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PurTermsAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PurTermsAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PurTermsAttches_Company_TermsCode_DrawingSeq(Company:string, TermsCode:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PurTermsAttches_Company_TermsCode_DrawingSeq(Company:string, TermsCode:string, DrawingSeq:string, requestBody:Erp_Tablesets_PurTermsAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1007,7 +1208,14 @@ export function patch_PurTermsAttches_Company_TermsCode_DrawingSeq(Company:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1024,7 +1232,7 @@ export function patch_PurTermsAttches_Company_TermsCode_DrawingSeq(Company:strin
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TermsCode Desc: TermsCode   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1043,7 +1251,14 @@ export function delete_PurTermsAttches_Company_TermsCode_DrawingSeq(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1063,10 +1278,10 @@ export function delete_PurTermsAttches_Company_TermsCode_DrawingSeq(Company:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PurTermsListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1081,7 +1296,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsListRow)
           })
@@ -1093,6 +1315,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1107,7 +1346,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1176,15 +1415,22 @@ export function get_GetRows(whereClausePurTerms:string, whereClausePurTermsAttch
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1197,7 +1443,7 @@ export function get_GetRows(whereClausePurTerms:string, whereClausePurTermsAttch
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1221,15 +1467,22 @@ export function get_GetByID(termsCode:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1244,30 +1497,37 @@ Parameters:  none
 Notes:
 <param name="vDueOnDay">Propose Discount Days</param><param name="ds">Temporary tables for PurTerms details</param>
    OperationID: OnChangingDisDays
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingDisDays_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingDisDays_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingDisDays_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingDisDays(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingDisDays(requestBody:OnChangingDisDays_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingDisDays_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/OnChangingDisDays", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingDisDays_output)
           })
       .catch((error) => {
           reject(error)
@@ -1282,30 +1542,37 @@ Parameters:  none
 Notes:
 <param name="vDiscountPercent">Propose Discount Days</param><param name="ds">Temporary tables for PurTerms details</param>
    OperationID: OnChangingDisPercent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingDisPercent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingDisPercent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingDisPercent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingDisPercent(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingDisPercent(requestBody:OnChangingDisPercent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingDisPercent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/OnChangingDisPercent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingDisPercent_output)
           })
       .catch((error) => {
           reject(error)
@@ -1320,30 +1587,37 @@ Parameters:  none
 Notes:
 <param name="vNumOfDay">Propose Discount Days</param><param name="ds">Temporary tables for PurTerms details</param>
    OperationID: OnChangingNumOfDays
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingNumOfDays_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingNumOfDays_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingNumOfDays_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingNumOfDays(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingNumOfDays(requestBody:OnChangingNumOfDays_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingNumOfDays_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/OnChangingNumOfDays", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingNumOfDays_output)
           })
       .catch((error) => {
           reject(error)
@@ -1358,30 +1632,37 @@ Parameters:  none
 Notes:
 <param name="vNumOfMonths">Propose Discount Days</param><param name="ds">Temporary tables for PurTerms details</param>
    OperationID: OnChangingNumOfMonths
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingNumOfMonths_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingNumOfMonths_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingNumOfMonths_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingNumOfMonths(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingNumOfMonths(requestBody:OnChangingNumOfMonths_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingNumOfMonths_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/OnChangingNumOfMonths", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingNumOfMonths_output)
           })
       .catch((error) => {
           reject(error)
@@ -1396,30 +1677,37 @@ Parameters:  none
 Notes:
 <param name="pDueOnDay">Propose Discount Days</param>
    OperationID: OnChangingTermDueOnDay
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingTermDueOnDay_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingTermDueOnDay_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingTermDueOnDay_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingTermDueOnDay(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingTermDueOnDay(requestBody:OnChangingTermDueOnDay_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingTermDueOnDay_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/OnChangingTermDueOnDay", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingTermDueOnDay_output)
           })
       .catch((error) => {
           reject(error)
@@ -1430,30 +1718,37 @@ export function post_OnChangingTermDueOnDay(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method GetPurTermsSched
    OperationID: GetPurTermsSched
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPurTermsSched_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPurTermsSched_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPurTermsSched_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPurTermsSched(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPurTermsSched(requestBody:GetPurTermsSched_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPurTermsSched_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetPurTermsSched", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPurTermsSched_output)
           })
       .catch((error) => {
           reject(error)
@@ -1466,7 +1761,7 @@ export function post_GetPurTermsSched(requestBody:any, epicorHeaders?:Headers){
    Description: Purpose: Gets list of codes/descriptions for TermsType combo-box
 Parameters: none
    OperationID: GetTermsTypeCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTermsTypeCodeDescList_output
@@ -1479,15 +1774,22 @@ export function post_GetTermsTypeCodeDescList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTermsTypeCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetTermsTypeCodeDescList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTermsTypeCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1499,30 +1801,37 @@ export function post_GetTermsTypeCodeDescList(epicorHeaders?:Headers){
    Summary: Invoke method OnPurTermsSchedPercentageUpdate
    Description: Called on PurTermsSched.PayPercentage update
    OperationID: OnPurTermsSchedPercentageUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnPurTermsSchedPercentageUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnPurTermsSchedPercentageUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnPurTermsSchedPercentageUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnPurTermsSchedPercentageUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnPurTermsSchedPercentageUpdate(requestBody:OnPurTermsSchedPercentageUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnPurTermsSchedPercentageUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/OnPurTermsSchedPercentageUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnPurTermsSchedPercentageUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1534,30 +1843,37 @@ export function post_OnPurTermsSchedPercentageUpdate(requestBody:any, epicorHead
    Summary: Invoke method ValidateDiscountPercent
    Description: This method will check if current discount percent is less or greater than previous or next discounts and send a warning message.
    OperationID: ValidateDiscountPercent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateDiscountPercent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateDiscountPercent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateDiscountPercent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateDiscountPercent(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateDiscountPercent(requestBody:ValidateDiscountPercent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateDiscountPercent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/ValidateDiscountPercent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateDiscountPercent_output)
           })
       .catch((error) => {
           reject(error)
@@ -1568,30 +1884,37 @@ export function post_ValidateDiscountPercent(requestBody:any, epicorHeaders?:Hea
    /**  
    Summary: Invoke method OnPurTermsSchedPercentageUpdate2
    OperationID: OnPurTermsSchedPercentageUpdate2
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnPurTermsSchedPercentageUpdate2_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnPurTermsSchedPercentageUpdate2_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnPurTermsSchedPercentageUpdate2_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnPurTermsSchedPercentageUpdate2(requestBody:any, epicorHeaders?:Headers){
+export function post_OnPurTermsSchedPercentageUpdate2(requestBody:OnPurTermsSchedPercentageUpdate2_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnPurTermsSchedPercentageUpdate2_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/OnPurTermsSchedPercentageUpdate2", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnPurTermsSchedPercentageUpdate2_output)
           })
       .catch((error) => {
           reject(error)
@@ -1603,30 +1926,37 @@ export function post_OnPurTermsSchedPercentageUpdate2(requestBody:any, epicorHea
    Summary: Invoke method GetNewPurTerms
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPurTerms
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPurTerms_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPurTerms_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPurTerms_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPurTerms(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPurTerms(requestBody:GetNewPurTerms_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPurTerms_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetNewPurTerms", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPurTerms_output)
           })
       .catch((error) => {
           reject(error)
@@ -1638,30 +1968,37 @@ export function post_GetNewPurTerms(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewPurTermsAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPurTermsAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPurTermsAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPurTermsAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPurTermsAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPurTermsAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPurTermsAttch(requestBody:GetNewPurTermsAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPurTermsAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetNewPurTermsAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPurTermsAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1673,30 +2010,37 @@ export function post_GetNewPurTermsAttch(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewPurTermsDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPurTermsDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPurTermsDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPurTermsDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPurTermsDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPurTermsDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPurTermsDtl(requestBody:GetNewPurTermsDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPurTermsDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetNewPurTermsDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPurTermsDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1708,30 +2052,37 @@ export function post_GetNewPurTermsDtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewPurTermsSched
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPurTermsSched
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPurTermsSched_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPurTermsSched_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPurTermsSched_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPurTermsSched(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPurTermsSched(requestBody:GetNewPurTermsSched_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPurTermsSched_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetNewPurTermsSched", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPurTermsSched_output)
           })
       .catch((error) => {
           reject(error)
@@ -1743,30 +2094,37 @@ export function post_GetNewPurTermsSched(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1781,7 +2139,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1823,15 +2181,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1843,7 +2208,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1867,15 +2232,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1887,7 +2259,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1911,15 +2283,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1931,30 +2310,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1966,30 +2352,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PurTermsSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2000,31 +2393,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PurTermsAttchRow[],
+   "value":Erp_Tablesets_PurTermsAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PurTermsDtlRow[],
+   "value":Erp_Tablesets_PurTermsDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PurTermsListRow[],
+   "value":Erp_Tablesets_PurTermsListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PurTermsRow[],
+   "value":Erp_Tablesets_PurTermsRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PurTermsSchedRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PurTermsSchedRow[],
+   "value":Erp_Tablesets_PurTermsSchedRow,
 }
 
 export interface Erp_Tablesets_PurTermsAttchRow{
@@ -2214,6 +2624,23 @@ export interface Erp_Tablesets_PurTermsSchedRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2499,7 +2926,7 @@ export interface GetNewPurTermsAttch_input{
 export interface GetNewPurTermsAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2515,7 +2942,7 @@ export interface GetNewPurTermsDtl_input{
 export interface GetNewPurTermsDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2531,7 +2958,7 @@ export interface GetNewPurTermsSched_input{
 export interface GetNewPurTermsSched_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2545,7 +2972,7 @@ export interface GetNewPurTerms_input{
 export interface GetNewPurTerms_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2643,7 +3070,7 @@ export interface OnChangingDisDays_input{
 export interface OnChangingDisDays_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2659,7 +3086,7 @@ export interface OnChangingDisPercent_input{
 export interface OnChangingDisPercent_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2675,7 +3102,7 @@ export interface OnChangingNumOfDays_input{
 export interface OnChangingNumOfDays_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2691,7 +3118,7 @@ export interface OnChangingNumOfMonths_input{
 export interface OnChangingNumOfMonths_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2715,7 +3142,7 @@ export interface OnPurTermsSchedPercentageUpdate2_input{
 export interface OnPurTermsSchedPercentageUpdate2_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2729,7 +3156,7 @@ export interface OnPurTermsSchedPercentageUpdate_input{
 export interface OnPurTermsSchedPercentageUpdate_output{
 parameters : {
       /**  output parameters  */  
-   ts:Erp_Tablesets_PurTermsTableset[],
+   ts:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2748,7 +3175,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtPurTermsTableset[],
+   ds:Erp_Tablesets_UpdExtPurTermsTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2763,7 +3190,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
 }
 }
 
@@ -2778,7 +3205,7 @@ export interface ValidateDiscountPercent_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PurTermsTableset[],
+   ds:Erp_Tablesets_PurTermsTableset,
    warningMessage:string,
 }
 }

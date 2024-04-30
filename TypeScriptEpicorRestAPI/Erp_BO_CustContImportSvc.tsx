@@ -1,14 +1,33 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.CustContImportSvc
 // Description: Purpose:
 Parameters:  none
 Notes:
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -17,7 +36,7 @@ Notes:
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -35,7 +54,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -49,7 +75,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -67,7 +93,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -88,10 +121,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustomerImportRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustomerImportRow
    */  
 export function get_CustContImports(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -106,7 +139,14 @@ export function get_CustContImports(select?:string, expand?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustomerImportRow)
           })
@@ -120,15 +160,15 @@ export function get_CustContImports(select?:string, expand?:string, filter?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CustContImports
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustomerImportRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustomerImportRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CustomerImportRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CustomerImportRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustContImports(requestBody:any, epicorHeaders?:Headers){
+export function post_CustContImports(requestBody:Erp_Tablesets_CustomerImportRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -142,7 +182,14 @@ export function post_CustContImports(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -161,10 +208,10 @@ export function post_CustContImports(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustomerImportRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustomerImportRow
    */  
 export function get_CustContImports_Company_ImportID(Company:string, ImportID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -179,7 +226,14 @@ export function get_CustContImports_Company_ImportID(Company:string, ImportID:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustomerImportRow)
           })
@@ -195,15 +249,15 @@ export function get_CustContImports_Company_ImportID(Company:string, ImportID:st
    OperationID: UpdateExt_CustContImport
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ImportID Desc: ImportID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustomerImportRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustomerImportRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CustContImports_Company_ImportID(Company:string, ImportID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CustContImports_Company_ImportID(Company:string, ImportID:string, requestBody:Erp_Tablesets_CustomerImportRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_CustContImports_Company_ImportID(Company:string, ImportID:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -233,7 +294,7 @@ export function patch_CustContImports_Company_ImportID(Company:string, ImportID:
    OperationID: DeleteUpdateExt_CustContImport
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ImportID Desc: ImportID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -252,7 +313,14 @@ export function delete_CustContImports_Company_ImportID(Company:string, ImportID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -275,10 +343,10 @@ export function delete_CustContImports_Company_ImportID(Company:string, ImportID
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntImportRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntImportRow
    */  
 export function get_CustContImports_Company_ImportID_CustCntImports(Company:string, ImportID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -293,7 +361,14 @@ export function get_CustContImports_Company_ImportID_CustCntImports(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntImportRow)
           })
@@ -313,10 +388,10 @@ export function get_CustContImports_Company_ImportID_CustCntImports(Company:stri
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustCntImportRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustCntImportRow
    */  
 export function get_CustContImports_Company_ImportID_CustCntImports_Company_ParentImportID_ImportID(Company:string, ImportID:string, ParentImportID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -331,7 +406,14 @@ export function get_CustContImports_Company_ImportID_CustCntImports_Company_Pare
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustCntImportRow)
           })
@@ -353,10 +435,10 @@ export function get_CustContImports_Company_ImportID_CustCntImports_Company_Pare
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustomerImportAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustomerImportAttchRow
    */  
 export function get_CustContImports_Company_ImportID_CustomerImportAttches(Company:string, ImportID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -371,7 +453,14 @@ export function get_CustContImports_Company_ImportID_CustomerImportAttches(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustomerImportAttchRow)
           })
@@ -390,10 +479,10 @@ export function get_CustContImports_Company_ImportID_CustomerImportAttches(Compa
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustomerImportAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustomerImportAttchRow
    */  
 export function get_CustContImports_Company_ImportID_CustomerImportAttches_Company_ImportID_DrawingSeq(Company:string, ImportID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -408,7 +497,14 @@ export function get_CustContImports_Company_ImportID_CustomerImportAttches_Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustomerImportAttchRow)
           })
@@ -429,10 +525,10 @@ export function get_CustContImports_Company_ImportID_CustomerImportAttches_Compa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntImportRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntImportRow
    */  
 export function get_CustCntImports(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -447,7 +543,14 @@ export function get_CustCntImports(select?:string, expand?:string, filter?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntImportRow)
           })
@@ -461,15 +564,15 @@ export function get_CustCntImports(select?:string, expand?:string, filter?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CustCntImports
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustCntImportRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustCntImportRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CustCntImportRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CustCntImportRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustCntImports(requestBody:any, epicorHeaders?:Headers){
+export function post_CustCntImports(requestBody:Erp_Tablesets_CustCntImportRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -483,7 +586,14 @@ export function post_CustCntImports(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -503,10 +613,10 @@ export function post_CustCntImports(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustCntImportRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustCntImportRow
    */  
 export function get_CustCntImports_Company_ParentImportID_ImportID(Company:string, ParentImportID:string, ImportID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -521,7 +631,14 @@ export function get_CustCntImports_Company_ParentImportID_ImportID(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustCntImportRow)
           })
@@ -538,15 +655,15 @@ export function get_CustCntImports_Company_ParentImportID_ImportID(Company:strin
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ParentImportID Desc: ParentImportID   Required: True   Allow empty value : True
       @param ImportID Desc: ImportID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustCntImportRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustCntImportRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CustCntImports_Company_ParentImportID_ImportID(Company:string, ParentImportID:string, ImportID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CustCntImports_Company_ParentImportID_ImportID(Company:string, ParentImportID:string, ImportID:string, requestBody:Erp_Tablesets_CustCntImportRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -560,7 +677,14 @@ export function patch_CustCntImports_Company_ParentImportID_ImportID(Company:str
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -577,7 +701,7 @@ export function patch_CustCntImports_Company_ParentImportID_ImportID(Company:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ParentImportID Desc: ParentImportID   Required: True   Allow empty value : True
       @param ImportID Desc: ImportID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -596,7 +720,14 @@ export function delete_CustCntImports_Company_ParentImportID_ImportID(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -619,10 +750,10 @@ export function delete_CustCntImports_Company_ParentImportID_ImportID(Company:st
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntImportAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntImportAttchRow
    */  
 export function get_CustCntImports_Company_ParentImportID_ImportID_CustCntImportAttches(Company:string, ParentImportID:string, ImportID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -637,7 +768,14 @@ export function get_CustCntImports_Company_ParentImportID_ImportID_CustCntImport
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntImportAttchRow)
           })
@@ -657,10 +795,10 @@ export function get_CustCntImports_Company_ParentImportID_ImportID_CustCntImport
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustCntImportAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustCntImportAttchRow
    */  
 export function get_CustCntImports_Company_ParentImportID_ImportID_CustCntImportAttches_Company_ParentImportID_ImportID_DrawingSeq(Company:string, ParentImportID:string, ImportID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -675,7 +813,14 @@ export function get_CustCntImports_Company_ParentImportID_ImportID_CustCntImport
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustCntImportAttchRow)
           })
@@ -695,10 +840,10 @@ export function get_CustCntImports_Company_ParentImportID_ImportID_CustCntImport
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntImportAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntImportAttchRow
    */  
 export function get_CustCntImportAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -713,7 +858,14 @@ export function get_CustCntImportAttches(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntImportAttchRow)
           })
@@ -727,15 +879,15 @@ export function get_CustCntImportAttches(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CustCntImportAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustCntImportAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustCntImportAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CustCntImportAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CustCntImportAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustCntImportAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_CustCntImportAttches(requestBody:Erp_Tablesets_CustCntImportAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -749,7 +901,14 @@ export function post_CustCntImportAttches(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -769,10 +928,10 @@ export function post_CustCntImportAttches(requestBody:any, epicorHeaders?:Header
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustCntImportAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustCntImportAttchRow
    */  
 export function get_CustCntImportAttches_Company_ParentImportID_ImportID_DrawingSeq(Company:string, ParentImportID:string, ImportID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -787,7 +946,14 @@ export function get_CustCntImportAttches_Company_ParentImportID_ImportID_Drawing
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustCntImportAttchRow)
           })
@@ -805,15 +971,15 @@ export function get_CustCntImportAttches_Company_ParentImportID_ImportID_Drawing
       @param ParentImportID Desc: ParentImportID   Required: True   Allow empty value : True
       @param ImportID Desc: ImportID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustCntImportAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustCntImportAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CustCntImportAttches_Company_ParentImportID_ImportID_DrawingSeq(Company:string, ParentImportID:string, ImportID:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CustCntImportAttches_Company_ParentImportID_ImportID_DrawingSeq(Company:string, ParentImportID:string, ImportID:string, DrawingSeq:string, requestBody:Erp_Tablesets_CustCntImportAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -827,7 +993,14 @@ export function patch_CustCntImportAttches_Company_ParentImportID_ImportID_Drawi
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -845,7 +1018,7 @@ export function patch_CustCntImportAttches_Company_ParentImportID_ImportID_Drawi
       @param ParentImportID Desc: ParentImportID   Required: True   Allow empty value : True
       @param ImportID Desc: ImportID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -864,7 +1037,14 @@ export function delete_CustCntImportAttches_Company_ParentImportID_ImportID_Draw
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -884,10 +1064,10 @@ export function delete_CustCntImportAttches_Company_ParentImportID_ImportID_Draw
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustomerImportAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustomerImportAttchRow
    */  
 export function get_CustomerImportAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -902,7 +1082,14 @@ export function get_CustomerImportAttches(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustomerImportAttchRow)
           })
@@ -916,15 +1103,15 @@ export function get_CustomerImportAttches(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CustomerImportAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustomerImportAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustomerImportAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CustomerImportAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CustomerImportAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustomerImportAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_CustomerImportAttches(requestBody:Erp_Tablesets_CustomerImportAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -938,7 +1125,14 @@ export function post_CustomerImportAttches(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -957,10 +1151,10 @@ export function post_CustomerImportAttches(requestBody:any, epicorHeaders?:Heade
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustomerImportAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustomerImportAttchRow
    */  
 export function get_CustomerImportAttches_Company_ImportID_DrawingSeq(Company:string, ImportID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -975,7 +1169,14 @@ export function get_CustomerImportAttches_Company_ImportID_DrawingSeq(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustomerImportAttchRow)
           })
@@ -992,15 +1193,15 @@ export function get_CustomerImportAttches_Company_ImportID_DrawingSeq(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ImportID Desc: ImportID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustomerImportAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustomerImportAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CustomerImportAttches_Company_ImportID_DrawingSeq(Company:string, ImportID:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CustomerImportAttches_Company_ImportID_DrawingSeq(Company:string, ImportID:string, DrawingSeq:string, requestBody:Erp_Tablesets_CustomerImportAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1014,7 +1215,14 @@ export function patch_CustomerImportAttches_Company_ImportID_DrawingSeq(Company:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1031,7 +1239,7 @@ export function patch_CustomerImportAttches_Company_ImportID_DrawingSeq(Company:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ImportID Desc: ImportID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1050,7 +1258,14 @@ export function delete_CustomerImportAttches_Company_ImportID_DrawingSeq(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1070,10 +1285,10 @@ export function delete_CustomerImportAttches_Company_ImportID_DrawingSeq(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustomerImportListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustomerImportListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1088,7 +1303,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustomerImportListRow)
           })
@@ -1100,6 +1322,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1114,7 +1353,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1183,15 +1422,22 @@ export function get_GetRows(whereClauseCustomerImport:string, whereClauseCustome
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1204,7 +1450,7 @@ export function get_GetRows(whereClauseCustomerImport:string, whereClauseCustome
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1228,15 +1474,22 @@ export function get_GetByID(importID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1251,7 +1504,7 @@ export function get_GetByID(importID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1293,15 +1546,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1313,7 +1573,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method AutoMatch
    Description: Method to call to auto match import customers to existing customers.
    OperationID: AutoMatch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/AutoMatch_output
@@ -1326,15 +1586,22 @@ export function post_AutoMatch(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AutoMatch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/AutoMatch", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AutoMatch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1347,30 +1614,37 @@ export function post_AutoMatch(epicorHeaders?:Headers){
    Description: Method to call when changing the role code on an imported customer contact record.  Validates the
 role code and updates the role code description with the new value.
    OperationID: ChangeRoleCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRoleCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRoleCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRoleCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRoleCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRoleCode(requestBody:ChangeRoleCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRoleCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/ChangeRoleCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRoleCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1383,30 +1657,37 @@ export function post_ChangeRoleCode(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call when changing the sales rep code on an imported customer record.  Validates the
 sales rep code and updates the Sales Rep Name with the new value.
    OperationID: ChangeSalesRepCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSalesRepCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSalesRepCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSalesRepCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSalesRepCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSalesRepCode(requestBody:ChangeSalesRepCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSalesRepCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/ChangeSalesRepCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSalesRepCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1419,30 +1700,37 @@ export function post_ChangeSalesRepCode(requestBody:any, epicorHeaders?:Headers)
    Description: Method to call when changing the territory id on an imported customer record.  Validates the
 territory id and updates the territory description with the new value.
    OperationID: ChangeTerritoryID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeTerritoryID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeTerritoryID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeTerritoryID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeTerritoryID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeTerritoryID(requestBody:ChangeTerritoryID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeTerritoryID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/ChangeTerritoryID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeTerritoryID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1456,7 +1744,7 @@ export function post_ChangeTerritoryID(requestBody:any, epicorHeaders?:Headers){
 dataset should be cleared by the app that called this method after this method is run
 because the records in the dataset will be obsolete.
    OperationID: DeleteAll
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteAll_output
@@ -1469,15 +1757,22 @@ export function post_DeleteAll(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteAll_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/DeleteAll", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteAll_output)
           })
       .catch((error) => {
           reject(error)
@@ -1489,7 +1784,7 @@ export function post_DeleteAll(epicorHeaders?:Headers){
    Summary: Invoke method GetExistingCustomers
    Description: Method to call to retrieve the existing Customers and Customer contacts.
    OperationID: GetExistingCustomers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetExistingCustomers_output
@@ -1502,15 +1797,22 @@ export function post_GetExistingCustomers(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetExistingCustomers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/GetExistingCustomers", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetExistingCustomers_output)
           })
       .catch((error) => {
           reject(error)
@@ -1522,30 +1824,37 @@ export function post_GetExistingCustomers(epicorHeaders?:Headers){
    Summary: Invoke method ImportCustomersAndContacts
    Description: Method to call to import customers and contacts from a datatable.
    OperationID: ImportCustomersAndContacts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportCustomersAndContacts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportCustomersAndContacts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportCustomersAndContacts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportCustomersAndContacts(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportCustomersAndContacts(requestBody:ImportCustomersAndContacts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportCustomersAndContacts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/ImportCustomersAndContacts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportCustomersAndContacts_output)
           })
       .catch((error) => {
           reject(error)
@@ -1557,30 +1866,37 @@ export function post_ImportCustomersAndContacts(requestBody:any, epicorHeaders?:
    Summary: Invoke method MatchImpCustCnt
    Description: Method to call to match an import customer contact to an existing customer contact.
    OperationID: MatchImpCustCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MatchImpCustCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MatchImpCustCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MatchImpCustCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MatchImpCustCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_MatchImpCustCnt(requestBody:MatchImpCustCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MatchImpCustCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/MatchImpCustCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MatchImpCustCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1592,30 +1908,37 @@ export function post_MatchImpCustCnt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MatchImpCustomer
    Description: Method to call to match an import customer to an existing customer.
    OperationID: MatchImpCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MatchImpCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MatchImpCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MatchImpCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MatchImpCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_MatchImpCustomer(requestBody:MatchImpCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MatchImpCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/MatchImpCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MatchImpCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1627,30 +1950,37 @@ export function post_MatchImpCustomer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UnmatchImpCustCnt
    Description: Method to call to unmatch an import customer contact from an existing customer contact.
    OperationID: UnmatchImpCustCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnmatchImpCustCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnmatchImpCustCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnmatchImpCustCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnmatchImpCustCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_UnmatchImpCustCnt(requestBody:UnmatchImpCustCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnmatchImpCustCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/UnmatchImpCustCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnmatchImpCustCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1662,30 +1992,37 @@ export function post_UnmatchImpCustCnt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UnmatchImpCustomer
    Description: Method to call to unmatch an import customer from an existing customer.
    OperationID: UnmatchImpCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnmatchImpCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnmatchImpCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnmatchImpCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnmatchImpCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_UnmatchImpCustomer(requestBody:UnmatchImpCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnmatchImpCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/UnmatchImpCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnmatchImpCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1697,7 +2034,7 @@ export function post_UnmatchImpCustomer(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method UpdateCustomers
    Description: Method to call update existing Customers with data from the imported Customers.
    OperationID: UpdateCustomers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateCustomers_output
@@ -1710,15 +2047,22 @@ export function post_UpdateCustomers(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateCustomers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/UpdateCustomers", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateCustomers_output)
           })
       .catch((error) => {
           reject(error)
@@ -1730,30 +2074,37 @@ export function post_UpdateCustomers(epicorHeaders?:Headers){
    Summary: Invoke method ImportFileFromWeb
    Description: Imports Customers\Contacts with the .CSV file uploaded through the web into a special folder.
    OperationID: ImportFileFromWeb
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportFileFromWeb_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportFileFromWeb_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportFileFromWeb_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportFileFromWeb(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportFileFromWeb(requestBody:ImportFileFromWeb_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportFileFromWeb_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/ImportFileFromWeb", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportFileFromWeb_output)
           })
       .catch((error) => {
           reject(error)
@@ -1765,30 +2116,37 @@ export function post_ImportFileFromWeb(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCustomerImport
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCustomerImport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustomerImport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustomerImport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustomerImport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustomerImport(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustomerImport(requestBody:GetNewCustomerImport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustomerImport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/GetNewCustomerImport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustomerImport_output)
           })
       .catch((error) => {
           reject(error)
@@ -1800,30 +2158,37 @@ export function post_GetNewCustomerImport(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewCustomerImportAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCustomerImportAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustomerImportAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustomerImportAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustomerImportAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustomerImportAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustomerImportAttch(requestBody:GetNewCustomerImportAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustomerImportAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/GetNewCustomerImportAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustomerImportAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1835,30 +2200,37 @@ export function post_GetNewCustomerImportAttch(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewCustCntImport
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCustCntImport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustCntImport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustCntImport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustCntImport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustCntImport(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustCntImport(requestBody:GetNewCustCntImport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustCntImport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/GetNewCustCntImport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustCntImport_output)
           })
       .catch((error) => {
           reject(error)
@@ -1870,30 +2242,37 @@ export function post_GetNewCustCntImport(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewCustCntImportAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCustCntImportAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustCntImportAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustCntImportAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustCntImportAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustCntImportAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustCntImportAttch(requestBody:GetNewCustCntImportAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustCntImportAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/GetNewCustCntImportAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustCntImportAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1905,30 +2284,37 @@ export function post_GetNewCustCntImportAttch(requestBody:any, epicorHeaders?:He
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1940,7 +2326,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1964,15 +2350,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1984,7 +2377,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2008,15 +2401,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2028,30 +2428,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2063,30 +2470,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustContImportSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2097,31 +2511,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntImportAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustCntImportAttchRow[],
+   "value":Erp_Tablesets_CustCntImportAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntImportRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustCntImportRow[],
+   "value":Erp_Tablesets_CustCntImportRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustomerImportAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustomerImportAttchRow[],
+   "value":Erp_Tablesets_CustomerImportAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustomerImportListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustomerImportListRow[],
+   "value":Erp_Tablesets_CustomerImportListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustomerImportRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustomerImportRow[],
+   "value":Erp_Tablesets_CustomerImportRow,
 }
 
 export interface Erp_Tablesets_CustCntImportAttchRow{
@@ -2285,6 +2716,23 @@ export interface Erp_Tablesets_CustomerImportRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface AutoMatch_output{
@@ -2304,7 +2752,7 @@ export interface ChangeRoleCode_input{
 export interface ChangeRoleCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustContImportTableset[],
+   ds:Erp_Tablesets_CustContImportTableset,
 }
 }
 
@@ -2321,7 +2769,7 @@ export interface ChangeSalesRepCode_input{
 export interface ChangeSalesRepCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustContImportTableset[],
+   ds:Erp_Tablesets_CustContImportTableset,
 }
 }
 
@@ -2338,7 +2786,7 @@ export interface ChangeTerritoryID_input{
 export interface ChangeTerritoryID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustContImportTableset[],
+   ds:Erp_Tablesets_CustContImportTableset,
 }
 }
 
@@ -2790,7 +3238,7 @@ export interface GetNewCustCntImportAttch_input{
 export interface GetNewCustCntImportAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustContImportTableset[],
+   ds:Erp_Tablesets_CustContImportTableset,
 }
 }
 
@@ -2806,7 +3254,7 @@ export interface GetNewCustCntImport_input{
 export interface GetNewCustCntImport_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustContImportTableset[],
+   ds:Erp_Tablesets_CustContImportTableset,
 }
 }
 
@@ -2822,7 +3270,7 @@ export interface GetNewCustomerImportAttch_input{
 export interface GetNewCustomerImportAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustContImportTableset[],
+   ds:Erp_Tablesets_CustContImportTableset,
 }
 }
 
@@ -2836,7 +3284,7 @@ export interface GetNewCustomerImport_input{
 export interface GetNewCustomerImport_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustContImportTableset[],
+   ds:Erp_Tablesets_CustContImportTableset,
 }
 }
 
@@ -2911,7 +3359,7 @@ export interface ImportCustomersAndContacts_input{
 export interface ImportCustomersAndContacts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustContImportExportTableset[],
+   ds:Erp_Tablesets_CustContImportExportTableset,
 }
 }
 
@@ -3008,7 +3456,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtCustContImportTableset[],
+   ds:Erp_Tablesets_UpdExtCustContImportTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3023,7 +3471,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustContImportTableset[],
+   ds:Erp_Tablesets_CustContImportTableset,
 }
 }
 

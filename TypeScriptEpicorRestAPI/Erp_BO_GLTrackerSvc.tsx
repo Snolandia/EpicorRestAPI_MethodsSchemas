@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.GLTrackerSvc
 // Description: GL Account Period Balance for Tracker
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -77,6 +110,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -92,7 +142,7 @@ export function get_metadata(epicorHeaders?:Headers){
       @param fiscalYear Desc: Fiscal Year   Required: True
       @param fiscalYearSuffix Desc: Fiscal Year Suffix   Required: True   Allow empty value : True
       @param budgetCodeID Desc: Fiscal Year Suffix   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -170,15 +220,22 @@ export function get_GetRows(vBookID:string, vBalanceType:string, vUseCarryFwdBal
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +247,37 @@ export function get_GetRows(vBookID:string, vBalanceType:string, vUseCarryFwdBal
    Summary: Invoke method GetByIDBalanceAccount
    Description: Performs a GLAcctDspSvc.GetByID of the GLAccount based on the balance type.
    OperationID: GetByIDBalanceAccount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByIDBalanceAccount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByIDBalanceAccount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByIDBalanceAccount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByIDBalanceAccount(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByIDBalanceAccount(requestBody:GetByIDBalanceAccount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByIDBalanceAccount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetByIDBalanceAccount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByIDBalanceAccount_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,7 +289,7 @@ export function post_GetByIDBalanceAccount(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetDefaultChartTrackerFilters
    Description: Get the default Chart Tracker filters
    OperationID: GetDefaultChartTrackerFilters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultChartTrackerFilters_output
@@ -238,15 +302,22 @@ export function post_GetDefaultChartTrackerFilters(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultChartTrackerFilters_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetDefaultChartTrackerFilters", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultChartTrackerFilters_output)
           })
       .catch((error) => {
           reject(error)
@@ -257,30 +328,37 @@ export function post_GetDefaultChartTrackerFilters(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetFiscalPerDate
    OperationID: GetFiscalPerDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFiscalPerDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFiscalPerDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFiscalPerDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFiscalPerDate(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFiscalPerDate(requestBody:GetFiscalPerDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFiscalPerDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetFiscalPerDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFiscalPerDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -291,30 +369,37 @@ export function post_GetFiscalPerDate(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetFiscalPeriods
    OperationID: GetFiscalPeriods
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFiscalPeriods_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFiscalPeriods_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFiscalPeriods_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFiscalPeriods(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFiscalPeriods(requestBody:GetFiscalPeriods_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFiscalPeriods_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetFiscalPeriods", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFiscalPeriods_output)
           })
       .catch((error) => {
           reject(error)
@@ -325,30 +410,37 @@ export function post_GetFiscalPeriods(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetFiscalYear
    OperationID: GetFiscalYear
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFiscalYear_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFiscalYear_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFiscalYear_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFiscalYear(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFiscalYear(requestBody:GetFiscalYear_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFiscalYear_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetFiscalYear", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFiscalYear_output)
           })
       .catch((error) => {
           reject(error)
@@ -360,7 +452,7 @@ export function post_GetFiscalYear(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDefaultBudgetCode
    Description: Get default BudgetCode
    OperationID: GetDefaultBudgetCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultBudgetCode_output
@@ -373,15 +465,22 @@ export function post_GetDefaultBudgetCode(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultBudgetCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetDefaultBudgetCode", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultBudgetCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -393,30 +492,37 @@ export function post_GetDefaultBudgetCode(epicorHeaders?:Headers){
    Summary: Invoke method GetFiscalYearSuffix
    Description: Returns the Current Fiscal Year Suffix
    OperationID: GetFiscalYearSuffix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFiscalYearSuffix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFiscalYearSuffix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFiscalYearSuffix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFiscalYearSuffix(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFiscalYearSuffix(requestBody:GetFiscalYearSuffix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFiscalYearSuffix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetFiscalYearSuffix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFiscalYearSuffix_output)
           })
       .catch((error) => {
           reject(error)
@@ -428,30 +534,37 @@ export function post_GetFiscalYearSuffix(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetJournalHeaderComments
    Description: Returns GL Journal header comments.
    OperationID: GetJournalHeaderComments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetJournalHeaderComments_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetJournalHeaderComments_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetJournalHeaderComments_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetJournalHeaderComments(requestBody:any, epicorHeaders?:Headers){
+export function post_GetJournalHeaderComments(requestBody:GetJournalHeaderComments_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetJournalHeaderComments_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetJournalHeaderComments", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetJournalHeaderComments_output)
           })
       .catch((error) => {
           reject(error)
@@ -463,30 +576,37 @@ export function post_GetJournalHeaderComments(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetRowsSpecificGLAccount
    Description: This method overloads GetRows method
    OperationID: GetRowsSpecificGLAccount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsSpecificGLAccount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsSpecificGLAccount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsSpecificGLAccount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsSpecificGLAccount(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsSpecificGLAccount(requestBody:GetRowsSpecificGLAccount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsSpecificGLAccount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetRowsSpecificGLAccount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsSpecificGLAccount_output)
           })
       .catch((error) => {
           reject(error)
@@ -498,30 +618,37 @@ export function post_GetRowsSpecificGLAccount(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetRowsCurrBal
    Description: Get currency balance rows for specified balance account.
    OperationID: GetRowsCurrBal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCurrBal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCurrBal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCurrBal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCurrBal(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCurrBal(requestBody:GetRowsCurrBal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCurrBal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetRowsCurrBal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCurrBal_output)
           })
       .catch((error) => {
           reject(error)
@@ -532,30 +659,37 @@ export function post_GetRowsCurrBal(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetRowsCurrBalWithOpeningBalance
    OperationID: GetRowsCurrBalWithOpeningBalance
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCurrBalWithOpeningBalance_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCurrBalWithOpeningBalance_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCurrBalWithOpeningBalance_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCurrBalWithOpeningBalance(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCurrBalWithOpeningBalance(requestBody:GetRowsCurrBalWithOpeningBalance_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCurrBalWithOpeningBalance_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetRowsCurrBalWithOpeningBalance", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCurrBalWithOpeningBalance_output)
           })
       .catch((error) => {
           reject(error)
@@ -567,30 +701,37 @@ export function post_GetRowsCurrBalWithOpeningBalance(requestBody:any, epicorHea
    Summary: Invoke method GetRowsGLAccountList
    Description: Invokes GetRowsMultiple using a delimited list of GL accounts
    OperationID: GetRowsGLAccountList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsGLAccountList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsGLAccountList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsGLAccountList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsGLAccountList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsGLAccountList(requestBody:GetRowsGLAccountList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsGLAccountList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetRowsGLAccountList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsGLAccountList_output)
           })
       .catch((error) => {
           reject(error)
@@ -602,30 +743,37 @@ export function post_GetRowsGLAccountList(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetRowsMultiple
    Description: This method gets all the rows for a group of glaccounts specified GLAccount table
    OperationID: GetRowsMultiple
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsMultiple_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsMultiple_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsMultiple_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsMultiple(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsMultiple(requestBody:GetRowsMultiple_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsMultiple_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetRowsMultiple", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsMultiple_output)
           })
       .catch((error) => {
           reject(error)
@@ -637,30 +785,37 @@ export function post_GetRowsMultiple(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeBookID
    Description: On change of BookID
    OperationID: OnChangeBookID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBookID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBookID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBookID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBookID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBookID(requestBody:OnChangeBookID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBookID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/OnChangeBookID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBookID_output)
           })
       .catch((error) => {
           reject(error)
@@ -672,30 +827,37 @@ export function post_OnChangeBookID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeBudgetCodeID
    Description: On change of BudgetCodeID
    OperationID: OnChangeBudgetCodeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBudgetCodeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBudgetCodeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBudgetCodeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBudgetCodeID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBudgetCodeID(requestBody:OnChangeBudgetCodeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBudgetCodeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/OnChangeBudgetCodeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBudgetCodeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -707,30 +869,37 @@ export function post_OnChangeBudgetCodeID(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeFiscalYear
    Description: On change of FiscalYear
    OperationID: OnChangeFiscalYear
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeFiscalYear_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeFiscalYear_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeFiscalYear_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeFiscalYear(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeFiscalYear(requestBody:OnChangeFiscalYear_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeFiscalYear_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/OnChangeFiscalYear", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeFiscalYear_output)
           })
       .catch((error) => {
           reject(error)
@@ -742,30 +911,37 @@ export function post_OnChangeFiscalYear(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeFiscalYearSuffix
    Description: On change of FiscalYearSuffix
    OperationID: OnChangeFiscalYearSuffix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeFiscalYearSuffix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeFiscalYearSuffix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeFiscalYearSuffix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeFiscalYearSuffix(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeFiscalYearSuffix(requestBody:OnChangeFiscalYearSuffix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeFiscalYearSuffix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/OnChangeFiscalYearSuffix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeFiscalYearSuffix_output)
           })
       .catch((error) => {
           reject(error)
@@ -777,30 +953,37 @@ export function post_OnChangeFiscalYearSuffix(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangeStartEndDate
    Description: On change of StartDate or EndDate
    OperationID: OnChangeStartEndDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeStartEndDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeStartEndDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeStartEndDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeStartEndDate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeStartEndDate(requestBody:OnChangeStartEndDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeStartEndDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/OnChangeStartEndDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeStartEndDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -812,30 +995,37 @@ export function post_OnChangeStartEndDate(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeStartEndPeriod
    Description: On change of StartPeriod or EndPeriod
    OperationID: OnChangeStartEndPeriod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeStartEndPeriod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeStartEndPeriod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeStartEndPeriod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeStartEndPeriod(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeStartEndPeriod(requestBody:OnChangeStartEndPeriod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeStartEndPeriod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/OnChangeStartEndPeriod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeStartEndPeriod_output)
           })
       .catch((error) => {
           reject(error)
@@ -847,30 +1037,37 @@ export function post_OnChangeStartEndPeriod(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ValidateFiscalPerDate
    Description: Returns the Fiscal Year periods
    OperationID: ValidateFiscalPerDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateFiscalPerDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateFiscalPerDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateFiscalPerDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateFiscalPerDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateFiscalPerDate(requestBody:ValidateFiscalPerDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateFiscalPerDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/ValidateFiscalPerDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateFiscalPerDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -882,30 +1079,37 @@ export function post_ValidateFiscalPerDate(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ValidateFiscalPeriod
    Description: Validate the Fiscal Period
    OperationID: ValidateFiscalPeriod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateFiscalPeriod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateFiscalPeriod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateFiscalPeriod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateFiscalPeriod(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateFiscalPeriod(requestBody:ValidateFiscalPeriod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateFiscalPeriod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/ValidateFiscalPeriod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateFiscalPeriod_output)
           })
       .catch((error) => {
           reject(error)
@@ -917,30 +1121,37 @@ export function post_ValidateFiscalPeriod(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ValidateFiscalYearSuffix
    Description: Validate the Fiscal Year Suffix
    OperationID: ValidateFiscalYearSuffix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateFiscalYearSuffix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateFiscalYearSuffix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateFiscalYearSuffix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateFiscalYearSuffix(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateFiscalYearSuffix(requestBody:ValidateFiscalYearSuffix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateFiscalYearSuffix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/ValidateFiscalYearSuffix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateFiscalYearSuffix_output)
           })
       .catch((error) => {
           reject(error)
@@ -952,30 +1163,37 @@ export function post_ValidateFiscalYearSuffix(requestBody:any, epicorHeaders?:He
    Summary: Invoke method ValidateFiscalYear
    Description: Validate the Fiscal Year
    OperationID: ValidateFiscalYear
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateFiscalYear_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateFiscalYear_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateFiscalYear_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateFiscalYear(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateFiscalYear(requestBody:ValidateFiscalYear_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateFiscalYear_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/ValidateFiscalYear", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateFiscalYear_output)
           })
       .catch((error) => {
           reject(error)
@@ -987,30 +1205,37 @@ export function post_ValidateFiscalYear(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ValidateBudgetCode
    Description: Validate Budget Code
    OperationID: ValidateBudgetCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateBudgetCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateBudgetCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateBudgetCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateBudgetCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateBudgetCode(requestBody:ValidateBudgetCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateBudgetCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/ValidateBudgetCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateBudgetCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1022,30 +1247,37 @@ export function post_ValidateBudgetCode(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetBalAcctFromGlAcct
    Description: Get Balance Accounts
    OperationID: GetBalAcctFromGlAcct
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBalAcctFromGlAcct_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBalAcctFromGlAcct_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBalAcctFromGlAcct_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBalAcctFromGlAcct(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBalAcctFromGlAcct(requestBody:GetBalAcctFromGlAcct_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBalAcctFromGlAcct_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetBalAcctFromGlAcct", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBalAcctFromGlAcct_output)
           })
       .catch((error) => {
           reject(error)
@@ -1057,30 +1289,37 @@ export function post_GetBalAcctFromGlAcct(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GenerateSiteFilter
    Description: Creates siteFilter query based on selected Sites and allowed sites
    OperationID: GenerateSiteFilter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateSiteFilter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateSiteFilter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateSiteFilter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateSiteFilter(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateSiteFilter(requestBody:GenerateSiteFilter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateSiteFilter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GenerateSiteFilter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateSiteFilter_output)
           })
       .catch((error) => {
           reject(error)
@@ -1092,30 +1331,37 @@ export function post_GenerateSiteFilter(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetSiteFilterAndText
    Description: Gets site filter string for record retrieval and sites selected text
    OperationID: GetSiteFilterAndText
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSiteFilterAndText_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSiteFilterAndText_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSiteFilterAndText_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSiteFilterAndText(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSiteFilterAndText(requestBody:GetSiteFilterAndText_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSiteFilterAndText_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetSiteFilterAndText", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSiteFilterAndText_output)
           })
       .catch((error) => {
           reject(error)
@@ -1127,7 +1373,7 @@ export function post_GetSiteFilterAndText(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetGLTrackerSites
    Description: Returns Sites that can be selected for filtering tracker results
    OperationID: GetGLTrackerSites
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetGLTrackerSites_output
@@ -1140,15 +1386,22 @@ export function post_GetGLTrackerSites(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetGLTrackerSites_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLTrackerSvc/GetGLTrackerSites", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetGLTrackerSites_output)
           })
       .catch((error) => {
           reject(error)
@@ -1159,11 +1412,45 @@ export function post_GetGLTrackerSites(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1606,7 +1893,7 @@ export interface GetByIDBalanceAccount_input{
 export interface GetByIDBalanceAccount_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLAccountTrackerTableset[],
+   ds:Erp_Tablesets_GLAccountTrackerTableset,
 }
 }
 
@@ -1917,7 +2204,7 @@ export interface GetSiteFilterAndText_input{
 export interface GetSiteFilterAndText_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLTrackerSitesTableset[],
+   ds:Erp_Tablesets_GLTrackerSitesTableset,
    siteFilter:string,
    sitesSelectedText:string,
 }
@@ -1956,7 +2243,7 @@ export interface OnChangeBookID_input{
 export interface OnChangeBookID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ChartTrackerFiltersTableset[],
+   ds:Erp_Tablesets_ChartTrackerFiltersTableset,
 }
 }
 
@@ -1972,7 +2259,7 @@ export interface OnChangeBudgetCodeID_input{
 export interface OnChangeBudgetCodeID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ChartTrackerFiltersTableset[],
+   ds:Erp_Tablesets_ChartTrackerFiltersTableset,
 }
 }
 
@@ -1988,7 +2275,7 @@ export interface OnChangeFiscalYearSuffix_input{
 export interface OnChangeFiscalYearSuffix_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ChartTrackerFiltersTableset[],
+   ds:Erp_Tablesets_ChartTrackerFiltersTableset,
 }
 }
 
@@ -2004,7 +2291,7 @@ export interface OnChangeFiscalYear_input{
 export interface OnChangeFiscalYear_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ChartTrackerFiltersTableset[],
+   ds:Erp_Tablesets_ChartTrackerFiltersTableset,
 }
 }
 
@@ -2022,7 +2309,7 @@ export interface OnChangeStartEndDate_input{
 export interface OnChangeStartEndDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ChartTrackerFiltersTableset[],
+   ds:Erp_Tablesets_ChartTrackerFiltersTableset,
 }
 }
 
@@ -2040,7 +2327,7 @@ export interface OnChangeStartEndPeriod_input{
 export interface OnChangeStartEndPeriod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ChartTrackerFiltersTableset[],
+   ds:Erp_Tablesets_ChartTrackerFiltersTableset,
 }
 }
 

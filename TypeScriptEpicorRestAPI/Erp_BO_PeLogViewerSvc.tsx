@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PeLogViewerSvc
 // Description: PELogViewer Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -88,7 +138,7 @@ export function get_metadata(epicorHeaders?:Headers){
       @param whereClausePeLogViewer Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -130,15 +180,22 @@ export function get_GetRows(whereClausePeLogViewer:string, pageSize:string, abso
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -150,7 +207,7 @@ export function get_GetRows(whereClausePeLogViewer:string, pageSize:string, abso
    Summary: Invoke method InitPath
    Description: This procedure init path for pelog.txt file on first PELogViewer UI call
    OperationID: InitPath
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/InitPath_output
@@ -163,15 +220,22 @@ export function post_InitPath(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InitPath_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/InitPath", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InitPath_output)
           })
       .catch((error) => {
           reject(error)
@@ -183,7 +247,7 @@ export function post_InitPath(epicorHeaders?:Headers){
    Summary: Invoke method ClearLog
    Description: This procedure supposed to delete old logging file. (pelog.txt)
    OperationID: ClearLog
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClearLog_output
@@ -196,15 +260,22 @@ export function post_ClearLog(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClearLog_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/ClearLog", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClearLog_output)
           })
       .catch((error) => {
           reject(error)
@@ -215,7 +286,7 @@ export function post_ClearLog(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetPostModeList
    OperationID: GetPostModeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPostModeList_output
@@ -228,15 +299,22 @@ export function post_GetPostModeList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPostModeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetPostModeList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPostModeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -247,7 +325,7 @@ export function post_GetPostModeList(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetCompanyList
    OperationID: GetCompanyList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCompanyList_output
@@ -260,15 +338,22 @@ export function post_GetCompanyList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCompanyList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetCompanyList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCompanyList_output)
           })
       .catch((error) => {
           reject(error)
@@ -280,7 +365,7 @@ export function post_GetCompanyList(epicorHeaders?:Headers){
    Summary: Invoke method GetTransactionTypeList
    Description: The list of possible Transaction Types (ACTTypes) across available companies
    OperationID: GetTransactionTypeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTransactionTypeList_output
@@ -293,15 +378,22 @@ export function post_GetTransactionTypeList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTransactionTypeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetTransactionTypeList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTransactionTypeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -312,7 +404,7 @@ export function post_GetTransactionTypeList(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetValidList
    OperationID: GetValidList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetValidList_output
@@ -325,15 +417,22 @@ export function post_GetValidList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetValidList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetValidList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetValidList_output)
           })
       .catch((error) => {
           reject(error)
@@ -345,30 +444,37 @@ export function post_GetValidList(epicorHeaders?:Headers){
    Summary: Invoke method GetList
    Description: Returns a list of rows that satisfy the where clause.
    OperationID: GetList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetList(requestBody:GetList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -381,30 +487,37 @@ export function post_GetList(requestBody:any, epicorHeaders?:Headers){
    Description: This function should return dataset containing logging infromation
 about requested posting process. The clone of GetPELogInfoByPostingUID which returns the requested data as the function result
    OperationID: GetPELogInfoByPostingUIDExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPELogInfoByPostingUIDExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPELogInfoByPostingUIDExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPELogInfoByPostingUIDExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPELogInfoByPostingUIDExt(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPELogInfoByPostingUIDExt(requestBody:GetPELogInfoByPostingUIDExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPELogInfoByPostingUIDExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetPELogInfoByPostingUIDExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPELogInfoByPostingUIDExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -417,30 +530,37 @@ export function post_GetPELogInfoByPostingUIDExt(requestBody:any, epicorHeaders?
    Description: This function should return dataset containing logging infromation
 about requested posting process
    OperationID: GetPELogInfoByPostingUID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPELogInfoByPostingUID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPELogInfoByPostingUID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPELogInfoByPostingUID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPELogInfoByPostingUID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPELogInfoByPostingUID(requestBody:GetPELogInfoByPostingUID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPELogInfoByPostingUID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetPELogInfoByPostingUID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPELogInfoByPostingUID_output)
           })
       .catch((error) => {
           reject(error)
@@ -452,7 +572,7 @@ export function post_GetPELogInfoByPostingUID(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetActTypeList
    Description: Returns DataSet containing all Transaction types
    OperationID: GetActTypeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetActTypeList_output
@@ -465,15 +585,22 @@ export function post_GetActTypeList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetActTypeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetActTypeList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetActTypeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -485,30 +612,37 @@ export function post_GetActTypeList(epicorHeaders?:Headers){
    Summary: Invoke method SaveActTypeList
    Description: Applies changes in logging settings
    OperationID: SaveActTypeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveActTypeList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveActTypeList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveActTypeList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveActTypeList(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveActTypeList(requestBody:SaveActTypeList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveActTypeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/SaveActTypeList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveActTypeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -521,30 +655,37 @@ export function post_SaveActTypeList(requestBody:any, epicorHeaders?:Headers){
    Description: This function should return dataset containing logging infromation
 about requested posting process
    OperationID: GetPELogInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPELogInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPELogInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPELogInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPELogInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPELogInfo(requestBody:GetPELogInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPELogInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetPELogInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPELogInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -556,30 +697,37 @@ export function post_GetPELogInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method FileType
    Description: File Type check
    OperationID: FileType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FileType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FileType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FileType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FileType(requestBody:any, epicorHeaders?:Headers){
+export function post_FileType(requestBody:FileType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FileType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/FileType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FileType_output)
           })
       .catch((error) => {
           reject(error)
@@ -591,7 +739,7 @@ export function post_FileType(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDelims
    Description: Returns list delimiters
    OperationID: GetDelims
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDelims_output
@@ -604,15 +752,22 @@ export function post_GetDelims(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDelims_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetDelims", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDelims_output)
           })
       .catch((error) => {
           reject(error)
@@ -624,30 +779,37 @@ export function post_GetDelims(epicorHeaders?:Headers){
    Summary: Invoke method ExportLog
    Description: Export PE Log into the file
    OperationID: ExportLog
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportLog_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportLog_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportLog_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportLog(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportLog(requestBody:ExportLog_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportLog_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/ExportLog", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportLog_output)
           })
       .catch((error) => {
           reject(error)
@@ -659,30 +821,37 @@ export function post_ExportLog(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ImportLog
    Description: Import PE Log file into the PE Log cache
    OperationID: ImportLog
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportLog_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportLog_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportLog_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportLog(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportLog(requestBody:ImportLog_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportLog_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/ImportLog", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportLog_output)
           })
       .catch((error) => {
           reject(error)
@@ -696,7 +865,7 @@ export function post_ImportLog(requestBody:any, epicorHeaders?:Headers){
    OperationID: Get_GetNodeById
       @param GPostingUID Desc: 0aaa410e-ecc2-4dcd-9e6d-0c2d0d879149   Required: True   Allow empty value : True
       @param NodeID Desc: 0 to load parent   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNodeById_output
@@ -729,15 +898,22 @@ export function get_GetNodeById(GPostingUID:string, NodeID:string, epicorHeaders
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNodeById_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/GetNodeById" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNodeById_output)
           })
       .catch((error) => {
           reject(error)
@@ -753,7 +929,7 @@ export function get_GetNodeById(GPostingUID:string, NodeID:string, epicorHeaders
       @param searchText Desc: Search text   Required: True   Allow empty value : True
       @param direction Desc: Direction of the search: 0 - search forward, 1- search backward   Required: True
       @param currentNodeID Desc: The start point for the search (empty string - search will be performed at the beginning of the log)   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindNode_output
@@ -804,15 +980,22 @@ export function get_FindNode(GPostingUID:string, searchText:string, direction:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindNode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PeLogViewerSvc/FindNode" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindNode_output)
           })
       .catch((error) => {
           reject(error)
@@ -823,11 +1006,45 @@ export function get_FindNode(GPostingUID:string, searchText:string, direction:st
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1008,7 +1225,7 @@ export interface GetList_output{
 parameters : {
       /**  output parameters  */  
    morePages:boolean,
-   ds:Erp_Tablesets_PeLogViewerListTableset[],
+   ds:Erp_Tablesets_PeLogViewerListTableset,
 }
 }
 
@@ -1051,7 +1268,7 @@ export interface GetPELogInfoByPostingUID_input{
 export interface GetPELogInfoByPostingUID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PeLogViewerTableset[],
+   ds:Erp_Tablesets_PeLogViewerTableset,
 }
 }
 
@@ -1083,7 +1300,7 @@ export interface GetPELogInfo_input{
 export interface GetPELogInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PeLogViewerTableset[],
+   ds:Erp_Tablesets_PeLogViewerTableset,
 }
 }
 

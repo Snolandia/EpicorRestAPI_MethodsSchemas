@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.DemandReconcileSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemandReconcileRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemandReconcileRow
    */  
 export function get_DemandReconciles(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_DemandReconciles(select?:string, expand?:string, filter?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DemandReconcileRow)
           })
@@ -118,15 +158,15 @@ export function get_DemandReconciles(select?:string, expand?:string, filter?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DemandReconciles
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DemandReconcileRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DemandReconcileRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DemandReconcileRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DemandReconcileRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DemandReconciles(requestBody:any, epicorHeaders?:Headers){
+export function post_DemandReconciles(requestBody:Erp_Tablesets_DemandReconcileRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_DemandReconciles(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_DemandReconciles(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DemandReconcileRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DemandReconcileRow
    */  
 export function get_DemandReconciles_Company_ReconcileNum(Company:string, ReconcileNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_DemandReconciles_Company_ReconcileNum(Company:string, Reconc
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DemandReconcileRow)
           })
@@ -193,15 +247,15 @@ export function get_DemandReconciles_Company_ReconcileNum(Company:string, Reconc
    OperationID: UpdateExt_DemandReconcile
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ReconcileNum Desc: ReconcileNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DemandReconcileRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DemandReconcileRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DemandReconciles_Company_ReconcileNum(Company:string, ReconcileNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DemandReconciles_Company_ReconcileNum(Company:string, ReconcileNum:string, requestBody:Erp_Tablesets_DemandReconcileRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_DemandReconciles_Company_ReconcileNum(Company:string, Reco
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_DemandReconciles_Company_ReconcileNum(Company:string, Reco
    OperationID: DeleteUpdateExt_DemandReconcile
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ReconcileNum Desc: ReconcileNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_DemandReconciles_Company_ReconcileNum(Company:string, Rec
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_DemandReconciles_Company_ReconcileNum(Company:string, Rec
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemReconAdjustRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemReconAdjustRow
    */  
 export function get_DemandReconciles_Company_ReconcileNum_DemReconAdjusts(Company:string, ReconcileNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_DemandReconciles_Company_ReconcileNum_DemReconAdjusts(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DemReconAdjustRow)
           })
@@ -311,10 +386,10 @@ export function get_DemandReconciles_Company_ReconcileNum_DemReconAdjusts(Compan
       @param TranNum Desc: TranNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DemReconAdjustRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DemReconAdjustRow
    */  
 export function get_DemandReconciles_Company_ReconcileNum_DemReconAdjusts_Company_ReconcileNum_SysDate_SysTime_TranNum(Company:string, ReconcileNum:string, SysDate:string, SysTime:string, TranNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_DemandReconciles_Company_ReconcileNum_DemReconAdjusts_Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DemReconAdjustRow)
           })
@@ -351,10 +433,10 @@ export function get_DemandReconciles_Company_ReconcileNum_DemReconAdjusts_Compan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemReconcileShipmentsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemReconcileShipmentsRow
    */  
 export function get_DemandReconciles_Company_ReconcileNum_DemReconcileShipments(Company:string, ReconcileNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -369,7 +451,14 @@ export function get_DemandReconciles_Company_ReconcileNum_DemReconcileShipments(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DemReconcileShipmentsRow)
           })
@@ -388,10 +477,10 @@ export function get_DemandReconciles_Company_ReconcileNum_DemReconcileShipments(
       @param PackNum Desc: PackNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DemReconcileShipmentsRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DemReconcileShipmentsRow
    */  
 export function get_DemandReconciles_Company_ReconcileNum_DemReconcileShipments_Company_ReconcileNum_PackNum(Company:string, ReconcileNum:string, PackNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -406,7 +495,14 @@ export function get_DemandReconciles_Company_ReconcileNum_DemReconcileShipments_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DemReconcileShipmentsRow)
           })
@@ -426,10 +522,10 @@ export function get_DemandReconciles_Company_ReconcileNum_DemReconcileShipments_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemReconAdjustRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemReconAdjustRow
    */  
 export function get_DemReconAdjusts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -444,7 +540,14 @@ export function get_DemReconAdjusts(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DemReconAdjustRow)
           })
@@ -458,15 +561,15 @@ export function get_DemReconAdjusts(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DemReconAdjusts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DemReconAdjustRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DemReconAdjustRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DemReconAdjustRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DemReconAdjustRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DemReconAdjusts(requestBody:any, epicorHeaders?:Headers){
+export function post_DemReconAdjusts(requestBody:Erp_Tablesets_DemReconAdjustRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -480,7 +583,14 @@ export function post_DemReconAdjusts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -501,10 +611,10 @@ export function post_DemReconAdjusts(requestBody:any, epicorHeaders?:Headers){
       @param TranNum Desc: TranNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DemReconAdjustRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DemReconAdjustRow
    */  
 export function get_DemReconAdjusts_Company_ReconcileNum_SysDate_SysTime_TranNum(Company:string, ReconcileNum:string, SysDate:string, SysTime:string, TranNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -519,7 +629,14 @@ export function get_DemReconAdjusts_Company_ReconcileNum_SysDate_SysTime_TranNum
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DemReconAdjustRow)
           })
@@ -538,15 +655,15 @@ export function get_DemReconAdjusts_Company_ReconcileNum_SysDate_SysTime_TranNum
       @param SysDate Desc: SysDate   Required: True   Allow empty value : True
       @param SysTime Desc: SysTime   Required: True
       @param TranNum Desc: TranNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DemReconAdjustRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DemReconAdjustRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DemReconAdjusts_Company_ReconcileNum_SysDate_SysTime_TranNum(Company:string, ReconcileNum:string, SysDate:string, SysTime:string, TranNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DemReconAdjusts_Company_ReconcileNum_SysDate_SysTime_TranNum(Company:string, ReconcileNum:string, SysDate:string, SysTime:string, TranNum:string, requestBody:Erp_Tablesets_DemReconAdjustRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -560,7 +677,14 @@ export function patch_DemReconAdjusts_Company_ReconcileNum_SysDate_SysTime_TranN
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -579,7 +703,7 @@ export function patch_DemReconAdjusts_Company_ReconcileNum_SysDate_SysTime_TranN
       @param SysDate Desc: SysDate   Required: True   Allow empty value : True
       @param SysTime Desc: SysTime   Required: True
       @param TranNum Desc: TranNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -598,7 +722,14 @@ export function delete_DemReconAdjusts_Company_ReconcileNum_SysDate_SysTime_Tran
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -618,10 +749,10 @@ export function delete_DemReconAdjusts_Company_ReconcileNum_SysDate_SysTime_Tran
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemReconcileShipmentsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemReconcileShipmentsRow
    */  
 export function get_DemReconcileShipments(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -636,7 +767,14 @@ export function get_DemReconcileShipments(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DemReconcileShipmentsRow)
           })
@@ -650,15 +788,15 @@ export function get_DemReconcileShipments(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DemReconcileShipments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DemReconcileShipmentsRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DemReconcileShipmentsRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DemReconcileShipmentsRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DemReconcileShipmentsRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DemReconcileShipments(requestBody:any, epicorHeaders?:Headers){
+export function post_DemReconcileShipments(requestBody:Erp_Tablesets_DemReconcileShipmentsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -672,7 +810,14 @@ export function post_DemReconcileShipments(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -691,10 +836,10 @@ export function post_DemReconcileShipments(requestBody:any, epicorHeaders?:Heade
       @param PackNum Desc: PackNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DemReconcileShipmentsRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DemReconcileShipmentsRow
    */  
 export function get_DemReconcileShipments_Company_ReconcileNum_PackNum(Company:string, ReconcileNum:string, PackNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -709,7 +854,14 @@ export function get_DemReconcileShipments_Company_ReconcileNum_PackNum(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DemReconcileShipmentsRow)
           })
@@ -726,15 +878,15 @@ export function get_DemReconcileShipments_Company_ReconcileNum_PackNum(Company:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ReconcileNum Desc: ReconcileNum   Required: True
       @param PackNum Desc: PackNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DemReconcileShipmentsRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DemReconcileShipmentsRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DemReconcileShipments_Company_ReconcileNum_PackNum(Company:string, ReconcileNum:string, PackNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DemReconcileShipments_Company_ReconcileNum_PackNum(Company:string, ReconcileNum:string, PackNum:string, requestBody:Erp_Tablesets_DemReconcileShipmentsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -748,7 +900,14 @@ export function patch_DemReconcileShipments_Company_ReconcileNum_PackNum(Company
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -765,7 +924,7 @@ export function patch_DemReconcileShipments_Company_ReconcileNum_PackNum(Company
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ReconcileNum Desc: ReconcileNum   Required: True
       @param PackNum Desc: PackNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -784,7 +943,14 @@ export function delete_DemReconcileShipments_Company_ReconcileNum_PackNum(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -804,10 +970,10 @@ export function delete_DemReconcileShipments_Company_ReconcileNum_PackNum(Compan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemandReconcileListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DemandReconcileListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -822,7 +988,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DemandReconcileListRow)
           })
@@ -834,6 +1007,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -847,7 +1037,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -907,15 +1097,22 @@ export function get_GetRows(whereClauseDemandReconcile:string, whereClauseDemRec
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -928,7 +1125,7 @@ export function get_GetRows(whereClauseDemandReconcile:string, whereClauseDemRec
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -952,15 +1149,22 @@ export function get_GetByID(reconcileNum:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -975,7 +1179,7 @@ export function get_GetByID(reconcileNum:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1017,15 +1221,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1037,30 +1248,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method ChangeDRAdjustmentQty
    Description: Recalc Variance when the Adjustment Quantity changes.
    OperationID: ChangeDRAdjustmentQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDRAdjustmentQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDRAdjustmentQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDRAdjustmentQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDRAdjustmentQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDRAdjustmentQty(requestBody:ChangeDRAdjustmentQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDRAdjustmentQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/ChangeDRAdjustmentQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDRAdjustmentQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -1072,30 +1290,37 @@ export function post_ChangeDRAdjustmentQty(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ChangeDRCustID
    Description: Used when the CustID field is being changed to a new value.
    OperationID: ChangeDRCustID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDRCustID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDRCustID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDRCustID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDRCustID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDRCustID(requestBody:ChangeDRCustID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDRCustID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/ChangeDRCustID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDRCustID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1107,30 +1332,37 @@ export function post_ChangeDRCustID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeDRDemandContract
    Description: Used when the DemandContract field is being changed to a new value.
    OperationID: ChangeDRDemandContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDRDemandContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDRDemandContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDRDemandContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDRDemandContract(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDRDemandContract(requestBody:ChangeDRDemandContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDRDemandContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/ChangeDRDemandContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDRDemandContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -1142,30 +1374,37 @@ export function post_ChangeDRDemandContract(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ChangeDRPartNum
    Description: Used when the PartNum field is being changed to a new value.
    OperationID: ChangeDRPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDRPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDRPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDRPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDRPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDRPartNum(requestBody:ChangeDRPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDRPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/ChangeDRPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDRPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1177,30 +1416,37 @@ export function post_ChangeDRPartNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeDRReconcileCUMMQty
    Description: Recalc Adjust Quantity when the Reconcile Quantity changes.
    OperationID: ChangeDRReconcileCUMMQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDRReconcileCUMMQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDRReconcileCUMMQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDRReconcileCUMMQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDRReconcileCUMMQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDRReconcileCUMMQty(requestBody:ChangeDRReconcileCUMMQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDRReconcileCUMMQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/ChangeDRReconcileCUMMQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDRReconcileCUMMQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -1212,30 +1458,37 @@ export function post_ChangeDRReconcileCUMMQty(requestBody:any, epicorHeaders?:He
    Summary: Invoke method ChangeDRReconcileStartCumQty
    Description: Recalc Adjust Quantity and set Company Cumulative Quantity when the Start Cumulative Quantity changes.
    OperationID: ChangeDRReconcileStartCumQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDRReconcileStartCumQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDRReconcileStartCumQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDRReconcileStartCumQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDRReconcileStartCumQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDRReconcileStartCumQty(requestBody:ChangeDRReconcileStartCumQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDRReconcileStartCumQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/ChangeDRReconcileStartCumQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDRReconcileStartCumQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -1247,30 +1500,37 @@ export function post_ChangeDRReconcileStartCumQty(requestBody:any, epicorHeaders
    Summary: Invoke method ChangeDRShippedCUMMQty
    Description: Changed event of Company Cumulative Quantity field.
    OperationID: ChangeDRShippedCUMMQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDRShippedCUMMQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDRShippedCUMMQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDRShippedCUMMQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDRShippedCUMMQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDRShippedCUMMQty(requestBody:ChangeDRShippedCUMMQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDRShippedCUMMQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/ChangeDRShippedCUMMQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDRShippedCUMMQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -1282,30 +1542,37 @@ export function post_ChangeDRShippedCUMMQty(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ChangeDRSReconcileQty
    Description: Updates the Reconcile Qty for the selected PackNum.
    OperationID: ChangeDRSReconcileQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDRSReconcileQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDRSReconcileQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDRSReconcileQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDRSReconcileQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDRSReconcileQty(requestBody:ChangeDRSReconcileQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDRSReconcileQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/ChangeDRSReconcileQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDRSReconcileQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -1317,30 +1584,37 @@ export function post_ChangeDRSReconcileQty(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ChangeDRTPCUMMQty
    Description: Changed event of Trading Partner Quantity field.
    OperationID: ChangeDRTPCUMMQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDRTPCUMMQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDRTPCUMMQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDRTPCUMMQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDRTPCUMMQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDRTPCUMMQty(requestBody:ChangeDRTPCUMMQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDRTPCUMMQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/ChangeDRTPCUMMQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDRTPCUMMQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -1351,30 +1625,37 @@ export function post_ChangeDRTPCUMMQty(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CreateAdjustmentCredit
    OperationID: CreateAdjustmentCredit
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateAdjustmentCredit_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateAdjustmentCredit_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateAdjustmentCredit_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateAdjustmentCredit(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateAdjustmentCredit(requestBody:CreateAdjustmentCredit_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateAdjustmentCredit_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/CreateAdjustmentCredit", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateAdjustmentCredit_output)
           })
       .catch((error) => {
           reject(error)
@@ -1386,30 +1667,37 @@ export function post_CreateAdjustmentCredit(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method RestartCumInfo
    Description: Restart the cumulative info stored for the company. B
    OperationID: RestartCumInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RestartCumInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RestartCumInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RestartCumInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RestartCumInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_RestartCumInfo(requestBody:RestartCumInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RestartCumInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/RestartCumInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RestartCumInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -1421,30 +1709,37 @@ export function post_RestartCumInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRowsSearch
    Description: Returns Demand Reconcile records for search
    OperationID: GetRowsSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsSearch(requestBody:GetRowsSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/GetRowsSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1456,30 +1751,37 @@ export function post_GetRowsSearch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewDemandReconcile
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDemandReconcile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDemandReconcile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDemandReconcile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDemandReconcile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDemandReconcile(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDemandReconcile(requestBody:GetNewDemandReconcile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDemandReconcile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/GetNewDemandReconcile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDemandReconcile_output)
           })
       .catch((error) => {
           reject(error)
@@ -1491,30 +1793,37 @@ export function post_GetNewDemandReconcile(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1526,7 +1835,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1550,15 +1859,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1570,7 +1886,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1594,15 +1910,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1614,30 +1937,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1649,30 +1979,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DemandReconcileSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1683,26 +2020,43 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DemReconAdjustRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DemReconAdjustRow[],
+   "value":Erp_Tablesets_DemReconAdjustRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DemReconcileShipmentsRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DemReconcileShipmentsRow[],
+   "value":Erp_Tablesets_DemReconcileShipmentsRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DemandReconcileListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DemandReconcileListRow[],
+   "value":Erp_Tablesets_DemandReconcileListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DemandReconcileRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DemandReconcileRow[],
+   "value":Erp_Tablesets_DemandReconcileRow,
 }
 
 export interface Erp_Tablesets_DemReconAdjustRow{
@@ -1997,6 +2351,23 @@ export interface Erp_Tablesets_DemandReconcileRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2012,7 +2383,7 @@ export interface ChangeDRAdjustmentQty_input{
 export interface ChangeDRAdjustmentQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 
@@ -2029,7 +2400,7 @@ export interface ChangeDRCustID_input{
 export interface ChangeDRCustID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 
@@ -2046,7 +2417,7 @@ export interface ChangeDRDemandContract_input{
 export interface ChangeDRDemandContract_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 
@@ -2063,7 +2434,7 @@ export interface ChangeDRPartNum_input{
 export interface ChangeDRPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 
@@ -2080,7 +2451,7 @@ export interface ChangeDRReconcileCUMMQty_input{
 export interface ChangeDRReconcileCUMMQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 
@@ -2097,7 +2468,7 @@ export interface ChangeDRReconcileStartCumQty_input{
 export interface ChangeDRReconcileStartCumQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 
@@ -2114,7 +2485,7 @@ export interface ChangeDRSReconcileQty_input{
 export interface ChangeDRSReconcileQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 
@@ -2131,7 +2502,7 @@ export interface ChangeDRShippedCUMMQty_input{
 export interface ChangeDRShippedCUMMQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 
@@ -2148,7 +2519,7 @@ export interface ChangeDRTPCUMMQty_input{
 export interface ChangeDRTPCUMMQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 
@@ -2558,7 +2929,7 @@ export interface GetNewDemandReconcile_input{
 export interface GetNewDemandReconcile_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 
@@ -2669,7 +3040,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtDemandReconcileTableset[],
+   ds:Erp_Tablesets_UpdExtDemandReconcileTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2684,7 +3055,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DemandReconcileTableset[],
+   ds:Erp_Tablesets_DemandReconcileTableset,
 }
 }
 

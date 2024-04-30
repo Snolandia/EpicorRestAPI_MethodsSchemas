@@ -1,14 +1,33 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.SelectedSerialNumbersSvc
 // Description: New and existing serial numbers are added to the ttSelectedSerialNumbers
 temp table when the user selects them.  Also allows update of the SNFormat
 temp table.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -17,7 +36,7 @@ temp table.
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -35,7 +54,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -49,7 +75,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -67,7 +93,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -80,6 +113,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -88,30 +138,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Description: This method is used for adding an existing SerialNo record to the Selected
 Serial Numbers dataset.
    OperationID: AddSerialNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddSerialNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddSerialNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddSerialNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddSerialNum(requestBody:any, epicorHeaders?:Headers){
+export function post_AddSerialNum(requestBody:AddSerialNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddSerialNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/AddSerialNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddSerialNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -123,30 +180,37 @@ export function post_AddSerialNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method HHScanCheckSN
    Description: Determines whether the SN exists or not. Also performs other validation on the request.
    OperationID: HHScanCheckSN
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/HHScanCheckSN_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/HHScanCheckSN_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/HHScanCheckSN_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_HHScanCheckSN(requestBody:any, epicorHeaders?:Headers){
+export function post_HHScanCheckSN(requestBody:HHScanCheckSN_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<HHScanCheckSN_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/HHScanCheckSN", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as HHScanCheckSN_output)
           })
       .catch((error) => {
           reject(error)
@@ -158,30 +222,37 @@ export function post_HHScanCheckSN(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CreateSerialNum
    Description: Add a serial number temporary record to the Selected Serial Number dataset.
    OperationID: CreateSerialNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateSerialNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateSerialNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateSerialNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateSerialNum(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateSerialNum(requestBody:CreateSerialNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateSerialNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/CreateSerialNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateSerialNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -193,30 +264,37 @@ export function post_CreateSerialNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CreateSerialNumRange
    Description: Create multiple serial number temporary records in the Selected Serial Numbers dataset.
    OperationID: CreateSerialNumRange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateSerialNumRange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateSerialNumRange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateSerialNumRange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateSerialNumRange(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateSerialNumRange(requestBody:CreateSerialNumRange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateSerialNumRange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/CreateSerialNumRange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateSerialNumRange_output)
           })
       .catch((error) => {
           reject(error)
@@ -228,30 +306,37 @@ export function post_CreateSerialNumRange(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method KineticGetSerialNumFormat
    Description: Gets the next serial number format based on the part number passed in.
    OperationID: KineticGetSerialNumFormat
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/KineticGetSerialNumFormat_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/KineticGetSerialNumFormat_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/KineticGetSerialNumFormat_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_KineticGetSerialNumFormat(requestBody:any, epicorHeaders?:Headers){
+export function post_KineticGetSerialNumFormat(requestBody:KineticGetSerialNumFormat_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<KineticGetSerialNumFormat_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/KineticGetSerialNumFormat", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as KineticGetSerialNumFormat_output)
           })
       .catch((error) => {
           reject(error)
@@ -263,30 +348,37 @@ export function post_KineticGetSerialNumFormat(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNextSN
    Description: Gets the next serial number based on the format for the part number passed in.
    OperationID: GetNextSN
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNextSN_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNextSN_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNextSN_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNextSN(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNextSN(requestBody:GetNextSN_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNextSN_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/GetNextSN", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNextSN_output)
           })
       .catch((error) => {
           reject(error)
@@ -298,30 +390,37 @@ export function post_GetNextSN(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetSerialNumFormat
    Description: Gets the next serial number format based on the part number passed in.
    OperationID: GetSerialNumFormat
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSerialNumFormat_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSerialNumFormat_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSerialNumFormat_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSerialNumFormat(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSerialNumFormat(requestBody:GetSerialNumFormat_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSerialNumFormat_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/GetSerialNumFormat", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSerialNumFormat_output)
           })
       .catch((error) => {
           reject(error)
@@ -333,30 +432,37 @@ export function post_GetSerialNumFormat(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method RetrieveSerialNumbers
    Description: Retrieve serial numbers
    OperationID: RetrieveSerialNumbers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RetrieveSerialNumbers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RetrieveSerialNumbers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RetrieveSerialNumbers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RetrieveSerialNumbers(requestBody:any, epicorHeaders?:Headers){
+export function post_RetrieveSerialNumbers(requestBody:RetrieveSerialNumbers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RetrieveSerialNumbers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/RetrieveSerialNumbers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RetrieveSerialNumbers_output)
           })
       .catch((error) => {
           reject(error)
@@ -368,30 +474,37 @@ export function post_RetrieveSerialNumbers(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ProcessSelectedSerialNumbers
    Description: Process selected serial numbers
    OperationID: ProcessSelectedSerialNumbers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessSelectedSerialNumbers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessSelectedSerialNumbers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessSelectedSerialNumbers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessSelectedSerialNumbers(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessSelectedSerialNumbers(requestBody:ProcessSelectedSerialNumbers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessSelectedSerialNumbers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/ProcessSelectedSerialNumbers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessSelectedSerialNumbers_output)
           })
       .catch((error) => {
           reject(error)
@@ -403,30 +516,37 @@ export function post_ProcessSelectedSerialNumbers(requestBody:any, epicorHeaders
    Summary: Invoke method CreateSingleSerialNumber
    Description: Add a serial number temporary record to the Selected Serial Number dataset.  The source data for this method is dataset SerialNumberSelection.
    OperationID: CreateSingleSerialNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateSingleSerialNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateSingleSerialNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateSingleSerialNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateSingleSerialNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateSingleSerialNumber(requestBody:CreateSingleSerialNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateSingleSerialNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/CreateSingleSerialNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateSingleSerialNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -438,30 +558,37 @@ export function post_CreateSingleSerialNumber(requestBody:any, epicorHeaders?:He
    Summary: Invoke method CreateSerialNumberRange
    Description: Create multiple serial number temporary records in the Serial Number Selection dataset.
    OperationID: CreateSerialNumberRange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateSerialNumberRange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateSerialNumberRange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateSerialNumberRange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateSerialNumberRange(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateSerialNumberRange(requestBody:CreateSerialNumberRange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateSerialNumberRange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/CreateSerialNumberRange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateSerialNumberRange_output)
           })
       .catch((error) => {
           reject(error)
@@ -474,30 +601,37 @@ export function post_CreateSerialNumberRange(requestBody:any, epicorHeaders?:Hea
    Description: Gets the next serial number based on the format for the part number passed in.  The source
 data for this method is the SerialNumberSelection dataset.
    OperationID: GetNextSerialNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNextSerialNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNextSerialNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNextSerialNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNextSerialNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNextSerialNumber(requestBody:GetNextSerialNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNextSerialNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/GetNextSerialNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNextSerialNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -510,30 +644,37 @@ export function post_GetNextSerialNumber(requestBody:any, epicorHeaders?:Headers
    Description: Select/unselect all serial numbers in the SerialNumberSelection dataset.  When parameter select = true all
 rows will be marked as selected; When parameter select = false all rows will be unselected.
    OperationID: SelectSerialNumbers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SelectSerialNumbers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SelectSerialNumbers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SelectSerialNumbers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectSerialNumbers(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectSerialNumbers(requestBody:SelectSerialNumbers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SelectSerialNumbers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/SelectSerialNumbers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SelectSerialNumbers_output)
           })
       .catch((error) => {
           reject(error)
@@ -544,30 +685,37 @@ export function post_SelectSerialNumbers(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method ValidateCreateSNStartAtQty
    OperationID: ValidateCreateSNStartAtQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCreateSNStartAtQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCreateSNStartAtQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCreateSNStartAtQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCreateSNStartAtQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCreateSNStartAtQty(requestBody:ValidateCreateSNStartAtQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCreateSNStartAtQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/ValidateCreateSNStartAtQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCreateSNStartAtQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -578,30 +726,37 @@ export function post_ValidateCreateSNStartAtQty(requestBody:any, epicorHeaders?:
    /**  
    Summary: Invoke method ValidateCreateSerialNumber
    OperationID: ValidateCreateSerialNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCreateSerialNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCreateSerialNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCreateSerialNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCreateSerialNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCreateSerialNumber(requestBody:ValidateCreateSerialNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCreateSerialNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SelectedSerialNumbersSvc/ValidateCreateSerialNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCreateSerialNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -612,11 +767,45 @@ export function post_ValidateCreateSerialNumber(requestBody:any, epicorHeaders?:
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -654,7 +843,7 @@ export interface AddSerialNum_input{
 export interface AddSerialNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SelectedSerialNumbersTableset[],
+   ds:Erp_Tablesets_SelectedSerialNumbersTableset,
 }
 }
 
@@ -695,7 +884,7 @@ export interface CreateSerialNumRange_input{
 export interface CreateSerialNumRange_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SelectedSerialNumbersTableset[],
+   ds:Erp_Tablesets_SelectedSerialNumbersTableset,
 }
 }
 
@@ -736,7 +925,7 @@ export interface CreateSerialNum_input{
 export interface CreateSerialNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SelectedSerialNumbersTableset[],
+   ds:Erp_Tablesets_SelectedSerialNumbersTableset,
 }
 }
 
@@ -780,7 +969,7 @@ export interface CreateSerialNumberRange_input{
 export interface CreateSerialNumberRange_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialNumberSelectionTableset[],
+   ds:Erp_Tablesets_SerialNumberSelectionTableset,
    nextBaseSN:string,
    snPrefix:string,
    nextFullSN:string,
@@ -829,7 +1018,7 @@ export interface CreateSingleSerialNumber_input{
 export interface CreateSingleSerialNumber_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialNumberSelectionTableset[],
+   ds:Erp_Tablesets_SerialNumberSelectionTableset,
 }
 }
 
@@ -1039,7 +1228,7 @@ export interface GetNextSN_input{
 export interface GetNextSN_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SelectedSerialNumbersTableset[],
+   ds:Erp_Tablesets_SelectedSerialNumbersTableset,
    nextBaseSN:string,
    snPrefix:string,
    nextFullSN:string,
@@ -1072,7 +1261,7 @@ export interface GetNextSerialNumber_input{
 export interface GetNextSerialNumber_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialNumberSelectionTableset[],
+   ds:Erp_Tablesets_SerialNumberSelectionTableset,
    nextBaseSN:string,
    snPrefix:string,
    nextFullSN:string,
@@ -1106,7 +1295,7 @@ export interface GetSerialNumFormat_input{
 export interface GetSerialNumFormat_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SelectedSerialNumbersTableset[],
+   ds:Erp_Tablesets_SelectedSerialNumbersTableset,
 }
 }
 
@@ -1147,7 +1336,7 @@ export interface HHScanCheckSN_input{
 export interface HHScanCheckSN_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SelectedSerialNumbersTableset[],
+   ds:Erp_Tablesets_SelectedSerialNumbersTableset,
    opSNIsDeselected:boolean,
    opExists:boolean,
 }
@@ -1217,8 +1406,8 @@ export interface ProcessSelectedSerialNumbers_input{
 export interface ProcessSelectedSerialNumbers_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialNumberSelectionTableset[],
-   ds1:Erp_Tablesets_SelectedSerialNumbersTableset[],
+   ds:Erp_Tablesets_SerialNumberSelectionTableset,
+   ds1:Erp_Tablesets_SelectedSerialNumbersTableset,
 }
 }
 
@@ -1250,7 +1439,7 @@ export interface RetrieveSerialNumbers_input{
 export interface RetrieveSerialNumbers_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialNumberSelectionTableset[],
+   ds:Erp_Tablesets_SerialNumberSelectionTableset,
 }
 }
 
@@ -1271,7 +1460,7 @@ export interface SelectSerialNumbers_output{
 parameters : {
       /**  output parameters  */  
    deselectMessage:string,
-   ds:Erp_Tablesets_SerialNumberSelectionTableset[],
+   ds:Erp_Tablesets_SerialNumberSelectionTableset,
 }
 }
 
@@ -1294,7 +1483,7 @@ export interface ValidateCreateSNStartAtQty_output{
 parameters : {
       /**  output parameters  */  
    startAtQty:string,
-   ds:Erp_Tablesets_SelectedSerialNumbersTableset[],
+   ds:Erp_Tablesets_SelectedSerialNumbersTableset,
 }
 }
 
@@ -1315,7 +1504,7 @@ export interface ValidateCreateSerialNumber_output{
 parameters : {
       /**  output parameters  */  
    serialNumber:string,
-   ds:Erp_Tablesets_SelectedSerialNumbersTableset[],
+   ds:Erp_Tablesets_SelectedSerialNumbersTableset,
 }
 }
 

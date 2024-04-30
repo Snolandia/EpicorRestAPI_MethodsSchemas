@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.AdminLicensingSvc
 // Description: License maintenance business object for use by Admin Console
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method GetLicense
    Description: Retrieving licensing information for the installation
    OperationID: GetLicense
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLicense_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLicense_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLicense_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLicense(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLicense(requestBody:GetLicense_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLicense_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/GetLicense", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLicense_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_GetLicense(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SysLicenseExists
    Description: Checks for existance of SysLicense record
    OperationID: SysLicenseExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SysLicenseExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SysLicenseExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SysLicenseExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SysLicenseExists(requestBody:any, epicorHeaders?:Headers){
+export function post_SysLicenseExists(requestBody:SysLicenseExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SysLicenseExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/SysLicenseExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SysLicenseExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_SysLicenseExists(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteLicense
    Description: This method deletes the License with the specified installation id.
    OperationID: DeleteLicense
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteLicense_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteLicense_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteLicense_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteLicense(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteLicense(requestBody:DeleteLicense_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteLicense_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/DeleteLicense", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteLicense_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_DeleteLicense(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExistingLicense
    Description: Updates a license file if an update is available.
    OperationID: UpdateExistingLicense
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExistingLicense_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExistingLicense_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExistingLicense_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExistingLicense(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExistingLicense(requestBody:UpdateExistingLicense_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExistingLicense_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/UpdateExistingLicense", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExistingLicense_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,30 +303,37 @@ export function post_UpdateExistingLicense(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method EnableModule
    Description: This method enables a licensed feature/module.
    OperationID: EnableModule
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/EnableModule_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/EnableModule_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/EnableModule_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_EnableModule(requestBody:any, epicorHeaders?:Headers){
+export function post_EnableModule(requestBody:EnableModule_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<EnableModule_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/EnableModule", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as EnableModule_output)
           })
       .catch((error) => {
           reject(error)
@@ -260,30 +345,37 @@ export function post_EnableModule(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method EnableSingleModule
    Description: Enables a license module.
    OperationID: EnableSingleModule
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/EnableSingleModule_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/EnableSingleModule_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/EnableSingleModule_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_EnableSingleModule(requestBody:any, epicorHeaders?:Headers){
+export function post_EnableSingleModule(requestBody:EnableSingleModule_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<EnableSingleModule_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/EnableSingleModule", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as EnableSingleModule_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,7 +387,7 @@ export function post_EnableSingleModule(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetLicenseList
    Description: Returns a list of all licenses.
    OperationID: GetLicenseList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLicenseList_output
@@ -308,15 +400,22 @@ export function post_GetLicenseList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLicenseList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/GetLicenseList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLicenseList_output)
           })
       .catch((error) => {
           reject(error)
@@ -328,7 +427,7 @@ export function post_GetLicenseList(epicorHeaders?:Headers){
    Summary: Invoke method GetUsableLicenseList
    Description: Returns a list of all usable licenses.
    OperationID: GetUsableLicenseList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetUsableLicenseList_output
@@ -341,15 +440,22 @@ export function post_GetUsableLicenseList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetUsableLicenseList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/GetUsableLicenseList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetUsableLicenseList_output)
           })
       .catch((error) => {
           reject(error)
@@ -361,30 +467,37 @@ export function post_GetUsableLicenseList(epicorHeaders?:Headers){
    Summary: Invoke method ImportLicense
    Description: This method imports a new License.
    OperationID: ImportLicense
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportLicense_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportLicense_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportLicense_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportLicense(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportLicense(requestBody:ImportLicense_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportLicense_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/ImportLicense", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportLicense_output)
           })
       .catch((error) => {
           reject(error)
@@ -396,7 +509,7 @@ export function post_ImportLicense(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckAndDownloadCloudLicenseUpdates
    Description: Checks the Global license server and download cloud license updates if exists.
    OperationID: CheckAndDownloadCloudLicenseUpdates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckAndDownloadCloudLicenseUpdates_output
@@ -409,15 +522,22 @@ export function post_CheckAndDownloadCloudLicenseUpdates(epicorHeaders?:Headers)
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckAndDownloadCloudLicenseUpdates_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/CheckAndDownloadCloudLicenseUpdates", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckAndDownloadCloudLicenseUpdates_output)
           })
       .catch((error) => {
           reject(error)
@@ -429,30 +549,37 @@ export function post_CheckAndDownloadCloudLicenseUpdates(epicorHeaders?:Headers)
    Summary: Invoke method SetTenantID
    Description: Sets the tenant ID by updated or creating the row in LicenseTenant
    OperationID: SetTenantID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetTenantID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetTenantID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetTenantID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetTenantID(requestBody:any, epicorHeaders?:Headers){
+export function post_SetTenantID(requestBody:SetTenantID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetTenantID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/SetTenantID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetTenantID_output)
           })
       .catch((error) => {
           reject(error)
@@ -464,30 +591,37 @@ export function post_SetTenantID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLicensesByTenantID
    Description: Gets the licenses by tenant ID.
    OperationID: GetLicensesByTenantID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLicensesByTenantID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLicensesByTenantID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLicensesByTenantID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLicensesByTenantID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLicensesByTenantID(requestBody:GetLicensesByTenantID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLicensesByTenantID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/GetLicensesByTenantID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLicensesByTenantID_output)
           })
       .catch((error) => {
           reject(error)
@@ -498,7 +632,7 @@ export function post_GetLicensesByTenantID(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method GetSysLicenseList
    OperationID: GetSysLicenseList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSysLicenseList_output
@@ -511,15 +645,22 @@ export function post_GetSysLicenseList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSysLicenseList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AdminLicensingSvc/GetSysLicenseList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSysLicenseList_output)
           })
       .catch((error) => {
           reject(error)
@@ -530,11 +671,45 @@ export function post_GetSysLicenseList(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -562,7 +737,7 @@ export interface EnableModule_input{
 export interface EnableModule_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_AdminLicensingTableset[],
+   ds:Ice_Tablesets_AdminLicensingTableset,
 }
 }
 

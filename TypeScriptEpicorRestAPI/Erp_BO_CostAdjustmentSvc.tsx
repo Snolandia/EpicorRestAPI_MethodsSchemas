@@ -1,6 +1,7 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.CostAdjustmentSvc
 // Description: Cost Adjustment Business Object
         Business object which provides the fields needed by
@@ -12,9 +13,27 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
         Lewis Batcher
         10-14-2003
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -23,7 +42,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -41,7 +60,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -55,7 +81,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -73,7 +99,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,6 +119,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -94,30 +144,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Description: Obtains the cost fields, part description, transaction date, cost method
 and other fields for the Cost Adjustment UI.
    OperationID: GetCostAdjustment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCostAdjustment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCostAdjustment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCostAdjustment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCostAdjustment(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCostAdjustment(requestBody:GetCostAdjustment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCostAdjustment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/GetCostAdjustment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCostAdjustment_output)
           })
       .catch((error) => {
           reject(error)
@@ -130,30 +187,37 @@ export function post_GetCostAdjustment(requestBody:any, epicorHeaders?:Headers){
    Description: Returns CostAdjustment with the cost fields, part description, transaction date, cost method
 and other fields
    OperationID: GetCostAdjustmentRow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCostAdjustmentRow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCostAdjustmentRow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCostAdjustmentRow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCostAdjustmentRow(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCostAdjustmentRow(requestBody:GetCostAdjustmentRow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCostAdjustmentRow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/GetCostAdjustmentRow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCostAdjustmentRow_output)
           })
       .catch((error) => {
           reject(error)
@@ -167,30 +231,37 @@ export function post_GetCostAdjustmentRow(requestBody:any, epicorHeaders?:Header
 The CostAdjustmentDataSet contains the cost fields, part description, transaction date, cost method
 and other fields for the Cost Adjustment UI.
    OperationID: GetCostAdjustmentMultiple
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCostAdjustmentMultiple_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCostAdjustmentMultiple_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCostAdjustmentMultiple_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCostAdjustmentMultiple(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCostAdjustmentMultiple(requestBody:GetCostAdjustmentMultiple_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCostAdjustmentMultiple_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/GetCostAdjustmentMultiple", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCostAdjustmentMultiple_output)
           })
       .catch((error) => {
           reject(error)
@@ -202,30 +273,37 @@ export function post_GetCostAdjustmentMultiple(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetFIFOCosts
    Description: Obtains the FIFO costs for a part which has a cost method of 'F'.
    OperationID: GetFIFOCosts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFIFOCosts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFIFOCosts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFIFOCosts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFIFOCosts(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFIFOCosts(requestBody:GetFIFOCosts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFIFOCosts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/GetFIFOCosts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFIFOCosts_output)
           })
       .catch((error) => {
           reject(error)
@@ -237,30 +315,37 @@ export function post_GetFIFOCosts(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLotCosts
    Description: Obtains the lot costs for a part which has a cost method of 'T'.
    OperationID: GetLotCosts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLotCosts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLotCosts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLotCosts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLotCosts(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLotCosts(requestBody:GetLotCosts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLotCosts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/GetLotCosts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLotCosts_output)
           })
       .catch((error) => {
           reject(error)
@@ -272,30 +357,37 @@ export function post_GetLotCosts(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCostAdjustment
    Description: This method creates a new CostAdjustmentDataSet row entry.
    OperationID: GetNewCostAdjustment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCostAdjustment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCostAdjustment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCostAdjustment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCostAdjustment(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCostAdjustment(requestBody:GetNewCostAdjustment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCostAdjustment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/GetNewCostAdjustment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCostAdjustment_output)
           })
       .catch((error) => {
           reject(error)
@@ -307,30 +399,37 @@ export function post_GetNewCostAdjustment(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewCostAdjustmentList
    Description: This method creates a new ttCostAdjustmentList row entry.
    OperationID: GetNewCostAdjustmentList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCostAdjustmentList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCostAdjustmentList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCostAdjustmentList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCostAdjustmentList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCostAdjustmentList(requestBody:GetNewCostAdjustmentList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCostAdjustmentList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/GetNewCostAdjustmentList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCostAdjustmentList_output)
           })
       .catch((error) => {
           reject(error)
@@ -342,30 +441,37 @@ export function post_GetNewCostAdjustmentList(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangeAvgMtlUnitCost
    Description: Call this method when the user changes the Average Material Unit Cost.
    OperationID: OnChangeAvgMtlUnitCost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAvgMtlUnitCost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAvgMtlUnitCost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAvgMtlUnitCost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAvgMtlUnitCost(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAvgMtlUnitCost(requestBody:OnChangeAvgMtlUnitCost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAvgMtlUnitCost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/OnChangeAvgMtlUnitCost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAvgMtlUnitCost_output)
           })
       .catch((error) => {
           reject(error)
@@ -377,30 +483,37 @@ export function post_OnChangeAvgMtlUnitCost(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnChangeFIFOMaterialCost
    Description: Call this method when the user changes the FIFO Material Unit Cost.
    OperationID: OnChangeFIFOMaterialCost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeFIFOMaterialCost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeFIFOMaterialCost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeFIFOMaterialCost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeFIFOMaterialCost(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeFIFOMaterialCost(requestBody:OnChangeFIFOMaterialCost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeFIFOMaterialCost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/OnChangeFIFOMaterialCost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeFIFOMaterialCost_output)
           })
       .catch((error) => {
           reject(error)
@@ -412,30 +525,37 @@ export function post_OnChangeFIFOMaterialCost(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangeLastMtlUnitCost
    Description: Call this method when the user changes the Last Material Unit Cost.
    OperationID: OnChangeLastMtlUnitCost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeLastMtlUnitCost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeLastMtlUnitCost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeLastMtlUnitCost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeLastMtlUnitCost(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeLastMtlUnitCost(requestBody:OnChangeLastMtlUnitCost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeLastMtlUnitCost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/OnChangeLastMtlUnitCost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeLastMtlUnitCost_output)
           })
       .catch((error) => {
           reject(error)
@@ -447,30 +567,37 @@ export function post_OnChangeLastMtlUnitCost(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method OnChangePartNum
    Description: Call this method when the user enters a PartNum.
    OperationID: OnChangePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartNum(requestBody:OnChangePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/OnChangePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -482,30 +609,37 @@ export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeStdMtlUnitCost
    Description: Call this method when the user changes the Standard Material Unit Cost.
    OperationID: OnChangeStdMtlUnitCost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeStdMtlUnitCost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeStdMtlUnitCost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeStdMtlUnitCost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeStdMtlUnitCost(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeStdMtlUnitCost(requestBody:OnChangeStdMtlUnitCost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeStdMtlUnitCost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/OnChangeStdMtlUnitCost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeStdMtlUnitCost_output)
           })
       .catch((error) => {
           reject(error)
@@ -522,30 +656,37 @@ it does, the LegalNumberPrompt business objects needs to be called to
 gather that information.  This method should be called when the user
 saves the record but before the Update method is called.
    OperationID: PreSetCostAdjustment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreSetCostAdjustment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreSetCostAdjustment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreSetCostAdjustment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreSetCostAdjustment(requestBody:any, epicorHeaders?:Headers){
+export function post_PreSetCostAdjustment(requestBody:PreSetCostAdjustment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreSetCostAdjustment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/PreSetCostAdjustment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreSetCostAdjustment_output)
           })
       .catch((error) => {
           reject(error)
@@ -559,30 +700,37 @@ export function post_PreSetCostAdjustment(requestBody:any, epicorHeaders?:Header
 Then updates the costs in the Part record, PartLot (if applicable)
 and creates the appropriate PartTran records.
    OperationID: SetCostAdjustment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetCostAdjustment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetCostAdjustment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetCostAdjustment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetCostAdjustment(requestBody:any, epicorHeaders?:Headers){
+export function post_SetCostAdjustment(requestBody:SetCostAdjustment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetCostAdjustment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/SetCostAdjustment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetCostAdjustment_output)
           })
       .catch((error) => {
           reject(error)
@@ -597,30 +745,37 @@ Then updates the costs in the Part record, PartLot (if applicable)
 and creates the appropriate PartTran records.
 Specific for web (client) use.
    OperationID: SetCostAdjustmentForWeb
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetCostAdjustmentForWeb_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetCostAdjustmentForWeb_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetCostAdjustmentForWeb_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetCostAdjustmentForWeb(requestBody:any, epicorHeaders?:Headers){
+export function post_SetCostAdjustmentForWeb(requestBody:SetCostAdjustmentForWeb_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetCostAdjustmentForWeb_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/SetCostAdjustmentForWeb", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetCostAdjustmentForWeb_output)
           })
       .catch((error) => {
           reject(error)
@@ -635,30 +790,37 @@ Then updates the costs in the Part record, PartLot (if applicable)
 and creates the appropriate PartTran records.
 If plant, warehouse, qty parameters are set then use them instead of current warehouse values
    OperationID: SetCostAdjustmentCommon
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetCostAdjustmentCommon_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetCostAdjustmentCommon_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetCostAdjustmentCommon_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetCostAdjustmentCommon(requestBody:any, epicorHeaders?:Headers){
+export function post_SetCostAdjustmentCommon(requestBody:SetCostAdjustmentCommon_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetCostAdjustmentCommon_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/SetCostAdjustmentCommon", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetCostAdjustmentCommon_output)
           })
       .catch((error) => {
           reject(error)
@@ -669,7 +831,7 @@ export function post_SetCostAdjustmentCommon(requestBody:any, epicorHeaders?:Hea
    /**  
    Summary: Invoke method GetAvailTranDocTypes
    OperationID: GetAvailTranDocTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailTranDocTypes_output
@@ -682,15 +844,22 @@ export function post_GetAvailTranDocTypes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailTranDocTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostAdjustmentSvc/GetAvailTranDocTypes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailTranDocTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -701,11 +870,45 @@ export function post_GetAvailTranDocTypes(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -942,7 +1145,7 @@ export interface GetCostAdjustmentMultiple_output{
    returnObj:Erp_Tablesets_CostAdjustmentTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentListTableset[],
+   ds:Erp_Tablesets_CostAdjustmentListTableset,
 }
 }
 
@@ -978,7 +1181,7 @@ export interface GetCostAdjustment_input{
 export interface GetCostAdjustment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
 }
 }
 
@@ -992,7 +1195,7 @@ export interface GetFIFOCosts_input{
 export interface GetFIFOCosts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
 }
 }
 
@@ -1006,7 +1209,7 @@ export interface GetLotCosts_input{
 export interface GetLotCosts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
 }
 }
 
@@ -1020,7 +1223,7 @@ export interface GetNewCostAdjustmentList_input{
 export interface GetNewCostAdjustmentList_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentListTableset[],
+   ds:Erp_Tablesets_CostAdjustmentListTableset,
 }
 }
 
@@ -1034,7 +1237,7 @@ export interface GetNewCostAdjustment_input{
 export interface GetNewCostAdjustment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
 }
 }
 
@@ -1072,7 +1275,7 @@ export interface OnChangeAvgMtlUnitCost_input{
 export interface OnChangeAvgMtlUnitCost_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
 }
 }
 
@@ -1089,7 +1292,7 @@ export interface OnChangeFIFOMaterialCost_input{
 export interface OnChangeFIFOMaterialCost_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
 }
 }
 
@@ -1106,7 +1309,7 @@ export interface OnChangeLastMtlUnitCost_input{
 export interface OnChangeLastMtlUnitCost_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
 }
 }
 
@@ -1123,7 +1326,7 @@ export interface OnChangePartNum_input{
 export interface OnChangePartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
 }
 }
 
@@ -1140,7 +1343,7 @@ export interface OnChangeStdMtlUnitCost_input{
 export interface OnChangeStdMtlUnitCost_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
 }
 }
 
@@ -1154,7 +1357,7 @@ export interface PreSetCostAdjustment_input{
 export interface PreSetCostAdjustment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
    requiresUserInput:boolean,
 }
 }
@@ -1181,7 +1384,7 @@ export interface SetCostAdjustmentCommon_input{
 export interface SetCostAdjustmentCommon_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
    partTranPKs:string,
    hasError:boolean,
 }
@@ -1197,7 +1400,7 @@ export interface SetCostAdjustmentForWeb_input{
 export interface SetCostAdjustmentForWeb_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
    partTranPKs:string,
 }
 }
@@ -1212,7 +1415,7 @@ export interface SetCostAdjustment_input{
 export interface SetCostAdjustment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostAdjustmentTableset[],
+   ds:Erp_Tablesets_CostAdjustmentTableset,
    partTranPKs:string,
 }
 }

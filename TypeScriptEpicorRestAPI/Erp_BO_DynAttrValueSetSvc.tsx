@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.DynAttrValueSetSvc
 // Description: Dynamic Attributes Set core service
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrValueSetRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrValueSetRow
    */  
 export function get_DynAttrValueSets(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_DynAttrValueSets(select?:string, expand?:string, filter?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrValueSetRow)
           })
@@ -118,15 +158,15 @@ export function get_DynAttrValueSets(select?:string, expand?:string, filter?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DynAttrValueSets
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DynAttrValueSetRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DynAttrValueSets(requestBody:any, epicorHeaders?:Headers){
+export function post_DynAttrValueSets(requestBody:Erp_Tablesets_DynAttrValueSetRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_DynAttrValueSets(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_DynAttrValueSets(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DynAttrValueSetRow
    */  
 export function get_DynAttrValueSets_Company_AttributeSetID(Company:string, AttributeSetID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_DynAttrValueSets_Company_AttributeSetID(Company:string, Attr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DynAttrValueSetRow)
           })
@@ -193,15 +247,15 @@ export function get_DynAttrValueSets_Company_AttributeSetID(Company:string, Attr
    OperationID: UpdateExt_DynAttrValueSet
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AttributeSetID Desc: AttributeSetID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DynAttrValueSets_Company_AttributeSetID(Company:string, AttributeSetID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DynAttrValueSets_Company_AttributeSetID(Company:string, AttributeSetID:string, requestBody:Erp_Tablesets_DynAttrValueSetRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_DynAttrValueSets_Company_AttributeSetID(Company:string, At
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_DynAttrValueSets_Company_AttributeSetID(Company:string, At
    OperationID: DeleteUpdateExt_DynAttrValueSet
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AttributeSetID Desc: AttributeSetID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_DynAttrValueSets_Company_AttributeSetID(Company:string, A
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_DynAttrValueSets_Company_AttributeSetID(Company:string, A
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrValueSetLangDescRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrValueSetLangDescRow
    */  
 export function get_DynAttrValueSets_Company_AttributeSetID_DynAttrValueSetLangDescs(Company:string, AttributeSetID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_DynAttrValueSets_Company_AttributeSetID_DynAttrValueSetLangD
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrValueSetLangDescRow)
           })
@@ -309,10 +384,10 @@ export function get_DynAttrValueSets_Company_AttributeSetID_DynAttrValueSetLangD
       @param LangNameID Desc: LangNameID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetLangDescRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DynAttrValueSetLangDescRow
    */  
 export function get_DynAttrValueSets_Company_AttributeSetID_DynAttrValueSetLangDescs_Company_AttributeSetID_LangNameID(Company:string, AttributeSetID:string, LangNameID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_DynAttrValueSets_Company_AttributeSetID_DynAttrValueSetLangD
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DynAttrValueSetLangDescRow)
           })
@@ -347,10 +429,10 @@ export function get_DynAttrValueSets_Company_AttributeSetID_DynAttrValueSetLangD
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrValueSetLangDescRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrValueSetLangDescRow
    */  
 export function get_DynAttrValueSetLangDescs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -365,7 +447,14 @@ export function get_DynAttrValueSetLangDescs(select?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrValueSetLangDescRow)
           })
@@ -379,15 +468,15 @@ export function get_DynAttrValueSetLangDescs(select?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DynAttrValueSetLangDescs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetLangDescRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetLangDescRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetLangDescRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DynAttrValueSetLangDescRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DynAttrValueSetLangDescs(requestBody:any, epicorHeaders?:Headers){
+export function post_DynAttrValueSetLangDescs(requestBody:Erp_Tablesets_DynAttrValueSetLangDescRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -401,7 +490,14 @@ export function post_DynAttrValueSetLangDescs(requestBody:any, epicorHeaders?:He
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -420,10 +516,10 @@ export function post_DynAttrValueSetLangDescs(requestBody:any, epicorHeaders?:He
       @param LangNameID Desc: LangNameID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetLangDescRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DynAttrValueSetLangDescRow
    */  
 export function get_DynAttrValueSetLangDescs_Company_AttributeSetID_LangNameID(Company:string, AttributeSetID:string, LangNameID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -438,7 +534,14 @@ export function get_DynAttrValueSetLangDescs_Company_AttributeSetID_LangNameID(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DynAttrValueSetLangDescRow)
           })
@@ -455,15 +558,15 @@ export function get_DynAttrValueSetLangDescs_Company_AttributeSetID_LangNameID(C
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AttributeSetID Desc: AttributeSetID   Required: True
       @param LangNameID Desc: LangNameID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetLangDescRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrValueSetLangDescRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DynAttrValueSetLangDescs_Company_AttributeSetID_LangNameID(Company:string, AttributeSetID:string, LangNameID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DynAttrValueSetLangDescs_Company_AttributeSetID_LangNameID(Company:string, AttributeSetID:string, LangNameID:string, requestBody:Erp_Tablesets_DynAttrValueSetLangDescRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -477,7 +580,14 @@ export function patch_DynAttrValueSetLangDescs_Company_AttributeSetID_LangNameID
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -494,7 +604,7 @@ export function patch_DynAttrValueSetLangDescs_Company_AttributeSetID_LangNameID
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AttributeSetID Desc: AttributeSetID   Required: True
       @param LangNameID Desc: LangNameID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -513,7 +623,14 @@ export function delete_DynAttrValueSetLangDescs_Company_AttributeSetID_LangNameI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -533,10 +650,10 @@ export function delete_DynAttrValueSetLangDescs_Company_AttributeSetID_LangNameI
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrValueRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrValueRow
    */  
 export function get_DynAttrValues(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -551,7 +668,14 @@ export function get_DynAttrValues(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrValueRow)
           })
@@ -565,15 +689,15 @@ export function get_DynAttrValues(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DynAttrValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrValueRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrValueRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DynAttrValueRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DynAttrValueRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DynAttrValues(requestBody:any, epicorHeaders?:Headers){
+export function post_DynAttrValues(requestBody:Erp_Tablesets_DynAttrValueRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -587,7 +711,14 @@ export function post_DynAttrValues(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -609,10 +740,10 @@ export function post_DynAttrValues(requestBody:any, epicorHeaders?:Headers){
       @param AttributeID Desc: AttributeID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DynAttrValueRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DynAttrValueRow
    */  
 export function get_DynAttrValues_Company_RelatedToSchemaName_RelatedToTableName_RelatedToSysRowID_AttrClassID_AttributeID(Company:string, RelatedToSchemaName:string, RelatedToTableName:string, RelatedToSysRowID:string, AttrClassID:string, AttributeID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -627,7 +758,14 @@ export function get_DynAttrValues_Company_RelatedToSchemaName_RelatedToTableName
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DynAttrValueRow)
           })
@@ -647,15 +785,15 @@ export function get_DynAttrValues_Company_RelatedToSchemaName_RelatedToTableName
       @param RelatedToSysRowID Desc: RelatedToSysRowID   Required: True   Allow empty value : True
       @param AttrClassID Desc: AttrClassID   Required: True   Allow empty value : True
       @param AttributeID Desc: AttributeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrValueRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrValueRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DynAttrValues_Company_RelatedToSchemaName_RelatedToTableName_RelatedToSysRowID_AttrClassID_AttributeID(Company:string, RelatedToSchemaName:string, RelatedToTableName:string, RelatedToSysRowID:string, AttrClassID:string, AttributeID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DynAttrValues_Company_RelatedToSchemaName_RelatedToTableName_RelatedToSysRowID_AttrClassID_AttributeID(Company:string, RelatedToSchemaName:string, RelatedToTableName:string, RelatedToSysRowID:string, AttrClassID:string, AttributeID:string, requestBody:Erp_Tablesets_DynAttrValueRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -669,7 +807,14 @@ export function patch_DynAttrValues_Company_RelatedToSchemaName_RelatedToTableNa
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -689,7 +834,7 @@ export function patch_DynAttrValues_Company_RelatedToSchemaName_RelatedToTableNa
       @param RelatedToSysRowID Desc: RelatedToSysRowID   Required: True   Allow empty value : True
       @param AttrClassID Desc: AttrClassID   Required: True   Allow empty value : True
       @param AttributeID Desc: AttributeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -708,7 +853,14 @@ export function delete_DynAttrValues_Company_RelatedToSchemaName_RelatedToTableN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -728,10 +880,10 @@ export function delete_DynAttrValues_Company_RelatedToSchemaName_RelatedToTableN
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassDtlComboValuesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassDtlComboValuesRow
    */  
 export function get_DynAttrClassDtlComboValues(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -746,7 +898,14 @@ export function get_DynAttrClassDtlComboValues(select?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassDtlComboValuesRow)
           })
@@ -760,15 +919,15 @@ export function get_DynAttrClassDtlComboValues(select?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DynAttrClassDtlComboValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlComboValuesRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlComboValuesRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlComboValuesRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DynAttrClassDtlComboValuesRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DynAttrClassDtlComboValues(requestBody:any, epicorHeaders?:Headers){
+export function post_DynAttrClassDtlComboValues(requestBody:Erp_Tablesets_DynAttrClassDtlComboValuesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -782,7 +941,14 @@ export function post_DynAttrClassDtlComboValues(requestBody:any, epicorHeaders?:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -799,10 +965,10 @@ export function post_DynAttrClassDtlComboValues(requestBody:any, epicorHeaders?:
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlComboValuesRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DynAttrClassDtlComboValuesRow
    */  
 export function get_DynAttrClassDtlComboValues_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -817,7 +983,14 @@ export function get_DynAttrClassDtlComboValues_SysRowID(SysRowID:string, select?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DynAttrClassDtlComboValuesRow)
           })
@@ -832,15 +1005,15 @@ export function get_DynAttrClassDtlComboValues_SysRowID(SysRowID:string, select?
    Description: Calls UpdateExt to update DynAttrClassDtlComboValue. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_DynAttrClassDtlComboValue
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlComboValuesRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlComboValuesRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DynAttrClassDtlComboValues_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DynAttrClassDtlComboValues_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_DynAttrClassDtlComboValuesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -854,7 +1027,14 @@ export function patch_DynAttrClassDtlComboValues_SysRowID(SysRowID:string, reque
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -869,7 +1049,7 @@ export function patch_DynAttrClassDtlComboValues_SysRowID(SysRowID:string, reque
    Description: Call UpdateExt to delete DynAttrClassDtlComboValue item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_DynAttrClassDtlComboValue
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -888,7 +1068,14 @@ export function delete_DynAttrClassDtlComboValues_SysRowID(SysRowID:string, epic
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -908,10 +1095,10 @@ export function delete_DynAttrClassDtlComboValues_SysRowID(SysRowID:string, epic
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrValueSetListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrValueSetListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -926,7 +1113,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrValueSetListRow)
           })
@@ -938,6 +1132,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -952,7 +1163,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1021,15 +1232,22 @@ export function get_GetRows(whereClauseDynAttrValueSet:string, whereClauseDynAtt
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1042,7 +1260,7 @@ export function get_GetRows(whereClauseDynAttrValueSet:string, whereClauseDynAtt
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1066,15 +1284,22 @@ export function get_GetByID(attributeSetID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1089,7 +1314,7 @@ export function get_GetByID(attributeSetID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1131,15 +1356,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1153,30 +1385,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
 Method is dependent on a populated InventoryDynAttrValueSummaryRow with minimum populated values: AttrClassID, RelatedToSchemaName, RelatedToTableName.
 If used for Inventory Attributes then either RelatedToSysRowID or PartNum must be supplied.
    OperationID: GetNewAttributeValuesRow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAttributeValuesRow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAttributeValuesRow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAttributeValuesRow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAttributeValuesRow(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAttributeValuesRow(requestBody:GetNewAttributeValuesRow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAttributeValuesRow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetNewAttributeValuesRow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAttributeValuesRow_output)
           })
       .catch((error) => {
           reject(error)
@@ -1190,30 +1429,37 @@ export function post_GetNewAttributeValuesRow(requestBody:any, epicorHeaders?:He
 Method is dependent on a populated InventoryDynAttrValueSummaryRow with minimum populated values: AttrClassID, RelatedToSchemaName, RelatedToTableName.
 If used for Inventory Attributes then either RelatedToSysRowID or PartNum must be supplied.
    OperationID: GetNewAttributeValuesRowWithOutDynamicMetaDataDS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAttributeValuesRowWithOutDynamicMetaDataDS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAttributeValuesRowWithOutDynamicMetaDataDS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAttributeValuesRowWithOutDynamicMetaDataDS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAttributeValuesRowWithOutDynamicMetaDataDS(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAttributeValuesRowWithOutDynamicMetaDataDS(requestBody:GetNewAttributeValuesRowWithOutDynamicMetaDataDS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAttributeValuesRowWithOutDynamicMetaDataDS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetNewAttributeValuesRowWithOutDynamicMetaDataDS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAttributeValuesRowWithOutDynamicMetaDataDS_output)
           })
       .catch((error) => {
           reject(error)
@@ -1225,30 +1471,37 @@ export function post_GetNewAttributeValuesRowWithOutDynamicMetaDataDS(requestBod
    Summary: Invoke method GetNewInventoryDynAttrValuesRow
    Description: Used with Inventory Attributes Entry to create full set of DynAttrValue as inverted table.
    OperationID: GetNewInventoryDynAttrValuesRow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewInventoryDynAttrValuesRow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewInventoryDynAttrValuesRow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewInventoryDynAttrValuesRow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewInventoryDynAttrValuesRow(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewInventoryDynAttrValuesRow(requestBody:GetNewInventoryDynAttrValuesRow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewInventoryDynAttrValuesRow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetNewInventoryDynAttrValuesRow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewInventoryDynAttrValuesRow_output)
           })
       .catch((error) => {
           reject(error)
@@ -1260,30 +1513,37 @@ export function post_GetNewInventoryDynAttrValuesRow(requestBody:any, epicorHead
    Summary: Invoke method GetNewInventoryDynAttrValueSummary
    Description: Gets new InventoryDynAttrValueSummary that can be used in later request for any additional parameters required.  Helper for summary totals.
    OperationID: GetNewInventoryDynAttrValueSummary
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewInventoryDynAttrValueSummary_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewInventoryDynAttrValueSummary_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewInventoryDynAttrValueSummary_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewInventoryDynAttrValueSummary(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewInventoryDynAttrValueSummary(requestBody:GetNewInventoryDynAttrValueSummary_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewInventoryDynAttrValueSummary_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetNewInventoryDynAttrValueSummary", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewInventoryDynAttrValueSummary_output)
           })
       .catch((error) => {
           reject(error)
@@ -1295,30 +1555,37 @@ export function post_GetNewInventoryDynAttrValueSummary(requestBody:any, epicorH
    Summary: Invoke method GetByIDDynAttrValueSetDataSet
    Description: Returns the DynAttrValueSetTableset as an inverted dynamic Dataset
    OperationID: GetByIDDynAttrValueSetDataSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByIDDynAttrValueSetDataSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByIDDynAttrValueSetDataSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByIDDynAttrValueSetDataSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByIDDynAttrValueSetDataSet(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByIDDynAttrValueSetDataSet(requestBody:GetByIDDynAttrValueSetDataSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByIDDynAttrValueSetDataSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetByIDDynAttrValueSetDataSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByIDDynAttrValueSetDataSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1331,30 +1598,37 @@ export function post_GetByIDDynAttrValueSetDataSet(requestBody:any, epicorHeader
    Description: Used with Dynamic Attribute Set Maintenance to create full dataset with all needed DynAttrValue columns.  The DynAttrValue rows have been inverted to columns.
 For new sets the whole set most be created at the same time, a valid attribute class ID must be supplied.
    OperationID: GetNewDynAttrValueSetDataSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrValueSetDataSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrValueSetDataSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDynAttrValueSetDataSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDynAttrValueSetDataSet(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDynAttrValueSetDataSet(requestBody:GetNewDynAttrValueSetDataSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDynAttrValueSetDataSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetNewDynAttrValueSetDataSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDynAttrValueSetDataSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1367,30 +1641,37 @@ export function post_GetNewDynAttrValueSetDataSet(requestBody:any, epicorHeaders
    Description: Used with Dynamic Attribute Set Maintenance to create full dataset with all needed DynAttrValue rows.
 For new sets the whole set most be created at the same time, a valid attribute class ID must be supplied.
    OperationID: GetNewDynAttrValueSetTableset
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrValueSetTableset_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrValueSetTableset_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDynAttrValueSetTableset_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDynAttrValueSetTableset(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDynAttrValueSetTableset(requestBody:GetNewDynAttrValueSetTableset_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDynAttrValueSetTableset_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetNewDynAttrValueSetTableset", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDynAttrValueSetTableset_output)
           })
       .catch((error) => {
           reject(error)
@@ -1402,30 +1683,37 @@ export function post_GetNewDynAttrValueSetTableset(requestBody:any, epicorHeader
    Summary: Invoke method GetFullDynAttrValueSetDataSetByAttrClassID
    Description: Returns dynamically built DataSet for all DynAttrValueSet for given attribute class.
    OperationID: GetFullDynAttrValueSetDataSetByAttrClassID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFullDynAttrValueSetDataSetByAttrClassID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFullDynAttrValueSetDataSetByAttrClassID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFullDynAttrValueSetDataSetByAttrClassID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFullDynAttrValueSetDataSetByAttrClassID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFullDynAttrValueSetDataSetByAttrClassID(requestBody:GetFullDynAttrValueSetDataSetByAttrClassID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFullDynAttrValueSetDataSetByAttrClassID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetFullDynAttrValueSetDataSetByAttrClassID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFullDynAttrValueSetDataSetByAttrClassID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1437,30 +1725,37 @@ export function post_GetFullDynAttrValueSetDataSetByAttrClassID(requestBody:any,
    Summary: Invoke method GetFullDynAttrValueSetDataSetByList
    Description: Returns dynamically built DataSet for all DynAttrValueSet for given AttributeSetID list.
    OperationID: GetFullDynAttrValueSetDataSetByList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFullDynAttrValueSetDataSetByList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFullDynAttrValueSetDataSetByList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFullDynAttrValueSetDataSetByList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFullDynAttrValueSetDataSetByList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFullDynAttrValueSetDataSetByList(requestBody:GetFullDynAttrValueSetDataSetByList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFullDynAttrValueSetDataSetByList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetFullDynAttrValueSetDataSetByList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFullDynAttrValueSetDataSetByList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1472,30 +1767,37 @@ export function post_GetFullDynAttrValueSetDataSetByList(requestBody:any, epicor
    Summary: Invoke method DynAttrValueColumnChanging
    Description: Column value change for dynamic attribute.
    OperationID: DynAttrValueColumnChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DynAttrValueColumnChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DynAttrValueColumnChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DynAttrValueColumnChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DynAttrValueColumnChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_DynAttrValueColumnChanging(requestBody:DynAttrValueColumnChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DynAttrValueColumnChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/DynAttrValueColumnChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DynAttrValueColumnChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -1508,30 +1810,37 @@ export function post_DynAttrValueColumnChanging(requestBody:any, epicorHeaders?:
    Description: Column value change for dynamic attribute.
 This method does NOT support BPM.
    OperationID: OnChangeDynAttrValueColumn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeDynAttrValueColumn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeDynAttrValueColumn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeDynAttrValueColumn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeDynAttrValueColumn(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeDynAttrValueColumn(requestBody:OnChangeDynAttrValueColumn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeDynAttrValueColumn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/OnChangeDynAttrValueColumn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeDynAttrValueColumn_output)
           })
       .catch((error) => {
           reject(error)
@@ -1546,30 +1855,37 @@ and avoid data type inferrance causing passed decimal values to become Integers.
 This method does NOT support BPM, write BPM against OnChangeDynAttrValueColumn.
 This method used by Dynamic Attribute Value Entry.
    OperationID: OnChangeAttributeValuesColumnObject
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAttributeValuesColumnObject_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAttributeValuesColumnObject_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAttributeValuesColumnObject_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAttributeValuesColumnObject(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAttributeValuesColumnObject(requestBody:OnChangeAttributeValuesColumnObject_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAttributeValuesColumnObject_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/OnChangeAttributeValuesColumnObject", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAttributeValuesColumnObject_output)
           })
       .catch((error) => {
           reject(error)
@@ -1584,30 +1900,37 @@ and avoid data type inferrance causing passed decimal values to become Integers.
 This method does NOT support BPM, write BPM against OnChangeDynAttrValueColumn.
 This method used by Dynamic Attribute Value Set Maintenance.
    OperationID: OnChangeDynAttrValueSetColumnObject
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeDynAttrValueSetColumnObject_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeDynAttrValueSetColumnObject_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeDynAttrValueSetColumnObject_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeDynAttrValueSetColumnObject(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeDynAttrValueSetColumnObject(requestBody:OnChangeDynAttrValueSetColumnObject_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeDynAttrValueSetColumnObject_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/OnChangeDynAttrValueSetColumnObject", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeDynAttrValueSetColumnObject_output)
           })
       .catch((error) => {
           reject(error)
@@ -1620,30 +1943,37 @@ export function post_OnChangeDynAttrValueSetColumnObject(requestBody:any, epicor
    Description: Returns dataset of all related attribute values.
 This method is used to return both types of attributes: dynamic attributes, inventory dynamic attributes.
    OperationID: GetAttributeValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAttributeValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAttributeValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAttributeValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAttributeValues(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAttributeValues(requestBody:GetAttributeValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAttributeValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetAttributeValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAttributeValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -1656,30 +1986,37 @@ export function post_GetAttributeValues(requestBody:any, epicorHeaders?:Headers)
    Description: Returns dataset of all related attribute values.
 This method is used to return both types of attributes: dynamic attributes, inventory dynamic attributes.
    OperationID: GetAttributeValuesWithOutDynamicMetaDataDS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAttributeValuesWithOutDynamicMetaDataDS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAttributeValuesWithOutDynamicMetaDataDS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAttributeValuesWithOutDynamicMetaDataDS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAttributeValuesWithOutDynamicMetaDataDS(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAttributeValuesWithOutDynamicMetaDataDS(requestBody:GetAttributeValuesWithOutDynamicMetaDataDS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAttributeValuesWithOutDynamicMetaDataDS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetAttributeValuesWithOutDynamicMetaDataDS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAttributeValuesWithOutDynamicMetaDataDS_output)
           })
       .catch((error) => {
           reject(error)
@@ -1691,30 +2028,37 @@ export function post_GetAttributeValuesWithOutDynamicMetaDataDS(requestBody:any,
    Summary: Invoke method GetInventoryDynAttrValueParams
    Description: Returns dataset of inventory detail information and all related inventory dynamic attribute values.
    OperationID: GetInventoryDynAttrValueParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetInventoryDynAttrValueParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetInventoryDynAttrValueParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInventoryDynAttrValueParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetInventoryDynAttrValueParams(requestBody:any, epicorHeaders?:Headers){
+export function post_GetInventoryDynAttrValueParams(requestBody:GetInventoryDynAttrValueParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInventoryDynAttrValueParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetInventoryDynAttrValueParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInventoryDynAttrValueParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -1726,30 +2070,37 @@ export function post_GetInventoryDynAttrValueParams(requestBody:any, epicorHeade
    Summary: Invoke method GetDefaultsFromSelectedTemplate
    Description: Defaults attribute values from the selected template attribute set
    OperationID: GetDefaultsFromSelectedTemplate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDefaultsFromSelectedTemplate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDefaultsFromSelectedTemplate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultsFromSelectedTemplate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDefaultsFromSelectedTemplate(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDefaultsFromSelectedTemplate(requestBody:GetDefaultsFromSelectedTemplate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultsFromSelectedTemplate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetDefaultsFromSelectedTemplate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultsFromSelectedTemplate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1761,30 +2112,37 @@ export function post_GetDefaultsFromSelectedTemplate(requestBody:any, epicorHead
    Summary: Invoke method RefreshDynAttrValuesRow
    Description: Refreshes inverted dynamic attribute row
    OperationID: RefreshDynAttrValuesRow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshDynAttrValuesRow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshDynAttrValuesRow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshDynAttrValuesRow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshDynAttrValuesRow(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshDynAttrValuesRow(requestBody:RefreshDynAttrValuesRow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshDynAttrValuesRow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/RefreshDynAttrValuesRow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshDynAttrValuesRow_output)
           })
       .catch((error) => {
           reject(error)
@@ -1797,30 +2155,37 @@ export function post_RefreshDynAttrValuesRow(requestBody:any, epicorHeaders?:Hea
    Description: Update which takes a whole dataset and first tries to find existing attribute set based on exact match of all attribute values and if found returns the id.
 If one is not found will create the parent DynAttrValueSet and all child DynAttrValue records.
    OperationID: MasterUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MasterUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MasterUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MasterUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MasterUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_MasterUpdate(requestBody:MasterUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MasterUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/MasterUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MasterUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1835,30 +2200,37 @@ Update which takes a whole dataset and first tries to find existing attribute se
 If an existing attribute set is not found, one will be created with the parent DynAttrValueSet and all child DynAttrValue records.
 Regardless whether an existing attribute set is found or a new one is created, the related AttributeSetID is returned.
    OperationID: MasterUpdateFromMultiCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MasterUpdateFromMultiCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MasterUpdateFromMultiCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MasterUpdateFromMultiCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MasterUpdateFromMultiCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_MasterUpdateFromMultiCompany(requestBody:MasterUpdateFromMultiCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MasterUpdateFromMultiCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/MasterUpdateFromMultiCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MasterUpdateFromMultiCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -1873,30 +2245,37 @@ If an existing attribute set is not found, one will be created with the parent D
 Regardless whether an existing attribute set is found or a new one is created, the related AttributeSetID is returned.
 Set will be marked as Active and HasBeenUsed.
    OperationID: MasterUpdateDynAttrValueSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MasterUpdateDynAttrValueSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MasterUpdateDynAttrValueSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MasterUpdateDynAttrValueSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MasterUpdateDynAttrValueSet(requestBody:any, epicorHeaders?:Headers){
+export function post_MasterUpdateDynAttrValueSet(requestBody:MasterUpdateDynAttrValueSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MasterUpdateDynAttrValueSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/MasterUpdateDynAttrValueSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MasterUpdateDynAttrValueSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1908,30 +2287,37 @@ export function post_MasterUpdateDynAttrValueSet(requestBody:any, epicorHeaders?
    Summary: Invoke method UpdateDynAttrValueSetDataSet
    Description: Update Dynamic Attribute Value Set using a dynamically built DataTable
    OperationID: UpdateDynAttrValueSetDataSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateDynAttrValueSetDataSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateDynAttrValueSetDataSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateDynAttrValueSetDataSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateDynAttrValueSetDataSet(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateDynAttrValueSetDataSet(requestBody:UpdateDynAttrValueSetDataSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateDynAttrValueSetDataSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/UpdateDynAttrValueSetDataSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateDynAttrValueSetDataSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1944,30 +2330,37 @@ export function post_UpdateDynAttrValueSetDataSet(requestBody:any, epicorHeaders
    Description: Update Dynamic Attribute Value Set using a dynamically built DataTable
 Passing dataset as an object such that we can apply the dynamic schema attributes and void dataType inferrance causing decimal values to become integers
    OperationID: UpdateDynAttrValueSetDataSetObject
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateDynAttrValueSetDataSetObject_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateDynAttrValueSetDataSetObject_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateDynAttrValueSetDataSetObject_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateDynAttrValueSetDataSetObject(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateDynAttrValueSetDataSetObject(requestBody:UpdateDynAttrValueSetDataSetObject_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateDynAttrValueSetDataSetObject_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/UpdateDynAttrValueSetDataSetObject", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateDynAttrValueSetDataSetObject_output)
           })
       .catch((error) => {
           reject(error)
@@ -1980,30 +2373,37 @@ export function post_UpdateDynAttrValueSetDataSetObject(requestBody:any, epicorH
    Description: Update dynamic attribute values using a dynamically built inverted DataTable
 This method is used to modify both types of attributes: dynamic attributes, inventory dynamic attributes.
    OperationID: UpdateAttributeValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateAttributeValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateAttributeValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateAttributeValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateAttributeValues(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateAttributeValues(requestBody:UpdateAttributeValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateAttributeValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/UpdateAttributeValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateAttributeValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -2017,30 +2417,37 @@ export function post_UpdateAttributeValues(requestBody:any, epicorHeaders?:Heade
 This method is used to modify both types of attributes: dynamic attributes, inventory dynamic attributes.
 Passing dataset as an object such that we can apply the dynamic schema attributes and void dataType inferrance causing decimal values to become integers
    OperationID: UpdateAttributeValuesObject
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateAttributeValuesObject_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateAttributeValuesObject_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateAttributeValuesObject_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateAttributeValuesObject(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateAttributeValuesObject(requestBody:UpdateAttributeValuesObject_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateAttributeValuesObject_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/UpdateAttributeValuesObject", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateAttributeValuesObject_output)
           })
       .catch((error) => {
           reject(error)
@@ -2052,30 +2459,37 @@ export function post_UpdateAttributeValuesObject(requestBody:any, epicorHeaders?
    Summary: Invoke method GetDynAttrValueSetPlanningKeys
    Description: Returns PlanningAttributeSetSeq and PlanningAttributeSetHash based on attribute values
    OperationID: GetDynAttrValueSetPlanningKeys
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDynAttrValueSetPlanningKeys_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDynAttrValueSetPlanningKeys_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDynAttrValueSetPlanningKeys_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDynAttrValueSetPlanningKeys(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDynAttrValueSetPlanningKeys(requestBody:GetDynAttrValueSetPlanningKeys_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDynAttrValueSetPlanningKeys_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetDynAttrValueSetPlanningKeys", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDynAttrValueSetPlanningKeys_output)
           })
       .catch((error) => {
           reject(error)
@@ -2087,30 +2501,37 @@ export function post_GetDynAttrValueSetPlanningKeys(requestBody:any, epicorHeade
    Summary: Invoke method UpdateEntityAttributeSetFromConfigurator
    Description: Updates the target entity attribute set from a product configuration.
    OperationID: UpdateEntityAttributeSetFromConfigurator
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateEntityAttributeSetFromConfigurator_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateEntityAttributeSetFromConfigurator_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateEntityAttributeSetFromConfigurator_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateEntityAttributeSetFromConfigurator(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateEntityAttributeSetFromConfigurator(requestBody:UpdateEntityAttributeSetFromConfigurator_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateEntityAttributeSetFromConfigurator_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/UpdateEntityAttributeSetFromConfigurator", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateEntityAttributeSetFromConfigurator_output)
           })
       .catch((error) => {
           reject(error)
@@ -2122,30 +2543,37 @@ export function post_UpdateEntityAttributeSetFromConfigurator(requestBody:any, e
    Summary: Invoke method UpdateInventoryAttributes
    Description: Updates attribute set and line detail using dynamically built DataTable
    OperationID: UpdateInventoryAttributes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateInventoryAttributes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateInventoryAttributes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateInventoryAttributes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateInventoryAttributes(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateInventoryAttributes(requestBody:UpdateInventoryAttributes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateInventoryAttributes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/UpdateInventoryAttributes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateInventoryAttributes_output)
           })
       .catch((error) => {
           reject(error)
@@ -2157,30 +2585,37 @@ export function post_UpdateInventoryAttributes(requestBody:any, epicorHeaders?:H
    Summary: Invoke method AssignDataFields
    Description: Assigns all data fields for related data type and perform validation on the field value.
    OperationID: AssignDataFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignDataFields_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignDataFields_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignDataFields_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignDataFields(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignDataFields(requestBody:AssignDataFields_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignDataFields_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/AssignDataFields", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignDataFields_output)
           })
       .catch((error) => {
           reject(error)
@@ -2192,30 +2627,37 @@ export function post_AssignDataFields(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckAttributeChange
    Description: Method to return message if attributes or qty don't match linked SO on PO for BTO sales order.
    OperationID: CheckAttributeChange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckAttributeChange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckAttributeChange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckAttributeChange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckAttributeChange(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckAttributeChange(requestBody:CheckAttributeChange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckAttributeChange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/CheckAttributeChange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckAttributeChange_output)
           })
       .catch((error) => {
           reject(error)
@@ -2227,30 +2669,37 @@ export function post_CheckAttributeChange(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method UpdateSalesOrderComponentAttribute
    Description: Method to update the Quantity per Kit if the Quantity is modified in Attribute screen for Sales Kit Components in Sales Order.
    OperationID: UpdateSalesOrderComponentAttribute
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateSalesOrderComponentAttribute_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateSalesOrderComponentAttribute_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateSalesOrderComponentAttribute_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateSalesOrderComponentAttribute(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateSalesOrderComponentAttribute(requestBody:UpdateSalesOrderComponentAttribute_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateSalesOrderComponentAttribute_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/UpdateSalesOrderComponentAttribute", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateSalesOrderComponentAttribute_output)
           })
       .catch((error) => {
           reject(error)
@@ -2263,30 +2712,37 @@ export function post_UpdateSalesOrderComponentAttribute(requestBody:any, epicorH
    Description: Used to validate a new attribute set based on AttrClassIS and ShortDescription.
 This is only used by the UI when creating new set and not used when creating by an inventory transaction.
    OperationID: ValidateShortDescription
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateShortDescription_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateShortDescription_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateShortDescription_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateShortDescription(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateShortDescription(requestBody:ValidateShortDescription_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateShortDescription_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/ValidateShortDescription", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateShortDescription_output)
           })
       .catch((error) => {
           reject(error)
@@ -2298,30 +2754,37 @@ export function post_ValidateShortDescription(requestBody:any, epicorHeaders?:He
    Summary: Invoke method ValidateUniqueDynAttrValueSetByShortDescription
    Description: Validates and returns the AttributeSetID if unique set based on short description
    OperationID: ValidateUniqueDynAttrValueSetByShortDescription
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateUniqueDynAttrValueSetByShortDescription_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateUniqueDynAttrValueSetByShortDescription_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateUniqueDynAttrValueSetByShortDescription_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateUniqueDynAttrValueSetByShortDescription(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateUniqueDynAttrValueSetByShortDescription(requestBody:ValidateUniqueDynAttrValueSetByShortDescription_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateUniqueDynAttrValueSetByShortDescription_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/ValidateUniqueDynAttrValueSetByShortDescription", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateUniqueDynAttrValueSetByShortDescription_output)
           })
       .catch((error) => {
           reject(error)
@@ -2333,30 +2796,37 @@ export function post_ValidateUniqueDynAttrValueSetByShortDescription(requestBody
    Summary: Invoke method GetNewDynAttrValueSet
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDynAttrValueSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrValueSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrValueSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDynAttrValueSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDynAttrValueSet(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDynAttrValueSet(requestBody:GetNewDynAttrValueSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDynAttrValueSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetNewDynAttrValueSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDynAttrValueSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -2368,30 +2838,37 @@ export function post_GetNewDynAttrValueSet(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewDynAttrValue
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDynAttrValue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrValue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrValue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDynAttrValue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDynAttrValue(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDynAttrValue(requestBody:GetNewDynAttrValue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDynAttrValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetNewDynAttrValue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDynAttrValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -2403,30 +2880,37 @@ export function post_GetNewDynAttrValue(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewDynAttrValueSetLangDesc
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDynAttrValueSetLangDesc
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrValueSetLangDesc_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrValueSetLangDesc_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDynAttrValueSetLangDesc_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDynAttrValueSetLangDesc(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDynAttrValueSetLangDesc(requestBody:GetNewDynAttrValueSetLangDesc_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDynAttrValueSetLangDesc_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetNewDynAttrValueSetLangDesc", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDynAttrValueSetLangDesc_output)
           })
       .catch((error) => {
           reject(error)
@@ -2438,30 +2922,37 @@ export function post_GetNewDynAttrValueSetLangDesc(requestBody:any, epicorHeader
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2473,7 +2964,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2497,15 +2988,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2517,7 +3015,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2541,15 +3039,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2561,30 +3066,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2596,30 +3108,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrValueSetSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2630,31 +3149,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassDtlComboValuesRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DynAttrClassDtlComboValuesRow[],
+   "value":Erp_Tablesets_DynAttrClassDtlComboValuesRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrValueRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DynAttrValueRow[],
+   "value":Erp_Tablesets_DynAttrValueRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrValueSetLangDescRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DynAttrValueSetLangDescRow[],
+   "value":Erp_Tablesets_DynAttrValueSetLangDescRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrValueSetListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DynAttrValueSetListRow[],
+   "value":Erp_Tablesets_DynAttrValueSetListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrValueSetRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DynAttrValueSetRow[],
+   "value":Erp_Tablesets_DynAttrValueSetRow,
 }
 
 export interface Erp_Tablesets_DynAttrClassDtlComboValuesRow{
@@ -2820,6 +3356,23 @@ export interface Erp_Tablesets_DynAttrValueSetRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2836,7 +3389,7 @@ export interface AssignDataFields_input{
 export interface AssignDataFields_output{
 parameters : {
       /**  output parameters  */  
-   ttDynAttrValue:Erp_Tablesets_DynAttrValueRow[],
+   ttDynAttrValue:Erp_Tablesets_DynAttrValueRow,
 }
 }
 
@@ -2886,7 +3439,7 @@ export interface DynAttrValueColumnChanging_input{
 export interface DynAttrValueColumnChanging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AttributeChangingTableset[],
+   ds:Erp_Tablesets_AttributeChangingTableset,
 }
 }
 
@@ -3313,7 +3866,7 @@ export interface GetAttributeValuesWithOutDynamicMetaDataDS_output{
    returnObj:any,      //schema had no properties on an object.
 parameters : {
       /**  output parameters  */  
-   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset[],
+   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
 }
 }
 
@@ -3338,8 +3891,8 @@ export interface GetAttributeValues_output{
    returnObj:any,      //schema had no properties on an object.
 parameters : {
       /**  output parameters  */  
-   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset[],
-   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset[],
+   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
+   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 
@@ -3356,7 +3909,7 @@ export interface GetByIDDynAttrValueSetDataSet_output{
    returnObj:any,      //schema had no properties on an object.
 parameters : {
       /**  output parameters  */  
-   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset[],
+   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 
@@ -3443,7 +3996,7 @@ export interface GetFullDynAttrValueSetDataSetByAttrClassID_output{
    returnObj:any,      //schema had no properties on an object.
 parameters : {
       /**  output parameters  */  
-   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset[],
+   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 
@@ -3462,7 +4015,7 @@ export interface GetFullDynAttrValueSetDataSetByList_output{
    returnObj:any,      //schema had no properties on an object.
 parameters : {
       /**  output parameters  */  
-   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset[],
+   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 
@@ -3486,7 +4039,7 @@ export interface GetInventoryDynAttrValueParams_input{
 export interface GetInventoryDynAttrValueParams_output{
 parameters : {
       /**  output parameters  */  
-   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset[],
+   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
    inventoryDynAttrValueDS: UNKNOW TYPE(error 2338),
 }
 }
@@ -3525,7 +4078,7 @@ export interface GetNewAttributeValuesRowWithOutDynamicMetaDataDS_input{
 export interface GetNewAttributeValuesRowWithOutDynamicMetaDataDS_output{
 parameters : {
       /**  output parameters  */  
-   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset[],
+   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
    inventoryDynAttrValueDS: UNKNOW TYPE(error 2338),
 }
 }
@@ -3542,9 +4095,9 @@ export interface GetNewAttributeValuesRow_input{
 export interface GetNewAttributeValuesRow_output{
 parameters : {
       /**  output parameters  */  
-   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset[],
+   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
    inventoryDynAttrValueDS: UNKNOW TYPE(error 2338),
-   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset[],
+   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 
@@ -3563,7 +4116,7 @@ export interface GetNewDynAttrValueSetDataSet_output{
 parameters : {
       /**  output parameters  */  
    ds: UNKNOW TYPE(error 2338),
-   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset[],
+   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 
@@ -3579,7 +4132,7 @@ export interface GetNewDynAttrValueSetLangDesc_input{
 export interface GetNewDynAttrValueSetLangDesc_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrValueSetTableset[],
+   ds:Erp_Tablesets_DynAttrValueSetTableset,
 }
 }
 
@@ -3595,7 +4148,7 @@ export interface GetNewDynAttrValueSetTableset_input{
 export interface GetNewDynAttrValueSetTableset_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrValueSetTableset[],
+   ds:Erp_Tablesets_DynAttrValueSetTableset,
 }
 }
 
@@ -3609,7 +4162,7 @@ export interface GetNewDynAttrValueSet_input{
 export interface GetNewDynAttrValueSet_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrValueSetTableset[],
+   ds:Erp_Tablesets_DynAttrValueSetTableset,
 }
 }
 
@@ -3631,7 +4184,7 @@ export interface GetNewDynAttrValue_input{
 export interface GetNewDynAttrValue_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrValueSetTableset[],
+   ds:Erp_Tablesets_DynAttrValueSetTableset,
 }
 }
 
@@ -3653,7 +4206,7 @@ export interface GetNewInventoryDynAttrValueSummary_input{
 export interface GetNewInventoryDynAttrValueSummary_output{
 parameters : {
       /**  output parameters  */  
-   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset[],
+   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
 }
 }
 
@@ -3674,7 +4227,7 @@ export interface GetNewInventoryDynAttrValuesRow_output{
 parameters : {
       /**  output parameters  */  
    inventoryDynAttrValueDS: UNKNOW TYPE(error 2338),
-   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset[],
+   dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 
@@ -3750,7 +4303,7 @@ export interface MasterUpdateDynAttrValueSet_output{
    returnObj:number,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrValueSetTableset[],
+   ds:Erp_Tablesets_DynAttrValueSetTableset,
 }
 }
 
@@ -3765,7 +4318,7 @@ export interface MasterUpdateFromMultiCompany_output{
    returnObj:number,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrValueSetTableset[],
+   ds:Erp_Tablesets_DynAttrValueSetTableset,
 }
 }
 
@@ -3779,7 +4332,7 @@ export interface MasterUpdate_input{
 export interface MasterUpdate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrValueSetTableset[],
+   ds:Erp_Tablesets_DynAttrValueSetTableset,
 }
 }
 
@@ -3875,7 +4428,7 @@ export interface UpdateAttributeValuesObject_input{
 export interface UpdateAttributeValuesObject_output{
 parameters : {
       /**  output parameters  */  
-   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset[],
+   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
    dynAttrValueDS: UNKNOW TYPE(error 2338),
 }
 }
@@ -3896,7 +4449,7 @@ export interface UpdateAttributeValues_input{
 export interface UpdateAttributeValues_output{
 parameters : {
       /**  output parameters  */  
-   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset[],
+   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
    dynAttrValueDS: UNKNOW TYPE(error 2338),
 }
 }
@@ -3945,7 +4498,7 @@ export interface UpdateEntityAttributeSetFromConfigurator_input{
 export interface UpdateEntityAttributeSetFromConfigurator_output{
 parameters : {
       /**  output parameters  */  
-   dynAttrValueSetDS:Erp_Tablesets_DynAttrValueSetTableset[],
+   dynAttrValueSetDS:Erp_Tablesets_DynAttrValueSetTableset,
 }
 }
 
@@ -3964,7 +4517,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtDynAttrValueSetTableset[],
+   ds:Erp_Tablesets_UpdExtDynAttrValueSetTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3985,7 +4538,7 @@ export interface UpdateInventoryAttributes_input{
 export interface UpdateInventoryAttributes_output{
 parameters : {
       /**  output parameters  */  
-   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset[],
+   inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
    updatedDynAttrValueDS: UNKNOW TYPE(error 2338),
 }
 }
@@ -4014,7 +4567,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrValueSetTableset[],
+   ds:Erp_Tablesets_DynAttrValueSetTableset,
 }
 }
 

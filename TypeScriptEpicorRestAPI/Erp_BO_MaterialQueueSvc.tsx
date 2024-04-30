@@ -1,6 +1,7 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.MaterialQueueSvc
 // Description: Here are some brief notes regarding how to accomplish in Sonoma
 the features found in the v6.10 Vantage program Material Request Queue.
@@ -38,9 +39,27 @@ the Move Material program.
 I think there is substantial work involved in setting up these calls--they
 each use different datasets.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -49,7 +68,7 @@ each use different datasets.
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -67,7 +86,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -81,7 +107,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -99,7 +125,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -119,10 +152,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MtlQueueRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MtlQueueRow
    */  
 export function get_MaterialQueues(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -137,7 +170,14 @@ export function get_MaterialQueues(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MtlQueueRow)
           })
@@ -151,15 +191,15 @@ export function get_MaterialQueues(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MaterialQueues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MtlQueueRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MtlQueueRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MtlQueueRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MtlQueueRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MaterialQueues(requestBody:any, epicorHeaders?:Headers){
+export function post_MaterialQueues(requestBody:Erp_Tablesets_MtlQueueRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -173,7 +213,14 @@ export function post_MaterialQueues(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -191,10 +238,10 @@ export function post_MaterialQueues(requestBody:any, epicorHeaders?:Headers){
       @param MtlQueueSeq Desc: MtlQueueSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MtlQueueRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MtlQueueRow
    */  
 export function get_MaterialQueues_Company_MtlQueueSeq(Company:string, MtlQueueSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -209,7 +256,14 @@ export function get_MaterialQueues_Company_MtlQueueSeq(Company:string, MtlQueueS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MtlQueueRow)
           })
@@ -225,15 +279,15 @@ export function get_MaterialQueues_Company_MtlQueueSeq(Company:string, MtlQueueS
    OperationID: UpdateExt_MaterialQueue
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param MtlQueueSeq Desc: MtlQueueSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MtlQueueRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MtlQueueRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MaterialQueues_Company_MtlQueueSeq(Company:string, MtlQueueSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MaterialQueues_Company_MtlQueueSeq(Company:string, MtlQueueSeq:string, requestBody:Erp_Tablesets_MtlQueueRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -247,7 +301,14 @@ export function patch_MaterialQueues_Company_MtlQueueSeq(Company:string, MtlQueu
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -263,7 +324,7 @@ export function patch_MaterialQueues_Company_MtlQueueSeq(Company:string, MtlQueu
    OperationID: DeleteUpdateExt_MaterialQueue
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param MtlQueueSeq Desc: MtlQueueSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -282,7 +343,14 @@ export function delete_MaterialQueues_Company_MtlQueueSeq(Company:string, MtlQue
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -302,10 +370,10 @@ export function delete_MaterialQueues_Company_MtlQueueSeq(Company:string, MtlQue
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MtlQueueListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MtlQueueListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -320,7 +388,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MtlQueueListRow)
           })
@@ -333,6 +408,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -343,7 +435,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -385,15 +477,22 @@ export function get_GetRows(whereClauseMtlQueue:string, pageSize:string, absolut
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -406,7 +505,7 @@ export function get_GetRows(whereClauseMtlQueue:string, pageSize:string, absolut
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -430,15 +529,22 @@ export function get_GetByID(mtlQueueSeq:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -453,7 +559,7 @@ export function get_GetByID(mtlQueueSeq:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -495,15 +601,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -515,30 +628,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method AutoSelectTransactions
    Description: Retrieve material queue entry by company and by employee.
    OperationID: AutoSelectTransactions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AutoSelectTransactions_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AutoSelectTransactions_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AutoSelectTransactions_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AutoSelectTransactions(requestBody:any, epicorHeaders?:Headers){
+export function post_AutoSelectTransactions(requestBody:AutoSelectTransactions_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AutoSelectTransactions_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/AutoSelectTransactions", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AutoSelectTransactions_output)
           })
       .catch((error) => {
           reject(error)
@@ -550,30 +670,37 @@ export function post_AutoSelectTransactions(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetMtlQueueByTranID
    Description: Retrieve material queue entry by company and by mtlQueueSeq.
    OperationID: GetMtlQueueByTranID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMtlQueueByTranID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMtlQueueByTranID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMtlQueueByTranID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMtlQueueByTranID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMtlQueueByTranID(requestBody:GetMtlQueueByTranID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMtlQueueByTranID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetMtlQueueByTranID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMtlQueueByTranID_output)
           })
       .catch((error) => {
           reject(error)
@@ -587,30 +714,37 @@ export function post_GetMtlQueueByTranID(requestBody:any, epicorHeaders?:Headers
 Notes:
 <param name="ipTranStatus">Transaction status</param><param name="ipMtlQueueSeq">Material Queue Sequence</param><param name="ipEmpID">Employee ID</param><param name="ds">The MaterialQueueDataSet.</param>
    OperationID: LockUnLockMtlQueForEmpID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LockUnLockMtlQueForEmpID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LockUnLockMtlQueForEmpID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LockUnLockMtlQueForEmpID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LockUnLockMtlQueForEmpID(requestBody:any, epicorHeaders?:Headers){
+export function post_LockUnLockMtlQueForEmpID(requestBody:LockUnLockMtlQueForEmpID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LockUnLockMtlQueForEmpID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/LockUnLockMtlQueForEmpID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LockUnLockMtlQueForEmpID_output)
           })
       .catch((error) => {
           reject(error)
@@ -624,30 +758,37 @@ export function post_LockUnLockMtlQueForEmpID(requestBody:any, epicorHeaders?:He
 Notes:
 <param name="ipTranStatus">Transaction status</param><param name="ipMtlQueueSeq">Material Queue Sequence</param><param name="ds">The MaterialQueueDataSet.</param>
    OperationID: LockUnLockMtlQue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LockUnLockMtlQue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LockUnLockMtlQue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LockUnLockMtlQue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LockUnLockMtlQue(requestBody:any, epicorHeaders?:Headers){
+export function post_LockUnLockMtlQue(requestBody:LockUnLockMtlQue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LockUnLockMtlQue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/LockUnLockMtlQue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LockUnLockMtlQue_output)
           })
       .catch((error) => {
           reject(error)
@@ -659,7 +800,7 @@ export function post_LockUnLockMtlQue(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDefaultFilterSettings
    Description: Returns the PlantConfCtrl filter settings for the current company / plant
    OperationID: GetDefaultFilterSettings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultFilterSettings_output
@@ -672,15 +813,22 @@ export function post_GetDefaultFilterSettings(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultFilterSettings_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetDefaultFilterSettings", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultFilterSettings_output)
           })
       .catch((error) => {
           reject(error)
@@ -692,30 +840,37 @@ export function post_GetDefaultFilterSettings(epicorHeaders?:Headers){
    Summary: Invoke method UnlockAutoSelectTransactions
    Description: UnLockAutoSelectTransactions.
    OperationID: UnlockAutoSelectTransactions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnlockAutoSelectTransactions_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnlockAutoSelectTransactions_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnlockAutoSelectTransactions_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnlockAutoSelectTransactions(requestBody:any, epicorHeaders?:Headers){
+export function post_UnlockAutoSelectTransactions(requestBody:UnlockAutoSelectTransactions_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnlockAutoSelectTransactions_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/UnlockAutoSelectTransactions", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnlockAutoSelectTransactions_output)
           })
       .catch((error) => {
           reject(error)
@@ -727,7 +882,7 @@ export function post_UnlockAutoSelectTransactions(requestBody:any, epicorHeaders
    Summary: Invoke method SortQueueByPriority
    Description: Return a flag to know if the records will be sorted by the PlantConfCtrl.SortQueuebyPriority filed
    OperationID: SortQueueByPriority
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/SortQueueByPriority_output
@@ -740,15 +895,22 @@ export function post_SortQueueByPriority(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SortQueueByPriority_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/SortQueueByPriority", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SortQueueByPriority_output)
           })
       .catch((error) => {
           reject(error)
@@ -760,30 +922,37 @@ export function post_SortQueueByPriority(epicorHeaders?:Headers){
    Summary: Invoke method VerifyMtlQueueExists
    Description: VerifyMtlQueueExists - Returns true if MtlQueue still exists
    OperationID: VerifyMtlQueueExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VerifyMtlQueueExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VerifyMtlQueueExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VerifyMtlQueueExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VerifyMtlQueueExists(requestBody:any, epicorHeaders?:Headers){
+export function post_VerifyMtlQueueExists(requestBody:VerifyMtlQueueExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VerifyMtlQueueExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/VerifyMtlQueueExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VerifyMtlQueueExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -798,7 +967,7 @@ export function post_VerifyMtlQueueExists(requestBody:any, epicorHeaders?:Header
       @param delimitedFilterString Desc: Format is [FieldName]Value~[FieldName]Value~   Required: True   Allow empty value : True
       @param recordsPerPage Desc: Records per page or 0 for all rows   Required: True
       @param pageNum Desc: Page number defaults to page 1 if not specified   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCustom_output
@@ -840,15 +1009,22 @@ export function get_GetRowsCustom(delimitedFilterString:string, recordsPerPage:s
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCustom_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetRowsCustom" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCustom_output)
           })
       .catch((error) => {
           reject(error)
@@ -872,7 +1048,7 @@ export function get_GetRowsCustom(delimitedFilterString:string, recordsPerPage:s
       @param onlyUnselected Desc: Only sreturn rows not selected by any employee   Required: True
       @param pageSize Desc: Page Size   Required: True
       @param absolutePage Desc: Absolute Page   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCustomParams_output
@@ -995,15 +1171,22 @@ export function get_GetRowsCustomParams(whereClause:string, fromDate:string, toD
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCustomParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetRowsCustomParams" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCustomParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -1015,30 +1198,37 @@ export function get_GetRowsCustomParams(whereClause:string, fromDate:string, toD
    Summary: Invoke method GetPCIDPrintParams
    Description: GetPCIDPrintParams - returns the number of labels, and report style information for the mtl queue PCID print
    OperationID: GetPCIDPrintParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPCIDPrintParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPCIDPrintParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPCIDPrintParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPCIDPrintParams(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPCIDPrintParams(requestBody:GetPCIDPrintParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPCIDPrintParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetPCIDPrintParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPCIDPrintParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -1049,30 +1239,37 @@ export function post_GetPCIDPrintParams(requestBody:any, epicorHeaders?:Headers)
    /**  
    Summary: Invoke method GetPkgControlIDGenParams
    OperationID: GetPkgControlIDGenParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPkgControlIDGenParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPkgControlIDGenParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPkgControlIDGenParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPkgControlIDGenParams(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPkgControlIDGenParams(requestBody:GetPkgControlIDGenParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPkgControlIDGenParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetPkgControlIDGenParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPkgControlIDGenParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -1084,30 +1281,37 @@ export function post_GetPkgControlIDGenParams(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetParametersForMtlTags
    Description: Returns the string required to call the Print Mtl Tags UI
    OperationID: GetParametersForMtlTags
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetParametersForMtlTags_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetParametersForMtlTags_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParametersForMtlTags_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetParametersForMtlTags(requestBody:any, epicorHeaders?:Headers){
+export function post_GetParametersForMtlTags(requestBody:GetParametersForMtlTags_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParametersForMtlTags_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetParametersForMtlTags", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParametersForMtlTags_output)
           })
       .catch((error) => {
           reject(error)
@@ -1119,30 +1323,37 @@ export function post_GetParametersForMtlTags(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetSelectedMtlQueueList
    Description: Returns a delimited list of selected material queue records
    OperationID: GetSelectedMtlQueueList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSelectedMtlQueueList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSelectedMtlQueueList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSelectedMtlQueueList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSelectedMtlQueueList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSelectedMtlQueueList(requestBody:GetSelectedMtlQueueList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSelectedMtlQueueList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetSelectedMtlQueueList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSelectedMtlQueueList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1154,30 +1365,37 @@ export function post_GetSelectedMtlQueueList(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetDeleteConfirmationMessage
    Description: Returns a delete message that includes the list of MtlQueue records to be deleted
    OperationID: GetDeleteConfirmationMessage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDeleteConfirmationMessage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDeleteConfirmationMessage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDeleteConfirmationMessage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDeleteConfirmationMessage(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDeleteConfirmationMessage(requestBody:GetDeleteConfirmationMessage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDeleteConfirmationMessage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetDeleteConfirmationMessage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDeleteConfirmationMessage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1189,7 +1407,7 @@ export function post_GetDeleteConfirmationMessage(requestBody:any, epicorHeaders
    Summary: Invoke method GetDefaultToDate
    Description: Returns the default to date
    OperationID: GetDefaultToDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultToDate_output
@@ -1202,15 +1420,22 @@ export function post_GetDefaultToDate(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultToDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetDefaultToDate", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultToDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1222,30 +1447,37 @@ export function post_GetDefaultToDate(epicorHeaders?:Headers){
    Summary: Invoke method GetNewMtlQueue
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMtlQueue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMtlQueue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMtlQueue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMtlQueue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMtlQueue(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMtlQueue(requestBody:GetNewMtlQueue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMtlQueue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetNewMtlQueue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMtlQueue_output)
           })
       .catch((error) => {
           reject(error)
@@ -1257,30 +1489,37 @@ export function post_GetNewMtlQueue(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1292,7 +1531,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1316,15 +1555,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1336,7 +1582,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1360,15 +1606,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1380,30 +1633,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1415,30 +1675,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MaterialQueueSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1449,16 +1716,33 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MtlQueueListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MtlQueueListRow[],
+   "value":Erp_Tablesets_MtlQueueListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MtlQueueRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MtlQueueRow[],
+   "value":Erp_Tablesets_MtlQueueRow,
 }
 
 export interface Erp_Tablesets_MtlQueueListRow{
@@ -1985,6 +2269,23 @@ MGMT-LOCK - Manager locked, RELEASED - Released, HOLD - On Hold, USER-LOCK - Loc
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2655,7 +2956,7 @@ export interface GetDeleteConfirmationMessage_input{
 export interface GetDeleteConfirmationMessage_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MaterialQueueTableset[],
+   ds:Erp_Tablesets_MaterialQueueTableset,
    deleteConfirmationMessage:string,
 }
 }
@@ -2704,7 +3005,7 @@ export interface GetNewMtlQueue_input{
 export interface GetNewMtlQueue_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MaterialQueueTableset[],
+   ds:Erp_Tablesets_MaterialQueueTableset,
 }
 }
 
@@ -2871,7 +3172,7 @@ export interface GetSelectedMtlQueueList_input{
 export interface GetSelectedMtlQueueList_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MaterialQueueTableset[],
+   ds:Erp_Tablesets_MaterialQueueTableset,
    mtlQueueSelectedList:string,
 }
 }
@@ -2928,7 +3229,7 @@ export interface LockUnLockMtlQueForEmpID_input{
 export interface LockUnLockMtlQueForEmpID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MaterialQueueTableset[],
+   ds:Erp_Tablesets_MaterialQueueTableset,
 }
 }
 
@@ -2946,7 +3247,7 @@ export interface LockUnLockMtlQue_input{
 export interface LockUnLockMtlQue_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MaterialQueueTableset[],
+   ds:Erp_Tablesets_MaterialQueueTableset,
 }
 }
 
@@ -2981,7 +3282,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtMaterialQueueTableset[],
+   ds:Erp_Tablesets_UpdExtMaterialQueueTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2996,7 +3297,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MaterialQueueTableset[],
+   ds:Erp_Tablesets_MaterialQueueTableset,
 }
 }
 

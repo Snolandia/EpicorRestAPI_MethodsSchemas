@@ -1,13 +1,32 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.BankFundTranSvc
 // Description: bo/BankFundTran/BankFundTran.p
            Bank Funds Transfer
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -16,7 +35,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -34,7 +53,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -48,7 +74,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -66,7 +92,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -79,6 +112,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -86,30 +136,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method ChangeFromAmt
    Description: This method validates the proposed Tranfer Amount and updates the dataset accordingly
    OperationID: ChangeFromAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFromAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFromAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFromAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFromAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFromAmt(requestBody:ChangeFromAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFromAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/ChangeFromAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFromAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -121,30 +178,37 @@ export function post_ChangeFromAmt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeFromBank
    Description: This method validates the proposed from (source) bank and updates the dataset accordingly
    OperationID: ChangeFromBank
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFromBank_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFromBank_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFromBank_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFromBank(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFromBank(requestBody:ChangeFromBank_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFromBank_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/ChangeFromBank", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFromBank_output)
           })
       .catch((error) => {
           reject(error)
@@ -156,30 +220,37 @@ export function post_ChangeFromBank(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeRateGrp
    Description: This method validates the proposed RateGrpCode and updates the dataset accordingly
    OperationID: ChangeRateGrp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRateGrp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRateGrp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRateGrp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRateGrp(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRateGrp(requestBody:ChangeRateGrp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRateGrp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/ChangeRateGrp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRateGrp_output)
           })
       .catch((error) => {
           reject(error)
@@ -191,30 +262,37 @@ export function post_ChangeRateGrp(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeTargetBank
    Description: This method validates the proposed target bank and updates the dataset accordingly
    OperationID: ChangeTargetBank
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeTargetBank_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeTargetBank_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeTargetBank_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeTargetBank(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeTargetBank(requestBody:ChangeTargetBank_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeTargetBank_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/ChangeTargetBank", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeTargetBank_output)
           })
       .catch((error) => {
           reject(error)
@@ -226,30 +304,37 @@ export function post_ChangeTargetBank(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeToAmt
    Description: This method validates the proposed To Tranfer Amount and updates the dataset accordingly
    OperationID: ChangeToAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeToAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeToAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeToAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeToAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeToAmt(requestBody:ChangeToAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeToAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/ChangeToAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeToAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -262,30 +347,37 @@ export function post_ChangeToAmt(requestBody:any, epicorHeaders?:Headers){
    Description: This method validates the proposed Transaction date and updates the dataset according
 to the new date/fiscal period
    OperationID: ChangeTranDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeTranDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeTranDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeTranDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeTranDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeTranDate(requestBody:ChangeTranDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeTranDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/ChangeTranDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeTranDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -297,7 +389,7 @@ export function post_ChangeTranDate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CreateBankTran
    Description: This method creates the BankFundTran record for the user to edit
    OperationID: CreateBankTran
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateBankTran_output
@@ -310,15 +402,22 @@ export function post_CreateBankTran(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateBankTran_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/CreateBankTran", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateBankTran_output)
           })
       .catch((error) => {
           reject(error)
@@ -330,30 +429,37 @@ export function post_CreateBankTran(epicorHeaders?:Headers){
    Summary: Invoke method CreateBankTranRecords
    Description: This method creates 2 BankTran records before posting them
    OperationID: CreateBankTranRecords
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateBankTranRecords_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateBankTranRecords_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateBankTranRecords_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateBankTranRecords(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateBankTranRecords(requestBody:CreateBankTranRecords_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateBankTranRecords_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/CreateBankTranRecords", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateBankTranRecords_output)
           })
       .catch((error) => {
           reject(error)
@@ -370,30 +476,37 @@ it does, the LegalNumberPrompt business objects needs to be called to
 gather that information.  This method should be called when the user
 saves the record but before the Update method is called.
    OperationID: GetLegalNumGenOpts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLegalNumGenOpts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLegalNumGenOpts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLegalNumGenOpts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLegalNumGenOpts(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLegalNumGenOpts(requestBody:GetLegalNumGenOpts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLegalNumGenOpts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/GetLegalNumGenOpts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLegalNumGenOpts_output)
           })
       .catch((error) => {
           reject(error)
@@ -405,30 +518,37 @@ export function post_GetLegalNumGenOpts(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ValidateBeforeTransfer
    Description: This method validates all entered data, that need to do before transfer.
    OperationID: ValidateBeforeTransfer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateBeforeTransfer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateBeforeTransfer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateBeforeTransfer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateBeforeTransfer(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateBeforeTransfer(requestBody:ValidateBeforeTransfer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateBeforeTransfer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/ValidateBeforeTransfer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateBeforeTransfer_output)
           })
       .catch((error) => {
           reject(error)
@@ -440,30 +560,37 @@ export function post_ValidateBeforeTransfer(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetByTranNum
    Description: Returns dataset filled with data found by TranNum
    OperationID: GetByTranNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByTranNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByTranNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByTranNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByTranNum(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByTranNum(requestBody:GetByTranNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByTranNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/GetByTranNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByTranNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -475,30 +602,37 @@ export function post_GetByTranNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateBankTranRecords
    Description: This method upadtes 2 BankTran records and save them. Works only with unposted records.
    OperationID: UpdateBankTranRecords
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateBankTranRecords_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateBankTranRecords_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateBankTranRecords_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateBankTranRecords(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateBankTranRecords(requestBody:UpdateBankTranRecords_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateBankTranRecords_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/UpdateBankTranRecords", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateBankTranRecords_output)
           })
       .catch((error) => {
           reject(error)
@@ -510,30 +644,37 @@ export function post_UpdateBankTranRecords(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method PESelectDetractionInvoices
    Description: This procedure returns invoices with Detractions to be paid
    OperationID: PESelectDetractionInvoices
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PESelectDetractionInvoices_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PESelectDetractionInvoices_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PESelectDetractionInvoices_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PESelectDetractionInvoices(requestBody:any, epicorHeaders?:Headers){
+export function post_PESelectDetractionInvoices(requestBody:PESelectDetractionInvoices_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PESelectDetractionInvoices_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/PESelectDetractionInvoices", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PESelectDetractionInvoices_output)
           })
       .catch((error) => {
           reject(error)
@@ -545,30 +686,37 @@ export function post_PESelectDetractionInvoices(requestBody:any, epicorHeaders?:
    Summary: Invoke method PEUpdateInvcHeadRecords
    Description: This procedure updates selected InvcHead
    OperationID: PEUpdateInvcHeadRecords
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PEUpdateInvcHeadRecords_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PEUpdateInvcHeadRecords_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PEUpdateInvcHeadRecords_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PEUpdateInvcHeadRecords(requestBody:any, epicorHeaders?:Headers){
+export function post_PEUpdateInvcHeadRecords(requestBody:PEUpdateInvcHeadRecords_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PEUpdateInvcHeadRecords_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BankFundTranSvc/PEUpdateInvcHeadRecords", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PEUpdateInvcHeadRecords_output)
           })
       .catch((error) => {
           reject(error)
@@ -579,11 +727,45 @@ export function post_PEUpdateInvcHeadRecords(requestBody:any, epicorHeaders?:Hea
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -603,7 +785,7 @@ export interface ChangeFromAmt_input{
 export interface ChangeFromAmt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BankFundTranTableset[],
+   ds:Erp_Tablesets_BankFundTranTableset,
 }
 }
 
@@ -623,7 +805,7 @@ export interface ChangeFromBank_input{
 export interface ChangeFromBank_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BankFundTranTableset[],
+   ds:Erp_Tablesets_BankFundTranTableset,
 }
 }
 
@@ -640,7 +822,7 @@ export interface ChangeRateGrp_input{
 export interface ChangeRateGrp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BankFundTranTableset[],
+   ds:Erp_Tablesets_BankFundTranTableset,
 }
 }
 
@@ -660,7 +842,7 @@ export interface ChangeTargetBank_input{
 export interface ChangeTargetBank_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BankFundTranTableset[],
+   ds:Erp_Tablesets_BankFundTranTableset,
 }
 }
 
@@ -680,7 +862,7 @@ export interface ChangeToAmt_input{
 export interface ChangeToAmt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BankFundTranTableset[],
+   ds:Erp_Tablesets_BankFundTranTableset,
 }
 }
 
@@ -700,7 +882,7 @@ export interface ChangeTranDate_input{
 export interface ChangeTranDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BankFundTranTableset[],
+   ds:Erp_Tablesets_BankFundTranTableset,
 }
 }
 
@@ -715,7 +897,7 @@ export interface CreateBankTranRecords_output{
    returnObj:number,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BankFundTranTableset[],
+   ds:Erp_Tablesets_BankFundTranTableset,
 }
 }
 
@@ -950,7 +1132,7 @@ export interface GetLegalNumGenOpts_input{
 export interface GetLegalNumGenOpts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BankFundTranTableset[],
+   ds:Erp_Tablesets_BankFundTranTableset,
    RequiresUserInput:boolean,
 }
 }
@@ -988,8 +1170,8 @@ export interface PESelectDetractionInvoices_input{
 export interface PESelectDetractionInvoices_output{
 parameters : {
       /**  output parameters  */  
-   dsBankFundTran:Erp_Tablesets_BankFundTranTableset[],
-   dsPEARInvSel:Erp_Tablesets_PEARInvSelTableset[],
+   dsBankFundTran:Erp_Tablesets_BankFundTranTableset,
+   dsPEARInvSel:Erp_Tablesets_PEARInvSelTableset,
 }
 }
 
@@ -1005,8 +1187,8 @@ export interface PEUpdateInvcHeadRecords_input{
 export interface PEUpdateInvcHeadRecords_output{
 parameters : {
       /**  output parameters  */  
-   dsBankFundTran:Erp_Tablesets_BankFundTranTableset[],
-   dsPEARInvSel:Erp_Tablesets_PEARInvSelTableset[],
+   dsBankFundTran:Erp_Tablesets_BankFundTranTableset,
+   dsPEARInvSel:Erp_Tablesets_PEARInvSelTableset,
 }
 }
 
@@ -1021,7 +1203,7 @@ export interface UpdateBankTranRecords_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BankFundTranTableset[],
+   ds:Erp_Tablesets_BankFundTranTableset,
 }
 }
 
@@ -1035,7 +1217,7 @@ export interface ValidateBeforeTransfer_input{
 export interface ValidateBeforeTransfer_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BankFundTranTableset[],
+   ds:Erp_Tablesets_BankFundTranTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.LIB.ESIndexSvc
 // Description: ESIndex service.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method CreateIndex
    Description: Creates an index in Enterprise Search.
    OperationID: CreateIndex
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateIndex_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateIndex_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateIndex_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateIndex(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateIndex(requestBody:CreateIndex_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateIndex_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/CreateIndex", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateIndex_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_CreateIndex(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ModifyIndex
    Description: Modifies an existing index in Enterprise Search.
    OperationID: ModifyIndex
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ModifyIndex_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ModifyIndex_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ModifyIndex_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ModifyIndex(requestBody:any, epicorHeaders?:Headers){
+export function post_ModifyIndex(requestBody:ModifyIndex_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ModifyIndex_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/ModifyIndex", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ModifyIndex_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_ModifyIndex(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method BuildIndex
    Description: Builds an index in Enterprise Search.
    OperationID: BuildIndex
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildIndex_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildIndex_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildIndex_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildIndex(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildIndex(requestBody:BuildIndex_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildIndex_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/BuildIndex", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildIndex_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_BuildIndex(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteIndex
    Description: Deletes an index from Enterprise Search.
    OperationID: DeleteIndex
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteIndex_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteIndex_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteIndex_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteIndex(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteIndex(requestBody:DeleteIndex_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteIndex_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/DeleteIndex", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteIndex_output)
           })
       .catch((error) => {
           reject(error)
@@ -226,30 +304,37 @@ export function post_DeleteIndex(requestBody:any, epicorHeaders?:Headers){
    Description: Gets the index details with the indexed BAQ's from Enterprise Search.
 <param name="indexName">index name.</param>
    OperationID: GetIndex
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetIndex_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetIndex_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetIndex_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetIndex(requestBody:any, epicorHeaders?:Headers){
+export function post_GetIndex(requestBody:GetIndex_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetIndex_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/GetIndex", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetIndex_output)
           })
       .catch((error) => {
           reject(error)
@@ -261,30 +346,37 @@ export function post_GetIndex(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBuildLog
    Description: Gets a build log by its id.
    OperationID: GetBuildLog
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBuildLog_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBuildLog_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBuildLog_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBuildLog(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBuildLog(requestBody:GetBuildLog_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBuildLog_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/GetBuildLog", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBuildLog_output)
           })
       .catch((error) => {
           reject(error)
@@ -297,30 +389,37 @@ export function post_GetBuildLog(requestBody:any, epicorHeaders?:Headers){
    Description: Gets the build log by its id from Enterprise Search service and saves it in User data shared folder.
 The file name is the build log id with .log extension.
    OperationID: WriteBuildLogToFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/WriteBuildLogToFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/WriteBuildLogToFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/WriteBuildLogToFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_WriteBuildLogToFile(requestBody:any, epicorHeaders?:Headers){
+export function post_WriteBuildLogToFile(requestBody:WriteBuildLogToFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<WriteBuildLogToFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/WriteBuildLogToFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as WriteBuildLogToFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -332,30 +431,37 @@ export function post_WriteBuildLogToFile(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetBuildHistory
    Description: Gets a list of the builds per index.
    OperationID: GetBuildHistory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBuildHistory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBuildHistory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBuildHistory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBuildHistory(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBuildHistory(requestBody:GetBuildHistory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBuildHistory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/GetBuildHistory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBuildHistory_output)
           })
       .catch((error) => {
           reject(error)
@@ -367,7 +473,7 @@ export function post_GetBuildHistory(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetAllIndexes
    Description: Gets a list of available indexes in Enterprise Search.
    OperationID: GetAllIndexes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAllIndexes_output
@@ -380,15 +486,22 @@ export function post_GetAllIndexes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAllIndexes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/GetAllIndexes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAllIndexes_output)
           })
       .catch((error) => {
           reject(error)
@@ -400,7 +513,7 @@ export function post_GetAllIndexes(epicorHeaders?:Headers){
    Summary: Invoke method GetTemplates
    Description: Gets a list of available templates in Enterprise Search.
    OperationID: GetTemplates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTemplates_output
@@ -413,15 +526,22 @@ export function post_GetTemplates(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTemplates_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/GetTemplates", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTemplates_output)
           })
       .catch((error) => {
           reject(error)
@@ -433,7 +553,7 @@ export function post_GetTemplates(epicorHeaders?:Headers){
    Summary: Invoke method GetAvailableCompanies
    Description: Gets a list of available companies.
    OperationID: GetAvailableCompanies
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableCompanies_output
@@ -446,15 +566,22 @@ export function post_GetAvailableCompanies(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableCompanies_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/GetAvailableCompanies", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableCompanies_output)
           })
       .catch((error) => {
           reject(error)
@@ -466,30 +593,37 @@ export function post_GetAvailableCompanies(epicorHeaders?:Headers){
    Summary: Invoke method GetSearchableBaqs
    Description: Gets a list of shared BAQ's that are NOT cross-company.
    OperationID: GetSearchableBaqs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSearchableBaqs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSearchableBaqs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSearchableBaqs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSearchableBaqs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSearchableBaqs(requestBody:GetSearchableBaqs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSearchableBaqs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/GetSearchableBaqs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSearchableBaqs_output)
           })
       .catch((error) => {
           reject(error)
@@ -501,7 +635,7 @@ export function post_GetSearchableBaqs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLikeLinks
    Description: Gets a list of like links.
    OperationID: GetLikeLinks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLikeLinks_output
@@ -514,15 +648,22 @@ export function post_GetLikeLinks(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLikeLinks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/GetLikeLinks", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLikeLinks_output)
           })
       .catch((error) => {
           reject(error)
@@ -534,30 +675,37 @@ export function post_GetLikeLinks(epicorHeaders?:Headers){
    Summary: Invoke method RefreshBaqs
    Description: Refreshes the list of BAQ's.
    OperationID: RefreshBaqs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshBaqs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshBaqs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshBaqs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshBaqs(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshBaqs(requestBody:RefreshBaqs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshBaqs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/RefreshBaqs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshBaqs_output)
           })
       .catch((error) => {
           reject(error)
@@ -569,30 +717,37 @@ export function post_RefreshBaqs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RefreshBaqList
    Description: Refreshes the list of BAQ's.
    OperationID: RefreshBaqList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshBaqList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshBaqList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshBaqList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshBaqList(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshBaqList(requestBody:RefreshBaqList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshBaqList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/RefreshBaqList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshBaqList_output)
           })
       .catch((error) => {
           reject(error)
@@ -604,30 +759,37 @@ export function post_RefreshBaqList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateBaq
    Description: Validates the list of BAQ's.
    OperationID: ValidateBaq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateBaq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateBaq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateBaq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateBaq(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateBaq(requestBody:ValidateBaq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateBaq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/ValidateBaq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateBaq_output)
           })
       .catch((error) => {
           reject(error)
@@ -639,30 +801,37 @@ export function post_ValidateBaq(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateAllBaqs
    Description: Validates all the BAQ's in an index.
    OperationID: ValidateAllBaqs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateAllBaqs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateAllBaqs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateAllBaqs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateAllBaqs(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateAllBaqs(requestBody:ValidateAllBaqs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateAllBaqs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/ValidateAllBaqs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateAllBaqs_output)
           })
       .catch((error) => {
           reject(error)
@@ -674,30 +843,37 @@ export function post_ValidateAllBaqs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteBaq
    Description: Deletes a BAQ from the list of indexed BAQ's in Enterprise Search.
    OperationID: DeleteBaq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteBaq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteBaq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteBaq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteBaq(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteBaq(requestBody:DeleteBaq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteBaq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/DeleteBaq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteBaq_output)
           })
       .catch((error) => {
           reject(error)
@@ -709,30 +885,37 @@ export function post_DeleteBaq(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AddBaq
    Description: Adds a BAQ to the list of indexed BAQ's in Enterprise Search.
    OperationID: AddBaq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddBaq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddBaq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddBaq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddBaq(requestBody:any, epicorHeaders?:Headers){
+export function post_AddBaq(requestBody:AddBaq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddBaq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/AddBaq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddBaq_output)
           })
       .catch((error) => {
           reject(error)
@@ -744,30 +927,37 @@ export function post_AddBaq(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBaqTuning
    Description: Gets the BAQ tuning settings.
    OperationID: GetBaqTuning
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBaqTuning_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBaqTuning_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBaqTuning_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBaqTuning(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBaqTuning(requestBody:GetBaqTuning_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBaqTuning_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/GetBaqTuning", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBaqTuning_output)
           })
       .catch((error) => {
           reject(error)
@@ -779,30 +969,37 @@ export function post_GetBaqTuning(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateBaqTuning
    Description: Updates the BAQ tuning settings.
    OperationID: UpdateBaqTuning
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateBaqTuning_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateBaqTuning_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateBaqTuning_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateBaqTuning(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateBaqTuning(requestBody:UpdateBaqTuning_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateBaqTuning_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/UpdateBaqTuning", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateBaqTuning_output)
           })
       .catch((error) => {
           reject(error)
@@ -814,30 +1011,37 @@ export function post_UpdateBaqTuning(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunBAQValidation
    Description: Validates a BAQ.
    OperationID: RunBAQValidation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunBAQValidation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunBAQValidation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunBAQValidation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunBAQValidation(requestBody:any, epicorHeaders?:Headers){
+export function post_RunBAQValidation(requestBody:RunBAQValidation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunBAQValidation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/RunBAQValidation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunBAQValidation_output)
           })
       .catch((error) => {
           reject(error)
@@ -849,30 +1053,37 @@ export function post_RunBAQValidation(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunAllBAQValidations
    Description: Validates all the BAQ's in an index.
    OperationID: RunAllBAQValidations
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunAllBAQValidations_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunAllBAQValidations_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunAllBAQValidations_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunAllBAQValidations(requestBody:any, epicorHeaders?:Headers){
+export function post_RunAllBAQValidations(requestBody:RunAllBAQValidations_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunAllBAQValidations_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/RunAllBAQValidations", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunAllBAQValidations_output)
           })
       .catch((error) => {
           reject(error)
@@ -885,30 +1096,37 @@ export function post_RunAllBAQValidations(requestBody:any, epicorHeaders?:Header
    Description: Adds and updates any modified rows (ESIndex and ESIndexBAQ tables).
 ESIndexBAQField can't have fields added (it comes from the BAQ definition).
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -920,7 +1138,7 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssertUserCanAccess
    Description: Checks if the user can access ESIndex methods.
    OperationID: AssertUserCanAccess
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssertUserCanAccess_output
@@ -933,15 +1151,22 @@ export function post_AssertUserCanAccess(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssertUserCanAccess_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ESIndexSvc/AssertUserCanAccess", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssertUserCanAccess_output)
           })
       .catch((error) => {
           reject(error)
@@ -952,11 +1177,45 @@ export function post_AssertUserCanAccess(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1426,7 +1685,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ESIndexTableset[],
+   ds:Ice_Tablesets_ESIndexTableset,
 }
 }
 

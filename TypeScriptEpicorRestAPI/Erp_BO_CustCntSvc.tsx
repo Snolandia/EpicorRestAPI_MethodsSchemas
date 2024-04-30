@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.CustCntSvc
 // Description: Customer Contact Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntRow
    */  
 export function get_CustCnts(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_CustCnts(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntRow)
           })
@@ -118,15 +158,15 @@ export function get_CustCnts(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CustCnts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustCntRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustCntRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CustCntRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CustCntRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustCnts(requestBody:any, epicorHeaders?:Headers){
+export function post_CustCnts(requestBody:Erp_Tablesets_CustCntRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_CustCnts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -161,10 +208,10 @@ export function post_CustCnts(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustCntRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustCntRow
    */  
 export function get_CustCnts_Company_CustNum_ShipToNum_ConNum(Company:string, CustNum:string, ShipToNum:string, ConNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -179,7 +226,14 @@ export function get_CustCnts_Company_CustNum_ShipToNum_ConNum(Company:string, Cu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustCntRow)
           })
@@ -197,15 +251,15 @@ export function get_CustCnts_Company_CustNum_ShipToNum_ConNum(Company:string, Cu
       @param CustNum Desc: CustNum   Required: True
       @param ShipToNum Desc: ShipToNum   Required: True   Allow empty value : True
       @param ConNum Desc: ConNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustCntRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustCntRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CustCnts_Company_CustNum_ShipToNum_ConNum(Company:string, CustNum:string, ShipToNum:string, ConNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CustCnts_Company_CustNum_ShipToNum_ConNum(Company:string, CustNum:string, ShipToNum:string, ConNum:string, requestBody:Erp_Tablesets_CustCntRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -219,7 +273,14 @@ export function patch_CustCnts_Company_CustNum_ShipToNum_ConNum(Company:string, 
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -237,7 +298,7 @@ export function patch_CustCnts_Company_CustNum_ShipToNum_ConNum(Company:string, 
       @param CustNum Desc: CustNum   Required: True
       @param ShipToNum Desc: ShipToNum   Required: True   Allow empty value : True
       @param ConNum Desc: ConNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -256,7 +317,14 @@ export function delete_CustCnts_Company_CustNum_ShipToNum_ConNum(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -280,10 +348,10 @@ export function delete_CustCnts_Company_CustNum_ShipToNum_ConNum(Company:string,
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntAttchRow
    */  
 export function get_CustCnts_Company_CustNum_ShipToNum_ConNum_CustCntAttches(Company:string, CustNum:string, ShipToNum:string, ConNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -298,7 +366,14 @@ export function get_CustCnts_Company_CustNum_ShipToNum_ConNum_CustCntAttches(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntAttchRow)
           })
@@ -319,10 +394,10 @@ export function get_CustCnts_Company_CustNum_ShipToNum_ConNum_CustCntAttches(Com
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustCntAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustCntAttchRow
    */  
 export function get_CustCnts_Company_CustNum_ShipToNum_ConNum_CustCntAttches_Company_CustNum_ShipToNum_ConNum_DrawingSeq(Company:string, CustNum:string, ShipToNum:string, ConNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -337,7 +412,14 @@ export function get_CustCnts_Company_CustNum_ShipToNum_ConNum_CustCntAttches_Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustCntAttchRow)
           })
@@ -357,10 +439,10 @@ export function get_CustCnts_Company_CustNum_ShipToNum_ConNum_CustCntAttches_Com
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntAttchRow
    */  
 export function get_CustCntAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -375,7 +457,14 @@ export function get_CustCntAttches(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntAttchRow)
           })
@@ -389,15 +478,15 @@ export function get_CustCntAttches(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CustCntAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustCntAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CustCntAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CustCntAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CustCntAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustCntAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_CustCntAttches(requestBody:Erp_Tablesets_CustCntAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -411,7 +500,14 @@ export function post_CustCntAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -432,10 +528,10 @@ export function post_CustCntAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CustCntAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CustCntAttchRow
    */  
 export function get_CustCntAttches_Company_CustNum_ShipToNum_ConNum_DrawingSeq(Company:string, CustNum:string, ShipToNum:string, ConNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -450,7 +546,14 @@ export function get_CustCntAttches_Company_CustNum_ShipToNum_ConNum_DrawingSeq(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CustCntAttchRow)
           })
@@ -469,15 +572,15 @@ export function get_CustCntAttches_Company_CustNum_ShipToNum_ConNum_DrawingSeq(C
       @param ShipToNum Desc: ShipToNum   Required: True   Allow empty value : True
       @param ConNum Desc: ConNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustCntAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CustCntAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CustCntAttches_Company_CustNum_ShipToNum_ConNum_DrawingSeq(Company:string, CustNum:string, ShipToNum:string, ConNum:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CustCntAttches_Company_CustNum_ShipToNum_ConNum_DrawingSeq(Company:string, CustNum:string, ShipToNum:string, ConNum:string, DrawingSeq:string, requestBody:Erp_Tablesets_CustCntAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -491,7 +594,14 @@ export function patch_CustCntAttches_Company_CustNum_ShipToNum_ConNum_DrawingSeq
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -510,7 +620,7 @@ export function patch_CustCntAttches_Company_CustNum_ShipToNum_ConNum_DrawingSeq
       @param ShipToNum Desc: ShipToNum   Required: True   Allow empty value : True
       @param ConNum Desc: ConNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -529,7 +639,14 @@ export function delete_CustCntAttches_Company_CustNum_ShipToNum_ConNum_DrawingSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -549,10 +666,10 @@ export function delete_CustCntAttches_Company_CustNum_ShipToNum_ConNum_DrawingSe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CustCntListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -567,7 +684,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntListRow)
           })
@@ -580,6 +704,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -591,7 +732,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -642,15 +783,22 @@ export function get_GetRows(whereClauseCustCnt:string, whereClauseCustCntAttch:s
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -665,7 +813,7 @@ export function get_GetRows(whereClauseCustCnt:string, whereClauseCustCntAttch:s
    Required: True
    Required: True   Allow empty value : True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -707,15 +855,22 @@ export function get_GetByID(custNum:string, shipToNum:string, conNum:string, epi
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -726,30 +881,37 @@ export function get_GetByID(custNum:string, shipToNum:string, conNum:string, epi
    /**  
    Summary: Invoke method GetCustCntGlobalFields
    OperationID: GetCustCntGlobalFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCustCntGlobalFields_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCustCntGlobalFields_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCustCntGlobalFields_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCustCntGlobalFields(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCustCntGlobalFields(requestBody:GetCustCntGlobalFields_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCustCntGlobalFields_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetCustCntGlobalFields", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCustCntGlobalFields_output)
           })
       .catch((error) => {
           reject(error)
@@ -765,30 +927,37 @@ longer than allowed to allow the users to change them or accept that they will b
 truncated when sent to External Financials.  Needs to be run right before update.  If the user
 answers no to the question then the update method should not be run.
    OperationID: CheckEFFieldLength
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckEFFieldLength_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckEFFieldLength_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckEFFieldLength_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckEFFieldLength(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckEFFieldLength(requestBody:CheckEFFieldLength_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckEFFieldLength_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/CheckEFFieldLength", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckEFFieldLength_output)
           })
       .catch((error) => {
           reject(error)
@@ -801,30 +970,37 @@ export function post_CheckEFFieldLength(requestBody:any, epicorHeaders?:Headers)
    Description: This method populates the detail fields from CustCnt.Name when targetName = "Detail".
 When targetField = "Name", then the CustCnt.Name is built from the detail fields.
    OperationID: DefaultName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DefaultName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DefaultName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DefaultName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DefaultName(requestBody:any, epicorHeaders?:Headers){
+export function post_DefaultName(requestBody:DefaultName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DefaultName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/DefaultName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DefaultName_output)
           })
       .catch((error) => {
           reject(error)
@@ -838,30 +1014,37 @@ export function post_DefaultName(requestBody:any, epicorHeaders?:Headers){
 GlbCustCnt.CustNum gt 0 indicates linked GlbCustCnt records
 GlbCustCnt.CustNum lt = 0 indicates unlinked GlbCustCnt records
    OperationID: GetGlbCustCntList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetGlbCustCntList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetGlbCustCntList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetGlbCustCntList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetGlbCustCntList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetGlbCustCntList(requestBody:GetGlbCustCntList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetGlbCustCntList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetGlbCustCntList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetGlbCustCntList_output)
           })
       .catch((error) => {
           reject(error)
@@ -873,30 +1056,37 @@ export function post_GetGlbCustCntList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RefreshGlbCustCnt
    Description: Refresh GlbCustCnt record after linking
    OperationID: RefreshGlbCustCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshGlbCustCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshGlbCustCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshGlbCustCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshGlbCustCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshGlbCustCnt(requestBody:RefreshGlbCustCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshGlbCustCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/RefreshGlbCustCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshGlbCustCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -908,30 +1098,37 @@ export function post_RefreshGlbCustCnt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SkipGlbCustCnt
    Description: Mark unlinked GlbCustCnt records as skipped
    OperationID: SkipGlbCustCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SkipGlbCustCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SkipGlbCustCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SkipGlbCustCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SkipGlbCustCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_SkipGlbCustCnt(requestBody:SkipGlbCustCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SkipGlbCustCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/SkipGlbCustCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SkipGlbCustCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -943,30 +1140,37 @@ export function post_SkipGlbCustCnt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SkipSingleGlbCustCnt
    Description: Mark a specified GlbCustCnt record as skipped
    OperationID: SkipSingleGlbCustCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SkipSingleGlbCustCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SkipSingleGlbCustCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SkipSingleGlbCustCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SkipSingleGlbCustCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_SkipSingleGlbCustCnt(requestBody:SkipSingleGlbCustCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SkipSingleGlbCustCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/SkipSingleGlbCustCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SkipSingleGlbCustCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -977,30 +1181,37 @@ export function post_SkipSingleGlbCustCnt(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method GetPerConData
    OperationID: GetPerConData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPerConData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPerConData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPerConData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPerConData(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPerConData(requestBody:GetPerConData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPerConData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetPerConData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPerConData_output)
           })
       .catch((error) => {
           reject(error)
@@ -1012,30 +1223,37 @@ export function post_GetPerConData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCustCntForShipTos
    Description: This method returns the CustCnt table populated for specific CustNum and list of ShipToNum
    OperationID: GetCustCntForShipTos
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCustCntForShipTos_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCustCntForShipTos_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCustCntForShipTos_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCustCntForShipTos(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCustCntForShipTos(requestBody:GetCustCntForShipTos_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCustCntForShipTos_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetCustCntForShipTos", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCustCntForShipTos_output)
           })
       .catch((error) => {
           reject(error)
@@ -1047,30 +1265,37 @@ export function post_GetCustCntForShipTos(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method LinkGlbCustCntRef
    Description: Invokes LinkGlbCustCnt but returns CustCntTableset as ref
    OperationID: LinkGlbCustCntRef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LinkGlbCustCntRef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LinkGlbCustCntRef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LinkGlbCustCntRef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LinkGlbCustCntRef(requestBody:any, epicorHeaders?:Headers){
+export function post_LinkGlbCustCntRef(requestBody:LinkGlbCustCntRef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LinkGlbCustCntRef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/LinkGlbCustCntRef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LinkGlbCustCntRef_output)
           })
       .catch((error) => {
           reject(error)
@@ -1088,30 +1313,37 @@ If the Contact Number is for a new Contact, the GlbCustCnt information is transl
 copied to the CustCntDataSet as an Add.  Until the update method is run on CustCnt record
 the Link process is not completed.
    OperationID: LinkGlbCustCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LinkGlbCustCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LinkGlbCustCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LinkGlbCustCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LinkGlbCustCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_LinkGlbCustCnt(requestBody:LinkGlbCustCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LinkGlbCustCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/LinkGlbCustCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LinkGlbCustCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1124,30 +1356,37 @@ export function post_LinkGlbCustCnt(requestBody:any, epicorHeaders?:Headers){
    Description: This sets the ShipTo table based on the MasterCustNum and MasterShipToNum fields.
 To be used when the alternate fields change
    OperationID: OnChangeAltShipToContact
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAltShipToContact_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAltShipToContact_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAltShipToContact_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAltShipToContact(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAltShipToContact(requestBody:OnChangeAltShipToContact_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAltShipToContact_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/OnChangeAltShipToContact", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAltShipToContact_output)
           })
       .catch((error) => {
           reject(error)
@@ -1159,30 +1398,37 @@ export function post_OnChangeAltShipToContact(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangeCustCntPerConAddress
    Description: This method updates the address fields based on the PerConAddress being changed
    OperationID: OnChangeCustCntPerConAddress
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCustCntPerConAddress_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCustCntPerConAddress_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCustCntPerConAddress_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCustCntPerConAddress(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCustCntPerConAddress(requestBody:OnChangeCustCntPerConAddress_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCustCntPerConAddress_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/OnChangeCustCntPerConAddress", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCustCntPerConAddress_output)
           })
       .catch((error) => {
           reject(error)
@@ -1195,30 +1441,37 @@ export function post_OnChangeCustCntPerConAddress(requestBody:any, epicorHeaders
    Description: This method clears or sets the Address fields based on the SpecialAddress flag.
 If CustCnt.SpecialAddress is checked then the address fields are defaulted from the Customer.
    OperationID: SpecialAddressChange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpecialAddressChange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpecialAddressChange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpecialAddressChange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpecialAddressChange(requestBody:any, epicorHeaders?:Headers){
+export function post_SpecialAddressChange(requestBody:SpecialAddressChange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpecialAddressChange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/SpecialAddressChange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpecialAddressChange_output)
           })
       .catch((error) => {
           reject(error)
@@ -1230,30 +1483,37 @@ export function post_SpecialAddressChange(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewCustCnt
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCustCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustCnt(requestBody:GetNewCustCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetNewCustCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1265,30 +1525,37 @@ export function post_GetNewCustCnt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCustCntAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCustCntAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustCntAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustCntAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustCntAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustCntAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustCntAttch(requestBody:GetNewCustCntAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustCntAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetNewCustCntAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustCntAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1300,30 +1567,37 @@ export function post_GetNewCustCntAttch(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1338,7 +1612,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1380,15 +1654,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1400,7 +1681,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1424,15 +1705,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1444,7 +1732,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1468,15 +1756,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1488,30 +1783,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1523,30 +1825,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CustCntSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1557,21 +1866,38 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustCntAttchRow[],
+   "value":Erp_Tablesets_CustCntAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustCntListRow[],
+   "value":Erp_Tablesets_CustCntListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CustCntRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CustCntRow[],
+   "value":Erp_Tablesets_CustCntRow,
 }
 
 export interface Erp_Tablesets_CustCntAttchRow{
@@ -1939,6 +2265,23 @@ When a packing slip is created for this customer, this contact's name will autom
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2017,7 +2360,7 @@ export interface DefaultName_input{
 export interface DefaultName_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustCntTableset[],
+   ds:Erp_Tablesets_CustCntTableset,
 }
 }
 
@@ -2705,7 +3048,7 @@ export interface GetNewCustCntAttch_input{
 export interface GetNewCustCntAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustCntTableset[],
+   ds:Erp_Tablesets_CustCntTableset,
 }
 }
 
@@ -2723,7 +3066,7 @@ export interface GetNewCustCnt_input{
 export interface GetNewCustCnt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustCntTableset[],
+   ds:Erp_Tablesets_CustCntTableset,
 }
 }
 
@@ -2739,7 +3082,7 @@ export interface GetPerConData_input{
 export interface GetPerConData_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustCntTableset[],
+   ds:Erp_Tablesets_CustCntTableset,
 }
 }
 
@@ -2820,7 +3163,7 @@ export interface LinkGlbCustCntRef_input{
 export interface LinkGlbCustCntRef_output{
 parameters : {
       /**  output parameters  */  
-   dsCustCnt:Erp_Tablesets_CustCntTableset[],
+   dsCustCnt:Erp_Tablesets_CustCntTableset,
 }
 }
 
@@ -2847,7 +3190,7 @@ export interface LinkGlbCustCnt_output{
    returnObj:Erp_Tablesets_CustCntTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlbCustCntTableset[],
+   ds:Erp_Tablesets_GlbCustCntTableset,
 }
 }
 
@@ -2870,7 +3213,7 @@ export interface OnChangeAltShipToContact_input{
 export interface OnChangeAltShipToContact_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustCntTableset[],
+   ds:Erp_Tablesets_CustCntTableset,
 }
 }
 
@@ -2888,7 +3231,7 @@ export interface OnChangeCustCntPerConAddress_input{
 export interface OnChangeCustCntPerConAddress_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustCntTableset[],
+   ds:Erp_Tablesets_CustCntTableset,
 }
 }
 
@@ -2914,7 +3257,7 @@ export interface RefreshGlbCustCnt_input{
 export interface RefreshGlbCustCnt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlbCustCntTableset[],
+   ds:Erp_Tablesets_GlbCustCntTableset,
 }
 }
 
@@ -2937,7 +3280,7 @@ export interface SkipGlbCustCnt_input{
 export interface SkipGlbCustCnt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlbCustCntTableset[],
+   ds:Erp_Tablesets_GlbCustCntTableset,
 }
 }
 
@@ -2963,7 +3306,7 @@ export interface SkipSingleGlbCustCnt_input{
 export interface SkipSingleGlbCustCnt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlbCustCntTableset[],
+   ds:Erp_Tablesets_GlbCustCntTableset,
 }
 }
 
@@ -2977,7 +3320,7 @@ export interface SpecialAddressChange_input{
 export interface SpecialAddressChange_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustCntTableset[],
+   ds:Erp_Tablesets_CustCntTableset,
 }
 }
 
@@ -2996,7 +3339,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtCustCntTableset[],
+   ds:Erp_Tablesets_UpdExtCustCntTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3011,7 +3354,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CustCntTableset[],
+   ds:Erp_Tablesets_CustCntTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.ARRecTrackerSvc
 // Description: AR Rec Tracker
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,7 +135,7 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method GetSelectionDefaults
    Description: Get selection criteria defaults
    OperationID: GetSelectionDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSelectionDefaults_output
@@ -98,15 +148,22 @@ export function post_GetSelectionDefaults(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSelectionDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARRecTrackerSvc/GetSelectionDefaults", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSelectionDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -118,30 +175,37 @@ export function post_GetSelectionDefaults(epicorHeaders?:Headers){
    Summary: Invoke method GetSubLedgerMovements
    Description: This method gets all the movements records for the range of dates
    OperationID: GetSubLedgerMovements
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSubLedgerMovements_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSubLedgerMovements_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSubLedgerMovements_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSubLedgerMovements(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSubLedgerMovements(requestBody:GetSubLedgerMovements_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSubLedgerMovements_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARRecTrackerSvc/GetSubLedgerMovements", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSubLedgerMovements_output)
           })
       .catch((error) => {
           reject(error)
@@ -153,30 +217,37 @@ export function post_GetSubLedgerMovements(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetGLMovements
    Description: This method gets all jounal records for the range of dates
    OperationID: GetGLMovements
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetGLMovements_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetGLMovements_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetGLMovements_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetGLMovements(requestBody:any, epicorHeaders?:Headers){
+export function post_GetGLMovements(requestBody:GetGLMovements_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetGLMovements_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARRecTrackerSvc/GetGLMovements", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetGLMovements_output)
           })
       .catch((error) => {
           reject(error)
@@ -188,30 +259,37 @@ export function post_GetGLMovements(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRecTotals
    Description: This method gets the totals for a group of glaccounts
    OperationID: GetRecTotals
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRecTotals_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRecTotals_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRecTotals_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRecTotals(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRecTotals(requestBody:GetRecTotals_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRecTotals_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARRecTrackerSvc/GetRecTotals", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRecTotals_output)
           })
       .catch((error) => {
           reject(error)
@@ -223,30 +301,37 @@ export function post_GetRecTotals(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetAllRecs
    Description: This method gets all records
    OperationID: GetAllRecs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAllRecs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAllRecs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAllRecs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAllRecs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAllRecs(requestBody:GetAllRecs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAllRecs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARRecTrackerSvc/GetAllRecs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAllRecs_output)
           })
       .catch((error) => {
           reject(error)
@@ -258,30 +343,37 @@ export function post_GetAllRecs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDiffs
    Description: This method gets just the differences
    OperationID: GetDiffs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDiffs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDiffs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDiffs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDiffs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDiffs(requestBody:GetDiffs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDiffs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARRecTrackerSvc/GetDiffs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDiffs_output)
           })
       .catch((error) => {
           reject(error)
@@ -293,30 +385,37 @@ export function post_GetDiffs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeBookID
    Description: This method is called when the BookID is changed.
    OperationID: OnChangeBookID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBookID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBookID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBookID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBookID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBookID(requestBody:OnChangeBookID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBookID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARRecTrackerSvc/OnChangeBookID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBookID_output)
           })
       .catch((error) => {
           reject(error)
@@ -327,11 +426,45 @@ export function post_OnChangeBookID(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -985,7 +1118,7 @@ export interface GetAllRecs_input{
 export interface GetAllRecs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARRecTrackerTotTableset[],
+   ds:Erp_Tablesets_ARRecTrackerTotTableset,
 }
 }
 
@@ -1020,7 +1153,7 @@ export interface GetDiffs_input{
 export interface GetDiffs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARRecTrackerTotTableset[],
+   ds:Erp_Tablesets_ARRecTrackerTotTableset,
 }
 }
 
@@ -1055,7 +1188,7 @@ export interface GetGLMovements_input{
 export interface GetGLMovements_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARRecTrackerTotTableset[],
+   ds:Erp_Tablesets_ARRecTrackerTotTableset,
 }
 }
 
@@ -1090,7 +1223,7 @@ export interface GetRecTotals_input{
 export interface GetRecTotals_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARRecTrackerTotTableset[],
+   ds:Erp_Tablesets_ARRecTrackerTotTableset,
 }
 }
 
@@ -1129,7 +1262,7 @@ export interface GetSubLedgerMovements_input{
 export interface GetSubLedgerMovements_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARRecTrackerTotTableset[],
+   ds:Erp_Tablesets_ARRecTrackerTotTableset,
 }
 }
 
@@ -1168,7 +1301,7 @@ export interface OnChangeBookID_output{
    returnObj:Erp_Tablesets_ARRecTrackerTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARRecTrackerTableset[],
+   ds:Erp_Tablesets_ARRecTrackerTableset,
 }
 }
 

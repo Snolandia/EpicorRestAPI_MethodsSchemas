@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.DynAttrClassSvc
 // Description: Dynamic Attribute Class Maintenance
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassRow
    */  
 export function get_DynAttrClasses(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_DynAttrClasses(select?:string, expand?:string, filter?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassRow)
           })
@@ -118,15 +158,15 @@ export function get_DynAttrClasses(select?:string, expand?:string, filter?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DynAttrClasses
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrClassRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrClassRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DynAttrClassRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DynAttrClassRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DynAttrClasses(requestBody:any, epicorHeaders?:Headers){
+export function post_DynAttrClasses(requestBody:Erp_Tablesets_DynAttrClassRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_DynAttrClasses(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_DynAttrClasses(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DynAttrClassRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DynAttrClassRow
    */  
 export function get_DynAttrClasses_Company_AttrClassID(Company:string, AttrClassID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_DynAttrClasses_Company_AttrClassID(Company:string, AttrClass
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DynAttrClassRow)
           })
@@ -193,15 +247,15 @@ export function get_DynAttrClasses_Company_AttrClassID(Company:string, AttrClass
    OperationID: UpdateExt_DynAttrClass
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AttrClassID Desc: AttrClassID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrClassRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrClassRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DynAttrClasses_Company_AttrClassID(Company:string, AttrClassID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DynAttrClasses_Company_AttrClassID(Company:string, AttrClassID:string, requestBody:Erp_Tablesets_DynAttrClassRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_DynAttrClasses_Company_AttrClassID(Company:string, AttrCla
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_DynAttrClasses_Company_AttrClassID(Company:string, AttrCla
    OperationID: DeleteUpdateExt_DynAttrClass
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AttrClassID Desc: AttrClassID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_DynAttrClasses_Company_AttrClassID(Company:string, AttrCl
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_DynAttrClasses_Company_AttrClassID(Company:string, AttrCl
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassDtlRow
    */  
 export function get_DynAttrClasses_Company_AttrClassID_DynAttrClassDtls(Company:string, AttrClassID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_DynAttrClasses_Company_AttrClassID_DynAttrClassDtls(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassDtlRow)
           })
@@ -311,10 +386,10 @@ export function get_DynAttrClasses_Company_AttrClassID_DynAttrClassDtls(Company:
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DynAttrClassDtlRow
    */  
 export function get_DynAttrClasses_Company_AttrClassID_DynAttrClassDtls_Company_AttrClassID_AttributeID(Company:string, AttrClassID:string, AttributeID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_DynAttrClasses_Company_AttrClassID_DynAttrClassDtls_Company_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DynAttrClassDtlRow)
           })
@@ -350,10 +432,10 @@ export function get_DynAttrClasses_Company_AttrClassID_DynAttrClassDtls_Company_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassDtlRow
    */  
 export function get_DynAttrClassDtls(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_DynAttrClassDtls(select?:string, expand?:string, filter?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassDtlRow)
           })
@@ -382,15 +471,15 @@ export function get_DynAttrClassDtls(select?:string, expand?:string, filter?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DynAttrClassDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DynAttrClassDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DynAttrClassDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_DynAttrClassDtls(requestBody:Erp_Tablesets_DynAttrClassDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -404,7 +493,14 @@ export function post_DynAttrClassDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -424,10 +520,10 @@ export function post_DynAttrClassDtls(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DynAttrClassDtlRow
    */  
 export function get_DynAttrClassDtls_Company_AttrClassID_AttributeID(Company:string, AttrClassID:string, AttributeID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -442,7 +538,14 @@ export function get_DynAttrClassDtls_Company_AttrClassID_AttributeID(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DynAttrClassDtlRow)
           })
@@ -459,15 +562,15 @@ export function get_DynAttrClassDtls_Company_AttrClassID_AttributeID(Company:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AttrClassID Desc: AttrClassID   Required: True   Allow empty value : True
       @param AttributeID Desc: AttributeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DynAttrClassDtls_Company_AttrClassID_AttributeID(Company:string, AttrClassID:string, AttributeID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DynAttrClassDtls_Company_AttrClassID_AttributeID(Company:string, AttrClassID:string, AttributeID:string, requestBody:Erp_Tablesets_DynAttrClassDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -481,7 +584,14 @@ export function patch_DynAttrClassDtls_Company_AttrClassID_AttributeID(Company:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -498,7 +608,7 @@ export function patch_DynAttrClassDtls_Company_AttrClassID_AttributeID(Company:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AttrClassID Desc: AttrClassID   Required: True   Allow empty value : True
       @param AttributeID Desc: AttributeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -517,7 +627,14 @@ export function delete_DynAttrClassDtls_Company_AttrClassID_AttributeID(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -540,10 +657,10 @@ export function delete_DynAttrClassDtls_Company_AttrClassID_AttributeID(Company:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassDtlListValRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassDtlListValRow
    */  
 export function get_DynAttrClassDtls_Company_AttrClassID_AttributeID_DynAttrClassDtlListVals(Company:string, AttrClassID:string, AttributeID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -558,7 +675,14 @@ export function get_DynAttrClassDtls_Company_AttrClassID_AttributeID_DynAttrClas
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassDtlListValRow)
           })
@@ -578,10 +702,10 @@ export function get_DynAttrClassDtls_Company_AttrClassID_AttributeID_DynAttrClas
       @param Code Desc: Code   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlListValRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DynAttrClassDtlListValRow
    */  
 export function get_DynAttrClassDtls_Company_AttrClassID_AttributeID_DynAttrClassDtlListVals_Company_AttrClassID_AttributeID_Code(Company:string, AttrClassID:string, AttributeID:string, Code:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -596,7 +720,14 @@ export function get_DynAttrClassDtls_Company_AttrClassID_AttributeID_DynAttrClas
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DynAttrClassDtlListValRow)
           })
@@ -616,10 +747,10 @@ export function get_DynAttrClassDtls_Company_AttrClassID_AttributeID_DynAttrClas
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassDtlListValRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassDtlListValRow
    */  
 export function get_DynAttrClassDtlListVals(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -634,7 +765,14 @@ export function get_DynAttrClassDtlListVals(select?:string, filter?:string, orde
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassDtlListValRow)
           })
@@ -648,15 +786,15 @@ export function get_DynAttrClassDtlListVals(select?:string, filter?:string, orde
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DynAttrClassDtlListVals
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlListValRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlListValRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlListValRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DynAttrClassDtlListValRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DynAttrClassDtlListVals(requestBody:any, epicorHeaders?:Headers){
+export function post_DynAttrClassDtlListVals(requestBody:Erp_Tablesets_DynAttrClassDtlListValRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -670,7 +808,14 @@ export function post_DynAttrClassDtlListVals(requestBody:any, epicorHeaders?:Hea
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -690,10 +835,10 @@ export function post_DynAttrClassDtlListVals(requestBody:any, epicorHeaders?:Hea
       @param Code Desc: Code   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlListValRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DynAttrClassDtlListValRow
    */  
 export function get_DynAttrClassDtlListVals_Company_AttrClassID_AttributeID_Code(Company:string, AttrClassID:string, AttributeID:string, Code:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -708,7 +853,14 @@ export function get_DynAttrClassDtlListVals_Company_AttrClassID_AttributeID_Code
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DynAttrClassDtlListValRow)
           })
@@ -726,15 +878,15 @@ export function get_DynAttrClassDtlListVals_Company_AttrClassID_AttributeID_Code
       @param AttrClassID Desc: AttrClassID   Required: True   Allow empty value : True
       @param AttributeID Desc: AttributeID   Required: True   Allow empty value : True
       @param Code Desc: Code   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlListValRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DynAttrClassDtlListValRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DynAttrClassDtlListVals_Company_AttrClassID_AttributeID_Code(Company:string, AttrClassID:string, AttributeID:string, Code:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DynAttrClassDtlListVals_Company_AttrClassID_AttributeID_Code(Company:string, AttrClassID:string, AttributeID:string, Code:string, requestBody:Erp_Tablesets_DynAttrClassDtlListValRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -748,7 +900,14 @@ export function patch_DynAttrClassDtlListVals_Company_AttrClassID_AttributeID_Co
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -766,7 +925,7 @@ export function patch_DynAttrClassDtlListVals_Company_AttrClassID_AttributeID_Co
       @param AttrClassID Desc: AttrClassID   Required: True   Allow empty value : True
       @param AttributeID Desc: AttributeID   Required: True   Allow empty value : True
       @param Code Desc: Code   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -785,7 +944,14 @@ export function delete_DynAttrClassDtlListVals_Company_AttrClassID_AttributeID_C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -805,10 +971,10 @@ export function delete_DynAttrClassDtlListVals_Company_AttrClassID_AttributeID_C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DynAttrClassListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -823,7 +989,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassListRow)
           })
@@ -835,6 +1008,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -848,7 +1038,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -908,15 +1098,22 @@ export function get_GetRows(whereClauseDynAttrClass:string, whereClauseDynAttrCl
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -929,7 +1126,7 @@ export function get_GetRows(whereClauseDynAttrClass:string, whereClauseDynAttrCl
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -953,15 +1150,22 @@ export function get_GetByID(attrClassID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -973,30 +1177,37 @@ export function get_GetByID(attrClassID:string, epicorHeaders?:Headers){
    Summary: Invoke method DuplicateDynAttrClass
    Description: Duplicates the current Dynamic Attribute Class
    OperationID: DuplicateDynAttrClass
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DuplicateDynAttrClass_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DuplicateDynAttrClass_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DuplicateDynAttrClass_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DuplicateDynAttrClass(requestBody:any, epicorHeaders?:Headers){
+export function post_DuplicateDynAttrClass(requestBody:DuplicateDynAttrClass_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DuplicateDynAttrClass_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/DuplicateDynAttrClass", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DuplicateDynAttrClass_output)
           })
       .catch((error) => {
           reject(error)
@@ -1009,30 +1220,37 @@ export function post_DuplicateDynAttrClass(requestBody:any, epicorHeaders?:Heade
    Description: Used when the Data Type field of DynAttrClassDtl has been changed to a new value.
 Resets all possible fields.
    OperationID: OnChangeFieldDataType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeFieldDataType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeFieldDataType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeFieldDataType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeFieldDataType(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeFieldDataType(requestBody:OnChangeFieldDataType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeFieldDataType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/OnChangeFieldDataType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeFieldDataType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1044,30 +1262,37 @@ export function post_OnChangeFieldDataType(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method OnChangeAttributeID
    Description: Used when the AttributeID field has changed on DynAttrClassDtl record.
    OperationID: OnChangeAttributeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAttributeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAttributeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAttributeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAttributeID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAttributeID(requestBody:OnChangeAttributeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAttributeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/OnChangeAttributeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAttributeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1079,30 +1304,37 @@ export function post_OnChangeAttributeID(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method CheckAttributeID
    Description: Used to check if the entered AttributeID is in the DynAttrMasterDtl record
    OperationID: CheckAttributeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckAttributeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckAttributeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckAttributeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckAttributeID(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckAttributeID(requestBody:CheckAttributeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckAttributeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/CheckAttributeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckAttributeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1114,30 +1346,37 @@ export function post_CheckAttributeID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeBizType
    Description: Handles require changes to Attribute when the Business Type changes: sets the Required At list picker
    OperationID: ChangeBizType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeBizType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeBizType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeBizType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeBizType(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeBizType(requestBody:ChangeBizType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeBizType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/ChangeBizType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeBizType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1149,30 +1388,37 @@ export function post_ChangeBizType(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeUsedInPlanning
    Description: Handles require changes to Attribute when the MRP changes: sets the Required At list picker
    OperationID: ChangeUsedInPlanning
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeUsedInPlanning_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeUsedInPlanning_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeUsedInPlanning_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeUsedInPlanning(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeUsedInPlanning(requestBody:ChangeUsedInPlanning_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeUsedInPlanning_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/ChangeUsedInPlanning", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeUsedInPlanning_output)
           })
       .catch((error) => {
           reject(error)
@@ -1185,30 +1431,37 @@ export function post_ChangeUsedInPlanning(requestBody:any, epicorHeaders?:Header
    Description: Used when the RelatedToTableName field of DynAttrClass has been changed to a new value.
 Resets all possible fields.
    OperationID: OnChangeRelatedToTableName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeRelatedToTableName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeRelatedToTableName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeRelatedToTableName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeRelatedToTableName(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeRelatedToTableName(requestBody:OnChangeRelatedToTableName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeRelatedToTableName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/OnChangeRelatedToTableName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeRelatedToTableName_output)
           })
       .catch((error) => {
           reject(error)
@@ -1220,30 +1473,37 @@ export function post_OnChangeRelatedToTableName(requestBody:any, epicorHeaders?:
    Summary: Invoke method SetDynAttrClassDtlIsExpressionDefined
    Description: Indicates if calculated expression has been entered.
    OperationID: SetDynAttrClassDtlIsExpressionDefined
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetDynAttrClassDtlIsExpressionDefined_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetDynAttrClassDtlIsExpressionDefined_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetDynAttrClassDtlIsExpressionDefined_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetDynAttrClassDtlIsExpressionDefined(requestBody:any, epicorHeaders?:Headers){
+export function post_SetDynAttrClassDtlIsExpressionDefined(requestBody:SetDynAttrClassDtlIsExpressionDefined_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetDynAttrClassDtlIsExpressionDefined_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/SetDynAttrClassDtlIsExpressionDefined", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetDynAttrClassDtlIsExpressionDefined_output)
           })
       .catch((error) => {
           reject(error)
@@ -1255,30 +1515,37 @@ export function post_SetDynAttrClassDtlIsExpressionDefined(requestBody:any, epic
    Summary: Invoke method ValidateFormat
    Description: Validates data format
    OperationID: ValidateFormat
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateFormat_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateFormat_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateFormat_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateFormat(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateFormat(requestBody:ValidateFormat_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateFormat_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/ValidateFormat", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateFormat_output)
           })
       .catch((error) => {
           reject(error)
@@ -1290,30 +1557,37 @@ export function post_ValidateFormat(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RegenerateAttributeSetHash
    Description: Regenerates AttributeSetHash - specific for sets with calculated fields
    OperationID: RegenerateAttributeSetHash
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RegenerateAttributeSetHash_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RegenerateAttributeSetHash_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RegenerateAttributeSetHash_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RegenerateAttributeSetHash(requestBody:any, epicorHeaders?:Headers){
+export function post_RegenerateAttributeSetHash(requestBody:RegenerateAttributeSetHash_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RegenerateAttributeSetHash_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/RegenerateAttributeSetHash", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RegenerateAttributeSetHash_output)
           })
       .catch((error) => {
           reject(error)
@@ -1325,7 +1599,7 @@ export function post_RegenerateAttributeSetHash(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetRelatedToTableNameListFromLandingPage
    Description: This method returns the list of Related To Table Names plus the value 'All' for use in the Landing Page.
    OperationID: GetRelatedToTableNameListFromLandingPage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRelatedToTableNameListFromLandingPage_output
@@ -1338,15 +1612,22 @@ export function post_GetRelatedToTableNameListFromLandingPage(epicorHeaders?:Hea
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRelatedToTableNameListFromLandingPage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/GetRelatedToTableNameListFromLandingPage", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRelatedToTableNameListFromLandingPage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1358,7 +1639,7 @@ export function post_GetRelatedToTableNameListFromLandingPage(epicorHeaders?:Hea
    Summary: Invoke method GetRelatedToTableNameList
    Description: This method returns the list of Related To Table Names.
    OperationID: GetRelatedToTableNameList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRelatedToTableNameList_output
@@ -1371,15 +1652,22 @@ export function post_GetRelatedToTableNameList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRelatedToTableNameList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/GetRelatedToTableNameList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRelatedToTableNameList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1391,30 +1679,37 @@ export function post_GetRelatedToTableNameList(epicorHeaders?:Headers){
    Summary: Invoke method GetNewDynAttrClass
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDynAttrClass
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrClass_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrClass_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDynAttrClass_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDynAttrClass(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDynAttrClass(requestBody:GetNewDynAttrClass_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDynAttrClass_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/GetNewDynAttrClass", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDynAttrClass_output)
           })
       .catch((error) => {
           reject(error)
@@ -1426,30 +1721,37 @@ export function post_GetNewDynAttrClass(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewDynAttrClassDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDynAttrClassDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrClassDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrClassDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDynAttrClassDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDynAttrClassDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDynAttrClassDtl(requestBody:GetNewDynAttrClassDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDynAttrClassDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/GetNewDynAttrClassDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDynAttrClassDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1461,30 +1763,37 @@ export function post_GetNewDynAttrClassDtl(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewDynAttrClassDtlListVal
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDynAttrClassDtlListVal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrClassDtlListVal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDynAttrClassDtlListVal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDynAttrClassDtlListVal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDynAttrClassDtlListVal(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDynAttrClassDtlListVal(requestBody:GetNewDynAttrClassDtlListVal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDynAttrClassDtlListVal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/GetNewDynAttrClassDtlListVal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDynAttrClassDtlListVal_output)
           })
       .catch((error) => {
           reject(error)
@@ -1496,30 +1805,37 @@ export function post_GetNewDynAttrClassDtlListVal(requestBody:any, epicorHeaders
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1534,7 +1850,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1576,15 +1892,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1596,7 +1919,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1620,15 +1943,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1640,7 +1970,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1664,15 +1994,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1684,30 +2021,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1719,30 +2063,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DynAttrClassSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1753,26 +2104,43 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassDtlListValRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DynAttrClassDtlListValRow[],
+   "value":Erp_Tablesets_DynAttrClassDtlListValRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DynAttrClassDtlRow[],
+   "value":Erp_Tablesets_DynAttrClassDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DynAttrClassListRow[],
+   "value":Erp_Tablesets_DynAttrClassListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DynAttrClassRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DynAttrClassRow[],
+   "value":Erp_Tablesets_DynAttrClassRow,
 }
 
 export interface Erp_Tablesets_DynAttrClassDtlListValRow{
@@ -2014,6 +2382,23 @@ export interface Erp_Tablesets_DynAttrClassRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2028,7 +2413,7 @@ export interface ChangeBizType_input{
 export interface ChangeBizType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 
@@ -2044,7 +2429,7 @@ export interface ChangeUsedInPlanning_input{
 export interface ChangeUsedInPlanning_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 
@@ -2431,7 +2816,7 @@ export interface GetNewDynAttrClassDtlListVal_input{
 export interface GetNewDynAttrClassDtlListVal_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 
@@ -2447,7 +2832,7 @@ export interface GetNewDynAttrClassDtl_input{
 export interface GetNewDynAttrClassDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 
@@ -2461,7 +2846,7 @@ export interface GetNewDynAttrClass_input{
 export interface GetNewDynAttrClass_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 
@@ -2544,7 +2929,7 @@ export interface OnChangeAttributeID_input{
 export interface OnChangeAttributeID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 
@@ -2561,7 +2946,7 @@ export interface OnChangeFieldDataType_input{
 export interface OnChangeFieldDataType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 
@@ -2578,7 +2963,7 @@ export interface OnChangeRelatedToTableName_input{
 export interface OnChangeRelatedToTableName_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 
@@ -2602,7 +2987,7 @@ export interface SetDynAttrClassDtlIsExpressionDefined_input{
 export interface SetDynAttrClassDtlIsExpressionDefined_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 
@@ -2621,7 +3006,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtDynAttrClassTableset[],
+   ds:Erp_Tablesets_UpdExtDynAttrClassTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2636,7 +3021,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 
@@ -2653,7 +3038,7 @@ export interface ValidateFormat_input{
 export interface ValidateFormat_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynAttrClassTableset[],
+   ds:Erp_Tablesets_DynAttrClassTableset,
 }
 }
 

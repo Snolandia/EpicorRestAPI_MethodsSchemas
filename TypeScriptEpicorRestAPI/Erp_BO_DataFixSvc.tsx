@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.DataFixSvc
 // Description: DataFix functionality
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.datafixRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.datafixRow
    */  
 export function get_DataFixes(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_DataFixes(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_datafixRow)
           })
@@ -118,15 +158,15 @@ export function get_DataFixes(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataFixes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.datafixRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.datafixRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.datafixRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.datafixRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataFixes(requestBody:any, epicorHeaders?:Headers){
+export function post_DataFixes(requestBody:Erp_Tablesets_datafixRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_DataFixes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -164,10 +211,10 @@ export function post_DataFixes(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.datafixRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.datafixRow
    */  
 export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -182,7 +229,14 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_datafixRow)
           })
@@ -203,15 +257,15 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Company
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param Key4 Desc: Key4   Required: True   Allow empty value : True
       @param Key5 Desc: Key5   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.datafixRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.datafixRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, requestBody:Erp_Tablesets_datafixRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -225,7 +279,14 @@ export function patch_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Compa
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -246,7 +307,7 @@ export function patch_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Compa
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param Key4 Desc: Key4   Required: True   Allow empty value : True
       @param Key5 Desc: Key5   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -265,7 +326,14 @@ export function delete_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -292,10 +360,10 @@ export function delete_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Comp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixDDefRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixDDefRow
    */  
 export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFixDDefs(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -310,7 +378,14 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataFixDDefRow)
           })
@@ -336,10 +411,10 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
       @param seqnum Desc: seqnum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataFixDDefRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataFixDDefRow
    */  
 export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFixDDefs_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tabseq_tblname_seqnum(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, tabseq:string, tblname:string, seqnum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -354,7 +429,14 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataFixDDefRow)
           })
@@ -381,10 +463,10 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixParamRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixParamRow
    */  
 export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFixParams(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -399,7 +481,14 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataFixParamRow)
           })
@@ -422,10 +511,10 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
       @param Key5 Desc: Key5   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataFixParamRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataFixParamRow
    */  
 export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFixParams_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -440,7 +529,14 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataFixParamRow)
           })
@@ -467,10 +563,10 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixRptRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixRptRow
    */  
 export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFixRpts(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -485,7 +581,14 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataFixRptRow)
           })
@@ -510,10 +613,10 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
       @param seqId Desc: seqId   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataFixRptRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataFixRptRow
    */  
 export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFixRpts_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tblname_seqId(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, tblname:string, seqId:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -528,7 +631,14 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataFixRptRow)
           })
@@ -548,10 +658,10 @@ export function get_DataFixes_Company_LocalName_Key1_Key2_Key3_Key4_Key5_DataFix
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixDDefRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixDDefRow
    */  
 export function get_DataFixDDefs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -566,7 +676,14 @@ export function get_DataFixDDefs(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataFixDDefRow)
           })
@@ -580,15 +697,15 @@ export function get_DataFixDDefs(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataFixDDefs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataFixDDefRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataFixDDefRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataFixDDefRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataFixDDefRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataFixDDefs(requestBody:any, epicorHeaders?:Headers){
+export function post_DataFixDDefs(requestBody:Erp_Tablesets_DataFixDDefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -602,7 +719,14 @@ export function post_DataFixDDefs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -628,10 +752,10 @@ export function post_DataFixDDefs(requestBody:any, epicorHeaders?:Headers){
       @param seqnum Desc: seqnum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataFixDDefRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataFixDDefRow
    */  
 export function get_DataFixDDefs_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tabseq_tblname_seqnum(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, tabseq:string, tblname:string, seqnum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -646,7 +770,14 @@ export function get_DataFixDDefs_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tabs
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataFixDDefRow)
           })
@@ -670,15 +801,15 @@ export function get_DataFixDDefs_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tabs
       @param tabseq Desc: tabseq   Required: True
       @param tblname Desc: tblname   Required: True   Allow empty value : True
       @param seqnum Desc: seqnum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataFixDDefRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataFixDDefRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataFixDDefs_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tabseq_tblname_seqnum(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, tabseq:string, tblname:string, seqnum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataFixDDefs_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tabseq_tblname_seqnum(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, tabseq:string, tblname:string, seqnum:string, requestBody:Erp_Tablesets_DataFixDDefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -692,7 +823,14 @@ export function patch_DataFixDDefs_Company_LocalName_Key1_Key2_Key3_Key4_Key5_ta
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -716,7 +854,7 @@ export function patch_DataFixDDefs_Company_LocalName_Key1_Key2_Key3_Key4_Key5_ta
       @param tabseq Desc: tabseq   Required: True
       @param tblname Desc: tblname   Required: True   Allow empty value : True
       @param seqnum Desc: seqnum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -735,7 +873,14 @@ export function delete_DataFixDDefs_Company_LocalName_Key1_Key2_Key3_Key4_Key5_t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -755,10 +900,10 @@ export function delete_DataFixDDefs_Company_LocalName_Key1_Key2_Key3_Key4_Key5_t
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixParamRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixParamRow
    */  
 export function get_DataFixParams(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -773,7 +918,14 @@ export function get_DataFixParams(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataFixParamRow)
           })
@@ -787,15 +939,15 @@ export function get_DataFixParams(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataFixParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataFixParamRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataFixParamRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataFixParamRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataFixParamRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataFixParams(requestBody:any, epicorHeaders?:Headers){
+export function post_DataFixParams(requestBody:Erp_Tablesets_DataFixParamRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -809,7 +961,14 @@ export function post_DataFixParams(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -832,10 +991,10 @@ export function post_DataFixParams(requestBody:any, epicorHeaders?:Headers){
       @param Key5 Desc: Key5   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataFixParamRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataFixParamRow
    */  
 export function get_DataFixParams_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -850,7 +1009,14 @@ export function get_DataFixParams_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataFixParamRow)
           })
@@ -871,15 +1037,15 @@ export function get_DataFixParams_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Com
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param Key4 Desc: Key4   Required: True   Allow empty value : True
       @param Key5 Desc: Key5   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataFixParamRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataFixParamRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataFixParams_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataFixParams_Company_LocalName_Key1_Key2_Key3_Key4_Key5(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, requestBody:Erp_Tablesets_DataFixParamRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -893,7 +1059,14 @@ export function patch_DataFixParams_Company_LocalName_Key1_Key2_Key3_Key4_Key5(C
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -914,7 +1087,7 @@ export function patch_DataFixParams_Company_LocalName_Key1_Key2_Key3_Key4_Key5(C
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param Key4 Desc: Key4   Required: True   Allow empty value : True
       @param Key5 Desc: Key5   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -933,7 +1106,14 @@ export function delete_DataFixParams_Company_LocalName_Key1_Key2_Key3_Key4_Key5(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -953,10 +1133,10 @@ export function delete_DataFixParams_Company_LocalName_Key1_Key2_Key3_Key4_Key5(
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixRptRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataFixRptRow
    */  
 export function get_DataFixRpts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -971,7 +1151,14 @@ export function get_DataFixRpts(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataFixRptRow)
           })
@@ -985,15 +1172,15 @@ export function get_DataFixRpts(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataFixRpts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataFixRptRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataFixRptRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataFixRptRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataFixRptRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataFixRpts(requestBody:any, epicorHeaders?:Headers){
+export function post_DataFixRpts(requestBody:Erp_Tablesets_DataFixRptRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1007,7 +1194,14 @@ export function post_DataFixRpts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1032,10 +1226,10 @@ export function post_DataFixRpts(requestBody:any, epicorHeaders?:Headers){
       @param seqId Desc: seqId   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataFixRptRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataFixRptRow
    */  
 export function get_DataFixRpts_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tblname_seqId(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, tblname:string, seqId:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1050,7 +1244,14 @@ export function get_DataFixRpts_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tblna
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataFixRptRow)
           })
@@ -1073,15 +1274,15 @@ export function get_DataFixRpts_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tblna
       @param Key5 Desc: Key5   Required: True   Allow empty value : True
       @param tblname Desc: tblname   Required: True   Allow empty value : True
       @param seqId Desc: seqId   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataFixRptRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataFixRptRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataFixRpts_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tblname_seqId(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, tblname:string, seqId:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataFixRpts_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tblname_seqId(Company:string, LocalName:string, Key1:string, Key2:string, Key3:string, Key4:string, Key5:string, tblname:string, seqId:string, requestBody:Erp_Tablesets_DataFixRptRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1095,7 +1296,14 @@ export function patch_DataFixRpts_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tbl
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1118,7 +1326,7 @@ export function patch_DataFixRpts_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tbl
       @param Key5 Desc: Key5   Required: True   Allow empty value : True
       @param tblname Desc: tblname   Required: True   Allow empty value : True
       @param seqId Desc: seqId   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1137,7 +1345,14 @@ export function delete_DataFixRpts_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1157,10 +1372,10 @@ export function delete_DataFixRpts_Company_LocalName_Key1_Key2_Key3_Key4_Key5_tb
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.datafixlistRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.datafixlistRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1175,7 +1390,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_datafixlistRow)
           })
@@ -1187,6 +1409,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1201,7 +1440,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1270,15 +1509,22 @@ export function get_GetRows(whereClausedatafix:string, whereClauseDataFixDDef:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1297,7 +1543,7 @@ export function get_GetRows(whereClausedatafix:string, whereClauseDataFixDDef:st
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1375,15 +1621,22 @@ export function get_GetByID(company:string, localName:string, key1:string, key2:
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1398,7 +1651,7 @@ export function get_GetByID(company:string, localName:string, key1:string, key2:
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1440,15 +1693,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1460,30 +1720,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetByIDCustom
    Description: Get DataFix data for given DataFixId
    OperationID: GetByIDCustom
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByIDCustom_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByIDCustom_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByIDCustom_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByIDCustom(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByIDCustom(requestBody:GetByIDCustom_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByIDCustom_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetByIDCustom", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByIDCustom_output)
           })
       .catch((error) => {
           reject(error)
@@ -1495,30 +1762,37 @@ export function post_GetByIDCustom(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRowsCustom
    Description: Retrieve DataFix rows from Local001 table and populate temp tables
    OperationID: GetRowsCustom
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCustom_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCustom_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCustom_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCustom(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCustom(requestBody:GetRowsCustom_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCustom_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetRowsCustom", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCustom_output)
           })
       .catch((error) => {
           reject(error)
@@ -1530,30 +1804,37 @@ export function post_GetRowsCustom(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method StartReport
    Description: Start Report
    OperationID: StartReport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StartReport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StartReport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StartReport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StartReport(requestBody:any, epicorHeaders?:Headers){
+export function post_StartReport(requestBody:StartReport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StartReport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/StartReport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StartReport_output)
           })
       .catch((error) => {
           reject(error)
@@ -1565,30 +1846,37 @@ export function post_StartReport(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateReport
    Description: Update Report
    OperationID: UpdateReport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateReport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateReport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateReport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateReport(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateReport(requestBody:UpdateReport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateReport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/UpdateReport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateReport_output)
           })
       .catch((error) => {
           reject(error)
@@ -1600,30 +1888,37 @@ export function post_UpdateReport(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CancelReport
    Description: Cancel Report
    OperationID: CancelReport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CancelReport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CancelReport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CancelReport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CancelReport(requestBody:any, epicorHeaders?:Headers){
+export function post_CancelReport(requestBody:CancelReport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CancelReport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/CancelReport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CancelReport_output)
           })
       .catch((error) => {
           reject(error)
@@ -1635,30 +1930,37 @@ export function post_CancelReport(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetReport
    Description: Get Report
    OperationID: GetReport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetReport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetReport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetReport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetReport(requestBody:any, epicorHeaders?:Headers){
+export function post_GetReport(requestBody:GetReport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetReport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetReport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetReport_output)
           })
       .catch((error) => {
           reject(error)
@@ -1670,30 +1972,37 @@ export function post_GetReport(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetReportSysRowIDUpdate
    Description: Get Report
    OperationID: GetReportSysRowIDUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetReportSysRowIDUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetReportSysRowIDUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetReportSysRowIDUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetReportSysRowIDUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_GetReportSysRowIDUpdate(requestBody:GetReportSysRowIDUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetReportSysRowIDUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetReportSysRowIDUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetReportSysRowIDUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1705,30 +2014,37 @@ export function post_GetReportSysRowIDUpdate(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ResetFix
    Description: Reset a Fix parameters and clear report
    OperationID: ResetFix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ResetFix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ResetFix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ResetFix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ResetFix(requestBody:any, epicorHeaders?:Headers){
+export function post_ResetFix(requestBody:ResetFix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ResetFix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/ResetFix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ResetFix_output)
           })
       .catch((error) => {
           reject(error)
@@ -1740,30 +2056,37 @@ export function post_ResetFix(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SelectAll
    Description: Select all the current report records
    OperationID: SelectAll
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SelectAll_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SelectAll_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SelectAll_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectAll(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectAll(requestBody:SelectAll_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SelectAll_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/SelectAll", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SelectAll_output)
           })
       .catch((error) => {
           reject(error)
@@ -1775,30 +2098,37 @@ export function post_SelectAll(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UnSelectAll
    Description: UnSelect all the current report records
    OperationID: UnSelectAll
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnSelectAll_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnSelectAll_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnSelectAll_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnSelectAll(requestBody:any, epicorHeaders?:Headers){
+export function post_UnSelectAll(requestBody:UnSelectAll_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnSelectAll_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/UnSelectAll", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnSelectAll_output)
           })
       .catch((error) => {
           reject(error)
@@ -1810,30 +2140,37 @@ export function post_UnSelectAll(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UnQuote
    Description: remove quotes from a string
    OperationID: UnQuote
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnQuote_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnQuote_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnQuote_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnQuote(requestBody:any, epicorHeaders?:Headers){
+export function post_UnQuote(requestBody:UnQuote_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnQuote_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/UnQuote", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnQuote_output)
           })
       .catch((error) => {
           reject(error)
@@ -1845,30 +2182,37 @@ export function post_UnQuote(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunUpdate
    Description: Run Data Fix Update
    OperationID: RunUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_RunUpdate(requestBody:RunUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/RunUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1880,30 +2224,37 @@ export function post_RunUpdate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunUpdateNoDisplay
    Description: Run Data Fix Update without displaying data first
    OperationID: RunUpdateNoDisplay
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunUpdateNoDisplay_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunUpdateNoDisplay_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunUpdateNoDisplay_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunUpdateNoDisplay(requestBody:any, epicorHeaders?:Headers){
+export function post_RunUpdateNoDisplay(requestBody:RunUpdateNoDisplay_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunUpdateNoDisplay_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/RunUpdateNoDisplay", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunUpdateNoDisplay_output)
           })
       .catch((error) => {
           reject(error)
@@ -1915,30 +2266,37 @@ export function post_RunUpdateNoDisplay(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetTenants
    Description: Get Tenants
    OperationID: GetTenants
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTenants_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTenants_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTenants_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTenants(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTenants(requestBody:GetTenants_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTenants_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetTenants", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTenants_output)
           })
       .catch((error) => {
           reject(error)
@@ -1950,7 +2308,7 @@ export function post_GetTenants(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCurrentTenantID
    Description: Get Current Tenant ID
    OperationID: GetCurrentTenantID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCurrentTenantID_output
@@ -1963,15 +2321,22 @@ export function post_GetCurrentTenantID(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCurrentTenantID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetCurrentTenantID", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCurrentTenantID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1983,7 +2348,7 @@ export function post_GetCurrentTenantID(epicorHeaders?:Headers){
    Summary: Invoke method GetInstallationID
    Description: Get Installation ID
    OperationID: GetInstallationID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInstallationID_output
@@ -1996,15 +2361,22 @@ export function post_GetInstallationID(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInstallationID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetInstallationID", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInstallationID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2016,7 +2388,7 @@ export function post_GetInstallationID(epicorHeaders?:Headers){
    Summary: Invoke method GetCurrentInstallationID
    Description: Get Current Tenant ID
    OperationID: GetCurrentInstallationID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCurrentInstallationID_output
@@ -2029,15 +2401,22 @@ export function post_GetCurrentInstallationID(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCurrentInstallationID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetCurrentInstallationID", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCurrentInstallationID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2049,30 +2428,37 @@ export function post_GetCurrentInstallationID(epicorHeaders?:Headers){
    Summary: Invoke method ImportDataFix
    Description: Import a new data fix
    OperationID: ImportDataFix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportDataFix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportDataFix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportDataFix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportDataFix(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportDataFix(requestBody:ImportDataFix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportDataFix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/ImportDataFix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportDataFix_output)
           })
       .catch((error) => {
           reject(error)
@@ -2083,30 +2469,37 @@ export function post_ImportDataFix(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method PrereadDataFix
    OperationID: PrereadDataFix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PrereadDataFix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PrereadDataFix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PrereadDataFix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PrereadDataFix(requestBody:any, epicorHeaders?:Headers){
+export function post_PrereadDataFix(requestBody:PrereadDataFix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PrereadDataFix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/PrereadDataFix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PrereadDataFix_output)
           })
       .catch((error) => {
           reject(error)
@@ -2118,30 +2511,37 @@ export function post_PrereadDataFix(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GenerateParameterComponents
    Description: Generate the necessary components to fill parameters from ds.
    OperationID: GenerateParameterComponents
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateParameterComponents_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateParameterComponents_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateParameterComponents_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateParameterComponents(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateParameterComponents(requestBody:GenerateParameterComponents_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateParameterComponents_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GenerateParameterComponents", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateParameterComponents_output)
           })
       .catch((error) => {
           reject(error)
@@ -2153,7 +2553,7 @@ export function post_GenerateParameterComponents(requestBody:any, epicorHeaders?
    Summary: Invoke method GetCompanies
    Description: Get the companies available.
    OperationID: GetCompanies
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCompanies_output
@@ -2166,15 +2566,22 @@ export function post_GetCompanies(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCompanies_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetCompanies", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCompanies_output)
           })
       .catch((error) => {
           reject(error)
@@ -2185,30 +2592,37 @@ export function post_GetCompanies(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method UploadLocalImportFile
    OperationID: UploadLocalImportFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UploadLocalImportFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UploadLocalImportFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UploadLocalImportFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UploadLocalImportFile(requestBody:any, epicorHeaders?:Headers){
+export function post_UploadLocalImportFile(requestBody:UploadLocalImportFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UploadLocalImportFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/UploadLocalImportFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UploadLocalImportFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2220,30 +2634,37 @@ export function post_UploadLocalImportFile(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetRowsDataFix
    Description: Retrieve DataFix rows from Local001 table and populate temp tables
    OperationID: GetRowsDataFix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsDataFix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsDataFix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsDataFix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsDataFix(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsDataFix(requestBody:GetRowsDataFix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsDataFix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetRowsDataFix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsDataFix_output)
           })
       .catch((error) => {
           reject(error)
@@ -2255,30 +2676,37 @@ export function post_GetRowsDataFix(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewdatafix
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewdatafix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewdatafix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewdatafix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewdatafix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewdatafix(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewdatafix(requestBody:GetNewdatafix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewdatafix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetNewdatafix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewdatafix_output)
           })
       .catch((error) => {
           reject(error)
@@ -2290,30 +2718,37 @@ export function post_GetNewdatafix(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2325,7 +2760,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2349,15 +2784,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2369,7 +2811,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2393,15 +2835,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2413,30 +2862,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2448,30 +2904,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataFixSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2482,31 +2945,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataFixDDefRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataFixDDefRow[],
+   "value":Erp_Tablesets_DataFixDDefRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataFixParamRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataFixParamRow[],
+   "value":Erp_Tablesets_DataFixParamRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataFixRptRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataFixRptRow[],
+   "value":Erp_Tablesets_DataFixRptRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_datafixRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_datafixRow[],
+   "value":Erp_Tablesets_datafixRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_datafixlistRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_datafixlistRow[],
+   "value":Erp_Tablesets_datafixlistRow,
 }
 
 export interface Erp_Tablesets_DataFixDDefRow{
@@ -2906,6 +3386,23 @@ export interface Erp_Tablesets_datafixlistRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2930,7 +3427,7 @@ export interface CancelReport_input{
 export interface CancelReport_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3524,7 +4021,7 @@ export interface GetNewdatafix_input{
 export interface GetNewdatafix_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3551,7 +4048,7 @@ export interface GetReportSysRowIDUpdate_output{
    returnObj:number,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3577,7 +4074,7 @@ export interface GetReport_input{
 export interface GetReport_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3746,7 +4243,7 @@ export interface PrereadDataFix_output{
 parameters : {
       /**  output parameters  */  
    RetMessage:string,
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3772,7 +4269,7 @@ export interface ResetFix_input{
 export interface ResetFix_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3793,7 +4290,7 @@ export interface RunUpdateNoDisplay_output{
 parameters : {
       /**  output parameters  */  
    RptCnt:number,
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3814,7 +4311,7 @@ export interface RunUpdate_output{
 parameters : {
       /**  output parameters  */  
    RptCnt:number,
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3831,7 +4328,7 @@ export interface SelectAll_input{
 export interface SelectAll_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3863,7 +4360,7 @@ export interface StartReport_input{
 export interface StartReport_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3892,7 +4389,7 @@ export interface UnSelectAll_input{
 export interface UnSelectAll_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3911,7 +4408,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtDataFixTableset[],
+   ds:Erp_Tablesets_UpdExtDataFixTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3938,7 +4435,7 @@ export interface UpdateReport_input{
 export interface UpdateReport_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 
@@ -3952,7 +4449,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataFixTableset[],
+   ds:Erp_Tablesets_DataFixTableset,
 }
 }
 

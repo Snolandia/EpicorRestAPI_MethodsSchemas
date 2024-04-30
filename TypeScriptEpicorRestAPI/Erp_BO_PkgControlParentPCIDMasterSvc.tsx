@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PkgControlParentPCIDMasterSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,13 +111,30 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
    /**  
    Summary: Invoke method Init
    OperationID: Init
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/Init_output
@@ -97,15 +147,22 @@ export function post_Init(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Init_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/Init", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Init_output)
           })
       .catch((error) => {
           reject(error)
@@ -117,30 +174,37 @@ export function post_Init(epicorHeaders?:Headers){
    Summary: Invoke method GetNewPCIDMaster
    Description: This returns a blank master record to the UI
    OperationID: GetNewPCIDMaster
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPCIDMaster_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPCIDMaster_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPCIDMaster_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPCIDMaster(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPCIDMaster(requestBody:GetNewPCIDMaster_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPCIDMaster_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/GetNewPCIDMaster", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPCIDMaster_output)
           })
       .catch((error) => {
           reject(error)
@@ -152,30 +216,37 @@ export function post_GetNewPCIDMaster(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckPCIDPrinted
    Description: to check if pcid has been printed and throw a error.
    OperationID: CheckPCIDPrinted
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPCIDPrinted_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPCIDPrinted_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPCIDPrinted_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPCIDPrinted(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPCIDPrinted(requestBody:CheckPCIDPrinted_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPCIDPrinted_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/CheckPCIDPrinted", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPCIDPrinted_output)
           })
       .catch((error) => {
           reject(error)
@@ -186,30 +257,37 @@ export function post_CheckPCIDPrinted(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetReportStyleNum
    OperationID: GetReportStyleNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetReportStyleNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetReportStyleNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetReportStyleNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetReportStyleNum(requestBody:any, epicorHeaders?:Headers){
+export function post_GetReportStyleNum(requestBody:GetReportStyleNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetReportStyleNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/GetReportStyleNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetReportStyleNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -221,30 +299,37 @@ export function post_GetReportStyleNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ProcessParentPCID
    Description: This method updates the parent pcid record when the ui is closed.
    OperationID: ProcessParentPCID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessParentPCID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessParentPCID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessParentPCID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessParentPCID(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessParentPCID(requestBody:ProcessParentPCID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessParentPCID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/ProcessParentPCID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessParentPCID_output)
           })
       .catch((error) => {
           reject(error)
@@ -256,30 +341,37 @@ export function post_ProcessParentPCID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ProcessChildPCID
    Description: this method creates the parent/child links if a child is scanned in the UI.
    OperationID: ProcessChildPCID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessChildPCID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessChildPCID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessChildPCID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessChildPCID(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessChildPCID(requestBody:ProcessChildPCID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessChildPCID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/ProcessChildPCID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessChildPCID_output)
           })
       .catch((error) => {
           reject(error)
@@ -291,30 +383,37 @@ export function post_ProcessChildPCID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ProcessPCIDPrinted
    Description: This method updates the parent pcid record after a mixed label has been printed
    OperationID: ProcessPCIDPrinted
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessPCIDPrinted_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessPCIDPrinted_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessPCIDPrinted_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessPCIDPrinted(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessPCIDPrinted(requestBody:ProcessPCIDPrinted_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessPCIDPrinted_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/ProcessPCIDPrinted", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessPCIDPrinted_output)
           })
       .catch((error) => {
           reject(error)
@@ -326,30 +425,37 @@ export function post_ProcessPCIDPrinted(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method PreProcess
    Description: this method checks the parent/child records for errors before processing.
    OperationID: PreProcess
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreProcess_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreProcess_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreProcess_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreProcess(requestBody:any, epicorHeaders?:Headers){
+export function post_PreProcess(requestBody:PreProcess_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreProcess_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/PreProcess", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreProcess_output)
           })
       .catch((error) => {
           reject(error)
@@ -361,30 +467,37 @@ export function post_PreProcess(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateEDIMasterMixed
    Description: To validate the EDI Data before print and during confirm
    OperationID: ValidateEDIMasterMixed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateEDIMasterMixed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateEDIMasterMixed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateEDIMasterMixed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateEDIMasterMixed(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateEDIMasterMixed(requestBody:ValidateEDIMasterMixed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateEDIMasterMixed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/ValidateEDIMasterMixed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateEDIMasterMixed_output)
           })
       .catch((error) => {
           reject(error)
@@ -395,30 +508,37 @@ export function post_ValidateEDIMasterMixed(requestBody:any, epicorHeaders?:Head
    /**  
    Summary: Invoke method PreProcessConfirm
    OperationID: PreProcessConfirm
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreProcessConfirm_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreProcessConfirm_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreProcessConfirm_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreProcessConfirm(requestBody:any, epicorHeaders?:Headers){
+export function post_PreProcessConfirm(requestBody:PreProcessConfirm_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreProcessConfirm_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/PreProcessConfirm", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreProcessConfirm_output)
           })
       .catch((error) => {
           reject(error)
@@ -431,30 +551,37 @@ export function post_PreProcessConfirm(requestBody:any, epicorHeaders?:Headers){
    Description: This method should be called when a child pcid has already been entered and
 if the parent needs to be confirmed
    OperationID: ConfirmParent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ConfirmParent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ConfirmParent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ConfirmParent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ConfirmParent(requestBody:any, epicorHeaders?:Headers){
+export function post_ConfirmParent(requestBody:ConfirmParent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ConfirmParent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/ConfirmParent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ConfirmParent_output)
           })
       .catch((error) => {
           reject(error)
@@ -467,30 +594,37 @@ export function post_ConfirmParent(requestBody:any, epicorHeaders?:Headers){
    Description: This method should be called if the parent PCID is already entered
 and the user wants to confirm the child.
    OperationID: ConfirmChild
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ConfirmChild_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ConfirmChild_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ConfirmChild_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ConfirmChild(requestBody:any, epicorHeaders?:Headers){
+export function post_ConfirmChild(requestBody:ConfirmChild_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ConfirmChild_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/ConfirmChild", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ConfirmChild_output)
           })
       .catch((error) => {
           reject(error)
@@ -502,7 +636,7 @@ export function post_ConfirmChild(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MasterPCIDNeedsToBeLoaded
    Description: Method to throw a error message
    OperationID: MasterPCIDNeedsToBeLoaded
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/MasterPCIDNeedsToBeLoaded_output
@@ -515,15 +649,22 @@ export function post_MasterPCIDNeedsToBeLoaded(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MasterPCIDNeedsToBeLoaded_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/MasterPCIDNeedsToBeLoaded", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MasterPCIDNeedsToBeLoaded_output)
           })
       .catch((error) => {
           reject(error)
@@ -534,7 +675,7 @@ export function post_MasterPCIDNeedsToBeLoaded(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ContactSupervisor
    OperationID: ContactSupervisor
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ContactSupervisor_output
@@ -547,15 +688,22 @@ export function post_ContactSupervisor(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ContactSupervisor_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlParentPCIDMasterSvc/ContactSupervisor", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ContactSupervisor_output)
           })
       .catch((error) => {
           reject(error)
@@ -566,11 +714,45 @@ export function post_ContactSupervisor(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -597,7 +779,7 @@ export interface ConfirmChild_input{
 export interface ConfirmChild_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset[],
+   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset,
 }
 }
 
@@ -613,7 +795,7 @@ export interface ConfirmParent_input{
 export interface ConfirmParent_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset[],
+   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset,
 }
 }
 
@@ -726,7 +908,7 @@ export interface PreProcessConfirm_input{
 export interface PreProcessConfirm_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset[],
+   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset,
 }
 }
 
@@ -742,7 +924,7 @@ export interface PreProcess_input{
 export interface PreProcess_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset[],
+   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset,
    opMessageUI:string,
    opSupervisorPwdRequired:boolean,
 }
@@ -758,7 +940,7 @@ export interface ProcessChildPCID_input{
 export interface ProcessChildPCID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset[],
+   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset,
 }
 }
 
@@ -772,7 +954,7 @@ export interface ProcessPCIDPrinted_input{
 export interface ProcessPCIDPrinted_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset[],
+   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset,
 }
 }
 
@@ -786,7 +968,7 @@ export interface ProcessParentPCID_input{
 export interface ProcessParentPCID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset[],
+   ds:Erp_Tablesets_PkgControlParentPCIDMasterTableset,
 }
 }
 

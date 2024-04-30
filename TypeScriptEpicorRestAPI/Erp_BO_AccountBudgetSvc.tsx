@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.AccountBudgetSvc
 // Description: class AccountBudgetSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLBudgetHdRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLBudgetHdRow
    */  
 export function get_AccountBudgets(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_AccountBudgets(select?:string, expand?:string, filter?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLBudgetHdRow)
           })
@@ -118,15 +158,15 @@ export function get_AccountBudgets(select?:string, expand?:string, filter?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AccountBudgets
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLBudgetHdRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLBudgetHdRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GLBudgetHdRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GLBudgetHdRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AccountBudgets(requestBody:any, epicorHeaders?:Headers){
+export function post_AccountBudgets(requestBody:Erp_Tablesets_GLBudgetHdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_AccountBudgets(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -165,10 +212,10 @@ export function post_AccountBudgets(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLBudgetHdRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLBudgetHdRow
    */  
 export function get_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_FiscalYear_FiscalYearSuffix_FiscalCalendarID_BudgetCodeID(Company:string, BookID:string, BalanceAcct:string, BalanceType:string, FiscalYear:string, FiscalYearSuffix:string, FiscalCalendarID:string, BudgetCodeID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -183,7 +230,14 @@ export function get_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_Fiscal
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLBudgetHdRow)
           })
@@ -205,15 +259,15 @@ export function get_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_Fiscal
       @param FiscalYearSuffix Desc: FiscalYearSuffix   Required: True   Allow empty value : True
       @param FiscalCalendarID Desc: FiscalCalendarID   Required: True   Allow empty value : True
       @param BudgetCodeID Desc: BudgetCodeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLBudgetHdRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLBudgetHdRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_FiscalYear_FiscalYearSuffix_FiscalCalendarID_BudgetCodeID(Company:string, BookID:string, BalanceAcct:string, BalanceType:string, FiscalYear:string, FiscalYearSuffix:string, FiscalCalendarID:string, BudgetCodeID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_FiscalYear_FiscalYearSuffix_FiscalCalendarID_BudgetCodeID(Company:string, BookID:string, BalanceAcct:string, BalanceType:string, FiscalYear:string, FiscalYearSuffix:string, FiscalCalendarID:string, BudgetCodeID:string, requestBody:Erp_Tablesets_GLBudgetHdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -227,7 +281,14 @@ export function patch_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_Fisc
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -249,7 +310,7 @@ export function patch_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_Fisc
       @param FiscalYearSuffix Desc: FiscalYearSuffix   Required: True   Allow empty value : True
       @param FiscalCalendarID Desc: FiscalCalendarID   Required: True   Allow empty value : True
       @param BudgetCodeID Desc: BudgetCodeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -268,7 +329,14 @@ export function delete_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_Fis
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -296,10 +364,10 @@ export function delete_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_Fis
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLBudgetDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLBudgetDtlRow
    */  
 export function get_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_FiscalYear_FiscalYearSuffix_FiscalCalendarID_BudgetCodeID_GLBudgetDtls(Company:string, BookID:string, BalanceAcct:string, BalanceType:string, FiscalYear:string, FiscalYearSuffix:string, FiscalCalendarID:string, BudgetCodeID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -314,7 +382,14 @@ export function get_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_Fiscal
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLBudgetDtlRow)
           })
@@ -339,10 +414,10 @@ export function get_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_Fiscal
       @param FiscalPeriod Desc: FiscalPeriod   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLBudgetDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLBudgetDtlRow
    */  
 export function get_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_FiscalYear_FiscalYearSuffix_FiscalCalendarID_BudgetCodeID_GLBudgetDtls_Company_BookID_BalanceAcct_BalanceType_FiscalYear_FiscalYearSuffix_FiscalPeriod_FiscalCalendarID_BudgetCodeID(Company:string, BookID:string, BalanceAcct:string, BalanceType:string, FiscalYear:string, FiscalYearSuffix:string, FiscalCalendarID:string, BudgetCodeID:string, FiscalPeriod:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -357,7 +432,14 @@ export function get_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_Fiscal
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLBudgetDtlRow)
           })
@@ -377,10 +459,10 @@ export function get_AccountBudgets_Company_BookID_BalanceAcct_BalanceType_Fiscal
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLBudgetDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLBudgetDtlRow
    */  
 export function get_GLBudgetDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -395,7 +477,14 @@ export function get_GLBudgetDtls(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLBudgetDtlRow)
           })
@@ -409,15 +498,15 @@ export function get_GLBudgetDtls(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GLBudgetDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLBudgetDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLBudgetDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GLBudgetDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GLBudgetDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLBudgetDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_GLBudgetDtls(requestBody:Erp_Tablesets_GLBudgetDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -431,7 +520,14 @@ export function post_GLBudgetDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -456,10 +552,10 @@ export function post_GLBudgetDtls(requestBody:any, epicorHeaders?:Headers){
       @param BudgetCodeID Desc: BudgetCodeID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLBudgetDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLBudgetDtlRow
    */  
 export function get_GLBudgetDtls_Company_BookID_BalanceAcct_BalanceType_FiscalYear_FiscalYearSuffix_FiscalPeriod_FiscalCalendarID_BudgetCodeID(Company:string, BookID:string, BalanceAcct:string, BalanceType:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, FiscalCalendarID:string, BudgetCodeID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -474,7 +570,14 @@ export function get_GLBudgetDtls_Company_BookID_BalanceAcct_BalanceType_FiscalYe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLBudgetDtlRow)
           })
@@ -497,15 +600,15 @@ export function get_GLBudgetDtls_Company_BookID_BalanceAcct_BalanceType_FiscalYe
       @param FiscalPeriod Desc: FiscalPeriod   Required: True
       @param FiscalCalendarID Desc: FiscalCalendarID   Required: True   Allow empty value : True
       @param BudgetCodeID Desc: BudgetCodeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLBudgetDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLBudgetDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GLBudgetDtls_Company_BookID_BalanceAcct_BalanceType_FiscalYear_FiscalYearSuffix_FiscalPeriod_FiscalCalendarID_BudgetCodeID(Company:string, BookID:string, BalanceAcct:string, BalanceType:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, FiscalCalendarID:string, BudgetCodeID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GLBudgetDtls_Company_BookID_BalanceAcct_BalanceType_FiscalYear_FiscalYearSuffix_FiscalPeriod_FiscalCalendarID_BudgetCodeID(Company:string, BookID:string, BalanceAcct:string, BalanceType:string, FiscalYear:string, FiscalYearSuffix:string, FiscalPeriod:string, FiscalCalendarID:string, BudgetCodeID:string, requestBody:Erp_Tablesets_GLBudgetDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -519,7 +622,14 @@ export function patch_GLBudgetDtls_Company_BookID_BalanceAcct_BalanceType_Fiscal
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -542,7 +652,7 @@ export function patch_GLBudgetDtls_Company_BookID_BalanceAcct_BalanceType_Fiscal
       @param FiscalPeriod Desc: FiscalPeriod   Required: True
       @param FiscalCalendarID Desc: FiscalCalendarID   Required: True   Allow empty value : True
       @param BudgetCodeID Desc: BudgetCodeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -561,7 +671,14 @@ export function delete_GLBudgetDtls_Company_BookID_BalanceAcct_BalanceType_Fisca
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -581,10 +698,10 @@ export function delete_GLBudgetDtls_Company_BookID_BalanceAcct_BalanceType_Fisca
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLBudgetHdListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLBudgetHdListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -599,7 +716,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLBudgetHdListRow)
           })
@@ -612,6 +736,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -623,7 +764,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -674,15 +815,22 @@ export function get_GetRows(whereClauseGLBudgetHd:string, whereClauseGLBudgetDtl
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -701,7 +849,7 @@ export function get_GetRows(whereClauseGLBudgetHd:string, whereClauseGLBudgetDtl
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -779,15 +927,22 @@ export function get_GetByID(bookID:string, balanceAcct:string, balanceType:strin
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -802,7 +957,7 @@ export function get_GetByID(bookID:string, balanceAcct:string, balanceType:strin
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -844,15 +999,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -864,30 +1026,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetNewGLBudgetHdEx
    Description: GetNewGLBudgetHd with all key parameters
    OperationID: GetNewGLBudgetHdEx
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLBudgetHdEx_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLBudgetHdEx_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGLBudgetHdEx_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGLBudgetHdEx(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGLBudgetHdEx(requestBody:GetNewGLBudgetHdEx_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGLBudgetHdEx_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/GetNewGLBudgetHdEx", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGLBudgetHdEx_output)
           })
       .catch((error) => {
           reject(error)
@@ -899,30 +1068,37 @@ export function post_GetNewGLBudgetHdEx(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method DeleteBudget
    Description: This method deletes the entire Budget of a valid fiscal year.
    OperationID: DeleteBudget
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteBudget_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteBudget_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteBudget_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteBudget(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteBudget(requestBody:DeleteBudget_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteBudget_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/DeleteBudget", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteBudget_output)
           })
       .catch((error) => {
           reject(error)
@@ -935,30 +1111,37 @@ export function post_DeleteBudget(requestBody:any, epicorHeaders?:Headers){
    Description: This method updates the DispTotalBudgetAmt and the BudgetAmt of the GLBudgetHd
 when the GLBudgetDtl.BudgetAmt changes.
    OperationID: ChangeDtlBudgetAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDtlBudgetAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDtlBudgetAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDtlBudgetAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDtlBudgetAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDtlBudgetAmt(requestBody:ChangeDtlBudgetAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDtlBudgetAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/ChangeDtlBudgetAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDtlBudgetAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -971,30 +1154,37 @@ export function post_ChangeDtlBudgetAmt(requestBody:any, epicorHeaders?:Headers)
    Description: This method updates the DispTotalBudgetStatAmt and the BudgetStatAmt of the GLBudgetHd
 when the GLBudgetDtl.BudgetStatAmt changes.
    OperationID: ChangeDtlBudgetStatAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeDtlBudgetStatAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeDtlBudgetStatAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeDtlBudgetStatAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeDtlBudgetStatAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeDtlBudgetStatAmt(requestBody:ChangeDtlBudgetStatAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeDtlBudgetStatAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/ChangeDtlBudgetStatAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeDtlBudgetStatAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1006,30 +1196,37 @@ export function post_ChangeDtlBudgetStatAmt(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ChangePerCodeOrAmount
    Description: This method updates the DispTotalBudgetAmt when the BudgetPerCode or BudgetAmt or BudgetStatAmt changes.
    OperationID: ChangePerCodeOrAmount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangePerCodeOrAmount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangePerCodeOrAmount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangePerCodeOrAmount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangePerCodeOrAmount(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangePerCodeOrAmount(requestBody:ChangePerCodeOrAmount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangePerCodeOrAmount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/ChangePerCodeOrAmount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangePerCodeOrAmount_output)
           })
       .catch((error) => {
           reject(error)
@@ -1041,30 +1238,37 @@ export function post_ChangePerCodeOrAmount(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ChangeBalanceAcct
    Description: This method updates the StatUOM information when BalanceAcct is changed.
    OperationID: ChangeBalanceAcct
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeBalanceAcct_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeBalanceAcct_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeBalanceAcct_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeBalanceAcct(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeBalanceAcct(requestBody:ChangeBalanceAcct_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeBalanceAcct_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/ChangeBalanceAcct", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeBalanceAcct_output)
           })
       .catch((error) => {
           reject(error)
@@ -1076,30 +1280,37 @@ export function post_ChangeBalanceAcct(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateGLAccount
    Description: Validate account and budget
    OperationID: ValidateGLAccount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateGLAccount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateGLAccount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateGLAccount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateGLAccount(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateGLAccount(requestBody:ValidateGLAccount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateGLAccount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/ValidateGLAccount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateGLAccount_output)
           })
       .catch((error) => {
           reject(error)
@@ -1111,30 +1322,37 @@ export function post_ValidateGLAccount(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateGLBook
    Description: ValidateGLBook
    OperationID: ValidateGLBook
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateGLBook_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateGLBook_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateGLBook_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateGLBook(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateGLBook(requestBody:ValidateGLBook_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateGLBook_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/ValidateGLBook", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateGLBook_output)
           })
       .catch((error) => {
           reject(error)
@@ -1146,30 +1364,37 @@ export function post_ValidateGLBook(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateBudgetCode
    Description: Validate BudgetCode
    OperationID: ValidateBudgetCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateBudgetCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateBudgetCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateBudgetCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateBudgetCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateBudgetCode(requestBody:ValidateBudgetCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateBudgetCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/ValidateBudgetCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateBudgetCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1181,30 +1406,37 @@ export function post_ValidateBudgetCode(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetTargetBudgetCode
    Description: Return target budget code
    OperationID: GetTargetBudgetCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTargetBudgetCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTargetBudgetCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTargetBudgetCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTargetBudgetCode(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTargetBudgetCode(requestBody:GetTargetBudgetCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTargetBudgetCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/GetTargetBudgetCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTargetBudgetCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1216,30 +1448,37 @@ export function post_GetTargetBudgetCode(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewGLBudgetHd
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGLBudgetHd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLBudgetHd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLBudgetHd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGLBudgetHd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGLBudgetHd(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGLBudgetHd(requestBody:GetNewGLBudgetHd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGLBudgetHd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/GetNewGLBudgetHd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGLBudgetHd_output)
           })
       .catch((error) => {
           reject(error)
@@ -1251,30 +1490,37 @@ export function post_GetNewGLBudgetHd(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewGLBudgetDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGLBudgetDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLBudgetDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLBudgetDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGLBudgetDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGLBudgetDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGLBudgetDtl(requestBody:GetNewGLBudgetDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGLBudgetDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/GetNewGLBudgetDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGLBudgetDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1286,30 +1532,37 @@ export function post_GetNewGLBudgetDtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1321,7 +1574,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1345,15 +1598,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1365,7 +1625,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1389,15 +1649,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1409,30 +1676,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1444,30 +1718,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AccountBudgetSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1478,21 +1759,38 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLBudgetDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLBudgetDtlRow[],
+   "value":Erp_Tablesets_GLBudgetDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLBudgetHdListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLBudgetHdListRow[],
+   "value":Erp_Tablesets_GLBudgetHdListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLBudgetHdRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLBudgetHdRow[],
+   "value":Erp_Tablesets_GLBudgetHdRow,
 }
 
 export interface Erp_Tablesets_GLBudgetDtlRow{
@@ -1769,6 +2067,23 @@ export interface Erp_Tablesets_GLBudgetHdRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1781,7 +2096,7 @@ export interface ChangeBalanceAcct_input{
 export interface ChangeBalanceAcct_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AccountBudgetTableset[],
+   ds:Erp_Tablesets_AccountBudgetTableset,
 }
 }
 
@@ -1795,7 +2110,7 @@ export interface ChangeDtlBudgetAmt_input{
 export interface ChangeDtlBudgetAmt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AccountBudgetTableset[],
+   ds:Erp_Tablesets_AccountBudgetTableset,
 }
 }
 
@@ -1809,7 +2124,7 @@ export interface ChangeDtlBudgetStatAmt_input{
 export interface ChangeDtlBudgetStatAmt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AccountBudgetTableset[],
+   ds:Erp_Tablesets_AccountBudgetTableset,
 }
 }
 
@@ -1823,7 +2138,7 @@ export interface ChangePerCodeOrAmount_input{
 export interface ChangePerCodeOrAmount_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AccountBudgetTableset[],
+   ds:Erp_Tablesets_AccountBudgetTableset,
 }
 }
 
@@ -2248,7 +2563,7 @@ export interface GetNewGLBudgetDtl_input{
 export interface GetNewGLBudgetDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AccountBudgetTableset[],
+   ds:Erp_Tablesets_AccountBudgetTableset,
 }
 }
 
@@ -2276,7 +2591,7 @@ export interface GetNewGLBudgetHdEx_input{
 export interface GetNewGLBudgetHdEx_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AccountBudgetTableset[],
+   ds:Erp_Tablesets_AccountBudgetTableset,
 }
 }
 
@@ -2302,7 +2617,7 @@ export interface GetNewGLBudgetHd_input{
 export interface GetNewGLBudgetHd_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AccountBudgetTableset[],
+   ds:Erp_Tablesets_AccountBudgetTableset,
 }
 }
 
@@ -2390,7 +2705,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtAccountBudgetTableset[],
+   ds:Erp_Tablesets_UpdExtAccountBudgetTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2405,7 +2720,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AccountBudgetTableset[],
+   ds:Erp_Tablesets_AccountBudgetTableset,
 }
 }
 

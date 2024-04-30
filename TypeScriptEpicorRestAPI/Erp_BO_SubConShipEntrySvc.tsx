@@ -1,11 +1,30 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.SubConShipEntrySvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -14,7 +33,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -32,7 +51,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -46,7 +72,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -64,7 +90,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipHRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipHRow
    */  
 export function get_SubConShipEntries(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_SubConShipEntries(select?:string, expand?:string, filter?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipHRow)
           })
@@ -117,15 +157,15 @@ export function get_SubConShipEntries(select?:string, expand?:string, filter?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SubConShipEntries
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SubShipHRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SubShipHRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SubShipHRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SubShipHRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubConShipEntries(requestBody:any, epicorHeaders?:Headers){
+export function post_SubConShipEntries(requestBody:Erp_Tablesets_SubShipHRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_SubConShipEntries(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -158,10 +205,10 @@ export function post_SubConShipEntries(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SubShipHRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SubShipHRow
    */  
 export function get_SubConShipEntries_Company_PackNum(Company:string, PackNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -176,7 +223,14 @@ export function get_SubConShipEntries_Company_PackNum(Company:string, PackNum:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SubShipHRow)
           })
@@ -192,15 +246,15 @@ export function get_SubConShipEntries_Company_PackNum(Company:string, PackNum:st
    OperationID: UpdateExt_SubConShipEntry
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PackNum Desc: PackNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SubShipHRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SubShipHRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SubConShipEntries_Company_PackNum(Company:string, PackNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SubConShipEntries_Company_PackNum(Company:string, PackNum:string, requestBody:Erp_Tablesets_SubShipHRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -214,7 +268,14 @@ export function patch_SubConShipEntries_Company_PackNum(Company:string, PackNum:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -230,7 +291,7 @@ export function patch_SubConShipEntries_Company_PackNum(Company:string, PackNum:
    OperationID: DeleteUpdateExt_SubConShipEntry
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PackNum Desc: PackNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -249,7 +310,14 @@ export function delete_SubConShipEntries_Company_PackNum(Company:string, PackNum
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_SubConShipEntries_Company_PackNum(Company:string, PackNum
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipDRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipDRow
    */  
 export function get_SubConShipEntries_Company_PackNum_SubShipDs(Company:string, PackNum:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_SubConShipEntries_Company_PackNum_SubShipDs(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipDRow)
           })
@@ -310,10 +385,10 @@ export function get_SubConShipEntries_Company_PackNum_SubShipDs(Company:string, 
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SubShipDRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SubShipDRow
    */  
 export function get_SubConShipEntries_Company_PackNum_SubShipDs_Company_PackNum_PackLine(Company:string, PackNum:string, PackLine:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -328,7 +403,14 @@ export function get_SubConShipEntries_Company_PackNum_SubShipDs_Company_PackNum_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SubShipDRow)
           })
@@ -350,10 +432,10 @@ export function get_SubConShipEntries_Company_PackNum_SubShipDs_Company_PackNum_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CartonTrkDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CartonTrkDtlRow
    */  
 export function get_SubConShipEntries_Company_PackNum_CartonTrkDtls(Company:string, PackNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_SubConShipEntries_Company_PackNum_CartonTrkDtls(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CartonTrkDtlRow)
           })
@@ -388,10 +477,10 @@ export function get_SubConShipEntries_Company_PackNum_CartonTrkDtls(Company:stri
       @param CaseNum Desc: CaseNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CartonTrkDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CartonTrkDtlRow
    */  
 export function get_SubConShipEntries_Company_PackNum_CartonTrkDtls_Company_ShipmentType_PackNum_CaseNum(Company:string, PackNum:string, ShipmentType:string, CaseNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -406,7 +495,14 @@ export function get_SubConShipEntries_Company_PackNum_CartonTrkDtls_Company_Ship
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CartonTrkDtlRow)
           })
@@ -428,10 +524,10 @@ export function get_SubConShipEntries_Company_PackNum_CartonTrkDtls_Company_Ship
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipUPSRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipUPSRow
    */  
 export function get_SubConShipEntries_Company_PackNum_SubShipUPS(Company:string, PackNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -446,7 +542,14 @@ export function get_SubConShipEntries_Company_PackNum_SubShipUPS(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipUPSRow)
           })
@@ -465,10 +568,10 @@ export function get_SubConShipEntries_Company_PackNum_SubShipUPS(Company:string,
       @param UPSQVSeq Desc: UPSQVSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SubShipUPSRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SubShipUPSRow
    */  
 export function get_SubConShipEntries_Company_PackNum_SubShipUPS_Company_PackNum_UPSQVSeq(Company:string, PackNum:string, UPSQVSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -483,7 +586,14 @@ export function get_SubConShipEntries_Company_PackNum_SubShipUPS_Company_PackNum
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SubShipUPSRow)
           })
@@ -505,10 +615,10 @@ export function get_SubConShipEntries_Company_PackNum_SubShipUPS_Company_PackNum
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipHAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipHAttchRow
    */  
 export function get_SubConShipEntries_Company_PackNum_SubShipHAttches(Company:string, PackNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -523,7 +633,14 @@ export function get_SubConShipEntries_Company_PackNum_SubShipHAttches(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipHAttchRow)
           })
@@ -542,10 +659,10 @@ export function get_SubConShipEntries_Company_PackNum_SubShipHAttches(Company:st
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SubShipHAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SubShipHAttchRow
    */  
 export function get_SubConShipEntries_Company_PackNum_SubShipHAttches_Company_PackNum_DrawingSeq(Company:string, PackNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -560,7 +677,14 @@ export function get_SubConShipEntries_Company_PackNum_SubShipHAttches_Company_Pa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SubShipHAttchRow)
           })
@@ -581,10 +705,10 @@ export function get_SubConShipEntries_Company_PackNum_SubShipHAttches_Company_Pa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipDRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipDRow
    */  
 export function get_SubShipDs(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -599,7 +723,14 @@ export function get_SubShipDs(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipDRow)
           })
@@ -613,15 +744,15 @@ export function get_SubShipDs(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SubShipDs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SubShipDRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SubShipDRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SubShipDRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SubShipDRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubShipDs(requestBody:any, epicorHeaders?:Headers){
+export function post_SubShipDs(requestBody:Erp_Tablesets_SubShipDRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -635,7 +766,14 @@ export function post_SubShipDs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -655,10 +793,10 @@ export function post_SubShipDs(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SubShipDRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SubShipDRow
    */  
 export function get_SubShipDs_Company_PackNum_PackLine(Company:string, PackNum:string, PackLine:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -673,7 +811,14 @@ export function get_SubShipDs_Company_PackNum_PackLine(Company:string, PackNum:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SubShipDRow)
           })
@@ -690,15 +835,15 @@ export function get_SubShipDs_Company_PackNum_PackLine(Company:string, PackNum:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PackNum Desc: PackNum   Required: True
       @param PackLine Desc: PackLine   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SubShipDRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SubShipDRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SubShipDs_Company_PackNum_PackLine(Company:string, PackNum:string, PackLine:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SubShipDs_Company_PackNum_PackLine(Company:string, PackNum:string, PackLine:string, requestBody:Erp_Tablesets_SubShipDRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -712,7 +857,14 @@ export function patch_SubShipDs_Company_PackNum_PackLine(Company:string, PackNum
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -729,7 +881,7 @@ export function patch_SubShipDs_Company_PackNum_PackLine(Company:string, PackNum
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PackNum Desc: PackNum   Required: True
       @param PackLine Desc: PackLine   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -748,7 +900,14 @@ export function delete_SubShipDs_Company_PackNum_PackLine(Company:string, PackNu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -771,10 +930,10 @@ export function delete_SubShipDs_Company_PackNum_PackLine(Company:string, PackNu
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ShipCOORow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ShipCOORow
    */  
 export function get_SubShipDs_Company_PackNum_PackLine_ShipCOOs(Company:string, PackNum:string, PackLine:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -789,7 +948,14 @@ export function get_SubShipDs_Company_PackNum_PackLine_ShipCOOs(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ShipCOORow)
           })
@@ -810,10 +976,10 @@ export function get_SubShipDs_Company_PackNum_PackLine_ShipCOOs(Company:string, 
       @param OrigCountry Desc: OrigCountry   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ShipCOORow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ShipCOORow
    */  
 export function get_SubShipDs_Company_PackNum_PackLine_ShipCOOs_Company_RelatedToFile_PackNum_PackLine_OrigCountry(Company:string, PackNum:string, PackLine:string, RelatedToFile:string, OrigCountry:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -828,7 +994,14 @@ export function get_SubShipDs_Company_PackNum_PackLine_ShipCOOs_Company_RelatedT
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ShipCOORow)
           })
@@ -851,10 +1024,10 @@ export function get_SubShipDs_Company_PackNum_PackLine_ShipCOOs_Company_RelatedT
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipDAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipDAttchRow
    */  
 export function get_SubShipDs_Company_PackNum_PackLine_SubShipDAttches(Company:string, PackNum:string, PackLine:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -869,7 +1042,14 @@ export function get_SubShipDs_Company_PackNum_PackLine_SubShipDAttches(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipDAttchRow)
           })
@@ -889,10 +1069,10 @@ export function get_SubShipDs_Company_PackNum_PackLine_SubShipDAttches(Company:s
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SubShipDAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SubShipDAttchRow
    */  
 export function get_SubShipDs_Company_PackNum_PackLine_SubShipDAttches_Company_PackNum_PackLine_DrawingSeq(Company:string, PackNum:string, PackLine:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -907,7 +1087,14 @@ export function get_SubShipDs_Company_PackNum_PackLine_SubShipDAttches_Company_P
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SubShipDAttchRow)
           })
@@ -927,10 +1114,10 @@ export function get_SubShipDs_Company_PackNum_PackLine_SubShipDAttches_Company_P
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ShipCOORow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ShipCOORow
    */  
 export function get_ShipCOOs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -945,7 +1132,14 @@ export function get_ShipCOOs(select?:string, filter?:string, orderby?:string, to
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ShipCOORow)
           })
@@ -959,15 +1153,15 @@ export function get_ShipCOOs(select?:string, filter?:string, orderby?:string, to
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ShipCOOs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ShipCOORow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ShipCOORow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.ShipCOORow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.ShipCOORow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ShipCOOs(requestBody:any, epicorHeaders?:Headers){
+export function post_ShipCOOs(requestBody:Erp_Tablesets_ShipCOORow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -981,7 +1175,14 @@ export function post_ShipCOOs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1002,10 +1203,10 @@ export function post_ShipCOOs(requestBody:any, epicorHeaders?:Headers){
       @param OrigCountry Desc: OrigCountry   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ShipCOORow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ShipCOORow
    */  
 export function get_ShipCOOs_Company_RelatedToFile_PackNum_PackLine_OrigCountry(Company:string, RelatedToFile:string, PackNum:string, PackLine:string, OrigCountry:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1020,7 +1221,14 @@ export function get_ShipCOOs_Company_RelatedToFile_PackNum_PackLine_OrigCountry(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ShipCOORow)
           })
@@ -1039,15 +1247,15 @@ export function get_ShipCOOs_Company_RelatedToFile_PackNum_PackLine_OrigCountry(
       @param PackNum Desc: PackNum   Required: True
       @param PackLine Desc: PackLine   Required: True
       @param OrigCountry Desc: OrigCountry   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.ShipCOORow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.ShipCOORow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ShipCOOs_Company_RelatedToFile_PackNum_PackLine_OrigCountry(Company:string, RelatedToFile:string, PackNum:string, PackLine:string, OrigCountry:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ShipCOOs_Company_RelatedToFile_PackNum_PackLine_OrigCountry(Company:string, RelatedToFile:string, PackNum:string, PackLine:string, OrigCountry:string, requestBody:Erp_Tablesets_ShipCOORow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1061,7 +1269,14 @@ export function patch_ShipCOOs_Company_RelatedToFile_PackNum_PackLine_OrigCountr
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1080,7 +1295,7 @@ export function patch_ShipCOOs_Company_RelatedToFile_PackNum_PackLine_OrigCountr
       @param PackNum Desc: PackNum   Required: True
       @param PackLine Desc: PackLine   Required: True
       @param OrigCountry Desc: OrigCountry   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1099,7 +1314,14 @@ export function delete_ShipCOOs_Company_RelatedToFile_PackNum_PackLine_OrigCount
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1119,10 +1341,10 @@ export function delete_ShipCOOs_Company_RelatedToFile_PackNum_PackLine_OrigCount
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipDAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipDAttchRow
    */  
 export function get_SubShipDAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1137,7 +1359,14 @@ export function get_SubShipDAttches(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipDAttchRow)
           })
@@ -1151,15 +1380,15 @@ export function get_SubShipDAttches(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SubShipDAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SubShipDAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SubShipDAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SubShipDAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SubShipDAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubShipDAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_SubShipDAttches(requestBody:Erp_Tablesets_SubShipDAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1173,7 +1402,14 @@ export function post_SubShipDAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1193,10 +1429,10 @@ export function post_SubShipDAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SubShipDAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SubShipDAttchRow
    */  
 export function get_SubShipDAttches_Company_PackNum_PackLine_DrawingSeq(Company:string, PackNum:string, PackLine:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1211,7 +1447,14 @@ export function get_SubShipDAttches_Company_PackNum_PackLine_DrawingSeq(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SubShipDAttchRow)
           })
@@ -1229,15 +1472,15 @@ export function get_SubShipDAttches_Company_PackNum_PackLine_DrawingSeq(Company:
       @param PackNum Desc: PackNum   Required: True
       @param PackLine Desc: PackLine   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SubShipDAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SubShipDAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SubShipDAttches_Company_PackNum_PackLine_DrawingSeq(Company:string, PackNum:string, PackLine:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SubShipDAttches_Company_PackNum_PackLine_DrawingSeq(Company:string, PackNum:string, PackLine:string, DrawingSeq:string, requestBody:Erp_Tablesets_SubShipDAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1251,7 +1494,14 @@ export function patch_SubShipDAttches_Company_PackNum_PackLine_DrawingSeq(Compan
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1269,7 +1519,7 @@ export function patch_SubShipDAttches_Company_PackNum_PackLine_DrawingSeq(Compan
       @param PackNum Desc: PackNum   Required: True
       @param PackLine Desc: PackLine   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1288,7 +1538,14 @@ export function delete_SubShipDAttches_Company_PackNum_PackLine_DrawingSeq(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1308,10 +1565,10 @@ export function delete_SubShipDAttches_Company_PackNum_PackLine_DrawingSeq(Compa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CartonTrkDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CartonTrkDtlRow
    */  
 export function get_CartonTrkDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1326,7 +1583,14 @@ export function get_CartonTrkDtls(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CartonTrkDtlRow)
           })
@@ -1340,15 +1604,15 @@ export function get_CartonTrkDtls(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CartonTrkDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CartonTrkDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CartonTrkDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CartonTrkDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CartonTrkDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CartonTrkDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_CartonTrkDtls(requestBody:Erp_Tablesets_CartonTrkDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1362,7 +1626,14 @@ export function post_CartonTrkDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1382,10 +1653,10 @@ export function post_CartonTrkDtls(requestBody:any, epicorHeaders?:Headers){
       @param CaseNum Desc: CaseNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CartonTrkDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CartonTrkDtlRow
    */  
 export function get_CartonTrkDtls_Company_ShipmentType_PackNum_CaseNum(Company:string, ShipmentType:string, PackNum:string, CaseNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1400,7 +1671,14 @@ export function get_CartonTrkDtls_Company_ShipmentType_PackNum_CaseNum(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CartonTrkDtlRow)
           })
@@ -1418,15 +1696,15 @@ export function get_CartonTrkDtls_Company_ShipmentType_PackNum_CaseNum(Company:s
       @param ShipmentType Desc: ShipmentType   Required: True   Allow empty value : True
       @param PackNum Desc: PackNum   Required: True
       @param CaseNum Desc: CaseNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CartonTrkDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CartonTrkDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CartonTrkDtls_Company_ShipmentType_PackNum_CaseNum(Company:string, ShipmentType:string, PackNum:string, CaseNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CartonTrkDtls_Company_ShipmentType_PackNum_CaseNum(Company:string, ShipmentType:string, PackNum:string, CaseNum:string, requestBody:Erp_Tablesets_CartonTrkDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1440,7 +1718,14 @@ export function patch_CartonTrkDtls_Company_ShipmentType_PackNum_CaseNum(Company
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1458,7 +1743,7 @@ export function patch_CartonTrkDtls_Company_ShipmentType_PackNum_CaseNum(Company
       @param ShipmentType Desc: ShipmentType   Required: True   Allow empty value : True
       @param PackNum Desc: PackNum   Required: True
       @param CaseNum Desc: CaseNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1477,7 +1762,14 @@ export function delete_CartonTrkDtls_Company_ShipmentType_PackNum_CaseNum(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1497,10 +1789,10 @@ export function delete_CartonTrkDtls_Company_ShipmentType_PackNum_CaseNum(Compan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipUPSRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipUPSRow
    */  
 export function get_SubShipUPS(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1515,7 +1807,14 @@ export function get_SubShipUPS(select?:string, filter?:string, orderby?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipUPSRow)
           })
@@ -1529,15 +1828,15 @@ export function get_SubShipUPS(select?:string, filter?:string, orderby?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SubShipUPS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SubShipUPSRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SubShipUPSRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SubShipUPSRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SubShipUPSRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubShipUPS(requestBody:any, epicorHeaders?:Headers){
+export function post_SubShipUPS(requestBody:Erp_Tablesets_SubShipUPSRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1551,7 +1850,14 @@ export function post_SubShipUPS(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1570,10 +1876,10 @@ export function post_SubShipUPS(requestBody:any, epicorHeaders?:Headers){
       @param UPSQVSeq Desc: UPSQVSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SubShipUPSRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SubShipUPSRow
    */  
 export function get_SubShipUPS_Company_PackNum_UPSQVSeq(Company:string, PackNum:string, UPSQVSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1588,7 +1894,14 @@ export function get_SubShipUPS_Company_PackNum_UPSQVSeq(Company:string, PackNum:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SubShipUPSRow)
           })
@@ -1605,15 +1918,15 @@ export function get_SubShipUPS_Company_PackNum_UPSQVSeq(Company:string, PackNum:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PackNum Desc: PackNum   Required: True
       @param UPSQVSeq Desc: UPSQVSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SubShipUPSRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SubShipUPSRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SubShipUPS_Company_PackNum_UPSQVSeq(Company:string, PackNum:string, UPSQVSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SubShipUPS_Company_PackNum_UPSQVSeq(Company:string, PackNum:string, UPSQVSeq:string, requestBody:Erp_Tablesets_SubShipUPSRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1627,7 +1940,14 @@ export function patch_SubShipUPS_Company_PackNum_UPSQVSeq(Company:string, PackNu
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1644,7 +1964,7 @@ export function patch_SubShipUPS_Company_PackNum_UPSQVSeq(Company:string, PackNu
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PackNum Desc: PackNum   Required: True
       @param UPSQVSeq Desc: UPSQVSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1663,7 +1983,14 @@ export function delete_SubShipUPS_Company_PackNum_UPSQVSeq(Company:string, PackN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1683,10 +2010,10 @@ export function delete_SubShipUPS_Company_PackNum_UPSQVSeq(Company:string, PackN
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipHAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipHAttchRow
    */  
 export function get_SubShipHAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1701,7 +2028,14 @@ export function get_SubShipHAttches(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipHAttchRow)
           })
@@ -1715,15 +2049,15 @@ export function get_SubShipHAttches(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SubShipHAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SubShipHAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SubShipHAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SubShipHAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SubShipHAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubShipHAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_SubShipHAttches(requestBody:Erp_Tablesets_SubShipHAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1737,7 +2071,14 @@ export function post_SubShipHAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1756,10 +2097,10 @@ export function post_SubShipHAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SubShipHAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SubShipHAttchRow
    */  
 export function get_SubShipHAttches_Company_PackNum_DrawingSeq(Company:string, PackNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1774,7 +2115,14 @@ export function get_SubShipHAttches_Company_PackNum_DrawingSeq(Company:string, P
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SubShipHAttchRow)
           })
@@ -1791,15 +2139,15 @@ export function get_SubShipHAttches_Company_PackNum_DrawingSeq(Company:string, P
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PackNum Desc: PackNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SubShipHAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SubShipHAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SubShipHAttches_Company_PackNum_DrawingSeq(Company:string, PackNum:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SubShipHAttches_Company_PackNum_DrawingSeq(Company:string, PackNum:string, DrawingSeq:string, requestBody:Erp_Tablesets_SubShipHAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1813,7 +2161,14 @@ export function patch_SubShipHAttches_Company_PackNum_DrawingSeq(Company:string,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1830,7 +2185,7 @@ export function patch_SubShipHAttches_Company_PackNum_DrawingSeq(Company:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PackNum Desc: PackNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1849,7 +2204,14 @@ export function delete_SubShipHAttches_Company_PackNum_DrawingSeq(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1869,10 +2231,10 @@ export function delete_SubShipHAttches_Company_PackNum_DrawingSeq(Company:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumGenOptsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumGenOptsRow
    */  
 export function get_LegalNumGenOpts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1887,7 +2249,14 @@ export function get_LegalNumGenOpts(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumGenOptsRow)
           })
@@ -1901,15 +2270,15 @@ export function get_LegalNumGenOpts(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LegalNumGenOpts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LegalNumGenOpts(requestBody:any, epicorHeaders?:Headers){
+export function post_LegalNumGenOpts(requestBody:Erp_Tablesets_LegalNumGenOptsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1923,7 +2292,14 @@ export function post_LegalNumGenOpts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1941,10 +2317,10 @@ export function post_LegalNumGenOpts(requestBody:any, epicorHeaders?:Headers){
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
    */  
 export function get_LegalNumGenOpts_Company_LegalNumberID(Company:string, LegalNumberID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1959,7 +2335,14 @@ export function get_LegalNumGenOpts_Company_LegalNumberID(Company:string, LegalN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumGenOptsRow)
           })
@@ -1975,15 +2358,15 @@ export function get_LegalNumGenOpts_Company_LegalNumberID(Company:string, LegalN
    OperationID: UpdateExt_LegalNumGenOpt
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumGenOptsRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LegalNumGenOpts_Company_LegalNumberID(Company:string, LegalNumberID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LegalNumGenOpts_Company_LegalNumberID(Company:string, LegalNumberID:string, requestBody:Erp_Tablesets_LegalNumGenOptsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1997,7 +2380,14 @@ export function patch_LegalNumGenOpts_Company_LegalNumberID(Company:string, Lega
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2013,7 +2403,7 @@ export function patch_LegalNumGenOpts_Company_LegalNumberID(Company:string, Lega
    OperationID: DeleteUpdateExt_LegalNumGenOpt
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2032,7 +2422,14 @@ export function delete_LegalNumGenOpts_Company_LegalNumberID(Company:string, Leg
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2052,10 +2449,10 @@ export function delete_LegalNumGenOpts_Company_LegalNumberID(Company:string, Leg
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SelectedSerialNumbersRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SelectedSerialNumbersRow
    */  
 export function get_SelectedSerialNumbers(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2070,7 +2467,14 @@ export function get_SelectedSerialNumbers(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SelectedSerialNumbersRow)
           })
@@ -2084,15 +2488,15 @@ export function get_SelectedSerialNumbers(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SelectedSerialNumbers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectedSerialNumbers(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectedSerialNumbers(requestBody:Erp_Tablesets_SelectedSerialNumbersRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2106,7 +2510,14 @@ export function post_SelectedSerialNumbers(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2125,10 +2536,10 @@ export function post_SelectedSerialNumbers(requestBody:any, epicorHeaders?:Heade
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
    */  
 export function get_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:string, PartNum:string, SerialNumber:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2143,7 +2554,14 @@ export function get_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SelectedSerialNumbersRow)
           })
@@ -2160,15 +2578,15 @@ export function get_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:string, PartNum:string, SerialNumber:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:string, PartNum:string, SerialNumber:string, requestBody:Erp_Tablesets_SelectedSerialNumbersRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2182,7 +2600,14 @@ export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2199,7 +2624,7 @@ export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2218,7 +2643,14 @@ export function delete_SelectedSerialNumbers_Company_PartNum_SerialNumber(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2238,10 +2670,10 @@ export function delete_SelectedSerialNumbers_Company_PartNum_SerialNumber(Compan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SerialNumberSearchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SerialNumberSearchRow
    */  
 export function get_SerialNumberSearches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2256,7 +2688,14 @@ export function get_SerialNumberSearches(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SerialNumberSearchRow)
           })
@@ -2270,15 +2709,15 @@ export function get_SerialNumberSearches(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SerialNumberSearches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SerialNumberSearchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SerialNumberSearchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SerialNumberSearchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SerialNumberSearchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SerialNumberSearches(requestBody:any, epicorHeaders?:Headers){
+export function post_SerialNumberSearches(requestBody:Erp_Tablesets_SerialNumberSearchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2292,7 +2731,14 @@ export function post_SerialNumberSearches(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2309,10 +2755,10 @@ export function post_SerialNumberSearches(requestBody:any, epicorHeaders?:Header
       @param ProcessToken Desc: ProcessToken   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SerialNumberSearchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SerialNumberSearchRow
    */  
 export function get_SerialNumberSearches_ProcessToken(ProcessToken:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2327,7 +2773,14 @@ export function get_SerialNumberSearches_ProcessToken(ProcessToken:string, selec
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SerialNumberSearchRow)
           })
@@ -2342,15 +2795,15 @@ export function get_SerialNumberSearches_ProcessToken(ProcessToken:string, selec
    Description: Calls UpdateExt to update SerialNumberSearch. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_SerialNumberSearch
       @param ProcessToken Desc: ProcessToken   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SerialNumberSearchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SerialNumberSearchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SerialNumberSearches_ProcessToken(ProcessToken:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SerialNumberSearches_ProcessToken(ProcessToken:string, requestBody:Erp_Tablesets_SerialNumberSearchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2364,7 +2817,14 @@ export function patch_SerialNumberSearches_ProcessToken(ProcessToken:string, req
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2379,7 +2839,7 @@ export function patch_SerialNumberSearches_ProcessToken(ProcessToken:string, req
    Description: Call UpdateExt to delete SerialNumberSearch item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_SerialNumberSearch
       @param ProcessToken Desc: ProcessToken   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2398,7 +2858,14 @@ export function delete_SerialNumberSearches_ProcessToken(ProcessToken:string, ep
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2418,10 +2885,10 @@ export function delete_SerialNumberSearches_ProcessToken(ProcessToken:string, ep
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SNFormatRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SNFormatRow
    */  
 export function get_SNFormats(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2436,7 +2903,14 @@ export function get_SNFormats(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SNFormatRow)
           })
@@ -2450,15 +2924,15 @@ export function get_SNFormats(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SNFormats
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SNFormatRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SNFormats(requestBody:any, epicorHeaders?:Headers){
+export function post_SNFormats(requestBody:Erp_Tablesets_SNFormatRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2472,7 +2946,14 @@ export function post_SNFormats(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2491,10 +2972,10 @@ export function post_SNFormats(requestBody:any, epicorHeaders?:Headers){
       @param Plant Desc: Plant   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SNFormatRow
    */  
 export function get_SNFormats_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2509,7 +2990,14 @@ export function get_SNFormats_Company_PartNum_Plant(Company:string, PartNum:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SNFormatRow)
           })
@@ -2526,15 +3014,15 @@ export function get_SNFormats_Company_PartNum_Plant(Company:string, PartNum:stri
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, requestBody:Erp_Tablesets_SNFormatRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2548,7 +3036,14 @@ export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2565,7 +3060,7 @@ export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2584,7 +3079,14 @@ export function delete_SNFormats_Company_PartNum_Plant(Company:string, PartNum:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2604,10 +3106,10 @@ export function delete_SNFormats_Company_PartNum_Plant(Company:string, PartNum:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipHListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SubShipHListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2622,7 +3124,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipHListRow)
           })
@@ -2634,6 +3143,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -2655,7 +3181,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -2787,15 +3313,22 @@ export function get_GetRows(whereClauseSubShipH:string, whereClauseSubShipHAttch
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2808,7 +3341,7 @@ export function get_GetRows(whereClauseSubShipH:string, whereClauseSubShipHAttch
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -2832,15 +3365,22 @@ export function get_GetByID(packNum:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2855,7 +3395,7 @@ export function get_GetByID(packNum:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -2897,15 +3437,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2917,30 +3464,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method AssignLegalNumber
    Description: Assigns a legal number to the subcontract shipment.
    OperationID: AssignLegalNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignLegalNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignLegalNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignLegalNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignLegalNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignLegalNumber(requestBody:AssignLegalNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignLegalNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/AssignLegalNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignLegalNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -2952,30 +3506,37 @@ export function post_AssignLegalNumber(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CalculateWeight
    Description: Calculate the weight of a carton based upon Part.Weight.
    OperationID: CalculateWeight
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CalculateWeight_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CalculateWeight_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CalculateWeight_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CalculateWeight(requestBody:any, epicorHeaders?:Headers){
+export function post_CalculateWeight(requestBody:CalculateWeight_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CalculateWeight_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CalculateWeight", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CalculateWeight_output)
           })
       .catch((error) => {
           reject(error)
@@ -2990,30 +3551,37 @@ Parameters:
 <param name="ipPackNum">Current packNum</param><param name="ipNbrCartonsToCreate">Number of cartons or cases to create</param><param name="ipPkgCode">Package Code to use when creating cartons</param><param name="ipPkgLength">length to use when creating cartons</param><param name="ipPkgWidth">Width to use when creating cartons</param><param name="ipPkgHeight">Height to use when creating cartons</param><param name="ipRecalcAmts">Logical indicating if the amounts are to be recalculated</param><param name="ipZeroWeight">Logical indicating if the weights are recalculated</param><param name="ds"></param>
 Notes:  Called from Kinetic so first need to dirty rows
    OperationID: CallsCreateCustomerCartons
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CallsCreateCustomerCartons_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CallsCreateCustomerCartons_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CallsCreateCustomerCartons_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CallsCreateCustomerCartons(requestBody:any, epicorHeaders?:Headers){
+export function post_CallsCreateCustomerCartons(requestBody:CallsCreateCustomerCartons_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CallsCreateCustomerCartons_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CallsCreateCustomerCartons", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CallsCreateCustomerCartons_output)
           })
       .catch((error) => {
           reject(error)
@@ -3028,30 +3596,37 @@ Parameters:
 <param name="ipNbrCartonsToCreate">Number of cartons or cases to create</param><param name="ipPkgCode">Package Code to use when creating cartons</param><param name="ipPkgLength">length to use when creating cartons</param><param name="ipPkgWidth">Width to use when creating cartons</param><param name="ipPkgHeight">Height to use when creating cartons</param><param name="ipRecalcAmts">Logical indicating if the amounts are to be recalculated</param><param name="ipZeroWeight">Logical indicating if the weights are recalculated</param><param name="ds"></param>
 Notes:
    OperationID: CreateCustomerCartons
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateCustomerCartons_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateCustomerCartons_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateCustomerCartons_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateCustomerCartons(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateCustomerCartons(requestBody:CreateCustomerCartons_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateCustomerCartons_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CreateCustomerCartons", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateCustomerCartons_output)
           })
       .catch((error) => {
           reject(error)
@@ -3065,30 +3640,37 @@ export function post_CreateCustomerCartons(requestBody:any, epicorHeaders?:Heade
 <param name="ipWeight"> weight to validate</param>
 Notes:
    OperationID: CartonValidateWeight
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CartonValidateWeight_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CartonValidateWeight_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CartonValidateWeight_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CartonValidateWeight(requestBody:any, epicorHeaders?:Headers){
+export function post_CartonValidateWeight(requestBody:CartonValidateWeight_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CartonValidateWeight_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CartonValidateWeight", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CartonValidateWeight_output)
           })
       .catch((error) => {
           reject(error)
@@ -3102,30 +3684,37 @@ export function post_CartonValidateWeight(requestBody:any, epicorHeaders?:Header
 <param name="ds">Customer Shipment data set </param>
 Notes:
    OperationID: DeletePhantomPacks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeletePhantomPacks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeletePhantomPacks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeletePhantomPacks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeletePhantomPacks(requestBody:any, epicorHeaders?:Headers){
+export function post_DeletePhantomPacks(requestBody:DeletePhantomPacks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeletePhantomPacks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/DeletePhantomPacks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeletePhantomPacks_output)
           })
       .catch((error) => {
           reject(error)
@@ -3139,30 +3728,37 @@ export function post_DeletePhantomPacks(requestBody:any, epicorHeaders?:Headers)
 <param name="ipFromCase">First case number to start deletes</param><param name="ipToCase">Last case number to delete</param><param name="ds">Customer Shipment data set </param>
 Notes:
    OperationID: DeleteRangePhantomPacks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteRangePhantomPacks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteRangePhantomPacks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteRangePhantomPacks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteRangePhantomPacks(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteRangePhantomPacks(requestBody:DeleteRangePhantomPacks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteRangePhantomPacks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/DeleteRangePhantomPacks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteRangePhantomPacks_output)
           })
       .catch((error) => {
           reject(error)
@@ -3176,30 +3772,37 @@ export function post_DeleteRangePhantomPacks(requestBody:any, epicorHeaders?:Hea
 <param name="ipPkgCode">package code</param><param name="opPkgHeight">package height</param><param name="opPkgWidth">package width</param><param name="opPkgLength">package length</param>
 Notes:
    OperationID: GetCartonPackaging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCartonPackaging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCartonPackaging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCartonPackaging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCartonPackaging(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCartonPackaging(requestBody:GetCartonPackaging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCartonPackaging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetCartonPackaging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCartonPackaging_output)
           })
       .catch((error) => {
           reject(error)
@@ -3213,30 +3816,37 @@ export function post_GetCartonPackaging(requestBody:any, epicorHeaders?:Headers)
 <param name="ipPackNum">Pack Number to process</param><param name="ipOldWeight">Previous weight</param><param name="ipWeight">Current Case weight</param><param name="ds">Customer Shipment data set</param>
 Notes:
    OperationID: UpdatePackWeightWithCarton
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdatePackWeightWithCarton_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdatePackWeightWithCarton_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdatePackWeightWithCarton_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdatePackWeightWithCarton(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdatePackWeightWithCarton(requestBody:UpdatePackWeightWithCarton_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdatePackWeightWithCarton_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/UpdatePackWeightWithCarton", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdatePackWeightWithCarton_output)
           })
       .catch((error) => {
           reject(error)
@@ -3250,30 +3860,37 @@ export function post_UpdatePackWeightWithCarton(requestBody:any, epicorHeaders?:
 <param name="ipPackNum">Pack Number to process</param><param name="ipCaseNum">Case Number to set value to zero</param><param name="ipOldCOD">Previous COD</param><param name="ipCOD">Current Case COD</param><param name="ipFlag">Current COD flag value</param><param name="ds">Customer Shipment data set</param>
 Notes:
    OperationID: UpdatePackCODWithCarton
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdatePackCODWithCarton_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdatePackCODWithCarton_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdatePackCODWithCarton_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdatePackCODWithCarton(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdatePackCODWithCarton(requestBody:UpdatePackCODWithCarton_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdatePackCODWithCarton_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/UpdatePackCODWithCarton", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdatePackCODWithCarton_output)
           })
       .catch((error) => {
           reject(error)
@@ -3287,30 +3904,37 @@ export function post_UpdatePackCODWithCarton(requestBody:any, epicorHeaders?:Hea
 <param name="ipPackNum">Pack Number to process</param><param name="ipCaseNum">Case Number to set value to zero </param><param name="ipOldDeclared">Previous COD</param><param name="ipDeclared">Current Case COD</param><param name="ipDeclaredFlag">current setting of declared insurance</param><param name="ds">Customer Shipment data set</param>
 Notes:
    OperationID: UpdatePackDeclaredWithCarton
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdatePackDeclaredWithCarton_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdatePackDeclaredWithCarton_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdatePackDeclaredWithCarton_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdatePackDeclaredWithCarton(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdatePackDeclaredWithCarton(requestBody:UpdatePackDeclaredWithCarton_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdatePackDeclaredWithCarton_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/UpdatePackDeclaredWithCarton", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdatePackDeclaredWithCarton_output)
           })
       .catch((error) => {
           reject(error)
@@ -3322,30 +3946,37 @@ export function post_UpdatePackDeclaredWithCarton(requestBody:any, epicorHeaders
    Summary: Invoke method CancelVoidCarton
    Description: Checks to see if the carton void can be cancelled and re-opens it if it is allowed.
    OperationID: CancelVoidCarton
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CancelVoidCarton_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CancelVoidCarton_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CancelVoidCarton_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CancelVoidCarton(requestBody:any, epicorHeaders?:Headers){
+export function post_CancelVoidCarton(requestBody:CancelVoidCarton_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CancelVoidCarton_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CancelVoidCarton", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CancelVoidCarton_output)
           })
       .catch((error) => {
           reject(error)
@@ -3359,30 +3990,37 @@ export function post_CancelVoidCarton(requestBody:any, epicorHeaders?:Headers){
 <param name="ipPackNum">Pack Num to validate weights</param>
 Notes:
    OperationID: CheckValidCartonWeight
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckValidCartonWeight_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckValidCartonWeight_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckValidCartonWeight_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckValidCartonWeight(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckValidCartonWeight(requestBody:CheckValidCartonWeight_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckValidCartonWeight_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CheckValidCartonWeight", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckValidCartonWeight_output)
           })
       .catch((error) => {
           reject(error)
@@ -3395,30 +4033,37 @@ export function post_CheckValidCartonWeight(requestBody:any, epicorHeaders?:Head
    Description: This methods updates associated fields.
 This method should run when the SubShipD.AssemblySeq field changes.
    OperationID: ChangeSubShipDAssemblySeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSubShipDAssemblySeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSubShipDAssemblySeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSubShipDAssemblySeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSubShipDAssemblySeq(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSubShipDAssemblySeq(requestBody:ChangeSubShipDAssemblySeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSubShipDAssemblySeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/ChangeSubShipDAssemblySeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSubShipDAssemblySeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -3431,30 +4076,37 @@ export function post_ChangeSubShipDAssemblySeq(requestBody:any, epicorHeaders?:H
    Description: This methods updates associated fields.
 This method should run when the SubShipD.JobNum field changes.
    OperationID: ChangeSubShipDJobNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSubShipDJobNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSubShipDJobNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSubShipDJobNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSubShipDJobNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSubShipDJobNum(requestBody:ChangeSubShipDJobNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSubShipDJobNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/ChangeSubShipDJobNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSubShipDJobNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3467,30 +4119,37 @@ export function post_ChangeSubShipDJobNum(requestBody:any, epicorHeaders?:Header
    Description: This methods validates the SubShipD.OprSeq and updates associated fields.
 This method should run when the SubShipD.OprSeq field changes.
    OperationID: ChangeSubShipDOprSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSubShipDOprSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSubShipDOprSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSubShipDOprSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSubShipDOprSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSubShipDOprSeq(requestBody:ChangeSubShipDOprSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSubShipDOprSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/ChangeSubShipDOprSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSubShipDOprSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -3503,30 +4162,37 @@ export function post_ChangeSubShipDOprSeq(requestBody:any, epicorHeaders?:Header
    Description: This method validates the SubShipD.PONum field.
 This method should run when the SubShipD.PONum chages.
    OperationID: ChangeSubShipDPONum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSubShipDPONum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSubShipDPONum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSubShipDPONum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSubShipDPONum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSubShipDPONum(requestBody:ChangeSubShipDPONum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSubShipDPONum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/ChangeSubShipDPONum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSubShipDPONum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3539,30 +4205,37 @@ export function post_ChangeSubShipDPONum(requestBody:any, epicorHeaders?:Headers
    Description: This methods validates the SubShipH.PurPoint and updates some variables and DspShipAddr.
 This method should run when the SubShipH.PurPoint field changes.
    OperationID: ChangeSubShipHPurPoint
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSubShipHPurPoint_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSubShipHPurPoint_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSubShipHPurPoint_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSubShipHPurPoint(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSubShipHPurPoint(requestBody:ChangeSubShipHPurPoint_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSubShipHPurPoint_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/ChangeSubShipHPurPoint", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSubShipHPurPoint_output)
           })
       .catch((error) => {
           reject(error)
@@ -3576,30 +4249,37 @@ export function post_ChangeSubShipHPurPoint(requestBody:any, epicorHeaders?:Head
 SubShipH.VendorNumVendorID field.
 This method should run when the SubShipH.VendorNumVendorID field changes.
    OperationID: ChangeSubShipHVendorNumVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSubShipHVendorNumVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSubShipHVendorNumVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSubShipHVendorNumVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSubShipHVendorNumVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSubShipHVendorNumVendorID(requestBody:ChangeSubShipHVendorNumVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSubShipHVendorNumVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/ChangeSubShipHVendorNumVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSubShipHVendorNumVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3611,30 +4291,37 @@ export function post_ChangeSubShipHVendorNumVendorID(requestBody:any, epicorHead
    Summary: Invoke method CheckCOOPercents
    Description: Checks to see if the Qty percent and value percent fields total 100 percent.
    OperationID: CheckCOOPercents
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckCOOPercents_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckCOOPercents_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckCOOPercents_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckCOOPercents(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckCOOPercents(requestBody:CheckCOOPercents_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckCOOPercents_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CheckCOOPercents", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckCOOPercents_output)
           })
       .catch((error) => {
           reject(error)
@@ -3647,30 +4334,37 @@ export function post_CheckCOOPercents(requestBody:any, epicorHeaders?:Headers){
    Description: This method validates the ShipCOO.OrigCountry field.
 This method should run before changing the ShipCOO.OrigCountry field.
    OperationID: CheckShipCOOOrigCountry
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckShipCOOOrigCountry_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckShipCOOOrigCountry_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckShipCOOOrigCountry_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckShipCOOOrigCountry(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckShipCOOOrigCountry(requestBody:CheckShipCOOOrigCountry_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckShipCOOOrigCountry_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CheckShipCOOOrigCountry", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckShipCOOOrigCountry_output)
           })
       .catch((error) => {
           reject(error)
@@ -3683,30 +4377,37 @@ export function post_CheckShipCOOOrigCountry(requestBody:any, epicorHeaders?:Hea
    Description: This method validates the SubShipD.AssemblySeq field.
 This method should run before changing the SubShipD.AssemblySeq field.
    OperationID: CheckSubShipDAssemblySeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSubShipDAssemblySeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSubShipDAssemblySeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSubShipDAssemblySeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSubShipDAssemblySeq(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSubShipDAssemblySeq(requestBody:CheckSubShipDAssemblySeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSubShipDAssemblySeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CheckSubShipDAssemblySeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSubShipDAssemblySeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -3719,30 +4420,37 @@ export function post_CheckSubShipDAssemblySeq(requestBody:any, epicorHeaders?:He
    Description: This method validates the SubShipD.JobNum field.
 This method should run before changing the SubShipD.JobNum field.
    OperationID: CheckSubShipDJobNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSubShipDJobNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSubShipDJobNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSubShipDJobNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSubShipDJobNum(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSubShipDJobNum(requestBody:CheckSubShipDJobNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSubShipDJobNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CheckSubShipDJobNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSubShipDJobNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3755,30 +4463,37 @@ export function post_CheckSubShipDJobNum(requestBody:any, epicorHeaders?:Headers
    Description: This method validates the SubShipD.OprSeq field.
 This method should run before changing the SubShipD.OprSeq field.
    OperationID: CheckSubShipDOprSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSubShipDOprSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSubShipDOprSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSubShipDOprSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSubShipDOprSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSubShipDOprSeq(requestBody:CheckSubShipDOprSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSubShipDOprSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CheckSubShipDOprSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSubShipDOprSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -3791,30 +4506,37 @@ export function post_CheckSubShipDOprSeq(requestBody:any, epicorHeaders?:Headers
    Description: This method validates the SubShipD.POLine field.
 This method should run before changing the SubShipD.POLine field.
    OperationID: CheckSubShipDPOLine
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSubShipDPOLine_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSubShipDPOLine_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSubShipDPOLine_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSubShipDPOLine(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSubShipDPOLine(requestBody:CheckSubShipDPOLine_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSubShipDPOLine_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CheckSubShipDPOLine", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSubShipDPOLine_output)
           })
       .catch((error) => {
           reject(error)
@@ -3827,30 +4549,37 @@ export function post_CheckSubShipDPOLine(requestBody:any, epicorHeaders?:Headers
    Description: This method validates the SubShipD.PONum field.
 This method should run before changing the SubShipD.PONum field.
    OperationID: CheckSubShipDPONum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSubShipDPONum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSubShipDPONum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSubShipDPONum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSubShipDPONum(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSubShipDPONum(requestBody:CheckSubShipDPONum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSubShipDPONum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CheckSubShipDPONum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSubShipDPONum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3863,30 +4592,37 @@ export function post_CheckSubShipDPONum(requestBody:any, epicorHeaders?:Headers)
    Description: This method validates the SubShipD.PORelNum field.
 This method should run before changing the SubShipD.PORelNum field.
    OperationID: CheckSubShipDPORelNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSubShipDPORelNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSubShipDPORelNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSubShipDPORelNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSubShipDPORelNum(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSubShipDPORelNum(requestBody:CheckSubShipDPORelNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSubShipDPORelNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CheckSubShipDPORelNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSubShipDPORelNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3898,30 +4634,37 @@ export function post_CheckSubShipDPORelNum(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ClearConvertedManifest
    Description: Clear SubShipH Manifest fields when Unfreighting.
    OperationID: ClearConvertedManifest
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ClearConvertedManifest_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ClearConvertedManifest_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClearConvertedManifest_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ClearConvertedManifest(requestBody:any, epicorHeaders?:Headers){
+export function post_ClearConvertedManifest(requestBody:ClearConvertedManifest_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClearConvertedManifest_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/ClearConvertedManifest", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClearConvertedManifest_output)
           })
       .catch((error) => {
           reject(error)
@@ -3933,30 +4676,37 @@ export function post_ClearConvertedManifest(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method CloseCarton
    Description: Checks to see if the carton can be closed and closes it if it is allowed.
    OperationID: CloseCarton
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CloseCarton_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CloseCarton_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CloseCarton_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CloseCarton(requestBody:any, epicorHeaders?:Headers){
+export function post_CloseCarton(requestBody:CloseCarton_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CloseCarton_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/CloseCarton", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CloseCarton_output)
           })
       .catch((error) => {
           reject(error)
@@ -3968,30 +4718,37 @@ export function post_CloseCarton(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ConvertToManifestUOM
    Description: Populate SubShipH Manifest fields.
    OperationID: ConvertToManifestUOM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ConvertToManifestUOM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ConvertToManifestUOM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ConvertToManifestUOM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ConvertToManifestUOM(requestBody:any, epicorHeaders?:Headers){
+export function post_ConvertToManifestUOM(requestBody:ConvertToManifestUOM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ConvertToManifestUOM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/ConvertToManifestUOM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ConvertToManifestUOM_output)
           })
       .catch((error) => {
           reject(error)
@@ -4002,7 +4759,7 @@ export function post_ConvertToManifestUOM(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method GetAvailTranDocTypes
    OperationID: GetAvailTranDocTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailTranDocTypes_output
@@ -4015,15 +4772,22 @@ export function post_GetAvailTranDocTypes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailTranDocTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetAvailTranDocTypes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailTranDocTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -4035,30 +4799,37 @@ export function post_GetAvailTranDocTypes(epicorHeaders?:Headers){
    Summary: Invoke method GetLegalNumGenOpts
    Description: Returns the legal number generation options.
    OperationID: GetLegalNumGenOpts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLegalNumGenOpts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLegalNumGenOpts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLegalNumGenOpts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLegalNumGenOpts(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLegalNumGenOpts(requestBody:GetLegalNumGenOpts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLegalNumGenOpts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetLegalNumGenOpts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLegalNumGenOpts_output)
           })
       .catch((error) => {
           reject(error)
@@ -4069,30 +4840,37 @@ export function post_GetLegalNumGenOpts(requestBody:any, epicorHeaders?:Headers)
    /**  
    Summary: Invoke method GetPackageClass
    OperationID: GetPackageClass
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPackageClass_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPackageClass_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPackageClass_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPackageClass(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPackageClass(requestBody:GetPackageClass_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPackageClass_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetPackageClass", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPackageClass_output)
           })
       .catch((error) => {
           reject(error)
@@ -4103,30 +4881,37 @@ export function post_GetPackageClass(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetPackaging
    OperationID: GetPackaging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPackaging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPackaging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPackaging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPackaging(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPackaging(requestBody:GetPackaging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPackaging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetPackaging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPackaging_output)
           })
       .catch((error) => {
           reject(error)
@@ -4137,30 +4922,37 @@ export function post_GetPackaging(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetPayBTFlagDefaults
    OperationID: GetPayBTFlagDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPayBTFlagDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPayBTFlagDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPayBTFlagDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPayBTFlagDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPayBTFlagDefaults(requestBody:GetPayBTFlagDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPayBTFlagDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetPayBTFlagDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPayBTFlagDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -4172,30 +4964,37 @@ export function post_GetPayBTFlagDefaults(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetScale
    Description: Calculate the weight of a carton based upon Part.Weight.
    OperationID: GetScale
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetScale_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetScale_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetScale_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetScale(requestBody:any, epicorHeaders?:Headers){
+export function post_GetScale(requestBody:GetScale_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetScale_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetScale", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetScale_output)
           })
       .catch((error) => {
           reject(error)
@@ -4207,30 +5006,37 @@ export function post_GetScale(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetSelectSerialNumbersParams
    Description: Gets parameters required for launching Select Serial Numbers
    OperationID: GetSelectSerialNumbersParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSelectSerialNumbersParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSelectSerialNumbersParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSelectSerialNumbersParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSelectSerialNumbersParams(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSelectSerialNumbersParams(requestBody:GetSelectSerialNumbersParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSelectSerialNumbersParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetSelectSerialNumbersParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSelectSerialNumbersParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -4242,30 +5048,37 @@ export function post_GetSelectSerialNumbersParams(requestBody:any, epicorHeaders
    Summary: Invoke method GetTranDocTypeID
    Description: Sets default values when the TranDocTypeID changes
    OperationID: GetTranDocTypeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTranDocTypeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTranDocTypeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTranDocTypeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTranDocTypeID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTranDocTypeID(requestBody:GetTranDocTypeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTranDocTypeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetTranDocTypeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTranDocTypeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4277,30 +5090,37 @@ export function post_GetTranDocTypeID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OpenCarton
    Description: Checks to see if the carton can be opened and opens it if it is allowed.
    OperationID: OpenCarton
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OpenCarton_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OpenCarton_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OpenCarton_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OpenCarton(requestBody:any, epicorHeaders?:Headers){
+export function post_OpenCarton(requestBody:OpenCarton_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OpenCarton_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/OpenCarton", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OpenCarton_output)
           })
       .catch((error) => {
           reject(error)
@@ -4314,30 +5134,37 @@ export function post_OpenCarton(requestBody:any, epicorHeaders?:Headers){
 answered before the record can be saved.  If the user answers no to any one of
 the questions, then the update method should not be called.
    OperationID: PreSubShipDUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreSubShipDUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreSubShipDUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreSubShipDUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreSubShipDUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_PreSubShipDUpdate(requestBody:PreSubShipDUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreSubShipDUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/PreSubShipDUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreSubShipDUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4348,30 +5175,37 @@ export function post_PreSubShipDUpdate(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method RebuildShipUPS
    OperationID: RebuildShipUPS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RebuildShipUPS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RebuildShipUPS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RebuildShipUPS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RebuildShipUPS(requestBody:any, epicorHeaders?:Headers){
+export function post_RebuildShipUPS(requestBody:RebuildShipUPS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RebuildShipUPS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/RebuildShipUPS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RebuildShipUPS_output)
           })
       .catch((error) => {
           reject(error)
@@ -4382,30 +5216,37 @@ export function post_RebuildShipUPS(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method RefreshShipUPS
    OperationID: RefreshShipUPS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshShipUPS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshShipUPS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshShipUPS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshShipUPS(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshShipUPS(requestBody:RefreshShipUPS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshShipUPS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/RefreshShipUPS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshShipUPS_output)
           })
       .catch((error) => {
           reject(error)
@@ -4416,30 +5257,37 @@ export function post_RefreshShipUPS(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SetUPSQVEnable
    OperationID: SetUPSQVEnable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetUPSQVEnable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetUPSQVEnable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetUPSQVEnable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetUPSQVEnable(requestBody:any, epicorHeaders?:Headers){
+export function post_SetUPSQVEnable(requestBody:SetUPSQVEnable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetUPSQVEnable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/SetUPSQVEnable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetUPSQVEnable_output)
           })
       .catch((error) => {
           reject(error)
@@ -4450,30 +5298,37 @@ export function post_SetUPSQVEnable(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SetUPSQVShipStatus
    OperationID: SetUPSQVShipStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetUPSQVShipStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetUPSQVShipStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetUPSQVShipStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetUPSQVShipStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_SetUPSQVShipStatus(requestBody:SetUPSQVShipStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetUPSQVShipStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/SetUPSQVShipStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetUPSQVShipStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -4485,30 +5340,37 @@ export function post_SetUPSQVShipStatus(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method StageCarton
    Description: Checks to see if the carton can be voided and voids it if it is allowed.
    OperationID: StageCarton
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StageCarton_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StageCarton_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StageCarton_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StageCarton(requestBody:any, epicorHeaders?:Headers){
+export function post_StageCarton(requestBody:StageCarton_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StageCarton_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/StageCarton", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StageCarton_output)
           })
       .catch((error) => {
           reject(error)
@@ -4520,30 +5382,37 @@ export function post_StageCarton(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateSN
    Description: Validates that a single serial number is valid for this transaction
    OperationID: ValidateSN
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSN_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSN_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSN_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSN(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSN(requestBody:ValidateSN_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSN_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/ValidateSN", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSN_output)
           })
       .catch((error) => {
           reject(error)
@@ -4555,30 +5424,37 @@ export function post_ValidateSN(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method VoidCarton
    Description: Checks to see if the carton can be voided and voids it if it is allowed.
    OperationID: VoidCarton
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VoidCarton_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VoidCarton_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VoidCarton_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VoidCarton(requestBody:any, epicorHeaders?:Headers){
+export function post_VoidCarton(requestBody:VoidCarton_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VoidCarton_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/VoidCarton", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VoidCarton_output)
           })
       .catch((error) => {
           reject(error)
@@ -4590,30 +5466,37 @@ export function post_VoidCarton(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method VoidLegalNumber
    Description: Voids the legal number.
    OperationID: VoidLegalNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VoidLegalNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VoidLegalNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VoidLegalNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VoidLegalNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_VoidLegalNumber(requestBody:VoidLegalNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VoidLegalNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/VoidLegalNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VoidLegalNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -4625,30 +5508,37 @@ export function post_VoidLegalNumber(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GenerateDigitalSignature
    Description: Generate Digital Signature
    OperationID: GenerateDigitalSignature
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateDigitalSignature_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateDigitalSignature_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateDigitalSignature_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateDigitalSignature(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateDigitalSignature(requestBody:GenerateDigitalSignature_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateDigitalSignature_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GenerateDigitalSignature", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateDigitalSignature_output)
           })
       .catch((error) => {
           reject(error)
@@ -4660,30 +5550,37 @@ export function post_GenerateDigitalSignature(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnBuildCommentAddress
    Description: Gets either a customer or vendor address to add to shipComments for either header or detail comments.
    OperationID: OnBuildCommentAddress
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnBuildCommentAddress_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnBuildCommentAddress_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnBuildCommentAddress_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnBuildCommentAddress(requestBody:any, epicorHeaders?:Headers){
+export function post_OnBuildCommentAddress(requestBody:OnBuildCommentAddress_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnBuildCommentAddress_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/OnBuildCommentAddress", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnBuildCommentAddress_output)
           })
       .catch((error) => {
           reject(error)
@@ -4695,30 +5592,37 @@ export function post_OnBuildCommentAddress(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewSubShipH
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewSubShipH
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSubShipH_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSubShipH_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSubShipH_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSubShipH(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSubShipH(requestBody:GetNewSubShipH_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSubShipH_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetNewSubShipH", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSubShipH_output)
           })
       .catch((error) => {
           reject(error)
@@ -4730,30 +5634,37 @@ export function post_GetNewSubShipH(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewSubShipHAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewSubShipHAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSubShipHAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSubShipHAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSubShipHAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSubShipHAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSubShipHAttch(requestBody:GetNewSubShipHAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSubShipHAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetNewSubShipHAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSubShipHAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -4765,30 +5676,37 @@ export function post_GetNewSubShipHAttch(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewSubShipD
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewSubShipD
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSubShipD_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSubShipD_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSubShipD_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSubShipD(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSubShipD(requestBody:GetNewSubShipD_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSubShipD_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetNewSubShipD", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSubShipD_output)
           })
       .catch((error) => {
           reject(error)
@@ -4800,30 +5718,37 @@ export function post_GetNewSubShipD(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewSubShipDAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewSubShipDAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSubShipDAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSubShipDAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSubShipDAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSubShipDAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSubShipDAttch(requestBody:GetNewSubShipDAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSubShipDAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetNewSubShipDAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSubShipDAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -4835,30 +5760,37 @@ export function post_GetNewSubShipDAttch(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewShipCOO
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewShipCOO
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewShipCOO_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewShipCOO_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewShipCOO_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewShipCOO(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewShipCOO(requestBody:GetNewShipCOO_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewShipCOO_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetNewShipCOO", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewShipCOO_output)
           })
       .catch((error) => {
           reject(error)
@@ -4870,30 +5802,37 @@ export function post_GetNewShipCOO(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCartonTrkDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCartonTrkDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCartonTrkDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCartonTrkDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCartonTrkDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCartonTrkDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCartonTrkDtl(requestBody:GetNewCartonTrkDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCartonTrkDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetNewCartonTrkDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCartonTrkDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -4905,30 +5844,37 @@ export function post_GetNewCartonTrkDtl(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewSubShipUPS
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewSubShipUPS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSubShipUPS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSubShipUPS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSubShipUPS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSubShipUPS(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSubShipUPS(requestBody:GetNewSubShipUPS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSubShipUPS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetNewSubShipUPS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSubShipUPS_output)
           })
       .catch((error) => {
           reject(error)
@@ -4940,30 +5886,37 @@ export function post_GetNewSubShipUPS(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4975,7 +5928,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -4999,15 +5952,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -5019,7 +5979,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -5043,15 +6003,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -5063,30 +6030,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -5098,30 +6072,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SubConShipEntrySvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -5132,66 +6113,83 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CartonTrkDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CartonTrkDtlRow[],
+   "value":Erp_Tablesets_CartonTrkDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumGenOptsRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LegalNumGenOptsRow[],
+   "value":Erp_Tablesets_LegalNumGenOptsRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SNFormatRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SNFormatRow[],
+   "value":Erp_Tablesets_SNFormatRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SelectedSerialNumbersRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SelectedSerialNumbersRow[],
+   "value":Erp_Tablesets_SelectedSerialNumbersRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SerialNumberSearchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SerialNumberSearchRow[],
+   "value":Erp_Tablesets_SerialNumberSearchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ShipCOORow{
    "odatametadata":string,
-   "value":Erp_Tablesets_ShipCOORow[],
+   "value":Erp_Tablesets_ShipCOORow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipDAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SubShipDAttchRow[],
+   "value":Erp_Tablesets_SubShipDAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipDRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SubShipDRow[],
+   "value":Erp_Tablesets_SubShipDRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipHAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SubShipHAttchRow[],
+   "value":Erp_Tablesets_SubShipHAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipHListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SubShipHListRow[],
+   "value":Erp_Tablesets_SubShipHListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipHRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SubShipHRow[],
+   "value":Erp_Tablesets_SubShipHRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SubShipUPSRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SubShipUPSRow[],
+   "value":Erp_Tablesets_SubShipUPSRow,
 }
 
 export interface Erp_Tablesets_CartonTrkDtlRow{
@@ -6326,6 +7324,23 @@ export interface Erp_Tablesets_SubShipUPSRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -6341,7 +7356,7 @@ export interface AssignLegalNumber_input{
 export interface AssignLegalNumber_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
    opLegalNumMsg:string,
 }
 }
@@ -6386,7 +7401,7 @@ export interface CallsCreateCustomerCartons_input{
 export interface CallsCreateCustomerCartons_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6422,7 +7437,7 @@ export interface ChangeSubShipDAssemblySeq_input{
 export interface ChangeSubShipDAssemblySeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6436,7 +7451,7 @@ export interface ChangeSubShipDJobNum_input{
 export interface ChangeSubShipDJobNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6450,7 +7465,7 @@ export interface ChangeSubShipDOprSeq_input{
 export interface ChangeSubShipDOprSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6464,7 +7479,7 @@ export interface ChangeSubShipDPONum_input{
 export interface ChangeSubShipDPONum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6481,7 +7496,7 @@ export interface ChangeSubShipHPurPoint_input{
 export interface ChangeSubShipHPurPoint_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6498,7 +7513,7 @@ export interface ChangeSubShipHVendorNumVendorID_input{
 export interface ChangeSubShipHVendorNumVendorID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6529,7 +7544,7 @@ export interface CheckShipCOOOrigCountry_input{
 export interface CheckShipCOOOrigCountry_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6547,7 +7562,7 @@ export interface CheckSubShipDAssemblySeq_output{
 parameters : {
       /**  output parameters  */  
    serialWarning:string,
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6565,7 +7580,7 @@ export interface CheckSubShipDJobNum_output{
 parameters : {
       /**  output parameters  */  
    serialWarning:string,
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6583,7 +7598,7 @@ export interface CheckSubShipDOprSeq_output{
 parameters : {
       /**  output parameters  */  
    serialWarning:string,
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6600,7 +7615,7 @@ export interface CheckSubShipDPOLine_input{
 export interface CheckSubShipDPOLine_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6617,7 +7632,7 @@ export interface CheckSubShipDPONum_input{
 export interface CheckSubShipDPONum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6634,7 +7649,7 @@ export interface CheckSubShipDPORelNum_input{
 export interface CheckSubShipDPORelNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6672,7 +7687,7 @@ export interface CloseCarton_input{
 export interface CloseCarton_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6711,7 +7726,7 @@ export interface CreateCustomerCartons_input{
 export interface CreateCustomerCartons_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6735,7 +7750,7 @@ export interface DeletePhantomPacks_input{
 export interface DeletePhantomPacks_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -6753,7 +7768,7 @@ export interface DeleteRangePhantomPacks_input{
 export interface DeleteRangePhantomPacks_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -7974,7 +8989,7 @@ export interface GenerateDigitalSignature_input{
 export interface GenerateDigitalSignature_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8047,7 +9062,7 @@ export interface GetLegalNumGenOpts_input{
 export interface GetLegalNumGenOpts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
    opPromptForNum:boolean,
 }
 }
@@ -8088,7 +9103,7 @@ export interface GetNewCartonTrkDtl_input{
 export interface GetNewCartonTrkDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8108,7 +9123,7 @@ export interface GetNewShipCOO_input{
 export interface GetNewShipCOO_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8126,7 +9141,7 @@ export interface GetNewSubShipDAttch_input{
 export interface GetNewSubShipDAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8142,7 +9157,7 @@ export interface GetNewSubShipD_input{
 export interface GetNewSubShipD_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8158,7 +9173,7 @@ export interface GetNewSubShipHAttch_input{
 export interface GetNewSubShipHAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8172,7 +9187,7 @@ export interface GetNewSubShipH_input{
 export interface GetNewSubShipH_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8188,7 +9203,7 @@ export interface GetNewSubShipUPS_input{
 export interface GetNewSubShipUPS_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8204,7 +9219,7 @@ export interface GetPackageClass_input{
 export interface GetPackageClass_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8220,7 +9235,7 @@ export interface GetPackaging_input{
 export interface GetPackaging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8234,7 +9249,7 @@ export interface GetPayBTFlagDefaults_input{
 export interface GetPayBTFlagDefaults_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8303,7 +9318,7 @@ export interface GetSelectSerialNumbersParams_output{
    returnObj:Erp_Tablesets_SelectSerialNumbersParamsTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8320,7 +9335,7 @@ export interface GetTranDocTypeID_input{
 export interface GetTranDocTypeID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8385,7 +9400,7 @@ export interface OnBuildCommentAddress_input{
 export interface OnBuildCommentAddress_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8411,7 +9426,7 @@ export interface PreSubShipDUpdate_input{
 export interface PreSubShipDUpdate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
    lotMessage:string,
    qtyMessage:string,
 }
@@ -8429,7 +9444,7 @@ export interface RebuildShipUPS_input{
 export interface RebuildShipUPS_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8445,7 +9460,7 @@ export interface RefreshShipUPS_input{
 export interface RefreshShipUPS_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8461,7 +9476,7 @@ export interface SetUPSQVEnable_input{
 export interface SetUPSQVEnable_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8477,7 +9492,7 @@ export interface SetUPSQVShipStatus_input{
 export interface SetUPSQVShipStatus_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8494,7 +9509,7 @@ export interface StageCarton_input{
 export interface StageCarton_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8513,7 +9528,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtSubConShipEntryTableset[],
+   ds:Erp_Tablesets_UpdExtSubConShipEntryTableset,
    errorsOccurred:boolean,
 }
 }
@@ -8538,7 +9553,7 @@ export interface UpdatePackCODWithCarton_input{
 export interface UpdatePackCODWithCarton_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8562,7 +9577,7 @@ export interface UpdatePackDeclaredWithCarton_input{
 export interface UpdatePackDeclaredWithCarton_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8582,7 +9597,7 @@ export interface UpdatePackWeightWithCarton_input{
 export interface UpdatePackWeightWithCarton_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8596,7 +9611,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
 }
 }
 
@@ -8613,7 +9628,7 @@ export interface ValidateSN_input{
 export interface ValidateSN_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SubConShipEntryTableset[],
+   ds:Erp_Tablesets_SubConShipEntryTableset,
    isVoided:boolean,
 }
 }

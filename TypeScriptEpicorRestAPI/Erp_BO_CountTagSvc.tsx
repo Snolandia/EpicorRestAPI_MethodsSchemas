@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.CountTagSvc
 // Description: Count Tag
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CCTagRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CCTagRow
    */  
 export function get_CountTags(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_CountTags(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CCTagRow)
           })
@@ -117,15 +157,15 @@ export function get_CountTags(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CountTags
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CCTagRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CCTagRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CCTagRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CCTagRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CountTags(requestBody:any, epicorHeaders?:Headers){
+export function post_CountTags(requestBody:Erp_Tablesets_CCTagRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_CountTags(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_CountTags(requestBody:any, epicorHeaders?:Headers){
       @param TagNum Desc: TagNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CCTagRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CCTagRow
    */  
 export function get_CountTags_Company_Plant_WarehouseCode_TagNum(Company:string, Plant:string, WarehouseCode:string, TagNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_CountTags_Company_Plant_WarehouseCode_TagNum(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CCTagRow)
           })
@@ -195,15 +249,15 @@ export function get_CountTags_Company_Plant_WarehouseCode_TagNum(Company:string,
       @param Plant Desc: Plant   Required: True   Allow empty value : True
       @param WarehouseCode Desc: WarehouseCode   Required: True   Allow empty value : True
       @param TagNum Desc: TagNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CCTagRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CCTagRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CountTags_Company_Plant_WarehouseCode_TagNum(Company:string, Plant:string, WarehouseCode:string, TagNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CountTags_Company_Plant_WarehouseCode_TagNum(Company:string, Plant:string, WarehouseCode:string, TagNum:string, requestBody:Erp_Tablesets_CCTagRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_CountTags_Company_Plant_WarehouseCode_TagNum(Company:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -235,7 +296,7 @@ export function patch_CountTags_Company_Plant_WarehouseCode_TagNum(Company:strin
       @param Plant Desc: Plant   Required: True   Allow empty value : True
       @param WarehouseCode Desc: WarehouseCode   Required: True   Allow empty value : True
       @param TagNum Desc: TagNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -254,7 +315,14 @@ export function delete_CountTags_Company_Plant_WarehouseCode_TagNum(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -274,10 +342,10 @@ export function delete_CountTags_Company_Plant_WarehouseCode_TagNum(Company:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CCTagWrkShtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CCTagWrkShtRow
    */  
 export function get_CCTagWrkShts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -292,7 +360,14 @@ export function get_CCTagWrkShts(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CCTagWrkShtRow)
           })
@@ -306,15 +381,15 @@ export function get_CCTagWrkShts(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CCTagWrkShts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CCTagWrkShtRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CCTagWrkShtRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CCTagWrkShtRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CCTagWrkShtRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CCTagWrkShts(requestBody:any, epicorHeaders?:Headers){
+export function post_CCTagWrkShts(requestBody:Erp_Tablesets_CCTagWrkShtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -328,7 +403,14 @@ export function post_CCTagWrkShts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -345,10 +427,10 @@ export function post_CCTagWrkShts(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CCTagWrkShtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CCTagWrkShtRow
    */  
 export function get_CCTagWrkShts_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -363,7 +445,14 @@ export function get_CCTagWrkShts_SysRowID(SysRowID:string, select?:string, filte
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CCTagWrkShtRow)
           })
@@ -378,15 +467,15 @@ export function get_CCTagWrkShts_SysRowID(SysRowID:string, select?:string, filte
    Description: Calls UpdateExt to update CCTagWrkSht. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_CCTagWrkSht
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CCTagWrkShtRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CCTagWrkShtRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CCTagWrkShts_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CCTagWrkShts_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_CCTagWrkShtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -400,7 +489,14 @@ export function patch_CCTagWrkShts_SysRowID(SysRowID:string, requestBody:any, ep
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -415,7 +511,7 @@ export function patch_CCTagWrkShts_SysRowID(SysRowID:string, requestBody:any, ep
    Description: Call UpdateExt to delete CCTagWrkSht item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_CCTagWrkSht
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -434,7 +530,14 @@ export function delete_CCTagWrkShts_SysRowID(SysRowID:string, epicorHeaders?:Hea
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -454,10 +557,10 @@ export function delete_CCTagWrkShts_SysRowID(SysRowID:string, epicorHeaders?:Hea
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CCTagListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CCTagListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -472,7 +575,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CCTagListRow)
           })
@@ -485,6 +595,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -496,7 +623,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -547,15 +674,22 @@ export function get_GetRows(whereClauseCCTag:string, whereClauseCCTagWrkSht:stri
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -570,7 +704,7 @@ export function get_GetRows(whereClauseCCTag:string, whereClauseCCTagWrkSht:stri
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -612,15 +746,22 @@ export function get_GetByID(plant:string, warehouseCode:string, tagNum:string, e
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -635,7 +776,7 @@ export function get_GetByID(plant:string, warehouseCode:string, tagNum:string, e
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -677,15 +818,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -700,30 +848,37 @@ Parameters:  none
 Notes:
 <param name="pQty">CCTag.CountedQty</param><param name="ds">The CountTag data set</param>
    OperationID: CalcCountedQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CalcCountedQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CalcCountedQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CalcCountedQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CalcCountedQty(requestBody:any, epicorHeaders?:Headers){
+export function post_CalcCountedQty(requestBody:CalcCountedQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CalcCountedQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/CalcCountedQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CalcCountedQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -736,30 +891,37 @@ export function post_CalcCountedQty(requestBody:any, epicorHeaders?:Headers){
    Description: This is a custome GetByID to be used when the user manually enters a tag number in count Tag Entry. It will ensure
 that the tag belongs to the specific cycle that is selected in Count Tag Entry.
    OperationID: CustomGetByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CustomGetByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CustomGetByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CustomGetByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustomGetByID(requestBody:any, epicorHeaders?:Headers){
+export function post_CustomGetByID(requestBody:CustomGetByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CustomGetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/CustomGetByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CustomGetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -771,30 +933,37 @@ export function post_CustomGetByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPartXRefInfo
    Description: This method defaults PartAdvisor fields when the PartNum field changes
    OperationID: GetPartXRefInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartXRefInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartXRefInfo(requestBody:GetPartXRefInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartXRefInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GetPartXRefInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartXRefInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -809,30 +978,37 @@ Parameters:  none
 Notes:
 <param name="ipPartNum">Proposed PartNum</param><param name="ds">The CountTag data set</param>
    OperationID: GetUOMData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetUOMData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetUOMData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetUOMData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetUOMData(requestBody:any, epicorHeaders?:Headers){
+export function post_GetUOMData(requestBody:GetUOMData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetUOMData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GetUOMData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetUOMData_output)
           })
       .catch((error) => {
           reject(error)
@@ -844,30 +1020,37 @@ export function post_GetUOMData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangePCIDTagType
    Description: Call this method when user changes the PCID Tag Type.
    OperationID: OnChangePCIDTagType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePCIDTagType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePCIDTagType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePCIDTagType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePCIDTagType(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePCIDTagType(requestBody:OnChangePCIDTagType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePCIDTagType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangePCIDTagType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePCIDTagType_output)
           })
       .catch((error) => {
           reject(error)
@@ -879,30 +1062,37 @@ export function post_OnChangePCIDTagType(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method OnChangeMoveToBinNum
    Description: Procedure that validates the Move To Bin Num
    OperationID: OnChangeMoveToBinNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeMoveToBinNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeMoveToBinNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeMoveToBinNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeMoveToBinNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeMoveToBinNum(requestBody:OnChangeMoveToBinNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeMoveToBinNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangeMoveToBinNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeMoveToBinNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -914,30 +1104,37 @@ export function post_OnChangeMoveToBinNum(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeBinNum
    Description: Procedure that validates the Bin Num
    OperationID: OnChangeBinNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBinNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBinNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBinNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBinNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBinNum(requestBody:OnChangeBinNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBinNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangeBinNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBinNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -949,30 +1146,37 @@ export function post_OnChangeBinNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeCountedQty
    Description: Recalculate the CountedQty field.
    OperationID: OnChangeCountedQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCountedQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCountedQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCountedQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCountedQty(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCountedQty(requestBody:OnChangeCountedQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCountedQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangeCountedQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCountedQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -984,30 +1188,37 @@ export function post_OnChangeCountedQty(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangingRevisionNum
    Description: Call this method when the Revision changes to maintain inventory tracking
    OperationID: OnChangingRevisionNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingRevisionNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingRevisionNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingRevisionNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingRevisionNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingRevisionNum(requestBody:OnChangingRevisionNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingRevisionNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangingRevisionNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingRevisionNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1019,30 +1230,37 @@ export function post_OnChangingRevisionNum(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method OnChangePartNum
    Description: CountTag - Call this method when the user changes the PartNum.
    OperationID: OnChangePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartNum(requestBody:OnChangePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1054,30 +1272,37 @@ export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangePCID
    Description: Method that validates the PCID.
    OperationID: OnChangePCID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePCID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePCID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePCID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePCID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePCID(requestBody:OnChangePCID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePCID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangePCID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePCID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1089,30 +1314,37 @@ export function post_OnChangePCID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeItemPCID
    Description: Method that validates the Item PCID.
    OperationID: OnChangeItemPCID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeItemPCID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeItemPCID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeItemPCID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeItemPCID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeItemPCID(requestBody:OnChangeItemPCID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeItemPCID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangeItemPCID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeItemPCID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1124,30 +1356,37 @@ export function post_OnChangeItemPCID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeUOM
    Description: CountTag - Call this method when the user changes the PartNum.
    OperationID: OnChangeUOM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeUOM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeUOM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeUOM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeUOM(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeUOM(requestBody:OnChangeUOM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeUOM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangeUOM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeUOM_output)
           })
       .catch((error) => {
           reject(error)
@@ -1159,30 +1398,37 @@ export function post_OnChangeUOM(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeAttributeSet
    Description: Call this method when the attribute set changes
    OperationID: OnChangeAttributeSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAttributeSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAttributeSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAttributeSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAttributeSet(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAttributeSet(requestBody:OnChangeAttributeSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAttributeSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangeAttributeSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAttributeSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1194,30 +1440,37 @@ export function post_OnChangeAttributeSet(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeNumberOfPieces
    Description: Call this method when the Nbr Of Pieces changes to calculate a new tran qty
    OperationID: OnChangeNumberOfPieces
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeNumberOfPieces_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeNumberOfPieces_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeNumberOfPieces_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeNumberOfPieces(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeNumberOfPieces(requestBody:OnChangeNumberOfPieces_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeNumberOfPieces_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/OnChangeNumberOfPieces", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeNumberOfPieces_output)
           })
       .catch((error) => {
           reject(error)
@@ -1233,7 +1486,7 @@ Notes:
 ///
 ///
    OperationID: ValidatePlant
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidatePlant_output
@@ -1246,15 +1499,22 @@ export function post_ValidatePlant(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidatePlant_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/ValidatePlant", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidatePlant_output)
           })
       .catch((error) => {
           reject(error)
@@ -1270,30 +1530,37 @@ Notes:
 ///
 ///
    OperationID: GenerateNestedTags
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateNestedTags_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateNestedTags_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateNestedTags_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateNestedTags(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateNestedTags(requestBody:GenerateNestedTags_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateNestedTags_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GenerateNestedTags", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateNestedTags_output)
           })
       .catch((error) => {
           reject(error)
@@ -1309,30 +1576,37 @@ Notes:
 ///
 ///
    OperationID: GenerateTags
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateTags_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateTags_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateTags_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateTags(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateTags(requestBody:GenerateTags_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateTags_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GenerateTags", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateTags_output)
           })
       .catch((error) => {
           reject(error)
@@ -1347,30 +1621,37 @@ Parameters:  none
 Notes:
 <param name="ds">The CountTag data set</param>
    OperationID: getRelatedTagsWhereClause
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/getRelatedTagsWhereClause_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/getRelatedTagsWhereClause_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/getRelatedTagsWhereClause_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_getRelatedTagsWhereClause(requestBody:any, epicorHeaders?:Headers){
+export function post_getRelatedTagsWhereClause(requestBody:getRelatedTagsWhereClause_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<getRelatedTagsWhereClause_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/getRelatedTagsWhereClause", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as getRelatedTagsWhereClause_output)
           })
       .catch((error) => {
           reject(error)
@@ -1385,30 +1666,37 @@ Parameters:  none
 Notes:
 <param name="seqStartDate" /><param name="seqTimeSeqStarted" /><param name="ds">The CountTag data set</param>
    OperationID: GetActivityWhereClause
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetActivityWhereClause_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetActivityWhereClause_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetActivityWhereClause_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetActivityWhereClause(requestBody:any, epicorHeaders?:Headers){
+export function post_GetActivityWhereClause(requestBody:GetActivityWhereClause_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetActivityWhereClause_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GetActivityWhereClause", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetActivityWhereClause_output)
           })
       .catch((error) => {
           reject(error)
@@ -1420,30 +1708,37 @@ export function post_GetActivityWhereClause(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method CalculateActivityBeforeCount
    Description: CalculateActivityBeforeCount
    OperationID: CalculateActivityBeforeCount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CalculateActivityBeforeCount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CalculateActivityBeforeCount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CalculateActivityBeforeCount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CalculateActivityBeforeCount(requestBody:any, epicorHeaders?:Headers){
+export function post_CalculateActivityBeforeCount(requestBody:CalculateActivityBeforeCount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CalculateActivityBeforeCount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/CalculateActivityBeforeCount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CalculateActivityBeforeCount_output)
           })
       .catch((error) => {
           reject(error)
@@ -1455,30 +1750,37 @@ export function post_CalculateActivityBeforeCount(requestBody:any, epicorHeaders
    Summary: Invoke method GetSNTransWhereClause
    Description: GetSNTransWhereClause
    OperationID: GetSNTransWhereClause
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSNTransWhereClause_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSNTransWhereClause_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSNTransWhereClause_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSNTransWhereClause(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSNTransWhereClause(requestBody:GetSNTransWhereClause_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSNTransWhereClause_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GetSNTransWhereClause", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSNTransWhereClause_output)
           })
       .catch((error) => {
           reject(error)
@@ -1490,30 +1792,37 @@ export function post_GetSNTransWhereClause(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewCCTag
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCCTag
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCCTag_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCCTag_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCCTag_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCCTag(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCCTag(requestBody:GetNewCCTag_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCCTag_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GetNewCCTag", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCCTag_output)
           })
       .catch((error) => {
           reject(error)
@@ -1525,30 +1834,37 @@ export function post_GetNewCCTag(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1560,7 +1876,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1584,15 +1900,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1604,7 +1927,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1628,15 +1951,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1648,30 +1978,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1683,30 +2020,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CountTagSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1717,21 +2061,38 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CCTagListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CCTagListRow[],
+   "value":Erp_Tablesets_CCTagListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CCTagRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CCTagRow[],
+   "value":Erp_Tablesets_CCTagRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CCTagWrkShtRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CCTagWrkShtRow[],
+   "value":Erp_Tablesets_CCTagWrkShtRow,
 }
 
 export interface Erp_Tablesets_CCTagListRow{
@@ -1967,6 +2328,23 @@ export interface Erp_Tablesets_CCTagWrkShtRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1981,7 +2359,7 @@ export interface CalcCountedQty_input{
 export interface CalcCountedQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2002,7 +2380,7 @@ export interface CalculateActivityBeforeCount_input{
 export interface CalculateActivityBeforeCount_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2368,7 +2746,7 @@ export interface GetActivityWhereClause_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2445,7 +2823,7 @@ export interface GetNewCCTag_input{
 export interface GetNewCCTag_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2513,7 +2891,7 @@ export interface GetSNTransWhereClause_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2529,7 +2907,7 @@ export interface GetUOMData_input{
 export interface GetUOMData_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2581,7 +2959,7 @@ export interface OnChangeAttributeSet_input{
 export interface OnChangeAttributeSet_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2598,7 +2976,7 @@ export interface OnChangeBinNum_input{
 export interface OnChangeBinNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2615,7 +2993,7 @@ export interface OnChangeCountedQty_input{
 export interface OnChangeCountedQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2632,7 +3010,7 @@ export interface OnChangeItemPCID_input{
 export interface OnChangeItemPCID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2649,7 +3027,7 @@ export interface OnChangeMoveToBinNum_input{
 export interface OnChangeMoveToBinNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2665,7 +3043,7 @@ export interface OnChangeNumberOfPieces_input{
 export interface OnChangeNumberOfPieces_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2682,7 +3060,7 @@ export interface OnChangePCIDTagType_input{
 export interface OnChangePCIDTagType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2699,7 +3077,7 @@ export interface OnChangePCID_input{
 export interface OnChangePCID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2719,7 +3097,7 @@ export interface OnChangePartNum_input{
 export interface OnChangePartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2736,7 +3114,7 @@ export interface OnChangeUOM_input{
 export interface OnChangeUOM_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2752,7 +3130,7 @@ export interface OnChangingRevisionNum_input{
 export interface OnChangingRevisionNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2771,7 +3149,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtCountTagTableset[],
+   ds:Erp_Tablesets_UpdExtCountTagTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2786,7 +3164,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 
@@ -2804,7 +3182,7 @@ export interface getRelatedTagsWhereClause_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CountTagTableset[],
+   ds:Erp_Tablesets_CountTagTableset,
 }
 }
 

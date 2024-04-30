@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.ATPSvc
 // Description: Part Tracker , Part Advisor -> Available to Promise screen.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method ForecastButtonHandler
    Description: Call this method from Forecast button of ATP screen.
    OperationID: ForecastButtonHandler
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ForecastButtonHandler_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ForecastButtonHandler_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ForecastButtonHandler_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ForecastButtonHandler(requestBody:any, epicorHeaders?:Headers){
+export function post_ForecastButtonHandler(requestBody:ForecastButtonHandler_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ForecastButtonHandler_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/ForecastButtonHandler", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ForecastButtonHandler_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_ForecastButtonHandler(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method OnChangePlantWithDS
    Description: Update the ATP table when changing Plants in Kinetic.
    OperationID: OnChangePlantWithDS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePlantWithDS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePlantWithDS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePlantWithDS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePlantWithDS(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePlantWithDS(requestBody:OnChangePlantWithDS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePlantWithDS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/OnChangePlantWithDS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePlantWithDS_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_OnChangePlantWithDS(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method OnChangeField
    Description: When the user changes the value of any field except Plant and Part call this method.
    OperationID: OnChangeField
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeField_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeField_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeField_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeField(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeField(requestBody:OnChangeField_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeField_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/OnChangeField", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeField_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_OnChangeField(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method VerifyShortDescription
    Description: Validate short description
    OperationID: VerifyShortDescription
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VerifyShortDescription_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VerifyShortDescription_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VerifyShortDescription_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VerifyShortDescription(requestBody:any, epicorHeaders?:Headers){
+export function post_VerifyShortDescription(requestBody:VerifyShortDescription_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VerifyShortDescription_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/VerifyShortDescription", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VerifyShortDescription_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,30 +303,37 @@ export function post_VerifyShortDescription(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnChangePlant
    Description: When the user changes the Plant, call this method.
    OperationID: OnChangePlant
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePlant_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePlant_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePlant_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePlant(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePlant(requestBody:OnChangePlant_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePlant_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/OnChangePlant", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePlant_output)
           })
       .catch((error) => {
           reject(error)
@@ -260,30 +345,37 @@ export function post_OnChangePlant(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ProjectedReceipts
    Description: Call this method from Receipts button of ATP screen.
    OperationID: ProjectedReceipts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProjectedReceipts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProjectedReceipts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProjectedReceipts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProjectedReceipts(requestBody:any, epicorHeaders?:Headers){
+export function post_ProjectedReceipts(requestBody:ProjectedReceipts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProjectedReceipts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/ProjectedReceipts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProjectedReceipts_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,30 +387,37 @@ export function post_ProjectedReceipts(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ProjectedReceiptsWithDate
    Description: Call this method from Receipts button of ATP screen for Kinetic.
    OperationID: ProjectedReceiptsWithDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProjectedReceiptsWithDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProjectedReceiptsWithDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProjectedReceiptsWithDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProjectedReceiptsWithDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ProjectedReceiptsWithDate(requestBody:ProjectedReceiptsWithDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProjectedReceiptsWithDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/ProjectedReceiptsWithDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProjectedReceiptsWithDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -330,30 +429,37 @@ export function post_ProjectedReceiptsWithDate(requestBody:any, epicorHeaders?:H
    Summary: Invoke method SalesOrder
    Description: Call this method from Sales Order button of ATP screen.
    OperationID: SalesOrder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SalesOrder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SalesOrder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SalesOrder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SalesOrder(requestBody:any, epicorHeaders?:Headers){
+export function post_SalesOrder(requestBody:SalesOrder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SalesOrder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/SalesOrder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SalesOrder_output)
           })
       .catch((error) => {
           reject(error)
@@ -365,30 +471,37 @@ export function post_SalesOrder(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method TransferOrder
    Description: Call this method from Transfer Order button of ATP screen.
    OperationID: TransferOrder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TransferOrder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TransferOrder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TransferOrder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TransferOrder(requestBody:any, epicorHeaders?:Headers){
+export function post_TransferOrder(requestBody:TransferOrder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TransferOrder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/TransferOrder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TransferOrder_output)
           })
       .catch((error) => {
           reject(error)
@@ -400,30 +513,37 @@ export function post_TransferOrder(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method getPlanningAttributeSet
    Description: Get the planning attribute set for an attribute set
    OperationID: getPlanningAttributeSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/getPlanningAttributeSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/getPlanningAttributeSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/getPlanningAttributeSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_getPlanningAttributeSet(requestBody:any, epicorHeaders?:Headers){
+export function post_getPlanningAttributeSet(requestBody:getPlanningAttributeSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<getPlanningAttributeSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/getPlanningAttributeSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as getPlanningAttributeSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -434,30 +554,37 @@ export function post_getPlanningAttributeSet(requestBody:any, epicorHeaders?:Hea
    /**  
    Summary: Invoke method FindPlanningAttributeSet
    OperationID: FindPlanningAttributeSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindPlanningAttributeSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindPlanningAttributeSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindPlanningAttributeSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindPlanningAttributeSet(requestBody:any, epicorHeaders?:Headers){
+export function post_FindPlanningAttributeSet(requestBody:FindPlanningAttributeSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindPlanningAttributeSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/FindPlanningAttributeSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindPlanningAttributeSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -469,30 +596,37 @@ export function post_FindPlanningAttributeSet(requestBody:any, epicorHeaders?:He
    Summary: Invoke method UpdateAttributeSetIDFromRevisionNum
    Description: This method updates attributeSetID and planningAttributeSetSeq when new revision is selected.
    OperationID: UpdateAttributeSetIDFromRevisionNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateAttributeSetIDFromRevisionNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateAttributeSetIDFromRevisionNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateAttributeSetIDFromRevisionNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateAttributeSetIDFromRevisionNum(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateAttributeSetIDFromRevisionNum(requestBody:UpdateAttributeSetIDFromRevisionNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateAttributeSetIDFromRevisionNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/UpdateAttributeSetIDFromRevisionNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateAttributeSetIDFromRevisionNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -504,30 +638,37 @@ export function post_UpdateAttributeSetIDFromRevisionNum(requestBody:any, epicor
    Summary: Invoke method PartsAttributeClassHasRevisionAndIsMRPTracked
    Description: This method updates attributeSetID and planningAttributeSetSeq when new revision is selected.
    OperationID: PartsAttributeClassHasRevisionAndIsMRPTracked
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PartsAttributeClassHasRevisionAndIsMRPTracked_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PartsAttributeClassHasRevisionAndIsMRPTracked_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PartsAttributeClassHasRevisionAndIsMRPTracked_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartsAttributeClassHasRevisionAndIsMRPTracked(requestBody:any, epicorHeaders?:Headers){
+export function post_PartsAttributeClassHasRevisionAndIsMRPTracked(requestBody:PartsAttributeClassHasRevisionAndIsMRPTracked_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PartsAttributeClassHasRevisionAndIsMRPTracked_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/PartsAttributeClassHasRevisionAndIsMRPTracked", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PartsAttributeClassHasRevisionAndIsMRPTracked_output)
           })
       .catch((error) => {
           reject(error)
@@ -539,30 +680,37 @@ export function post_PartsAttributeClassHasRevisionAndIsMRPTracked(requestBody:a
    Summary: Invoke method HasMRPPlanningAttribute
    Description: Return true if the Part has an MRP Planning Attribute, thus requiring an Attribute Set to be selected
    OperationID: HasMRPPlanningAttribute
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/HasMRPPlanningAttribute_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/HasMRPPlanningAttribute_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/HasMRPPlanningAttribute_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_HasMRPPlanningAttribute(requestBody:any, epicorHeaders?:Headers){
+export function post_HasMRPPlanningAttribute(requestBody:HasMRPPlanningAttribute_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<HasMRPPlanningAttribute_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ATPSvc/HasMRPPlanningAttribute", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as HasMRPPlanningAttribute_output)
           })
       .catch((error) => {
           reject(error)
@@ -573,11 +721,45 @@ export function post_HasMRPPlanningAttribute(requestBody:any, epicorHeaders?:Hea
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1362,7 +1544,7 @@ export interface OnChangeField_output{
 parameters : {
       /**  output parameters  */  
    pcRowIdent:string,
-   ds:Erp_Tablesets_ATPTableset[],
+   ds:Erp_Tablesets_ATPTableset,
 }
 }
 
@@ -1383,7 +1565,7 @@ export interface OnChangePlantWithDS_output{
 parameters : {
       /**  output parameters  */  
    startAtDate:string,
-   ds:Erp_Tablesets_ATPTableset[],
+   ds:Erp_Tablesets_ATPTableset,
 }
 }
 

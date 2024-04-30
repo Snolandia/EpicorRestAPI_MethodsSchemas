@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.GLCntrlTypeSvc
 // Description: Add your summary for this object here
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCntrlTypeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCntrlTypeRow
    */  
 export function get_GLCntrlTypes(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_GLCntrlTypes(select?:string, expand?:string, filter?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCntrlTypeRow)
           })
@@ -118,15 +158,15 @@ export function get_GLCntrlTypes(select?:string, expand?:string, filter?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GLCntrlTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLCntrlTypeRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLCntrlTypeRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GLCntrlTypeRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GLCntrlTypeRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLCntrlTypes(requestBody:any, epicorHeaders?:Headers){
+export function post_GLCntrlTypes(requestBody:Erp_Tablesets_GLCntrlTypeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_GLCntrlTypes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_GLCntrlTypes(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLCntrlTypeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLCntrlTypeRow
    */  
 export function get_GLCntrlTypes_Company_GLControlType(Company:string, GLControlType:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_GLCntrlTypes_Company_GLControlType(Company:string, GLControl
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLCntrlTypeRow)
           })
@@ -193,15 +247,15 @@ export function get_GLCntrlTypes_Company_GLControlType(Company:string, GLControl
    OperationID: UpdateExt_GLCntrlType
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GLControlType Desc: GLControlType   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLCntrlTypeRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLCntrlTypeRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GLCntrlTypes_Company_GLControlType(Company:string, GLControlType:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GLCntrlTypes_Company_GLControlType(Company:string, GLControlType:string, requestBody:Erp_Tablesets_GLCntrlTypeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_GLCntrlTypes_Company_GLControlType(Company:string, GLContr
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_GLCntrlTypes_Company_GLControlType(Company:string, GLContr
    OperationID: DeleteUpdateExt_GLCntrlType
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GLControlType Desc: GLControlType   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_GLCntrlTypes_Company_GLControlType(Company:string, GLCont
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_GLCntrlTypes_Company_GLControlType(Company:string, GLCont
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTAcctCntxtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTAcctCntxtRow
    */  
 export function get_GLCntrlTypes_Company_GLControlType_GLCTAcctCntxts(Company:string, GLControlType:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTAcctCntxts(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCTAcctCntxtRow)
           })
@@ -309,10 +384,10 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTAcctCntxts(Company:st
       @param GLCTAcctNum Desc: GLCTAcctNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLCTAcctCntxtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLCTAcctCntxtRow
    */  
 export function get_GLCntrlTypes_Company_GLControlType_GLCTAcctCntxts_Company_GLControlType_GLCTAcctNum(Company:string, GLControlType:string, GLCTAcctNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTAcctCntxts_Company_GL
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLCTAcctCntxtRow)
           })
@@ -349,10 +431,10 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTAcctCntxts_Company_GL
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTEntityRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTEntityRow
    */  
 export function get_GLCntrlTypes_Company_GLControlType_GLCTEntities(Company:string, GLControlType:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -367,7 +449,14 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTEntities(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCTEntityRow)
           })
@@ -386,10 +475,10 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTEntities(Company:stri
       @param BusinessEntity Desc: BusinessEntity   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLCTEntityRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLCTEntityRow
    */  
 export function get_GLCntrlTypes_Company_GLControlType_GLCTEntities_Company_GLControlType_BusinessEntity(Company:string, GLControlType:string, BusinessEntity:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -404,7 +493,14 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTEntities_Company_GLCo
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLCTEntityRow)
           })
@@ -426,10 +522,10 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTEntities_Company_GLCo
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTJrnlCntxtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTJrnlCntxtRow
    */  
 export function get_GLCntrlTypes_Company_GLControlType_GLCTJrnlCntxts(Company:string, GLControlType:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -444,7 +540,14 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTJrnlCntxts(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCTJrnlCntxtRow)
           })
@@ -463,10 +566,10 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTJrnlCntxts(Company:st
       @param JrnlContext Desc: JrnlContext   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLCTJrnlCntxtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLCTJrnlCntxtRow
    */  
 export function get_GLCntrlTypes_Company_GLControlType_GLCTJrnlCntxts_Company_GLControlType_JrnlContext(Company:string, GLControlType:string, JrnlContext:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -481,7 +584,14 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTJrnlCntxts_Company_GL
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLCTJrnlCntxtRow)
           })
@@ -501,10 +611,10 @@ export function get_GLCntrlTypes_Company_GLControlType_GLCTJrnlCntxts_Company_GL
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTAcctCntxtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTAcctCntxtRow
    */  
 export function get_GLCTAcctCntxts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -519,7 +629,14 @@ export function get_GLCTAcctCntxts(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCTAcctCntxtRow)
           })
@@ -533,15 +650,15 @@ export function get_GLCTAcctCntxts(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GLCTAcctCntxts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLCTAcctCntxtRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLCTAcctCntxtRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GLCTAcctCntxtRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GLCTAcctCntxtRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLCTAcctCntxts(requestBody:any, epicorHeaders?:Headers){
+export function post_GLCTAcctCntxts(requestBody:Erp_Tablesets_GLCTAcctCntxtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -555,7 +672,14 @@ export function post_GLCTAcctCntxts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -574,10 +698,10 @@ export function post_GLCTAcctCntxts(requestBody:any, epicorHeaders?:Headers){
       @param GLCTAcctNum Desc: GLCTAcctNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLCTAcctCntxtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLCTAcctCntxtRow
    */  
 export function get_GLCTAcctCntxts_Company_GLControlType_GLCTAcctNum(Company:string, GLControlType:string, GLCTAcctNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -592,7 +716,14 @@ export function get_GLCTAcctCntxts_Company_GLControlType_GLCTAcctNum(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLCTAcctCntxtRow)
           })
@@ -609,15 +740,15 @@ export function get_GLCTAcctCntxts_Company_GLControlType_GLCTAcctNum(Company:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GLControlType Desc: GLControlType   Required: True   Allow empty value : True
       @param GLCTAcctNum Desc: GLCTAcctNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLCTAcctCntxtRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLCTAcctCntxtRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GLCTAcctCntxts_Company_GLControlType_GLCTAcctNum(Company:string, GLControlType:string, GLCTAcctNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GLCTAcctCntxts_Company_GLControlType_GLCTAcctNum(Company:string, GLControlType:string, GLCTAcctNum:string, requestBody:Erp_Tablesets_GLCTAcctCntxtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -631,7 +762,14 @@ export function patch_GLCTAcctCntxts_Company_GLControlType_GLCTAcctNum(Company:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -648,7 +786,7 @@ export function patch_GLCTAcctCntxts_Company_GLControlType_GLCTAcctNum(Company:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GLControlType Desc: GLControlType   Required: True   Allow empty value : True
       @param GLCTAcctNum Desc: GLCTAcctNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -667,7 +805,14 @@ export function delete_GLCTAcctCntxts_Company_GLControlType_GLCTAcctNum(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -687,10 +832,10 @@ export function delete_GLCTAcctCntxts_Company_GLControlType_GLCTAcctNum(Company:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTEntityRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTEntityRow
    */  
 export function get_GLCTEntities(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -705,7 +850,14 @@ export function get_GLCTEntities(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCTEntityRow)
           })
@@ -719,15 +871,15 @@ export function get_GLCTEntities(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GLCTEntities
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLCTEntityRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLCTEntityRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GLCTEntityRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GLCTEntityRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLCTEntities(requestBody:any, epicorHeaders?:Headers){
+export function post_GLCTEntities(requestBody:Erp_Tablesets_GLCTEntityRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -741,7 +893,14 @@ export function post_GLCTEntities(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -760,10 +919,10 @@ export function post_GLCTEntities(requestBody:any, epicorHeaders?:Headers){
       @param BusinessEntity Desc: BusinessEntity   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLCTEntityRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLCTEntityRow
    */  
 export function get_GLCTEntities_Company_GLControlType_BusinessEntity(Company:string, GLControlType:string, BusinessEntity:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -778,7 +937,14 @@ export function get_GLCTEntities_Company_GLControlType_BusinessEntity(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLCTEntityRow)
           })
@@ -795,15 +961,15 @@ export function get_GLCTEntities_Company_GLControlType_BusinessEntity(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GLControlType Desc: GLControlType   Required: True   Allow empty value : True
       @param BusinessEntity Desc: BusinessEntity   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLCTEntityRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLCTEntityRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GLCTEntities_Company_GLControlType_BusinessEntity(Company:string, GLControlType:string, BusinessEntity:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GLCTEntities_Company_GLControlType_BusinessEntity(Company:string, GLControlType:string, BusinessEntity:string, requestBody:Erp_Tablesets_GLCTEntityRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -817,7 +983,14 @@ export function patch_GLCTEntities_Company_GLControlType_BusinessEntity(Company:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -834,7 +1007,7 @@ export function patch_GLCTEntities_Company_GLControlType_BusinessEntity(Company:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GLControlType Desc: GLControlType   Required: True   Allow empty value : True
       @param BusinessEntity Desc: BusinessEntity   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -853,7 +1026,14 @@ export function delete_GLCTEntities_Company_GLControlType_BusinessEntity(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -873,10 +1053,10 @@ export function delete_GLCTEntities_Company_GLControlType_BusinessEntity(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTJrnlCntxtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCTJrnlCntxtRow
    */  
 export function get_GLCTJrnlCntxts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -891,7 +1071,14 @@ export function get_GLCTJrnlCntxts(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCTJrnlCntxtRow)
           })
@@ -905,15 +1092,15 @@ export function get_GLCTJrnlCntxts(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GLCTJrnlCntxts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLCTJrnlCntxtRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLCTJrnlCntxtRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GLCTJrnlCntxtRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GLCTJrnlCntxtRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLCTJrnlCntxts(requestBody:any, epicorHeaders?:Headers){
+export function post_GLCTJrnlCntxts(requestBody:Erp_Tablesets_GLCTJrnlCntxtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -927,7 +1114,14 @@ export function post_GLCTJrnlCntxts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -946,10 +1140,10 @@ export function post_GLCTJrnlCntxts(requestBody:any, epicorHeaders?:Headers){
       @param JrnlContext Desc: JrnlContext   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLCTJrnlCntxtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLCTJrnlCntxtRow
    */  
 export function get_GLCTJrnlCntxts_Company_GLControlType_JrnlContext(Company:string, GLControlType:string, JrnlContext:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -964,7 +1158,14 @@ export function get_GLCTJrnlCntxts_Company_GLControlType_JrnlContext(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLCTJrnlCntxtRow)
           })
@@ -981,15 +1182,15 @@ export function get_GLCTJrnlCntxts_Company_GLControlType_JrnlContext(Company:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GLControlType Desc: GLControlType   Required: True   Allow empty value : True
       @param JrnlContext Desc: JrnlContext   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLCTJrnlCntxtRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLCTJrnlCntxtRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GLCTJrnlCntxts_Company_GLControlType_JrnlContext(Company:string, GLControlType:string, JrnlContext:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GLCTJrnlCntxts_Company_GLControlType_JrnlContext(Company:string, GLControlType:string, JrnlContext:string, requestBody:Erp_Tablesets_GLCTJrnlCntxtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1003,7 +1204,14 @@ export function patch_GLCTJrnlCntxts_Company_GLControlType_JrnlContext(Company:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1020,7 +1228,7 @@ export function patch_GLCTJrnlCntxts_Company_GLControlType_JrnlContext(Company:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GLControlType Desc: GLControlType   Required: True   Allow empty value : True
       @param JrnlContext Desc: JrnlContext   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1039,7 +1247,14 @@ export function delete_GLCTJrnlCntxts_Company_GLControlType_JrnlContext(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1059,10 +1274,10 @@ export function delete_GLCTJrnlCntxts_Company_GLControlType_JrnlContext(Company:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCntrlTypeListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLCntrlTypeListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1077,7 +1292,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCntrlTypeListRow)
           })
@@ -1089,6 +1311,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1103,7 +1342,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1172,15 +1411,22 @@ export function get_GetRows(whereClauseGLCntrlType:string, whereClauseGLCTAcctCn
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1193,7 +1439,7 @@ export function get_GetRows(whereClauseGLCntrlType:string, whereClauseGLCTAcctCn
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1217,15 +1463,400 @@ export function get_GetByID(glControlType:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method ChangeAllBooks
+   Description: Method to call when changing the AllBooks.
+   OperationID: ChangeAllBooks
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeAllBooks_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/ChangeAllBooks_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_ChangeAllBooks(requestBody:ChangeAllBooks_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<ChangeAllBooks_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/ChangeAllBooks", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as ChangeAllBooks_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method ChangeRequired
+   Description: Method to call when changing the Required.
+   OperationID: ChangeRequired
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRequired_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/ChangeRequired_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_ChangeRequired(requestBody:ChangeRequired_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<ChangeRequired_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/ChangeRequired", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as ChangeRequired_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method ChangeUseMasterChart
+   Description: Method to call when changing the UseMasterChart.
+   OperationID: ChangeUseMasterChart
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeUseMasterChart_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/ChangeUseMasterChart_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_ChangeUseMasterChart(requestBody:ChangeUseMasterChart_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<ChangeUseMasterChart_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/ChangeUseMasterChart", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as ChangeUseMasterChart_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method CheckBusinessEntity
+   Description: Check list of BusinessEntities for duplicates.
+   OperationID: CheckBusinessEntity
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckBusinessEntity_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/CheckBusinessEntity_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_CheckBusinessEntity(requestBody:CheckBusinessEntity_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<CheckBusinessEntity_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/CheckBusinessEntity", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as CheckBusinessEntity_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetNewGLCntrlType
+   Description: Inserts a new row in the DataSet with defaults populated.
+   OperationID: GetNewGLCntrlType
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLCntrlType_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetNewGLCntrlType_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_GetNewGLCntrlType(requestBody:GetNewGLCntrlType_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetNewGLCntrlType_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetNewGLCntrlType", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetNewGLCntrlType_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetNewGLCTAcctCntxt
+   Description: Inserts a new row in the DataSet with defaults populated.
+   OperationID: GetNewGLCTAcctCntxt
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLCTAcctCntxt_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetNewGLCTAcctCntxt_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_GetNewGLCTAcctCntxt(requestBody:GetNewGLCTAcctCntxt_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetNewGLCTAcctCntxt_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetNewGLCTAcctCntxt", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetNewGLCTAcctCntxt_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetNewGLCTEntity
+   Description: Inserts a new row in the DataSet with defaults populated.
+   OperationID: GetNewGLCTEntity
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLCTEntity_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetNewGLCTEntity_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_GetNewGLCTEntity(requestBody:GetNewGLCTEntity_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetNewGLCTEntity_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetNewGLCTEntity", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetNewGLCTEntity_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetNewGLCTJrnlCntxt
+   Description: Inserts a new row in the DataSet with defaults populated.
+   OperationID: GetNewGLCTJrnlCntxt
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLCTJrnlCntxt_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetNewGLCTJrnlCntxt_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_GetNewGLCTJrnlCntxt(requestBody:GetNewGLCTJrnlCntxt_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetNewGLCTJrnlCntxt_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetNewGLCTJrnlCntxt", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetNewGLCTJrnlCntxt_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method DeleteByID
+   Description: Deletes a row given its ID.
+   OperationID: DeleteByID
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/DeleteByID_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/DeleteByID", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1240,7 +1871,7 @@ export function get_GetByID(glControlType:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1282,330 +1913,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method ChangeAllBooks
-   Description: Method to call when changing the AllBooks.
-   OperationID: ChangeAllBooks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeAllBooks_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/ChangeAllBooks_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_ChangeAllBooks(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/ChangeAllBooks", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method ChangeRequired
-   Description: Method to call when changing the Required.
-   OperationID: ChangeRequired
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRequired_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/ChangeRequired_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_ChangeRequired(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/ChangeRequired", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method ChangeUseMasterChart
-   Description: Method to call when changing the UseMasterChart.
-   OperationID: ChangeUseMasterChart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeUseMasterChart_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/ChangeUseMasterChart_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_ChangeUseMasterChart(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/ChangeUseMasterChart", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method CheckBusinessEntity
-   Description: Check list of BusinessEntities for duplicates.
-   OperationID: CheckBusinessEntity
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckBusinessEntity_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/CheckBusinessEntity_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_CheckBusinessEntity(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/CheckBusinessEntity", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method GetNewGLCntrlType
-   Description: Inserts a new row in the DataSet with defaults populated.
-   OperationID: GetNewGLCntrlType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLCntrlType_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetNewGLCntrlType_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_GetNewGLCntrlType(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetNewGLCntrlType", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method GetNewGLCTAcctCntxt
-   Description: Inserts a new row in the DataSet with defaults populated.
-   OperationID: GetNewGLCTAcctCntxt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLCTAcctCntxt_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetNewGLCTAcctCntxt_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_GetNewGLCTAcctCntxt(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetNewGLCTAcctCntxt", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method GetNewGLCTEntity
-   Description: Inserts a new row in the DataSet with defaults populated.
-   OperationID: GetNewGLCTEntity
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLCTEntity_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetNewGLCTEntity_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_GetNewGLCTEntity(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetNewGLCTEntity", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method GetNewGLCTJrnlCntxt
-   Description: Inserts a new row in the DataSet with defaults populated.
-   OperationID: GetNewGLCTJrnlCntxt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLCTJrnlCntxt_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetNewGLCTJrnlCntxt_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_GetNewGLCTJrnlCntxt(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetNewGLCTJrnlCntxt", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method DeleteByID
-   Description: Deletes a row given its ID.
-   OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/DeleteByID_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/DeleteByID", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1617,7 +1940,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1641,15 +1964,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1661,7 +1991,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1685,15 +2015,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1705,30 +2042,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1740,30 +2084,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GLCntrlTypeSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1774,31 +2125,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCTAcctCntxtRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLCTAcctCntxtRow[],
+   "value":Erp_Tablesets_GLCTAcctCntxtRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCTEntityRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLCTEntityRow[],
+   "value":Erp_Tablesets_GLCTEntityRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCTJrnlCntxtRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLCTJrnlCntxtRow[],
+   "value":Erp_Tablesets_GLCTJrnlCntxtRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCntrlTypeListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLCntrlTypeListRow[],
+   "value":Erp_Tablesets_GLCntrlTypeListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLCntrlTypeRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLCntrlTypeRow[],
+   "value":Erp_Tablesets_GLCntrlTypeRow,
 }
 
 export interface Erp_Tablesets_GLCTAcctCntxtRow{
@@ -1916,6 +2284,23 @@ export interface Erp_Tablesets_GLCntrlTypeRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1931,7 +2316,7 @@ export interface ChangeAllBooks_input{
 export interface ChangeAllBooks_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLCntrlTypeTableset[],
+   ds:Erp_Tablesets_GLCntrlTypeTableset,
 }
 }
 
@@ -1969,7 +2354,7 @@ export interface ChangeUseMasterChart_input{
 export interface ChangeUseMasterChart_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLCntrlTypeTableset[],
+   ds:Erp_Tablesets_GLCntrlTypeTableset,
 }
 }
 
@@ -1985,7 +2370,7 @@ export interface CheckBusinessEntity_input{
 export interface CheckBusinessEntity_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLCntrlTypeTableset[],
+   ds:Erp_Tablesets_GLCntrlTypeTableset,
 }
 }
 
@@ -2198,7 +2583,7 @@ export interface GetNewGLCTAcctCntxt_input{
 export interface GetNewGLCTAcctCntxt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLCntrlTypeTableset[],
+   ds:Erp_Tablesets_GLCntrlTypeTableset,
 }
 }
 
@@ -2214,7 +2599,7 @@ export interface GetNewGLCTEntity_input{
 export interface GetNewGLCTEntity_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLCntrlTypeTableset[],
+   ds:Erp_Tablesets_GLCntrlTypeTableset,
 }
 }
 
@@ -2230,7 +2615,7 @@ export interface GetNewGLCTJrnlCntxt_input{
 export interface GetNewGLCTJrnlCntxt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLCntrlTypeTableset[],
+   ds:Erp_Tablesets_GLCntrlTypeTableset,
 }
 }
 
@@ -2244,7 +2629,7 @@ export interface GetNewGLCntrlType_input{
 export interface GetNewGLCntrlType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLCntrlTypeTableset[],
+   ds:Erp_Tablesets_GLCntrlTypeTableset,
 }
 }
 
@@ -2324,7 +2709,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtGLCntrlTypeTableset[],
+   ds:Erp_Tablesets_UpdExtGLCntrlTypeTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2339,7 +2724,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GLCntrlTypeTableset[],
+   ds:Erp_Tablesets_GLCntrlTypeTableset,
 }
 }
 

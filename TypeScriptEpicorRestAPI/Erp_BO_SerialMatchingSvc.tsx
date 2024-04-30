@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.SerialMatchingSvc
 // Description: Add your summary for this object here
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -88,30 +138,37 @@ Parameters:  none
 Notes:
 <param name="ipJobNum">JobHead.JobNum</param><param name="ipAssemblySeq">JobAsmbl.AssemblySeq</param><param name="ipSerialNo">SerialNo.SerialNumber</param><param name="ipPartNum">Part.PartNum</param><param name="ipRevNum">PartRev.RevisionNum</param><param name="ipCrtHdr">ipCrtHdr</param><param name="opRevMsg">revision</param><param name="ds">The Serial Matching data set </param>
    OperationID: AutoMatch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AutoMatch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AutoMatch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AutoMatch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AutoMatch(requestBody:any, epicorHeaders?:Headers){
+export function post_AutoMatch(requestBody:AutoMatch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AutoMatch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/AutoMatch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AutoMatch_output)
           })
       .catch((error) => {
           reject(error)
@@ -126,30 +183,37 @@ Parameters:  none
 Notes:type="Epicor.Mfg.BO.SerialMatchingDataSet"
 <param name="ipSerialNo">SerialNo.SerialNumber</param><param name="ipPartNum">SerialNo.PartNum</param><param name="ipRevNum">PartRev.RevisionNum</param><param name="ipJobNum">JobHead.JobNum</param><param name="ipAssemblySeq">JobAsmbl.AssemblySeq</param><param name="opRevMsg">revision</param><param name="opnoBOMMsg">bommessage</param><return name="ds">The Serial Matching data set </return>
    OperationID: ChangeSerialNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSerialNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSerialNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSerialNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSerialNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSerialNum(requestBody:ChangeSerialNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSerialNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/ChangeSerialNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSerialNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -164,30 +228,37 @@ Parameters:  none
 Notes:type="Epicor.Mfg.BO.SerialMatchingDataSet"
 <param name="ipFullyMatched">ttSerialMatchHdr.FullyMatched</param><param name="ds">The Serial Matching data set </param>
    OperationID: ChangeFullyMatched
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFullyMatched_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFullyMatched_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFullyMatched_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFullyMatched(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFullyMatched(requestBody:ChangeFullyMatched_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFullyMatched_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/ChangeFullyMatched", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFullyMatched_output)
           })
       .catch((error) => {
           reject(error)
@@ -202,30 +273,37 @@ Parameters:  none
 Notes:
 <param name="ipType"></param><param name="ds">The Serial Matching data set </param>
    OperationID: GetAvailableToMatch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAvailableToMatch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAvailableToMatch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableToMatch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAvailableToMatch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAvailableToMatch(requestBody:GetAvailableToMatch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableToMatch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/GetAvailableToMatch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableToMatch_output)
           })
       .catch((error) => {
           reject(error)
@@ -240,30 +318,37 @@ Parameters:  none
 Notes:
 <param name="ipParAsmblSeqNum">parent assembly AsmblSeqNum</param><param name="ds">The Serial Matching data set </param>
    OperationID: GetNewSerialMatchAsmbl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSerialMatchAsmbl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSerialMatchAsmbl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSerialMatchAsmbl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSerialMatchAsmbl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSerialMatchAsmbl(requestBody:GetNewSerialMatchAsmbl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSerialMatchAsmbl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/GetNewSerialMatchAsmbl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSerialMatchAsmbl_output)
           })
       .catch((error) => {
           reject(error)
@@ -278,30 +363,37 @@ Parameters:  none
 Notes:
 <param name="ipAsmblSeqNum">ipAsmblSeqNum</param><param name="ds">The Serial Matching data set </param>
    OperationID: GetNewSerialMatchMtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSerialMatchMtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSerialMatchMtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSerialMatchMtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSerialMatchMtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSerialMatchMtl(requestBody:GetNewSerialMatchMtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSerialMatchMtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/GetNewSerialMatchMtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSerialMatchMtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -316,30 +408,37 @@ Parameters:  none
 Notes:
 <param name="ipMode"></param><param name="ipSerialNum">SerialNo.SerialNumber</param><param name="ipInt"></param><param name="ds">The Serial Matching data set </param>
    OperationID: OnChangeAsmblSerialNo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAsmblSerialNo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAsmblSerialNo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAsmblSerialNo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAsmblSerialNo(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAsmblSerialNo(requestBody:OnChangeAsmblSerialNo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAsmblSerialNo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/OnChangeAsmblSerialNo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAsmblSerialNo_output)
           })
       .catch((error) => {
           reject(error)
@@ -354,30 +453,37 @@ Parameters:  none
 Notes:
 <param name="ipMode"></param><param name="ipSerialNo">SerialNo.SerialNumber</param><param name="ipAsmSeqNum"></param><param name="ds">The Serial Matching data set </param>
    OperationID: UpdateSMAssembly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateSMAssembly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateSMAssembly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateSMAssembly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateSMAssembly(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateSMAssembly(requestBody:UpdateSMAssembly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateSMAssembly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/UpdateSMAssembly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateSMAssembly_output)
           })
       .catch((error) => {
           reject(error)
@@ -392,30 +498,37 @@ Parameters:  none
 Notes:
 <param name="ipSerilaNum">ipSerilaNum</param><param name="ipAsmblSeqNum">ipAsmblSeqNum</param><param name="ds">The Serial Matching data set </param>
    OperationID: UpdateONSaveAssembly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateONSaveAssembly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateONSaveAssembly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateONSaveAssembly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateONSaveAssembly(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateONSaveAssembly(requestBody:UpdateONSaveAssembly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateONSaveAssembly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/UpdateONSaveAssembly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateONSaveAssembly_output)
           })
       .catch((error) => {
           reject(error)
@@ -430,30 +543,37 @@ Parameters:  none
 Notes:
 <param name="ipMode">revision</param><param name="ipSerialNum">Serial Number</param><param name="ipMtlSeqNum">ipMtlSeqNum</param><param name="ds">The Serial Matching data set </param>
    OperationID: OnChangeMtlSerialNo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeMtlSerialNo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeMtlSerialNo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeMtlSerialNo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeMtlSerialNo(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeMtlSerialNo(requestBody:OnChangeMtlSerialNo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeMtlSerialNo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/OnChangeMtlSerialNo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeMtlSerialNo_output)
           })
       .catch((error) => {
           reject(error)
@@ -468,30 +588,37 @@ Parameters:  none
 Notes:
 <param name="ipMode">Part.PartNum</param><param name="ds">The Serial Matching data set </param>
    OperationID: UpdateSMMtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateSMMtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateSMMtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateSMMtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateSMMtl(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateSMMtl(requestBody:UpdateSMMtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateSMMtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/UpdateSMMtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateSMMtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -506,30 +633,37 @@ Parameters:  none
 Notes:
 <param name="ipMode">Part.PartNum</param><param name="ipSerialNo">SerialNo.SerialNumber</param><param name="ipMtlSeqNum">ipMtlSeqNum</param><param name="ds">The Serial Matching data set </param>
    OperationID: UpdateSMMaterial
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateSMMaterial_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateSMMaterial_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateSMMaterial_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateSMMaterial(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateSMMaterial(requestBody:UpdateSMMaterial_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateSMMaterial_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/UpdateSMMaterial", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateSMMaterial_output)
           })
       .catch((error) => {
           reject(error)
@@ -544,30 +678,37 @@ Parameters:  none
 Notes:
 <param name="ipPartNum">Part.PartNum</param><param name="ds">The Serial Matching data set </param>
    OperationID: OnChangePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartNum(requestBody:OnChangePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/OnChangePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -582,30 +723,37 @@ Parameters:  none
 Notes:
 <param name="ipAssmblSeq">JobAsmbl.AssemblySeq</param><param name="ds">The Serial Matching data set </param>
    OperationID: SetFullyMatched
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetFullyMatched_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetFullyMatched_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetFullyMatched_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetFullyMatched(requestBody:any, epicorHeaders?:Headers){
+export function post_SetFullyMatched(requestBody:SetFullyMatched_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetFullyMatched_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/SetFullyMatched", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetFullyMatched_output)
           })
       .catch((error) => {
           reject(error)
@@ -620,30 +768,37 @@ Parameters:  none
 Notes:
 <param name="ipJobNum">JobHead.JobNum</param><param name="ipAssemblySeq">JobAsmbl.AssemblySeq</param><param name="opQuestion"></param><param name="ds">The Serial Matching data set </param>
    OperationID: ValidateAssembly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateAssembly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateAssembly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateAssembly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateAssembly(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateAssembly(requestBody:ValidateAssembly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateAssembly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/ValidateAssembly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateAssembly_output)
           })
       .catch((error) => {
           reject(error)
@@ -658,30 +813,37 @@ Parameters:  none
 Notes:
 <param name="ipJobNum">JobHead.JobNum</param><param name="opQuestion"></param>
    OperationID: ValidateJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateJob_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateJob_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateJob_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateJob(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateJob(requestBody:ValidateJob_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/ValidateJob", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -696,30 +858,37 @@ Parameters:  none
 Notes:
 <param name="ipSerialNo">SerialNo.SerialNumber</param><param name="ipJobNum">JobHead.JobNum</param><param name="ipAssemblySeq">JobAsmbl.AssemblySeq</param><param name="opErrMsg"></param>
    OperationID: ValidateTopSerialNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateTopSerialNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateTopSerialNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateTopSerialNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateTopSerialNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateTopSerialNumber(requestBody:ValidateTopSerialNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateTopSerialNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/ValidateTopSerialNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateTopSerialNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -734,7 +903,7 @@ Parameters:  none
 Notes:
 <return name="opLLSerTrk">PlantConfCtrl.LowLvlSerialTrk</return>
    OperationID: GetPlantLLSerTrk
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPlantLLSerTrk_output
@@ -747,15 +916,22 @@ export function post_GetPlantLLSerTrk(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPlantLLSerTrk_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/GetPlantLLSerTrk", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPlantLLSerTrk_output)
           })
       .catch((error) => {
           reject(error)
@@ -766,30 +942,37 @@ export function post_GetPlantLLSerTrk(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetMatchToParentAsmblSerialNo
    OperationID: GetMatchToParentAsmblSerialNo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMatchToParentAsmblSerialNo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMatchToParentAsmblSerialNo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMatchToParentAsmblSerialNo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMatchToParentAsmblSerialNo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMatchToParentAsmblSerialNo(requestBody:GetMatchToParentAsmblSerialNo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMatchToParentAsmblSerialNo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SerialMatchingSvc/GetMatchToParentAsmblSerialNo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMatchToParentAsmblSerialNo_output)
           })
       .catch((error) => {
           reject(error)
@@ -800,11 +983,45 @@ export function post_GetMatchToParentAsmblSerialNo(requestBody:any, epicorHeader
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -831,7 +1048,7 @@ export interface AutoMatch_output{
 parameters : {
       /**  output parameters  */  
    opRevMsg:string,
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -847,7 +1064,7 @@ export interface ChangeFullyMatched_input{
 export interface ChangeFullyMatched_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1065,7 +1282,7 @@ export interface GetAvailableToMatch_input{
 export interface GetAvailableToMatch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1092,7 +1309,7 @@ export interface GetNewSerialMatchAsmbl_input{
 export interface GetNewSerialMatchAsmbl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1108,7 +1325,7 @@ export interface GetNewSerialMatchMtl_input{
 export interface GetNewSerialMatchMtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1156,7 +1373,7 @@ export interface OnChangeAsmblSerialNo_input{
 export interface OnChangeAsmblSerialNo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1176,7 +1393,7 @@ export interface OnChangeMtlSerialNo_input{
 export interface OnChangeMtlSerialNo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1192,7 +1409,7 @@ export interface OnChangePartNum_input{
 export interface OnChangePartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1208,7 +1425,7 @@ export interface SetFullyMatched_input{
 export interface SetFullyMatched_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1226,7 +1443,7 @@ export interface UpdateONSaveAssembly_input{
 export interface UpdateONSaveAssembly_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1246,7 +1463,7 @@ export interface UpdateSMAssembly_input{
 export interface UpdateSMAssembly_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1266,7 +1483,7 @@ export interface UpdateSMMaterial_input{
 export interface UpdateSMMaterial_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1282,7 +1499,7 @@ export interface UpdateSMMtl_input{
 export interface UpdateSMMtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 
@@ -1301,7 +1518,7 @@ export interface ValidateAssembly_output{
 parameters : {
       /**  output parameters  */  
    opQuestion:string,
-   ds:Erp_Tablesets_SerialMatchingTableset[],
+   ds:Erp_Tablesets_SerialMatchingTableset,
 }
 }
 

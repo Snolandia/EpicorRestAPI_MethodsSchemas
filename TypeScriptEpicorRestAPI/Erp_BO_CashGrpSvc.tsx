@@ -1,15 +1,34 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.CashGrpSvc
 // Description: bo/CashGrp/CashGrp.p
            Cash Group Entry - separated from CashRec.p
            Jennifer Johnson
            03/18/04
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -18,7 +37,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -36,7 +55,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -50,7 +76,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -68,7 +94,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -88,10 +121,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CashGrpRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CashGrpRow
    */  
 export function get_CashGrps(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -106,7 +139,14 @@ export function get_CashGrps(select?:string, filter?:string, orderby?:string, to
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CashGrpRow)
           })
@@ -120,15 +160,15 @@ export function get_CashGrps(select?:string, filter?:string, orderby?:string, to
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CashGrps
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CashGrpRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CashGrpRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CashGrpRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CashGrpRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CashGrps(requestBody:any, epicorHeaders?:Headers){
+export function post_CashGrps(requestBody:Erp_Tablesets_CashGrpRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -142,7 +182,14 @@ export function post_CashGrps(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -160,10 +207,10 @@ export function post_CashGrps(requestBody:any, epicorHeaders?:Headers){
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CashGrpRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CashGrpRow
    */  
 export function get_CashGrps_Company_GroupID(Company:string, GroupID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -178,7 +225,14 @@ export function get_CashGrps_Company_GroupID(Company:string, GroupID:string, sel
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CashGrpRow)
           })
@@ -194,15 +248,15 @@ export function get_CashGrps_Company_GroupID(Company:string, GroupID:string, sel
    OperationID: UpdateExt_CashGrp
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CashGrpRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CashGrpRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CashGrps_Company_GroupID(Company:string, GroupID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CashGrps_Company_GroupID(Company:string, GroupID:string, requestBody:Erp_Tablesets_CashGrpRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -216,7 +270,14 @@ export function patch_CashGrps_Company_GroupID(Company:string, GroupID:string, r
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -232,7 +293,7 @@ export function patch_CashGrps_Company_GroupID(Company:string, GroupID:string, r
    OperationID: DeleteUpdateExt_CashGrp
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -251,7 +312,14 @@ export function delete_CashGrps_Company_GroupID(Company:string, GroupID:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -271,10 +339,10 @@ export function delete_CashGrps_Company_GroupID(Company:string, GroupID:string, 
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CashGrpListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CashGrpListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -289,7 +357,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CashGrpListRow)
           })
@@ -302,6 +377,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -312,7 +404,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -354,15 +446,22 @@ export function get_GetRows(whereClauseCashGrp:string, pageSize:string, absolute
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -375,7 +474,7 @@ export function get_GetRows(whereClauseCashGrp:string, pageSize:string, absolute
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -399,15 +498,22 @@ export function get_GetByID(groupID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -422,7 +528,7 @@ export function get_GetByID(groupID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -464,15 +570,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -484,30 +597,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetCodeDescList
    Description: This method returns a code/description list string for the table name and field name passed in
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -520,30 +640,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    Description: This method checks to see if the selected group is in use before fetching the dataset
 if the group is in use, the user must answer yes to continue before the GetByID method is run
    OperationID: BeforeGetByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BeforeGetByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BeforeGetByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BeforeGetByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BeforeGetByID(requestBody:any, epicorHeaders?:Headers){
+export function post_BeforeGetByID(requestBody:BeforeGetByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BeforeGetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/BeforeGetByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BeforeGetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -555,30 +682,37 @@ export function post_BeforeGetByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetByIDNoLock
    Description: Returns a DataSet given the primary key. Active user locking disabled.
    OperationID: GetByIDNoLock
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByIDNoLock_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByIDNoLock_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByIDNoLock_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByIDNoLock(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByIDNoLock(requestBody:GetByIDNoLock_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByIDNoLock_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetByIDNoLock", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByIDNoLock_output)
           })
       .catch((error) => {
           reject(error)
@@ -590,30 +724,37 @@ export function post_GetByIDNoLock(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCashGrpNoLock
    Description: Inserts a new row in the DataSet with defaults populated. Active user locking disabled.
    OperationID: GetNewCashGrpNoLock
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCashGrpNoLock_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCashGrpNoLock_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCashGrpNoLock_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCashGrpNoLock(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCashGrpNoLock(requestBody:GetNewCashGrpNoLock_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCashGrpNoLock_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetNewCashGrpNoLock", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCashGrpNoLock_output)
           })
       .catch((error) => {
           reject(error)
@@ -625,30 +766,37 @@ export function post_GetNewCashGrpNoLock(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetRowsNoLock
    Description: GetRows method with disabled ActiveUser functionality.
    OperationID: GetRowsNoLock
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsNoLock_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsNoLock_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsNoLock_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsNoLock(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsNoLock(requestBody:GetRowsNoLock_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsNoLock_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetRowsNoLock", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsNoLock_output)
           })
       .catch((error) => {
           reject(error)
@@ -661,30 +809,37 @@ export function post_GetRowsNoLock(requestBody:any, epicorHeaders?:Headers){
    Description: This method deletes TaxDtl records which have zero amounts
 Since Payments TAx logic calculates tax conditionally only for the first tax line the payment could have multiple zero tax records.
    OperationID: DeleteZeroAmtTaxRec
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteZeroAmtTaxRec_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteZeroAmtTaxRec_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteZeroAmtTaxRec_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteZeroAmtTaxRec(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteZeroAmtTaxRec(requestBody:DeleteZeroAmtTaxRec_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteZeroAmtTaxRec_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/DeleteZeroAmtTaxRec", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteZeroAmtTaxRec_output)
           })
       .catch((error) => {
           reject(error)
@@ -696,30 +851,37 @@ export function post_DeleteZeroAmtTaxRec(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetGrpBankInfo
    Description: This method is called when the Bank Account changes
    OperationID: GetGrpBankInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetGrpBankInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetGrpBankInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetGrpBankInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetGrpBankInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetGrpBankInfo(requestBody:GetGrpBankInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetGrpBankInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetGrpBankInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetGrpBankInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -731,30 +893,37 @@ export function post_GetGrpBankInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetGrpFiscal
    Description: This method is run when the Transaction date is changed to update the fiscal period fields
    OperationID: GetGrpFiscal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetGrpFiscal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetGrpFiscal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetGrpFiscal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetGrpFiscal(requestBody:any, epicorHeaders?:Headers){
+export function post_GetGrpFiscal(requestBody:GetGrpFiscal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetGrpFiscal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetGrpFiscal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetGrpFiscal_output)
           })
       .catch((error) => {
           reject(error)
@@ -766,30 +935,37 @@ export function post_GetGrpFiscal(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCashGrpForPINoLock
    Description: GetNewCashGrpForPI with active user locking disabled.
    OperationID: GetNewCashGrpForPINoLock
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCashGrpForPINoLock_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCashGrpForPINoLock_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCashGrpForPINoLock_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCashGrpForPINoLock(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCashGrpForPINoLock(requestBody:GetNewCashGrpForPINoLock_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCashGrpForPINoLock_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetNewCashGrpForPINoLock", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCashGrpForPINoLock_output)
           })
       .catch((error) => {
           reject(error)
@@ -800,30 +976,37 @@ export function post_GetNewCashGrpForPINoLock(requestBody:any, epicorHeaders?:He
    /**  
    Summary: Invoke method GetNewCashGrpForPI
    OperationID: GetNewCashGrpForPI
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCashGrpForPI_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCashGrpForPI_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCashGrpForPI_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCashGrpForPI(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCashGrpForPI(requestBody:GetNewCashGrpForPI_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCashGrpForPI_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetNewCashGrpForPI", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCashGrpForPI_output)
           })
       .catch((error) => {
           reject(error)
@@ -835,30 +1018,37 @@ export function post_GetNewCashGrpForPI(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewCashGrpForPIStatusNoLock
    Description: GetNewCashGrpForPIStatus with active user locking disabled.
    OperationID: GetNewCashGrpForPIStatusNoLock
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCashGrpForPIStatusNoLock_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCashGrpForPIStatusNoLock_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCashGrpForPIStatusNoLock_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCashGrpForPIStatusNoLock(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCashGrpForPIStatusNoLock(requestBody:GetNewCashGrpForPIStatusNoLock_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCashGrpForPIStatusNoLock_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetNewCashGrpForPIStatusNoLock", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCashGrpForPIStatusNoLock_output)
           })
       .catch((error) => {
           reject(error)
@@ -869,30 +1059,37 @@ export function post_GetNewCashGrpForPIStatusNoLock(requestBody:any, epicorHeade
    /**  
    Summary: Invoke method GetNewCashGrpForPIStatus
    OperationID: GetNewCashGrpForPIStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCashGrpForPIStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCashGrpForPIStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCashGrpForPIStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCashGrpForPIStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCashGrpForPIStatus(requestBody:GetNewCashGrpForPIStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCashGrpForPIStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetNewCashGrpForPIStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCashGrpForPIStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -903,30 +1100,37 @@ export function post_GetNewCashGrpForPIStatus(requestBody:any, epicorHeaders?:He
    /**  
    Summary: Invoke method GetPIGroupByID
    OperationID: GetPIGroupByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPIGroupByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPIGroupByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPIGroupByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPIGroupByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPIGroupByID(requestBody:GetPIGroupByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPIGroupByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetPIGroupByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPIGroupByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -938,30 +1142,37 @@ export function post_GetPIGroupByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method IsPIGroup
    Description: This method verifies a Cash Group exists and returns the different types of group flags for further use.
    OperationID: IsPIGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsPIGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsPIGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsPIGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsPIGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_IsPIGroup(requestBody:IsPIGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsPIGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/IsPIGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsPIGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -973,30 +1184,37 @@ export function post_IsPIGroup(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LockPIGroup
    Description: Should be call before GetPIGroupByID to lock the Group.
    OperationID: LockPIGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LockPIGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LockPIGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LockPIGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LockPIGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_LockPIGroup(requestBody:LockPIGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LockPIGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/LockPIGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LockPIGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1008,30 +1226,37 @@ export function post_LockPIGroup(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LockPIGroupInDS
    Description: Should be call before GetPIGroupByID to lock the Group.
    OperationID: LockPIGroupInDS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LockPIGroupInDS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LockPIGroupInDS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LockPIGroupInDS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LockPIGroupInDS(requestBody:any, epicorHeaders?:Headers){
+export function post_LockPIGroupInDS(requestBody:LockPIGroupInDS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LockPIGroupInDS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/LockPIGroupInDS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LockPIGroupInDS_output)
           })
       .catch((error) => {
           reject(error)
@@ -1043,30 +1268,37 @@ export function post_LockPIGroupInDS(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UnlockPIGroup
    Description: Unlock the group.  Only user who locked the group can unlock it.
    OperationID: UnlockPIGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnlockPIGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnlockPIGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnlockPIGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnlockPIGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_UnlockPIGroup(requestBody:UnlockPIGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnlockPIGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/UnlockPIGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnlockPIGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1078,30 +1310,37 @@ export function post_UnlockPIGroup(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UnlockPIGroupInDS
    Description: Unlock the group.  Only user who locked the group can unlock it.
    OperationID: UnlockPIGroupInDS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnlockPIGroupInDS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnlockPIGroupInDS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnlockPIGroupInDS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnlockPIGroupInDS(requestBody:any, epicorHeaders?:Headers){
+export function post_UnlockPIGroupInDS(requestBody:UnlockPIGroupInDS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnlockPIGroupInDS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/UnlockPIGroupInDS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnlockPIGroupInDS_output)
           })
       .catch((error) => {
           reject(error)
@@ -1112,30 +1351,37 @@ export function post_UnlockPIGroupInDS(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetPIStatusGroupByID
    OperationID: GetPIStatusGroupByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPIStatusGroupByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPIStatusGroupByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPIStatusGroupByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPIStatusGroupByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPIStatusGroupByID(requestBody:GetPIStatusGroupByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPIStatusGroupByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetPIStatusGroupByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPIStatusGroupByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1148,30 +1394,37 @@ export function post_GetPIStatusGroupByID(requestBody:any, epicorHeaders?:Header
    Description: This method must be run whenever the use is leaving the current CashGrp record
 (either by selecting a new Group or by leaving the screen)
    OperationID: LeaveCashGrp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveCashGrp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveCashGrp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveCashGrp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveCashGrp(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveCashGrp(requestBody:LeaveCashGrp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveCashGrp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/LeaveCashGrp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveCashGrp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1186,30 +1439,37 @@ This method first checks if the Group Receipt/Payment was processed and CashGrp.
 This method checks that the A/R is interfaced to the G/L. If not, then ask the
 user if they want to go ahead and post the cash receipts
    OperationID: PrePostEPGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PrePostEPGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PrePostEPGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PrePostEPGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PrePostEPGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_PrePostEPGroup(requestBody:PrePostEPGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PrePostEPGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/PrePostEPGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PrePostEPGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1224,30 +1484,37 @@ user if they want to go ahead and post the cash receipts
 This method also checks if this Group has any related Tax Records with 0 amounts
 The user is asked if these records are supposed to be deleted before Post
    OperationID: PrePostGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PrePostGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PrePostGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PrePostGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PrePostGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_PrePostGroup(requestBody:PrePostGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PrePostGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/PrePostGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PrePostGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1259,30 +1526,37 @@ export function post_PrePostGroup(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateMaster
    Description: This method is called instead of the standard Update
    OperationID: UpdateMaster
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateMaster_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateMaster_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateMaster_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateMaster(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateMaster(requestBody:UpdateMaster_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateMaster_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/UpdateMaster", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateMaster_output)
           })
       .catch((error) => {
           reject(error)
@@ -1294,30 +1568,37 @@ export function post_UpdateMaster(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ReceiptGroupExists
    Description: This method is called to check if group with entered ID exists
    OperationID: ReceiptGroupExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ReceiptGroupExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ReceiptGroupExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ReceiptGroupExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ReceiptGroupExists(requestBody:any, epicorHeaders?:Headers){
+export function post_ReceiptGroupExists(requestBody:ReceiptGroupExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ReceiptGroupExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/ReceiptGroupExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ReceiptGroupExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -1329,30 +1610,37 @@ export function post_ReceiptGroupExists(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetListDepositSlips
    Description: Returns a List Dataset for DepositSlips
    OperationID: GetListDepositSlips
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListDepositSlips_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListDepositSlips_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListDepositSlips_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListDepositSlips(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListDepositSlips(requestBody:GetListDepositSlips_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListDepositSlips_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetListDepositSlips", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListDepositSlips_output)
           })
       .catch((error) => {
           reject(error)
@@ -1364,30 +1652,37 @@ export function post_GetListDepositSlips(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetRowsUseLockSetting
    Description: Returns the CashGrp dataset using the Auto Lock Group functionality
    OperationID: GetRowsUseLockSetting
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsUseLockSetting_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsUseLockSetting_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsUseLockSetting_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsUseLockSetting(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsUseLockSetting(requestBody:GetRowsUseLockSetting_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsUseLockSetting_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetRowsUseLockSetting", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsUseLockSetting_output)
           })
       .catch((error) => {
           reject(error)
@@ -1401,30 +1696,37 @@ export function post_GetRowsUseLockSetting(requestBody:any, epicorHeaders?:Heade
 This method update the database and refresh the group dataset with the information from the database.
 Returns the dataset with the current lock status of GLJrnGrp.
    OperationID: GroupUnlock
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GroupUnlock_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GroupUnlock_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GroupUnlock_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GroupUnlock(requestBody:any, epicorHeaders?:Headers){
+export function post_GroupUnlock(requestBody:GroupUnlock_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GroupUnlock_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GroupUnlock", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GroupUnlock_output)
           })
       .catch((error) => {
           reject(error)
@@ -1438,30 +1740,37 @@ export function post_GroupUnlock(requestBody:any, epicorHeaders?:Headers){
 This method update the database and refresh the group dataset with the information from the database.
 Returns the dataset with the current lock status of GLJrnGrp.
    OperationID: GroupLock
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GroupLock_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GroupLock_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GroupLock_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GroupLock(requestBody:any, epicorHeaders?:Headers){
+export function post_GroupLock(requestBody:GroupLock_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GroupLock_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GroupLock", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GroupLock_output)
           })
       .catch((error) => {
           reject(error)
@@ -1473,30 +1782,37 @@ export function post_GroupLock(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCashGrp
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCashGrp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCashGrp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCashGrp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCashGrp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCashGrp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCashGrp(requestBody:GetNewCashGrp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCashGrp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetNewCashGrp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCashGrp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1508,30 +1824,37 @@ export function post_GetNewCashGrp(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1543,7 +1866,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1567,15 +1890,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1587,7 +1917,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1611,15 +1941,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1631,30 +1968,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1666,30 +2010,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CashGrpSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1700,16 +2051,33 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CashGrpListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CashGrpListRow[],
+   "value":Erp_Tablesets_CashGrpListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CashGrpRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CashGrpRow[],
+   "value":Erp_Tablesets_CashGrpRow,
 }
 
 export interface Erp_Tablesets_CashGrpListRow{
@@ -1892,6 +2260,23 @@ export interface Erp_Tablesets_CashGrpRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2202,7 +2587,7 @@ export interface GetGrpBankInfo_input{
 export interface GetGrpBankInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2219,7 +2604,7 @@ export interface GetGrpFiscal_input{
 export interface GetGrpFiscal_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2282,7 +2667,7 @@ export interface GetNewCashGrpForPINoLock_input{
 export interface GetNewCashGrpForPINoLock_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2296,7 +2681,7 @@ export interface GetNewCashGrpForPIStatusNoLock_input{
 export interface GetNewCashGrpForPIStatusNoLock_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2310,7 +2695,7 @@ export interface GetNewCashGrpForPIStatus_input{
 export interface GetNewCashGrpForPIStatus_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2326,7 +2711,7 @@ export interface GetNewCashGrpForPI_input{
 export interface GetNewCashGrpForPI_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2340,7 +2725,7 @@ export interface GetNewCashGrpNoLock_input{
 export interface GetNewCashGrpNoLock_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2354,7 +2739,7 @@ export interface GetNewCashGrp_input{
 export interface GetNewCashGrp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2454,7 +2839,7 @@ export interface GroupLock_input{
 export interface GroupLock_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2471,7 +2856,7 @@ export interface GroupUnlock_input{
 export interface GroupUnlock_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2553,7 +2938,7 @@ export interface LockPIGroupInDS_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2630,7 +3015,7 @@ export interface UnlockPIGroupInDS_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 
@@ -2664,7 +3049,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtCashGrpTableset[],
+   ds:Erp_Tablesets_UpdExtCashGrpTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2679,7 +3064,7 @@ export interface UpdateMaster_input{
 export interface UpdateMaster_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
    mode:number,
    oldBankBatchSysRowID:string,
 }
@@ -2695,7 +3080,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CashGrpTableset[],
+   ds:Erp_Tablesets_CashGrpTableset,
 }
 }
 

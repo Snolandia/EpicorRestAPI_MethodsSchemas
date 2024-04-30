@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.LIB.CdcSubscriberSvc
 // Description: Cdc Subscriber API
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method Register
    Description: Register a new subscriber for the API
    OperationID: Register
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Register_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Register_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Register_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Register(requestBody:any, epicorHeaders?:Headers){
+export function post_Register(requestBody:Register_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Register_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/Register", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Register_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_Register(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Unregister
    Description: Unregister a subscriber
    OperationID: Unregister
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Unregister_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Unregister_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Unregister_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Unregister(requestBody:any, epicorHeaders?:Headers){
+export function post_Unregister(requestBody:Unregister_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Unregister_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/Unregister", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Unregister_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_Unregister(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SubscriberUpdate
    Description: Update a subscriber's configuration
    OperationID: SubscriberUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SubscriberUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SubscriberUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SubscriberUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubscriberUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_SubscriberUpdate(requestBody:SubscriberUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SubscriberUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/SubscriberUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SubscriberUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_SubscriberUpdate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RegenerateSecret
    Description: Generate a new secret for a subscriber
    OperationID: RegenerateSecret
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RegenerateSecret_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RegenerateSecret_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RegenerateSecret_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RegenerateSecret(requestBody:any, epicorHeaders?:Headers){
+export function post_RegenerateSecret(requestBody:RegenerateSecret_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RegenerateSecret_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/RegenerateSecret", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RegenerateSecret_output)
           })
       .catch((error) => {
           reject(error)
@@ -224,30 +302,37 @@ export function post_RegenerateSecret(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method RuleGet
    OperationID: RuleGet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RuleGet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RuleGet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RuleGet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RuleGet(requestBody:any, epicorHeaders?:Headers){
+export function post_RuleGet(requestBody:RuleGet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RuleGet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/RuleGet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RuleGet_output)
           })
       .catch((error) => {
           reject(error)
@@ -259,30 +344,37 @@ export function post_RuleGet(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RuleAdd
    Description: Add a rule for a specific subscriber
    OperationID: RuleAdd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RuleAdd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RuleAdd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RuleAdd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RuleAdd(requestBody:any, epicorHeaders?:Headers){
+export function post_RuleAdd(requestBody:RuleAdd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RuleAdd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/RuleAdd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RuleAdd_output)
           })
       .catch((error) => {
           reject(error)
@@ -294,30 +386,37 @@ export function post_RuleAdd(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RuleRemove
    Description: Remove a rule from a specific subscriber
    OperationID: RuleRemove
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RuleRemove_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RuleRemove_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RuleRemove_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RuleRemove(requestBody:any, epicorHeaders?:Headers){
+export function post_RuleRemove(requestBody:RuleRemove_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RuleRemove_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/RuleRemove", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RuleRemove_output)
           })
       .catch((error) => {
           reject(error)
@@ -329,30 +428,37 @@ export function post_RuleRemove(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RuleUpdate
    Description: Update a rule
    OperationID: RuleUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RuleUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RuleUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RuleUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RuleUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_RuleUpdate(requestBody:RuleUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RuleUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/RuleUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RuleUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -364,30 +470,37 @@ export function post_RuleUpdate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RulesList
    Description: List out all the rules for a specific subscriber
    OperationID: RulesList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RulesList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RulesList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RulesList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RulesList(requestBody:any, epicorHeaders?:Headers){
+export function post_RulesList(requestBody:RulesList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RulesList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/RulesList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RulesList_output)
           })
       .catch((error) => {
           reject(error)
@@ -399,30 +512,37 @@ export function post_RulesList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RuleTableList
    Description: List tables that have been enabled for CDC and can be used for rules
    OperationID: RuleTableList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RuleTableList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RuleTableList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RuleTableList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RuleTableList(requestBody:any, epicorHeaders?:Headers){
+export function post_RuleTableList(requestBody:RuleTableList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RuleTableList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/RuleTableList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RuleTableList_output)
           })
       .catch((error) => {
           reject(error)
@@ -434,30 +554,37 @@ export function post_RuleTableList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GenerateSampleData
    Description: Generate sample data for a given table
    OperationID: GenerateSampleData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateSampleData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateSampleData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateSampleData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateSampleData(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateSampleData(requestBody:GenerateSampleData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateSampleData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/GenerateSampleData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateSampleData_output)
           })
       .catch((error) => {
           reject(error)
@@ -469,30 +596,37 @@ export function post_GenerateSampleData(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GenerateLookupSampleData
    Description: Generate sample data for the lookups on a given table
    OperationID: GenerateLookupSampleData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateLookupSampleData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateLookupSampleData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateLookupSampleData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateLookupSampleData(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateLookupSampleData(requestBody:GenerateLookupSampleData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateLookupSampleData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/GenerateLookupSampleData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateLookupSampleData_output)
           })
       .catch((error) => {
           reject(error)
@@ -504,30 +638,37 @@ export function post_GenerateLookupSampleData(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GenerateKeyTags
    Description: Generate Tags based on the primary key columns
    OperationID: GenerateKeyTags
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateKeyTags_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateKeyTags_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateKeyTags_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateKeyTags(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateKeyTags(requestBody:GenerateKeyTags_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateKeyTags_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/GenerateKeyTags", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateKeyTags_output)
           })
       .catch((error) => {
           reject(error)
@@ -539,30 +680,37 @@ export function post_GenerateKeyTags(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLookupLinks
    Description: Get look up links available for a specific table
    OperationID: GetLookupLinks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLookupLinks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLookupLinks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLookupLinks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLookupLinks(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLookupLinks(requestBody:GetLookupLinks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLookupLinks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/GetLookupLinks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLookupLinks_output)
           })
       .catch((error) => {
           reject(error)
@@ -574,30 +722,37 @@ export function post_GetLookupLinks(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLookupDataFields
    Description: Get data fields for a specific look up on a table
    OperationID: GetLookupDataFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLookupDataFields_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLookupDataFields_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLookupDataFields_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLookupDataFields(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLookupDataFields(requestBody:GetLookupDataFields_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLookupDataFields_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/GetLookupDataFields", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLookupDataFields_output)
           })
       .catch((error) => {
           reject(error)
@@ -609,30 +764,37 @@ export function post_GetLookupDataFields(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method Pull
    Description: Pull messages from the subscriber queue.
    OperationID: Pull
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Pull_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Pull_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Pull_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Pull(requestBody:any, epicorHeaders?:Headers){
+export function post_Pull(requestBody:Pull_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Pull_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.CdcSubscriberSvc/Pull", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Pull_output)
           })
       .catch((error) => {
           reject(error)
@@ -643,11 +805,45 @@ export function post_Pull(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.DataExportSvc
 // Description: Data Export Tool
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportDefRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportDefRow
    */  
 export function get_DataExports(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_DataExports(select?:string, expand?:string, filter?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportDefRow)
           })
@@ -118,15 +158,15 @@ export function get_DataExports(select?:string, expand?:string, filter?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataExports
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportDefRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportDefRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataExportDefRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataExportDefRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataExports(requestBody:any, epicorHeaders?:Headers){
+export function post_DataExports(requestBody:Erp_Tablesets_DataExportDefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_DataExports(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_DataExports(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportDefRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportDefRow
    */  
 export function get_DataExports_Company_DefinitionID(Company:string, DefinitionID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_DataExports_Company_DefinitionID(Company:string, DefinitionI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportDefRow)
           })
@@ -193,15 +247,15 @@ export function get_DataExports_Company_DefinitionID(Company:string, DefinitionI
    OperationID: UpdateExt_DataExport
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportDefRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportDefRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataExports_Company_DefinitionID(Company:string, DefinitionID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataExports_Company_DefinitionID(Company:string, DefinitionID:string, requestBody:Erp_Tablesets_DataExportDefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_DataExports_Company_DefinitionID(Company:string, Definitio
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_DataExports_Company_DefinitionID(Company:string, Definitio
    OperationID: DeleteUpdateExt_DataExport
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_DataExports_Company_DefinitionID(Company:string, Definiti
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_DataExports_Company_DefinitionID(Company:string, Definiti
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportHistoryRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportHistoryRow
    */  
 export function get_DataExports_Company_DefinitionID_DataExportHistories(Company:string, DefinitionID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_DataExports_Company_DefinitionID_DataExportHistories(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportHistoryRow)
           })
@@ -309,10 +384,10 @@ export function get_DataExports_Company_DefinitionID_DataExportHistories(Company
       @param iCounter Desc: iCounter   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportHistoryRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportHistoryRow
    */  
 export function get_DataExports_Company_DefinitionID_DataExportHistories_Company_DefinitionID_iCounter(Company:string, DefinitionID:string, iCounter:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_DataExports_Company_DefinitionID_DataExportHistories_Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportHistoryRow)
           })
@@ -349,10 +431,10 @@ export function get_DataExports_Company_DefinitionID_DataExportHistories_Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportOptionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportOptionRow
    */  
 export function get_DataExports_Company_DefinitionID_DataExportOptions(Company:string, DefinitionID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -367,7 +449,14 @@ export function get_DataExports_Company_DefinitionID_DataExportOptions(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportOptionRow)
           })
@@ -387,10 +476,10 @@ export function get_DataExports_Company_DefinitionID_DataExportOptions(Company:s
       @param TableOption Desc: TableOption   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportOptionRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportOptionRow
    */  
 export function get_DataExports_Company_DefinitionID_DataExportOptions_Company_DefinitionID_OptionName_TableOption(Company:string, DefinitionID:string, OptionName:string, TableOption:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -405,7 +494,14 @@ export function get_DataExports_Company_DefinitionID_DataExportOptions_Company_D
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportOptionRow)
           })
@@ -428,10 +524,10 @@ export function get_DataExports_Company_DefinitionID_DataExportOptions_Company_D
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableRow
    */  
 export function get_DataExports_Company_DefinitionID_DataExportTables(Company:string, DefinitionID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -446,7 +542,14 @@ export function get_DataExports_Company_DefinitionID_DataExportTables(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportTableRow)
           })
@@ -466,10 +569,10 @@ export function get_DataExports_Company_DefinitionID_DataExportTables(Company:st
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportTableRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportTableRow
    */  
 export function get_DataExports_Company_DefinitionID_DataExportTables_Company_DefinitionID_TableName(Company:string, DefinitionID:string, TableName:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -484,7 +587,14 @@ export function get_DataExports_Company_DefinitionID_DataExportTables_Company_De
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportTableRow)
           })
@@ -504,10 +614,10 @@ export function get_DataExports_Company_DefinitionID_DataExportTables_Company_De
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportHistoryRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportHistoryRow
    */  
 export function get_DataExportHistories(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -522,7 +632,14 @@ export function get_DataExportHistories(select?:string, filter?:string, orderby?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportHistoryRow)
           })
@@ -536,15 +653,15 @@ export function get_DataExportHistories(select?:string, filter?:string, orderby?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataExportHistories
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportHistoryRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportHistoryRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataExportHistoryRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataExportHistoryRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataExportHistories(requestBody:any, epicorHeaders?:Headers){
+export function post_DataExportHistories(requestBody:Erp_Tablesets_DataExportHistoryRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -558,7 +675,14 @@ export function post_DataExportHistories(requestBody:any, epicorHeaders?:Headers
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -577,10 +701,10 @@ export function post_DataExportHistories(requestBody:any, epicorHeaders?:Headers
       @param iCounter Desc: iCounter   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportHistoryRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportHistoryRow
    */  
 export function get_DataExportHistories_Company_DefinitionID_iCounter(Company:string, DefinitionID:string, iCounter:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -595,7 +719,14 @@ export function get_DataExportHistories_Company_DefinitionID_iCounter(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportHistoryRow)
           })
@@ -612,15 +743,15 @@ export function get_DataExportHistories_Company_DefinitionID_iCounter(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param iCounter Desc: iCounter   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportHistoryRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportHistoryRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataExportHistories_Company_DefinitionID_iCounter(Company:string, DefinitionID:string, iCounter:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataExportHistories_Company_DefinitionID_iCounter(Company:string, DefinitionID:string, iCounter:string, requestBody:Erp_Tablesets_DataExportHistoryRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -634,7 +765,14 @@ export function patch_DataExportHistories_Company_DefinitionID_iCounter(Company:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -651,7 +789,7 @@ export function patch_DataExportHistories_Company_DefinitionID_iCounter(Company:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param iCounter Desc: iCounter   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -670,7 +808,14 @@ export function delete_DataExportHistories_Company_DefinitionID_iCounter(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -690,10 +835,10 @@ export function delete_DataExportHistories_Company_DefinitionID_iCounter(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportOptionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportOptionRow
    */  
 export function get_DataExportOptions(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -708,7 +853,14 @@ export function get_DataExportOptions(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportOptionRow)
           })
@@ -722,15 +874,15 @@ export function get_DataExportOptions(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataExportOptions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportOptionRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportOptionRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataExportOptionRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataExportOptionRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataExportOptions(requestBody:any, epicorHeaders?:Headers){
+export function post_DataExportOptions(requestBody:Erp_Tablesets_DataExportOptionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -744,7 +896,14 @@ export function post_DataExportOptions(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -764,10 +923,10 @@ export function post_DataExportOptions(requestBody:any, epicorHeaders?:Headers){
       @param TableOption Desc: TableOption   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportOptionRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportOptionRow
    */  
 export function get_DataExportOptions_Company_DefinitionID_OptionName_TableOption(Company:string, DefinitionID:string, OptionName:string, TableOption:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -782,7 +941,14 @@ export function get_DataExportOptions_Company_DefinitionID_OptionName_TableOptio
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportOptionRow)
           })
@@ -800,15 +966,15 @@ export function get_DataExportOptions_Company_DefinitionID_OptionName_TableOptio
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param OptionName Desc: OptionName   Required: True   Allow empty value : True
       @param TableOption Desc: TableOption   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportOptionRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportOptionRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataExportOptions_Company_DefinitionID_OptionName_TableOption(Company:string, DefinitionID:string, OptionName:string, TableOption:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataExportOptions_Company_DefinitionID_OptionName_TableOption(Company:string, DefinitionID:string, OptionName:string, TableOption:string, requestBody:Erp_Tablesets_DataExportOptionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -822,7 +988,14 @@ export function patch_DataExportOptions_Company_DefinitionID_OptionName_TableOpt
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -840,7 +1013,7 @@ export function patch_DataExportOptions_Company_DefinitionID_OptionName_TableOpt
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param OptionName Desc: OptionName   Required: True   Allow empty value : True
       @param TableOption Desc: TableOption   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -859,7 +1032,14 @@ export function delete_DataExportOptions_Company_DefinitionID_OptionName_TableOp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -880,10 +1060,10 @@ export function delete_DataExportOptions_Company_DefinitionID_OptionName_TableOp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableRow
    */  
 export function get_DataExportTables(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -898,7 +1078,14 @@ export function get_DataExportTables(select?:string, expand?:string, filter?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportTableRow)
           })
@@ -912,15 +1099,15 @@ export function get_DataExportTables(select?:string, expand?:string, filter?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataExportTables
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportTableRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportTableRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataExportTableRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataExportTableRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataExportTables(requestBody:any, epicorHeaders?:Headers){
+export function post_DataExportTables(requestBody:Erp_Tablesets_DataExportTableRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -934,7 +1121,14 @@ export function post_DataExportTables(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -954,10 +1148,10 @@ export function post_DataExportTables(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportTableRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportTableRow
    */  
 export function get_DataExportTables_Company_DefinitionID_TableName(Company:string, DefinitionID:string, TableName:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -972,7 +1166,14 @@ export function get_DataExportTables_Company_DefinitionID_TableName(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportTableRow)
           })
@@ -989,15 +1190,15 @@ export function get_DataExportTables_Company_DefinitionID_TableName(Company:stri
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param TableName Desc: TableName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportTableRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportTableRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataExportTables_Company_DefinitionID_TableName(Company:string, DefinitionID:string, TableName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataExportTables_Company_DefinitionID_TableName(Company:string, DefinitionID:string, TableName:string, requestBody:Erp_Tablesets_DataExportTableRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1011,7 +1212,14 @@ export function patch_DataExportTables_Company_DefinitionID_TableName(Company:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1028,7 +1236,7 @@ export function patch_DataExportTables_Company_DefinitionID_TableName(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param TableName Desc: TableName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1047,7 +1255,14 @@ export function delete_DataExportTables_Company_DefinitionID_TableName(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1071,10 +1286,10 @@ export function delete_DataExportTables_Company_DefinitionID_TableName(Company:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnRow
    */  
 export function get_DataExportTables_Company_DefinitionID_TableName_DataExportColumns(Company:string, DefinitionID:string, TableName:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1089,7 +1304,14 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportCo
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportColumnRow)
           })
@@ -1110,10 +1332,10 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportCo
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportColumnRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportColumnRow
    */  
 export function get_DataExportTables_Company_DefinitionID_TableName_DataExportColumns_Company_DefinitionID_TableName_ColumnName(Company:string, DefinitionID:string, TableName:string, ColumnName:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1128,7 +1350,14 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportCo
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportColumnRow)
           })
@@ -1151,10 +1380,10 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportCo
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableAttributeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableAttributeRow
    */  
 export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTableAttributes(Company:string, DefinitionID:string, TableName:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1169,7 +1398,14 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportTableAttributeRow)
           })
@@ -1189,10 +1425,10 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTa
       @param AttributeName Desc: AttributeName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportTableAttributeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportTableAttributeRow
    */  
 export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTableAttributes_Company_DefinitionID_TableName_AttributeName(Company:string, DefinitionID:string, TableName:string, AttributeName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1207,7 +1443,14 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportTableAttributeRow)
           })
@@ -1230,10 +1473,10 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableParamRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableParamRow
    */  
 export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTableParams(Company:string, DefinitionID:string, TableName:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1248,7 +1491,14 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportTableParamRow)
           })
@@ -1268,10 +1518,10 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTa
       @param ParamName Desc: ParamName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportTableParamRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportTableParamRow
    */  
 export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTableParams_Company_DefinitionID_TableName_ParamName(Company:string, DefinitionID:string, TableName:string, ParamName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1286,7 +1536,14 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportTableParamRow)
           })
@@ -1307,10 +1564,10 @@ export function get_DataExportTables_Company_DefinitionID_TableName_DataExportTa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnRow
    */  
 export function get_DataExportColumns(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1325,7 +1582,14 @@ export function get_DataExportColumns(select?:string, expand?:string, filter?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportColumnRow)
           })
@@ -1339,15 +1603,15 @@ export function get_DataExportColumns(select?:string, expand?:string, filter?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataExportColumns
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportColumnRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportColumnRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataExportColumnRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataExportColumnRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataExportColumns(requestBody:any, epicorHeaders?:Headers){
+export function post_DataExportColumns(requestBody:Erp_Tablesets_DataExportColumnRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1361,7 +1625,14 @@ export function post_DataExportColumns(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1382,10 +1653,10 @@ export function post_DataExportColumns(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportColumnRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportColumnRow
    */  
 export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName(Company:string, DefinitionID:string, TableName:string, ColumnName:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1400,7 +1671,14 @@ export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportColumnRow)
           })
@@ -1418,15 +1696,15 @@ export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName(
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param ColumnName Desc: ColumnName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportColumnRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportColumnRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataExportColumns_Company_DefinitionID_TableName_ColumnName(Company:string, DefinitionID:string, TableName:string, ColumnName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataExportColumns_Company_DefinitionID_TableName_ColumnName(Company:string, DefinitionID:string, TableName:string, ColumnName:string, requestBody:Erp_Tablesets_DataExportColumnRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1440,7 +1718,14 @@ export function patch_DataExportColumns_Company_DefinitionID_TableName_ColumnNam
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1458,7 +1743,7 @@ export function patch_DataExportColumns_Company_DefinitionID_TableName_ColumnNam
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param ColumnName Desc: ColumnName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1477,7 +1762,14 @@ export function delete_DataExportColumns_Company_DefinitionID_TableName_ColumnNa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1501,10 +1793,10 @@ export function delete_DataExportColumns_Company_DefinitionID_TableName_ColumnNa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnAttributeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnAttributeRow
    */  
 export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_DataExportColumnAttributes(Company:string, DefinitionID:string, TableName:string, ColumnName:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1519,7 +1811,14 @@ export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportColumnAttributeRow)
           })
@@ -1540,10 +1839,10 @@ export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_
       @param AttributeName Desc: AttributeName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportColumnAttributeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportColumnAttributeRow
    */  
 export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_DataExportColumnAttributes_Company_DefinitionID_TableName_ColumnName_AttributeName(Company:string, DefinitionID:string, TableName:string, ColumnName:string, AttributeName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1558,7 +1857,14 @@ export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportColumnAttributeRow)
           })
@@ -1582,10 +1888,10 @@ export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnLinkRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnLinkRow
    */  
 export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_DataExportColumnLinks(Company:string, DefinitionID:string, TableName:string, ColumnName:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1600,7 +1906,14 @@ export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportColumnLinkRow)
           })
@@ -1621,10 +1934,10 @@ export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_
       @param iCounter Desc: iCounter   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportColumnLinkRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportColumnLinkRow
    */  
 export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_DataExportColumnLinks_Company_DefinitionID_TableName_ColumnName_iCounter(Company:string, DefinitionID:string, TableName:string, ColumnName:string, iCounter:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1639,7 +1952,14 @@ export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportColumnLinkRow)
           })
@@ -1659,10 +1979,10 @@ export function get_DataExportColumns_Company_DefinitionID_TableName_ColumnName_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnAttributeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnAttributeRow
    */  
 export function get_DataExportColumnAttributes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1677,7 +1997,14 @@ export function get_DataExportColumnAttributes(select?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportColumnAttributeRow)
           })
@@ -1691,15 +2018,15 @@ export function get_DataExportColumnAttributes(select?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataExportColumnAttributes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportColumnAttributeRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportColumnAttributeRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataExportColumnAttributeRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataExportColumnAttributeRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataExportColumnAttributes(requestBody:any, epicorHeaders?:Headers){
+export function post_DataExportColumnAttributes(requestBody:Erp_Tablesets_DataExportColumnAttributeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1713,7 +2040,14 @@ export function post_DataExportColumnAttributes(requestBody:any, epicorHeaders?:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1734,10 +2068,10 @@ export function post_DataExportColumnAttributes(requestBody:any, epicorHeaders?:
       @param AttributeName Desc: AttributeName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportColumnAttributeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportColumnAttributeRow
    */  
 export function get_DataExportColumnAttributes_Company_DefinitionID_TableName_ColumnName_AttributeName(Company:string, DefinitionID:string, TableName:string, ColumnName:string, AttributeName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1752,7 +2086,14 @@ export function get_DataExportColumnAttributes_Company_DefinitionID_TableName_Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportColumnAttributeRow)
           })
@@ -1771,15 +2112,15 @@ export function get_DataExportColumnAttributes_Company_DefinitionID_TableName_Co
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param ColumnName Desc: ColumnName   Required: True   Allow empty value : True
       @param AttributeName Desc: AttributeName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportColumnAttributeRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportColumnAttributeRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataExportColumnAttributes_Company_DefinitionID_TableName_ColumnName_AttributeName(Company:string, DefinitionID:string, TableName:string, ColumnName:string, AttributeName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataExportColumnAttributes_Company_DefinitionID_TableName_ColumnName_AttributeName(Company:string, DefinitionID:string, TableName:string, ColumnName:string, AttributeName:string, requestBody:Erp_Tablesets_DataExportColumnAttributeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1793,7 +2134,14 @@ export function patch_DataExportColumnAttributes_Company_DefinitionID_TableName_
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1812,7 +2160,7 @@ export function patch_DataExportColumnAttributes_Company_DefinitionID_TableName_
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param ColumnName Desc: ColumnName   Required: True   Allow empty value : True
       @param AttributeName Desc: AttributeName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1831,7 +2179,14 @@ export function delete_DataExportColumnAttributes_Company_DefinitionID_TableName
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1851,10 +2206,10 @@ export function delete_DataExportColumnAttributes_Company_DefinitionID_TableName
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnLinkRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportColumnLinkRow
    */  
 export function get_DataExportColumnLinks(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1869,7 +2224,14 @@ export function get_DataExportColumnLinks(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportColumnLinkRow)
           })
@@ -1883,15 +2245,15 @@ export function get_DataExportColumnLinks(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataExportColumnLinks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportColumnLinkRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportColumnLinkRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataExportColumnLinkRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataExportColumnLinkRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataExportColumnLinks(requestBody:any, epicorHeaders?:Headers){
+export function post_DataExportColumnLinks(requestBody:Erp_Tablesets_DataExportColumnLinkRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1905,7 +2267,14 @@ export function post_DataExportColumnLinks(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1926,10 +2295,10 @@ export function post_DataExportColumnLinks(requestBody:any, epicorHeaders?:Heade
       @param iCounter Desc: iCounter   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportColumnLinkRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportColumnLinkRow
    */  
 export function get_DataExportColumnLinks_Company_DefinitionID_TableName_ColumnName_iCounter(Company:string, DefinitionID:string, TableName:string, ColumnName:string, iCounter:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1944,7 +2313,14 @@ export function get_DataExportColumnLinks_Company_DefinitionID_TableName_ColumnN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportColumnLinkRow)
           })
@@ -1963,15 +2339,15 @@ export function get_DataExportColumnLinks_Company_DefinitionID_TableName_ColumnN
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param ColumnName Desc: ColumnName   Required: True   Allow empty value : True
       @param iCounter Desc: iCounter   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportColumnLinkRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportColumnLinkRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataExportColumnLinks_Company_DefinitionID_TableName_ColumnName_iCounter(Company:string, DefinitionID:string, TableName:string, ColumnName:string, iCounter:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataExportColumnLinks_Company_DefinitionID_TableName_ColumnName_iCounter(Company:string, DefinitionID:string, TableName:string, ColumnName:string, iCounter:string, requestBody:Erp_Tablesets_DataExportColumnLinkRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1985,7 +2361,14 @@ export function patch_DataExportColumnLinks_Company_DefinitionID_TableName_Colum
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2004,7 +2387,7 @@ export function patch_DataExportColumnLinks_Company_DefinitionID_TableName_Colum
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param ColumnName Desc: ColumnName   Required: True   Allow empty value : True
       @param iCounter Desc: iCounter   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2023,7 +2406,14 @@ export function delete_DataExportColumnLinks_Company_DefinitionID_TableName_Colu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2043,10 +2433,10 @@ export function delete_DataExportColumnLinks_Company_DefinitionID_TableName_Colu
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableAttributeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableAttributeRow
    */  
 export function get_DataExportTableAttributes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2061,7 +2451,14 @@ export function get_DataExportTableAttributes(select?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportTableAttributeRow)
           })
@@ -2075,15 +2472,15 @@ export function get_DataExportTableAttributes(select?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataExportTableAttributes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportTableAttributeRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportTableAttributeRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataExportTableAttributeRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataExportTableAttributeRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataExportTableAttributes(requestBody:any, epicorHeaders?:Headers){
+export function post_DataExportTableAttributes(requestBody:Erp_Tablesets_DataExportTableAttributeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2097,7 +2494,14 @@ export function post_DataExportTableAttributes(requestBody:any, epicorHeaders?:H
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2117,10 +2521,10 @@ export function post_DataExportTableAttributes(requestBody:any, epicorHeaders?:H
       @param AttributeName Desc: AttributeName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportTableAttributeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportTableAttributeRow
    */  
 export function get_DataExportTableAttributes_Company_DefinitionID_TableName_AttributeName(Company:string, DefinitionID:string, TableName:string, AttributeName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2135,7 +2539,14 @@ export function get_DataExportTableAttributes_Company_DefinitionID_TableName_Att
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportTableAttributeRow)
           })
@@ -2153,15 +2564,15 @@ export function get_DataExportTableAttributes_Company_DefinitionID_TableName_Att
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param AttributeName Desc: AttributeName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportTableAttributeRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportTableAttributeRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataExportTableAttributes_Company_DefinitionID_TableName_AttributeName(Company:string, DefinitionID:string, TableName:string, AttributeName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataExportTableAttributes_Company_DefinitionID_TableName_AttributeName(Company:string, DefinitionID:string, TableName:string, AttributeName:string, requestBody:Erp_Tablesets_DataExportTableAttributeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2175,7 +2586,14 @@ export function patch_DataExportTableAttributes_Company_DefinitionID_TableName_A
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2193,7 +2611,7 @@ export function patch_DataExportTableAttributes_Company_DefinitionID_TableName_A
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param AttributeName Desc: AttributeName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2212,7 +2630,14 @@ export function delete_DataExportTableAttributes_Company_DefinitionID_TableName_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2232,10 +2657,10 @@ export function delete_DataExportTableAttributes_Company_DefinitionID_TableName_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableParamRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportTableParamRow
    */  
 export function get_DataExportTableParams(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2250,7 +2675,14 @@ export function get_DataExportTableParams(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportTableParamRow)
           })
@@ -2264,15 +2696,15 @@ export function get_DataExportTableParams(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DataExportTableParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportTableParamRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.DataExportTableParamRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.DataExportTableParamRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.DataExportTableParamRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DataExportTableParams(requestBody:any, epicorHeaders?:Headers){
+export function post_DataExportTableParams(requestBody:Erp_Tablesets_DataExportTableParamRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2286,7 +2718,14 @@ export function post_DataExportTableParams(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2306,10 +2745,10 @@ export function post_DataExportTableParams(requestBody:any, epicorHeaders?:Heade
       @param ParamName Desc: ParamName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.DataExportTableParamRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.DataExportTableParamRow
    */  
 export function get_DataExportTableParams_Company_DefinitionID_TableName_ParamName(Company:string, DefinitionID:string, TableName:string, ParamName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2324,7 +2763,14 @@ export function get_DataExportTableParams_Company_DefinitionID_TableName_ParamNa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_DataExportTableParamRow)
           })
@@ -2342,15 +2788,15 @@ export function get_DataExportTableParams_Company_DefinitionID_TableName_ParamNa
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param ParamName Desc: ParamName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportTableParamRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.DataExportTableParamRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DataExportTableParams_Company_DefinitionID_TableName_ParamName(Company:string, DefinitionID:string, TableName:string, ParamName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DataExportTableParams_Company_DefinitionID_TableName_ParamName(Company:string, DefinitionID:string, TableName:string, ParamName:string, requestBody:Erp_Tablesets_DataExportTableParamRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2364,7 +2810,14 @@ export function patch_DataExportTableParams_Company_DefinitionID_TableName_Param
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2382,7 +2835,7 @@ export function patch_DataExportTableParams_Company_DefinitionID_TableName_Param
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param ParamName Desc: ParamName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2401,7 +2854,14 @@ export function delete_DataExportTableParams_Company_DefinitionID_TableName_Para
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2421,10 +2881,10 @@ export function delete_DataExportTableParams_Company_DefinitionID_TableName_Para
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportDefListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.DataExportDefListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2439,7 +2899,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportDefListRow)
           })
@@ -2451,6 +2918,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -2470,7 +2954,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -2584,15 +3068,22 @@ export function get_GetRows(whereClauseDataExportDef:string, whereClauseDataExpo
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2605,7 +3096,7 @@ export function get_GetRows(whereClauseDataExportDef:string, whereClauseDataExpo
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -2629,15 +3120,22 @@ export function get_GetByID(definitionID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2652,7 +3150,7 @@ export function get_GetByID(definitionID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -2694,15 +3192,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2713,30 +3218,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    /**  
    Summary: Invoke method DuplicateDefinition
    OperationID: DuplicateDefinition
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DuplicateDefinition_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DuplicateDefinition_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DuplicateDefinition_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DuplicateDefinition(requestBody:any, epicorHeaders?:Headers){
+export function post_DuplicateDefinition(requestBody:DuplicateDefinition_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DuplicateDefinition_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/DuplicateDefinition", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DuplicateDefinition_output)
           })
       .catch((error) => {
           reject(error)
@@ -2747,30 +3259,37 @@ export function post_DuplicateDefinition(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method ExportDefinition
    OperationID: ExportDefinition
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportDefinition_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportDefinition_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportDefinition_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportDefinition(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportDefinition(requestBody:ExportDefinition_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportDefinition_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/ExportDefinition", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportDefinition_output)
           })
       .catch((error) => {
           reject(error)
@@ -2781,30 +3300,37 @@ export function post_ExportDefinition(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ImportDefinition
    OperationID: ImportDefinition
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportDefinition_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportDefinition_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportDefinition_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportDefinition(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportDefinition(requestBody:ImportDefinition_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportDefinition_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/ImportDefinition", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportDefinition_output)
           })
       .catch((error) => {
           reject(error)
@@ -2815,30 +3341,37 @@ export function post_ImportDefinition(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method Generate
    OperationID: Generate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Generate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Generate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Generate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Generate(requestBody:any, epicorHeaders?:Headers){
+export function post_Generate(requestBody:Generate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Generate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/Generate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Generate_output)
           })
       .catch((error) => {
           reject(error)
@@ -2849,30 +3382,37 @@ export function post_Generate(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GenerateToServerFolder
    OperationID: GenerateToServerFolder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateToServerFolder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateToServerFolder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateToServerFolder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateToServerFolder(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateToServerFolder(requestBody:GenerateToServerFolder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateToServerFolder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GenerateToServerFolder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateToServerFolder_output)
           })
       .catch((error) => {
           reject(error)
@@ -2884,7 +3424,7 @@ export function post_GenerateToServerFolder(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetDateFormats
    Description: This method returns a list of date formats
    OperationID: GetDateFormats
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDateFormats_output
@@ -2897,15 +3437,22 @@ export function post_GetDateFormats(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDateFormats_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetDateFormats", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDateFormats_output)
           })
       .catch((error) => {
           reject(error)
@@ -2917,30 +3464,37 @@ export function post_GetDateFormats(epicorHeaders?:Headers){
    Summary: Invoke method GetFieldList
    Description: This method returns a list of Fields
    OperationID: GetFieldList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFieldList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFieldList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFieldList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFieldList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFieldList(requestBody:GetFieldList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFieldList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetFieldList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFieldList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2952,30 +3506,37 @@ export function post_GetFieldList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetTableList
    Description: This method returns a list of Tables
    OperationID: GetTableList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTableList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTableList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTableList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTableList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTableList(requestBody:GetTableList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTableList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetTableList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTableList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2987,30 +3548,37 @@ export function post_GetTableList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetForeignTblFieldList
    Description: This method returns a list of Foreign Fields excluding already used for links
    OperationID: GetForeignTblFieldList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetForeignTblFieldList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetForeignTblFieldList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetForeignTblFieldList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetForeignTblFieldList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetForeignTblFieldList(requestBody:GetForeignTblFieldList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetForeignTblFieldList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetForeignTblFieldList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetForeignTblFieldList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3022,30 +3590,37 @@ export function post_GetForeignTblFieldList(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetOwnTblFieldList
    Description: This method returns a list of Own Fields excluding already used for links
    OperationID: GetOwnTblFieldList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetOwnTblFieldList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetOwnTblFieldList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOwnTblFieldList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetOwnTblFieldList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetOwnTblFieldList(requestBody:GetOwnTblFieldList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOwnTblFieldList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetOwnTblFieldList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOwnTblFieldList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3057,30 +3632,37 @@ export function post_GetOwnTblFieldList(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetForeignTableList
    Description: This method returns a list of Foreign Key Tables
    OperationID: GetForeignTableList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetForeignTableList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetForeignTableList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetForeignTableList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetForeignTableList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetForeignTableList(requestBody:GetForeignTableList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetForeignTableList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetForeignTableList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetForeignTableList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3092,30 +3674,37 @@ export function post_GetForeignTableList(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetTablesListWithWrongSource
    Description: Get the list of tables, for which data source do not exist.
    OperationID: GetTablesListWithWrongSource
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTablesListWithWrongSource_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTablesListWithWrongSource_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTablesListWithWrongSource_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTablesListWithWrongSource(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTablesListWithWrongSource(requestBody:GetTablesListWithWrongSource_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTablesListWithWrongSource_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetTablesListWithWrongSource", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTablesListWithWrongSource_output)
           })
       .catch((error) => {
           reject(error)
@@ -3127,30 +3716,37 @@ export function post_GetTablesListWithWrongSource(requestBody:any, epicorHeaders
    Summary: Invoke method IsPostingsExist
    Description: Check that postings exist in specified period.
    OperationID: IsPostingsExist
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsPostingsExist_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsPostingsExist_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsPostingsExist_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsPostingsExist(requestBody:any, epicorHeaders?:Headers){
+export function post_IsPostingsExist(requestBody:IsPostingsExist_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsPostingsExist_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/IsPostingsExist", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsPostingsExist_output)
           })
       .catch((error) => {
           reject(error)
@@ -3162,30 +3758,37 @@ export function post_IsPostingsExist(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeGLBook
    Description: Call method when the over rides the check # in Process Payment.
    OperationID: OnChangeGLBook
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeGLBook_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeGLBook_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeGLBook_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeGLBook(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeGLBook(requestBody:OnChangeGLBook_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeGLBook_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/OnChangeGLBook", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeGLBook_output)
           })
       .catch((error) => {
           reject(error)
@@ -3196,30 +3799,37 @@ export function post_OnChangeGLBook(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method OnRetrieveColumns
    OperationID: OnRetrieveColumns
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnRetrieveColumns_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnRetrieveColumns_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnRetrieveColumns_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnRetrieveColumns(requestBody:any, epicorHeaders?:Headers){
+export function post_OnRetrieveColumns(requestBody:OnRetrieveColumns_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnRetrieveColumns_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/OnRetrieveColumns", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnRetrieveColumns_output)
           })
       .catch((error) => {
           reject(error)
@@ -3232,30 +3842,37 @@ export function post_OnRetrieveColumns(requestBody:any, epicorHeaders?:Headers){
    Description: This method will refresh data in tableset for DataExportDef table.
 <param name="ds" type="Erp.Tablesets.DataExportDataSet">Erp.Tablesets.DataExportDataSet</param>
    OperationID: RefreshDataExportDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshDataExportDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshDataExportDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshDataExportDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshDataExportDef(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshDataExportDef(requestBody:RefreshDataExportDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshDataExportDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/RefreshDataExportDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshDataExportDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -3267,30 +3884,37 @@ export function post_RefreshDataExportDef(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method SetGDPdUMode
    Description: <param name="ds" type="Erp.Tablesets.DataExportDataSet">Erp.Tablesets.DataExportDataSet</param>
    OperationID: SetGDPdUMode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetGDPdUMode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetGDPdUMode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetGDPdUMode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetGDPdUMode(requestBody:any, epicorHeaders?:Headers){
+export function post_SetGDPdUMode(requestBody:SetGDPdUMode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetGDPdUMode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/SetGDPdUMode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetGDPdUMode_output)
           })
       .catch((error) => {
           reject(error)
@@ -3304,30 +3928,37 @@ export function post_SetGDPdUMode(requestBody:any, epicorHeaders?:Headers){
 rowident field/column.
 <param name="ipDefinitionID">Definition ID</param><param name="ds" type="Erp.Tablesets.DataExportDataSet">Erp.Tablesets.DataExportDataSet</param>
    OperationID: StoreData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StoreData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StoreData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StoreData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StoreData(requestBody:any, epicorHeaders?:Headers){
+export function post_StoreData(requestBody:StoreData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StoreData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/StoreData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StoreData_output)
           })
       .catch((error) => {
           reject(error)
@@ -3339,30 +3970,37 @@ export function post_StoreData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewDataExportDef
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDataExportDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDataExportDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDataExportDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDataExportDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDataExportDef(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDataExportDef(requestBody:GetNewDataExportDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDataExportDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetNewDataExportDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDataExportDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -3374,30 +4012,37 @@ export function post_GetNewDataExportDef(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewDataExportHistory
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDataExportHistory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDataExportHistory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDataExportHistory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDataExportHistory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDataExportHistory(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDataExportHistory(requestBody:GetNewDataExportHistory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDataExportHistory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetNewDataExportHistory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDataExportHistory_output)
           })
       .catch((error) => {
           reject(error)
@@ -3409,30 +4054,37 @@ export function post_GetNewDataExportHistory(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewDataExportOption
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDataExportOption
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDataExportOption_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDataExportOption_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDataExportOption_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDataExportOption(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDataExportOption(requestBody:GetNewDataExportOption_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDataExportOption_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetNewDataExportOption", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDataExportOption_output)
           })
       .catch((error) => {
           reject(error)
@@ -3444,30 +4096,37 @@ export function post_GetNewDataExportOption(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetNewDataExportTable
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDataExportTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDataExportTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDataExportTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDataExportTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDataExportTable(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDataExportTable(requestBody:GetNewDataExportTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDataExportTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetNewDataExportTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDataExportTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -3479,30 +4138,37 @@ export function post_GetNewDataExportTable(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewDataExportColumn
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDataExportColumn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDataExportColumn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDataExportColumn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDataExportColumn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDataExportColumn(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDataExportColumn(requestBody:GetNewDataExportColumn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDataExportColumn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetNewDataExportColumn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDataExportColumn_output)
           })
       .catch((error) => {
           reject(error)
@@ -3514,30 +4180,37 @@ export function post_GetNewDataExportColumn(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetNewDataExportColumnAttribute
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDataExportColumnAttribute
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDataExportColumnAttribute_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDataExportColumnAttribute_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDataExportColumnAttribute_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDataExportColumnAttribute(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDataExportColumnAttribute(requestBody:GetNewDataExportColumnAttribute_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDataExportColumnAttribute_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetNewDataExportColumnAttribute", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDataExportColumnAttribute_output)
           })
       .catch((error) => {
           reject(error)
@@ -3549,30 +4222,37 @@ export function post_GetNewDataExportColumnAttribute(requestBody:any, epicorHead
    Summary: Invoke method GetNewDataExportColumnLink
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDataExportColumnLink
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDataExportColumnLink_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDataExportColumnLink_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDataExportColumnLink_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDataExportColumnLink(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDataExportColumnLink(requestBody:GetNewDataExportColumnLink_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDataExportColumnLink_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetNewDataExportColumnLink", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDataExportColumnLink_output)
           })
       .catch((error) => {
           reject(error)
@@ -3584,30 +4264,37 @@ export function post_GetNewDataExportColumnLink(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetNewDataExportTableAttribute
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDataExportTableAttribute
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDataExportTableAttribute_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDataExportTableAttribute_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDataExportTableAttribute_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDataExportTableAttribute(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDataExportTableAttribute(requestBody:GetNewDataExportTableAttribute_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDataExportTableAttribute_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetNewDataExportTableAttribute", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDataExportTableAttribute_output)
           })
       .catch((error) => {
           reject(error)
@@ -3619,30 +4306,37 @@ export function post_GetNewDataExportTableAttribute(requestBody:any, epicorHeade
    Summary: Invoke method GetNewDataExportTableParam
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDataExportTableParam
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDataExportTableParam_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDataExportTableParam_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDataExportTableParam_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDataExportTableParam(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDataExportTableParam(requestBody:GetNewDataExportTableParam_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDataExportTableParam_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetNewDataExportTableParam", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDataExportTableParam_output)
           })
       .catch((error) => {
           reject(error)
@@ -3654,30 +4348,37 @@ export function post_GetNewDataExportTableParam(requestBody:any, epicorHeaders?:
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3689,7 +4390,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -3713,15 +4414,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3733,7 +4441,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -3757,15 +4465,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -3777,30 +4492,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -3812,30 +4534,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.DataExportSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -3846,56 +4575,73 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportColumnAttributeRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataExportColumnAttributeRow[],
+   "value":Erp_Tablesets_DataExportColumnAttributeRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportColumnLinkRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataExportColumnLinkRow[],
+   "value":Erp_Tablesets_DataExportColumnLinkRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportColumnRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataExportColumnRow[],
+   "value":Erp_Tablesets_DataExportColumnRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportDefListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataExportDefListRow[],
+   "value":Erp_Tablesets_DataExportDefListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportDefRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataExportDefRow[],
+   "value":Erp_Tablesets_DataExportDefRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportHistoryRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataExportHistoryRow[],
+   "value":Erp_Tablesets_DataExportHistoryRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportOptionRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataExportOptionRow[],
+   "value":Erp_Tablesets_DataExportOptionRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportTableAttributeRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataExportTableAttributeRow[],
+   "value":Erp_Tablesets_DataExportTableAttributeRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportTableParamRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataExportTableParamRow[],
+   "value":Erp_Tablesets_DataExportTableParamRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_DataExportTableRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_DataExportTableRow[],
+   "value":Erp_Tablesets_DataExportTableRow,
 }
 
 export interface Erp_Tablesets_DataExportColumnAttributeRow{
@@ -4303,6 +5049,23 @@ export interface Erp_Tablesets_DataExportTableRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -4813,7 +5576,7 @@ parameters : {
    opErrMessage:string,
    opFilesQty:number,
    opExportSubFolder:string,
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -4839,7 +5602,7 @@ parameters : {
    opErrMessage:string,
    opFilesQty:number,
    opFilesForExport:string,
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -4987,7 +5750,7 @@ export interface GetNewDataExportColumnAttribute_input{
 export interface GetNewDataExportColumnAttribute_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5007,7 +5770,7 @@ export interface GetNewDataExportColumnLink_input{
 export interface GetNewDataExportColumnLink_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5025,7 +5788,7 @@ export interface GetNewDataExportColumn_input{
 export interface GetNewDataExportColumn_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5039,7 +5802,7 @@ export interface GetNewDataExportDef_input{
 export interface GetNewDataExportDef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5055,7 +5818,7 @@ export interface GetNewDataExportHistory_input{
 export interface GetNewDataExportHistory_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5073,7 +5836,7 @@ export interface GetNewDataExportOption_input{
 export interface GetNewDataExportOption_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5091,7 +5854,7 @@ export interface GetNewDataExportTableAttribute_input{
 export interface GetNewDataExportTableAttribute_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5109,7 +5872,7 @@ export interface GetNewDataExportTableParam_input{
 export interface GetNewDataExportTableParam_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5125,7 +5888,7 @@ export interface GetNewDataExportTable_input{
 export interface GetNewDataExportTable_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5334,7 +6097,7 @@ export interface OnChangeGLBook_input{
 export interface OnChangeGLBook_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5360,7 +6123,7 @@ export interface OnRetrieveColumns_input{
 export interface OnRetrieveColumns_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5374,7 +6137,7 @@ export interface RefreshDataExportDef_input{
 export interface RefreshDataExportDef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5388,7 +6151,7 @@ export interface SetGDPdUMode_input{
 export interface SetGDPdUMode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5404,7 +6167,7 @@ export interface StoreData_input{
 export interface StoreData_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 
@@ -5423,7 +6186,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtDataExportTableset[],
+   ds:Erp_Tablesets_UpdExtDataExportTableset,
    errorsOccurred:boolean,
 }
 }
@@ -5438,7 +6201,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DataExportTableset[],
+   ds:Erp_Tablesets_DataExportTableset,
 }
 }
 

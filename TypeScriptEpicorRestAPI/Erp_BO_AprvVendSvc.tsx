@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.AprvVendSvc
 // Description: Add your summary for this object here
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AprvVendRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AprvVendRow
    */  
 export function get_AprvVends(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_AprvVends(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AprvVendRow)
           })
@@ -118,15 +158,15 @@ export function get_AprvVends(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AprvVends
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AprvVendRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AprvVendRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AprvVendRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AprvVendRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AprvVends(requestBody:any, epicorHeaders?:Headers){
+export function post_AprvVends(requestBody:Erp_Tablesets_AprvVendRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_AprvVends(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -164,10 +211,10 @@ export function post_AprvVends(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AprvVendRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AprvVendRow
    */  
 export function get_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_CustNum(Company:string, VendorNum:string, PartNum:string, APVType:string, ClassID:string, OpCode:string, CustNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -182,7 +229,14 @@ export function get_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AprvVendRow)
           })
@@ -203,15 +257,15 @@ export function get_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_C
       @param ClassID Desc: ClassID   Required: True   Allow empty value : True
       @param OpCode Desc: OpCode   Required: True   Allow empty value : True
       @param CustNum Desc: CustNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AprvVendRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AprvVendRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_CustNum(Company:string, VendorNum:string, PartNum:string, APVType:string, ClassID:string, OpCode:string, CustNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_CustNum(Company:string, VendorNum:string, PartNum:string, APVType:string, ClassID:string, OpCode:string, CustNum:string, requestBody:Erp_Tablesets_AprvVendRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -225,7 +279,14 @@ export function patch_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -246,7 +307,7 @@ export function patch_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode
       @param ClassID Desc: ClassID   Required: True   Allow empty value : True
       @param OpCode Desc: OpCode   Required: True   Allow empty value : True
       @param CustNum Desc: CustNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -265,7 +326,14 @@ export function delete_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCod
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -292,10 +360,10 @@ export function delete_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCod
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartXRefVendRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartXRefVendRow
    */  
 export function get_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_CustNum_PartXRefVends(Company:string, VendorNum:string, PartNum:string, APVType:string, ClassID:string, OpCode:string, CustNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -310,7 +378,14 @@ export function get_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartXRefVendRow)
           })
@@ -336,10 +411,10 @@ export function get_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_C
       @param MfgPartNum Desc: MfgPartNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PartXRefVendRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PartXRefVendRow
    */  
 export function get_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_CustNum_PartXRefVends_Company_PartNum_VendorNum_VendPartNum_MfgNum_MfgPartNum(Company:string, VendorNum:string, PartNum:string, APVType:string, ClassID:string, OpCode:string, CustNum:string, VendPartNum:string, MfgNum:string, MfgPartNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -354,7 +429,14 @@ export function get_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PartXRefVendRow)
           })
@@ -374,10 +456,10 @@ export function get_AprvVends_Company_VendorNum_PartNum_APVType_ClassID_OpCode_C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartXRefVendRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartXRefVendRow
    */  
 export function get_PartXRefVends(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -392,7 +474,14 @@ export function get_PartXRefVends(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartXRefVendRow)
           })
@@ -406,15 +495,15 @@ export function get_PartXRefVends(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PartXRefVends
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartXRefVendRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartXRefVendRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PartXRefVendRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PartXRefVendRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartXRefVends(requestBody:any, epicorHeaders?:Headers){
+export function post_PartXRefVends(requestBody:Erp_Tablesets_PartXRefVendRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -428,7 +517,14 @@ export function post_PartXRefVends(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -450,10 +546,10 @@ export function post_PartXRefVends(requestBody:any, epicorHeaders?:Headers){
       @param MfgPartNum Desc: MfgPartNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PartXRefVendRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PartXRefVendRow
    */  
 export function get_PartXRefVends_Company_PartNum_VendorNum_VendPartNum_MfgNum_MfgPartNum(Company:string, PartNum:string, VendorNum:string, VendPartNum:string, MfgNum:string, MfgPartNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -468,7 +564,14 @@ export function get_PartXRefVends_Company_PartNum_VendorNum_VendPartNum_MfgNum_M
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PartXRefVendRow)
           })
@@ -488,15 +591,15 @@ export function get_PartXRefVends_Company_PartNum_VendorNum_VendPartNum_MfgNum_M
       @param VendPartNum Desc: VendPartNum   Required: True   Allow empty value : True
       @param MfgNum Desc: MfgNum   Required: True
       @param MfgPartNum Desc: MfgPartNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartXRefVendRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartXRefVendRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PartXRefVends_Company_PartNum_VendorNum_VendPartNum_MfgNum_MfgPartNum(Company:string, PartNum:string, VendorNum:string, VendPartNum:string, MfgNum:string, MfgPartNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PartXRefVends_Company_PartNum_VendorNum_VendPartNum_MfgNum_MfgPartNum(Company:string, PartNum:string, VendorNum:string, VendPartNum:string, MfgNum:string, MfgPartNum:string, requestBody:Erp_Tablesets_PartXRefVendRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -510,7 +613,14 @@ export function patch_PartXRefVends_Company_PartNum_VendorNum_VendPartNum_MfgNum
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -530,7 +640,7 @@ export function patch_PartXRefVends_Company_PartNum_VendorNum_VendPartNum_MfgNum
       @param VendPartNum Desc: VendPartNum   Required: True   Allow empty value : True
       @param MfgNum Desc: MfgNum   Required: True
       @param MfgPartNum Desc: MfgPartNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -549,7 +659,14 @@ export function delete_PartXRefVends_Company_PartNum_VendorNum_VendPartNum_MfgNu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -569,10 +686,10 @@ export function delete_PartXRefVends_Company_PartNum_VendorNum_VendPartNum_MfgNu
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AprvVendListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AprvVendListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -587,7 +704,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AprvVendListRow)
           })
@@ -600,6 +724,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -611,7 +752,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -662,15 +803,22 @@ export function get_GetRows(whereClauseAprvVend:string, whereClausePartXRefVend:
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -688,7 +836,7 @@ export function get_GetRows(whereClauseAprvVend:string, whereClausePartXRefVend:
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -757,15 +905,22 @@ export function get_GetByID(vendorNum:string, partNum:string, apVType:string, cl
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -780,7 +935,7 @@ export function get_GetByID(vendorNum:string, partNum:string, apVType:string, cl
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -822,15 +977,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -842,30 +1004,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetAprvData
    Description: .
    OperationID: GetAprvData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAprvData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAprvData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAprvData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAprvData(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAprvData(requestBody:GetAprvData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAprvData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetAprvData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAprvData_output)
           })
       .catch((error) => {
           reject(error)
@@ -877,30 +1046,37 @@ export function post_GetAprvData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListbyVendorName
    Description: Search suppliers by Vendor Name. Call normal GetList method.
    OperationID: GetListbyVendorName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListbyVendorName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListbyVendorName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListbyVendorName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListbyVendorName(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListbyVendorName(requestBody:GetListbyVendorName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListbyVendorName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetListbyVendorName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListbyVendorName_output)
           })
       .catch((error) => {
           reject(error)
@@ -917,7 +1093,7 @@ export function post_GetListbyVendorName(requestBody:any, epicorHeaders?:Headers
       @param VendorID Desc: Vendor Name.   Required: True   Allow empty value : True
       @param pageSize Desc: Page size.   Required: True
       @param absolutePage Desc: Absolute page.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsForLandingPage_output
@@ -977,15 +1153,22 @@ export function get_GetRowsForLandingPage(whereClauseAprvVend:string, whereClaus
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsForLandingPage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetRowsForLandingPage" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsForLandingPage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1002,7 +1185,7 @@ export function get_GetRowsForLandingPage(whereClauseAprvVend:string, whereClaus
       @param PageSize Desc: Page size.   Required: True
       @param AbsolutePage Desc: Absolute page.   Required: True
       @param VendorID Desc: Vendor Name.   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCustom_output
@@ -1062,15 +1245,22 @@ export function get_GetRowsCustom(whereClauseAprvVend:string, whereClausePartXRe
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCustom_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetRowsCustom" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCustom_output)
           })
       .catch((error) => {
           reject(error)
@@ -1082,30 +1272,37 @@ export function get_GetRowsCustom(whereClauseAprvVend:string, whereClausePartXRe
    Summary: Invoke method OnChangeClassID
    Description: .
    OperationID: OnChangeClassID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeClassID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeClassID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeClassID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeClassID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeClassID(requestBody:OnChangeClassID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeClassID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/OnChangeClassID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeClassID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1117,30 +1314,37 @@ export function post_OnChangeClassID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeCustID
    Description: .
    OperationID: OnChangeCustID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCustID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCustID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCustID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCustID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCustID(requestBody:OnChangeCustID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCustID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/OnChangeCustID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCustID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1152,30 +1356,37 @@ export function post_OnChangeCustID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeCustNum
    Description: .
    OperationID: OnChangeCustNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCustNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCustNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCustNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCustNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCustNum(requestBody:OnChangeCustNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCustNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/OnChangeCustNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCustNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1187,30 +1398,37 @@ export function post_OnChangeCustNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeMfgNum
    Description: .
    OperationID: OnChangeMfgNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeMfgNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeMfgNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeMfgNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeMfgNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeMfgNum(requestBody:OnChangeMfgNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeMfgNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/OnChangeMfgNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeMfgNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1222,30 +1440,37 @@ export function post_OnChangeMfgNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeMfgPartNum
    Description: .
    OperationID: OnChangeMfgPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeMfgPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeMfgPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeMfgPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeMfgPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeMfgPartNum(requestBody:OnChangeMfgPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeMfgPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/OnChangeMfgPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeMfgPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1257,30 +1482,37 @@ export function post_OnChangeMfgPartNum(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeOpCode
    Description: .
    OperationID: OnChangeOpCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOpCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOpCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOpCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOpCode(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOpCode(requestBody:OnChangeOpCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOpCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/OnChangeOpCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOpCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1292,30 +1524,37 @@ export function post_OnChangeOpCode(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangePartNum
    Description: .
    OperationID: OnChangePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartNum(requestBody:OnChangePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/OnChangePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1327,30 +1566,37 @@ export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeVendorID
    Description: .
    OperationID: OnChangeVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeVendorID(requestBody:OnChangeVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/OnChangeVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1362,30 +1608,37 @@ export function post_OnChangeVendorID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeVendorNum
    Description: .
    OperationID: OnChangeVendorNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeVendorNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeVendorNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeVendorNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeVendorNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeVendorNum(requestBody:OnChangeVendorNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeVendorNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/OnChangeVendorNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeVendorNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1397,30 +1650,37 @@ export function post_OnChangeVendorNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeVendPartNum
    Description: Run when the PartXRefVend.VendPartNum is changing.
    OperationID: OnChangeVendPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeVendPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeVendPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeVendPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeVendPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeVendPartNum(requestBody:OnChangeVendPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeVendPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/OnChangeVendPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeVendPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1432,30 +1692,37 @@ export function post_OnChangeVendPartNum(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewAprvVend
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAprvVend
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAprvVend_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAprvVend_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAprvVend_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAprvVend(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAprvVend(requestBody:GetNewAprvVend_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAprvVend_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetNewAprvVend", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAprvVend_output)
           })
       .catch((error) => {
           reject(error)
@@ -1467,30 +1734,37 @@ export function post_GetNewAprvVend(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewPartXRefVend
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPartXRefVend
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPartXRefVend_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPartXRefVend_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPartXRefVend_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPartXRefVend(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPartXRefVend(requestBody:GetNewPartXRefVend_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPartXRefVend_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetNewPartXRefVend", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPartXRefVend_output)
           })
       .catch((error) => {
           reject(error)
@@ -1502,30 +1776,37 @@ export function post_GetNewPartXRefVend(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1537,7 +1818,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1561,15 +1842,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1581,7 +1869,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1605,15 +1893,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1625,30 +1920,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1660,30 +1962,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AprvVendSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1694,21 +2003,38 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AprvVendListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AprvVendListRow[],
+   "value":Erp_Tablesets_AprvVendListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AprvVendRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AprvVendRow[],
+   "value":Erp_Tablesets_AprvVendRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartXRefVendRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PartXRefVendRow[],
+   "value":Erp_Tablesets_PartXRefVendRow,
 }
 
 export interface Erp_Tablesets_AprvVendListRow{
@@ -1888,6 +2214,23 @@ export interface Erp_Tablesets_PartXRefVendRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2227,7 +2570,7 @@ export interface GetNewAprvVend_input{
 export interface GetNewAprvVend_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2249,7 +2592,7 @@ export interface GetNewPartXRefVend_input{
 export interface GetNewPartXRefVend_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2379,7 +2722,7 @@ export interface OnChangeClassID_input{
 export interface OnChangeClassID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2396,7 +2739,7 @@ export interface OnChangeCustID_input{
 export interface OnChangeCustID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2413,7 +2756,7 @@ export interface OnChangeCustNum_input{
 export interface OnChangeCustNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2430,7 +2773,7 @@ export interface OnChangeMfgNum_input{
 export interface OnChangeMfgNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2447,7 +2790,7 @@ export interface OnChangeMfgPartNum_input{
 export interface OnChangeMfgPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2464,7 +2807,7 @@ export interface OnChangeOpCode_input{
 export interface OnChangeOpCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2481,7 +2824,7 @@ export interface OnChangePartNum_input{
 export interface OnChangePartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2498,7 +2841,7 @@ export interface OnChangeVendPartNum_input{
 export interface OnChangeVendPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2515,7 +2858,7 @@ export interface OnChangeVendorID_input{
 export interface OnChangeVendorID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2532,7 +2875,7 @@ export interface OnChangeVendorNum_input{
 export interface OnChangeVendorNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 
@@ -2551,7 +2894,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtAprvVendTableset[],
+   ds:Erp_Tablesets_UpdExtAprvVendTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2566,7 +2909,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AprvVendTableset[],
+   ds:Erp_Tablesets_AprvVendTableset,
 }
 }
 

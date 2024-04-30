@@ -1,13 +1,32 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.AutoTranReversalSvc
 // Description: SrcGLTran
            Give the user the ability to select a group of GLJrnDtl lines, with one Journal Number.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -16,7 +35,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -34,7 +53,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -48,7 +74,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -66,7 +92,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLJrnDtlListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLJrnDtlListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLJrnDtlListRow)
           })
@@ -117,6 +157,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -124,30 +181,37 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Summary: Invoke method CheckReverseDate
    Description: Check if New Reversing Apply Date is valid or not.
    OperationID: CheckReverseDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckReverseDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckReverseDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckReverseDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckReverseDate(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckReverseDate(requestBody:CheckReverseDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLJrnDtlListRow>((resolve, reject) => {
+   return (new Promise<CheckReverseDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/CheckReverseDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLJrnDtlListRow)
+         resolve(data as CheckReverseDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -159,30 +223,37 @@ export function post_CheckReverseDate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckReverseDateRowMod
    Description: Check if New Reversing Apply Date is valid or not. Returns updated row with RowMod = 'U'
    OperationID: CheckReverseDateRowMod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckReverseDateRowMod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckReverseDateRowMod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckReverseDateRowMod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckReverseDateRowMod(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckReverseDateRowMod(requestBody:CheckReverseDateRowMod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckReverseDateRowMod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/CheckReverseDateRowMod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckReverseDateRowMod_output)
           })
       .catch((error) => {
           reject(error)
@@ -194,30 +265,37 @@ export function post_CheckReverseDateRowMod(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ClosePeriodChanged
    Description: Fiscal period should be recalculated if closing period changed
    OperationID: ClosePeriodChanged
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ClosePeriodChanged_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ClosePeriodChanged_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClosePeriodChanged_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ClosePeriodChanged(requestBody:any, epicorHeaders?:Headers){
+export function post_ClosePeriodChanged(requestBody:ClosePeriodChanged_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClosePeriodChanged_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/ClosePeriodChanged", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClosePeriodChanged_output)
           })
       .catch((error) => {
           reject(error)
@@ -229,30 +307,37 @@ export function post_ClosePeriodChanged(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ClosePeriodChangedRowMod
    Description: Fiscal period should be recalculated if closing period changed. Returns updated row with RowMod = 'U'
    OperationID: ClosePeriodChangedRowMod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ClosePeriodChangedRowMod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ClosePeriodChangedRowMod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClosePeriodChangedRowMod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ClosePeriodChangedRowMod(requestBody:any, epicorHeaders?:Headers){
+export function post_ClosePeriodChangedRowMod(requestBody:ClosePeriodChangedRowMod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClosePeriodChangedRowMod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/ClosePeriodChangedRowMod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClosePeriodChangedRowMod_output)
           })
       .catch((error) => {
           reject(error)
@@ -264,30 +349,37 @@ export function post_ClosePeriodChangedRowMod(requestBody:any, epicorHeaders?:He
    Summary: Invoke method DeleteLinkingMemos
    Description: Delete linking memos is posting was not run.
    OperationID: DeleteLinkingMemos
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteLinkingMemos_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteLinkingMemos_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteLinkingMemos_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteLinkingMemos(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteLinkingMemos(requestBody:DeleteLinkingMemos_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteLinkingMemos_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/DeleteLinkingMemos", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteLinkingMemos_output)
           })
       .catch((error) => {
           reject(error)
@@ -299,30 +391,37 @@ export function post_DeleteLinkingMemos(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetGLTranList
    Description: Get a list of GL journal Lines.
    OperationID: GetGLTranList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetGLTranList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetGLTranList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetGLTranList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetGLTranList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetGLTranList(requestBody:GetGLTranList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetGLTranList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/GetGLTranList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetGLTranList_output)
           })
       .catch((error) => {
           reject(error)
@@ -334,30 +433,37 @@ export function post_GetGLTranList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListCurrentCompany
    Description: Returns a list of rows that satisfy the where clause.
    OperationID: GetListCurrentCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListCurrentCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListCurrentCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListCurrentCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListCurrentCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListCurrentCompany(requestBody:GetListCurrentCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListCurrentCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/GetListCurrentCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListCurrentCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -369,30 +475,37 @@ export function post_GetListCurrentCompany(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetList
    Description: Returns a list of rows that satisfy the where clause.
    OperationID: GetList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetList(requestBody:GetList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/GetList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -407,30 +520,37 @@ Parameters:
 <param name="ipAmtToReverse">amount to reverse</param><param name="ds">Epicor.Mfg.BO.AutoTranReversalDataSet</param>
 Notes:
    OperationID: OnChangeAmtToReverse
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAmtToReverse_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAmtToReverse_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAmtToReverse_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAmtToReverse(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAmtToReverse(requestBody:OnChangeAmtToReverse_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAmtToReverse_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/OnChangeAmtToReverse", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAmtToReverse_output)
           })
       .catch((error) => {
           reject(error)
@@ -445,30 +565,37 @@ Parameters:
 <param name="ipAmtToReverse">amount to reverse</param><param name="ds">Epicor.Mfg.BO.AutoTranReversalDataSet</param>
 Notes:
    OperationID: OnChangeAmtToReverseRowMod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAmtToReverseRowMod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAmtToReverseRowMod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAmtToReverseRowMod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAmtToReverseRowMod(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAmtToReverseRowMod(requestBody:OnChangeAmtToReverseRowMod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAmtToReverseRowMod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/OnChangeAmtToReverseRowMod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAmtToReverseRowMod_output)
           })
       .catch((error) => {
           reject(error)
@@ -483,30 +610,37 @@ Parameters:
 <param name="ipAmtStatToReverse">amount to reverse</param><param name="ds">Epicor.Mfg.BO.AutoTranReversalDataSet</param>
 Notes:
    OperationID: OnChangeAmtStatToReverse
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAmtStatToReverse_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAmtStatToReverse_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAmtStatToReverse_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAmtStatToReverse(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAmtStatToReverse(requestBody:OnChangeAmtStatToReverse_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAmtStatToReverse_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/OnChangeAmtStatToReverse", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAmtStatToReverse_output)
           })
       .catch((error) => {
           reject(error)
@@ -521,30 +655,37 @@ Parameters:
 <param name="ipAmtStatToReverse">amount to reverse</param><param name="ds">Epicor.Mfg.BO.AutoTranReversalDataSet</param>
 Notes:
    OperationID: OnChangeAmtStatToReverseRowMod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAmtStatToReverseRowMod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAmtStatToReverseRowMod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAmtStatToReverseRowMod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAmtStatToReverseRowMod(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAmtStatToReverseRowMod(requestBody:OnChangeAmtStatToReverseRowMod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAmtStatToReverseRowMod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/OnChangeAmtStatToReverseRowMod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAmtStatToReverseRowMod_output)
           })
       .catch((error) => {
           reject(error)
@@ -559,30 +700,37 @@ Parameters:
 <param name="ipSelected">boolean indicating if the line is selected or deselected</param><param name="ds">Epicor.Mfg.BO.AutoTranReversalDataSet</param>
 Notes:
    OperationID: OnChangeSelected
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeSelected_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeSelected_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeSelected_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeSelected(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeSelected(requestBody:OnChangeSelected_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeSelected_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/OnChangeSelected", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeSelected_output)
           })
       .catch((error) => {
           reject(error)
@@ -597,30 +745,37 @@ Parameters:
 <param name="ipSelected">boolean indicating if the line is selected or deselected</param><param name="ds">Epicor.Mfg.BO.AutoTranReversalDataSet</param>
 Notes:
    OperationID: OnChangeSelectedRowMod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeSelectedRowMod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeSelectedRowMod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeSelectedRowMod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeSelectedRowMod(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeSelectedRowMod(requestBody:OnChangeSelectedRowMod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeSelectedRowMod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/OnChangeSelectedRowMod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeSelectedRowMod_output)
           })
       .catch((error) => {
           reject(error)
@@ -632,30 +787,37 @@ export function post_OnChangeSelectedRowMod(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method Post
    Description: Post
    OperationID: Post
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Post_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Post_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Post_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Post(requestBody:any, epicorHeaders?:Headers){
+export function post_Post(requestBody:Post_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Post_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AutoTranReversalSvc/Post", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Post_output)
           })
       .catch((error) => {
           reject(error)
@@ -666,11 +828,28 @@ export function post_Post(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLJrnDtlListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLJrnDtlListRow[],
+   "value":Erp_Tablesets_GLJrnDtlListRow,
 }
 
 export interface Erp_Tablesets_GLJrnDtlListRow{
@@ -723,6 +902,23 @@ export interface Erp_Tablesets_GLJrnDtlListRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -741,7 +937,7 @@ export interface CheckReverseDateRowMod_input{
 export interface CheckReverseDateRowMod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 
@@ -761,7 +957,7 @@ export interface CheckReverseDate_input{
 export interface CheckReverseDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 
@@ -778,7 +974,7 @@ export interface ClosePeriodChangedRowMod_input{
 export interface ClosePeriodChangedRowMod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 
@@ -795,7 +991,7 @@ export interface ClosePeriodChanged_input{
 export interface ClosePeriodChanged_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 
@@ -812,7 +1008,7 @@ export interface DeleteLinkingMemos_input{
 export interface DeleteLinkingMemos_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 
@@ -1463,7 +1659,7 @@ export interface OnChangeAmtStatToReverseRowMod_input{
 export interface OnChangeAmtStatToReverseRowMod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 
@@ -1479,7 +1675,7 @@ export interface OnChangeAmtStatToReverse_input{
 export interface OnChangeAmtStatToReverse_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 
@@ -1495,7 +1691,7 @@ export interface OnChangeAmtToReverseRowMod_input{
 export interface OnChangeAmtToReverseRowMod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 
@@ -1511,7 +1707,7 @@ export interface OnChangeAmtToReverse_input{
 export interface OnChangeAmtToReverse_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 
@@ -1527,7 +1723,7 @@ export interface OnChangeSelectedRowMod_input{
 export interface OnChangeSelectedRowMod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 
@@ -1543,7 +1739,7 @@ export interface OnChangeSelected_input{
 export interface OnChangeSelected_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AutoTranReversalTableset[],
+   ds:Erp_Tablesets_AutoTranReversalTableset,
 }
 }
 

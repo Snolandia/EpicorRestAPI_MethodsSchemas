@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.MktgLstSvc
 // Description: Marketing Lists file.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgListRow
    */  
 export function get_MktgLsts(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_MktgLsts(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MktgListRow)
           })
@@ -118,15 +158,15 @@ export function get_MktgLsts(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MktgLsts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MktgListRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MktgListRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MktgListRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MktgListRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MktgLsts(requestBody:any, epicorHeaders?:Headers){
+export function post_MktgLsts(requestBody:Erp_Tablesets_MktgListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_MktgLsts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_MktgLsts(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MktgListRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MktgListRow
    */  
 export function get_MktgLsts_Company_MktgListID(Company:string, MktgListID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_MktgLsts_Company_MktgListID(Company:string, MktgListID:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MktgListRow)
           })
@@ -193,15 +247,15 @@ export function get_MktgLsts_Company_MktgListID(Company:string, MktgListID:strin
    OperationID: UpdateExt_MktgLst
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param MktgListID Desc: MktgListID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MktgListRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MktgListRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MktgLsts_Company_MktgListID(Company:string, MktgListID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MktgLsts_Company_MktgListID(Company:string, MktgListID:string, requestBody:Erp_Tablesets_MktgListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_MktgLsts_Company_MktgListID(Company:string, MktgListID:str
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_MktgLsts_Company_MktgListID(Company:string, MktgListID:str
    OperationID: DeleteUpdateExt_MktgLst
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param MktgListID Desc: MktgListID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_MktgLsts_Company_MktgListID(Company:string, MktgListID:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_MktgLsts_Company_MktgListID(Company:string, MktgListID:st
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgLstDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgLstDtlRow
    */  
 export function get_MktgLsts_Company_MktgListID_MktgLstDtls(Company:string, MktgListID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_MktgLsts_Company_MktgListID_MktgLstDtls(Company:string, Mktg
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MktgLstDtlRow)
           })
@@ -309,10 +384,10 @@ export function get_MktgLsts_Company_MktgListID_MktgLstDtls(Company:string, Mktg
       @param SeqNum Desc: SeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MktgLstDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MktgLstDtlRow
    */  
 export function get_MktgLsts_Company_MktgListID_MktgLstDtls_Company_MktgListID_SeqNum(Company:string, MktgListID:string, SeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_MktgLsts_Company_MktgListID_MktgLstDtls_Company_MktgListID_S
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MktgLstDtlRow)
           })
@@ -349,10 +431,10 @@ export function get_MktgLsts_Company_MktgListID_MktgLstDtls_Company_MktgListID_S
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgListAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgListAttchRow
    */  
 export function get_MktgLsts_Company_MktgListID_MktgListAttches(Company:string, MktgListID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -367,7 +449,14 @@ export function get_MktgLsts_Company_MktgListID_MktgListAttches(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MktgListAttchRow)
           })
@@ -386,10 +475,10 @@ export function get_MktgLsts_Company_MktgListID_MktgListAttches(Company:string, 
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MktgListAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MktgListAttchRow
    */  
 export function get_MktgLsts_Company_MktgListID_MktgListAttches_Company_MktgListID_DrawingSeq(Company:string, MktgListID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -404,7 +493,14 @@ export function get_MktgLsts_Company_MktgListID_MktgListAttches_Company_MktgList
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MktgListAttchRow)
           })
@@ -424,10 +520,10 @@ export function get_MktgLsts_Company_MktgListID_MktgListAttches_Company_MktgList
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgLstDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgLstDtlRow
    */  
 export function get_MktgLstDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -442,7 +538,14 @@ export function get_MktgLstDtls(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MktgLstDtlRow)
           })
@@ -456,15 +559,15 @@ export function get_MktgLstDtls(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MktgLstDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MktgLstDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MktgLstDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MktgLstDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MktgLstDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MktgLstDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_MktgLstDtls(requestBody:Erp_Tablesets_MktgLstDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -478,7 +581,14 @@ export function post_MktgLstDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -497,10 +607,10 @@ export function post_MktgLstDtls(requestBody:any, epicorHeaders?:Headers){
       @param SeqNum Desc: SeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MktgLstDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MktgLstDtlRow
    */  
 export function get_MktgLstDtls_Company_MktgListID_SeqNum(Company:string, MktgListID:string, SeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -515,7 +625,14 @@ export function get_MktgLstDtls_Company_MktgListID_SeqNum(Company:string, MktgLi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MktgLstDtlRow)
           })
@@ -532,15 +649,15 @@ export function get_MktgLstDtls_Company_MktgListID_SeqNum(Company:string, MktgLi
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param MktgListID Desc: MktgListID   Required: True   Allow empty value : True
       @param SeqNum Desc: SeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MktgLstDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MktgLstDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MktgLstDtls_Company_MktgListID_SeqNum(Company:string, MktgListID:string, SeqNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MktgLstDtls_Company_MktgListID_SeqNum(Company:string, MktgListID:string, SeqNum:string, requestBody:Erp_Tablesets_MktgLstDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -554,7 +671,14 @@ export function patch_MktgLstDtls_Company_MktgListID_SeqNum(Company:string, Mktg
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -571,7 +695,7 @@ export function patch_MktgLstDtls_Company_MktgListID_SeqNum(Company:string, Mktg
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param MktgListID Desc: MktgListID   Required: True   Allow empty value : True
       @param SeqNum Desc: SeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -590,7 +714,14 @@ export function delete_MktgLstDtls_Company_MktgListID_SeqNum(Company:string, Mkt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -610,10 +741,10 @@ export function delete_MktgLstDtls_Company_MktgListID_SeqNum(Company:string, Mkt
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgListAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgListAttchRow
    */  
 export function get_MktgListAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -628,7 +759,14 @@ export function get_MktgListAttches(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MktgListAttchRow)
           })
@@ -642,15 +780,15 @@ export function get_MktgListAttches(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MktgListAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MktgListAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MktgListAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MktgListAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MktgListAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MktgListAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_MktgListAttches(requestBody:Erp_Tablesets_MktgListAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -664,7 +802,14 @@ export function post_MktgListAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -683,10 +828,10 @@ export function post_MktgListAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MktgListAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MktgListAttchRow
    */  
 export function get_MktgListAttches_Company_MktgListID_DrawingSeq(Company:string, MktgListID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -701,7 +846,14 @@ export function get_MktgListAttches_Company_MktgListID_DrawingSeq(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MktgListAttchRow)
           })
@@ -718,15 +870,15 @@ export function get_MktgListAttches_Company_MktgListID_DrawingSeq(Company:string
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param MktgListID Desc: MktgListID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MktgListAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MktgListAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MktgListAttches_Company_MktgListID_DrawingSeq(Company:string, MktgListID:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MktgListAttches_Company_MktgListID_DrawingSeq(Company:string, MktgListID:string, DrawingSeq:string, requestBody:Erp_Tablesets_MktgListAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -740,7 +892,14 @@ export function patch_MktgListAttches_Company_MktgListID_DrawingSeq(Company:stri
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -757,7 +916,7 @@ export function patch_MktgListAttches_Company_MktgListID_DrawingSeq(Company:stri
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param MktgListID Desc: MktgListID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -776,7 +935,14 @@ export function delete_MktgListAttches_Company_MktgListID_DrawingSeq(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -796,10 +962,10 @@ export function delete_MktgListAttches_Company_MktgListID_DrawingSeq(Company:str
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgListListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MktgListListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -814,7 +980,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MktgListListRow)
           })
@@ -826,6 +999,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -839,7 +1029,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -899,15 +1089,22 @@ export function get_GetRows(whereClauseMktgList:string, whereClauseMktgListAttch
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -920,7 +1117,7 @@ export function get_GetRows(whereClauseMktgList:string, whereClauseMktgListAttch
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -944,15 +1141,22 @@ export function get_GetByID(mktgListID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -967,7 +1171,7 @@ export function get_GetByID(mktgListID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1009,15 +1213,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1029,30 +1240,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method ChangedCreateCall
    Description: This method refreshes the dataset when the CreateTask flage is turned off
    OperationID: ChangedCreateCall
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangedCreateCall_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangedCreateCall_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangedCreateCall_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangedCreateCall(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangedCreateCall(requestBody:ChangedCreateCall_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangedCreateCall_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/ChangedCreateCall", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangedCreateCall_output)
           })
       .catch((error) => {
           reject(error)
@@ -1064,30 +1282,37 @@ export function post_ChangedCreateCall(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangedCreateTask
    Description: This method refreshes the dataset when the CreateTask flage is turned off
    OperationID: ChangedCreateTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangedCreateTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangedCreateTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangedCreateTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangedCreateTask(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangedCreateTask(requestBody:ChangedCreateTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangedCreateTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/ChangedCreateTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangedCreateTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -1099,30 +1324,37 @@ export function post_ChangedCreateTask(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CopyDtlFrom
    Description: This method copies detail records from another MktgList to the current MktgList
    OperationID: CopyDtlFrom
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CopyDtlFrom_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CopyDtlFrom_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CopyDtlFrom_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CopyDtlFrom(requestBody:any, epicorHeaders?:Headers){
+export function post_CopyDtlFrom(requestBody:CopyDtlFrom_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CopyDtlFrom_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/CopyDtlFrom", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CopyDtlFrom_output)
           })
       .catch((error) => {
           reject(error)
@@ -1134,30 +1366,37 @@ export function post_CopyDtlFrom(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GenerateMktgLstDtl
    Description: This method creates detail records from MktgListGenerate dataset
    OperationID: GenerateMktgLstDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateMktgLstDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateMktgLstDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateMktgLstDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateMktgLstDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateMktgLstDtl(requestBody:GenerateMktgLstDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateMktgLstDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GenerateMktgLstDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateMktgLstDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1169,30 +1408,37 @@ export function post_GenerateMktgLstDtl(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetExportList
    Description: This method creates the MktgLstExp table using the values in the MktgLstExpParam table
    OperationID: GetExportList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetExportList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetExportList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetExportList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetExportList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetExportList(requestBody:GetExportList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetExportList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetExportList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetExportList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1204,7 +1450,7 @@ export function post_GetExportList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewExportParam
    Description: This method creates the MktgLstParam table for use in the export process
    OperationID: GetNewExportParam
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewExportParam_output
@@ -1217,15 +1463,22 @@ export function post_GetNewExportParam(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewExportParam_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetNewExportParam", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewExportParam_output)
           })
       .catch((error) => {
           reject(error)
@@ -1237,30 +1490,37 @@ export function post_GetNewExportParam(epicorHeaders?:Headers){
    Summary: Invoke method OnChangeCallType
    Description: This method validates and defaults Call Type information when CallType is changed
    OperationID: OnChangeCallType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCallType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCallType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCallType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCallType(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCallType(requestBody:OnChangeCallType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCallType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/OnChangeCallType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCallType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1272,30 +1532,37 @@ export function post_OnChangeCallType(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeCampaignID
    Description: This method validates the Campaign ID when the user changes the value
    OperationID: OnChangeCampaignID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCampaignID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCampaignID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCampaignID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCampaignID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCampaignID(requestBody:OnChangeCampaignID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCampaignID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/OnChangeCampaignID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCampaignID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1307,30 +1574,37 @@ export function post_OnChangeCampaignID(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeConNum
    Description: This method validates the Contact when the user changes the value
    OperationID: OnChangeConNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeConNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeConNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeConNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeConNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeConNum(requestBody:OnChangeConNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeConNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/OnChangeConNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeConNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1342,30 +1616,37 @@ export function post_OnChangeConNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeCustID
    Description: This method validates the Customer ID when the user changes the value
    OperationID: OnChangeCustID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCustID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCustID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCustID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCustID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCustID(requestBody:OnChangeCustID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCustID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/OnChangeCustID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCustID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1377,30 +1658,37 @@ export function post_OnChangeCustID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeEvntSeq
    Description: This method validates the Event Sequence when the user changes the value
    OperationID: OnChangeEvntSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeEvntSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeEvntSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeEvntSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeEvntSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeEvntSeq(requestBody:OnChangeEvntSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeEvntSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/OnChangeEvntSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeEvntSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -1412,30 +1700,37 @@ export function post_OnChangeEvntSeq(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeShipTo
    Description: This method validates the Ship To Number when the user changes the value
    OperationID: OnChangeShipTo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeShipTo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeShipTo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeShipTo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeShipTo(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeShipTo(requestBody:OnChangeShipTo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeShipTo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/OnChangeShipTo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeShipTo_output)
           })
       .catch((error) => {
           reject(error)
@@ -1447,30 +1742,37 @@ export function post_OnChangeShipTo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeTaskID
    Description: This method validates and defaults Task information when TaskID is changed
    OperationID: OnChangeTaskID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeTaskID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeTaskID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeTaskID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeTaskID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeTaskID(requestBody:OnChangeTaskID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeTaskID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/OnChangeTaskID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeTaskID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1482,30 +1784,37 @@ export function post_OnChangeTaskID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeTaskType
    Description: This method validates and defaults Task Type information when TaskType is changed
    OperationID: OnChangeTaskType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeTaskType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeTaskType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeTaskType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeTaskType(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeTaskType(requestBody:OnChangeTaskType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeTaskType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/OnChangeTaskType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeTaskType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1520,30 +1829,37 @@ if the batch Id already exists for the target Marketing List a question will
 be returned to the user asking them if they'd like to reuse the batch ID.
 If the user answers yes they can continue on to the PullList method.
    OperationID: PrePullList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PrePullList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PrePullList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PrePullList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PrePullList(requestBody:any, epicorHeaders?:Headers){
+export function post_PrePullList(requestBody:PrePullList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PrePullList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/PrePullList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PrePullList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1557,30 +1873,37 @@ export function post_PrePullList(requestBody:any, epicorHeaders?:Headers){
 It will create MktLstDtl record for every Customer/Contact that is returned by
 the B.A. Query and will return the updated dataset to the UI
    OperationID: PullList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PullList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PullList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PullList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PullList(requestBody:any, epicorHeaders?:Headers){
+export function post_PullList(requestBody:PullList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PullList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/PullList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PullList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1591,30 +1914,37 @@ export function post_PullList(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetVRDescription
    OperationID: GetVRDescription
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetVRDescription_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetVRDescription_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetVRDescription_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetVRDescription(requestBody:any, epicorHeaders?:Headers){
+export function post_GetVRDescription(requestBody:GetVRDescription_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetVRDescription_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetVRDescription", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetVRDescription_output)
           })
       .catch((error) => {
           reject(error)
@@ -1625,30 +1955,37 @@ export function post_GetVRDescription(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetCodeDescList
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1659,30 +1996,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ExportListToCSV
    OperationID: ExportListToCSV
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportListToCSV_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportListToCSV_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportListToCSV_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportListToCSV(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportListToCSV(requestBody:ExportListToCSV_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportListToCSV_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/ExportListToCSV", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportListToCSV_output)
           })
       .catch((error) => {
           reject(error)
@@ -1694,30 +2038,37 @@ export function post_ExportListToCSV(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckBAQID
    Description: Check entered BAQ ID
    OperationID: CheckBAQID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckBAQID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckBAQID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckBAQID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckBAQID(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckBAQID(requestBody:CheckBAQID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckBAQID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/CheckBAQID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckBAQID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1729,30 +2080,37 @@ export function post_CheckBAQID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewMktgList
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMktgList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMktgList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMktgList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMktgList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMktgList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMktgList(requestBody:GetNewMktgList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMktgList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetNewMktgList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMktgList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1764,30 +2122,37 @@ export function post_GetNewMktgList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewMktgListAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMktgListAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMktgListAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMktgListAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMktgListAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMktgListAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMktgListAttch(requestBody:GetNewMktgListAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMktgListAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetNewMktgListAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMktgListAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1799,30 +2164,37 @@ export function post_GetNewMktgListAttch(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewMktgLstDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMktgLstDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMktgLstDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMktgLstDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMktgLstDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMktgLstDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMktgLstDtl(requestBody:GetNewMktgLstDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMktgLstDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetNewMktgLstDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMktgLstDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1834,30 +2206,37 @@ export function post_GetNewMktgLstDtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1869,7 +2248,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1893,15 +2272,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1913,7 +2299,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1937,15 +2323,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1957,30 +2350,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1992,30 +2392,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MktgLstSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2026,26 +2433,43 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MktgListAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MktgListAttchRow[],
+   "value":Erp_Tablesets_MktgListAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MktgListListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MktgListListRow[],
+   "value":Erp_Tablesets_MktgListListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MktgListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MktgListRow[],
+   "value":Erp_Tablesets_MktgListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MktgLstDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MktgLstDtlRow[],
+   "value":Erp_Tablesets_MktgLstDtlRow,
 }
 
 export interface Erp_Tablesets_MktgListAttchRow{
@@ -2188,6 +2612,23 @@ export interface Erp_Tablesets_MktgLstDtlRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2200,7 +2641,7 @@ export interface ChangedCreateCall_input{
 export interface ChangedCreateCall_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstExpTableset[],
+   ds:Erp_Tablesets_MktgLstExpTableset,
 }
 }
 
@@ -2214,7 +2655,7 @@ export interface ChangedCreateTask_input{
 export interface ChangedCreateTask_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstExpTableset[],
+   ds:Erp_Tablesets_MktgLstExpTableset,
 }
 }
 
@@ -2575,7 +3016,7 @@ export interface ExportListToCSV_input{
 export interface ExportListToCSV_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstExpTableset[],
+   ds:Erp_Tablesets_MktgLstExpTableset,
 }
 }
 
@@ -2589,7 +3030,7 @@ export interface GenerateMktgLstDtl_input{
 export interface GenerateMktgLstDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstDtlGenerateTableset[],
+   ds:Erp_Tablesets_MktgLstDtlGenerateTableset,
    statusMsg:string,
 }
 }
@@ -2653,7 +3094,7 @@ export interface GetExportList_input{
 export interface GetExportList_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstExpTableset[],
+   ds:Erp_Tablesets_MktgLstExpTableset,
 }
 }
 
@@ -2695,7 +3136,7 @@ export interface GetNewMktgListAttch_input{
 export interface GetNewMktgListAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstTableset[],
+   ds:Erp_Tablesets_MktgLstTableset,
 }
 }
 
@@ -2709,7 +3150,7 @@ export interface GetNewMktgList_input{
 export interface GetNewMktgList_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstTableset[],
+   ds:Erp_Tablesets_MktgLstTableset,
 }
 }
 
@@ -2725,7 +3166,7 @@ export interface GetNewMktgLstDtl_input{
 export interface GetNewMktgLstDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstTableset[],
+   ds:Erp_Tablesets_MktgLstTableset,
 }
 }
 
@@ -2816,7 +3257,7 @@ export interface OnChangeCallType_input{
 export interface OnChangeCallType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstExpTableset[],
+   ds:Erp_Tablesets_MktgLstExpTableset,
 }
 }
 
@@ -2833,7 +3274,7 @@ export interface OnChangeCampaignID_input{
 export interface OnChangeCampaignID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstTableset[],
+   ds:Erp_Tablesets_MktgLstTableset,
 }
 }
 
@@ -2850,7 +3291,7 @@ export interface OnChangeConNum_input{
 export interface OnChangeConNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstTableset[],
+   ds:Erp_Tablesets_MktgLstTableset,
 }
 }
 
@@ -2867,7 +3308,7 @@ export interface OnChangeCustID_input{
 export interface OnChangeCustID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstTableset[],
+   ds:Erp_Tablesets_MktgLstTableset,
 }
 }
 
@@ -2884,7 +3325,7 @@ export interface OnChangeEvntSeq_input{
 export interface OnChangeEvntSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstTableset[],
+   ds:Erp_Tablesets_MktgLstTableset,
 }
 }
 
@@ -2901,7 +3342,7 @@ export interface OnChangeShipTo_input{
 export interface OnChangeShipTo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstTableset[],
+   ds:Erp_Tablesets_MktgLstTableset,
 }
 }
 
@@ -2921,7 +3362,7 @@ export interface OnChangeTaskID_input{
 export interface OnChangeTaskID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstExpTableset[],
+   ds:Erp_Tablesets_MktgLstExpTableset,
 }
 }
 
@@ -2938,7 +3379,7 @@ export interface OnChangeTaskType_input{
 export interface OnChangeTaskType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstExpTableset[],
+   ds:Erp_Tablesets_MktgLstExpTableset,
 }
 }
 
@@ -2983,7 +3424,7 @@ export interface PullList_input{
 export interface PullList_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstTableset[],
+   ds:Erp_Tablesets_MktgLstTableset,
 }
 }
 
@@ -3002,7 +3443,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtMktgLstTableset[],
+   ds:Erp_Tablesets_UpdExtMktgLstTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3017,7 +3458,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MktgLstTableset[],
+   ds:Erp_Tablesets_MktgLstTableset,
 }
 }
 

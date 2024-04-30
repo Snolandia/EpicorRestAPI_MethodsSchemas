@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.SysMonitorSvc
 // Description: The System Monitor service.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method GetMonitorDataKeepIdleTime
    Description: Gets the task data for the user.
    OperationID: GetMonitorDataKeepIdleTime
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMonitorDataKeepIdleTime_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMonitorDataKeepIdleTime_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMonitorDataKeepIdleTime_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMonitorDataKeepIdleTime(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMonitorDataKeepIdleTime(requestBody:GetMonitorDataKeepIdleTime_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMonitorDataKeepIdleTime_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysMonitorSvc/GetMonitorDataKeepIdleTime", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMonitorDataKeepIdleTime_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_GetMonitorDataKeepIdleTime(requestBody:any, epicorHeaders?:
    Summary: Invoke method CheckForTaskUpdatesKeepIdleTime
    Description: Checks for Ice.SysRptLst and/or Ice.SysTask updates. This may return false positives.
    OperationID: CheckForTaskUpdatesKeepIdleTime
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckForTaskUpdatesKeepIdleTime_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckForTaskUpdatesKeepIdleTime_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckForTaskUpdatesKeepIdleTime_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckForTaskUpdatesKeepIdleTime(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckForTaskUpdatesKeepIdleTime(requestBody:CheckForTaskUpdatesKeepIdleTime_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckForTaskUpdatesKeepIdleTime_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysMonitorSvc/CheckForTaskUpdatesKeepIdleTime", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckForTaskUpdatesKeepIdleTime_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_CheckForTaskUpdatesKeepIdleTime(requestBody:any, epicorHead
    Summary: Invoke method CancelTask
    Description: Use to terminate a running task.
    OperationID: CancelTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CancelTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CancelTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CancelTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CancelTask(requestBody:any, epicorHeaders?:Headers){
+export function post_CancelTask(requestBody:CancelTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CancelTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysMonitorSvc/CancelTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CancelTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_CancelTask(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetScheduledTasks
    Description: To return the SysMonitorSchedDataSet which contains the scheduled tasks for a user.
    OperationID: GetScheduledTasks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetScheduledTasks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetScheduledTasks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetScheduledTasks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetScheduledTasks(requestBody:any, epicorHeaders?:Headers){
+export function post_GetScheduledTasks(requestBody:GetScheduledTasks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetScheduledTasks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysMonitorSvc/GetScheduledTasks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetScheduledTasks_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,30 +303,37 @@ export function post_GetScheduledTasks(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetTaskHistory
    Description: To return Task history records for the current user for a specified number of days.
    OperationID: GetTaskHistory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTaskHistory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTaskHistory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTaskHistory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTaskHistory(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTaskHistory(requestBody:GetTaskHistory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTaskHistory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysMonitorSvc/GetTaskHistory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTaskHistory_output)
           })
       .catch((error) => {
           reject(error)
@@ -260,30 +345,37 @@ export function post_GetTaskHistory(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetTReports
    Description: To return the SysMonitorDataSet which contains the SysTask and SysRptLst tables.
    OperationID: GetTReports
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTReports_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTReports_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTReports_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTReports(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTReports(requestBody:GetTReports_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTReports_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysMonitorSvc/GetTReports", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTReports_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,30 +387,37 @@ export function post_GetTReports(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetReports
    Description: To return the SysMonitorDataSet which contains the SysRptLst tables.
    OperationID: GetReports
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetReports_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetReports_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetReports_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetReports(requestBody:any, epicorHeaders?:Headers){
+export function post_GetReports(requestBody:GetReports_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetReports_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysMonitorSvc/GetReports", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetReports_output)
           })
       .catch((error) => {
           reject(error)
@@ -330,7 +429,7 @@ export function post_GetReports(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCompanyList
    Description: Return list of company current user has access to.
    OperationID: GetCompanyList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCompanyList_output
@@ -343,15 +442,22 @@ export function post_GetCompanyList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCompanyList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysMonitorSvc/GetCompanyList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCompanyList_output)
           })
       .catch((error) => {
           reject(error)
@@ -365,30 +471,37 @@ export function post_GetCompanyList(epicorHeaders?:Headers){
 Does NOT support adding new records.
 Does NOT support deletion of SysTask records.
    OperationID: UpdateSysMonitorDS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateSysMonitorDS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateSysMonitorDS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateSysMonitorDS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateSysMonitorDS(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateSysMonitorDS(requestBody:UpdateSysMonitorDS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateSysMonitorDS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysMonitorSvc/UpdateSysMonitorDS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateSysMonitorDS_output)
           })
       .catch((error) => {
           reject(error)
@@ -401,30 +514,37 @@ export function post_UpdateSysMonitorDS(requestBody:any, epicorHeaders?:Headers)
    Description: Use to commit deletions of the SysMonitor dataset to the database.
 Does NOT support adding or updating of records.
    OperationID: UpdateSysMonitorSched
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateSysMonitorSched_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateSysMonitorSched_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateSysMonitorSched_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateSysMonitorSched(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateSysMonitorSched(requestBody:UpdateSysMonitorSched_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateSysMonitorSched_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysMonitorSvc/UpdateSysMonitorSched", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateSysMonitorSched_output)
           })
       .catch((error) => {
           reject(error)
@@ -435,11 +555,45 @@ export function post_UpdateSysMonitorSched(requestBody:any, epicorHeaders?:Heade
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -919,7 +1073,7 @@ export interface UpdateSysMonitorDS_input{
 export interface UpdateSysMonitorDS_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_SysMonitorTableset[],
+   ds:Ice_Tablesets_SysMonitorTableset,
 }
 }
 
@@ -933,7 +1087,7 @@ export interface UpdateSysMonitorSched_input{
 export interface UpdateSysMonitorSched_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_SysMonitorSchedTableset[],
+   ds:Ice_Tablesets_SysMonitorSchedTableset,
 }
 }
 

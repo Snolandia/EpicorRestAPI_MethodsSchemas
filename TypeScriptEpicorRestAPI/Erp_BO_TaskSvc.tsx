@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.TaskSvc
 // Description: The Task main object.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaskRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaskRow
    */  
 export function get_Tasks(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_Tasks(select?:string, expand?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaskRow)
           })
@@ -118,15 +158,15 @@ export function get_Tasks(select?:string, expand?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_Tasks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaskRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaskRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.TaskRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.TaskRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Tasks(requestBody:any, epicorHeaders?:Headers){
+export function post_Tasks(requestBody:Erp_Tablesets_TaskRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_Tasks(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -163,10 +210,10 @@ export function post_Tasks(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaskRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaskRow
    */  
 export function get_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, TaskSeqNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -181,7 +228,14 @@ export function get_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaskRow)
           })
@@ -201,15 +255,15 @@ export function get_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum(Compan
       @param Key2 Desc: Key2   Required: True   Allow empty value : True
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param TaskSeqNum Desc: TaskSeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaskRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaskRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, TaskSeqNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, TaskSeqNum:string, requestBody:Erp_Tablesets_TaskRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -223,7 +277,14 @@ export function patch_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum(Comp
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -243,7 +304,7 @@ export function patch_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum(Comp
       @param Key2 Desc: Key2   Required: True   Allow empty value : True
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param TaskSeqNum Desc: TaskSeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -262,7 +323,14 @@ export function delete_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -288,10 +356,10 @@ export function delete_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum(Com
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaskCntRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaskCntRow
    */  
 export function get_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_TaskCnts(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, TaskSeqNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -306,7 +374,14 @@ export function get_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_TaskCn
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaskCntRow)
           })
@@ -329,10 +404,10 @@ export function get_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_TaskCn
       @param PerConLnkRowID Desc: PerConLnkRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaskCntRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaskCntRow
    */  
 export function get_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_TaskCnts_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_PerConLnkRowID(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, TaskSeqNum:string, PerConLnkRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -347,7 +422,14 @@ export function get_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_TaskCn
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaskCntRow)
           })
@@ -367,10 +449,10 @@ export function get_Tasks_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_TaskCn
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaskCntRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaskCntRow
    */  
 export function get_TaskCnts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -385,7 +467,14 @@ export function get_TaskCnts(select?:string, filter?:string, orderby?:string, to
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaskCntRow)
           })
@@ -399,15 +488,15 @@ export function get_TaskCnts(select?:string, filter?:string, orderby?:string, to
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_TaskCnts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaskCntRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.TaskCntRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.TaskCntRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.TaskCntRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TaskCnts(requestBody:any, epicorHeaders?:Headers){
+export function post_TaskCnts(requestBody:Erp_Tablesets_TaskCntRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -421,7 +510,14 @@ export function post_TaskCnts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -444,10 +540,10 @@ export function post_TaskCnts(requestBody:any, epicorHeaders?:Headers){
       @param PerConLnkRowID Desc: PerConLnkRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.TaskCntRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.TaskCntRow
    */  
 export function get_TaskCnts_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_PerConLnkRowID(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, TaskSeqNum:string, PerConLnkRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -462,7 +558,14 @@ export function get_TaskCnts_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_Per
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_TaskCntRow)
           })
@@ -483,15 +586,15 @@ export function get_TaskCnts_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_Per
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param TaskSeqNum Desc: TaskSeqNum   Required: True
       @param PerConLnkRowID Desc: PerConLnkRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaskCntRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.TaskCntRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_TaskCnts_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_PerConLnkRowID(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, TaskSeqNum:string, PerConLnkRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_TaskCnts_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_PerConLnkRowID(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, TaskSeqNum:string, PerConLnkRowID:string, requestBody:Erp_Tablesets_TaskCntRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -505,7 +608,14 @@ export function patch_TaskCnts_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_P
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -526,7 +636,7 @@ export function patch_TaskCnts_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_P
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param TaskSeqNum Desc: TaskSeqNum   Required: True
       @param PerConLnkRowID Desc: PerConLnkRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -545,7 +655,14 @@ export function delete_TaskCnts_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -565,10 +682,10 @@ export function delete_TaskCnts_Company_RelatedToFile_Key1_Key2_Key3_TaskSeqNum_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaskListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.TaskListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -583,7 +700,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaskListRow)
           })
@@ -596,6 +720,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -607,7 +748,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -658,15 +799,22 @@ export function get_GetRows(whereClauseTask:string, whereClauseTaskCnt:string, p
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -683,7 +831,7 @@ export function get_GetRows(whereClauseTask:string, whereClauseTaskCnt:string, p
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -743,15 +891,22 @@ export function get_GetByID(relatedToFile:string, key1:string, key2:string, key3
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -766,7 +921,7 @@ export function get_GetByID(relatedToFile:string, key1:string, key2:string, key3
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -808,15 +963,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -828,30 +990,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetCodeDescList
    Description: GetCodeDescList
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -863,30 +1032,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssignDefaultsFromQuote
    Description: Assigns defaults for the task when is created from a Quote.
    OperationID: AssignDefaultsFromQuote
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AssignDefaultsFromQuote_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AssignDefaultsFromQuote_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssignDefaultsFromQuote_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssignDefaultsFromQuote(requestBody:any, epicorHeaders?:Headers){
+export function post_AssignDefaultsFromQuote(requestBody:AssignDefaultsFromQuote_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssignDefaultsFromQuote_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/AssignDefaultsFromQuote", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssignDefaultsFromQuote_output)
           })
       .catch((error) => {
           reject(error)
@@ -899,30 +1075,37 @@ export function post_AssignDefaultsFromQuote(requestBody:any, epicorHeaders?:Hea
    Description: Executes thw Changecomplete logic and provides an optional warning message for quotes that have subsequent tasks and more than one task will be updateable.
 Use this method when you want the additional message sent back to the client.
    OperationID: ChangeCompleteIncludingNextTaskWarning
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCompleteIncludingNextTaskWarning_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCompleteIncludingNextTaskWarning_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCompleteIncludingNextTaskWarning_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCompleteIncludingNextTaskWarning(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCompleteIncludingNextTaskWarning(requestBody:ChangeCompleteIncludingNextTaskWarning_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCompleteIncludingNextTaskWarning_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeCompleteIncludingNextTaskWarning", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCompleteIncludingNextTaskWarning_output)
           })
       .catch((error) => {
           reject(error)
@@ -934,30 +1117,37 @@ export function post_ChangeCompleteIncludingNextTaskWarning(requestBody:any, epi
    Summary: Invoke method ChangeVoid
    Description: Performs next task check when the void column is changed.
    OperationID: ChangeVoid
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeVoid_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeVoid_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeVoid_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeVoid(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeVoid(requestBody:ChangeVoid_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeVoid_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeVoid", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeVoid_output)
           })
       .catch((error) => {
           reject(error)
@@ -969,30 +1159,37 @@ export function post_ChangeVoid(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeComplete
    Description: Assigns defaults for the task when the complete field is checked.
    OperationID: ChangeComplete
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeComplete_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeComplete_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeComplete_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeComplete(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeComplete(requestBody:ChangeComplete_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeComplete_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeComplete", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeComplete_output)
           })
       .catch((error) => {
           reject(error)
@@ -1004,30 +1201,37 @@ export function post_ChangeComplete(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeVoided
    Description: Assigns defaults for the task when the task gets Voided.
    OperationID: ChangeVoided
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeVoided_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeVoided_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeVoided_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeVoided(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeVoided(requestBody:ChangeVoided_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeVoided_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeVoided", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeVoided_output)
           })
       .catch((error) => {
           reject(error)
@@ -1039,30 +1243,37 @@ export function post_ChangeVoided(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeConclusion
    Description: Assigns defaults for the task when the conclusion is changed.
    OperationID: ChangeConclusion
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeConclusion_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeConclusion_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeConclusion_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeConclusion(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeConclusion(requestBody:ChangeConclusion_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeConclusion_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeConclusion", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeConclusion_output)
           })
       .catch((error) => {
           reject(error)
@@ -1074,30 +1285,37 @@ export function post_ChangeConclusion(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeConName
    Description: Update TaskCnt information when the contact Name is changed.
    OperationID: ChangeConName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeConName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeConName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeConName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeConName(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeConName(requestBody:ChangeConName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeConName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeConName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeConName_output)
           })
       .catch((error) => {
           reject(error)
@@ -1109,30 +1327,37 @@ export function post_ChangeConName(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeConPerConLnkRowID
    Description: Update TaskCnt information when the contact PerConLnkRowID is changed.
    OperationID: ChangeConPerConLnkRowID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeConPerConLnkRowID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeConPerConLnkRowID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeConPerConLnkRowID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeConPerConLnkRowID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeConPerConLnkRowID(requestBody:ChangeConPerConLnkRowID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeConPerConLnkRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeConPerConLnkRowID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeConPerConLnkRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1144,30 +1369,37 @@ export function post_ChangeConPerConLnkRowID(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ChangeCustomer
    Description: Assigns defaults for the task when the customer changes.
    OperationID: ChangeCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCustomer(requestBody:ChangeCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1179,30 +1411,37 @@ export function post_ChangeCustomer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeCustomerContact
    Description: Assigns defaults for the task when the customer contact changes.
    OperationID: ChangeCustomerContact
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCustomerContact_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCustomerContact_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCustomerContact_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCustomerContact(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCustomerContact(requestBody:ChangeCustomerContact_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCustomerContact_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeCustomerContact", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCustomerContact_output)
           })
       .catch((error) => {
           reject(error)
@@ -1214,30 +1453,37 @@ export function post_ChangeCustomerContact(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ChangeCustomerShipTo
    Description: Assigns defaults for the task when the customer changes.
    OperationID: ChangeCustomerShipTo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCustomerShipTo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCustomerShipTo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCustomerShipTo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCustomerShipTo(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCustomerShipTo(requestBody:ChangeCustomerShipTo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCustomerShipTo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeCustomerShipTo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCustomerShipTo_output)
           })
       .catch((error) => {
           reject(error)
@@ -1249,30 +1495,37 @@ export function post_ChangeCustomerShipTo(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ChangeTaskShipToCust
    Description: Assigns defaults for the task when the customer ship to changes.
    OperationID: ChangeTaskShipToCust
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeTaskShipToCust_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeTaskShipToCust_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeTaskShipToCust_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeTaskShipToCust(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeTaskShipToCust(requestBody:ChangeTaskShipToCust_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeTaskShipToCust_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeTaskShipToCust", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeTaskShipToCust_output)
           })
       .catch((error) => {
           reject(error)
@@ -1284,30 +1537,37 @@ export function post_ChangeTaskShipToCust(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ChangeTaskShipToCustContact
    Description: ChangeTaskShipToCustContact
    OperationID: ChangeTaskShipToCustContact
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeTaskShipToCustContact_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeTaskShipToCustContact_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeTaskShipToCustContact_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeTaskShipToCustContact(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeTaskShipToCustContact(requestBody:ChangeTaskShipToCustContact_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeTaskShipToCustContact_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeTaskShipToCustContact", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeTaskShipToCustContact_output)
           })
       .catch((error) => {
           reject(error)
@@ -1319,30 +1579,37 @@ export function post_ChangeTaskShipToCustContact(requestBody:any, epicorHeaders?
    Summary: Invoke method ChangeNextTaskSeq
    Description: Get the Next Task Description when the NextTaskSeq changes.
    OperationID: ChangeNextTaskSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeNextTaskSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeNextTaskSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeNextTaskSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeNextTaskSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeNextTaskSeq(requestBody:ChangeNextTaskSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeNextTaskSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeNextTaskSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeNextTaskSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -1354,30 +1621,37 @@ export function post_ChangeNextTaskSeq(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeSalesRep
    Description: Assigns defaults for the task when the salesRep changes.
    OperationID: ChangeSalesRep
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSalesRep_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSalesRep_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSalesRep_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSalesRep(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSalesRep(requestBody:ChangeSalesRep_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSalesRep_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeSalesRep", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSalesRep_output)
           })
       .catch((error) => {
           reject(error)
@@ -1389,30 +1663,37 @@ export function post_ChangeSalesRep(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeTaskID
    Description: Assigns defaults for the task when the task id changes.
    OperationID: ChangeTaskID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeTaskID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeTaskID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeTaskID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeTaskID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeTaskID(requestBody:ChangeTaskID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeTaskID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeTaskID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeTaskID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1424,30 +1705,37 @@ export function post_ChangeTaskID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeTaskTimeDisp
    Description: Assigns the format for the task Start and End Time fields when their value changes.
    OperationID: ChangeTaskTimeDisp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeTaskTimeDisp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeTaskTimeDisp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeTaskTimeDisp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeTaskTimeDisp(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeTaskTimeDisp(requestBody:ChangeTaskTimeDisp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeTaskTimeDisp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeTaskTimeDisp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeTaskTimeDisp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1459,30 +1747,37 @@ export function post_ChangeTaskTimeDisp(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ChangeTEApprovalAction
    Description: Assigns defaults for the task when the time or expense approval action changes.
    OperationID: ChangeTEApprovalAction
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeTEApprovalAction_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeTEApprovalAction_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeTEApprovalAction_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeTEApprovalAction(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeTEApprovalAction(requestBody:ChangeTEApprovalAction_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeTEApprovalAction_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeTEApprovalAction", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeTEApprovalAction_output)
           })
       .catch((error) => {
           reject(error)
@@ -1494,30 +1789,37 @@ export function post_ChangeTEApprovalAction(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ValidateConclusion
    Description: Validates Task Conclusion
    OperationID: ValidateConclusion
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateConclusion_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateConclusion_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateConclusion_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateConclusion(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateConclusion(requestBody:ValidateConclusion_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateConclusion_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ValidateConclusion", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateConclusion_output)
           })
       .catch((error) => {
           reject(error)
@@ -1529,30 +1831,37 @@ export function post_ValidateConclusion(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ValidateVendorID
    Description: Validate Vendor ID.
    OperationID: ValidateVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateVendorID(requestBody:ValidateVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ValidateVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1564,30 +1873,37 @@ export function post_ValidateVendorID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidatePurPoint
    Description: Validate Vendor Purchase Point.
    OperationID: ValidatePurPoint
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidatePurPoint_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidatePurPoint_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidatePurPoint_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidatePurPoint(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidatePurPoint(requestBody:ValidatePurPoint_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidatePurPoint_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ValidatePurPoint", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidatePurPoint_output)
           })
       .catch((error) => {
           reject(error)
@@ -1599,30 +1915,37 @@ export function post_ValidatePurPoint(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeVendor
    Description: Assigns defaults for the task when the vendor changes.
    OperationID: ChangeVendor
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeVendor_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeVendor_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeVendor_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeVendor(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeVendor(requestBody:ChangeVendor_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeVendor_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeVendor", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeVendor_output)
           })
       .catch((error) => {
           reject(error)
@@ -1634,30 +1957,37 @@ export function post_ChangeVendor(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeVendorContact
    Description: Assigns defaults for the task when the vendor contact changes.
    OperationID: ChangeVendorContact
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeVendorContact_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeVendorContact_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeVendorContact_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeVendorContact(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeVendorContact(requestBody:ChangeVendorContact_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeVendorContact_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeVendorContact", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeVendorContact_output)
           })
       .catch((error) => {
           reject(error)
@@ -1669,30 +1999,37 @@ export function post_ChangeVendorContact(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ChangeVendorPP
    Description: Assigns defaults for the task when the vendor purchase point changes.
    OperationID: ChangeVendorPP
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeVendorPP_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeVendorPP_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeVendorPP_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeVendorPP(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeVendorPP(requestBody:ChangeVendorPP_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeVendorPP_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ChangeVendorPP", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeVendorPP_output)
           })
       .catch((error) => {
           reject(error)
@@ -1703,30 +2040,37 @@ export function post_ChangeVendorPP(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CheckQuoteForCreditLimit
    OperationID: CheckQuoteForCreditLimit
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckQuoteForCreditLimit_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckQuoteForCreditLimit_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckQuoteForCreditLimit_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckQuoteForCreditLimit(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckQuoteForCreditLimit(requestBody:CheckQuoteForCreditLimit_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckQuoteForCreditLimit_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/CheckQuoteForCreditLimit", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckQuoteForCreditLimit_output)
           })
       .catch((error) => {
           reject(error)
@@ -1738,30 +2082,37 @@ export function post_CheckQuoteForCreditLimit(requestBody:any, epicorHeaders?:He
    Summary: Invoke method PutCustomerOnCreditHold
    Description: PutCustomerOnCreditHold
    OperationID: PutCustomerOnCreditHold
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PutCustomerOnCreditHold_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PutCustomerOnCreditHold_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PutCustomerOnCreditHold_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PutCustomerOnCreditHold(requestBody:any, epicorHeaders?:Headers){
+export function post_PutCustomerOnCreditHold(requestBody:PutCustomerOnCreditHold_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PutCustomerOnCreditHold_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/PutCustomerOnCreditHold", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PutCustomerOnCreditHold_output)
           })
       .catch((error) => {
           reject(error)
@@ -1773,30 +2124,37 @@ export function post_PutCustomerOnCreditHold(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetCreditHoldMessageText
    Description: Retrieve the customer on credit hold message text.
    OperationID: GetCreditHoldMessageText
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCreditHoldMessageText_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCreditHoldMessageText_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCreditHoldMessageText_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCreditHoldMessageText(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCreditHoldMessageText(requestBody:GetCreditHoldMessageText_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCreditHoldMessageText_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetCreditHoldMessageText", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCreditHoldMessageText_output)
           })
       .catch((error) => {
           reject(error)
@@ -1807,7 +2165,7 @@ export function post_GetCreditHoldMessageText(requestBody:any, epicorHeaders?:He
    /**  
    Summary: Invoke method GetDefaultEndDate
    OperationID: GetDefaultEndDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultEndDate_output
@@ -1820,15 +2178,22 @@ export function post_GetDefaultEndDate(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultEndDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetDefaultEndDate", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultEndDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1843,30 +2208,37 @@ a Sales Representative, Date Range, and sort options.  This method builds the wh
 clause instead of having the UI build the where clause on their end.  Although either
 method could be used to build the Tree.
    OperationID: GetListApprovers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListApprovers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListApprovers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListApprovers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListApprovers(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListApprovers(requestBody:GetListApprovers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListApprovers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetListApprovers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListApprovers_output)
           })
       .catch((error) => {
           reject(error)
@@ -1879,7 +2251,7 @@ export function post_GetListApprovers(requestBody:any, epicorHeaders?:Headers){
    Description: This method returns the message text for the case where there aren't any quote
 lines with an order quantity.
    OperationID: GetQuoteLinesWOQtyMessageText
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQuoteLinesWOQtyMessageText_output
@@ -1892,15 +2264,22 @@ export function post_GetQuoteLinesWOQtyMessageText(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQuoteLinesWOQtyMessageText_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetQuoteLinesWOQtyMessageText", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQuoteLinesWOQtyMessageText_output)
           })
       .catch((error) => {
           reject(error)
@@ -1912,30 +2291,37 @@ export function post_GetQuoteLinesWOQtyMessageText(epicorHeaders?:Headers){
    Summary: Invoke method ExistsUncompletedTasks
    Description: This method returns a true if there are remaining uncompleted tasks
    OperationID: ExistsUncompletedTasks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExistsUncompletedTasks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExistsUncompletedTasks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExistsUncompletedTasks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExistsUncompletedTasks(requestBody:any, epicorHeaders?:Headers){
+export function post_ExistsUncompletedTasks(requestBody:ExistsUncompletedTasks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExistsUncompletedTasks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ExistsUncompletedTasks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExistsUncompletedTasks_output)
           })
       .catch((error) => {
           reject(error)
@@ -1947,30 +2333,37 @@ export function post_ExistsUncompletedTasks(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetPrimarySalesRepForUser
    Description: Gets the primary sales rep for the user
    OperationID: GetPrimarySalesRepForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPrimarySalesRepForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPrimarySalesRepForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPrimarySalesRepForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPrimarySalesRepForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPrimarySalesRepForUser(requestBody:GetPrimarySalesRepForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPrimarySalesRepForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetPrimarySalesRepForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPrimarySalesRepForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -1982,30 +2375,37 @@ export function post_GetPrimarySalesRepForUser(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetRemainUncompletedTasks
    Description: Retrieve yes/no regarding if there are ramain uncompleted milestone tasks in HDCase.
    OperationID: GetRemainUncompletedTasks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRemainUncompletedTasks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRemainUncompletedTasks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRemainUncompletedTasks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRemainUncompletedTasks(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRemainUncompletedTasks(requestBody:GetRemainUncompletedTasks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRemainUncompletedTasks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetRemainUncompletedTasks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRemainUncompletedTasks_output)
           })
       .catch((error) => {
           reject(error)
@@ -2017,30 +2417,37 @@ export function post_GetRemainUncompletedTasks(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetRowsContactTracker
    Description: Called from Contact tracker instead of GetRows for better performance
    OperationID: GetRowsContactTracker
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsContactTracker_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsContactTracker_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsContactTracker_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsContactTracker(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsContactTracker(requestBody:GetRowsContactTracker_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsContactTracker_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetRowsContactTracker", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsContactTracker_output)
           })
       .catch((error) => {
           reject(error)
@@ -2052,30 +2459,37 @@ export function post_GetRowsContactTracker(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetRowsCustomerTracker
    Description: Called from Customer tracker instead of GetRows for better performance
    OperationID: GetRowsCustomerTracker
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCustomerTracker_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCustomerTracker_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCustomerTracker_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCustomerTracker(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCustomerTracker(requestBody:GetRowsCustomerTracker_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCustomerTracker_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetRowsCustomerTracker", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCustomerTracker_output)
           })
       .catch((error) => {
           reject(error)
@@ -2090,30 +2504,37 @@ a Sales Representative, Date Range, and sort options.  This method builds the wh
 clause instead of having the UI build the where clause on their end.  Although either
 method could be used to build the Tree.
    OperationID: GetTaskCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTaskCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTaskCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTaskCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTaskCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTaskCnt(requestBody:GetTaskCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTaskCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetTaskCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTaskCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2128,30 +2549,37 @@ a Sales Representative, Date Range, and sort options.  This method builds the wh
 clause instead of having the UI build the where clause on their end.  Although either
 method could be used to build the Tree.
    OperationID: GetTaskListByDateRange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTaskListByDateRange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTaskListByDateRange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTaskListByDateRange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTaskListByDateRange(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTaskListByDateRange(requestBody:GetTaskListByDateRange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTaskListByDateRange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetTaskListByDateRange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTaskListByDateRange_output)
           })
       .catch((error) => {
           reject(error)
@@ -2163,30 +2591,37 @@ export function post_GetTaskListByDateRange(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetTaskList
    Description: Deprecated method to get the list of Tasks to be viewed in the Task List screen based a Sales Representative, Date Range, and sort options.
    OperationID: GetTaskList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTaskList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTaskList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTaskList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTaskList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTaskList(requestBody:GetTaskList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTaskList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetTaskList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTaskList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2198,30 +2633,37 @@ export function post_GetTaskList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCurrentTaskSeqNum
    Description: GetCurrentTaskSeqNum
    OperationID: GetCurrentTaskSeqNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCurrentTaskSeqNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCurrentTaskSeqNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCurrentTaskSeqNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCurrentTaskSeqNum(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCurrentTaskSeqNum(requestBody:GetCurrentTaskSeqNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCurrentTaskSeqNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetCurrentTaskSeqNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCurrentTaskSeqNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -2233,30 +2675,37 @@ export function post_GetCurrentTaskSeqNum(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method WorkFlowCompleteWithRemainingTask
    Description: Marks current Task as WorkflowComplete = true, and remaining tasks get completed
    OperationID: WorkFlowCompleteWithRemainingTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/WorkFlowCompleteWithRemainingTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/WorkFlowCompleteWithRemainingTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/WorkFlowCompleteWithRemainingTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_WorkFlowCompleteWithRemainingTask(requestBody:any, epicorHeaders?:Headers){
+export function post_WorkFlowCompleteWithRemainingTask(requestBody:WorkFlowCompleteWithRemainingTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<WorkFlowCompleteWithRemainingTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/WorkFlowCompleteWithRemainingTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as WorkFlowCompleteWithRemainingTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -2268,30 +2717,37 @@ export function post_WorkFlowCompleteWithRemainingTask(requestBody:any, epicorHe
    Summary: Invoke method CheckTaskCanBeVoided
    Description: CheckTaskCanBeVoided
    OperationID: CheckTaskCanBeVoided
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckTaskCanBeVoided_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckTaskCanBeVoided_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckTaskCanBeVoided_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckTaskCanBeVoided(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckTaskCanBeVoided(requestBody:CheckTaskCanBeVoided_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckTaskCanBeVoided_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/CheckTaskCanBeVoided", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckTaskCanBeVoided_output)
           })
       .catch((error) => {
           reject(error)
@@ -2303,30 +2759,37 @@ export function post_CheckTaskCanBeVoided(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method CanCompleteWorkflow
    Description: CanCompleteWorkflow
    OperationID: CanCompleteWorkflow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CanCompleteWorkflow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CanCompleteWorkflow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CanCompleteWorkflow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CanCompleteWorkflow(requestBody:any, epicorHeaders?:Headers){
+export function post_CanCompleteWorkflow(requestBody:CanCompleteWorkflow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CanCompleteWorkflow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/CanCompleteWorkflow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CanCompleteWorkflow_output)
           })
       .catch((error) => {
           reject(error)
@@ -2338,30 +2801,37 @@ export function post_CanCompleteWorkflow(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method TerritoryAuthorized
    Description: TerritoryAuthorized
    OperationID: TerritoryAuthorized
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TerritoryAuthorized_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TerritoryAuthorized_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TerritoryAuthorized_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TerritoryAuthorized(requestBody:any, epicorHeaders?:Headers){
+export function post_TerritoryAuthorized(requestBody:TerritoryAuthorized_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TerritoryAuthorized_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/TerritoryAuthorized", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TerritoryAuthorized_output)
           })
       .catch((error) => {
           reject(error)
@@ -2373,30 +2843,37 @@ export function post_TerritoryAuthorized(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method VoidTask
    Description: Voids a task
    OperationID: VoidTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VoidTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VoidTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VoidTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VoidTask(requestBody:any, epicorHeaders?:Headers){
+export function post_VoidTask(requestBody:VoidTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VoidTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/VoidTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VoidTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -2408,30 +2885,37 @@ export function post_VoidTask(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetTaskTreeDataSet
    Description: Gets dataset for task tree view
    OperationID: GetTaskTreeDataSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTaskTreeDataSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTaskTreeDataSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTaskTreeDataSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTaskTreeDataSet(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTaskTreeDataSet(requestBody:GetTaskTreeDataSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTaskTreeDataSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetTaskTreeDataSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTaskTreeDataSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -2443,30 +2927,37 @@ export function post_GetTaskTreeDataSet(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ExportFile
    Description: Export file
    OperationID: ExportFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportFile(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportFile(requestBody:ExportFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/ExportFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2478,30 +2969,37 @@ export function post_ExportFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewTask
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewTask(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewTask(requestBody:GetNewTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetNewTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -2513,30 +3011,37 @@ export function post_GetNewTask(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewTaskCnt
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewTaskCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewTaskCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewTaskCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewTaskCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewTaskCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewTaskCnt(requestBody:GetNewTaskCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewTaskCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetNewTaskCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewTaskCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2548,30 +3053,37 @@ export function post_GetNewTaskCnt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2583,7 +3095,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2607,15 +3119,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2627,7 +3146,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2651,15 +3170,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2671,30 +3197,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2706,30 +3239,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaskSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2740,21 +3280,38 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaskCntRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_TaskCntRow[],
+   "value":Erp_Tablesets_TaskCntRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaskListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_TaskListRow[],
+   "value":Erp_Tablesets_TaskListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_TaskRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_TaskRow[],
+   "value":Erp_Tablesets_TaskRow,
 }
 
 export interface Erp_Tablesets_TaskCntRow{
@@ -3162,6 +3719,23 @@ APP - Approve.  The time or expense record is approved when the milestone is com
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -3177,7 +3751,7 @@ export interface AssignDefaultsFromQuote_input{
 export interface AssignDefaultsFromQuote_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3206,7 +3780,7 @@ export interface ChangeCompleteIncludingNextTaskWarning_input{
 export interface ChangeCompleteIncludingNextTaskWarning_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
    cMessage:string,
    nextTaskWarning:string,
 }
@@ -3225,7 +3799,7 @@ export interface ChangeComplete_input{
 export interface ChangeComplete_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
    cMessage:string,
 }
 }
@@ -3243,7 +3817,7 @@ export interface ChangeConName_input{
 export interface ChangeConName_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3260,7 +3834,7 @@ export interface ChangeConPerConLnkRowID_input{
 export interface ChangeConPerConLnkRowID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3274,7 +3848,7 @@ export interface ChangeConclusion_input{
 export interface ChangeConclusion_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3288,7 +3862,7 @@ export interface ChangeCustomerContact_input{
 export interface ChangeCustomerContact_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3302,7 +3876,7 @@ export interface ChangeCustomerShipTo_input{
 export interface ChangeCustomerShipTo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3316,7 +3890,7 @@ export interface ChangeCustomer_input{
 export interface ChangeCustomer_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3330,7 +3904,7 @@ export interface ChangeNextTaskSeq_input{
 export interface ChangeNextTaskSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3344,7 +3918,7 @@ export interface ChangeSalesRep_input{
 export interface ChangeSalesRep_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3361,7 +3935,7 @@ export interface ChangeTEApprovalAction_input{
 export interface ChangeTEApprovalAction_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3375,7 +3949,7 @@ export interface ChangeTaskID_input{
 export interface ChangeTaskID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3389,7 +3963,7 @@ export interface ChangeTaskShipToCustContact_input{
 export interface ChangeTaskShipToCustContact_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3403,7 +3977,7 @@ export interface ChangeTaskShipToCust_input{
 export interface ChangeTaskShipToCust_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3417,7 +3991,7 @@ export interface ChangeTaskTimeDisp_input{
 export interface ChangeTaskTimeDisp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3431,7 +4005,7 @@ export interface ChangeVendorContact_input{
 export interface ChangeVendorContact_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3445,7 +4019,7 @@ export interface ChangeVendorPP_input{
 export interface ChangeVendorPP_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3459,7 +4033,7 @@ export interface ChangeVendor_input{
 export interface ChangeVendor_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -3476,7 +4050,7 @@ export interface ChangeVoid_input{
 export interface ChangeVoid_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
    nextTaskWarning:string,
 }
 }
@@ -3491,7 +4065,7 @@ export interface ChangeVoided_input{
 export interface ChangeVoided_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -4029,7 +4603,7 @@ export interface ExportFile_input{
 export interface ExportFile_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -4223,7 +4797,7 @@ export interface GetNewTaskCnt_input{
 export interface GetNewTaskCnt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -4245,7 +4819,7 @@ export interface GetNewTask_input{
 export interface GetNewTask_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -4378,7 +4952,7 @@ export interface GetTaskCnt_input{
 export interface GetTaskCnt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -4572,7 +5146,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtTaskTableset[],
+   ds:Erp_Tablesets_UpdExtTaskTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4587,7 +5161,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -4604,7 +5178,7 @@ export interface ValidateConclusion_input{
 export interface ValidateConclusion_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -4624,7 +5198,7 @@ export interface ValidatePurPoint_input{
 export interface ValidatePurPoint_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -4641,7 +5215,7 @@ export interface ValidateVendorID_input{
 export interface ValidateVendorID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -4655,7 +5229,7 @@ export interface VoidTask_input{
 export interface VoidTask_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 
@@ -4669,7 +5243,7 @@ export interface WorkFlowCompleteWithRemainingTask_input{
 export interface WorkFlowCompleteWithRemainingTask_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_TaskTableset[],
+   ds:Erp_Tablesets_TaskTableset,
 }
 }
 

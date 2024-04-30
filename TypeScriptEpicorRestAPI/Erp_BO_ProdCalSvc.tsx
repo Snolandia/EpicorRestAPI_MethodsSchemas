@@ -1,11 +1,30 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.ProdCalSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -14,7 +33,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -32,7 +51,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -46,7 +72,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -64,7 +90,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalRow
    */  
 export function get_ProdCals(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_ProdCals(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalRow)
           })
@@ -117,15 +157,15 @@ export function get_ProdCals(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ProdCals
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ProdCalRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ProdCalRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.ProdCalRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.ProdCalRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProdCals(requestBody:any, epicorHeaders?:Headers){
+export function post_ProdCals(requestBody:Erp_Tablesets_ProdCalRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_ProdCals(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -158,10 +205,10 @@ export function post_ProdCals(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ProdCalRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ProdCalRow
    */  
 export function get_ProdCals_Company_CalendarID(Company:string, CalendarID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -176,7 +223,14 @@ export function get_ProdCals_Company_CalendarID(Company:string, CalendarID:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ProdCalRow)
           })
@@ -192,15 +246,15 @@ export function get_ProdCals_Company_CalendarID(Company:string, CalendarID:strin
    OperationID: UpdateExt_ProdCal
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CalendarID Desc: CalendarID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.ProdCalRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.ProdCalRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ProdCals_Company_CalendarID(Company:string, CalendarID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ProdCals_Company_CalendarID(Company:string, CalendarID:string, requestBody:Erp_Tablesets_ProdCalRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -214,7 +268,14 @@ export function patch_ProdCals_Company_CalendarID(Company:string, CalendarID:str
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -230,7 +291,7 @@ export function patch_ProdCals_Company_CalendarID(Company:string, CalendarID:str
    OperationID: DeleteUpdateExt_ProdCal
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CalendarID Desc: CalendarID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -249,7 +310,14 @@ export function delete_ProdCals_Company_CalendarID(Company:string, CalendarID:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -271,10 +339,10 @@ export function delete_ProdCals_Company_CalendarID(Company:string, CalendarID:st
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalDayRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalDayRow
    */  
 export function get_ProdCals_Company_CalendarID_ProdCalDays(Company:string, CalendarID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -289,7 +357,14 @@ export function get_ProdCals_Company_CalendarID_ProdCalDays(Company:string, Cale
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalDayRow)
           })
@@ -308,10 +383,10 @@ export function get_ProdCals_Company_CalendarID_ProdCalDays(Company:string, Cale
       @param ModifiedDay Desc: ModifiedDay   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ProdCalDayRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ProdCalDayRow
    */  
 export function get_ProdCals_Company_CalendarID_ProdCalDays_Company_CalendarID_ModifiedDay(Company:string, CalendarID:string, ModifiedDay:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -326,7 +401,14 @@ export function get_ProdCals_Company_CalendarID_ProdCalDays_Company_CalendarID_M
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ProdCalDayRow)
           })
@@ -348,10 +430,10 @@ export function get_ProdCals_Company_CalendarID_ProdCalDays_Company_CalendarID_M
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalPlantListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalPlantListRow
    */  
 export function get_ProdCals_Company_CalendarID_ProdCalPlantLists(Company:string, CalendarID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -366,7 +448,14 @@ export function get_ProdCals_Company_CalendarID_ProdCalPlantLists(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalPlantListRow)
           })
@@ -385,10 +474,10 @@ export function get_ProdCals_Company_CalendarID_ProdCalPlantLists(Company:string
       @param Plant Desc: Plant   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ProdCalPlantListRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ProdCalPlantListRow
    */  
 export function get_ProdCals_Company_CalendarID_ProdCalPlantLists_Company_CalendarID_Plant(Company:string, CalendarID:string, Plant:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -403,7 +492,14 @@ export function get_ProdCals_Company_CalendarID_ProdCalPlantLists_Company_Calend
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ProdCalPlantListRow)
           })
@@ -425,10 +521,10 @@ export function get_ProdCals_Company_CalendarID_ProdCalPlantLists_Company_Calend
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalRsrcListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalRsrcListRow
    */  
 export function get_ProdCals_Company_CalendarID_ProdCalRsrcLists(Company:string, CalendarID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -443,7 +539,14 @@ export function get_ProdCals_Company_CalendarID_ProdCalRsrcLists(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalRsrcListRow)
           })
@@ -463,10 +566,10 @@ export function get_ProdCals_Company_CalendarID_ProdCalRsrcLists(Company:string,
       @param ResourceID Desc: ResourceID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ProdCalRsrcListRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ProdCalRsrcListRow
    */  
 export function get_ProdCals_Company_CalendarID_ProdCalRsrcLists_Company_CalendarID_ResourceGrpID_ResourceID(Company:string, CalendarID:string, ResourceGrpID:string, ResourceID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -481,7 +584,14 @@ export function get_ProdCals_Company_CalendarID_ProdCalRsrcLists_Company_Calenda
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ProdCalRsrcListRow)
           })
@@ -503,10 +613,10 @@ export function get_ProdCals_Company_CalendarID_ProdCalRsrcLists_Company_Calenda
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalVendListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalVendListRow
    */  
 export function get_ProdCals_Company_CalendarID_ProdCalVendLists(Company:string, CalendarID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -521,7 +631,14 @@ export function get_ProdCals_Company_CalendarID_ProdCalVendLists(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalVendListRow)
           })
@@ -540,10 +657,10 @@ export function get_ProdCals_Company_CalendarID_ProdCalVendLists(Company:string,
       @param VendorID Desc: VendorID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ProdCalVendListRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ProdCalVendListRow
    */  
 export function get_ProdCals_Company_CalendarID_ProdCalVendLists_Company_CalendarID_VendorID(Company:string, CalendarID:string, VendorID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -558,7 +675,14 @@ export function get_ProdCals_Company_CalendarID_ProdCalVendLists_Company_Calenda
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ProdCalVendListRow)
           })
@@ -578,10 +702,10 @@ export function get_ProdCals_Company_CalendarID_ProdCalVendLists_Company_Calenda
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalDayRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalDayRow
    */  
 export function get_ProdCalDays(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -596,7 +720,14 @@ export function get_ProdCalDays(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalDayRow)
           })
@@ -610,15 +741,15 @@ export function get_ProdCalDays(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ProdCalDays
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ProdCalDayRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ProdCalDayRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.ProdCalDayRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.ProdCalDayRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProdCalDays(requestBody:any, epicorHeaders?:Headers){
+export function post_ProdCalDays(requestBody:Erp_Tablesets_ProdCalDayRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -632,7 +763,14 @@ export function post_ProdCalDays(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -651,10 +789,10 @@ export function post_ProdCalDays(requestBody:any, epicorHeaders?:Headers){
       @param ModifiedDay Desc: ModifiedDay   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ProdCalDayRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ProdCalDayRow
    */  
 export function get_ProdCalDays_Company_CalendarID_ModifiedDay(Company:string, CalendarID:string, ModifiedDay:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -669,7 +807,14 @@ export function get_ProdCalDays_Company_CalendarID_ModifiedDay(Company:string, C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ProdCalDayRow)
           })
@@ -686,15 +831,15 @@ export function get_ProdCalDays_Company_CalendarID_ModifiedDay(Company:string, C
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CalendarID Desc: CalendarID   Required: True   Allow empty value : True
       @param ModifiedDay Desc: ModifiedDay   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.ProdCalDayRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.ProdCalDayRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ProdCalDays_Company_CalendarID_ModifiedDay(Company:string, CalendarID:string, ModifiedDay:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ProdCalDays_Company_CalendarID_ModifiedDay(Company:string, CalendarID:string, ModifiedDay:string, requestBody:Erp_Tablesets_ProdCalDayRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -708,7 +853,14 @@ export function patch_ProdCalDays_Company_CalendarID_ModifiedDay(Company:string,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -725,7 +877,7 @@ export function patch_ProdCalDays_Company_CalendarID_ModifiedDay(Company:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CalendarID Desc: CalendarID   Required: True   Allow empty value : True
       @param ModifiedDay Desc: ModifiedDay   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -744,7 +896,14 @@ export function delete_ProdCalDays_Company_CalendarID_ModifiedDay(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -764,10 +923,10 @@ export function delete_ProdCalDays_Company_CalendarID_ModifiedDay(Company:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalPlantListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalPlantListRow
    */  
 export function get_ProdCalPlantLists(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -782,7 +941,14 @@ export function get_ProdCalPlantLists(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalPlantListRow)
           })
@@ -796,15 +962,15 @@ export function get_ProdCalPlantLists(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ProdCalPlantLists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ProdCalPlantListRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ProdCalPlantListRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.ProdCalPlantListRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.ProdCalPlantListRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProdCalPlantLists(requestBody:any, epicorHeaders?:Headers){
+export function post_ProdCalPlantLists(requestBody:Erp_Tablesets_ProdCalPlantListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -818,7 +984,14 @@ export function post_ProdCalPlantLists(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -837,10 +1010,10 @@ export function post_ProdCalPlantLists(requestBody:any, epicorHeaders?:Headers){
       @param Plant Desc: Plant   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ProdCalPlantListRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ProdCalPlantListRow
    */  
 export function get_ProdCalPlantLists_Company_CalendarID_Plant(Company:string, CalendarID:string, Plant:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -855,7 +1028,14 @@ export function get_ProdCalPlantLists_Company_CalendarID_Plant(Company:string, C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ProdCalPlantListRow)
           })
@@ -872,15 +1052,15 @@ export function get_ProdCalPlantLists_Company_CalendarID_Plant(Company:string, C
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CalendarID Desc: CalendarID   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.ProdCalPlantListRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.ProdCalPlantListRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ProdCalPlantLists_Company_CalendarID_Plant(Company:string, CalendarID:string, Plant:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ProdCalPlantLists_Company_CalendarID_Plant(Company:string, CalendarID:string, Plant:string, requestBody:Erp_Tablesets_ProdCalPlantListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -894,7 +1074,14 @@ export function patch_ProdCalPlantLists_Company_CalendarID_Plant(Company:string,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -911,7 +1098,7 @@ export function patch_ProdCalPlantLists_Company_CalendarID_Plant(Company:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CalendarID Desc: CalendarID   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -930,7 +1117,14 @@ export function delete_ProdCalPlantLists_Company_CalendarID_Plant(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -950,10 +1144,10 @@ export function delete_ProdCalPlantLists_Company_CalendarID_Plant(Company:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalRsrcListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalRsrcListRow
    */  
 export function get_ProdCalRsrcLists(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -968,7 +1162,14 @@ export function get_ProdCalRsrcLists(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalRsrcListRow)
           })
@@ -982,15 +1183,15 @@ export function get_ProdCalRsrcLists(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ProdCalRsrcLists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ProdCalRsrcListRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ProdCalRsrcListRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.ProdCalRsrcListRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.ProdCalRsrcListRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProdCalRsrcLists(requestBody:any, epicorHeaders?:Headers){
+export function post_ProdCalRsrcLists(requestBody:Erp_Tablesets_ProdCalRsrcListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1004,7 +1205,14 @@ export function post_ProdCalRsrcLists(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1024,10 +1232,10 @@ export function post_ProdCalRsrcLists(requestBody:any, epicorHeaders?:Headers){
       @param ResourceID Desc: ResourceID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ProdCalRsrcListRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ProdCalRsrcListRow
    */  
 export function get_ProdCalRsrcLists_Company_CalendarID_ResourceGrpID_ResourceID(Company:string, CalendarID:string, ResourceGrpID:string, ResourceID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1042,7 +1250,14 @@ export function get_ProdCalRsrcLists_Company_CalendarID_ResourceGrpID_ResourceID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ProdCalRsrcListRow)
           })
@@ -1060,15 +1275,15 @@ export function get_ProdCalRsrcLists_Company_CalendarID_ResourceGrpID_ResourceID
       @param CalendarID Desc: CalendarID   Required: True   Allow empty value : True
       @param ResourceGrpID Desc: ResourceGrpID   Required: True   Allow empty value : True
       @param ResourceID Desc: ResourceID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.ProdCalRsrcListRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.ProdCalRsrcListRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ProdCalRsrcLists_Company_CalendarID_ResourceGrpID_ResourceID(Company:string, CalendarID:string, ResourceGrpID:string, ResourceID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ProdCalRsrcLists_Company_CalendarID_ResourceGrpID_ResourceID(Company:string, CalendarID:string, ResourceGrpID:string, ResourceID:string, requestBody:Erp_Tablesets_ProdCalRsrcListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1082,7 +1297,14 @@ export function patch_ProdCalRsrcLists_Company_CalendarID_ResourceGrpID_Resource
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1100,7 +1322,7 @@ export function patch_ProdCalRsrcLists_Company_CalendarID_ResourceGrpID_Resource
       @param CalendarID Desc: CalendarID   Required: True   Allow empty value : True
       @param ResourceGrpID Desc: ResourceGrpID   Required: True   Allow empty value : True
       @param ResourceID Desc: ResourceID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1119,7 +1341,14 @@ export function delete_ProdCalRsrcLists_Company_CalendarID_ResourceGrpID_Resourc
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1139,10 +1368,10 @@ export function delete_ProdCalRsrcLists_Company_CalendarID_ResourceGrpID_Resourc
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalVendListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalVendListRow
    */  
 export function get_ProdCalVendLists(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1157,7 +1386,14 @@ export function get_ProdCalVendLists(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalVendListRow)
           })
@@ -1171,15 +1407,15 @@ export function get_ProdCalVendLists(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ProdCalVendLists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ProdCalVendListRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ProdCalVendListRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.ProdCalVendListRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.ProdCalVendListRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProdCalVendLists(requestBody:any, epicorHeaders?:Headers){
+export function post_ProdCalVendLists(requestBody:Erp_Tablesets_ProdCalVendListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1193,7 +1429,14 @@ export function post_ProdCalVendLists(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1212,10 +1455,10 @@ export function post_ProdCalVendLists(requestBody:any, epicorHeaders?:Headers){
       @param VendorID Desc: VendorID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ProdCalVendListRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ProdCalVendListRow
    */  
 export function get_ProdCalVendLists_Company_CalendarID_VendorID(Company:string, CalendarID:string, VendorID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1230,7 +1473,14 @@ export function get_ProdCalVendLists_Company_CalendarID_VendorID(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ProdCalVendListRow)
           })
@@ -1247,15 +1497,15 @@ export function get_ProdCalVendLists_Company_CalendarID_VendorID(Company:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CalendarID Desc: CalendarID   Required: True   Allow empty value : True
       @param VendorID Desc: VendorID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.ProdCalVendListRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.ProdCalVendListRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ProdCalVendLists_Company_CalendarID_VendorID(Company:string, CalendarID:string, VendorID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ProdCalVendLists_Company_CalendarID_VendorID(Company:string, CalendarID:string, VendorID:string, requestBody:Erp_Tablesets_ProdCalVendListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1269,7 +1519,14 @@ export function patch_ProdCalVendLists_Company_CalendarID_VendorID(Company:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1286,7 +1543,7 @@ export function patch_ProdCalVendLists_Company_CalendarID_VendorID(Company:strin
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CalendarID Desc: CalendarID   Required: True   Allow empty value : True
       @param VendorID Desc: VendorID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1305,7 +1562,14 @@ export function delete_ProdCalVendLists_Company_CalendarID_VendorID(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1325,10 +1589,10 @@ export function delete_ProdCalVendLists_Company_CalendarID_VendorID(Company:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ProdCalListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1343,7 +1607,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalListRow)
           })
@@ -1355,6 +1626,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1370,7 +1658,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1448,15 +1736,22 @@ export function get_GetRows(whereClauseProdCal:string, whereClauseProdCalDay:str
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1469,7 +1764,7 @@ export function get_GetRows(whereClauseProdCal:string, whereClauseProdCalDay:str
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1493,15 +1788,22 @@ export function get_GetByID(calendarID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1516,7 +1818,7 @@ export function get_GetByID(calendarID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1558,15 +1860,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1587,30 +1896,37 @@ true depending on the number of ProdCal.HoursPerDay (example: If the ProdCal.Hou
 is 8 then ProdHour 1 through 8 would be set to true) and the capacity for the
 working day is set equal to the ProdCal.HoursPerDay.
    OperationID: CustomizeDay
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CustomizeDay_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CustomizeDay_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CustomizeDay_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustomizeDay(requestBody:any, epicorHeaders?:Headers){
+export function post_CustomizeDay(requestBody:CustomizeDay_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CustomizeDay_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/CustomizeDay", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CustomizeDay_output)
           })
       .catch((error) => {
           reject(error)
@@ -1622,30 +1938,37 @@ export function post_CustomizeDay(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DecideReadOnlyFields
    Description: Decides if start processReadOnlyFieldsor not
    OperationID: DecideReadOnlyFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DecideReadOnlyFields_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DecideReadOnlyFields_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DecideReadOnlyFields_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DecideReadOnlyFields(requestBody:any, epicorHeaders?:Headers){
+export function post_DecideReadOnlyFields(requestBody:DecideReadOnlyFields_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DecideReadOnlyFields_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/DecideReadOnlyFields", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DecideReadOnlyFields_output)
           })
       .catch((error) => {
           reject(error)
@@ -1657,30 +1980,37 @@ export function post_DecideReadOnlyFields(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DuplicateCalendar
    Description: This duplicates the production calendar for calendar ID.
    OperationID: DuplicateCalendar
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DuplicateCalendar_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DuplicateCalendar_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DuplicateCalendar_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DuplicateCalendar(requestBody:any, epicorHeaders?:Headers){
+export function post_DuplicateCalendar(requestBody:DuplicateCalendar_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DuplicateCalendar_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/DuplicateCalendar", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DuplicateCalendar_output)
           })
       .catch((error) => {
           reject(error)
@@ -1692,30 +2022,37 @@ export function post_DuplicateCalendar(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPlantCalendar
    Description: This method gets the plant calendar.
    OperationID: GetPlantCalendar
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPlantCalendar_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPlantCalendar_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPlantCalendar_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPlantCalendar(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPlantCalendar(requestBody:GetPlantCalendar_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPlantCalendar_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/GetPlantCalendar", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPlantCalendar_output)
           })
       .catch((error) => {
           reject(error)
@@ -1730,30 +2067,37 @@ This method will get list of all resources, resource groups,
 vendors, and plants associated with the specified production calendar and
 creates tables ttProdCalRsrcList, ttProdCalVendList, and ttProdCalPlantList.
    OperationID: GetResourceList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetResourceList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetResourceList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetResourceList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetResourceList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetResourceList(requestBody:GetResourceList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetResourceList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/GetResourceList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetResourceList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1765,30 +2109,37 @@ export function post_GetResourceList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method IsWorkDay
    Description: Returns if a selected date is a work day
    OperationID: IsWorkDay
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsWorkDay_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsWorkDay_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsWorkDay_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsWorkDay(requestBody:any, epicorHeaders?:Headers){
+export function post_IsWorkDay(requestBody:IsWorkDay_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsWorkDay_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/IsWorkDay", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsWorkDay_output)
           })
       .catch((error) => {
           reject(error)
@@ -1800,30 +2151,37 @@ export function post_IsWorkDay(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateHoursSelected
    Description: Updates hours selected per day when the calendar hours per day is changed
    OperationID: UpdateHoursSelected
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateHoursSelected_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateHoursSelected_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateHoursSelected_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateHoursSelected(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateHoursSelected(requestBody:UpdateHoursSelected_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateHoursSelected_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/UpdateHoursSelected", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateHoursSelected_output)
           })
       .catch((error) => {
           reject(error)
@@ -1835,30 +2193,37 @@ export function post_UpdateHoursSelected(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ChangeProdCalHoursPerDayHour
    Description: Calculates DayHours when an hour is toggled on or off
    OperationID: ChangeProdCalHoursPerDayHour
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeProdCalHoursPerDayHour_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeProdCalHoursPerDayHour_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeProdCalHoursPerDayHour_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeProdCalHoursPerDayHour(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeProdCalHoursPerDayHour(requestBody:ChangeProdCalHoursPerDayHour_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeProdCalHoursPerDayHour_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/ChangeProdCalHoursPerDayHour", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeProdCalHoursPerDayHour_output)
           })
       .catch((error) => {
           reject(error)
@@ -1870,30 +2235,37 @@ export function post_ChangeProdCalHoursPerDayHour(requestBody:any, epicorHeaders
    Summary: Invoke method ChangeProdCalHoursPerDaySelectRow
    Description: Updates hours on a row when SelectRow is checked or unchecked
    OperationID: ChangeProdCalHoursPerDaySelectRow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeProdCalHoursPerDaySelectRow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeProdCalHoursPerDaySelectRow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeProdCalHoursPerDaySelectRow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeProdCalHoursPerDaySelectRow(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeProdCalHoursPerDaySelectRow(requestBody:ChangeProdCalHoursPerDaySelectRow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeProdCalHoursPerDaySelectRow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/ChangeProdCalHoursPerDaySelectRow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeProdCalHoursPerDaySelectRow_output)
           })
       .catch((error) => {
           reject(error)
@@ -1905,30 +2277,37 @@ export function post_ChangeProdCalHoursPerDaySelectRow(requestBody:any, epicorHe
    Summary: Invoke method UpdateProdCalHours
    Description: Updates ProdCal Hour fields with selections from ProdCalHoursPerDay
    OperationID: UpdateProdCalHours
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateProdCalHours_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateProdCalHours_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateProdCalHours_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateProdCalHours(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateProdCalHours(requestBody:UpdateProdCalHours_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateProdCalHours_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/UpdateProdCalHours", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateProdCalHours_output)
           })
       .catch((error) => {
           reject(error)
@@ -1940,30 +2319,37 @@ export function post_UpdateProdCalHours(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetProdCalHoursPerDay
    Description: Returns the ProdCalHoursPerDay dataset
    OperationID: GetProdCalHoursPerDay
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetProdCalHoursPerDay_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetProdCalHoursPerDay_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetProdCalHoursPerDay_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetProdCalHoursPerDay(requestBody:any, epicorHeaders?:Headers){
+export function post_GetProdCalHoursPerDay(requestBody:GetProdCalHoursPerDay_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetProdCalHoursPerDay_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/GetProdCalHoursPerDay", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetProdCalHoursPerDay_output)
           })
       .catch((error) => {
           reject(error)
@@ -1975,30 +2361,37 @@ export function post_GetProdCalHoursPerDay(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ValidateWeekRangeStartingDate
    Description: Validate starting date for adding a week range
    OperationID: ValidateWeekRangeStartingDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateWeekRangeStartingDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateWeekRangeStartingDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateWeekRangeStartingDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateWeekRangeStartingDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateWeekRangeStartingDate(requestBody:ValidateWeekRangeStartingDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateWeekRangeStartingDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/ValidateWeekRangeStartingDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateWeekRangeStartingDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -2010,30 +2403,37 @@ export function post_ValidateWeekRangeStartingDate(requestBody:any, epicorHeader
    Summary: Invoke method ValidateWeekRangeStartingWeek
    Description: Validate starting week number when adding a week range
    OperationID: ValidateWeekRangeStartingWeek
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateWeekRangeStartingWeek_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateWeekRangeStartingWeek_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateWeekRangeStartingWeek_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateWeekRangeStartingWeek(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateWeekRangeStartingWeek(requestBody:ValidateWeekRangeStartingWeek_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateWeekRangeStartingWeek_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/ValidateWeekRangeStartingWeek", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateWeekRangeStartingWeek_output)
           })
       .catch((error) => {
           reject(error)
@@ -2045,30 +2445,37 @@ export function post_ValidateWeekRangeStartingWeek(requestBody:any, epicorHeader
    Summary: Invoke method ValidateWeekRangeNumberOfWeeks
    Description: Validate number of weeks when adding a week range
    OperationID: ValidateWeekRangeNumberOfWeeks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateWeekRangeNumberOfWeeks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateWeekRangeNumberOfWeeks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateWeekRangeNumberOfWeeks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateWeekRangeNumberOfWeeks(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateWeekRangeNumberOfWeeks(requestBody:ValidateWeekRangeNumberOfWeeks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateWeekRangeNumberOfWeeks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/ValidateWeekRangeNumberOfWeeks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateWeekRangeNumberOfWeeks_output)
           })
       .catch((error) => {
           reject(error)
@@ -2080,30 +2487,37 @@ export function post_ValidateWeekRangeNumberOfWeeks(requestBody:any, epicorHeade
    Summary: Invoke method GetNewProdCal
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewProdCal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewProdCal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewProdCal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewProdCal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewProdCal(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewProdCal(requestBody:GetNewProdCal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewProdCal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/GetNewProdCal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewProdCal_output)
           })
       .catch((error) => {
           reject(error)
@@ -2115,30 +2529,37 @@ export function post_GetNewProdCal(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewProdCalDay
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewProdCalDay
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewProdCalDay_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewProdCalDay_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewProdCalDay_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewProdCalDay(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewProdCalDay(requestBody:GetNewProdCalDay_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewProdCalDay_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/GetNewProdCalDay", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewProdCalDay_output)
           })
       .catch((error) => {
           reject(error)
@@ -2150,30 +2571,37 @@ export function post_GetNewProdCalDay(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2185,7 +2613,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2209,15 +2637,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2229,7 +2664,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2253,15 +2688,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2273,30 +2715,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2308,30 +2757,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ProdCalSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2342,36 +2798,53 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalDayRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_ProdCalDayRow[],
+   "value":Erp_Tablesets_ProdCalDayRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_ProdCalListRow[],
+   "value":Erp_Tablesets_ProdCalListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalPlantListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_ProdCalPlantListRow[],
+   "value":Erp_Tablesets_ProdCalPlantListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_ProdCalRow[],
+   "value":Erp_Tablesets_ProdCalRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalRsrcListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_ProdCalRsrcListRow[],
+   "value":Erp_Tablesets_ProdCalRsrcListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ProdCalVendListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_ProdCalVendListRow[],
+   "value":Erp_Tablesets_ProdCalVendListRow,
 }
 
 export interface Erp_Tablesets_ProdCalDayRow{
@@ -2903,6 +3376,23 @@ export interface Erp_Tablesets_ProdCalVendListRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2921,7 +3411,7 @@ export interface ChangeProdCalHoursPerDayHour_input{
 export interface ChangeProdCalHoursPerDayHour_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalHoursPerDayTableset[],
+   ds:Erp_Tablesets_ProdCalHoursPerDayTableset,
 }
 }
 
@@ -2941,7 +3431,7 @@ export interface ChangeProdCalHoursPerDaySelectRow_input{
 export interface ChangeProdCalHoursPerDaySelectRow_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalHoursPerDayTableset[],
+   ds:Erp_Tablesets_ProdCalHoursPerDayTableset,
 }
 }
 
@@ -2964,7 +3454,7 @@ export interface CustomizeDay_input{
 export interface CustomizeDay_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalTableset[],
+   ds:Erp_Tablesets_ProdCalTableset,
 }
 }
 
@@ -2978,7 +3468,7 @@ export interface DecideReadOnlyFields_input{
 export interface DecideReadOnlyFields_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalTableset[],
+   ds:Erp_Tablesets_ProdCalTableset,
 }
 }
 
@@ -3008,7 +3498,7 @@ export interface DuplicateCalendar_input{
 export interface DuplicateCalendar_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalTableset[],
+   ds:Erp_Tablesets_ProdCalTableset,
 }
 }
 
@@ -3689,7 +4179,7 @@ export interface GetNewProdCalDay_input{
 export interface GetNewProdCalDay_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalTableset[],
+   ds:Erp_Tablesets_ProdCalTableset,
 }
 }
 
@@ -3703,7 +4193,7 @@ export interface GetNewProdCal_input{
 export interface GetNewProdCal_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalTableset[],
+   ds:Erp_Tablesets_ProdCalTableset,
 }
 }
 
@@ -3717,7 +4207,7 @@ export interface GetPlantCalendar_input{
 export interface GetPlantCalendar_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalTableset[],
+   ds:Erp_Tablesets_ProdCalTableset,
 }
 }
 
@@ -3746,7 +4236,7 @@ export interface GetResourceList_input{
 export interface GetResourceList_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalTableset[],
+   ds:Erp_Tablesets_ProdCalTableset,
 }
 }
 
@@ -3846,7 +4336,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtProdCalTableset[],
+   ds:Erp_Tablesets_UpdExtProdCalTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3864,7 +4354,7 @@ export interface UpdateHoursSelected_input{
 export interface UpdateHoursSelected_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalHoursPerDayTableset[],
+   ds:Erp_Tablesets_ProdCalHoursPerDayTableset,
 }
 }
 
@@ -3880,8 +4370,8 @@ export interface UpdateProdCalHours_input{
 export interface UpdateProdCalHours_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalTableset[],
-   ds1:Erp_Tablesets_ProdCalHoursPerDayTableset[],
+   ds:Erp_Tablesets_ProdCalTableset,
+   ds1:Erp_Tablesets_ProdCalHoursPerDayTableset,
 }
 }
 
@@ -3895,7 +4385,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ProdCalTableset[],
+   ds:Erp_Tablesets_ProdCalTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.SalesPersonWBSvc
 // Description: SalesPersonWorkbench Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method GetCustomers
    Description: Retrieve all the records from Customer table
    OperationID: GetCustomers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCustomers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCustomers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCustomers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCustomers(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCustomers(requestBody:GetCustomers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCustomers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetCustomers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCustomers_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_GetCustomers(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListOfContacts
    Description: Retrieve a list of Contacts
    OperationID: GetListOfContacts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfContacts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfContacts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfContacts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfContacts(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfContacts(requestBody:GetListOfContacts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfContacts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfContacts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfContacts_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_GetListOfContacts(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListOfCRMCalls
    Description: Retrieve a list of CRM Calls
    OperationID: GetListOfCRMCalls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfCRMCalls_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfCRMCalls_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfCRMCalls_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfCRMCalls(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfCRMCalls(requestBody:GetListOfCRMCalls_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfCRMCalls_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfCRMCalls", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfCRMCalls_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_GetListOfCRMCalls(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListOfInvoices
    Description: Retrieve a list of invoice
    OperationID: GetListOfInvoices
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfInvoices_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfInvoices_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfInvoices_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfInvoices(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfInvoices(requestBody:GetListOfInvoices_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfInvoices_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfInvoices", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfInvoices_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,30 +303,37 @@ export function post_GetListOfInvoices(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListOfJobs
    Description: Retrieve all the records from JobHead, OrderHed,OrderRel and OrderDtl table
    OperationID: GetListOfJobs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfJobs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfJobs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfJobs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfJobs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfJobs(requestBody:GetListOfJobs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfJobs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfJobs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfJobs_output)
           })
       .catch((error) => {
           reject(error)
@@ -260,30 +345,37 @@ export function post_GetListOfJobs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListOfOrders
    Description: Retrieve a list of orders
    OperationID: GetListOfOrders
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfOrders_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfOrders_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfOrders_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfOrders(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfOrders(requestBody:GetListOfOrders_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfOrders_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfOrders", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfOrders_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,30 +387,37 @@ export function post_GetListOfOrders(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListOfQuotes
    Description: Retrieve a list of Quotes
    OperationID: GetListOfQuotes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfQuotes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfQuotes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfQuotes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfQuotes(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfQuotes(requestBody:GetListOfQuotes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfQuotes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfQuotes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfQuotes_output)
           })
       .catch((error) => {
           reject(error)
@@ -330,30 +429,37 @@ export function post_GetListOfQuotes(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListOfRMAs
    Description: Retrieve a list of RMAs
    OperationID: GetListOfRMAs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfRMAs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfRMAs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfRMAs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfRMAs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfRMAs(requestBody:GetListOfRMAs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfRMAs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfRMAs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfRMAs_output)
           })
       .catch((error) => {
           reject(error)
@@ -365,30 +471,37 @@ export function post_GetListOfRMAs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListOfServiceCalls
    Description: Retrieve a list of Service Call
    OperationID: GetListOfServiceCalls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfServiceCalls_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfServiceCalls_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfServiceCalls_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfServiceCalls(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfServiceCalls(requestBody:GetListOfServiceCalls_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfServiceCalls_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfServiceCalls", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfServiceCalls_output)
           })
       .catch((error) => {
           reject(error)
@@ -400,30 +513,37 @@ export function post_GetListOfServiceCalls(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetListOfSites
    Description: Retrieve a list of Ship To
    OperationID: GetListOfSites
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfSites_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfSites_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfSites_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfSites(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfSites(requestBody:GetListOfSites_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfSites_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfSites", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfSites_output)
           })
       .catch((error) => {
           reject(error)
@@ -435,30 +555,37 @@ export function post_GetListOfSites(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetListOfShipments
    Description: Retrieve a list of Shipments
    OperationID: GetListOfShipments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfShipments_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfShipments_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfShipments_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfShipments(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfShipments(requestBody:GetListOfShipments_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfShipments_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfShipments", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfShipments_output)
           })
       .catch((error) => {
           reject(error)
@@ -470,30 +597,37 @@ export function post_GetListOfShipments(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetListOfTasks
    Description: Retrieve a list of Task
    OperationID: GetListOfTasks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfTasks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfTasks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfTasks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfTasks(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfTasks(requestBody:GetListOfTasks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfTasks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SalesPersonWBSvc/GetListOfTasks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfTasks_output)
           })
       .catch((error) => {
           reject(error)
@@ -504,11 +638,45 @@ export function post_GetListOfTasks(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

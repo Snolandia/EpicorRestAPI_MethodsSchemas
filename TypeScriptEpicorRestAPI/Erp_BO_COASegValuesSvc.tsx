@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.COASegValuesSvc
 // Description: Add your summary for this object here
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegValuesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegValuesRow
    */  
 export function get_COASegValues(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_COASegValues(select?:string, expand?:string, filter?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegValuesRow)
           })
@@ -118,15 +158,15 @@ export function get_COASegValues(select?:string, expand?:string, filter?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_COASegValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.COASegValuesRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.COASegValuesRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.COASegValuesRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.COASegValuesRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_COASegValues(requestBody:any, epicorHeaders?:Headers){
+export function post_COASegValues(requestBody:Erp_Tablesets_COASegValuesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_COASegValues(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -161,10 +208,10 @@ export function post_COASegValues(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.COASegValuesRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.COASegValuesRow
    */  
 export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -179,7 +226,14 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_COASegValuesRow)
           })
@@ -197,15 +251,15 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode(Company:
       @param COACode Desc: COACode   Required: True   Allow empty value : True
       @param SegmentNbr Desc: SegmentNbr   Required: True
       @param SegmentCode Desc: SegmentCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.COASegValuesRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.COASegValuesRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_COASegValues_Company_COACode_SegmentNbr_SegmentCode(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_COASegValues_Company_COACode_SegmentNbr_SegmentCode(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, requestBody:Erp_Tablesets_COASegValuesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -219,7 +273,14 @@ export function patch_COASegValues_Company_COACode_SegmentNbr_SegmentCode(Compan
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -237,7 +298,7 @@ export function patch_COASegValues_Company_COACode_SegmentNbr_SegmentCode(Compan
       @param COACode Desc: COACode   Required: True   Allow empty value : True
       @param SegmentNbr Desc: SegmentNbr   Required: True
       @param SegmentCode Desc: SegmentCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -256,7 +317,14 @@ export function delete_COASegValues_Company_COACode_SegmentNbr_SegmentCode(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -280,10 +348,10 @@ export function delete_COASegValues_Company_COACode_SegmentNbr_SegmentCode(Compa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegAcctRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegAcctRow
    */  
 export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegAccts(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -298,7 +366,14 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegAc
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegAcctRow)
           })
@@ -319,10 +394,10 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegAc
       @param CurrencyCode Desc: CurrencyCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.COASegAcctRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.COASegAcctRow
    */  
 export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegAccts_Company_COACode_SegmentNbr_SegmentCode_CurrencyCode(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, CurrencyCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -337,7 +412,14 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegAc
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_COASegAcctRow)
           })
@@ -361,10 +443,10 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegAc
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegOptRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegOptRow
    */  
 export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegOpts(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -379,7 +461,14 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegOp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegOptRow)
           })
@@ -400,10 +489,10 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegOp
       @param SubSegmentNbr Desc: SubSegmentNbr   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.COASegOptRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.COASegOptRow
    */  
 export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegOpts_Company_COACode_SegmentNbr_SegmentCode_SubSegmentNbr(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, SubSegmentNbr:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -418,7 +507,14 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegOp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_COASegOptRow)
           })
@@ -442,10 +538,10 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegOp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegResRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegResRow
    */  
 export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegRes(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -460,7 +556,14 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegRe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegResRow)
           })
@@ -481,10 +584,10 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegRe
       @param RestrictID Desc: RestrictID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.COASegResRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.COASegResRow
    */  
 export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegRes_Company_COACode_SegmentNbr_SegmentCode_RestrictID(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, RestrictID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -499,7 +602,14 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegRe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_COASegResRow)
           })
@@ -519,10 +629,10 @@ export function get_COASegValues_Company_COACode_SegmentNbr_SegmentCode_COASegRe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegAcctRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegAcctRow
    */  
 export function get_COASegAccts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -537,7 +647,14 @@ export function get_COASegAccts(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegAcctRow)
           })
@@ -551,15 +668,15 @@ export function get_COASegAccts(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_COASegAccts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.COASegAcctRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.COASegAcctRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.COASegAcctRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.COASegAcctRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_COASegAccts(requestBody:any, epicorHeaders?:Headers){
+export function post_COASegAccts(requestBody:Erp_Tablesets_COASegAcctRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -573,7 +690,14 @@ export function post_COASegAccts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -594,10 +718,10 @@ export function post_COASegAccts(requestBody:any, epicorHeaders?:Headers){
       @param CurrencyCode Desc: CurrencyCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.COASegAcctRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.COASegAcctRow
    */  
 export function get_COASegAccts_Company_COACode_SegmentNbr_SegmentCode_CurrencyCode(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, CurrencyCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -612,7 +736,14 @@ export function get_COASegAccts_Company_COACode_SegmentNbr_SegmentCode_CurrencyC
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_COASegAcctRow)
           })
@@ -631,15 +762,15 @@ export function get_COASegAccts_Company_COACode_SegmentNbr_SegmentCode_CurrencyC
       @param SegmentNbr Desc: SegmentNbr   Required: True
       @param SegmentCode Desc: SegmentCode   Required: True   Allow empty value : True
       @param CurrencyCode Desc: CurrencyCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.COASegAcctRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.COASegAcctRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_COASegAccts_Company_COACode_SegmentNbr_SegmentCode_CurrencyCode(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, CurrencyCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_COASegAccts_Company_COACode_SegmentNbr_SegmentCode_CurrencyCode(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, CurrencyCode:string, requestBody:Erp_Tablesets_COASegAcctRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -653,7 +784,14 @@ export function patch_COASegAccts_Company_COACode_SegmentNbr_SegmentCode_Currenc
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -672,7 +810,7 @@ export function patch_COASegAccts_Company_COACode_SegmentNbr_SegmentCode_Currenc
       @param SegmentNbr Desc: SegmentNbr   Required: True
       @param SegmentCode Desc: SegmentCode   Required: True   Allow empty value : True
       @param CurrencyCode Desc: CurrencyCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -691,7 +829,14 @@ export function delete_COASegAccts_Company_COACode_SegmentNbr_SegmentCode_Curren
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -711,10 +856,10 @@ export function delete_COASegAccts_Company_COACode_SegmentNbr_SegmentCode_Curren
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegOptRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegOptRow
    */  
 export function get_COASegOpts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -729,7 +874,14 @@ export function get_COASegOpts(select?:string, filter?:string, orderby?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegOptRow)
           })
@@ -743,15 +895,15 @@ export function get_COASegOpts(select?:string, filter?:string, orderby?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_COASegOpts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.COASegOptRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.COASegOptRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.COASegOptRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.COASegOptRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_COASegOpts(requestBody:any, epicorHeaders?:Headers){
+export function post_COASegOpts(requestBody:Erp_Tablesets_COASegOptRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -765,7 +917,14 @@ export function post_COASegOpts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -786,10 +945,10 @@ export function post_COASegOpts(requestBody:any, epicorHeaders?:Headers){
       @param SubSegmentNbr Desc: SubSegmentNbr   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.COASegOptRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.COASegOptRow
    */  
 export function get_COASegOpts_Company_COACode_SegmentNbr_SegmentCode_SubSegmentNbr(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, SubSegmentNbr:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -804,7 +963,14 @@ export function get_COASegOpts_Company_COACode_SegmentNbr_SegmentCode_SubSegment
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_COASegOptRow)
           })
@@ -823,15 +989,15 @@ export function get_COASegOpts_Company_COACode_SegmentNbr_SegmentCode_SubSegment
       @param SegmentNbr Desc: SegmentNbr   Required: True
       @param SegmentCode Desc: SegmentCode   Required: True   Allow empty value : True
       @param SubSegmentNbr Desc: SubSegmentNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.COASegOptRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.COASegOptRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_COASegOpts_Company_COACode_SegmentNbr_SegmentCode_SubSegmentNbr(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, SubSegmentNbr:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_COASegOpts_Company_COACode_SegmentNbr_SegmentCode_SubSegmentNbr(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, SubSegmentNbr:string, requestBody:Erp_Tablesets_COASegOptRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -845,7 +1011,14 @@ export function patch_COASegOpts_Company_COACode_SegmentNbr_SegmentCode_SubSegme
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -864,7 +1037,7 @@ export function patch_COASegOpts_Company_COACode_SegmentNbr_SegmentCode_SubSegme
       @param SegmentNbr Desc: SegmentNbr   Required: True
       @param SegmentCode Desc: SegmentCode   Required: True   Allow empty value : True
       @param SubSegmentNbr Desc: SubSegmentNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -883,7 +1056,14 @@ export function delete_COASegOpts_Company_COACode_SegmentNbr_SegmentCode_SubSegm
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -903,10 +1083,10 @@ export function delete_COASegOpts_Company_COACode_SegmentNbr_SegmentCode_SubSegm
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegResRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegResRow
    */  
 export function get_COASegRes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -921,7 +1101,14 @@ export function get_COASegRes(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegResRow)
           })
@@ -935,15 +1122,15 @@ export function get_COASegRes(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_COASegRes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.COASegResRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.COASegResRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.COASegResRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.COASegResRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_COASegRes(requestBody:any, epicorHeaders?:Headers){
+export function post_COASegRes(requestBody:Erp_Tablesets_COASegResRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -957,7 +1144,14 @@ export function post_COASegRes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -978,10 +1172,10 @@ export function post_COASegRes(requestBody:any, epicorHeaders?:Headers){
       @param RestrictID Desc: RestrictID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.COASegResRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.COASegResRow
    */  
 export function get_COASegRes_Company_COACode_SegmentNbr_SegmentCode_RestrictID(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, RestrictID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -996,7 +1190,14 @@ export function get_COASegRes_Company_COACode_SegmentNbr_SegmentCode_RestrictID(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_COASegResRow)
           })
@@ -1015,15 +1216,15 @@ export function get_COASegRes_Company_COACode_SegmentNbr_SegmentCode_RestrictID(
       @param SegmentNbr Desc: SegmentNbr   Required: True
       @param SegmentCode Desc: SegmentCode   Required: True   Allow empty value : True
       @param RestrictID Desc: RestrictID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.COASegResRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.COASegResRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_COASegRes_Company_COACode_SegmentNbr_SegmentCode_RestrictID(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, RestrictID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_COASegRes_Company_COACode_SegmentNbr_SegmentCode_RestrictID(Company:string, COACode:string, SegmentNbr:string, SegmentCode:string, RestrictID:string, requestBody:Erp_Tablesets_COASegResRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1037,7 +1238,14 @@ export function patch_COASegRes_Company_COACode_SegmentNbr_SegmentCode_RestrictI
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1056,7 +1264,7 @@ export function patch_COASegRes_Company_COACode_SegmentNbr_SegmentCode_RestrictI
       @param SegmentNbr Desc: SegmentNbr   Required: True
       @param SegmentCode Desc: SegmentCode   Required: True   Allow empty value : True
       @param RestrictID Desc: RestrictID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1075,7 +1283,14 @@ export function delete_COASegRes_Company_COACode_SegmentNbr_SegmentCode_Restrict
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1095,10 +1310,10 @@ export function delete_COASegRes_Company_COACode_SegmentNbr_SegmentCode_Restrict
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegValuesListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.COASegValuesListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1113,7 +1328,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegValuesListRow)
           })
@@ -1125,6 +1347,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1139,7 +1378,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1208,15 +1447,22 @@ export function get_GetRows(whereClauseCOASegValues:string, whereClauseCOASegAcc
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1231,7 +1477,7 @@ export function get_GetRows(whereClauseCOASegValues:string, whereClauseCOASegAcc
    Required: True   Allow empty value : True
    Required: True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1273,15 +1519,22 @@ export function get_GetByID(coACode:string, segmentNbr:string, segmentCode:strin
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1296,7 +1549,7 @@ export function get_GetByID(coACode:string, segmentNbr:string, segmentCode:strin
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1338,15 +1591,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1358,30 +1618,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method ChangeRevalueOpt
    Description: On Revalue Option change
    OperationID: ChangeRevalueOpt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRevalueOpt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRevalueOpt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRevalueOpt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRevalueOpt(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRevalueOpt(requestBody:ChangeRevalueOpt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRevalueOpt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeRevalueOpt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRevalueOpt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1393,30 +1660,37 @@ export function post_ChangeRevalueOpt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeRateType
    Description: On Rate Type changing
    OperationID: ChangeRateType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRateType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRateType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRateType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRateType(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRateType(requestBody:ChangeRateType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRateType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeRateType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRateType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1428,30 +1702,37 @@ export function post_ChangeRateType(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeAccountContext
    Description: On Account context changing
    OperationID: ChangeAccountContext
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeAccountContext_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeAccountContext_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeAccountContext_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeAccountContext(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeAccountContext(requestBody:ChangeAccountContext_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeAccountContext_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeAccountContext", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeAccountContext_output)
           })
       .catch((error) => {
           reject(error)
@@ -1463,30 +1744,37 @@ export function post_ChangeAccountContext(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ChangeAllowed
    Description: On allowed change this method evaluates the Currency account type option to handle proper functionality.
    OperationID: ChangeAllowed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeAllowed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeAllowed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeAllowed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeAllowed(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeAllowed(requestBody:ChangeAllowed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeAllowed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeAllowed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeAllowed_output)
           })
       .catch((error) => {
           reject(error)
@@ -1498,30 +1786,37 @@ export function post_ChangeAllowed(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeCategory
    Description: This method convert the document currency to the journal currency.
    OperationID: ChangeCategory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCategory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCategory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCategory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCategory(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCategory(requestBody:ChangeCategory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCategory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeCategory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCategory_output)
           })
       .catch((error) => {
           reject(error)
@@ -1533,30 +1828,37 @@ export function post_ChangeCategory(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeCurrencyAccount
    Description: On currency account change, all related currencies should be updated to allowed/not allowed
    OperationID: ChangeCurrencyAccount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCurrencyAccount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCurrencyAccount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCurrencyAccount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCurrencyAccount(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCurrencyAccount(requestBody:ChangeCurrencyAccount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCurrencyAccount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeCurrencyAccount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCurrencyAccount_output)
           })
       .catch((error) => {
           reject(error)
@@ -1567,30 +1869,37 @@ export function post_ChangeCurrencyAccount(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method ChangeSegvalue
    OperationID: ChangeSegvalue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSegvalue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSegvalue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSegvalue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSegvalue(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSegvalue(requestBody:ChangeSegvalue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSegvalue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeSegvalue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSegvalue_output)
           })
       .catch((error) => {
           reject(error)
@@ -1608,30 +1917,37 @@ Parameters:
 <param name="ipCOACode"> COA Code</param><param name="ipSubSegmentNbr"> Segment Number to check for existence</param><param name="ipSegmentCode">Segment Code to search for </param>
 Notes:
    OperationID: CheckForDupSegOpt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckForDupSegOpt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckForDupSegOpt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckForDupSegOpt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckForDupSegOpt(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckForDupSegOpt(requestBody:CheckForDupSegOpt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckForDupSegOpt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/CheckForDupSegOpt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckForDupSegOpt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1642,30 +1958,37 @@ export function post_CheckForDupSegOpt(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ChangeStatistical
    OperationID: ChangeStatistical
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeStatistical_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeStatistical_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeStatistical_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeStatistical(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeStatistical(requestBody:ChangeStatistical_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeStatistical_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeStatistical", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeStatistical_output)
           })
       .catch((error) => {
           reject(error)
@@ -1676,30 +1999,37 @@ export function post_ChangeStatistical(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ChangeStatisticalOnly
    OperationID: ChangeStatisticalOnly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeStatisticalOnly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeStatisticalOnly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeStatisticalOnly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeStatisticalOnly(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeStatisticalOnly(requestBody:ChangeStatisticalOnly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeStatisticalOnly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeStatisticalOnly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeStatisticalOnly_output)
           })
       .catch((error) => {
           reject(error)
@@ -1710,30 +2040,37 @@ export function post_ChangeStatisticalOnly(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method ChangeStatUOMCode
    OperationID: ChangeStatUOMCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeStatUOMCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeStatUOMCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeStatUOMCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeStatUOMCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeStatUOMCode(requestBody:ChangeStatUOMCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeStatUOMCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeStatUOMCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeStatUOMCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1744,30 +2081,37 @@ export function post_ChangeStatUOMCode(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ChangeLinkedPlant
    OperationID: ChangeLinkedPlant
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeLinkedPlant_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeLinkedPlant_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeLinkedPlant_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeLinkedPlant(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeLinkedPlant(requestBody:ChangeLinkedPlant_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeLinkedPlant_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeLinkedPlant", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeLinkedPlant_output)
           })
       .catch((error) => {
           reject(error)
@@ -1779,30 +2123,37 @@ export function post_ChangeLinkedPlant(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeActive
    Description: Change Active related validations.
    OperationID: ChangeActive
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeActive_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeActive_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeActive_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeActive(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeActive(requestBody:ChangeActive_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeActive_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeActive", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeActive_output)
           })
       .catch((error) => {
           reject(error)
@@ -1815,30 +2166,37 @@ export function post_ChangeActive(requestBody:any, epicorHeaders?:Headers){
    Description: Performs validations when changing ActiveFlag
 Checks for GL Control references when marking a segment value as inactive
    OperationID: COASegValueActiveFlagChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/COASegValueActiveFlagChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/COASegValueActiveFlagChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/COASegValueActiveFlagChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_COASegValueActiveFlagChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_COASegValueActiveFlagChanging(requestBody:COASegValueActiveFlagChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<COASegValueActiveFlagChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/COASegValueActiveFlagChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as COASegValueActiveFlagChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -1850,30 +2208,37 @@ export function post_COASegValueActiveFlagChanging(requestBody:any, epicorHeader
    Summary: Invoke method RemoveSiteSegmentCodeDuplicate
    Description: SegmentCode duplicate values should be removed.
    OperationID: RemoveSiteSegmentCodeDuplicate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveSiteSegmentCodeDuplicate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveSiteSegmentCodeDuplicate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveSiteSegmentCodeDuplicate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveSiteSegmentCodeDuplicate(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveSiteSegmentCodeDuplicate(requestBody:RemoveSiteSegmentCodeDuplicate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveSiteSegmentCodeDuplicate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/RemoveSiteSegmentCodeDuplicate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveSiteSegmentCodeDuplicate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1885,30 +2250,37 @@ export function post_RemoveSiteSegmentCodeDuplicate(requestBody:any, epicorHeade
    Summary: Invoke method ChangeSiteSegmentCode
    Description: Validates new Site Segment Code value
    OperationID: ChangeSiteSegmentCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSiteSegmentCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSiteSegmentCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSiteSegmentCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSiteSegmentCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSiteSegmentCode(requestBody:ChangeSiteSegmentCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSiteSegmentCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChangeSiteSegmentCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSiteSegmentCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1920,30 +2292,37 @@ export function post_ChangeSiteSegmentCode(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method SiteSegmentChanged
    Description: Populates info about selected segment value
    OperationID: SiteSegmentChanged
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SiteSegmentChanged_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SiteSegmentChanged_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SiteSegmentChanged_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SiteSegmentChanged(requestBody:any, epicorHeaders?:Headers){
+export function post_SiteSegmentChanged(requestBody:SiteSegmentChanged_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SiteSegmentChanged_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/SiteSegmentChanged", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SiteSegmentChanged_output)
           })
       .catch((error) => {
           reject(error)
@@ -1954,30 +2333,37 @@ export function post_SiteSegmentChanged(requestBody:any, epicorHeaders?:Headers)
    /**  
    Summary: Invoke method ChgStatUOMCode
    OperationID: ChgStatUOMCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChgStatUOMCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChgStatUOMCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChgStatUOMCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChgStatUOMCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChgStatUOMCode(requestBody:ChgStatUOMCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChgStatUOMCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ChgStatUOMCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChgStatUOMCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1989,30 +2375,37 @@ export function post_ChgStatUOMCode(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCOASegmentGlobalFields
    Description: none
    OperationID: GetCOASegmentGlobalFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCOASegmentGlobalFields_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCOASegmentGlobalFields_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCOASegmentGlobalFields_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCOASegmentGlobalFields(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCOASegmentGlobalFields(requestBody:GetCOASegmentGlobalFields_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCOASegmentGlobalFields_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetCOASegmentGlobalFields", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCOASegmentGlobalFields_output)
           })
       .catch((error) => {
           reject(error)
@@ -2028,7 +2421,7 @@ Parameters:
 <param name="opCOACode">Indicates the COACODE the Chart of Accounts</param><param name="opDescription">Indicates the Description on fo the COACODE</param><param name="opSegmentNbr">Indicates Segment number of the Segment</param><param name="opSegmentName">Indicates the Segment Name of the Segment</param><param name="opGlobalCOA">opGlobalCOA</param><param name="opGlobalSegment">opGlobalSegment </param>
 Notes:
    OperationID: ComboValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ComboValues_output
@@ -2041,15 +2434,22 @@ export function post_ComboValues(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ComboValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ComboValues", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ComboValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -2061,30 +2461,37 @@ export function post_ComboValues(epicorHeaders?:Headers){
    Summary: Invoke method ValidateCOACodeSite
    Description: returns a description and Global COA flags of the entered COA code with Site Segment info
    OperationID: ValidateCOACodeSite
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCOACodeSite_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCOACodeSite_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCOACodeSite_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCOACodeSite(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCOACodeSite(requestBody:ValidateCOACodeSite_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCOACodeSite_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ValidateCOACodeSite", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCOACodeSite_output)
           })
       .catch((error) => {
           reject(error)
@@ -2096,30 +2503,37 @@ export function post_ValidateCOACodeSite(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ValidateCOACode
    Description: returns a description and Global COA flags of the entered COA code
    OperationID: ValidateCOACode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCOACode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCOACode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCOACode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCOACode(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCOACode(requestBody:ValidateCOACode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCOACode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ValidateCOACode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCOACode_output)
           })
       .catch((error) => {
           reject(error)
@@ -2131,30 +2545,37 @@ export function post_ValidateCOACode(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateCOASegment
    Description: Validate segment number
    OperationID: ValidateCOASegment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCOASegment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCOASegment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCOASegment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCOASegment(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCOASegment(requestBody:ValidateCOASegment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCOASegment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ValidateCOASegment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCOASegment_output)
           })
       .catch((error) => {
           reject(error)
@@ -2169,30 +2590,37 @@ Parameters:
 <param name="WhereClause">COASegValues search clause</param><param name="pageSize">Page size</param><param name="absolutePage">Absolute page</param><param name="morePages">More Pages</param>
 Notes:
    OperationID: GetListCBOnly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListCBOnly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListCBOnly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListCBOnly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListCBOnly(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListCBOnly(requestBody:GetListCBOnly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListCBOnly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetListCBOnly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListCBOnly_output)
           })
       .catch((error) => {
           reject(error)
@@ -2207,30 +2635,37 @@ Parameters:
 <param name="ipCOACode">COA code</param><param name="ipSegmentCode">segment code</param><param name="ipCurrencyAcct">flag identifying the segment as a currency account</param><param name="CurrencyAcctType">currency account Type</param>
 Notes:
    OperationID: ValidateCurrencyAccount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCurrencyAccount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCurrencyAccount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCurrencyAccount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCurrencyAccount(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCurrencyAccount(requestBody:ValidateCurrencyAccount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCurrencyAccount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ValidateCurrencyAccount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCurrencyAccount_output)
           })
       .catch((error) => {
           reject(error)
@@ -2245,30 +2680,37 @@ Parameters:
 <param name="ipCOACode"> COA Code</param><param name="ipSubSegmentNbr"> Segment Number to check for existence</param><param name="ipSegmentCode">Segment Code to search for </param>
 Notes:
    OperationID: ValidateDefaultSegment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateDefaultSegment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateDefaultSegment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateDefaultSegment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateDefaultSegment(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateDefaultSegment(requestBody:ValidateDefaultSegment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateDefaultSegment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/ValidateDefaultSegment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateDefaultSegment_output)
           })
       .catch((error) => {
           reject(error)
@@ -2280,30 +2722,37 @@ export function post_ValidateDefaultSegment(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method DefaultsOnAdd
    Description: Set Default creating a new account
    OperationID: DefaultsOnAdd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DefaultsOnAdd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DefaultsOnAdd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DefaultsOnAdd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DefaultsOnAdd(requestBody:any, epicorHeaders?:Headers){
+export function post_DefaultsOnAdd(requestBody:DefaultsOnAdd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DefaultsOnAdd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/DefaultsOnAdd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DefaultsOnAdd_output)
           })
       .catch((error) => {
           reject(error)
@@ -2315,30 +2764,37 @@ export function post_DefaultsOnAdd(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DefaultsOnAddSegAcct
    Description: Set Default creating a new COASegAcct
    OperationID: DefaultsOnAddSegAcct
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DefaultsOnAddSegAcct_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DefaultsOnAddSegAcct_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DefaultsOnAddSegAcct_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DefaultsOnAddSegAcct(requestBody:any, epicorHeaders?:Headers){
+export function post_DefaultsOnAddSegAcct(requestBody:DefaultsOnAddSegAcct_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DefaultsOnAddSegAcct_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/DefaultsOnAddSegAcct", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DefaultsOnAddSegAcct_output)
           })
       .catch((error) => {
           reject(error)
@@ -2350,30 +2806,37 @@ export function post_DefaultsOnAddSegAcct(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DeleteTransactionCurrencies
    Description: Delete Transaction Currencies
    OperationID: DeleteTransactionCurrencies
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteTransactionCurrencies_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteTransactionCurrencies_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteTransactionCurrencies_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteTransactionCurrencies(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteTransactionCurrencies(requestBody:DeleteTransactionCurrencies_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteTransactionCurrencies_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/DeleteTransactionCurrencies", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteTransactionCurrencies_output)
           })
       .catch((error) => {
           reject(error)
@@ -2384,30 +2847,37 @@ export function post_DeleteTransactionCurrencies(requestBody:any, epicorHeaders?
    /**  
    Summary: Invoke method IsStatOnlySegment
    OperationID: IsStatOnlySegment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsStatOnlySegment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsStatOnlySegment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsStatOnlySegment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsStatOnlySegment(requestBody:any, epicorHeaders?:Headers){
+export function post_IsStatOnlySegment(requestBody:IsStatOnlySegment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsStatOnlySegment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/IsStatOnlySegment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsStatOnlySegment_output)
           })
       .catch((error) => {
           reject(error)
@@ -2418,30 +2888,37 @@ export function post_IsStatOnlySegment(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method getBookRevOpt
    OperationID: getBookRevOpt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/getBookRevOpt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/getBookRevOpt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/getBookRevOpt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_getBookRevOpt(requestBody:any, epicorHeaders?:Headers){
+export function post_getBookRevOpt(requestBody:getBookRevOpt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<getBookRevOpt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/getBookRevOpt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as getBookRevOpt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2453,30 +2930,37 @@ export function post_getBookRevOpt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckCOASeparatorInSegmentValue
    Description: Return warning message if Segment Value contains COA Separator
    OperationID: CheckCOASeparatorInSegmentValue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckCOASeparatorInSegmentValue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckCOASeparatorInSegmentValue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckCOASeparatorInSegmentValue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckCOASeparatorInSegmentValue(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckCOASeparatorInSegmentValue(requestBody:CheckCOASeparatorInSegmentValue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckCOASeparatorInSegmentValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/CheckCOASeparatorInSegmentValue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckCOASeparatorInSegmentValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -2487,30 +2971,37 @@ export function post_CheckCOASeparatorInSegmentValue(requestBody:any, epicorHead
    /**  
    Summary: Invoke method GenerateSiteSegmentSetupData
    OperationID: GenerateSiteSegmentSetupData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateSiteSegmentSetupData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateSiteSegmentSetupData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateSiteSegmentSetupData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateSiteSegmentSetupData(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateSiteSegmentSetupData(requestBody:GenerateSiteSegmentSetupData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateSiteSegmentSetupData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GenerateSiteSegmentSetupData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateSiteSegmentSetupData_output)
           })
       .catch((error) => {
           reject(error)
@@ -2522,30 +3013,37 @@ export function post_GenerateSiteSegmentSetupData(requestBody:any, epicorHeaders
    Summary: Invoke method GetSiteSetting
    Description: Site Segment wizard availability
    OperationID: GetSiteSetting
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSiteSetting_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSiteSetting_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSiteSetting_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSiteSetting(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSiteSetting(requestBody:GetSiteSetting_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSiteSetting_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetSiteSetting", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSiteSetting_output)
           })
       .catch((error) => {
           reject(error)
@@ -2557,30 +3055,37 @@ export function post_GetSiteSetting(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DefaultBookID
    Description: Returns the default book value.
    OperationID: DefaultBookID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DefaultBookID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DefaultBookID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DefaultBookID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DefaultBookID(requestBody:any, epicorHeaders?:Headers){
+export function post_DefaultBookID(requestBody:DefaultBookID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DefaultBookID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/DefaultBookID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DefaultBookID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2592,30 +3097,37 @@ export function post_DefaultBookID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetInterSiteAccountPairs
    Description: Returns intersite account pairs for due from/due to
    OperationID: GetInterSiteAccountPairs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetInterSiteAccountPairs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetInterSiteAccountPairs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInterSiteAccountPairs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetInterSiteAccountPairs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetInterSiteAccountPairs(requestBody:GetInterSiteAccountPairs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInterSiteAccountPairs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetInterSiteAccountPairs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInterSiteAccountPairs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2627,30 +3139,37 @@ export function post_GetInterSiteAccountPairs(requestBody:any, epicorHeaders?:He
    Summary: Invoke method IntersiteAccountPairsApply
    Description: Apply due from/due to account pairs
    OperationID: IntersiteAccountPairsApply
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IntersiteAccountPairsApply_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IntersiteAccountPairsApply_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IntersiteAccountPairsApply_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IntersiteAccountPairsApply(requestBody:any, epicorHeaders?:Headers){
+export function post_IntersiteAccountPairsApply(requestBody:IntersiteAccountPairsApply_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IntersiteAccountPairsApply_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/IntersiteAccountPairsApply", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IntersiteAccountPairsApply_output)
           })
       .catch((error) => {
           reject(error)
@@ -2662,30 +3181,37 @@ export function post_IntersiteAccountPairsApply(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetSiteSegmentSetupData
    Description: Generates data for Site Segment Setup Wizard
    OperationID: GetSiteSegmentSetupData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSiteSegmentSetupData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSiteSegmentSetupData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSiteSegmentSetupData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSiteSegmentSetupData(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSiteSegmentSetupData(requestBody:GetSiteSegmentSetupData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSiteSegmentSetupData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetSiteSegmentSetupData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSiteSegmentSetupData_output)
           })
       .catch((error) => {
           reject(error)
@@ -2697,30 +3223,37 @@ export function post_GetSiteSegmentSetupData(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method SiteSegmentSetupApply
    Description: Applies Site Segment info for segment values
    OperationID: SiteSegmentSetupApply
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SiteSegmentSetupApply_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SiteSegmentSetupApply_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SiteSegmentSetupApply_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SiteSegmentSetupApply(requestBody:any, epicorHeaders?:Headers){
+export function post_SiteSegmentSetupApply(requestBody:SiteSegmentSetupApply_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SiteSegmentSetupApply_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/SiteSegmentSetupApply", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SiteSegmentSetupApply_output)
           })
       .catch((error) => {
           reject(error)
@@ -2732,30 +3265,37 @@ export function post_SiteSegmentSetupApply(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewCOASegValues
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCOASegValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCOASegValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCOASegValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCOASegValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCOASegValues(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCOASegValues(requestBody:GetNewCOASegValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCOASegValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetNewCOASegValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCOASegValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -2767,30 +3307,37 @@ export function post_GetNewCOASegValues(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewCOASegAcct
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCOASegAcct
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCOASegAcct_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCOASegAcct_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCOASegAcct_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCOASegAcct(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCOASegAcct(requestBody:GetNewCOASegAcct_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCOASegAcct_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetNewCOASegAcct", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCOASegAcct_output)
           })
       .catch((error) => {
           reject(error)
@@ -2802,30 +3349,37 @@ export function post_GetNewCOASegAcct(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCOASegOpt
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCOASegOpt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCOASegOpt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCOASegOpt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCOASegOpt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCOASegOpt(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCOASegOpt(requestBody:GetNewCOASegOpt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCOASegOpt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetNewCOASegOpt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCOASegOpt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2837,30 +3391,37 @@ export function post_GetNewCOASegOpt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCOASegRes
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCOASegRes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCOASegRes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCOASegRes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCOASegRes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCOASegRes(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCOASegRes(requestBody:GetNewCOASegRes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCOASegRes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetNewCOASegRes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCOASegRes_output)
           })
       .catch((error) => {
           reject(error)
@@ -2872,30 +3433,37 @@ export function post_GetNewCOASegRes(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2907,7 +3475,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2931,15 +3499,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2951,7 +3526,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2975,15 +3550,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2995,30 +3577,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -3030,30 +3619,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.COASegValuesSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -3064,31 +3660,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegAcctRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_COASegAcctRow[],
+   "value":Erp_Tablesets_COASegAcctRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegOptRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_COASegOptRow[],
+   "value":Erp_Tablesets_COASegOptRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegResRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_COASegResRow[],
+   "value":Erp_Tablesets_COASegResRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegValuesListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_COASegValuesListRow[],
+   "value":Erp_Tablesets_COASegValuesListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_COASegValuesRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_COASegValuesRow[],
+   "value":Erp_Tablesets_COASegValuesRow,
 }
 
 export interface Erp_Tablesets_COASegAcctRow{
@@ -3638,6 +4251,23 @@ Accounts can be used only for monetary amounts, both monetary and statistical am
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -3653,7 +4283,7 @@ export interface COASegValueActiveFlagChanging_input{
 export interface COASegValueActiveFlagChanging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
    msgInActive:string,
    msgActive:string,
 }
@@ -3681,7 +4311,7 @@ export interface ChangeActive_input{
 export interface ChangeActive_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
    msgInActive:string,
    msgActive:string,
 }
@@ -3712,7 +4342,7 @@ export interface ChangeAllowed_input{
 export interface ChangeAllowed_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -3729,7 +4359,7 @@ export interface ChangeCategory_input{
 export interface ChangeCategory_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -3746,7 +4376,7 @@ export interface ChangeCurrencyAccount_input{
 export interface ChangeCurrencyAccount_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -3762,7 +4392,7 @@ export interface ChangeLinkedPlant_input{
 export interface ChangeLinkedPlant_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
    msg:string,
    GLmsg:string,
 }
@@ -3792,7 +4422,7 @@ export interface ChangeRevalueOpt_input{
 export interface ChangeRevalueOpt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -3809,7 +4439,7 @@ export interface ChangeSegvalue_input{
 export interface ChangeSegvalue_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -3827,7 +4457,7 @@ export interface ChangeSiteSegmentCode_input{
 export interface ChangeSiteSegmentCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SiteSegmentSetupTableset[],
+   ds:Erp_Tablesets_SiteSegmentSetupTableset,
    msg:string,
    GLmsg:string,
 }
@@ -3845,7 +4475,7 @@ export interface ChangeStatUOMCode_input{
 export interface ChangeStatUOMCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
    msg:string,
 }
 }
@@ -3874,7 +4504,7 @@ export interface ChangeStatistical_input{
 export interface ChangeStatistical_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
    msg:string,
 }
 }
@@ -3961,7 +4591,7 @@ export interface DefaultsOnAddSegAcct_input{
 export interface DefaultsOnAddSegAcct_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -3981,7 +4611,7 @@ export interface DefaultsOnAdd_input{
 export interface DefaultsOnAdd_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -4015,7 +4645,7 @@ export interface DeleteTransactionCurrencies_input{
 export interface DeleteTransactionCurrencies_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -4680,7 +5310,7 @@ export interface GenerateSiteSegmentSetupData_input{
 export interface GenerateSiteSegmentSetupData_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SiteSegmentSetupTableset[],
+   ds:Erp_Tablesets_SiteSegmentSetupTableset,
 }
 }
 
@@ -4749,7 +5379,7 @@ export interface GetInterSiteAccountPairs_input{
 export interface GetInterSiteAccountPairs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SiteSegmentSetupTableset[],
+   ds:Erp_Tablesets_SiteSegmentSetupTableset,
 }
 }
 
@@ -4810,7 +5440,7 @@ export interface GetNewCOASegAcct_input{
 export interface GetNewCOASegAcct_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -4830,7 +5460,7 @@ export interface GetNewCOASegOpt_input{
 export interface GetNewCOASegOpt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -4850,7 +5480,7 @@ export interface GetNewCOASegRes_input{
 export interface GetNewCOASegRes_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -4868,7 +5498,7 @@ export interface GetNewCOASegValues_input{
 export interface GetNewCOASegValues_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 
@@ -4909,7 +5539,7 @@ export interface GetSiteSegmentSetupData_input{
 export interface GetSiteSegmentSetupData_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SiteSegmentSetupTableset[],
+   ds:Erp_Tablesets_SiteSegmentSetupTableset,
 }
 }
 
@@ -4973,7 +5603,7 @@ export interface IntersiteAccountPairsApply_input{
 export interface IntersiteAccountPairsApply_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SiteSegmentSetupTableset[],
+   ds:Erp_Tablesets_SiteSegmentSetupTableset,
    invalidAccountMessage:string,
    incompletePairMessage:string,
 }
@@ -5008,7 +5638,7 @@ export interface RemoveSiteSegmentCodeDuplicate_input{
 export interface RemoveSiteSegmentCodeDuplicate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SiteSegmentSetupTableset[],
+   ds:Erp_Tablesets_SiteSegmentSetupTableset,
 }
 }
 
@@ -5024,7 +5654,7 @@ export interface SiteSegmentChanged_input{
 export interface SiteSegmentChanged_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SiteSegmentSetupTableset[],
+   ds:Erp_Tablesets_SiteSegmentSetupTableset,
 }
 }
 
@@ -5038,7 +5668,7 @@ export interface SiteSegmentSetupApply_input{
 export interface SiteSegmentSetupApply_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SiteSegmentSetupTableset[],
+   ds:Erp_Tablesets_SiteSegmentSetupTableset,
    msg:string,
 }
 }
@@ -5058,7 +5688,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtCOASegValuesTableset[],
+   ds:Erp_Tablesets_UpdExtCOASegValuesTableset,
    errorsOccurred:boolean,
 }
 }
@@ -5073,7 +5703,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_COASegValuesTableset[],
+   ds:Erp_Tablesets_COASegValuesTableset,
 }
 }
 

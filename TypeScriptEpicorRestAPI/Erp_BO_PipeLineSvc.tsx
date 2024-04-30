@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PipeLineSvc
 // Description: PipeLineSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method BuildPipeLine
    Description: Call this method to build the Pipeline grid for a Salesperson.
    OperationID: BuildPipeLine
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildPipeLine_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildPipeLine_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildPipeLine_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildPipeLine(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildPipeLine(requestBody:BuildPipeLine_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildPipeLine_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/BuildPipeLine", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildPipeLine_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_BuildPipeLine(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CompanyActualQuota
    Description: Company Actual Quota.
    OperationID: CompanyActualQuota
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CompanyActualQuota_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CompanyActualQuota_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CompanyActualQuota_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CompanyActualQuota(requestBody:any, epicorHeaders?:Headers){
+export function post_CompanyActualQuota(requestBody:CompanyActualQuota_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CompanyActualQuota_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/CompanyActualQuota", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CompanyActualQuota_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_CompanyActualQuota(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetActuals
    Description: Call the correct method to retrieve Actuals data based on the Actuals Type.
    OperationID: GetActuals
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetActuals_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetActuals_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetActuals_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetActuals(requestBody:any, epicorHeaders?:Headers){
+export function post_GetActuals(requestBody:GetActuals_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetActuals_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/GetActuals", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetActuals_output)
           })
       .catch((error) => {
           reject(error)
@@ -210,30 +281,37 @@ pcTypeList contains only the "SalesRep" choice
 pcRegionList and pcTerritoryList are empty
 pcSalesRepList contains only the SalesRep associated with the current user
    OperationID: GetComboValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetComboValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetComboValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetComboValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetComboValues(requestBody:any, epicorHeaders?:Headers){
+export function post_GetComboValues(requestBody:GetComboValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetComboValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/GetComboValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetComboValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -244,7 +322,7 @@ export function post_GetComboValues(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetDates
    OperationID: GetDates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDates_output
@@ -257,15 +335,22 @@ export function post_GetDates(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDates_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/GetDates", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDates_output)
           })
       .catch((error) => {
           reject(error)
@@ -277,30 +362,37 @@ export function post_GetDates(epicorHeaders?:Headers){
    Summary: Invoke method GetQuarter
    Description: This method returns the Fiscal Quarter for given Company and FiscalPeriod.
    OperationID: GetQuarter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetQuarter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQuarter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQuarter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetQuarter(requestBody:any, epicorHeaders?:Headers){
+export function post_GetQuarter(requestBody:GetQuarter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQuarter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/GetQuarter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQuarter_output)
           })
       .catch((error) => {
           reject(error)
@@ -332,7 +424,7 @@ pcTypeList contains only the "SalesRep" choice
 pcRegionList and pcTerritoryList are empty
 pcSalesRepList contains only the SalesRep associated with the current user
    OperationID: GetTypeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTypeList_output
@@ -345,15 +437,22 @@ export function post_GetTypeList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTypeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/GetTypeList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTypeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -365,30 +464,37 @@ export function post_GetTypeList(epicorHeaders?:Headers){
    Summary: Invoke method GetComboValuesDataset
    Description: Get the valid region, territory, and sales rep values and populate them in the combo boxes.
    OperationID: GetComboValuesDataset
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetComboValuesDataset_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetComboValuesDataset_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetComboValuesDataset_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetComboValuesDataset(requestBody:any, epicorHeaders?:Headers){
+export function post_GetComboValuesDataset(requestBody:GetComboValuesDataset_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetComboValuesDataset_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/GetComboValuesDataset", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetComboValuesDataset_output)
           })
       .catch((error) => {
           reject(error)
@@ -400,30 +506,37 @@ export function post_GetComboValuesDataset(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method RegionActualQuota
    Description: This method displays the Regional Actual Quota
    OperationID: RegionActualQuota
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RegionActualQuota_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RegionActualQuota_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RegionActualQuota_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RegionActualQuota(requestBody:any, epicorHeaders?:Headers){
+export function post_RegionActualQuota(requestBody:RegionActualQuota_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RegionActualQuota_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/RegionActualQuota", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RegionActualQuota_output)
           })
       .catch((error) => {
           reject(error)
@@ -435,30 +548,37 @@ export function post_RegionActualQuota(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SalesManagerActualQuota
    Description: This method displays Sales Manager Actual Quota.
    OperationID: SalesManagerActualQuota
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SalesManagerActualQuota_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SalesManagerActualQuota_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SalesManagerActualQuota_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SalesManagerActualQuota(requestBody:any, epicorHeaders?:Headers){
+export function post_SalesManagerActualQuota(requestBody:SalesManagerActualQuota_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SalesManagerActualQuota_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/SalesManagerActualQuota", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SalesManagerActualQuota_output)
           })
       .catch((error) => {
           reject(error)
@@ -470,30 +590,37 @@ export function post_SalesManagerActualQuota(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method SalesRepActualQuota
    Description: This method displays Sales Rep's Actual Quota.
    OperationID: SalesRepActualQuota
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SalesRepActualQuota_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SalesRepActualQuota_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SalesRepActualQuota_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SalesRepActualQuota(requestBody:any, epicorHeaders?:Headers){
+export function post_SalesRepActualQuota(requestBody:SalesRepActualQuota_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SalesRepActualQuota_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/SalesRepActualQuota", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SalesRepActualQuota_output)
           })
       .catch((error) => {
           reject(error)
@@ -505,30 +632,37 @@ export function post_SalesRepActualQuota(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method SetupPipeLineControlTable
    Description: Initialize the PipeLineControl table.
    OperationID: SetupPipeLineControlTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetupPipeLineControlTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetupPipeLineControlTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetupPipeLineControlTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetupPipeLineControlTable(requestBody:any, epicorHeaders?:Headers){
+export function post_SetupPipeLineControlTable(requestBody:SetupPipeLineControlTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetupPipeLineControlTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/SetupPipeLineControlTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetupPipeLineControlTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -540,30 +674,37 @@ export function post_SetupPipeLineControlTable(requestBody:any, epicorHeaders?:H
    Summary: Invoke method TerritoryActualQuota
    Description: This method displays Territory Actual Quota
    OperationID: TerritoryActualQuota
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TerritoryActualQuota_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TerritoryActualQuota_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TerritoryActualQuota_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TerritoryActualQuota(requestBody:any, epicorHeaders?:Headers){
+export function post_TerritoryActualQuota(requestBody:TerritoryActualQuota_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TerritoryActualQuota_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PipeLineSvc/TerritoryActualQuota", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TerritoryActualQuota_output)
           })
       .catch((error) => {
           reject(error)
@@ -574,11 +715,45 @@ export function post_TerritoryActualQuota(requestBody:any, epicorHeaders?:Header
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -628,7 +803,7 @@ export interface CompanyActualQuota_input{
 export interface CompanyActualQuota_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PipeLineTotalsTableset[],
+   ds:Erp_Tablesets_PipeLineTotalsTableset,
 }
 }
 
@@ -751,7 +926,7 @@ export interface GetActuals_input{
 export interface GetActuals_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PipeLineTotalsTableset[],
+   ds:Erp_Tablesets_PipeLineTotalsTableset,
 }
 }
 
@@ -768,7 +943,7 @@ export interface GetComboValuesDataset_input{
 export interface GetComboValuesDataset_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PipeLineTableset[],
+   ds:Erp_Tablesets_PipeLineTableset,
 }
 }
 
@@ -880,7 +1055,7 @@ export interface RegionActualQuota_input{
 export interface RegionActualQuota_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PipeLineTotalsTableset[],
+   ds:Erp_Tablesets_PipeLineTotalsTableset,
 }
 }
 
@@ -912,7 +1087,7 @@ export interface SalesManagerActualQuota_input{
 export interface SalesManagerActualQuota_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PipeLineTotalsTableset[],
+   ds:Erp_Tablesets_PipeLineTotalsTableset,
 }
 }
 
@@ -947,7 +1122,7 @@ export interface SalesRepActualQuota_input{
 export interface SalesRepActualQuota_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PipeLineTotalsTableset[],
+   ds:Erp_Tablesets_PipeLineTotalsTableset,
 }
 }
 
@@ -961,7 +1136,7 @@ export interface SetupPipeLineControlTable_input{
 export interface SetupPipeLineControlTable_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PipeLineTableset[],
+   ds:Erp_Tablesets_PipeLineTableset,
 }
 }
 
@@ -996,7 +1171,7 @@ export interface TerritoryActualQuota_input{
 export interface TerritoryActualQuota_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PipeLineTotalsTableset[],
+   ds:Erp_Tablesets_PipeLineTotalsTableset,
 }
 }
 

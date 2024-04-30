@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.RFQEntrySvc
 // Description: Request for Quote - Entry
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQHeadRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQHeadRow
    */  
 export function get_RFQEntries(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_RFQEntries(select?:string, expand?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQHeadRow)
           })
@@ -118,15 +158,15 @@ export function get_RFQEntries(select?:string, expand?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RFQEntries
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQHeadRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQHeadRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RFQHeadRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RFQHeadRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RFQEntries(requestBody:any, epicorHeaders?:Headers){
+export function post_RFQEntries(requestBody:Erp_Tablesets_RFQHeadRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_RFQEntries(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_RFQEntries(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQHeadRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQHeadRow
    */  
 export function get_RFQEntries_Company_RFQNum(Company:string, RFQNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_RFQEntries_Company_RFQNum(Company:string, RFQNum:string, sel
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQHeadRow)
           })
@@ -193,15 +247,15 @@ export function get_RFQEntries_Company_RFQNum(Company:string, RFQNum:string, sel
    OperationID: UpdateExt_RFQEntry
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RFQNum Desc: RFQNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQHeadRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQHeadRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RFQEntries_Company_RFQNum(Company:string, RFQNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RFQEntries_Company_RFQNum(Company:string, RFQNum:string, requestBody:Erp_Tablesets_RFQHeadRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_RFQEntries_Company_RFQNum(Company:string, RFQNum:string, r
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_RFQEntries_Company_RFQNum(Company:string, RFQNum:string, r
    OperationID: DeleteUpdateExt_RFQEntry
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RFQNum Desc: RFQNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_RFQEntries_Company_RFQNum(Company:string, RFQNum:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_RFQEntries_Company_RFQNum(Company:string, RFQNum:string, 
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQItemRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQItemRow
    */  
 export function get_RFQEntries_Company_RFQNum_RFQItems(Company:string, RFQNum:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_RFQEntries_Company_RFQNum_RFQItems(Company:string, RFQNum:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQItemRow)
           })
@@ -311,10 +386,10 @@ export function get_RFQEntries_Company_RFQNum_RFQItems(Company:string, RFQNum:st
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQItemRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQItemRow
    */  
 export function get_RFQEntries_Company_RFQNum_RFQItems_Company_RFQNum_RFQLine(Company:string, RFQNum:string, RFQLine:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_RFQEntries_Company_RFQNum_RFQItems_Company_RFQNum_RFQLine(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQItemRow)
           })
@@ -351,10 +433,10 @@ export function get_RFQEntries_Company_RFQNum_RFQItems_Company_RFQNum_RFQLine(Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQHeadAttchRow
    */  
 export function get_RFQEntries_Company_RFQNum_RFQHeadAttches(Company:string, RFQNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -369,7 +451,14 @@ export function get_RFQEntries_Company_RFQNum_RFQHeadAttches(Company:string, RFQ
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQHeadAttchRow)
           })
@@ -388,10 +477,10 @@ export function get_RFQEntries_Company_RFQNum_RFQHeadAttches(Company:string, RFQ
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQHeadAttchRow
    */  
 export function get_RFQEntries_Company_RFQNum_RFQHeadAttches_Company_RFQNum_DrawingSeq(Company:string, RFQNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -406,7 +495,14 @@ export function get_RFQEntries_Company_RFQNum_RFQHeadAttches_Company_RFQNum_Draw
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQHeadAttchRow)
           })
@@ -427,10 +523,10 @@ export function get_RFQEntries_Company_RFQNum_RFQHeadAttches_Company_RFQNum_Draw
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQItemRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQItemRow
    */  
 export function get_RFQItems(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -445,7 +541,14 @@ export function get_RFQItems(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQItemRow)
           })
@@ -459,15 +562,15 @@ export function get_RFQItems(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RFQItems
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQItemRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQItemRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RFQItemRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RFQItemRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RFQItems(requestBody:any, epicorHeaders?:Headers){
+export function post_RFQItems(requestBody:Erp_Tablesets_RFQItemRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -481,7 +584,14 @@ export function post_RFQItems(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -501,10 +611,10 @@ export function post_RFQItems(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQItemRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQItemRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine(Company:string, RFQNum:string, RFQLine:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -519,7 +629,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine(Company:string, RFQNum:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQItemRow)
           })
@@ -536,15 +653,15 @@ export function get_RFQItems_Company_RFQNum_RFQLine(Company:string, RFQNum:strin
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RFQNum Desc: RFQNum   Required: True
       @param RFQLine Desc: RFQLine   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQItemRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQItemRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RFQItems_Company_RFQNum_RFQLine(Company:string, RFQNum:string, RFQLine:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RFQItems_Company_RFQNum_RFQLine(Company:string, RFQNum:string, RFQLine:string, requestBody:Erp_Tablesets_RFQItemRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -558,7 +675,14 @@ export function patch_RFQItems_Company_RFQNum_RFQLine(Company:string, RFQNum:str
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -575,7 +699,7 @@ export function patch_RFQItems_Company_RFQNum_RFQLine(Company:string, RFQNum:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RFQNum Desc: RFQNum   Required: True
       @param RFQLine Desc: RFQLine   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -594,7 +718,14 @@ export function delete_RFQItems_Company_RFQNum_RFQLine(Company:string, RFQNum:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -617,10 +748,10 @@ export function delete_RFQItems_Company_RFQNum_RFQLine(Company:string, RFQNum:st
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQPartRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQPartRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine_RFQParts(Company:string, RFQNum:string, RFQLine:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -635,7 +766,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQParts(Company:string, RFQ
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQPartRow)
           })
@@ -656,10 +794,10 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQParts(Company:string, RFQ
       @param MfgPartNum Desc: MfgPartNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQPartRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQPartRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine_RFQParts_Company_RFQNum_RFQLine_MfgNum_MfgPartNum(Company:string, RFQNum:string, RFQLine:string, MfgNum:string, MfgPartNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -674,7 +812,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQParts_Company_RFQNum_RFQL
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQPartRow)
           })
@@ -697,10 +842,10 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQParts_Company_RFQNum_RFQL
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQQtyRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQQtyRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine_RFQQties(Company:string, RFQNum:string, RFQLine:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -715,7 +860,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQQties(Company:string, RFQ
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQQtyRow)
           })
@@ -735,10 +887,10 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQQties(Company:string, RFQ
       @param QtyNum Desc: QtyNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQQtyRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQQtyRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine_RFQQties_Company_RFQNum_RFQLine_QtyNum(Company:string, RFQNum:string, RFQLine:string, QtyNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -753,7 +905,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQQties_Company_RFQNum_RFQL
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQQtyRow)
           })
@@ -776,10 +935,10 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQQties_Company_RFQNum_RFQL
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQSourcingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQSourcingRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine_RFQSourcings(Company:string, RFQNum:string, RFQLine:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -794,7 +953,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQSourcings(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQSourcingRow)
           })
@@ -814,10 +980,10 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQSourcings(Company:string,
       @param SourcingSeq Desc: SourcingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQSourcingRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQSourcingRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine_RFQSourcings_Company_RFQNum_RFQLine_SourcingSeq(Company:string, RFQNum:string, RFQLine:string, SourcingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -832,7 +998,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQSourcings_Company_RFQNum_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQSourcingRow)
           })
@@ -855,10 +1028,10 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQSourcings_Company_RFQNum_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQVendRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQVendRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine_RFQVends(Company:string, RFQNum:string, RFQLine:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -873,7 +1046,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQVends(Company:string, RFQ
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQVendRow)
           })
@@ -894,10 +1074,10 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQVends(Company:string, RFQ
       @param PurPoint Desc: PurPoint   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQVendRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQVendRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine_RFQVends_Company_RFQNum_RFQLine_VendorNum_PurPoint(Company:string, RFQNum:string, RFQLine:string, VendorNum:string, PurPoint:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -912,7 +1092,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQVends_Company_RFQNum_RFQL
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQVendRow)
           })
@@ -935,10 +1122,10 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQVends_Company_RFQNum_RFQL
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQItemAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQItemAttchRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine_RFQItemAttches(Company:string, RFQNum:string, RFQLine:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -953,7 +1140,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQItemAttches(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQItemAttchRow)
           })
@@ -973,10 +1167,10 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQItemAttches(Company:strin
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQItemAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQItemAttchRow
    */  
 export function get_RFQItems_Company_RFQNum_RFQLine_RFQItemAttches_Company_RFQNum_RFQLine_DrawingSeq(Company:string, RFQNum:string, RFQLine:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -991,7 +1185,14 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQItemAttches_Company_RFQNu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQItemAttchRow)
           })
@@ -1011,10 +1212,10 @@ export function get_RFQItems_Company_RFQNum_RFQLine_RFQItemAttches_Company_RFQNu
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQPartRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQPartRow
    */  
 export function get_RFQParts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1029,7 +1230,14 @@ export function get_RFQParts(select?:string, filter?:string, orderby?:string, to
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQPartRow)
           })
@@ -1043,15 +1251,15 @@ export function get_RFQParts(select?:string, filter?:string, orderby?:string, to
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RFQParts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQPartRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQPartRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RFQPartRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RFQPartRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RFQParts(requestBody:any, epicorHeaders?:Headers){
+export function post_RFQParts(requestBody:Erp_Tablesets_RFQPartRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1065,7 +1273,14 @@ export function post_RFQParts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1086,10 +1301,10 @@ export function post_RFQParts(requestBody:any, epicorHeaders?:Headers){
       @param MfgPartNum Desc: MfgPartNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQPartRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQPartRow
    */  
 export function get_RFQParts_Company_RFQNum_RFQLine_MfgNum_MfgPartNum(Company:string, RFQNum:string, RFQLine:string, MfgNum:string, MfgPartNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1104,7 +1319,14 @@ export function get_RFQParts_Company_RFQNum_RFQLine_MfgNum_MfgPartNum(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQPartRow)
           })
@@ -1123,15 +1345,15 @@ export function get_RFQParts_Company_RFQNum_RFQLine_MfgNum_MfgPartNum(Company:st
       @param RFQLine Desc: RFQLine   Required: True
       @param MfgNum Desc: MfgNum   Required: True
       @param MfgPartNum Desc: MfgPartNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQPartRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQPartRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RFQParts_Company_RFQNum_RFQLine_MfgNum_MfgPartNum(Company:string, RFQNum:string, RFQLine:string, MfgNum:string, MfgPartNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RFQParts_Company_RFQNum_RFQLine_MfgNum_MfgPartNum(Company:string, RFQNum:string, RFQLine:string, MfgNum:string, MfgPartNum:string, requestBody:Erp_Tablesets_RFQPartRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1145,7 +1367,14 @@ export function patch_RFQParts_Company_RFQNum_RFQLine_MfgNum_MfgPartNum(Company:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1164,7 +1393,7 @@ export function patch_RFQParts_Company_RFQNum_RFQLine_MfgNum_MfgPartNum(Company:
       @param RFQLine Desc: RFQLine   Required: True
       @param MfgNum Desc: MfgNum   Required: True
       @param MfgPartNum Desc: MfgPartNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1183,7 +1412,14 @@ export function delete_RFQParts_Company_RFQNum_RFQLine_MfgNum_MfgPartNum(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1203,10 +1439,10 @@ export function delete_RFQParts_Company_RFQNum_RFQLine_MfgNum_MfgPartNum(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQQtyRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQQtyRow
    */  
 export function get_RFQQties(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1221,7 +1457,14 @@ export function get_RFQQties(select?:string, filter?:string, orderby?:string, to
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQQtyRow)
           })
@@ -1235,15 +1478,15 @@ export function get_RFQQties(select?:string, filter?:string, orderby?:string, to
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RFQQties
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQQtyRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQQtyRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RFQQtyRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RFQQtyRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RFQQties(requestBody:any, epicorHeaders?:Headers){
+export function post_RFQQties(requestBody:Erp_Tablesets_RFQQtyRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1257,7 +1500,14 @@ export function post_RFQQties(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1277,10 +1527,10 @@ export function post_RFQQties(requestBody:any, epicorHeaders?:Headers){
       @param QtyNum Desc: QtyNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQQtyRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQQtyRow
    */  
 export function get_RFQQties_Company_RFQNum_RFQLine_QtyNum(Company:string, RFQNum:string, RFQLine:string, QtyNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1295,7 +1545,14 @@ export function get_RFQQties_Company_RFQNum_RFQLine_QtyNum(Company:string, RFQNu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQQtyRow)
           })
@@ -1313,15 +1570,15 @@ export function get_RFQQties_Company_RFQNum_RFQLine_QtyNum(Company:string, RFQNu
       @param RFQNum Desc: RFQNum   Required: True
       @param RFQLine Desc: RFQLine   Required: True
       @param QtyNum Desc: QtyNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQQtyRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQQtyRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RFQQties_Company_RFQNum_RFQLine_QtyNum(Company:string, RFQNum:string, RFQLine:string, QtyNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RFQQties_Company_RFQNum_RFQLine_QtyNum(Company:string, RFQNum:string, RFQLine:string, QtyNum:string, requestBody:Erp_Tablesets_RFQQtyRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1335,7 +1592,14 @@ export function patch_RFQQties_Company_RFQNum_RFQLine_QtyNum(Company:string, RFQ
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1353,7 +1617,7 @@ export function patch_RFQQties_Company_RFQNum_RFQLine_QtyNum(Company:string, RFQ
       @param RFQNum Desc: RFQNum   Required: True
       @param RFQLine Desc: RFQLine   Required: True
       @param QtyNum Desc: QtyNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1372,7 +1636,14 @@ export function delete_RFQQties_Company_RFQNum_RFQLine_QtyNum(Company:string, RF
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1392,10 +1663,10 @@ export function delete_RFQQties_Company_RFQNum_RFQLine_QtyNum(Company:string, RF
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQSourcingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQSourcingRow
    */  
 export function get_RFQSourcings(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1410,7 +1681,14 @@ export function get_RFQSourcings(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQSourcingRow)
           })
@@ -1424,15 +1702,15 @@ export function get_RFQSourcings(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RFQSourcings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQSourcingRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQSourcingRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RFQSourcingRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RFQSourcingRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RFQSourcings(requestBody:any, epicorHeaders?:Headers){
+export function post_RFQSourcings(requestBody:Erp_Tablesets_RFQSourcingRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1446,7 +1724,14 @@ export function post_RFQSourcings(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1466,10 +1751,10 @@ export function post_RFQSourcings(requestBody:any, epicorHeaders?:Headers){
       @param SourcingSeq Desc: SourcingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQSourcingRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQSourcingRow
    */  
 export function get_RFQSourcings_Company_RFQNum_RFQLine_SourcingSeq(Company:string, RFQNum:string, RFQLine:string, SourcingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1484,7 +1769,14 @@ export function get_RFQSourcings_Company_RFQNum_RFQLine_SourcingSeq(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQSourcingRow)
           })
@@ -1502,15 +1794,15 @@ export function get_RFQSourcings_Company_RFQNum_RFQLine_SourcingSeq(Company:stri
       @param RFQNum Desc: RFQNum   Required: True
       @param RFQLine Desc: RFQLine   Required: True
       @param SourcingSeq Desc: SourcingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQSourcingRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQSourcingRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RFQSourcings_Company_RFQNum_RFQLine_SourcingSeq(Company:string, RFQNum:string, RFQLine:string, SourcingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RFQSourcings_Company_RFQNum_RFQLine_SourcingSeq(Company:string, RFQNum:string, RFQLine:string, SourcingSeq:string, requestBody:Erp_Tablesets_RFQSourcingRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1524,7 +1816,14 @@ export function patch_RFQSourcings_Company_RFQNum_RFQLine_SourcingSeq(Company:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1542,7 +1841,7 @@ export function patch_RFQSourcings_Company_RFQNum_RFQLine_SourcingSeq(Company:st
       @param RFQNum Desc: RFQNum   Required: True
       @param RFQLine Desc: RFQLine   Required: True
       @param SourcingSeq Desc: SourcingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1561,7 +1860,14 @@ export function delete_RFQSourcings_Company_RFQNum_RFQLine_SourcingSeq(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1581,10 +1887,10 @@ export function delete_RFQSourcings_Company_RFQNum_RFQLine_SourcingSeq(Company:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQVendRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQVendRow
    */  
 export function get_RFQVends(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1599,7 +1905,14 @@ export function get_RFQVends(select?:string, filter?:string, orderby?:string, to
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQVendRow)
           })
@@ -1613,15 +1926,15 @@ export function get_RFQVends(select?:string, filter?:string, orderby?:string, to
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RFQVends
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQVendRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQVendRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RFQVendRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RFQVendRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RFQVends(requestBody:any, epicorHeaders?:Headers){
+export function post_RFQVends(requestBody:Erp_Tablesets_RFQVendRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1635,7 +1948,14 @@ export function post_RFQVends(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1656,10 +1976,10 @@ export function post_RFQVends(requestBody:any, epicorHeaders?:Headers){
       @param PurPoint Desc: PurPoint   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQVendRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQVendRow
    */  
 export function get_RFQVends_Company_RFQNum_RFQLine_VendorNum_PurPoint(Company:string, RFQNum:string, RFQLine:string, VendorNum:string, PurPoint:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1674,7 +1994,14 @@ export function get_RFQVends_Company_RFQNum_RFQLine_VendorNum_PurPoint(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQVendRow)
           })
@@ -1693,15 +2020,15 @@ export function get_RFQVends_Company_RFQNum_RFQLine_VendorNum_PurPoint(Company:s
       @param RFQLine Desc: RFQLine   Required: True
       @param VendorNum Desc: VendorNum   Required: True
       @param PurPoint Desc: PurPoint   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQVendRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQVendRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RFQVends_Company_RFQNum_RFQLine_VendorNum_PurPoint(Company:string, RFQNum:string, RFQLine:string, VendorNum:string, PurPoint:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RFQVends_Company_RFQNum_RFQLine_VendorNum_PurPoint(Company:string, RFQNum:string, RFQLine:string, VendorNum:string, PurPoint:string, requestBody:Erp_Tablesets_RFQVendRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1715,7 +2042,14 @@ export function patch_RFQVends_Company_RFQNum_RFQLine_VendorNum_PurPoint(Company
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1734,7 +2068,7 @@ export function patch_RFQVends_Company_RFQNum_RFQLine_VendorNum_PurPoint(Company
       @param RFQLine Desc: RFQLine   Required: True
       @param VendorNum Desc: VendorNum   Required: True
       @param PurPoint Desc: PurPoint   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1753,7 +2087,14 @@ export function delete_RFQVends_Company_RFQNum_RFQLine_VendorNum_PurPoint(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1773,10 +2114,10 @@ export function delete_RFQVends_Company_RFQNum_RFQLine_VendorNum_PurPoint(Compan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQItemAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQItemAttchRow
    */  
 export function get_RFQItemAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1791,7 +2132,14 @@ export function get_RFQItemAttches(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQItemAttchRow)
           })
@@ -1805,15 +2153,15 @@ export function get_RFQItemAttches(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RFQItemAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQItemAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQItemAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RFQItemAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RFQItemAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RFQItemAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_RFQItemAttches(requestBody:Erp_Tablesets_RFQItemAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1827,7 +2175,14 @@ export function post_RFQItemAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1847,10 +2202,10 @@ export function post_RFQItemAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQItemAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQItemAttchRow
    */  
 export function get_RFQItemAttches_Company_RFQNum_RFQLine_DrawingSeq(Company:string, RFQNum:string, RFQLine:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1865,7 +2220,14 @@ export function get_RFQItemAttches_Company_RFQNum_RFQLine_DrawingSeq(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQItemAttchRow)
           })
@@ -1883,15 +2245,15 @@ export function get_RFQItemAttches_Company_RFQNum_RFQLine_DrawingSeq(Company:str
       @param RFQNum Desc: RFQNum   Required: True
       @param RFQLine Desc: RFQLine   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQItemAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQItemAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RFQItemAttches_Company_RFQNum_RFQLine_DrawingSeq(Company:string, RFQNum:string, RFQLine:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RFQItemAttches_Company_RFQNum_RFQLine_DrawingSeq(Company:string, RFQNum:string, RFQLine:string, DrawingSeq:string, requestBody:Erp_Tablesets_RFQItemAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1905,7 +2267,14 @@ export function patch_RFQItemAttches_Company_RFQNum_RFQLine_DrawingSeq(Company:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1923,7 +2292,7 @@ export function patch_RFQItemAttches_Company_RFQNum_RFQLine_DrawingSeq(Company:s
       @param RFQNum Desc: RFQNum   Required: True
       @param RFQLine Desc: RFQLine   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1942,7 +2311,14 @@ export function delete_RFQItemAttches_Company_RFQNum_RFQLine_DrawingSeq(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1962,10 +2338,10 @@ export function delete_RFQItemAttches_Company_RFQNum_RFQLine_DrawingSeq(Company:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQHeadAttchRow
    */  
 export function get_RFQHeadAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1980,7 +2356,14 @@ export function get_RFQHeadAttches(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQHeadAttchRow)
           })
@@ -1994,15 +2377,15 @@ export function get_RFQHeadAttches(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RFQHeadAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQHeadAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RFQHeadAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RFQHeadAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RFQHeadAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RFQHeadAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_RFQHeadAttches(requestBody:Erp_Tablesets_RFQHeadAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2016,7 +2399,14 @@ export function post_RFQHeadAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2035,10 +2425,10 @@ export function post_RFQHeadAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RFQHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RFQHeadAttchRow
    */  
 export function get_RFQHeadAttches_Company_RFQNum_DrawingSeq(Company:string, RFQNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2053,7 +2443,14 @@ export function get_RFQHeadAttches_Company_RFQNum_DrawingSeq(Company:string, RFQ
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RFQHeadAttchRow)
           })
@@ -2070,15 +2467,15 @@ export function get_RFQHeadAttches_Company_RFQNum_DrawingSeq(Company:string, RFQ
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RFQNum Desc: RFQNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQHeadAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RFQHeadAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RFQHeadAttches_Company_RFQNum_DrawingSeq(Company:string, RFQNum:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RFQHeadAttches_Company_RFQNum_DrawingSeq(Company:string, RFQNum:string, DrawingSeq:string, requestBody:Erp_Tablesets_RFQHeadAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2092,7 +2489,14 @@ export function patch_RFQHeadAttches_Company_RFQNum_DrawingSeq(Company:string, R
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2109,7 +2513,7 @@ export function patch_RFQHeadAttches_Company_RFQNum_DrawingSeq(Company:string, R
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RFQNum Desc: RFQNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2128,7 +2532,14 @@ export function delete_RFQHeadAttches_Company_RFQNum_DrawingSeq(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2148,10 +2559,10 @@ export function delete_RFQHeadAttches_Company_RFQNum_DrawingSeq(Company:string, 
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQHeadListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RFQHeadListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2166,7 +2577,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQHeadListRow)
           })
@@ -2178,6 +2596,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -2196,7 +2631,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -2301,15 +2736,22 @@ export function get_GetRows(whereClauseRFQHead:string, whereClauseRFQHeadAttch:s
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2322,7 +2764,7 @@ export function get_GetRows(whereClauseRFQHead:string, whereClauseRFQHeadAttch:s
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -2346,15 +2788,22 @@ export function get_GetByID(rfQNum:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2369,7 +2818,7 @@ export function get_GetByID(rfQNum:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -2411,15 +2860,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2431,30 +2887,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method AddRFQItemFromJob
    Description: This method adds RFQItem from Job
    OperationID: AddRFQItemFromJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddRFQItemFromJob_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddRFQItemFromJob_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddRFQItemFromJob_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddRFQItemFromJob(requestBody:any, epicorHeaders?:Headers){
+export function post_AddRFQItemFromJob(requestBody:AddRFQItemFromJob_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddRFQItemFromJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/AddRFQItemFromJob", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddRFQItemFromJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -2466,30 +2929,37 @@ export function post_AddRFQItemFromJob(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AddRFQItemFromMiscReq
    Description: This method adds RFQItem from RFQSugg created from non-job requisitions
    OperationID: AddRFQItemFromMiscReq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddRFQItemFromMiscReq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddRFQItemFromMiscReq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddRFQItemFromMiscReq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddRFQItemFromMiscReq(requestBody:any, epicorHeaders?:Headers){
+export function post_AddRFQItemFromMiscReq(requestBody:AddRFQItemFromMiscReq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddRFQItemFromMiscReq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/AddRFQItemFromMiscReq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddRFQItemFromMiscReq_output)
           })
       .catch((error) => {
           reject(error)
@@ -2501,30 +2971,37 @@ export function post_AddRFQItemFromMiscReq(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method AddRFQItemFromQuote
    Description: This method adds RFQItem from Qoute
    OperationID: AddRFQItemFromQuote
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddRFQItemFromQuote_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddRFQItemFromQuote_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddRFQItemFromQuote_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddRFQItemFromQuote(requestBody:any, epicorHeaders?:Headers){
+export function post_AddRFQItemFromQuote(requestBody:AddRFQItemFromQuote_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddRFQItemFromQuote_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/AddRFQItemFromQuote", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddRFQItemFromQuote_output)
           })
       .catch((error) => {
           reject(error)
@@ -2536,30 +3013,37 @@ export function post_AddRFQItemFromQuote(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method AddRFQItemJob
    Description: This method adds RFQItem with SugNumList
    OperationID: AddRFQItemJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddRFQItemJob_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddRFQItemJob_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddRFQItemJob_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddRFQItemJob(requestBody:any, epicorHeaders?:Headers){
+export function post_AddRFQItemJob(requestBody:AddRFQItemJob_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddRFQItemJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/AddRFQItemJob", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddRFQItemJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -2571,30 +3055,37 @@ export function post_AddRFQItemJob(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AddRFQItemMiscReq
    Description: This method adds RFQItem with SugNumList from non-job related requisitions
    OperationID: AddRFQItemMiscReq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddRFQItemMiscReq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddRFQItemMiscReq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddRFQItemMiscReq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddRFQItemMiscReq(requestBody:any, epicorHeaders?:Headers){
+export function post_AddRFQItemMiscReq(requestBody:AddRFQItemMiscReq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddRFQItemMiscReq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/AddRFQItemMiscReq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddRFQItemMiscReq_output)
           })
       .catch((error) => {
           reject(error)
@@ -2606,30 +3097,37 @@ export function post_AddRFQItemMiscReq(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AddRFQItemQuote
    Description: This method adds RFQItem with SugNumList from Qoute
    OperationID: AddRFQItemQuote
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddRFQItemQuote_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddRFQItemQuote_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddRFQItemQuote_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddRFQItemQuote(requestBody:any, epicorHeaders?:Headers){
+export function post_AddRFQItemQuote(requestBody:AddRFQItemQuote_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddRFQItemQuote_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/AddRFQItemQuote", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddRFQItemQuote_output)
           })
       .catch((error) => {
           reject(error)
@@ -2641,30 +3139,37 @@ export function post_AddRFQItemQuote(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AddSupplierFromSearch
    Description: Call this method when UI uses Add (search).
    OperationID: AddSupplierFromSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddSupplierFromSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddSupplierFromSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddSupplierFromSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddSupplierFromSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_AddSupplierFromSearch(requestBody:AddSupplierFromSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddSupplierFromSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/AddSupplierFromSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddSupplierFromSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -2676,30 +3181,37 @@ export function post_AddSupplierFromSearch(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method CheckComplianceFail
    Description: Check for every vendor of the RFQ if it requires to be compliant.
    OperationID: CheckComplianceFail
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckComplianceFail_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckComplianceFail_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckComplianceFail_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckComplianceFail(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckComplianceFail(requestBody:CheckComplianceFail_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckComplianceFail_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/CheckComplianceFail", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckComplianceFail_output)
           })
       .catch((error) => {
           reject(error)
@@ -2711,30 +3223,37 @@ export function post_CheckComplianceFail(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method CreateNewRFQQty
    Description: Create RFQQty record. Please use this method instead of GetNewRFQQty.
    OperationID: CreateNewRFQQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateNewRFQQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateNewRFQQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateNewRFQQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateNewRFQQty(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateNewRFQQty(requestBody:CreateNewRFQQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateNewRFQQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/CreateNewRFQQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateNewRFQQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -2746,30 +3265,37 @@ export function post_CreateNewRFQQty(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DuplicateRFQ
    Description: Duplicates RFQ.
    OperationID: DuplicateRFQ
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DuplicateRFQ_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DuplicateRFQ_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DuplicateRFQ_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DuplicateRFQ(requestBody:any, epicorHeaders?:Headers){
+export function post_DuplicateRFQ(requestBody:DuplicateRFQ_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DuplicateRFQ_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/DuplicateRFQ", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DuplicateRFQ_output)
           })
       .catch((error) => {
           reject(error)
@@ -2781,30 +3307,37 @@ export function post_DuplicateRFQ(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AddVendorsFromSearch
    Description: Duplicates RFQ.
    OperationID: AddVendorsFromSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddVendorsFromSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddVendorsFromSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddVendorsFromSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddVendorsFromSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_AddVendorsFromSearch(requestBody:AddVendorsFromSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddVendorsFromSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/AddVendorsFromSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddVendorsFromSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -2815,7 +3348,7 @@ export function post_AddVendorsFromSearch(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method GetSourcingStatus
    OperationID: GetSourcingStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSourcingStatus_output
@@ -2828,15 +3361,22 @@ export function post_GetSourcingStatus(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSourcingStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetSourcingStatus", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSourcingStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -2848,30 +3388,37 @@ export function post_GetSourcingStatus(epicorHeaders?:Headers){
    Summary: Invoke method OnChangeofBuyerID
    Description: Call this method when the value of BuyerID changes.
    OperationID: OnChangeofBuyerID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeofBuyerID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeofBuyerID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeofBuyerID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeofBuyerID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeofBuyerID(requestBody:OnChangeofBuyerID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeofBuyerID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/OnChangeofBuyerID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeofBuyerID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2883,30 +3430,37 @@ export function post_OnChangeofBuyerID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangePartNum
    Description: Call this method when the value of PartNum changes.
    OperationID: OnChangePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartNum(requestBody:OnChangePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/OnChangePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -2918,30 +3472,37 @@ export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangingRevisionNum
    Description: Call this method when the Revision changes to maintain inventory tracking
    OperationID: OnChangingRevisionNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingRevisionNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingRevisionNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingRevisionNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingRevisionNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingRevisionNum(requestBody:OnChangingRevisionNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingRevisionNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/OnChangingRevisionNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingRevisionNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -2953,30 +3514,37 @@ export function post_OnChangingRevisionNum(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method OnChangePurPoint
    Description: Call this method when the value of PurPoint changes.
    OperationID: OnChangePurPoint
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePurPoint_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePurPoint_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePurPoint_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePurPoint(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePurPoint(requestBody:OnChangePurPoint_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePurPoint_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/OnChangePurPoint", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePurPoint_output)
           })
       .catch((error) => {
           reject(error)
@@ -2988,30 +3556,37 @@ export function post_OnChangePurPoint(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeRFQItemPUM
    Description: Call this method when the value of RFQItem.PUM changes.
    OperationID: OnChangeRFQItemPUM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeRFQItemPUM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeRFQItemPUM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeRFQItemPUM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeRFQItemPUM(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeRFQItemPUM(requestBody:OnChangeRFQItemPUM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeRFQItemPUM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/OnChangeRFQItemPUM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeRFQItemPUM_output)
           })
       .catch((error) => {
           reject(error)
@@ -3023,30 +3598,37 @@ export function post_OnChangeRFQItemPUM(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeVendorID
    Description: Call this method when the value of VendorID changes.
    OperationID: OnChangeVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeVendorID(requestBody:OnChangeVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/OnChangeVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3058,30 +3640,37 @@ export function post_OnChangeVendorID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OpenRFQ
    Description: Close/Open the RFQ.
    OperationID: OpenRFQ
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OpenRFQ_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OpenRFQ_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OpenRFQ_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OpenRFQ(requestBody:any, epicorHeaders?:Headers){
+export function post_OpenRFQ(requestBody:OpenRFQ_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OpenRFQ_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/OpenRFQ", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OpenRFQ_output)
           })
       .catch((error) => {
           reject(error)
@@ -3093,30 +3682,37 @@ export function post_OpenRFQ(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ReOpenRFQLine
    Description: Reopens the RFQ line.
    OperationID: ReOpenRFQLine
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ReOpenRFQLine_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ReOpenRFQLine_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ReOpenRFQLine_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ReOpenRFQLine(requestBody:any, epicorHeaders?:Headers){
+export function post_ReOpenRFQLine(requestBody:ReOpenRFQLine_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ReOpenRFQLine_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/ReOpenRFQLine", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ReOpenRFQLine_output)
           })
       .catch((error) => {
           reject(error)
@@ -3129,30 +3725,37 @@ export function post_ReOpenRFQLine(requestBody:any, epicorHeaders?:Headers){
    Description: This procedures generates a list of potential Vendors for
 the RFQItem.PartNum.
    OperationID: VendorWizard
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VendorWizard_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VendorWizard_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VendorWizard_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VendorWizard(requestBody:any, epicorHeaders?:Headers){
+export function post_VendorWizard(requestBody:VendorWizard_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VendorWizard_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/VendorWizard", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VendorWizard_output)
           })
       .catch((error) => {
           reject(error)
@@ -3164,30 +3767,37 @@ export function post_VendorWizard(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateSelectedVendAttributes
    Description: This procedures called from Kinetic to validate Selected Vendor Attributes
    OperationID: ValidateSelectedVendAttributes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSelectedVendAttributes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSelectedVendAttributes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSelectedVendAttributes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSelectedVendAttributes(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSelectedVendAttributes(requestBody:ValidateSelectedVendAttributes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSelectedVendAttributes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/ValidateSelectedVendAttributes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSelectedVendAttributes_output)
           })
       .catch((error) => {
           reject(error)
@@ -3200,30 +3810,37 @@ export function post_ValidateSelectedVendAttributes(requestBody:any, epicorHeade
    Description: Method specific to ECC.
 This is used as a final process using the XML that was sent from the Web.
    OperationID: ECCUpdateFinal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ECCUpdateFinal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ECCUpdateFinal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ECCUpdateFinal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ECCUpdateFinal(requestBody:any, epicorHeaders?:Headers){
+export function post_ECCUpdateFinal(requestBody:ECCUpdateFinal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ECCUpdateFinal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/ECCUpdateFinal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ECCUpdateFinal_output)
           })
       .catch((error) => {
           reject(error)
@@ -3235,30 +3852,37 @@ export function post_ECCUpdateFinal(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewRFQHead
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRFQHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRFQHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRFQHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRFQHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRFQHead(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRFQHead(requestBody:GetNewRFQHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRFQHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetNewRFQHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRFQHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -3270,30 +3894,37 @@ export function post_GetNewRFQHead(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewRFQHeadAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRFQHeadAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRFQHeadAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRFQHeadAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRFQHeadAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRFQHeadAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRFQHeadAttch(requestBody:GetNewRFQHeadAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRFQHeadAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetNewRFQHeadAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRFQHeadAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -3305,30 +3936,37 @@ export function post_GetNewRFQHeadAttch(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewRFQItem
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRFQItem
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRFQItem_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRFQItem_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRFQItem_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRFQItem(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRFQItem(requestBody:GetNewRFQItem_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRFQItem_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetNewRFQItem", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRFQItem_output)
           })
       .catch((error) => {
           reject(error)
@@ -3340,30 +3978,37 @@ export function post_GetNewRFQItem(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewRFQItemAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRFQItemAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRFQItemAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRFQItemAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRFQItemAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRFQItemAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRFQItemAttch(requestBody:GetNewRFQItemAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRFQItemAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetNewRFQItemAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRFQItemAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -3375,30 +4020,37 @@ export function post_GetNewRFQItemAttch(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewRFQPart
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRFQPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRFQPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRFQPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRFQPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRFQPart(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRFQPart(requestBody:GetNewRFQPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRFQPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetNewRFQPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRFQPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -3410,30 +4062,37 @@ export function post_GetNewRFQPart(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewRFQQty
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRFQQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRFQQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRFQQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRFQQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRFQQty(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRFQQty(requestBody:GetNewRFQQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRFQQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetNewRFQQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRFQQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -3445,30 +4104,37 @@ export function post_GetNewRFQQty(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewRFQSourcing
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRFQSourcing
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRFQSourcing_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRFQSourcing_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRFQSourcing_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRFQSourcing(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRFQSourcing(requestBody:GetNewRFQSourcing_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRFQSourcing_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetNewRFQSourcing", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRFQSourcing_output)
           })
       .catch((error) => {
           reject(error)
@@ -3480,30 +4146,37 @@ export function post_GetNewRFQSourcing(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewRFQVend
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRFQVend
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRFQVend_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRFQVend_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRFQVend_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRFQVend(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRFQVend(requestBody:GetNewRFQVend_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRFQVend_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetNewRFQVend", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRFQVend_output)
           })
       .catch((error) => {
           reject(error)
@@ -3515,30 +4188,37 @@ export function post_GetNewRFQVend(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3550,7 +4230,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -3574,15 +4254,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3594,7 +4281,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -3618,15 +4305,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -3638,30 +4332,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -3673,30 +4374,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQEntrySvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -3707,51 +4415,68 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQHeadAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RFQHeadAttchRow[],
+   "value":Erp_Tablesets_RFQHeadAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQHeadListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RFQHeadListRow[],
+   "value":Erp_Tablesets_RFQHeadListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQHeadRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RFQHeadRow[],
+   "value":Erp_Tablesets_RFQHeadRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQItemAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RFQItemAttchRow[],
+   "value":Erp_Tablesets_RFQItemAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQItemRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RFQItemRow[],
+   "value":Erp_Tablesets_RFQItemRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQPartRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RFQPartRow[],
+   "value":Erp_Tablesets_RFQPartRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQQtyRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RFQQtyRow[],
+   "value":Erp_Tablesets_RFQQtyRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQSourcingRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RFQSourcingRow[],
+   "value":Erp_Tablesets_RFQSourcingRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RFQVendRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RFQVendRow[],
+   "value":Erp_Tablesets_RFQVendRow,
 }
 
 export interface Erp_Tablesets_RFQHeadAttchRow{
@@ -4199,6 +4924,23 @@ Valid values are
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -4220,7 +4962,7 @@ export interface AddRFQItemFromJob_input{
 export interface AddRFQItemFromJob_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
    pcMessage:string,
 }
 }
@@ -4241,7 +4983,7 @@ export interface AddRFQItemFromMiscReq_input{
 export interface AddRFQItemFromMiscReq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -4264,7 +5006,7 @@ export interface AddRFQItemFromQuote_input{
 export interface AddRFQItemFromQuote_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
    pcMessage:string,
 }
 }
@@ -4285,7 +5027,7 @@ export interface AddRFQItemJob_input{
 export interface AddRFQItemJob_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
    pcMessage:string,
 }
 }
@@ -4306,7 +5048,7 @@ export interface AddRFQItemMiscReq_input{
 export interface AddRFQItemMiscReq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -4326,7 +5068,7 @@ export interface AddRFQItemQuote_input{
 export interface AddRFQItemQuote_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
    pcMessage:string,
 }
 }
@@ -4347,7 +5089,7 @@ export interface AddSupplierFromSearch_input{
 export interface AddSupplierFromSearch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -4373,7 +5115,7 @@ export interface AddVendorsFromSearch_input{
 export interface AddVendorsFromSearch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -4417,7 +5159,7 @@ export interface CreateNewRFQQty_input{
 export interface CreateNewRFQQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -4461,7 +5203,7 @@ export interface ECCUpdateFinal_input{
 export interface ECCUpdateFinal_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5002,7 +5744,7 @@ export interface GetNewRFQHeadAttch_input{
 export interface GetNewRFQHeadAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5016,7 +5758,7 @@ export interface GetNewRFQHead_input{
 export interface GetNewRFQHead_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5034,7 +5776,7 @@ export interface GetNewRFQItemAttch_input{
 export interface GetNewRFQItemAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5050,7 +5792,7 @@ export interface GetNewRFQItem_input{
 export interface GetNewRFQItem_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5070,7 +5812,7 @@ export interface GetNewRFQPart_input{
 export interface GetNewRFQPart_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5088,7 +5830,7 @@ export interface GetNewRFQQty_input{
 export interface GetNewRFQQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5106,7 +5848,7 @@ export interface GetNewRFQSourcing_input{
 export interface GetNewRFQSourcing_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5126,7 +5868,7 @@ export interface GetNewRFQVend_input{
 export interface GetNewRFQVend_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5219,7 +5961,7 @@ export interface OnChangePartNum_input{
 export interface OnChangePartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5239,7 +5981,7 @@ export interface OnChangePurPoint_input{
 export interface OnChangePurPoint_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5256,7 +5998,7 @@ export interface OnChangeRFQItemPUM_input{
 export interface OnChangeRFQItemPUM_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5273,7 +6015,7 @@ export interface OnChangeVendorID_input{
 export interface OnChangeVendorID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5294,7 +6036,7 @@ export interface OnChangeofBuyerID_output{
 parameters : {
       /**  output parameters  */  
    rtnMessage:string,
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5310,7 +6052,7 @@ export interface OnChangingRevisionNum_input{
 export interface OnChangingRevisionNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5345,7 +6087,7 @@ export interface ReOpenRFQLine_input{
 export interface ReOpenRFQLine_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5364,7 +6106,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtRFQEntryTableset[],
+   ds:Erp_Tablesets_UpdExtRFQEntryTableset,
    errorsOccurred:boolean,
 }
 }
@@ -5379,7 +6121,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
 }
 }
 
@@ -5432,7 +6174,7 @@ export interface VendorWizard_input{
 export interface VendorWizard_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQEntryTableset[],
+   ds:Erp_Tablesets_RFQEntryTableset,
    pcMessage:string,
 }
 }

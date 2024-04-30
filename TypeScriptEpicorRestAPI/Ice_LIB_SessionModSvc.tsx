@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.LIB.SessionModSvc
 // Description: Modifies session state
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,36 +111,60 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
    /**  
    Summary: Invoke method GetLicense
    OperationID: GetLicense
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLicense_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLicense_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLicense_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLicense(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLicense(requestBody:GetLicense_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLicense_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetLicense", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLicense_output)
           })
       .catch((error) => {
           reject(error)
@@ -118,7 +175,7 @@ export function post_GetLicense(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetModuleAccess
    OperationID: GetModuleAccess
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetModuleAccess_output
@@ -131,15 +188,22 @@ export function post_GetModuleAccess(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetModuleAccess_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetModuleAccess", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetModuleAccess_output)
           })
       .catch((error) => {
           reject(error)
@@ -151,7 +215,7 @@ export function post_GetModuleAccess(epicorHeaders?:Headers){
    Summary: Invoke method GetLicensedModuleAccess
    Description: Returns all the modules for the current company with flag for licensed.
    OperationID: GetLicensedModuleAccess
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLicensedModuleAccess_output
@@ -164,15 +228,22 @@ export function post_GetLicensedModuleAccess(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLicensedModuleAccess_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetLicensedModuleAccess", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLicensedModuleAccess_output)
           })
       .catch((error) => {
           reject(error)
@@ -184,30 +255,37 @@ export function post_GetLicensedModuleAccess(epicorHeaders?:Headers){
    Summary: Invoke method SetCompany
    Description: Set the session's current company.
    OperationID: SetCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_SetCompany(requestBody:SetCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/SetCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -219,30 +297,37 @@ export function post_SetCompany(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetDateFormat
    Description: Set the date format for the session
    OperationID: SetDateFormat
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetDateFormat_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetDateFormat_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetDateFormat_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetDateFormat(requestBody:any, epicorHeaders?:Headers){
+export function post_SetDateFormat(requestBody:SetDateFormat_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetDateFormat_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/SetDateFormat", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetDateFormat_output)
           })
       .catch((error) => {
           reject(error)
@@ -254,30 +339,37 @@ export function post_SetDateFormat(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetEmployee
    Description: Set the current employee ID for the session
    OperationID: SetEmployee
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetEmployee_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetEmployee_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetEmployee_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetEmployee(requestBody:any, epicorHeaders?:Headers){
+export function post_SetEmployee(requestBody:SetEmployee_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetEmployee_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/SetEmployee", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetEmployee_output)
           })
       .catch((error) => {
           reject(error)
@@ -288,30 +380,37 @@ export function post_SetEmployee(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SetLanguage
    OperationID: SetLanguage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetLanguage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetLanguage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetLanguage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetLanguage(requestBody:any, epicorHeaders?:Headers){
+export function post_SetLanguage(requestBody:SetLanguage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetLanguage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/SetLanguage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetLanguage_output)
           })
       .catch((error) => {
           reject(error)
@@ -323,30 +422,37 @@ export function post_SetLanguage(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetPlant
    Description: Set the session's current site.
    OperationID: SetPlant
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetPlant_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetPlant_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetPlant_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetPlant(requestBody:any, epicorHeaders?:Headers){
+export function post_SetPlant(requestBody:SetPlant_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetPlant_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/SetPlant", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetPlant_output)
           })
       .catch((error) => {
           reject(error)
@@ -358,30 +464,37 @@ export function post_SetPlant(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetUser
    Description: Sets the user.
    OperationID: SetUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetUser(requestBody:any, epicorHeaders?:Headers){
+export function post_SetUser(requestBody:SetUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/SetUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -393,30 +506,37 @@ export function post_SetUser(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetWorkstation
    Description: Set the current workstation ID for the session
    OperationID: SetWorkstation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetWorkstation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetWorkstation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetWorkstation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetWorkstation(requestBody:any, epicorHeaders?:Headers){
+export function post_SetWorkstation(requestBody:SetWorkstation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetWorkstation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/SetWorkstation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetWorkstation_output)
           })
       .catch((error) => {
           reject(error)
@@ -428,30 +548,37 @@ export function post_SetWorkstation(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetTaskClientID
    Description: Set the TaskClientID for the current session
    OperationID: SetTaskClientID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetTaskClientID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetTaskClientID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetTaskClientID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetTaskClientID(requestBody:any, epicorHeaders?:Headers){
+export function post_SetTaskClientID(requestBody:SetTaskClientID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetTaskClientID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/SetTaskClientID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetTaskClientID_output)
           })
       .catch((error) => {
           reject(error)
@@ -463,30 +590,37 @@ export function post_SetTaskClientID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Handshake
    Description: Validate the client version against server version.
    OperationID: Handshake
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Handshake_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Handshake_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Handshake_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Handshake(requestBody:any, epicorHeaders?:Headers){
+export function post_Handshake(requestBody:Handshake_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Handshake_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/Handshake", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Handshake_output)
           })
       .catch((error) => {
           reject(error)
@@ -498,7 +632,7 @@ export function post_Handshake(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AssertConversionsPending
    Description: Checks if the current logged in user has any pending conversions.
    OperationID: AssertConversionsPending
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/AssertConversionsPending_output
@@ -511,15 +645,22 @@ export function post_AssertConversionsPending(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AssertConversionsPending_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/AssertConversionsPending", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AssertConversionsPending_output)
           })
       .catch((error) => {
           reject(error)
@@ -531,7 +672,7 @@ export function post_AssertConversionsPending(epicorHeaders?:Headers){
    Summary: Invoke method UpdateSeedData
    Description: call to update seed data for patches
    OperationID: UpdateSeedData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateSeedData_output
@@ -544,15 +685,22 @@ export function post_UpdateSeedData(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateSeedData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/UpdateSeedData", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateSeedData_output)
           })
       .catch((error) => {
           reject(error)
@@ -564,30 +712,37 @@ export function post_UpdateSeedData(epicorHeaders?:Headers){
    Summary: Invoke method HandshakeBaseVersion
    Description: Validate the base FW client version against base FW server version
    OperationID: HandshakeBaseVersion
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/HandshakeBaseVersion_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/HandshakeBaseVersion_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/HandshakeBaseVersion_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_HandshakeBaseVersion(requestBody:any, epicorHeaders?:Headers){
+export function post_HandshakeBaseVersion(requestBody:HandshakeBaseVersion_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<HandshakeBaseVersion_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/HandshakeBaseVersion", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as HandshakeBaseVersion_output)
           })
       .catch((error) => {
           reject(error)
@@ -599,30 +754,37 @@ export function post_HandshakeBaseVersion(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method Sync
    Description: Synchronize the client and server copies of the session state
    OperationID: Sync
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Sync_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Sync_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Sync_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Sync(requestBody:any, epicorHeaders?:Headers){
+export function post_Sync(requestBody:Sync_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Sync_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/Sync", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Sync_output)
           })
       .catch((error) => {
           reject(error)
@@ -634,7 +796,7 @@ export function post_Sync(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Login
    Description: Creates a Session on the server for the validated user that is maintained until Logout is called.
    OperationID: Login
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/Login_output
@@ -647,15 +809,22 @@ export function post_Login(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Login_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/Login", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Login_output)
           })
       .catch((error) => {
           reject(error)
@@ -667,7 +836,7 @@ export function post_Login(epicorHeaders?:Headers){
    Summary: Invoke method Logout
    Description: Stops caching this Session.
    OperationID: Logout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/Logout_output
@@ -680,15 +849,22 @@ export function post_Logout(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Logout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/Logout", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Logout_output)
           })
       .catch((error) => {
           reject(error)
@@ -699,7 +875,7 @@ export function post_Logout(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetLanguage
    OperationID: GetLanguage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLanguage_output
@@ -712,15 +888,22 @@ export function post_GetLanguage(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLanguage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetLanguage", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLanguage_output)
           })
       .catch((error) => {
           reject(error)
@@ -731,7 +914,7 @@ export function post_GetLanguage(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method InMobileConnect
    OperationID: InMobileConnect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/InMobileConnect_output
@@ -744,15 +927,22 @@ export function post_InMobileConnect(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InMobileConnect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/InMobileConnect", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InMobileConnect_output)
           })
       .catch((error) => {
           reject(error)
@@ -764,30 +954,37 @@ export function post_InMobileConnect(epicorHeaders?:Headers){
    Summary: Invoke method IsValidSession
    Description: Checks whether a given session ID/user ID combination is valid
    OperationID: IsValidSession
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsValidSession_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsValidSession_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsValidSession_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsValidSession(requestBody:any, epicorHeaders?:Headers){
+export function post_IsValidSession(requestBody:IsValidSession_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsValidSession_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/IsValidSession", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsValidSession_output)
           })
       .catch((error) => {
           reject(error)
@@ -798,7 +995,7 @@ export function post_IsValidSession(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetSessionInfoForEdgeAgentUser
    OperationID: GetSessionInfoForEdgeAgentUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSessionInfoForEdgeAgentUser_output
@@ -811,15 +1008,22 @@ export function post_GetSessionInfoForEdgeAgentUser(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSessionInfoForEdgeAgentUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetSessionInfoForEdgeAgentUser", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSessionInfoForEdgeAgentUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -831,7 +1035,7 @@ export function post_GetSessionInfoForEdgeAgentUser(epicorHeaders?:Headers){
    Summary: Invoke method GetCustomVersion
    Description: Returns the custom version string defined by a third-party
    OperationID: GetCustomVersion
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCustomVersion_output
@@ -844,15 +1048,22 @@ export function post_GetCustomVersion(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCustomVersion_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetCustomVersion", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCustomVersion_output)
           })
       .catch((error) => {
           reject(error)
@@ -864,7 +1075,7 @@ export function post_GetCustomVersion(epicorHeaders?:Headers){
    Summary: Invoke method GetPatchLevel
    Description: Returns the Server FW patch level
    OperationID: GetPatchLevel
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPatchLevel_output
@@ -877,15 +1088,22 @@ export function post_GetPatchLevel(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPatchLevel_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetPatchLevel", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPatchLevel_output)
           })
       .catch((error) => {
           reject(error)
@@ -897,7 +1115,7 @@ export function post_GetPatchLevel(epicorHeaders?:Headers){
    Summary: Invoke method GetPatchLevelApp
    Description: Returns the Sever App patch level
    OperationID: GetPatchLevelApp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPatchLevelApp_output
@@ -910,15 +1128,22 @@ export function post_GetPatchLevelApp(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPatchLevelApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetPatchLevelApp", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPatchLevelApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -930,7 +1155,7 @@ export function post_GetPatchLevelApp(epicorHeaders?:Headers){
    Summary: Invoke method GetRequiredDBVersionApp
    Description: Returns the Sever App Required DB level
    OperationID: GetRequiredDBVersionApp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRequiredDBVersionApp_output
@@ -943,15 +1168,22 @@ export function post_GetRequiredDBVersionApp(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRequiredDBVersionApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetRequiredDBVersionApp", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRequiredDBVersionApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -963,7 +1195,7 @@ export function post_GetRequiredDBVersionApp(epicorHeaders?:Headers){
    Summary: Invoke method GetSystemCodeApp
    Description: Returns the Sever Application system code
    OperationID: GetSystemCodeApp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSystemCodeApp_output
@@ -976,15 +1208,22 @@ export function post_GetSystemCodeApp(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSystemCodeApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetSystemCodeApp", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSystemCodeApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -996,7 +1235,7 @@ export function post_GetSystemCodeApp(epicorHeaders?:Headers){
    Summary: Invoke method GetBaseLevel
    Description: Returns the FW Base Level
    OperationID: GetBaseLevel
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBaseLevel_output
@@ -1009,15 +1248,22 @@ export function post_GetBaseLevel(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBaseLevel_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetBaseLevel", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBaseLevel_output)
           })
       .catch((error) => {
           reject(error)
@@ -1029,7 +1275,7 @@ export function post_GetBaseLevel(epicorHeaders?:Headers){
    Summary: Invoke method GetBaseLevelApp
    Description: Returns the FW Base Level
    OperationID: GetBaseLevelApp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBaseLevelApp_output
@@ -1042,15 +1288,22 @@ export function post_GetBaseLevelApp(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBaseLevelApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetBaseLevelApp", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBaseLevelApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1062,7 +1315,7 @@ export function post_GetBaseLevelApp(epicorHeaders?:Headers){
    Summary: Invoke method DedicatedTenancy
    Description: Returns the DedicatedTenancy value
    OperationID: DedicatedTenancy
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/DedicatedTenancy_output
@@ -1075,15 +1328,22 @@ export function post_DedicatedTenancy(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DedicatedTenancy_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/DedicatedTenancy", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DedicatedTenancy_output)
           })
       .catch((error) => {
           reject(error)
@@ -1094,7 +1354,7 @@ export function post_DedicatedTenancy(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetCurrentValues
    OperationID: GetCurrentValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCurrentValues_output
@@ -1107,15 +1367,22 @@ export function post_GetCurrentValues(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCurrentValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetCurrentValues", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCurrentValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -1126,7 +1393,7 @@ export function post_GetCurrentValues(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetCurrentValuesFromServer
    OperationID: GetCurrentValuesFromServer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCurrentValuesFromServer_output
@@ -1139,15 +1406,22 @@ export function post_GetCurrentValuesFromServer(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCurrentValuesFromServer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetCurrentValuesFromServer", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCurrentValuesFromServer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1159,7 +1433,7 @@ export function post_GetCurrentValuesFromServer(epicorHeaders?:Headers){
    Summary: Invoke method GetSynergyUrl
    Description: Get the Synergy URL if one is setup within the system.
    OperationID: GetSynergyUrl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSynergyUrl_output
@@ -1172,15 +1446,22 @@ export function post_GetSynergyUrl(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSynergyUrl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetSynergyUrl", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSynergyUrl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1192,7 +1473,7 @@ export function post_GetSynergyUrl(epicorHeaders?:Headers){
    Summary: Invoke method GetTelemetrySettings
    Description: Get the telemetry settings to filter events in the client.
    OperationID: GetTelemetrySettings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTelemetrySettings_output
@@ -1205,15 +1486,22 @@ export function post_GetTelemetrySettings(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTelemetrySettings_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.SessionModSvc/GetTelemetrySettings", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTelemetrySettings_output)
           })
       .catch((error) => {
           reject(error)
@@ -1224,11 +1512,45 @@ export function post_GetTelemetrySettings(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

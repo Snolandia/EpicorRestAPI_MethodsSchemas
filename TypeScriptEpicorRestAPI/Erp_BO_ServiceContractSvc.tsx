@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.ServiceContractSvc
 // Description: Service Contract Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContHdRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContHdRow
    */  
 export function get_ServiceContracts(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_ServiceContracts(select?:string, expand?:string, filter?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContHdRow)
           })
@@ -118,15 +158,15 @@ export function get_ServiceContracts(select?:string, expand?:string, filter?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ServiceContracts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSContHdRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSContHdRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FSContHdRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FSContHdRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ServiceContracts(requestBody:any, epicorHeaders?:Headers){
+export function post_ServiceContracts(requestBody:Erp_Tablesets_FSContHdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_ServiceContracts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_ServiceContracts(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSContHdRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSContHdRow
    */  
 export function get_ServiceContracts_Company_ContractNum(Company:string, ContractNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_ServiceContracts_Company_ContractNum(Company:string, Contrac
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSContHdRow)
           })
@@ -193,15 +247,15 @@ export function get_ServiceContracts_Company_ContractNum(Company:string, Contrac
    OperationID: UpdateExt_ServiceContract
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractNum Desc: ContractNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSContHdRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSContHdRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ServiceContracts_Company_ContractNum(Company:string, ContractNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ServiceContracts_Company_ContractNum(Company:string, ContractNum:string, requestBody:Erp_Tablesets_FSContHdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_ServiceContracts_Company_ContractNum(Company:string, Contr
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_ServiceContracts_Company_ContractNum(Company:string, Contr
    OperationID: DeleteUpdateExt_ServiceContract
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractNum Desc: ContractNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_ServiceContracts_Company_ContractNum(Company:string, Cont
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_ServiceContracts_Company_ContractNum(Company:string, Cont
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContDtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContDtRow
    */  
 export function get_ServiceContracts_Company_ContractNum_FSContDts(Company:string, ContractNum:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_ServiceContracts_Company_ContractNum_FSContDts(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContDtRow)
           })
@@ -311,10 +386,10 @@ export function get_ServiceContracts_Company_ContractNum_FSContDts(Company:strin
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSContDtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSContDtRow
    */  
 export function get_ServiceContracts_Company_ContractNum_FSContDts_Company_ContractNum_ContractLine(Company:string, ContractNum:string, ContractLine:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_ServiceContracts_Company_ContractNum_FSContDts_Company_Contr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSContDtRow)
           })
@@ -352,10 +434,10 @@ export function get_ServiceContracts_Company_ContractNum_FSContDts_Company_Contr
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalRow
    */  
 export function get_ServiceContracts_Company_ContractNum_FSRenewals(Company:string, ContractNum:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -370,7 +452,14 @@ export function get_ServiceContracts_Company_ContractNum_FSRenewals(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSRenewalRow)
           })
@@ -390,10 +479,10 @@ export function get_ServiceContracts_Company_ContractNum_FSRenewals(Company:stri
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSRenewalRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSRenewalRow
    */  
 export function get_ServiceContracts_Company_ContractNum_FSRenewals_Company_ContractNum_RenewalNbr(Company:string, ContractNum:string, RenewalNbr:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -408,7 +497,14 @@ export function get_ServiceContracts_Company_ContractNum_FSRenewals_Company_Cont
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSRenewalRow)
           })
@@ -430,10 +526,10 @@ export function get_ServiceContracts_Company_ContractNum_FSRenewals_Company_Cont
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContLabExpRateRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContLabExpRateRow
    */  
 export function get_ServiceContracts_Company_ContractNum_FSContLabExpRates(Company:string, ContractNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -448,7 +544,14 @@ export function get_ServiceContracts_Company_ContractNum_FSContLabExpRates(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContLabExpRateRow)
           })
@@ -467,10 +570,10 @@ export function get_ServiceContracts_Company_ContractNum_FSContLabExpRates(Compa
       @param ExpenseCode Desc: ExpenseCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSContLabExpRateRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSContLabExpRateRow
    */  
 export function get_ServiceContracts_Company_ContractNum_FSContLabExpRates_Company_ContractNum_ExpenseCode(Company:string, ContractNum:string, ExpenseCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -485,7 +588,14 @@ export function get_ServiceContracts_Company_ContractNum_FSContLabExpRates_Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSContLabExpRateRow)
           })
@@ -506,10 +616,10 @@ export function get_ServiceContracts_Company_ContractNum_FSContLabExpRates_Compa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContDtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContDtRow
    */  
 export function get_FSContDts(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -524,7 +634,14 @@ export function get_FSContDts(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContDtRow)
           })
@@ -538,15 +655,15 @@ export function get_FSContDts(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FSContDts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSContDtRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSContDtRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FSContDtRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FSContDtRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FSContDts(requestBody:any, epicorHeaders?:Headers){
+export function post_FSContDts(requestBody:Erp_Tablesets_FSContDtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -560,7 +677,14 @@ export function post_FSContDts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -580,10 +704,10 @@ export function post_FSContDts(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSContDtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSContDtRow
    */  
 export function get_FSContDts_Company_ContractNum_ContractLine(Company:string, ContractNum:string, ContractLine:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -598,7 +722,14 @@ export function get_FSContDts_Company_ContractNum_ContractLine(Company:string, C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSContDtRow)
           })
@@ -615,15 +746,15 @@ export function get_FSContDts_Company_ContractNum_ContractLine(Company:string, C
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractNum Desc: ContractNum   Required: True
       @param ContractLine Desc: ContractLine   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSContDtRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSContDtRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FSContDts_Company_ContractNum_ContractLine(Company:string, ContractNum:string, ContractLine:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FSContDts_Company_ContractNum_ContractLine(Company:string, ContractNum:string, ContractLine:string, requestBody:Erp_Tablesets_FSContDtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -637,7 +768,14 @@ export function patch_FSContDts_Company_ContractNum_ContractLine(Company:string,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -654,7 +792,7 @@ export function patch_FSContDts_Company_ContractNum_ContractLine(Company:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractNum Desc: ContractNum   Required: True
       @param ContractLine Desc: ContractLine   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -673,7 +811,14 @@ export function delete_FSContDts_Company_ContractNum_ContractLine(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -696,10 +841,10 @@ export function delete_FSContDts_Company_ContractNum_ContractLine(Company:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContSNRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContSNRow
    */  
 export function get_FSContDts_Company_ContractNum_ContractLine_FSContSNs(Company:string, ContractNum:string, ContractLine:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -714,7 +859,14 @@ export function get_FSContDts_Company_ContractNum_ContractLine_FSContSNs(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContSNRow)
           })
@@ -735,10 +887,10 @@ export function get_FSContDts_Company_ContractNum_ContractLine_FSContSNs(Company
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSContSNRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSContSNRow
    */  
 export function get_FSContDts_Company_ContractNum_ContractLine_FSContSNs_Company_ContractNum_ContractLine_PartNum_SerialNumber(Company:string, ContractNum:string, ContractLine:string, PartNum:string, SerialNumber:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -753,7 +905,14 @@ export function get_FSContDts_Company_ContractNum_ContractLine_FSContSNs_Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSContSNRow)
           })
@@ -773,10 +932,10 @@ export function get_FSContDts_Company_ContractNum_ContractLine_FSContSNs_Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContSNRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContSNRow
    */  
 export function get_FSContSNs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -791,7 +950,14 @@ export function get_FSContSNs(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContSNRow)
           })
@@ -805,15 +971,15 @@ export function get_FSContSNs(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FSContSNs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSContSNRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSContSNRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FSContSNRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FSContSNRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FSContSNs(requestBody:any, epicorHeaders?:Headers){
+export function post_FSContSNs(requestBody:Erp_Tablesets_FSContSNRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -827,7 +993,14 @@ export function post_FSContSNs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -848,10 +1021,10 @@ export function post_FSContSNs(requestBody:any, epicorHeaders?:Headers){
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSContSNRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSContSNRow
    */  
 export function get_FSContSNs_Company_ContractNum_ContractLine_PartNum_SerialNumber(Company:string, ContractNum:string, ContractLine:string, PartNum:string, SerialNumber:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -866,7 +1039,14 @@ export function get_FSContSNs_Company_ContractNum_ContractLine_PartNum_SerialNum
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSContSNRow)
           })
@@ -885,15 +1065,15 @@ export function get_FSContSNs_Company_ContractNum_ContractLine_PartNum_SerialNum
       @param ContractLine Desc: ContractLine   Required: True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSContSNRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSContSNRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FSContSNs_Company_ContractNum_ContractLine_PartNum_SerialNumber(Company:string, ContractNum:string, ContractLine:string, PartNum:string, SerialNumber:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FSContSNs_Company_ContractNum_ContractLine_PartNum_SerialNumber(Company:string, ContractNum:string, ContractLine:string, PartNum:string, SerialNumber:string, requestBody:Erp_Tablesets_FSContSNRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -907,7 +1087,14 @@ export function patch_FSContSNs_Company_ContractNum_ContractLine_PartNum_SerialN
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -926,7 +1113,7 @@ export function patch_FSContSNs_Company_ContractNum_ContractLine_PartNum_SerialN
       @param ContractLine Desc: ContractLine   Required: True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -945,7 +1132,14 @@ export function delete_FSContSNs_Company_ContractNum_ContractLine_PartNum_Serial
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -966,10 +1160,10 @@ export function delete_FSContSNs_Company_ContractNum_ContractLine_PartNum_Serial
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalRow
    */  
 export function get_FSRenewals(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -984,7 +1178,14 @@ export function get_FSRenewals(select?:string, expand?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSRenewalRow)
           })
@@ -998,15 +1199,15 @@ export function get_FSRenewals(select?:string, expand?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FSRenewals
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSRenewalRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSRenewalRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FSRenewalRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FSRenewalRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FSRenewals(requestBody:any, epicorHeaders?:Headers){
+export function post_FSRenewals(requestBody:Erp_Tablesets_FSRenewalRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1020,7 +1221,14 @@ export function post_FSRenewals(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1040,10 +1248,10 @@ export function post_FSRenewals(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSRenewalRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSRenewalRow
    */  
 export function get_FSRenewals_Company_ContractNum_RenewalNbr(Company:string, ContractNum:string, RenewalNbr:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1058,7 +1266,14 @@ export function get_FSRenewals_Company_ContractNum_RenewalNbr(Company:string, Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSRenewalRow)
           })
@@ -1075,15 +1290,15 @@ export function get_FSRenewals_Company_ContractNum_RenewalNbr(Company:string, Co
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractNum Desc: ContractNum   Required: True
       @param RenewalNbr Desc: RenewalNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSRenewalRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSRenewalRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FSRenewals_Company_ContractNum_RenewalNbr(Company:string, ContractNum:string, RenewalNbr:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FSRenewals_Company_ContractNum_RenewalNbr(Company:string, ContractNum:string, RenewalNbr:string, requestBody:Erp_Tablesets_FSRenewalRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1097,7 +1312,14 @@ export function patch_FSRenewals_Company_ContractNum_RenewalNbr(Company:string, 
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1114,7 +1336,7 @@ export function patch_FSRenewals_Company_ContractNum_RenewalNbr(Company:string, 
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractNum Desc: ContractNum   Required: True
       @param RenewalNbr Desc: RenewalNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1133,7 +1355,14 @@ export function delete_FSRenewals_Company_ContractNum_RenewalNbr(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1157,10 +1386,10 @@ export function delete_FSRenewals_Company_ContractNum_RenewalNbr(Company:string,
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalDtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalDtRow
    */  
 export function get_FSRenewals_Company_ContractNum_RenewalNbr_FSRenewalDts(Company:string, ContractNum:string, RenewalNbr:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1175,7 +1404,14 @@ export function get_FSRenewals_Company_ContractNum_RenewalNbr_FSRenewalDts(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSRenewalDtRow)
           })
@@ -1196,10 +1432,10 @@ export function get_FSRenewals_Company_ContractNum_RenewalNbr_FSRenewalDts(Compa
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSRenewalDtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSRenewalDtRow
    */  
 export function get_FSRenewals_Company_ContractNum_RenewalNbr_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine(Company:string, ContractNum:string, RenewalNbr:string, RenewalLine:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1214,7 +1450,14 @@ export function get_FSRenewals_Company_ContractNum_RenewalNbr_FSRenewalDts_Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSRenewalDtRow)
           })
@@ -1235,10 +1478,10 @@ export function get_FSRenewals_Company_ContractNum_RenewalNbr_FSRenewalDts_Compa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalDtRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalDtRow
    */  
 export function get_FSRenewalDts(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1253,7 +1496,14 @@ export function get_FSRenewalDts(select?:string, expand?:string, filter?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSRenewalDtRow)
           })
@@ -1267,15 +1517,15 @@ export function get_FSRenewalDts(select?:string, expand?:string, filter?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FSRenewalDts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSRenewalDtRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSRenewalDtRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FSRenewalDtRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FSRenewalDtRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FSRenewalDts(requestBody:any, epicorHeaders?:Headers){
+export function post_FSRenewalDts(requestBody:Erp_Tablesets_FSRenewalDtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1289,7 +1539,14 @@ export function post_FSRenewalDts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1310,10 +1567,10 @@ export function post_FSRenewalDts(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSRenewalDtRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSRenewalDtRow
    */  
 export function get_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine(Company:string, ContractNum:string, RenewalNbr:string, RenewalLine:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1328,7 +1585,14 @@ export function get_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSRenewalDtRow)
           })
@@ -1346,15 +1610,15 @@ export function get_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine(Comp
       @param ContractNum Desc: ContractNum   Required: True
       @param RenewalNbr Desc: RenewalNbr   Required: True
       @param RenewalLine Desc: RenewalLine   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSRenewalDtRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSRenewalDtRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine(Company:string, ContractNum:string, RenewalNbr:string, RenewalLine:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine(Company:string, ContractNum:string, RenewalNbr:string, RenewalLine:string, requestBody:Erp_Tablesets_FSRenewalDtRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1368,7 +1632,14 @@ export function patch_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine(Co
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1386,7 +1657,7 @@ export function patch_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine(Co
       @param ContractNum Desc: ContractNum   Required: True
       @param RenewalNbr Desc: RenewalNbr   Required: True
       @param RenewalLine Desc: RenewalLine   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1405,7 +1676,14 @@ export function delete_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1429,10 +1707,10 @@ export function delete_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalSNRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalSNRow
    */  
 export function get_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine_FSRenewalSNs(Company:string, ContractNum:string, RenewalNbr:string, RenewalLine:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1447,7 +1725,14 @@ export function get_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine_FSRe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSRenewalSNRow)
           })
@@ -1469,10 +1754,10 @@ export function get_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine_FSRe
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSRenewalSNRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSRenewalSNRow
    */  
 export function get_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine_FSRenewalSNs_Company_ContractNum_RenewalNbr_RenewalLine_PartNum_SerialNumber(Company:string, ContractNum:string, RenewalNbr:string, RenewalLine:string, PartNum:string, SerialNumber:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1487,7 +1772,14 @@ export function get_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine_FSRe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSRenewalSNRow)
           })
@@ -1507,10 +1799,10 @@ export function get_FSRenewalDts_Company_ContractNum_RenewalNbr_RenewalLine_FSRe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalSNRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSRenewalSNRow
    */  
 export function get_FSRenewalSNs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1525,7 +1817,14 @@ export function get_FSRenewalSNs(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSRenewalSNRow)
           })
@@ -1539,15 +1838,15 @@ export function get_FSRenewalSNs(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FSRenewalSNs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSRenewalSNRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSRenewalSNRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FSRenewalSNRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FSRenewalSNRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FSRenewalSNs(requestBody:any, epicorHeaders?:Headers){
+export function post_FSRenewalSNs(requestBody:Erp_Tablesets_FSRenewalSNRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1561,7 +1860,14 @@ export function post_FSRenewalSNs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1583,10 +1889,10 @@ export function post_FSRenewalSNs(requestBody:any, epicorHeaders?:Headers){
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSRenewalSNRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSRenewalSNRow
    */  
 export function get_FSRenewalSNs_Company_ContractNum_RenewalNbr_RenewalLine_PartNum_SerialNumber(Company:string, ContractNum:string, RenewalNbr:string, RenewalLine:string, PartNum:string, SerialNumber:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1601,7 +1907,14 @@ export function get_FSRenewalSNs_Company_ContractNum_RenewalNbr_RenewalLine_Part
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSRenewalSNRow)
           })
@@ -1621,15 +1934,15 @@ export function get_FSRenewalSNs_Company_ContractNum_RenewalNbr_RenewalLine_Part
       @param RenewalLine Desc: RenewalLine   Required: True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSRenewalSNRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSRenewalSNRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FSRenewalSNs_Company_ContractNum_RenewalNbr_RenewalLine_PartNum_SerialNumber(Company:string, ContractNum:string, RenewalNbr:string, RenewalLine:string, PartNum:string, SerialNumber:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FSRenewalSNs_Company_ContractNum_RenewalNbr_RenewalLine_PartNum_SerialNumber(Company:string, ContractNum:string, RenewalNbr:string, RenewalLine:string, PartNum:string, SerialNumber:string, requestBody:Erp_Tablesets_FSRenewalSNRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1643,7 +1956,14 @@ export function patch_FSRenewalSNs_Company_ContractNum_RenewalNbr_RenewalLine_Pa
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1663,7 +1983,7 @@ export function patch_FSRenewalSNs_Company_ContractNum_RenewalNbr_RenewalLine_Pa
       @param RenewalLine Desc: RenewalLine   Required: True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1682,7 +2002,14 @@ export function delete_FSRenewalSNs_Company_ContractNum_RenewalNbr_RenewalLine_P
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1702,10 +2029,10 @@ export function delete_FSRenewalSNs_Company_ContractNum_RenewalNbr_RenewalLine_P
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContLabExpRateRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContLabExpRateRow
    */  
 export function get_FSContLabExpRates(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1720,7 +2047,14 @@ export function get_FSContLabExpRates(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContLabExpRateRow)
           })
@@ -1734,15 +2068,15 @@ export function get_FSContLabExpRates(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FSContLabExpRates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSContLabExpRateRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSContLabExpRateRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FSContLabExpRateRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FSContLabExpRateRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FSContLabExpRates(requestBody:any, epicorHeaders?:Headers){
+export function post_FSContLabExpRates(requestBody:Erp_Tablesets_FSContLabExpRateRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1756,7 +2090,14 @@ export function post_FSContLabExpRates(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1775,10 +2116,10 @@ export function post_FSContLabExpRates(requestBody:any, epicorHeaders?:Headers){
       @param ExpenseCode Desc: ExpenseCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSContLabExpRateRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSContLabExpRateRow
    */  
 export function get_FSContLabExpRates_Company_ContractNum_ExpenseCode(Company:string, ContractNum:string, ExpenseCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1793,7 +2134,14 @@ export function get_FSContLabExpRates_Company_ContractNum_ExpenseCode(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSContLabExpRateRow)
           })
@@ -1810,15 +2158,15 @@ export function get_FSContLabExpRates_Company_ContractNum_ExpenseCode(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractNum Desc: ContractNum   Required: True
       @param ExpenseCode Desc: ExpenseCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSContLabExpRateRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSContLabExpRateRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FSContLabExpRates_Company_ContractNum_ExpenseCode(Company:string, ContractNum:string, ExpenseCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FSContLabExpRates_Company_ContractNum_ExpenseCode(Company:string, ContractNum:string, ExpenseCode:string, requestBody:Erp_Tablesets_FSContLabExpRateRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1832,7 +2180,14 @@ export function patch_FSContLabExpRates_Company_ContractNum_ExpenseCode(Company:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1849,7 +2204,7 @@ export function patch_FSContLabExpRates_Company_ContractNum_ExpenseCode(Company:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ContractNum Desc: ContractNum   Required: True
       @param ExpenseCode Desc: ExpenseCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1868,7 +2223,14 @@ export function delete_FSContLabExpRates_Company_ContractNum_ExpenseCode(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1888,10 +2250,10 @@ export function delete_FSContLabExpRates_Company_ContractNum_ExpenseCode(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContOrderDtlListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContOrderDtlListRow
    */  
 export function get_FSContOrderDtlLists(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1906,7 +2268,14 @@ export function get_FSContOrderDtlLists(select?:string, filter?:string, orderby?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContOrderDtlListRow)
           })
@@ -1920,15 +2289,15 @@ export function get_FSContOrderDtlLists(select?:string, filter?:string, orderby?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FSContOrderDtlLists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSContOrderDtlListRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FSContOrderDtlListRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FSContOrderDtlListRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FSContOrderDtlListRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FSContOrderDtlLists(requestBody:any, epicorHeaders?:Headers){
+export function post_FSContOrderDtlLists(requestBody:Erp_Tablesets_FSContOrderDtlListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1942,7 +2311,14 @@ export function post_FSContOrderDtlLists(requestBody:any, epicorHeaders?:Headers
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1959,10 +2335,10 @@ export function post_FSContOrderDtlLists(requestBody:any, epicorHeaders?:Headers
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FSContOrderDtlListRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FSContOrderDtlListRow
    */  
 export function get_FSContOrderDtlLists_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1977,7 +2353,14 @@ export function get_FSContOrderDtlLists_SysRowID(SysRowID:string, select?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FSContOrderDtlListRow)
           })
@@ -1992,15 +2375,15 @@ export function get_FSContOrderDtlLists_SysRowID(SysRowID:string, select?:string
    Description: Calls UpdateExt to update FSContOrderDtlList. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_FSContOrderDtlList
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSContOrderDtlListRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FSContOrderDtlListRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FSContOrderDtlLists_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FSContOrderDtlLists_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_FSContOrderDtlListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2014,7 +2397,14 @@ export function patch_FSContOrderDtlLists_SysRowID(SysRowID:string, requestBody:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2029,7 +2419,7 @@ export function patch_FSContOrderDtlLists_SysRowID(SysRowID:string, requestBody:
    Description: Call UpdateExt to delete FSContOrderDtlList item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_FSContOrderDtlList
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2048,7 +2438,14 @@ export function delete_FSContOrderDtlLists_SysRowID(SysRowID:string, epicorHeade
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2068,10 +2465,10 @@ export function delete_FSContOrderDtlLists_SysRowID(SysRowID:string, epicorHeade
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SelectedSerialNumbersRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SelectedSerialNumbersRow
    */  
 export function get_SelectedSerialNumbers(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2086,7 +2483,14 @@ export function get_SelectedSerialNumbers(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SelectedSerialNumbersRow)
           })
@@ -2100,15 +2504,15 @@ export function get_SelectedSerialNumbers(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SelectedSerialNumbers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectedSerialNumbers(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectedSerialNumbers(requestBody:Erp_Tablesets_SelectedSerialNumbersRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2122,7 +2526,14 @@ export function post_SelectedSerialNumbers(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2141,10 +2552,10 @@ export function post_SelectedSerialNumbers(requestBody:any, epicorHeaders?:Heade
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
    */  
 export function get_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:string, PartNum:string, SerialNumber:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2159,7 +2570,14 @@ export function get_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SelectedSerialNumbersRow)
           })
@@ -2176,15 +2594,15 @@ export function get_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:string, PartNum:string, SerialNumber:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:string, PartNum:string, SerialNumber:string, requestBody:Erp_Tablesets_SelectedSerialNumbersRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2198,7 +2616,14 @@ export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2215,7 +2640,7 @@ export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2234,7 +2659,14 @@ export function delete_SelectedSerialNumbers_Company_PartNum_SerialNumber(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2254,10 +2686,10 @@ export function delete_SelectedSerialNumbers_Company_PartNum_SerialNumber(Compan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SNFormatRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SNFormatRow
    */  
 export function get_SNFormats(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2272,7 +2704,14 @@ export function get_SNFormats(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SNFormatRow)
           })
@@ -2286,15 +2725,15 @@ export function get_SNFormats(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SNFormats
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SNFormatRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SNFormats(requestBody:any, epicorHeaders?:Headers){
+export function post_SNFormats(requestBody:Erp_Tablesets_SNFormatRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2308,7 +2747,14 @@ export function post_SNFormats(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2327,10 +2773,10 @@ export function post_SNFormats(requestBody:any, epicorHeaders?:Headers){
       @param Plant Desc: Plant   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SNFormatRow
    */  
 export function get_SNFormats_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2345,7 +2791,14 @@ export function get_SNFormats_Company_PartNum_Plant(Company:string, PartNum:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SNFormatRow)
           })
@@ -2362,15 +2815,15 @@ export function get_SNFormats_Company_PartNum_Plant(Company:string, PartNum:stri
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, requestBody:Erp_Tablesets_SNFormatRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2384,7 +2837,14 @@ export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2401,7 +2861,7 @@ export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2420,7 +2880,14 @@ export function delete_SNFormats_Company_PartNum_Plant(Company:string, PartNum:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2440,10 +2907,10 @@ export function delete_SNFormats_Company_PartNum_Plant(Company:string, PartNum:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContHdListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FSContHdListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2458,7 +2925,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContHdListRow)
           })
@@ -2470,6 +2944,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -2490,7 +2981,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -2613,15 +3104,22 @@ export function get_GetRows(whereClauseFSContHd:string, whereClauseFSContDt:stri
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2634,7 +3132,7 @@ export function get_GetRows(whereClauseFSContHd:string, whereClauseFSContDt:stri
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -2658,15 +3156,22 @@ export function get_GetByID(contractNum:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2681,7 +3186,7 @@ export function get_GetByID(contractNum:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -2723,15 +3228,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2743,30 +3255,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method ActivateContract
    Description: Method to call when activating the contract.
    OperationID: ActivateContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ActivateContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ActivateContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ActivateContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ActivateContract(requestBody:any, epicorHeaders?:Headers){
+export function post_ActivateContract(requestBody:ActivateContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ActivateContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ActivateContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ActivateContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -2779,30 +3298,37 @@ export function post_ActivateContract(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call when changing the billing end date on the contract detail record.
 Updates FSContDt with values based on the new billing start date.
    OperationID: ChangeFSContDtBillEndDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtBillEndDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtBillEndDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtBillEndDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtBillEndDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtBillEndDate(requestBody:ChangeFSContDtBillEndDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtBillEndDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtBillEndDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtBillEndDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -2815,30 +3341,37 @@ export function post_ChangeFSContDtBillEndDate(requestBody:any, epicorHeaders?:H
    Description: Method to call when changing the billing start date on the contract detail record.
 Updates FSContDt with values based on the new billing start date.
    OperationID: ChangeFSContDtBillStartDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtBillStartDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtBillStartDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtBillStartDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtBillStartDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtBillStartDate(requestBody:ChangeFSContDtBillStartDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtBillStartDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtBillStartDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtBillStartDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -2851,30 +3384,37 @@ export function post_ChangeFSContDtBillStartDate(requestBody:any, epicorHeaders?
    Description: Method to call when changing the contract quantity on the contract detail record.
 Recalculates Ext Prices on FSContDt with values from the new quantity.
    OperationID: ChangeFSContDtContractQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtContractQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtContractQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtContractQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtContractQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtContractQty(requestBody:ChangeFSContDtContractQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtContractQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtContractQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtContractQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -2887,30 +3427,37 @@ export function post_ChangeFSContDtContractQty(requestBody:any, epicorHeaders?:H
    Description: Method to call when changing the order line on the contract detail record.
 Validates the line and updates FSContDt with values from the order line.
    OperationID: ChangeFSContDtOrderLine
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtOrderLine_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtOrderLine_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtOrderLine_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtOrderLine(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtOrderLine(requestBody:ChangeFSContDtOrderLine_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtOrderLine_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtOrderLine", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtOrderLine_output)
           })
       .catch((error) => {
           reject(error)
@@ -2923,30 +3470,37 @@ export function post_ChangeFSContDtOrderLine(requestBody:any, epicorHeaders?:Hea
    Description: Method to call when changing the order number on the contract detail record.
 Validates the number and updates FSContDt with values from the order.
    OperationID: ChangeFSContDtOrderNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtOrderNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtOrderNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtOrderNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtOrderNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtOrderNum(requestBody:ChangeFSContDtOrderNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtOrderNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtOrderNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtOrderNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -2962,30 +3516,37 @@ it will use the substitute part instead of the proposed part.
 Prior to calling this method, the CheckPartNumChange method should be run
 to validate the part.
    OperationID: ChangeFSContDtPartNumWithSubs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtPartNumWithSubs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtPartNumWithSubs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtPartNumWithSubs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtPartNumWithSubs(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtPartNumWithSubs(requestBody:ChangeFSContDtPartNumWithSubs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtPartNumWithSubs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtPartNumWithSubs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtPartNumWithSubs_output)
           })
       .catch((error) => {
           reject(error)
@@ -3000,30 +3561,37 @@ Updates FSContDt with values from the part number.
 Prior to calling this method, the CheckPartNumChange method should be run
 to validate the part.
    OperationID: ChangeFSContDtPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtPartNum(requestBody:ChangeFSContDtPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3036,30 +3604,37 @@ export function post_ChangeFSContDtPartNum(requestBody:any, epicorHeaders?:Heade
    Description: Method to call when changing the price per unit on the contract detail record.
 Recalculates Ext Prices on FSContDt with values from the new price per unit.
    OperationID: ChangeFSContDtPricePerUnit
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtPricePerUnit_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtPricePerUnit_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtPricePerUnit_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtPricePerUnit(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtPricePerUnit(requestBody:ChangeFSContDtPricePerUnit_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtPricePerUnit_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtPricePerUnit", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtPricePerUnit_output)
           })
       .catch((error) => {
           reject(error)
@@ -3072,30 +3647,37 @@ export function post_ChangeFSContDtPricePerUnit(requestBody:any, epicorHeaders?:
    Description: Method to call when changing the product code on the contract detail record.
 Validates the code and updates FSContDt with values from the product code.
    OperationID: ChangeFSContDtProdCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtProdCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtProdCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtProdCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtProdCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtProdCode(requestBody:ChangeFSContDtProdCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtProdCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtProdCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtProdCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -3108,30 +3690,37 @@ export function post_ChangeFSContDtProdCode(requestBody:any, epicorHeaders?:Head
    Description: Method to call when changing the project id on the contract detail record.
 Validates the id and updates FSContDt with values from the project.
    OperationID: ChangeFSContDtProjectID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtProjectID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtProjectID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtProjectID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtProjectID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtProjectID(requestBody:ChangeFSContDtProjectID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtProjectID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtProjectID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtProjectID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3145,30 +3734,37 @@ export function post_ChangeFSContDtProjectID(requestBody:any, epicorHeaders?:Hea
 contract detail record.
 Updates FSContDt with values from the customer part.
    OperationID: ChangeFSContDtXPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtXPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContDtXPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContDtXPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContDtXPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContDtXPartNum(requestBody:ChangeFSContDtXPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContDtXPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContDtXPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContDtXPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3181,30 +3777,37 @@ export function post_ChangeFSContDtXPartNum(requestBody:any, epicorHeaders?:Head
    Description: Method to call when changing the effective date on the contract header record.
 Updates FSContHd with values based on the new effective date.
    OperationID: ChangeFSContHdActiveDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdActiveDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdActiveDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdActiveDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdActiveDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdActiveDate(requestBody:ChangeFSContHdActiveDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdActiveDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdActiveDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdActiveDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -3217,30 +3820,37 @@ export function post_ChangeFSContHdActiveDate(requestBody:any, epicorHeaders?:He
    Description: Method to call when changing the customer id on the contract header record.
 Validates the customer id and updates FSContHd with values from the customer.
    OperationID: ChangeFSContHdBTCusNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdBTCusNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdBTCusNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdBTCusNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdBTCusNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdBTCusNum(requestBody:ChangeFSContHdBTCusNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdBTCusNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdBTCusNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdBTCusNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3253,30 +3863,37 @@ export function post_ChangeFSContHdBTCusNum(requestBody:any, epicorHeaders?:Head
    Description: Method to call when changing the contract code on the contract header record.
 Validates the code and updates FSContHd with values from the contract.
    OperationID: ChangeFSContHdContractCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdContractCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdContractCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdContractCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdContractCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdContractCode(requestBody:ChangeFSContHdContractCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdContractCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdContractCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdContractCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -3289,30 +3906,37 @@ export function post_ChangeFSContHdContractCode(requestBody:any, epicorHeaders?:
    Description: Method to call when changing the currency code on the contract header record.
 Validates the code and updates FSContHd with values from the currency.
    OperationID: ChangeFSContHdCurrencyCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdCurrencyCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdCurrencyCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdCurrencyCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdCurrencyCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdCurrencyCode(requestBody:ChangeFSContHdCurrencyCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdCurrencyCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdCurrencyCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdCurrencyCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -3325,30 +3949,37 @@ export function post_ChangeFSContHdCurrencyCode(requestBody:any, epicorHeaders?:
    Description: Method to call when changing the customer id on the contract header record.
 Validates the customer id and updates FSContHd with values from the customer.
    OperationID: ChangeFSContHdCustID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdCustID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdCustID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdCustID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdCustID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdCustID(requestBody:ChangeFSContHdCustID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdCustID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdCustID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdCustID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3360,30 +3991,37 @@ export function post_ChangeFSContHdCustID(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ChangeFSContHdDeferredRev
    Description: Method to call when changing the Deferred Revenue flag on the contract header record.
    OperationID: ChangeFSContHdDeferredRev
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdDeferredRev_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdDeferredRev_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdDeferredRev_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdDeferredRev(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdDeferredRev(requestBody:ChangeFSContHdDeferredRev_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdDeferredRev_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdDeferredRev", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdDeferredRev_output)
           })
       .catch((error) => {
           reject(error)
@@ -3396,30 +4034,37 @@ export function post_ChangeFSContHdDeferredRev(requestBody:any, epicorHeaders?:H
    Description: Method to call when changing the duration on the contract header record.
 Updates FSContHd with values based on the new duration.
    OperationID: ChangeFSContHdDuration
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdDuration_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdDuration_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdDuration_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdDuration(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdDuration(requestBody:ChangeFSContHdDuration_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdDuration_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdDuration", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdDuration_output)
           })
       .catch((error) => {
           reject(error)
@@ -3431,30 +4076,37 @@ export function post_ChangeFSContHdDuration(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ChangeFSContHdFiscalCalendarID
    Description: Method to call when changing the Fiscal Calendar on the contract header record.
    OperationID: ChangeFSContHdFiscalCalendarID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdFiscalCalendarID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdFiscalCalendarID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdFiscalCalendarID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdFiscalCalendarID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdFiscalCalendarID(requestBody:ChangeFSContHdFiscalCalendarID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdFiscalCalendarID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdFiscalCalendarID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdFiscalCalendarID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3467,30 +4119,37 @@ export function post_ChangeFSContHdFiscalCalendarID(requestBody:any, epicorHeade
    Description: Method to call when changing the Modifier on the contract header record.
 Updates FSContHd with values based on the new Modifier.
    OperationID: ChangeFSContHdModifier
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdModifier_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdModifier_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdModifier_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdModifier(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdModifier(requestBody:ChangeFSContHdModifier_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdModifier_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdModifier", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdModifier_output)
           })
       .catch((error) => {
           reject(error)
@@ -3503,30 +4162,37 @@ export function post_ChangeFSContHdModifier(requestBody:any, epicorHeaders?:Head
    Description: Method to call when changing the customer contact number on the contract header record.
 Validates the number and updates FSContHd with values from the contact.
    OperationID: ChangeFSContHdPrcConNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdPrcConNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdPrcConNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdPrcConNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdPrcConNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdPrcConNum(requestBody:ChangeFSContHdPrcConNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdPrcConNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdPrcConNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdPrcConNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3539,30 +4205,37 @@ export function post_ChangeFSContHdPrcConNum(requestBody:any, epicorHeaders?:Hea
    Description: Method to call when changing the PricePer on the contract header record.
 Updates FSContHd with values based on the new PricePer.
    OperationID: ChangeFSContHdPricePer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdPricePer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdPricePer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdPricePer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdPricePer(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdPricePer(requestBody:ChangeFSContHdPricePer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdPricePer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdPricePer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdPricePer_output)
           })
       .catch((error) => {
           reject(error)
@@ -3574,30 +4247,37 @@ export function post_ChangeFSContHdPricePer(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ChangeFSContHdQuotedContract
    Description: Method to call when changing the Quoted Contract flag on the contract header record.
    OperationID: ChangeFSContHdQuotedContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdQuotedContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdQuotedContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdQuotedContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdQuotedContract(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdQuotedContract(requestBody:ChangeFSContHdQuotedContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdQuotedContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdQuotedContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdQuotedContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -3609,30 +4289,37 @@ export function post_ChangeFSContHdQuotedContract(requestBody:any, epicorHeaders
    Summary: Invoke method ChangeFSContHdRACode
    Description: Method to call when changing the RACode on the contract header record.
    OperationID: ChangeFSContHdRACode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdRACode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdRACode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdRACode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdRACode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdRACode(requestBody:ChangeFSContHdRACode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdRACode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdRACode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdRACode_output)
           })
       .catch((error) => {
           reject(error)
@@ -3645,30 +4332,37 @@ export function post_ChangeFSContHdRACode(requestBody:any, epicorHeaders?:Header
    Description: Method to call when changing the RecurringFreq on the contract header record.
 Updates FSContHd with values based on the new RecurringFreq.
    OperationID: ChangeFSContHdRecurringFreq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdRecurringFreq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdRecurringFreq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdRecurringFreq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdRecurringFreq(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdRecurringFreq(requestBody:ChangeFSContHdRecurringFreq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdRecurringFreq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdRecurringFreq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdRecurringFreq_output)
           })
       .catch((error) => {
           reject(error)
@@ -3681,30 +4375,37 @@ export function post_ChangeFSContHdRecurringFreq(requestBody:any, epicorHeaders?
    Description: Method to call when changing the ShipTo Customer ID on the contract header record.
 Validates the ShipTo Customer ID and updates FSContHd with values from the customer.
    OperationID: ChangeFSContHdShipToCustID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdShipToCustID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdShipToCustID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdShipToCustID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdShipToCustID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdShipToCustID(requestBody:ChangeFSContHdShipToCustID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdShipToCustID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdShipToCustID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdShipToCustID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3717,30 +4418,37 @@ export function post_ChangeFSContHdShipToCustID(requestBody:any, epicorHeaders?:
    Description: Method to call when changing the ship to on the contract header record.
 Validates the number and updates FSContHd with values from the ship to.
    OperationID: ChangeFSContHdShipToNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdShipToNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdShipToNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdShipToNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdShipToNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdShipToNum(requestBody:ChangeFSContHdShipToNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdShipToNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdShipToNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdShipToNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3753,30 +4461,37 @@ export function post_ChangeFSContHdShipToNum(requestBody:any, epicorHeaders?:Hea
    Description: Method to call when changing the ship to contact on the contract header record.
 Validates the contact and updates FSContHd with values from the ship to contact.
    OperationID: ChangeFSContHdShpConNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdShpConNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdShpConNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdShpConNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdShpConNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdShpConNum(requestBody:ChangeFSContHdShpConNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdShpConNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdShpConNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdShpConNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -3793,30 +4508,37 @@ exist then a message will be returned to the user to let the user decide whether
 continue the update of invoice revenue schedules or not. The FSContHd.Suspended is
 updated right away if no related invoice schedule exists.
    OperationID: ChangeFSContHdSuspended
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdSuspended_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdSuspended_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdSuspended_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdSuspended(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdSuspended(requestBody:ChangeFSContHdSuspended_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdSuspended_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdSuspended", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdSuspended_output)
           })
       .catch((error) => {
           reject(error)
@@ -3828,30 +4550,37 @@ export function post_ChangeFSContHdSuspended(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ChangeFSContHdTaskSetID
    Description: Method to call when changing the Task Set ID on the contract header record.
    OperationID: ChangeFSContHdTaskSetID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdTaskSetID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdTaskSetID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdTaskSetID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdTaskSetID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdTaskSetID(requestBody:ChangeFSContHdTaskSetID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdTaskSetID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdTaskSetID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdTaskSetID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3864,30 +4593,37 @@ export function post_ChangeFSContHdTaskSetID(requestBody:any, epicorHeaders?:Hea
    Description: Method to call when changing the tax category id on the contract header record.
 Validates the id and updates FSContHd with values from the tax category.
    OperationID: ChangeFSContHdTaxCatID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdTaxCatID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdTaxCatID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdTaxCatID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdTaxCatID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdTaxCatID(requestBody:ChangeFSContHdTaxCatID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdTaxCatID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdTaxCatID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdTaxCatID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3899,30 +4635,37 @@ export function post_ChangeFSContHdTaxCatID(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ChangeFSContHdRecurringInv
    Description: Method to call when changing the recurring invoice flag on the contract header record.
    OperationID: ChangeFSContHdRecurringInv
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdRecurringInv_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHdRecurringInv_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHdRecurringInv_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHdRecurringInv(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHdRecurringInv(requestBody:ChangeFSContHdRecurringInv_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHdRecurringInv_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHdRecurringInv", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHdRecurringInv_output)
           })
       .catch((error) => {
           reject(error)
@@ -3935,30 +4678,37 @@ export function post_ChangeFSContHdRecurringInv(requestBody:any, epicorHeaders?:
    Description: Method to call when changing the UseOTS field the contract header record.
 Refreshes the address list and contact info
    OperationID: ChangeFSContHDUseOTS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSContHDUseOTS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSContHDUseOTS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSContHDUseOTS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSContHDUseOTS(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSContHDUseOTS(requestBody:ChangeFSContHDUseOTS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSContHDUseOTS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSContHDUseOTS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSContHDUseOTS_output)
           })
       .catch((error) => {
           reject(error)
@@ -3971,30 +4721,37 @@ export function post_ChangeFSContHDUseOTS(requestBody:any, epicorHeaders?:Header
    Description: Method to call when changing the contract code on the contract renewal header record.
 Validates the code and updates FSRenewal with values from the contract code defaults.
    OperationID: ChangeFSRenewalContractCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalContractCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalContractCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalContractCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalContractCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalContractCode(requestBody:ChangeFSRenewalContractCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalContractCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalContractCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalContractCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -4006,30 +4763,37 @@ export function post_ChangeFSRenewalContractCode(requestBody:any, epicorHeaders?
    Summary: Invoke method ChangeFSRenewalDeferredRev
    Description: Method to call when changing the Deferred Revenue flag on the contract renewal header record.
    OperationID: ChangeFSRenewalDeferredRev
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDeferredRev_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDeferredRev_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDeferredRev_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDeferredRev(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDeferredRev(requestBody:ChangeFSRenewalDeferredRev_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDeferredRev_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDeferredRev", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDeferredRev_output)
           })
       .catch((error) => {
           reject(error)
@@ -4042,30 +4806,37 @@ export function post_ChangeFSRenewalDeferredRev(requestBody:any, epicorHeaders?:
    Description: Method to call when changing the billing end date on the contract renewal detail record.
 Updates FSRenewalDt with values based on the new billing start date.
    OperationID: ChangeFSRenewalDtBillEndDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtBillEndDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtBillEndDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtBillEndDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtBillEndDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtBillEndDate(requestBody:ChangeFSRenewalDtBillEndDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtBillEndDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtBillEndDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtBillEndDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4078,30 +4849,37 @@ export function post_ChangeFSRenewalDtBillEndDate(requestBody:any, epicorHeaders
    Description: Method to call when changing the billing start date on the contract renewal detail record.
 Updates FSRenewalDt with values based on the new billing start date.
    OperationID: ChangeFSRenewalDtBillStartDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtBillStartDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtBillStartDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtBillStartDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtBillStartDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtBillStartDate(requestBody:ChangeFSRenewalDtBillStartDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtBillStartDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtBillStartDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtBillStartDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4114,30 +4892,37 @@ export function post_ChangeFSRenewalDtBillStartDate(requestBody:any, epicorHeade
    Description: Method to call when changing the contract quantity on the contract renewal detail record.
 Recalculates Ext Prices on FSRenewalDt with values from the new quantity.
    OperationID: ChangeFSRenewalDtContractQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtContractQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtContractQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtContractQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtContractQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtContractQty(requestBody:ChangeFSRenewalDtContractQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtContractQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtContractQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtContractQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -4150,30 +4935,37 @@ export function post_ChangeFSRenewalDtContractQty(requestBody:any, epicorHeaders
    Description: Method to call when changing the increase percent on the contract renewal detail record.
 Recalculates Prices on FSRenewalDt with values from the new increase percent.
    OperationID: ChangeFSRenewalDtIncreasePct
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtIncreasePct_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtIncreasePct_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtIncreasePct_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtIncreasePct(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtIncreasePct(requestBody:ChangeFSRenewalDtIncreasePct_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtIncreasePct_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtIncreasePct", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtIncreasePct_output)
           })
       .catch((error) => {
           reject(error)
@@ -4186,30 +4978,37 @@ export function post_ChangeFSRenewalDtIncreasePct(requestBody:any, epicorHeaders
    Description: Method to call when changing the order line on the contract renewal detail record.
 Validates the line and updates FSRenewalDt with values from the order line.
    OperationID: ChangeFSRenewalDtOrderLine
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtOrderLine_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtOrderLine_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtOrderLine_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtOrderLine(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtOrderLine(requestBody:ChangeFSRenewalDtOrderLine_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtOrderLine_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtOrderLine", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtOrderLine_output)
           })
       .catch((error) => {
           reject(error)
@@ -4222,30 +5021,37 @@ export function post_ChangeFSRenewalDtOrderLine(requestBody:any, epicorHeaders?:
    Description: Method to call when changing the order number on the contract renewal detail record.
 Validates the number and updates FSRenewalDt with values from the order.
    OperationID: ChangeFSRenewalDtOrderNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtOrderNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtOrderNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtOrderNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtOrderNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtOrderNum(requestBody:ChangeFSRenewalDtOrderNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtOrderNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtOrderNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtOrderNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -4260,30 +5066,37 @@ Updates FSRenewalDt with values from the part number.
 Prior to calling this method, the CheckPartNumChange method should be run
 to validate the part.
    OperationID: ChangeFSRenewalDtPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtPartNum(requestBody:ChangeFSRenewalDtPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -4298,30 +5111,37 @@ Updates FSRenewalDt with values from the part number.
 Prior to calling this method, the CheckPartNumChange method should be run
 to validate the part.
    OperationID: ChangeFSRenewalDtPartNumWithSubs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtPartNumWithSubs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtPartNumWithSubs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtPartNumWithSubs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtPartNumWithSubs(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtPartNumWithSubs(requestBody:ChangeFSRenewalDtPartNumWithSubs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtPartNumWithSubs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtPartNumWithSubs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtPartNumWithSubs_output)
           })
       .catch((error) => {
           reject(error)
@@ -4334,30 +5154,37 @@ export function post_ChangeFSRenewalDtPartNumWithSubs(requestBody:any, epicorHea
    Description: Method to call when changing the price per unit on the contract renewal detail record.
 Recalculates Ext Prices on FSRenewalDt with values from the new price per unit.
    OperationID: ChangeFSRenewalDtPricePerUnit
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtPricePerUnit_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtPricePerUnit_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtPricePerUnit_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtPricePerUnit(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtPricePerUnit(requestBody:ChangeFSRenewalDtPricePerUnit_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtPricePerUnit_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtPricePerUnit", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtPricePerUnit_output)
           })
       .catch((error) => {
           reject(error)
@@ -4370,30 +5197,37 @@ export function post_ChangeFSRenewalDtPricePerUnit(requestBody:any, epicorHeader
    Description: Method to call when changing the product code on the contract renewal detail record.
 Validates the code and updates FSRenewalDt with values from the product code.
    OperationID: ChangeFSRenewalDtProdCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtProdCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtProdCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtProdCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtProdCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtProdCode(requestBody:ChangeFSRenewalDtProdCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtProdCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtProdCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtProdCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -4406,30 +5240,37 @@ export function post_ChangeFSRenewalDtProdCode(requestBody:any, epicorHeaders?:H
    Description: Method to call when changing the project id on the contract renewal detail record.
 Validates the id and updates FSRenewalDt with values from the project.
    OperationID: ChangeFSRenewalDtProjectID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtProjectID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtProjectID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtProjectID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtProjectID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtProjectID(requestBody:ChangeFSRenewalDtProjectID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtProjectID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtProjectID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtProjectID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4443,30 +5284,37 @@ export function post_ChangeFSRenewalDtProjectID(requestBody:any, epicorHeaders?:
 contract renewal detail record.
 Updates FSRenewalDt with values from the customer part.
    OperationID: ChangeFSRenewalDtXPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtXPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDtXPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDtXPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDtXPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDtXPartNum(requestBody:ChangeFSRenewalDtXPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDtXPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDtXPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDtXPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -4479,30 +5327,37 @@ export function post_ChangeFSRenewalDtXPartNum(requestBody:any, epicorHeaders?:H
    Description: Method to call when changing the duration on the contract renewal header record.
 Updates FSRenewal with values based on the new duration.
    OperationID: ChangeFSRenewalDuration
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDuration_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalDuration_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalDuration_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalDuration(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalDuration(requestBody:ChangeFSRenewalDuration_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalDuration_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalDuration", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalDuration_output)
           })
       .catch((error) => {
           reject(error)
@@ -4514,30 +5369,37 @@ export function post_ChangeFSRenewalDuration(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ChangeFSRenewalFiscalCalendarID
    Description: Method to call when changing the Fiscal Calendar on the contract renewal header record.
    OperationID: ChangeFSRenewalFiscalCalendarID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalFiscalCalendarID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalFiscalCalendarID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalFiscalCalendarID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalFiscalCalendarID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalFiscalCalendarID(requestBody:ChangeFSRenewalFiscalCalendarID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalFiscalCalendarID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalFiscalCalendarID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalFiscalCalendarID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4550,30 +5412,37 @@ export function post_ChangeFSRenewalFiscalCalendarID(requestBody:any, epicorHead
    Description: Method to call when changing the Modifier on the contract renewal header record.
 Updates FSRenewal with values based on the new Modifier.
    OperationID: ChangeFSRenewalModifier
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalModifier_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalModifier_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalModifier_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalModifier(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalModifier(requestBody:ChangeFSRenewalModifier_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalModifier_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalModifier", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalModifier_output)
           })
       .catch((error) => {
           reject(error)
@@ -4586,30 +5455,37 @@ export function post_ChangeFSRenewalModifier(requestBody:any, epicorHeaders?:Hea
    Description: Method to call when changing the PricePer on the contract renewal header record.
 Updates FSRenewal with values based on the new PricePer.
    OperationID: ChangeFSRenewalPricePer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalPricePer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalPricePer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalPricePer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalPricePer(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalPricePer(requestBody:ChangeFSRenewalPricePer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalPricePer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalPricePer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalPricePer_output)
           })
       .catch((error) => {
           reject(error)
@@ -4621,30 +5497,37 @@ export function post_ChangeFSRenewalPricePer(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ChangeFSRenewalQuotedRenewal
    Description: Method to call when changing the Quoted Renewal flag on the contract renewal header record.
    OperationID: ChangeFSRenewalQuotedRenewal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalQuotedRenewal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalQuotedRenewal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalQuotedRenewal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalQuotedRenewal(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalQuotedRenewal(requestBody:ChangeFSRenewalQuotedRenewal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalQuotedRenewal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalQuotedRenewal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalQuotedRenewal_output)
           })
       .catch((error) => {
           reject(error)
@@ -4656,30 +5539,37 @@ export function post_ChangeFSRenewalQuotedRenewal(requestBody:any, epicorHeaders
    Summary: Invoke method ChangeFSRenewalRACode
    Description: Method to call when changing the RACode on the contract renewal header record.
    OperationID: ChangeFSRenewalRACode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalRACode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalRACode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalRACode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalRACode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalRACode(requestBody:ChangeFSRenewalRACode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalRACode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalRACode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalRACode_output)
           })
       .catch((error) => {
           reject(error)
@@ -4692,30 +5582,37 @@ export function post_ChangeFSRenewalRACode(requestBody:any, epicorHeaders?:Heade
    Description: Method to call when changing the RecurringFreq on the contract renewal header record.
 Updates FSRenewal with values based on the new RecurringFreq.
    OperationID: ChangeFSRenewalRecurringFreq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalRecurringFreq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalRecurringFreq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalRecurringFreq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalRecurringFreq(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalRecurringFreq(requestBody:ChangeFSRenewalRecurringFreq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalRecurringFreq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalRecurringFreq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalRecurringFreq_output)
           })
       .catch((error) => {
           reject(error)
@@ -4728,30 +5625,37 @@ export function post_ChangeFSRenewalRecurringFreq(requestBody:any, epicorHeaders
    Description: Method to call when changing the renewal effective date on the contract renewal header record.
 Updates FSRenewal with values based on the new effective date.
    OperationID: ChangeFSRenewalRenewEffDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalRenewEffDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalRenewEffDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalRenewEffDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalRenewEffDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalRenewEffDate(requestBody:ChangeFSRenewalRenewEffDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalRenewEffDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalRenewEffDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalRenewEffDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4763,30 +5667,37 @@ export function post_ChangeFSRenewalRenewEffDate(requestBody:any, epicorHeaders?
    Summary: Invoke method ChangeFSRenewalTaskSetID
    Description: Method to call when changing the Task Set ID on the contract renewal header record.
    OperationID: ChangeFSRenewalTaskSetID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalTaskSetID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalTaskSetID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalTaskSetID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalTaskSetID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalTaskSetID(requestBody:ChangeFSRenewalTaskSetID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalTaskSetID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalTaskSetID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalTaskSetID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4799,30 +5710,37 @@ export function post_ChangeFSRenewalTaskSetID(requestBody:any, epicorHeaders?:He
    Description: Method to call when changing the tax category id on the contract renewal header record.
 Validates the id and updates FSRenewal with values from the tax category.
    OperationID: ChangeFSRenewalTaxCatID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalTaxCatID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalTaxCatID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalTaxCatID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalTaxCatID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalTaxCatID(requestBody:ChangeFSRenewalTaxCatID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalTaxCatID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalTaxCatID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalTaxCatID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4834,30 +5752,37 @@ export function post_ChangeFSRenewalTaxCatID(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ChangeFSRenewalRecurringInv
    Description: Method to call when changing the recurring invoice flag on the contract renewal header record.
    OperationID: ChangeFSRenewalRecurringInv
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalRecurringInv_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSRenewalRecurringInv_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSRenewalRecurringInv_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSRenewalRecurringInv(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSRenewalRecurringInv(requestBody:ChangeFSRenewalRecurringInv_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSRenewalRecurringInv_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ChangeFSRenewalRecurringInv", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSRenewalRecurringInv_output)
           })
       .catch((error) => {
           reject(error)
@@ -4871,30 +5796,37 @@ export function post_ChangeFSRenewalRecurringInv(requestBody:any, epicorHeaders?
 ChangeFSContDtPartNum or Update methods are run.
 This returns all the questions that need to be asked before a part can be changed.
    OperationID: CheckPartNumChange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPartNumChange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPartNumChange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPartNumChange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPartNumChange(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPartNumChange(requestBody:CheckPartNumChange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPartNumChange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/CheckPartNumChange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPartNumChange_output)
           })
       .catch((error) => {
           reject(error)
@@ -4911,30 +5843,37 @@ This method should be called before the update method and should be called only 
 part is serial number tracked and the quantity is greater than zero.
 If the user answers yes, the change can occur; otherwise the change shouldn't occur.
    OperationID: CheckSerialNumbers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSerialNumbers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSerialNumbers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSerialNumbers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSerialNumbers(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSerialNumbers(requestBody:CheckSerialNumbers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSerialNumbers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/CheckSerialNumbers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSerialNumbers_output)
           })
       .catch((error) => {
           reject(error)
@@ -4946,30 +5885,37 @@ export function post_CheckSerialNumbers(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method CreateContractRMA
    Description: Call this method to create RMA for a given service contract.
    OperationID: CreateContractRMA
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateContractRMA_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateContractRMA_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateContractRMA_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateContractRMA(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateContractRMA(requestBody:CreateContractRMA_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateContractRMA_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/CreateContractRMA", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateContractRMA_output)
           })
       .catch((error) => {
           reject(error)
@@ -4983,30 +5929,37 @@ export function post_CreateContractRMA(requestBody:any, epicorHeaders?:Headers){
 intention to expire the contract before calling this method.  Warn the user
 that expiring the contract cannot be undone.
    OperationID: ExpireContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExpireContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExpireContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExpireContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExpireContract(requestBody:any, epicorHeaders?:Headers){
+export function post_ExpireContract(requestBody:ExpireContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExpireContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ExpireContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExpireContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -5019,7 +5972,7 @@ export function post_ExpireContract(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call to get the list for the Frequency options.  The list is
 returned in code1`code desc1~code2`code desc2 format.
    OperationID: FrequencyList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/FrequencyList_output
@@ -5032,15 +5985,22 @@ export function post_FrequencyList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FrequencyList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/FrequencyList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FrequencyList_output)
           })
       .catch((error) => {
           reject(error)
@@ -5053,30 +6013,37 @@ export function post_FrequencyList(epicorHeaders?:Headers){
    Description: Call this method to generate Contract Renewal (FSRenewal and FsRenewalDt)
 from a given Contract or Renewal.
    OperationID: GenerateRenewal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateRenewal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateRenewal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateRenewal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateRenewal(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateRenewal(requestBody:GenerateRenewal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateRenewal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GenerateRenewal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateRenewal_output)
           })
       .catch((error) => {
           reject(error)
@@ -5089,30 +6056,37 @@ export function post_GenerateRenewal(requestBody:any, epicorHeaders?:Headers){
    Description: Call this method to generate Contract Renewal Lines (FsRenewalDt)
 for a given Contract Renewal Header.
    OperationID: GenerateRenewalLines
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateRenewalLines_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateRenewalLines_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateRenewalLines_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateRenewalLines(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateRenewalLines(requestBody:GenerateRenewalLines_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateRenewalLines_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GenerateRenewalLines", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateRenewalLines_output)
           })
       .catch((error) => {
           reject(error)
@@ -5125,30 +6099,37 @@ export function post_GenerateRenewalLines(requestBody:any, epicorHeaders?:Header
    Description: Custom GetList method. Retrieves records based on a delimited list
 of Contract Numbers.
    OperationID: GetListCustom
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListCustom_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListCustom_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListCustom_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListCustom(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListCustom(requestBody:GetListCustom_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListCustom_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetListCustom", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListCustom_output)
           })
       .catch((error) => {
           reject(error)
@@ -5160,30 +6141,37 @@ export function post_GetListCustom(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFSContHdFromOrder
    Description: Method to call when adding a contract from an order.
    OperationID: GetNewFSContHdFromOrder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFSContHdFromOrder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFSContHdFromOrder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFSContHdFromOrder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFSContHdFromOrder(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFSContHdFromOrder(requestBody:GetNewFSContHdFromOrder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFSContHdFromOrder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetNewFSContHdFromOrder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFSContHdFromOrder_output)
           })
       .catch((error) => {
           reject(error)
@@ -5195,30 +6183,37 @@ export function post_GetNewFSContHdFromOrder(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetRowsContactTracker
    Description: Calls the normal GetRows method and then constructs a custom data set combining Hd/Dt fields for the contact tracker.
    OperationID: GetRowsContactTracker
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsContactTracker_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsContactTracker_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsContactTracker_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsContactTracker(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsContactTracker(requestBody:GetRowsContactTracker_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsContactTracker_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetRowsContactTracker", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsContactTracker_output)
           })
       .catch((error) => {
           reject(error)
@@ -5231,30 +6226,37 @@ export function post_GetRowsContactTracker(requestBody:any, epicorHeaders?:Heade
    Description: Custom GetList method. Retrieves records based on a delimited list
 of Contract Numbers.
    OperationID: GetRowsCustom
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCustom_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCustom_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCustom_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCustom(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCustom(requestBody:GetRowsCustom_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCustom_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetRowsCustom", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCustom_output)
           })
       .catch((error) => {
           reject(error)
@@ -5266,30 +6268,37 @@ export function post_GetRowsCustom(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRowsCustomerTracker
    Description: Calls the normal GetRows method and then constructs a custom data set combining Hd/Dt fields for the customer tracker.
    OperationID: GetRowsCustomerTracker
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCustomerTracker_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCustomerTracker_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCustomerTracker_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCustomerTracker(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCustomerTracker(requestBody:GetRowsCustomerTracker_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCustomerTracker_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetRowsCustomerTracker", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCustomerTracker_output)
           })
       .catch((error) => {
           reject(error)
@@ -5301,30 +6310,37 @@ export function post_GetRowsCustomerTracker(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetRowsCustomerTrackerActive
    Description: Returns active/not voided contracts for the customer
    OperationID: GetRowsCustomerTrackerActive
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCustomerTrackerActive_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCustomerTrackerActive_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCustomerTrackerActive_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCustomerTrackerActive(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCustomerTrackerActive(requestBody:GetRowsCustomerTrackerActive_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCustomerTrackerActive_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetRowsCustomerTrackerActive", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCustomerTrackerActive_output)
           })
       .catch((error) => {
           reject(error)
@@ -5336,30 +6352,37 @@ export function post_GetRowsCustomerTrackerActive(requestBody:any, epicorHeaders
    Summary: Invoke method GetRowsCustomerTrackerExpired
    Description: Returns expired/not voided contracts for the customer
    OperationID: GetRowsCustomerTrackerExpired
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCustomerTrackerExpired_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCustomerTrackerExpired_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCustomerTrackerExpired_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCustomerTrackerExpired(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCustomerTrackerExpired(requestBody:GetRowsCustomerTrackerExpired_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCustomerTrackerExpired_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetRowsCustomerTrackerExpired", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCustomerTrackerExpired_output)
           })
       .catch((error) => {
           reject(error)
@@ -5372,30 +6395,37 @@ export function post_GetRowsCustomerTrackerExpired(requestBody:any, epicorHeader
    Description: This method will retrieve the serial numbers for a service contract line and
 update the SelectedSerialNumbers table with these records.
    OperationID: GetSelectedSerialNumbers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSelectedSerialNumbers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSelectedSerialNumbers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSelectedSerialNumbers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSelectedSerialNumbers(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSelectedSerialNumbers(requestBody:GetSelectedSerialNumbers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSelectedSerialNumbers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetSelectedSerialNumbers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSelectedSerialNumbers_output)
           })
       .catch((error) => {
           reject(error)
@@ -5407,30 +6437,37 @@ export function post_GetSelectedSerialNumbers(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetSelectSerialNumbersParams
    Description: Gets parameters required for launching Select Serial Numbers
    OperationID: GetSelectSerialNumbersParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSelectSerialNumbersParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSelectSerialNumbersParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSelectSerialNumbersParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSelectSerialNumbersParams(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSelectSerialNumbersParams(requestBody:GetSelectSerialNumbersParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSelectSerialNumbersParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetSelectSerialNumbersParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSelectSerialNumbersParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -5443,30 +6480,37 @@ export function post_GetSelectSerialNumbersParams(requestBody:any, epicorHeaders
    Description: This method will retrieve the serial numbers for a service contract Renewal line and
 update the SelectedSerialNumbers table with these records.
    OperationID: GetRenewalSelectedSerialNumbers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRenewalSelectedSerialNumbers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRenewalSelectedSerialNumbers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRenewalSelectedSerialNumbers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRenewalSelectedSerialNumbers(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRenewalSelectedSerialNumbers(requestBody:GetRenewalSelectedSerialNumbers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRenewalSelectedSerialNumbers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetRenewalSelectedSerialNumbers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRenewalSelectedSerialNumbers_output)
           })
       .catch((error) => {
           reject(error)
@@ -5478,30 +6522,37 @@ export function post_GetRenewalSelectedSerialNumbers(requestBody:any, epicorHead
    Summary: Invoke method GetRenewalSelectSerialNumbersParams
    Description: Gets parameters required for launching Select Serial Numbers
    OperationID: GetRenewalSelectSerialNumbersParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRenewalSelectSerialNumbersParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRenewalSelectSerialNumbersParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRenewalSelectSerialNumbersParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRenewalSelectSerialNumbersParams(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRenewalSelectSerialNumbersParams(requestBody:GetRenewalSelectSerialNumbersParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRenewalSelectSerialNumbersParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetRenewalSelectSerialNumbersParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRenewalSelectSerialNumbersParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -5513,30 +6564,37 @@ export function post_GetRenewalSelectSerialNumbersParams(requestBody:any, epicor
    Summary: Invoke method CountContractsOnQuote
    Description: Verifies if the Contract/Renewal has any Quote. Then check if the Quote is related with other Contracts/Renewals.
    OperationID: CountContractsOnQuote
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CountContractsOnQuote_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CountContractsOnQuote_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CountContractsOnQuote_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CountContractsOnQuote(requestBody:any, epicorHeaders?:Headers){
+export function post_CountContractsOnQuote(requestBody:CountContractsOnQuote_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CountContractsOnQuote_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/CountContractsOnQuote", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CountContractsOnQuote_output)
           })
       .catch((error) => {
           reject(error)
@@ -5548,7 +6606,7 @@ export function post_CountContractsOnQuote(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method IsPlantSerialTracking
    Description: Verifies if the current login plant is set for Serial Tracking
    OperationID: IsPlantSerialTracking
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsPlantSerialTracking_output
@@ -5561,15 +6619,22 @@ export function post_IsPlantSerialTracking(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsPlantSerialTracking_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/IsPlantSerialTracking", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsPlantSerialTracking_output)
           })
       .catch((error) => {
           reject(error)
@@ -5582,7 +6647,7 @@ export function post_IsPlantSerialTracking(epicorHeaders?:Headers){
    Description: Method to call to get the list for the Price Per options.  The list is
 returned in code1`code desc1~code2`code desc2 format.
    OperationID: PricePerList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/PricePerList_output
@@ -5595,15 +6660,22 @@ export function post_PricePerList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PricePerList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/PricePerList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PricePerList_output)
           })
       .catch((error) => {
           reject(error)
@@ -5618,30 +6690,37 @@ SuspendContract method.  This logic updates all related InvcDtlRASch
 records for this service contract. Based on the input contract status, the related
 invoice revenue schedules will be put on hold/unhold.
    OperationID: SuspendContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SuspendContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SuspendContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SuspendContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SuspendContract(requestBody:any, epicorHeaders?:Headers){
+export function post_SuspendContract(requestBody:SuspendContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SuspendContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/SuspendContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SuspendContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -5653,30 +6732,37 @@ export function post_SuspendContract(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateSN
    Description: Validates that a single serial number is valid for this transaction
    OperationID: ValidateSN
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSN_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSN_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSN_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSN(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSN(requestBody:ValidateSN_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSN_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ValidateSN", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSN_output)
           })
       .catch((error) => {
           reject(error)
@@ -5688,30 +6774,37 @@ export function post_ValidateSN(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method VoidContract
    Description: Method to call when voiding the contract.
    OperationID: VoidContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VoidContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VoidContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VoidContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VoidContract(requestBody:any, epicorHeaders?:Headers){
+export function post_VoidContract(requestBody:VoidContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VoidContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/VoidContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VoidContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -5722,30 +6815,37 @@ export function post_VoidContract(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DisableContractLines
    OperationID: DisableContractLines
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DisableContractLines_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DisableContractLines_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DisableContractLines_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DisableContractLines(requestBody:any, epicorHeaders?:Headers){
+export function post_DisableContractLines(requestBody:DisableContractLines_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DisableContractLines_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/DisableContractLines", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DisableContractLines_output)
           })
       .catch((error) => {
           reject(error)
@@ -5757,30 +6857,37 @@ export function post_DisableContractLines(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method isContractExpired
    Description: Validates contract Expired date against the current time zone Date for the current company.
    OperationID: isContractExpired
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/isContractExpired_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/isContractExpired_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/isContractExpired_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_isContractExpired(requestBody:any, epicorHeaders?:Headers){
+export function post_isContractExpired(requestBody:isContractExpired_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<isContractExpired_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/isContractExpired", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as isContractExpired_output)
           })
       .catch((error) => {
           reject(error)
@@ -5792,30 +6899,37 @@ export function post_isContractExpired(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateOTSTaxID
    Description: One Time Ship To Tax Id validation
    OperationID: ValidateOTSTaxID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateOTSTaxID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateOTSTaxID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateOTSTaxID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateOTSTaxID(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateOTSTaxID(requestBody:ValidateOTSTaxID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateOTSTaxID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/ValidateOTSTaxID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateOTSTaxID_output)
           })
       .catch((error) => {
           reject(error)
@@ -5827,30 +6941,37 @@ export function post_ValidateOTSTaxID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFSContHd
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFSContHd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFSContHd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFSContHd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFSContHd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFSContHd(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFSContHd(requestBody:GetNewFSContHd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFSContHd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetNewFSContHd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFSContHd_output)
           })
       .catch((error) => {
           reject(error)
@@ -5862,30 +6983,37 @@ export function post_GetNewFSContHd(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFSContDt
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFSContDt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFSContDt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFSContDt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFSContDt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFSContDt(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFSContDt(requestBody:GetNewFSContDt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFSContDt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetNewFSContDt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFSContDt_output)
           })
       .catch((error) => {
           reject(error)
@@ -5897,30 +7025,37 @@ export function post_GetNewFSContDt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFSContSN
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFSContSN
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFSContSN_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFSContSN_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFSContSN_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFSContSN(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFSContSN(requestBody:GetNewFSContSN_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFSContSN_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetNewFSContSN", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFSContSN_output)
           })
       .catch((error) => {
           reject(error)
@@ -5932,30 +7067,37 @@ export function post_GetNewFSContSN(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFSRenewal
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFSRenewal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFSRenewal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFSRenewal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFSRenewal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFSRenewal(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFSRenewal(requestBody:GetNewFSRenewal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFSRenewal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetNewFSRenewal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFSRenewal_output)
           })
       .catch((error) => {
           reject(error)
@@ -5967,30 +7109,37 @@ export function post_GetNewFSRenewal(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFSRenewalDt
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFSRenewalDt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFSRenewalDt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFSRenewalDt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFSRenewalDt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFSRenewalDt(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFSRenewalDt(requestBody:GetNewFSRenewalDt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFSRenewalDt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetNewFSRenewalDt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFSRenewalDt_output)
           })
       .catch((error) => {
           reject(error)
@@ -6002,30 +7151,37 @@ export function post_GetNewFSRenewalDt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFSRenewalSN
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFSRenewalSN
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFSRenewalSN_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFSRenewalSN_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFSRenewalSN_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFSRenewalSN(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFSRenewalSN(requestBody:GetNewFSRenewalSN_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFSRenewalSN_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetNewFSRenewalSN", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFSRenewalSN_output)
           })
       .catch((error) => {
           reject(error)
@@ -6037,30 +7193,37 @@ export function post_GetNewFSRenewalSN(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFSContLabExpRate
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFSContLabExpRate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFSContLabExpRate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFSContLabExpRate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFSContLabExpRate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFSContLabExpRate(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFSContLabExpRate(requestBody:GetNewFSContLabExpRate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFSContLabExpRate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetNewFSContLabExpRate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFSContLabExpRate_output)
           })
       .catch((error) => {
           reject(error)
@@ -6072,30 +7235,37 @@ export function post_GetNewFSContLabExpRate(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -6107,7 +7277,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -6131,15 +7301,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -6151,7 +7328,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -6175,15 +7352,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -6195,30 +7379,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -6230,30 +7421,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ServiceContractSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -6264,61 +7462,78 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContDtRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FSContDtRow[],
+   "value":Erp_Tablesets_FSContDtRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContHdListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FSContHdListRow[],
+   "value":Erp_Tablesets_FSContHdListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContHdRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FSContHdRow[],
+   "value":Erp_Tablesets_FSContHdRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContLabExpRateRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FSContLabExpRateRow[],
+   "value":Erp_Tablesets_FSContLabExpRateRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContOrderDtlListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FSContOrderDtlListRow[],
+   "value":Erp_Tablesets_FSContOrderDtlListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSContSNRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FSContSNRow[],
+   "value":Erp_Tablesets_FSContSNRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSRenewalDtRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FSRenewalDtRow[],
+   "value":Erp_Tablesets_FSRenewalDtRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSRenewalRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FSRenewalRow[],
+   "value":Erp_Tablesets_FSRenewalRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FSRenewalSNRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FSRenewalSNRow[],
+   "value":Erp_Tablesets_FSRenewalSNRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SNFormatRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SNFormatRow[],
+   "value":Erp_Tablesets_SNFormatRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SelectedSerialNumbersRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SelectedSerialNumbersRow[],
+   "value":Erp_Tablesets_SelectedSerialNumbersRow,
 }
 
 export interface Erp_Tablesets_FSContDtRow{
@@ -7414,6 +8629,23 @@ export interface Erp_Tablesets_SelectedSerialNumbersRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -7429,7 +8661,7 @@ export interface ActivateContract_input{
 export interface ActivateContract_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7446,7 +8678,7 @@ export interface ChangeFSContDtBillEndDate_input{
 export interface ChangeFSContDtBillEndDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7463,7 +8695,7 @@ export interface ChangeFSContDtBillStartDate_input{
 export interface ChangeFSContDtBillStartDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7480,7 +8712,7 @@ export interface ChangeFSContDtContractQty_input{
 export interface ChangeFSContDtContractQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7497,7 +8729,7 @@ export interface ChangeFSContDtOrderLine_input{
 export interface ChangeFSContDtOrderLine_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7514,7 +8746,7 @@ export interface ChangeFSContDtOrderNum_input{
 export interface ChangeFSContDtOrderNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7532,7 +8764,7 @@ export interface ChangeFSContDtPartNumWithSubs_input{
 export interface ChangeFSContDtPartNumWithSubs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7549,7 +8781,7 @@ export interface ChangeFSContDtPartNum_input{
 export interface ChangeFSContDtPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7566,7 +8798,7 @@ export interface ChangeFSContDtPricePerUnit_input{
 export interface ChangeFSContDtPricePerUnit_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7583,7 +8815,7 @@ export interface ChangeFSContDtProdCode_input{
 export interface ChangeFSContDtProdCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7600,7 +8832,7 @@ export interface ChangeFSContDtProjectID_input{
 export interface ChangeFSContDtProjectID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7617,7 +8849,7 @@ export interface ChangeFSContDtXPartNum_input{
 export interface ChangeFSContDtXPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7631,7 +8863,7 @@ export interface ChangeFSContHDUseOTS_input{
 export interface ChangeFSContHDUseOTS_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7648,7 +8880,7 @@ export interface ChangeFSContHdActiveDate_input{
 export interface ChangeFSContHdActiveDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7665,7 +8897,7 @@ export interface ChangeFSContHdBTCusNum_input{
 export interface ChangeFSContHdBTCusNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7682,7 +8914,7 @@ export interface ChangeFSContHdContractCode_input{
 export interface ChangeFSContHdContractCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7699,7 +8931,7 @@ export interface ChangeFSContHdCurrencyCode_input{
 export interface ChangeFSContHdCurrencyCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7716,7 +8948,7 @@ export interface ChangeFSContHdCustID_input{
 export interface ChangeFSContHdCustID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7733,7 +8965,7 @@ export interface ChangeFSContHdDeferredRev_input{
 export interface ChangeFSContHdDeferredRev_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7750,7 +8982,7 @@ export interface ChangeFSContHdDuration_input{
 export interface ChangeFSContHdDuration_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7767,7 +8999,7 @@ export interface ChangeFSContHdFiscalCalendarID_input{
 export interface ChangeFSContHdFiscalCalendarID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7784,7 +9016,7 @@ export interface ChangeFSContHdModifier_input{
 export interface ChangeFSContHdModifier_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7801,7 +9033,7 @@ export interface ChangeFSContHdPrcConNum_input{
 export interface ChangeFSContHdPrcConNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7818,7 +9050,7 @@ export interface ChangeFSContHdPricePer_input{
 export interface ChangeFSContHdPricePer_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7835,7 +9067,7 @@ export interface ChangeFSContHdQuotedContract_input{
 export interface ChangeFSContHdQuotedContract_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7852,7 +9084,7 @@ export interface ChangeFSContHdRACode_input{
 export interface ChangeFSContHdRACode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7869,7 +9101,7 @@ export interface ChangeFSContHdRecurringFreq_input{
 export interface ChangeFSContHdRecurringFreq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7886,7 +9118,7 @@ export interface ChangeFSContHdRecurringInv_input{
 export interface ChangeFSContHdRecurringInv_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7903,7 +9135,7 @@ export interface ChangeFSContHdShipToCustID_input{
 export interface ChangeFSContHdShipToCustID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7920,7 +9152,7 @@ export interface ChangeFSContHdShipToNum_input{
 export interface ChangeFSContHdShipToNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7937,7 +9169,7 @@ export interface ChangeFSContHdShpConNum_input{
 export interface ChangeFSContHdShpConNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7955,7 +9187,7 @@ export interface ChangeFSContHdSuspended_output{
 parameters : {
       /**  output parameters  */  
    opMessage:string,
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7972,7 +9204,7 @@ export interface ChangeFSContHdTaskSetID_input{
 export interface ChangeFSContHdTaskSetID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -7989,7 +9221,7 @@ export interface ChangeFSContHdTaxCatID_input{
 export interface ChangeFSContHdTaxCatID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8006,7 +9238,7 @@ export interface ChangeFSRenewalContractCode_input{
 export interface ChangeFSRenewalContractCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8023,7 +9255,7 @@ export interface ChangeFSRenewalDeferredRev_input{
 export interface ChangeFSRenewalDeferredRev_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8040,7 +9272,7 @@ export interface ChangeFSRenewalDtBillEndDate_input{
 export interface ChangeFSRenewalDtBillEndDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8057,7 +9289,7 @@ export interface ChangeFSRenewalDtBillStartDate_input{
 export interface ChangeFSRenewalDtBillStartDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8074,7 +9306,7 @@ export interface ChangeFSRenewalDtContractQty_input{
 export interface ChangeFSRenewalDtContractQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8091,7 +9323,7 @@ export interface ChangeFSRenewalDtIncreasePct_input{
 export interface ChangeFSRenewalDtIncreasePct_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8108,7 +9340,7 @@ export interface ChangeFSRenewalDtOrderLine_input{
 export interface ChangeFSRenewalDtOrderLine_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8125,7 +9357,7 @@ export interface ChangeFSRenewalDtOrderNum_input{
 export interface ChangeFSRenewalDtOrderNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8145,7 +9377,7 @@ export interface ChangeFSRenewalDtPartNumWithSubs_input{
 export interface ChangeFSRenewalDtPartNumWithSubs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8162,7 +9394,7 @@ export interface ChangeFSRenewalDtPartNum_input{
 export interface ChangeFSRenewalDtPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8182,7 +9414,7 @@ export interface ChangeFSRenewalDtPricePerUnit_input{
 export interface ChangeFSRenewalDtPricePerUnit_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8199,7 +9431,7 @@ export interface ChangeFSRenewalDtProdCode_input{
 export interface ChangeFSRenewalDtProdCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8216,7 +9448,7 @@ export interface ChangeFSRenewalDtProjectID_input{
 export interface ChangeFSRenewalDtProjectID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8233,7 +9465,7 @@ export interface ChangeFSRenewalDtXPartNum_input{
 export interface ChangeFSRenewalDtXPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8250,7 +9482,7 @@ export interface ChangeFSRenewalDuration_input{
 export interface ChangeFSRenewalDuration_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8267,7 +9499,7 @@ export interface ChangeFSRenewalFiscalCalendarID_input{
 export interface ChangeFSRenewalFiscalCalendarID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8284,7 +9516,7 @@ export interface ChangeFSRenewalModifier_input{
 export interface ChangeFSRenewalModifier_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8301,7 +9533,7 @@ export interface ChangeFSRenewalPricePer_input{
 export interface ChangeFSRenewalPricePer_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8318,7 +9550,7 @@ export interface ChangeFSRenewalQuotedRenewal_input{
 export interface ChangeFSRenewalQuotedRenewal_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8335,7 +9567,7 @@ export interface ChangeFSRenewalRACode_input{
 export interface ChangeFSRenewalRACode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8352,7 +9584,7 @@ export interface ChangeFSRenewalRecurringFreq_input{
 export interface ChangeFSRenewalRecurringFreq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8369,7 +9601,7 @@ export interface ChangeFSRenewalRecurringInv_input{
 export interface ChangeFSRenewalRecurringInv_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8386,7 +9618,7 @@ export interface ChangeFSRenewalRenewEffDate_input{
 export interface ChangeFSRenewalRenewEffDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8403,7 +9635,7 @@ export interface ChangeFSRenewalTaskSetID_input{
 export interface ChangeFSRenewalTaskSetID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8420,7 +9652,7 @@ export interface ChangeFSRenewalTaxCatID_input{
 export interface ChangeFSRenewalTaxCatID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8456,7 +9688,7 @@ export interface CheckSerialNumbers_input{
 export interface CheckSerialNumbers_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
    cMessageText:string,
 }
 }
@@ -8472,7 +9704,7 @@ export interface CountContractsOnQuote_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -8492,7 +9724,7 @@ export interface CreateContractRMA_input{
 export interface CreateContractRMA_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -9778,7 +11010,7 @@ export interface ExpireContract_input{
 export interface ExpireContract_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -9805,7 +11037,7 @@ export interface GenerateRenewalLines_input{
 export interface GenerateRenewalLines_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -9822,7 +11054,7 @@ export interface GenerateRenewal_input{
 export interface GenerateRenewal_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -9915,7 +11147,7 @@ export interface GetNewFSContDt_input{
 export interface GetNewFSContDt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -9932,7 +11164,7 @@ export interface GetNewFSContHdFromOrder_input{
 export interface GetNewFSContHdFromOrder_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -9946,7 +11178,7 @@ export interface GetNewFSContHd_input{
 export interface GetNewFSContHd_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -9962,7 +11194,7 @@ export interface GetNewFSContLabExpRate_input{
 export interface GetNewFSContLabExpRate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -9982,7 +11214,7 @@ export interface GetNewFSContSN_input{
 export interface GetNewFSContSN_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10000,7 +11232,7 @@ export interface GetNewFSRenewalDt_input{
 export interface GetNewFSRenewalDt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10022,7 +11254,7 @@ export interface GetNewFSRenewalSN_input{
 export interface GetNewFSRenewalSN_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10038,7 +11270,7 @@ export interface GetNewFSRenewal_input{
 export interface GetNewFSRenewal_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10053,7 +11285,7 @@ export interface GetRenewalSelectSerialNumbersParams_output{
    returnObj:Erp_Tablesets_SelectSerialNumbersParamsTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10079,7 +11311,7 @@ export interface GetRenewalSelectedSerialNumbers_input{
 export interface GetRenewalSelectedSerialNumbers_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10304,7 +11536,7 @@ export interface GetSelectSerialNumbersParams_output{
    returnObj:Erp_Tablesets_SelectSerialNumbersParamsTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10327,7 +11559,7 @@ export interface GetSelectedSerialNumbers_input{
 export interface GetSelectedSerialNumbers_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10397,7 +11629,7 @@ export interface SuspendContract_input{
 export interface SuspendContract_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10416,7 +11648,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtServiceContractTableset[],
+   ds:Erp_Tablesets_UpdExtServiceContractTableset,
    errorsOccurred:boolean,
 }
 }
@@ -10431,7 +11663,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10449,7 +11681,7 @@ export interface ValidateOTSTaxID_input{
 export interface ValidateOTSTaxID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
    opMessage:string,
 }
 }
@@ -10467,7 +11699,7 @@ export interface ValidateSN_input{
 export interface ValidateSN_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
    isVoided:boolean,
 }
 }
@@ -10485,7 +11717,7 @@ export interface VoidContract_input{
 export interface VoidContract_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 
@@ -10501,7 +11733,7 @@ export interface isContractExpired_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ServiceContractTableset[],
+   ds:Erp_Tablesets_ServiceContractTableset,
 }
 }
 

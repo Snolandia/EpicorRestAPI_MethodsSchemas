@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.AssetAddEntrySvc
 // Description: FA Asset Addition Entry Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAdditionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAdditionRow
    */  
 export function get_AssetAddEntries(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_AssetAddEntries(select?:string, expand?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FAAdditionRow)
           })
@@ -118,15 +158,15 @@ export function get_AssetAddEntries(select?:string, expand?:string, filter?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AssetAddEntries
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FAAdditionRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FAAdditionRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FAAdditionRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FAAdditionRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AssetAddEntries(requestBody:any, epicorHeaders?:Headers){
+export function post_AssetAddEntries(requestBody:Erp_Tablesets_FAAdditionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_AssetAddEntries(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -160,10 +207,10 @@ export function post_AssetAddEntries(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FAAdditionRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FAAdditionRow
    */  
 export function get_AssetAddEntries_Company_AssetNum_AdditionNum(Company:string, AssetNum:string, AdditionNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -178,7 +225,14 @@ export function get_AssetAddEntries_Company_AssetNum_AdditionNum(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FAAdditionRow)
           })
@@ -195,15 +249,15 @@ export function get_AssetAddEntries_Company_AssetNum_AdditionNum(Company:string,
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param AdditionNum Desc: AdditionNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FAAdditionRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FAAdditionRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AssetAddEntries_Company_AssetNum_AdditionNum(Company:string, AssetNum:string, AdditionNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AssetAddEntries_Company_AssetNum_AdditionNum(Company:string, AssetNum:string, AdditionNum:string, requestBody:Erp_Tablesets_FAAdditionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_AssetAddEntries_Company_AssetNum_AdditionNum(Company:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -234,7 +295,7 @@ export function patch_AssetAddEntries_Company_AssetNum_AdditionNum(Company:strin
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param AdditionNum Desc: AdditionNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -253,7 +314,14 @@ export function delete_AssetAddEntries_Company_AssetNum_AdditionNum(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -276,10 +344,10 @@ export function delete_AssetAddEntries_Company_AssetNum_AdditionNum(Company:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAddRegRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAddRegRow
    */  
 export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAddRegs(Company:string, AssetNum:string, AdditionNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -294,7 +362,14 @@ export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAddRegs(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FAAddRegRow)
           })
@@ -314,10 +389,10 @@ export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAddRegs(Compa
       @param AssetRegID Desc: AssetRegID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FAAddRegRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FAAddRegRow
    */  
 export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAddRegs_Company_AssetNum_AdditionNum_AssetRegID(Company:string, AssetNum:string, AdditionNum:string, AssetRegID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -332,7 +407,14 @@ export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAddRegs_Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FAAddRegRow)
           })
@@ -355,10 +437,10 @@ export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAddRegs_Compa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAdditionAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAdditionAttchRow
    */  
 export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAdditionAttches(Company:string, AssetNum:string, AdditionNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -373,7 +455,14 @@ export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAdditionAttch
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FAAdditionAttchRow)
           })
@@ -393,10 +482,10 @@ export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAdditionAttch
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FAAdditionAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FAAdditionAttchRow
    */  
 export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAdditionAttches_Company_AssetNum_AdditionNum_DrawingSeq(Company:string, AssetNum:string, AdditionNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -411,7 +500,14 @@ export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAdditionAttch
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FAAdditionAttchRow)
           })
@@ -431,10 +527,10 @@ export function get_AssetAddEntries_Company_AssetNum_AdditionNum_FAAdditionAttch
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAddRegRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAddRegRow
    */  
 export function get_FAAddRegs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -449,7 +545,14 @@ export function get_FAAddRegs(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FAAddRegRow)
           })
@@ -463,15 +566,15 @@ export function get_FAAddRegs(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FAAddRegs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FAAddRegRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FAAddRegRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FAAddRegRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FAAddRegRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FAAddRegs(requestBody:any, epicorHeaders?:Headers){
+export function post_FAAddRegs(requestBody:Erp_Tablesets_FAAddRegRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -485,7 +588,14 @@ export function post_FAAddRegs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -505,10 +615,10 @@ export function post_FAAddRegs(requestBody:any, epicorHeaders?:Headers){
       @param AssetRegID Desc: AssetRegID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FAAddRegRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FAAddRegRow
    */  
 export function get_FAAddRegs_Company_AssetNum_AdditionNum_AssetRegID(Company:string, AssetNum:string, AdditionNum:string, AssetRegID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -523,7 +633,14 @@ export function get_FAAddRegs_Company_AssetNum_AdditionNum_AssetRegID(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FAAddRegRow)
           })
@@ -541,15 +658,15 @@ export function get_FAAddRegs_Company_AssetNum_AdditionNum_AssetRegID(Company:st
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param AdditionNum Desc: AdditionNum   Required: True
       @param AssetRegID Desc: AssetRegID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FAAddRegRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FAAddRegRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FAAddRegs_Company_AssetNum_AdditionNum_AssetRegID(Company:string, AssetNum:string, AdditionNum:string, AssetRegID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FAAddRegs_Company_AssetNum_AdditionNum_AssetRegID(Company:string, AssetNum:string, AdditionNum:string, AssetRegID:string, requestBody:Erp_Tablesets_FAAddRegRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -563,7 +680,14 @@ export function patch_FAAddRegs_Company_AssetNum_AdditionNum_AssetRegID(Company:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -581,7 +705,7 @@ export function patch_FAAddRegs_Company_AssetNum_AdditionNum_AssetRegID(Company:
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param AdditionNum Desc: AdditionNum   Required: True
       @param AssetRegID Desc: AssetRegID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -600,7 +724,14 @@ export function delete_FAAddRegs_Company_AssetNum_AdditionNum_AssetRegID(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -620,10 +751,10 @@ export function delete_FAAddRegs_Company_AssetNum_AdditionNum_AssetRegID(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAdditionAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAdditionAttchRow
    */  
 export function get_FAAdditionAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -638,7 +769,14 @@ export function get_FAAdditionAttches(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FAAdditionAttchRow)
           })
@@ -652,15 +790,15 @@ export function get_FAAdditionAttches(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FAAdditionAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FAAdditionAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FAAdditionAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FAAdditionAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FAAdditionAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FAAdditionAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_FAAdditionAttches(requestBody:Erp_Tablesets_FAAdditionAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -674,7 +812,14 @@ export function post_FAAdditionAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -694,10 +839,10 @@ export function post_FAAdditionAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FAAdditionAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FAAdditionAttchRow
    */  
 export function get_FAAdditionAttches_Company_AssetNum_AdditionNum_DrawingSeq(Company:string, AssetNum:string, AdditionNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -712,7 +857,14 @@ export function get_FAAdditionAttches_Company_AssetNum_AdditionNum_DrawingSeq(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FAAdditionAttchRow)
           })
@@ -730,15 +882,15 @@ export function get_FAAdditionAttches_Company_AssetNum_AdditionNum_DrawingSeq(Co
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param AdditionNum Desc: AdditionNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FAAdditionAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FAAdditionAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FAAdditionAttches_Company_AssetNum_AdditionNum_DrawingSeq(Company:string, AssetNum:string, AdditionNum:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FAAdditionAttches_Company_AssetNum_AdditionNum_DrawingSeq(Company:string, AssetNum:string, AdditionNum:string, DrawingSeq:string, requestBody:Erp_Tablesets_FAAdditionAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -752,7 +904,14 @@ export function patch_FAAdditionAttches_Company_AssetNum_AdditionNum_DrawingSeq(
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -770,7 +929,7 @@ export function patch_FAAdditionAttches_Company_AssetNum_AdditionNum_DrawingSeq(
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param AdditionNum Desc: AdditionNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -789,7 +948,14 @@ export function delete_FAAdditionAttches_Company_AssetNum_AdditionNum_DrawingSeq
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -809,10 +975,10 @@ export function delete_FAAdditionAttches_Company_AssetNum_AdditionNum_DrawingSeq
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SelectedSerialNumbersRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SelectedSerialNumbersRow
    */  
 export function get_SelectedSerialNumbers(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -827,7 +993,14 @@ export function get_SelectedSerialNumbers(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SelectedSerialNumbersRow)
           })
@@ -841,15 +1014,15 @@ export function get_SelectedSerialNumbers(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SelectedSerialNumbers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectedSerialNumbers(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectedSerialNumbers(requestBody:Erp_Tablesets_SelectedSerialNumbersRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -863,7 +1036,14 @@ export function post_SelectedSerialNumbers(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -882,10 +1062,10 @@ export function post_SelectedSerialNumbers(requestBody:any, epicorHeaders?:Heade
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
    */  
 export function get_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:string, PartNum:string, SerialNumber:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -900,7 +1080,14 @@ export function get_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SelectedSerialNumbersRow)
           })
@@ -917,15 +1104,15 @@ export function get_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SelectedSerialNumbersRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:string, PartNum:string, SerialNumber:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company:string, PartNum:string, SerialNumber:string, requestBody:Erp_Tablesets_SelectedSerialNumbersRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -939,7 +1126,14 @@ export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -956,7 +1150,7 @@ export function patch_SelectedSerialNumbers_Company_PartNum_SerialNumber(Company
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param SerialNumber Desc: SerialNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -975,7 +1169,14 @@ export function delete_SelectedSerialNumbers_Company_PartNum_SerialNumber(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -995,10 +1196,10 @@ export function delete_SelectedSerialNumbers_Company_PartNum_SerialNumber(Compan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SNFormatRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.SNFormatRow
    */  
 export function get_SNFormats(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1013,7 +1214,14 @@ export function get_SNFormats(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SNFormatRow)
           })
@@ -1027,15 +1235,15 @@ export function get_SNFormats(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SNFormats
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.SNFormatRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SNFormats(requestBody:any, epicorHeaders?:Headers){
+export function post_SNFormats(requestBody:Erp_Tablesets_SNFormatRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1049,7 +1257,14 @@ export function post_SNFormats(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1068,10 +1283,10 @@ export function post_SNFormats(requestBody:any, epicorHeaders?:Headers){
       @param Plant Desc: Plant   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.SNFormatRow
    */  
 export function get_SNFormats_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1086,7 +1301,14 @@ export function get_SNFormats_Company_PartNum_Plant(Company:string, PartNum:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_SNFormatRow)
           })
@@ -1103,15 +1325,15 @@ export function get_SNFormats_Company_PartNum_Plant(Company:string, PartNum:stri
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.SNFormatRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, requestBody:Erp_Tablesets_SNFormatRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1125,7 +1347,14 @@ export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1142,7 +1371,7 @@ export function patch_SNFormats_Company_PartNum_Plant(Company:string, PartNum:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1161,7 +1390,14 @@ export function delete_SNFormats_Company_PartNum_Plant(Company:string, PartNum:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1181,10 +1417,10 @@ export function delete_SNFormats_Company_PartNum_Plant(Company:string, PartNum:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAdditionListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FAAdditionListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1199,7 +1435,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FAAdditionListRow)
           })
@@ -1211,6 +1454,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1226,7 +1486,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1304,15 +1564,22 @@ export function get_GetRows(whereClauseFAAddition:string, whereClauseFAAdditionA
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1326,7 +1593,7 @@ export function get_GetRows(whereClauseFAAddition:string, whereClauseFAAdditionA
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1359,15 +1626,22 @@ export function get_GetByID(assetNum:string, additionNum:string, epicorHeaders?:
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1382,7 +1656,7 @@ export function get_GetByID(assetNum:string, additionNum:string, epicorHeaders?:
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1424,15 +1698,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1444,30 +1725,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method CheckAssetTransactions
    Description: Checks if there are any transactions for this Asset marked as Ready To Post
    OperationID: CheckAssetTransactions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckAssetTransactions_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckAssetTransactions_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckAssetTransactions_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckAssetTransactions(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckAssetTransactions(requestBody:CheckAssetTransactions_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckAssetTransactions_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/CheckAssetTransactions", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckAssetTransactions_output)
           })
       .catch((error) => {
           reject(error)
@@ -1479,30 +1767,37 @@ export function post_CheckAssetTransactions(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ClearReadyToPost
    Description: Clears Ready To Post flag on Asset transactions with SysRowID different from the one provided
    OperationID: ClearReadyToPost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ClearReadyToPost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ClearReadyToPost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClearReadyToPost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ClearReadyToPost(requestBody:any, epicorHeaders?:Headers){
+export function post_ClearReadyToPost(requestBody:ClearReadyToPost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClearReadyToPost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/ClearReadyToPost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClearReadyToPost_output)
           })
       .catch((error) => {
           reject(error)
@@ -1515,30 +1810,37 @@ export function post_ClearReadyToPost(requestBody:any, epicorHeaders?:Headers){
    Description: To be called on leave of FAAddition.Added field to update costs based on
 new exchange rate derived from this apply date.
    OperationID: LeaveAdded
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveAdded_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveAdded_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveAdded_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveAdded(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveAdded(requestBody:LeaveAdded_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveAdded_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveAdded", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveAdded_output)
           })
       .catch((error) => {
           reject(error)
@@ -1550,30 +1852,37 @@ export function post_LeaveAdded(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeaveAdditionCost
    Description: To be called on leave of addition cost field to update the Book Value field.
    OperationID: LeaveAdditionCost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveAdditionCost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveAdditionCost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveAdditionCost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveAdditionCost(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveAdditionCost(requestBody:LeaveAdditionCost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveAdditionCost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveAdditionCost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveAdditionCost_output)
           })
       .catch((error) => {
           reject(error)
@@ -1585,30 +1894,37 @@ export function post_LeaveAdditionCost(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeaveAdditionType
    Description: To be called on leave of AdditionType field
    OperationID: LeaveAdditionType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveAdditionType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveAdditionType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveAdditionType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveAdditionType(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveAdditionType(requestBody:LeaveAdditionType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveAdditionType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveAdditionType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveAdditionType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1620,30 +1936,37 @@ export function post_LeaveAdditionType(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeaveGrantAmt
    Description: To be called on leave of grant amount field to update the Book Value field.
    OperationID: LeaveGrantAmt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveGrantAmt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveGrantAmt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveGrantAmt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveGrantAmt(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveGrantAmt(requestBody:LeaveGrantAmt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveGrantAmt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveGrantAmt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveGrantAmt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1655,30 +1978,37 @@ export function post_LeaveGrantAmt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeaveInvoiceLine
    Description: Called on the leave of FAAddition.InvoiceLine for validation purpose.
    OperationID: LeaveInvoiceLine
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveInvoiceLine_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveInvoiceLine_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveInvoiceLine_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveInvoiceLine(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveInvoiceLine(requestBody:LeaveInvoiceLine_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveInvoiceLine_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveInvoiceLine", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveInvoiceLine_output)
           })
       .catch((error) => {
           reject(error)
@@ -1690,30 +2020,37 @@ export function post_LeaveInvoiceLine(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeaveInvoiceNum
    Description: Called on the leave of Invoice Number for validation purpose.
    OperationID: LeaveInvoiceNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveInvoiceNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveInvoiceNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveInvoiceNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveInvoiceNum(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveInvoiceNum(requestBody:LeaveInvoiceNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveInvoiceNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveInvoiceNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveInvoiceNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1725,30 +2062,37 @@ export function post_LeaveInvoiceNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeaveJobNum
    Description: To be called on leave of Job Number field for validating an existing Job.
    OperationID: LeaveJobNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveJobNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveJobNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveJobNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveJobNum(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveJobNum(requestBody:LeaveJobNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveJobNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveJobNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveJobNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1760,30 +2104,37 @@ export function post_LeaveJobNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeaveLotNum
    Description: To be called on leave of FAAddition.LotNum field
    OperationID: LeaveLotNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveLotNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveLotNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveLotNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveLotNum(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveLotNum(requestBody:LeaveLotNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveLotNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveLotNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveLotNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1795,30 +2146,37 @@ export function post_LeaveLotNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeavePartNum
    Description: To be called on leave of FAAddition.PartNum field
    OperationID: LeavePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeavePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeavePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeavePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeavePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_LeavePartNum(requestBody:LeavePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeavePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeavePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeavePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1830,30 +2188,37 @@ export function post_LeavePartNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeavePONum
    Description: To be called on leave of VendorID field to validate an existing PO
    OperationID: LeavePONum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeavePONum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeavePONum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeavePONum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeavePONum(requestBody:any, epicorHeaders?:Headers){
+export function post_LeavePONum(requestBody:LeavePONum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeavePONum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeavePONum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeavePONum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1865,30 +2230,37 @@ export function post_LeavePONum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeaveRegCurrDepreciation
    Description: To be called on leave of FAAddReg.CurrDepreciation field to update the Book Value field.
    OperationID: LeaveRegCurrDepreciation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveRegCurrDepreciation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveRegCurrDepreciation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveRegCurrDepreciation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveRegCurrDepreciation(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveRegCurrDepreciation(requestBody:LeaveRegCurrDepreciation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveRegCurrDepreciation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveRegCurrDepreciation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveRegCurrDepreciation_output)
           })
       .catch((error) => {
           reject(error)
@@ -1900,30 +2272,37 @@ export function post_LeaveRegCurrDepreciation(requestBody:any, epicorHeaders?:He
    Summary: Invoke method LeaveRegCurrGrantDep
    Description: To be called on leave of FAAddReg.CurrGrantDep field to update the Grant Book Value field.
    OperationID: LeaveRegCurrGrantDep
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveRegCurrGrantDep_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveRegCurrGrantDep_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveRegCurrGrantDep_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveRegCurrGrantDep(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveRegCurrGrantDep(requestBody:LeaveRegCurrGrantDep_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveRegCurrGrantDep_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveRegCurrGrantDep", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveRegCurrGrantDep_output)
           })
       .catch((error) => {
           reject(error)
@@ -1935,30 +2314,37 @@ export function post_LeaveRegCurrGrantDep(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method LeaveRegPrevDepreciation
    Description: To be called on leave of FAAddReg.PrevDepreciation field to update the Book Value field.
    OperationID: LeaveRegPrevDepreciation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveRegPrevDepreciation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveRegPrevDepreciation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveRegPrevDepreciation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveRegPrevDepreciation(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveRegPrevDepreciation(requestBody:LeaveRegPrevDepreciation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveRegPrevDepreciation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveRegPrevDepreciation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveRegPrevDepreciation_output)
           })
       .catch((error) => {
           reject(error)
@@ -1970,30 +2356,37 @@ export function post_LeaveRegPrevDepreciation(requestBody:any, epicorHeaders?:He
    Summary: Invoke method LeaveRegPrevGrantDep
    Description: To be called on leave of FAAddReg.PrevGrantDep field to update the Grant Book Value field.
    OperationID: LeaveRegPrevGrantDep
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveRegPrevGrantDep_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveRegPrevGrantDep_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveRegPrevGrantDep_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveRegPrevGrantDep(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveRegPrevGrantDep(requestBody:LeaveRegPrevGrantDep_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveRegPrevGrantDep_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveRegPrevGrantDep", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveRegPrevGrantDep_output)
           })
       .catch((error) => {
           reject(error)
@@ -2005,30 +2398,37 @@ export function post_LeaveRegPrevGrantDep(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method LeaveTransferQty
    Description: To be called on leave of FAAddition.TransferQty field. This qty is always expressed in IUM.
    OperationID: LeaveTransferQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveTransferQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveTransferQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveTransferQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveTransferQty(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveTransferQty(requestBody:LeaveTransferQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveTransferQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveTransferQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveTransferQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -2040,30 +2440,37 @@ export function post_LeaveTransferQty(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeaveVendorID
    Description: To be called on leave of VendorID field to validate an existing Vendor
    OperationID: LeaveVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveVendorID(requestBody:LeaveVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2075,30 +2482,37 @@ export function post_LeaveVendorID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LeaveWarehouse
    Description: To be called on leave of FAAddition.WarehouseCode field.
    OperationID: LeaveWarehouse
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LeaveWarehouse_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LeaveWarehouse_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LeaveWarehouse_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LeaveWarehouse(requestBody:any, epicorHeaders?:Headers){
+export function post_LeaveWarehouse(requestBody:LeaveWarehouse_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LeaveWarehouse_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/LeaveWarehouse", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LeaveWarehouse_output)
           })
       .catch((error) => {
           reject(error)
@@ -2110,30 +2524,37 @@ export function post_LeaveWarehouse(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method PreUpdate
    Description: To be called before Update
    OperationID: PreUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_PreUpdate(requestBody:PreUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/PreUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -2144,30 +2565,37 @@ export function post_PreUpdate(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ChangePlaceInServDate
    OperationID: ChangePlaceInServDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangePlaceInServDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangePlaceInServDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangePlaceInServDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangePlaceInServDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangePlaceInServDate(requestBody:ChangePlaceInServDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangePlaceInServDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/ChangePlaceInServDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangePlaceInServDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -2181,30 +2609,37 @@ export function post_ChangePlaceInServDate(requestBody:any, epicorHeaders?:Heade
 Notes:
 <param name="ds">Asset Addition DataSet</param><returns>The SelectSerialNumbersParams dataset</returns>
    OperationID: GetSelectSerialNumbersParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSelectSerialNumbersParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSelectSerialNumbersParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSelectSerialNumbersParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSelectSerialNumbersParams(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSelectSerialNumbersParams(requestBody:GetSelectSerialNumbersParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSelectSerialNumbersParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/GetSelectSerialNumbersParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSelectSerialNumbersParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -2216,30 +2651,37 @@ export function post_GetSelectSerialNumbersParams(requestBody:any, epicorHeaders
    Summary: Invoke method ValidateSN
    Description: Validates that a single serial number scanned in the serial number selection form is valid for this transaction
    OperationID: ValidateSN
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSN_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSN_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSN_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSN(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSN(requestBody:ValidateSN_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSN_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/ValidateSN", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSN_output)
           })
       .catch((error) => {
           reject(error)
@@ -2252,30 +2694,37 @@ export function post_ValidateSN(requestBody:any, epicorHeaders?:Headers){
    Description: This method will retrieve the serial numbers for FAAddition record and
 update the SelectedSerialNumbers table with these records.
    OperationID: GetSelectedSerialNumbers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSelectedSerialNumbers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSelectedSerialNumbers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSelectedSerialNumbers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSelectedSerialNumbers(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSelectedSerialNumbers(requestBody:GetSelectedSerialNumbers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSelectedSerialNumbers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/GetSelectedSerialNumbers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSelectedSerialNumbers_output)
           })
       .catch((error) => {
           reject(error)
@@ -2287,30 +2736,37 @@ export function post_GetSelectedSerialNumbers(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetNewFAAddition
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFAAddition
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFAAddition_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFAAddition_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFAAddition_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFAAddition(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFAAddition(requestBody:GetNewFAAddition_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFAAddition_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/GetNewFAAddition", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFAAddition_output)
           })
       .catch((error) => {
           reject(error)
@@ -2322,30 +2778,37 @@ export function post_GetNewFAAddition(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFAAdditionAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFAAdditionAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFAAdditionAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFAAdditionAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFAAdditionAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFAAdditionAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFAAdditionAttch(requestBody:GetNewFAAdditionAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFAAdditionAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/GetNewFAAdditionAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFAAdditionAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -2357,30 +2820,37 @@ export function post_GetNewFAAdditionAttch(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewFAAddReg
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFAAddReg
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFAAddReg_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFAAddReg_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFAAddReg_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFAAddReg(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFAAddReg(requestBody:GetNewFAAddReg_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFAAddReg_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/GetNewFAAddReg", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFAAddReg_output)
           })
       .catch((error) => {
           reject(error)
@@ -2392,30 +2862,37 @@ export function post_GetNewFAAddReg(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2427,7 +2904,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2451,15 +2928,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2471,7 +2955,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2495,15 +2979,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2515,30 +3006,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2550,30 +3048,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AssetAddEntrySvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2584,36 +3089,53 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FAAddRegRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FAAddRegRow[],
+   "value":Erp_Tablesets_FAAddRegRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FAAdditionAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FAAdditionAttchRow[],
+   "value":Erp_Tablesets_FAAdditionAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FAAdditionListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FAAdditionListRow[],
+   "value":Erp_Tablesets_FAAdditionListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FAAdditionRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FAAdditionRow[],
+   "value":Erp_Tablesets_FAAdditionRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SNFormatRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SNFormatRow[],
+   "value":Erp_Tablesets_SNFormatRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_SelectedSerialNumbersRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_SelectedSerialNumbersRow[],
+   "value":Erp_Tablesets_SelectedSerialNumbersRow,
 }
 
 export interface Erp_Tablesets_FAAddRegRow{
@@ -3222,6 +3744,23 @@ export interface Erp_Tablesets_SelectedSerialNumbersRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -3237,7 +3776,7 @@ export interface ChangePlaceInServDate_input{
 export interface ChangePlaceInServDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4023,7 +4562,7 @@ export interface GetNewFAAddReg_input{
 export interface GetNewFAAddReg_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4041,7 +4580,7 @@ export interface GetNewFAAdditionAttch_input{
 export interface GetNewFAAdditionAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4057,7 +4596,7 @@ export interface GetNewFAAddition_input{
 export interface GetNewFAAddition_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4099,7 +4638,7 @@ export interface GetSelectSerialNumbersParams_output{
    returnObj:Erp_Tablesets_SelectSerialNumbersParamsTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4122,7 +4661,7 @@ export interface GetSelectedSerialNumbers_input{
 export interface GetSelectedSerialNumbers_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4176,7 +4715,7 @@ export interface LeaveAdded_output{
 parameters : {
       /**  output parameters  */  
    warning:string,
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4196,7 +4735,7 @@ export interface LeaveAdditionCost_input{
 export interface LeaveAdditionCost_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
    errorMessage:string,
 }
 }
@@ -4214,7 +4753,7 @@ export interface LeaveAdditionType_input{
 export interface LeaveAdditionType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
    oSerialWarning:string,
 }
 }
@@ -4235,7 +4774,7 @@ export interface LeaveGrantAmt_input{
 export interface LeaveGrantAmt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4252,7 +4791,7 @@ export interface LeaveInvoiceLine_input{
 export interface LeaveInvoiceLine_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4269,7 +4808,7 @@ export interface LeaveInvoiceNum_input{
 export interface LeaveInvoiceNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4286,7 +4825,7 @@ export interface LeaveJobNum_input{
 export interface LeaveJobNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4303,7 +4842,7 @@ export interface LeaveLotNum_input{
 export interface LeaveLotNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4320,7 +4859,7 @@ export interface LeavePONum_input{
 export interface LeavePONum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4337,7 +4876,7 @@ export interface LeavePartNum_input{
 export interface LeavePartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
    oSerialWarning:string,
 }
 }
@@ -4373,7 +4912,7 @@ export interface LeaveRegCurrDepreciation_input{
 export interface LeaveRegCurrDepreciation_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4405,7 +4944,7 @@ export interface LeaveRegCurrGrantDep_input{
 export interface LeaveRegCurrGrantDep_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4440,7 +4979,7 @@ export interface LeaveRegPrevDepreciation_input{
 export interface LeaveRegPrevDepreciation_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4472,7 +5011,7 @@ export interface LeaveRegPrevGrantDep_input{
 export interface LeaveRegPrevGrantDep_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4489,7 +5028,7 @@ export interface LeaveTransferQty_input{
 export interface LeaveTransferQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
    errorMessage:string,
 }
 }
@@ -4507,7 +5046,7 @@ export interface LeaveVendorID_input{
 export interface LeaveVendorID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4524,7 +5063,7 @@ export interface LeaveWarehouse_input{
 export interface LeaveWarehouse_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4539,7 +5078,7 @@ export interface PreUpdate_output{
 parameters : {
       /**  output parameters  */  
    returnMessage:string,
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4558,7 +5097,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtAssetAddEntryTableset[],
+   ds:Erp_Tablesets_UpdExtAssetAddEntryTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4573,7 +5112,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
 }
 }
 
@@ -4590,7 +5129,7 @@ export interface ValidateSN_input{
 export interface ValidateSN_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AssetAddEntryTableset[],
+   ds:Erp_Tablesets_AssetAddEntryTableset,
    isVoided:boolean,
 }
 }

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.ShellLayoutSvc
 // Description: Service for managing IceShell layouts
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ShellLayoutRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ShellLayoutRow
    */  
 export function get_ShellLayouts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_ShellLayouts(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ShellLayoutRow)
           })
@@ -117,15 +157,15 @@ export function get_ShellLayouts(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ShellLayouts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ShellLayoutRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ShellLayoutRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ShellLayoutRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ShellLayoutRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ShellLayouts(requestBody:any, epicorHeaders?:Headers){
+export function post_ShellLayouts(requestBody:Ice_Tablesets_ShellLayoutRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_ShellLayouts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_ShellLayouts(requestBody:any, epicorHeaders?:Headers){
       @param LayoutID Desc: LayoutID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ShellLayoutRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ShellLayoutRow
    */  
 export function get_ShellLayouts_TenantID_HomePageType_SubType_LayoutID(TenantID:string, HomePageType:string, SubType:string, LayoutID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_ShellLayouts_TenantID_HomePageType_SubType_LayoutID(TenantID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ShellLayoutRow)
           })
@@ -195,15 +249,15 @@ export function get_ShellLayouts_TenantID_HomePageType_SubType_LayoutID(TenantID
       @param HomePageType Desc: HomePageType   Required: True   Allow empty value : True
       @param SubType Desc: SubType   Required: True   Allow empty value : True
       @param LayoutID Desc: LayoutID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ShellLayoutRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ShellLayoutRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ShellLayouts_TenantID_HomePageType_SubType_LayoutID(TenantID:string, HomePageType:string, SubType:string, LayoutID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ShellLayouts_TenantID_HomePageType_SubType_LayoutID(TenantID:string, HomePageType:string, SubType:string, LayoutID:string, requestBody:Ice_Tablesets_ShellLayoutRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_ShellLayouts_TenantID_HomePageType_SubType_LayoutID(Tenant
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -235,7 +296,7 @@ export function patch_ShellLayouts_TenantID_HomePageType_SubType_LayoutID(Tenant
       @param HomePageType Desc: HomePageType   Required: True   Allow empty value : True
       @param SubType Desc: SubType   Required: True   Allow empty value : True
       @param LayoutID Desc: LayoutID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -254,7 +315,14 @@ export function delete_ShellLayouts_TenantID_HomePageType_SubType_LayoutID(Tenan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -274,10 +342,10 @@ export function delete_ShellLayouts_TenantID_HomePageType_SubType_LayoutID(Tenan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ShellLayoutListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ShellLayoutListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -292,7 +360,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ShellLayoutListRow)
           })
@@ -305,6 +380,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -315,7 +407,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -357,15 +449,22 @@ export function get_GetRows(whereClauseShellLayout:string, pageSize:string, abso
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -381,7 +480,7 @@ export function get_GetRows(whereClauseShellLayout:string, pageSize:string, abso
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -432,15 +531,22 @@ export function get_GetByID(tenantID:string, homePageType:string, subType:string
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -455,7 +561,7 @@ export function get_GetByID(tenantID:string, homePageType:string, subType:string
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -497,15 +603,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -517,30 +630,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetDefaultLayout
    Description: Get Layout for user
    OperationID: GetDefaultLayout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDefaultLayout_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDefaultLayout_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultLayout_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDefaultLayout(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDefaultLayout(requestBody:GetDefaultLayout_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultLayout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetDefaultLayout", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultLayout_output)
           })
       .catch((error) => {
           reject(error)
@@ -552,30 +672,37 @@ export function post_GetDefaultLayout(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ResetToDefaultLayout
    Description: Resets to default layout.
    OperationID: ResetToDefaultLayout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ResetToDefaultLayout_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ResetToDefaultLayout_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ResetToDefaultLayout_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ResetToDefaultLayout(requestBody:any, epicorHeaders?:Headers){
+export function post_ResetToDefaultLayout(requestBody:ResetToDefaultLayout_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ResetToDefaultLayout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/ResetToDefaultLayout", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ResetToDefaultLayout_output)
           })
       .catch((error) => {
           reject(error)
@@ -587,30 +714,37 @@ export function post_ResetToDefaultLayout(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method SetAsSystemDefaultLayout
    Description: Sets the specified published layout as the system default layout for the homepage type.
    OperationID: SetAsSystemDefaultLayout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetAsSystemDefaultLayout_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetAsSystemDefaultLayout_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetAsSystemDefaultLayout_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetAsSystemDefaultLayout(requestBody:any, epicorHeaders?:Headers){
+export function post_SetAsSystemDefaultLayout(requestBody:SetAsSystemDefaultLayout_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetAsSystemDefaultLayout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/SetAsSystemDefaultLayout", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetAsSystemDefaultLayout_output)
           })
       .catch((error) => {
           reject(error)
@@ -622,30 +756,37 @@ export function post_SetAsSystemDefaultLayout(requestBody:any, epicorHeaders?:He
    Summary: Invoke method IsLayoutPublished
    Description: Checks if layout is published.
    OperationID: IsLayoutPublished
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsLayoutPublished_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsLayoutPublished_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsLayoutPublished_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsLayoutPublished(requestBody:any, epicorHeaders?:Headers){
+export function post_IsLayoutPublished(requestBody:IsLayoutPublished_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsLayoutPublished_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/IsLayoutPublished", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsLayoutPublished_output)
           })
       .catch((error) => {
           reject(error)
@@ -657,30 +798,37 @@ export function post_IsLayoutPublished(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPublishedShellLayouts
    Description: Gets the published layouts.
    OperationID: GetPublishedShellLayouts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPublishedShellLayouts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPublishedShellLayouts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPublishedShellLayouts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPublishedShellLayouts(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPublishedShellLayouts(requestBody:GetPublishedShellLayouts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPublishedShellLayouts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetPublishedShellLayouts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPublishedShellLayouts_output)
           })
       .catch((error) => {
           reject(error)
@@ -692,30 +840,37 @@ export function post_GetPublishedShellLayouts(requestBody:any, epicorHeaders?:He
    Summary: Invoke method CheckIfUserHasAccessToLayout
    Description: Checks if user has access to layout.
    OperationID: CheckIfUserHasAccessToLayout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckIfUserHasAccessToLayout_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckIfUserHasAccessToLayout_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckIfUserHasAccessToLayout_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckIfUserHasAccessToLayout(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckIfUserHasAccessToLayout(requestBody:CheckIfUserHasAccessToLayout_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckIfUserHasAccessToLayout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/CheckIfUserHasAccessToLayout", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckIfUserHasAccessToLayout_output)
           })
       .catch((error) => {
           reject(error)
@@ -727,30 +882,37 @@ export function post_CheckIfUserHasAccessToLayout(requestBody:any, epicorHeaders
    Summary: Invoke method UpdateSecurityCodeForPublishedLayout
    Description: Updates the security code for published layout.
    OperationID: UpdateSecurityCodeForPublishedLayout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateSecurityCodeForPublishedLayout_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateSecurityCodeForPublishedLayout_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateSecurityCodeForPublishedLayout_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateSecurityCodeForPublishedLayout(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateSecurityCodeForPublishedLayout(requestBody:UpdateSecurityCodeForPublishedLayout_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateSecurityCodeForPublishedLayout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/UpdateSecurityCodeForPublishedLayout", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateSecurityCodeForPublishedLayout_output)
           })
       .catch((error) => {
           reject(error)
@@ -762,30 +924,37 @@ export function post_UpdateSecurityCodeForPublishedLayout(requestBody:any, epico
    Summary: Invoke method PublishLayout
    Description: Publishes the layout from the ShellLayoutPersonal into the ShellLayout table.
    OperationID: PublishLayout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PublishLayout_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PublishLayout_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PublishLayout_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PublishLayout(requestBody:any, epicorHeaders?:Headers){
+export function post_PublishLayout(requestBody:PublishLayout_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PublishLayout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/PublishLayout", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PublishLayout_output)
           })
       .catch((error) => {
           reject(error)
@@ -797,30 +966,37 @@ export function post_PublishLayout(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UnpublishLayout
    Description: Unpublishes the layout if it is un-used.
    OperationID: UnpublishLayout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnpublishLayout_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnpublishLayout_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnpublishLayout_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnpublishLayout(requestBody:any, epicorHeaders?:Headers){
+export function post_UnpublishLayout(requestBody:UnpublishLayout_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnpublishLayout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/UnpublishLayout", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnpublishLayout_output)
           })
       .catch((error) => {
           reject(error)
@@ -832,30 +1008,37 @@ export function post_UnpublishLayout(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SelectPublishedLayoutForUser
    Description: Selects the published layout for user.
    OperationID: SelectPublishedLayoutForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SelectPublishedLayoutForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SelectPublishedLayoutForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SelectPublishedLayoutForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectPublishedLayoutForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectPublishedLayoutForUser(requestBody:SelectPublishedLayoutForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SelectPublishedLayoutForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/SelectPublishedLayoutForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SelectPublishedLayoutForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -867,30 +1050,37 @@ export function post_SelectPublishedLayoutForUser(requestBody:any, epicorHeaders
    Summary: Invoke method SaveShellLayoutAsPersonal
    Description: Saves the published layout as personal.
    OperationID: SaveShellLayoutAsPersonal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveShellLayoutAsPersonal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveShellLayoutAsPersonal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveShellLayoutAsPersonal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveShellLayoutAsPersonal(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveShellLayoutAsPersonal(requestBody:SaveShellLayoutAsPersonal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveShellLayoutAsPersonal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/SaveShellLayoutAsPersonal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveShellLayoutAsPersonal_output)
           })
       .catch((error) => {
           reject(error)
@@ -902,30 +1092,37 @@ export function post_SaveShellLayoutAsPersonal(requestBody:any, epicorHeaders?:H
    Summary: Invoke method IsCurrentPersonalLayoutReadonly
    Description: Determines whether the user's layout is non-editable (published or system layout).
    OperationID: IsCurrentPersonalLayoutReadonly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsCurrentPersonalLayoutReadonly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsCurrentPersonalLayoutReadonly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsCurrentPersonalLayoutReadonly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsCurrentPersonalLayoutReadonly(requestBody:any, epicorHeaders?:Headers){
+export function post_IsCurrentPersonalLayoutReadonly(requestBody:IsCurrentPersonalLayoutReadonly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsCurrentPersonalLayoutReadonly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/IsCurrentPersonalLayoutReadonly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsCurrentPersonalLayoutReadonly_output)
           })
       .catch((error) => {
           reject(error)
@@ -937,7 +1134,7 @@ export function post_IsCurrentPersonalLayoutReadonly(requestBody:any, epicorHead
    Summary: Invoke method GetCurrentCompanySiteLogo
    Description: Gets the current company site logo.
    OperationID: GetCurrentCompanySiteLogo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCurrentCompanySiteLogo_output
@@ -950,15 +1147,22 @@ export function post_GetCurrentCompanySiteLogo(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCurrentCompanySiteLogo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetCurrentCompanySiteLogo", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCurrentCompanySiteLogo_output)
           })
       .catch((error) => {
           reject(error)
@@ -970,30 +1174,37 @@ export function post_GetCurrentCompanySiteLogo(epicorHeaders?:Headers){
    Summary: Invoke method ExportShellLayout
    Description: Exports the shell layout.
    OperationID: ExportShellLayout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportShellLayout_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportShellLayout_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportShellLayout_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportShellLayout(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportShellLayout(requestBody:ExportShellLayout_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportShellLayout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/ExportShellLayout", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportShellLayout_output)
           })
       .catch((error) => {
           reject(error)
@@ -1005,30 +1216,37 @@ export function post_ExportShellLayout(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ImportShellLayout
    Description: Imports the shell layout.
    OperationID: ImportShellLayout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportShellLayout_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportShellLayout_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportShellLayout_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportShellLayout(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportShellLayout(requestBody:ImportShellLayout_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportShellLayout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/ImportShellLayout", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportShellLayout_output)
           })
       .catch((error) => {
           reject(error)
@@ -1040,30 +1258,37 @@ export function post_ImportShellLayout(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPersonalShellLayoutForUser
    Description: Gets the personal shell layout for user.
    OperationID: GetPersonalShellLayoutForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPersonalShellLayoutForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPersonalShellLayoutForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPersonalShellLayoutForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPersonalShellLayoutForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPersonalShellLayoutForUser(requestBody:GetPersonalShellLayoutForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPersonalShellLayoutForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetPersonalShellLayoutForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPersonalShellLayoutForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -1075,30 +1300,37 @@ export function post_GetPersonalShellLayoutForUser(requestBody:any, epicorHeader
    Summary: Invoke method GetHomePageForUser
    Description: Gets the home page for user.
    OperationID: GetHomePageForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetHomePageForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetHomePageForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetHomePageForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetHomePageForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_GetHomePageForUser(requestBody:GetHomePageForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetHomePageForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetHomePageForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetHomePageForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -1110,30 +1342,37 @@ export function post_GetHomePageForUser(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method UpdateHomePageForUser
    Description: Updates the home page for user.
    OperationID: UpdateHomePageForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateHomePageForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateHomePageForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateHomePageForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateHomePageForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateHomePageForUser(requestBody:UpdateHomePageForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateHomePageForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/UpdateHomePageForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateHomePageForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -1145,30 +1384,37 @@ export function post_UpdateHomePageForUser(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetUserOptionsForUser
    Description: Gets the user options for user.
    OperationID: GetUserOptionsForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetUserOptionsForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetUserOptionsForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetUserOptionsForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetUserOptionsForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_GetUserOptionsForUser(requestBody:GetUserOptionsForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetUserOptionsForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetUserOptionsForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetUserOptionsForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -1180,30 +1426,37 @@ export function post_GetUserOptionsForUser(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method UpdateUserOptionsForUser
    Description: Updates the user options for user.
    OperationID: UpdateUserOptionsForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateUserOptionsForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateUserOptionsForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateUserOptionsForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateUserOptionsForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateUserOptionsForUser(requestBody:UpdateUserOptionsForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateUserOptionsForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/UpdateUserOptionsForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateUserOptionsForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -1215,30 +1468,37 @@ export function post_UpdateUserOptionsForUser(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetImageForTile
    Description: Gets the image for tile.
    OperationID: GetImageForTile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetImageForTile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetImageForTile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetImageForTile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetImageForTile(requestBody:any, epicorHeaders?:Headers){
+export function post_GetImageForTile(requestBody:GetImageForTile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetImageForTile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetImageForTile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetImageForTile_output)
           })
       .catch((error) => {
           reject(error)
@@ -1250,30 +1510,37 @@ export function post_GetImageForTile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SaveImageForTile
    Description: Saves the image for tile.
    OperationID: SaveImageForTile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveImageForTile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveImageForTile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveImageForTile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveImageForTile(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveImageForTile(requestBody:SaveImageForTile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveImageForTile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/SaveImageForTile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveImageForTile_output)
           })
       .catch((error) => {
           reject(error)
@@ -1285,7 +1552,7 @@ export function post_SaveImageForTile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDataDiscoveryUrl
    Description: Gets the data discovery URL from the system configuration.
    OperationID: GetDataDiscoveryUrl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDataDiscoveryUrl_output
@@ -1298,15 +1565,22 @@ export function post_GetDataDiscoveryUrl(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDataDiscoveryUrl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetDataDiscoveryUrl", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDataDiscoveryUrl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1318,30 +1592,37 @@ export function post_GetDataDiscoveryUrl(epicorHeaders?:Headers){
    Summary: Invoke method SaveDataDiscoveryUrl
    Description: Saves the data discovery URL to the system configuration.
    OperationID: SaveDataDiscoveryUrl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveDataDiscoveryUrl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveDataDiscoveryUrl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveDataDiscoveryUrl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveDataDiscoveryUrl(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveDataDiscoveryUrl(requestBody:SaveDataDiscoveryUrl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveDataDiscoveryUrl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/SaveDataDiscoveryUrl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveDataDiscoveryUrl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1353,30 +1634,37 @@ export function post_SaveDataDiscoveryUrl(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewShellLayout
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewShellLayout
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewShellLayout_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewShellLayout_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewShellLayout_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewShellLayout(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewShellLayout(requestBody:GetNewShellLayout_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewShellLayout_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetNewShellLayout", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewShellLayout_output)
           })
       .catch((error) => {
           reject(error)
@@ -1388,30 +1676,37 @@ export function post_GetNewShellLayout(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1423,7 +1718,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1447,15 +1742,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1467,7 +1769,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1491,15 +1793,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1511,30 +1820,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1546,30 +1862,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ShellLayoutSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1580,16 +1903,33 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ShellLayoutListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ShellLayoutListRow[],
+   "value":Ice_Tablesets_ShellLayoutListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ShellLayoutRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ShellLayoutRow[],
+   "value":Ice_Tablesets_ShellLayoutRow,
 }
 
 export interface Ice_Tablesets_ShellLayoutListRow{
@@ -1663,6 +2003,23 @@ export interface Ice_Tablesets_ShellLayoutRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1857,7 +2214,7 @@ export interface GetNewShellLayout_input{
 export interface GetNewShellLayout_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ShellLayoutTableset[],
+   ds:Ice_Tablesets_ShellLayoutTableset,
 }
 }
 
@@ -1884,9 +2241,9 @@ export interface GetPersonalShellLayoutForUser_input{
 export interface GetPersonalShellLayoutForUser_output{
 parameters : {
       /**  output parameters  */  
-   homePageData:Ice_Tablesets_HomePageTableset[],
-   userOptionsData:Ice_Tablesets_UserOptionsTableset[],
-   favoritesData:Ice_Tablesets_FavoriteTableset[],
+   homePageData:Ice_Tablesets_HomePageTableset,
+   userOptionsData:Ice_Tablesets_UserOptionsTableset,
+   favoritesData:Ice_Tablesets_FavoriteTableset,
    warningNoAccess:string,
 }
 }
@@ -2355,9 +2712,9 @@ export interface ImportShellLayout_input{
 export interface ImportShellLayout_output{
 parameters : {
       /**  output parameters  */  
-   importedHomepageData:Ice_Tablesets_HomePageTableset[],
-   importedUseroptionsData:Ice_Tablesets_UserOptionsTableset[],
-   importedFavoritesData:Ice_Tablesets_FavoriteTableset[],
+   importedHomepageData:Ice_Tablesets_HomePageTableset,
+   importedUseroptionsData:Ice_Tablesets_UserOptionsTableset,
+   importedFavoritesData:Ice_Tablesets_FavoriteTableset,
 }
 }
 
@@ -2553,7 +2910,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtShellLayoutTableset[],
+   ds:Ice_Tablesets_UpdExtShellLayoutTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2626,7 +2983,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ShellLayoutTableset[],
+   ds:Ice_Tablesets_ShellLayoutTableset,
 }
 }
 

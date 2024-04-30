@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.ACTTypeRevisionSvc
 // Description: ACTType Revision business object.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ACTTypeRevisionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ACTTypeRevisionRow
    */  
 export function get_ACTTypeRevisions(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_ACTTypeRevisions(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ACTTypeRevisionRow)
           })
@@ -117,15 +157,15 @@ export function get_ACTTypeRevisions(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ACTTypeRevisions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ACTTypeRevisionRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.ACTTypeRevisionRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.ACTTypeRevisionRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.ACTTypeRevisionRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ACTTypeRevisions(requestBody:any, epicorHeaders?:Headers){
+export function post_ACTTypeRevisions(requestBody:Erp_Tablesets_ACTTypeRevisionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_ACTTypeRevisions(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -156,10 +203,10 @@ export function post_ACTTypeRevisions(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.ACTTypeRevisionRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.ACTTypeRevisionRow
    */  
 export function get_ACTTypeRevisions_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -174,7 +221,14 @@ export function get_ACTTypeRevisions_SysRowID(SysRowID:string, select?:string, f
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_ACTTypeRevisionRow)
           })
@@ -189,15 +243,15 @@ export function get_ACTTypeRevisions_SysRowID(SysRowID:string, select?:string, f
    Description: Calls UpdateExt to update ACTTypeRevision. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_ACTTypeRevision
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.ACTTypeRevisionRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.ACTTypeRevisionRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ACTTypeRevisions_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ACTTypeRevisions_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_ACTTypeRevisionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -211,7 +265,14 @@ export function patch_ACTTypeRevisions_SysRowID(SysRowID:string, requestBody:any
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -226,7 +287,7 @@ export function patch_ACTTypeRevisions_SysRowID(SysRowID:string, requestBody:any
    Description: Call UpdateExt to delete ACTTypeRevision item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_ACTTypeRevision
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -245,7 +306,14 @@ export function delete_ACTTypeRevisions_SysRowID(SysRowID:string, epicorHeaders?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -265,10 +333,10 @@ export function delete_ACTTypeRevisions_SysRowID(SysRowID:string, epicorHeaders?
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ACTTypeRevisionListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.ACTTypeRevisionListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -283,7 +351,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ACTTypeRevisionListRow)
           })
@@ -296,6 +371,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -306,7 +398,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -348,15 +440,22 @@ export function get_GetRows(whereClauseACTTypeRevision:string, pageSize:string, 
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -369,7 +468,7 @@ export function get_GetRows(whereClauseACTTypeRevision:string, pageSize:string, 
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -393,15 +492,22 @@ export function get_GetByID(sysRowID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -416,7 +522,7 @@ export function get_GetByID(sysRowID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -458,15 +564,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -478,30 +591,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetListOfRevisions
    Description: Gets List of revisions available for Export/Delete.
    OperationID: GetListOfRevisions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListOfRevisions_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListOfRevisions_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListOfRevisions_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListOfRevisions(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListOfRevisions(requestBody:GetListOfRevisions_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListOfRevisions_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/GetListOfRevisions", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListOfRevisions_output)
           })
       .catch((error) => {
           reject(error)
@@ -513,30 +633,37 @@ export function post_GetListOfRevisions(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetRevisionsDataInStringFormat
    Description: Get set of parameters lists in string format.
    OperationID: GetRevisionsDataInStringFormat
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRevisionsDataInStringFormat_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRevisionsDataInStringFormat_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRevisionsDataInStringFormat_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRevisionsDataInStringFormat(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRevisionsDataInStringFormat(requestBody:GetRevisionsDataInStringFormat_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRevisionsDataInStringFormat_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/GetRevisionsDataInStringFormat", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRevisionsDataInStringFormat_output)
           })
       .catch((error) => {
           reject(error)
@@ -548,30 +675,37 @@ export function post_GetRevisionsDataInStringFormat(requestBody:any, epicorHeade
    Summary: Invoke method FillRevisionsTableForImport
    Description: Get the list of revisions for import (system revisions).
    OperationID: FillRevisionsTableForImport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FillRevisionsTableForImport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FillRevisionsTableForImport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FillRevisionsTableForImport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FillRevisionsTableForImport(requestBody:any, epicorHeaders?:Headers){
+export function post_FillRevisionsTableForImport(requestBody:FillRevisionsTableForImport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FillRevisionsTableForImport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/FillRevisionsTableForImport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FillRevisionsTableForImport_output)
           })
       .catch((error) => {
           reject(error)
@@ -583,30 +717,37 @@ export function post_FillRevisionsTableForImport(requestBody:any, epicorHeaders?
    Summary: Invoke method FillTempTableForImportFromFile
    Description: Returns dataset with the list of revisions loaded form file.
    OperationID: FillTempTableForImportFromFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FillTempTableForImportFromFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FillTempTableForImportFromFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FillTempTableForImportFromFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FillTempTableForImportFromFile(requestBody:any, epicorHeaders?:Headers){
+export function post_FillTempTableForImportFromFile(requestBody:FillTempTableForImportFromFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FillTempTableForImportFromFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/FillTempTableForImportFromFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FillTempTableForImportFromFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -618,30 +759,37 @@ export function post_FillTempTableForImportFromFile(requestBody:any, epicorHeade
    Summary: Invoke method ChangeRevisionsStatus
    Description: Change status for all revisions.
    OperationID: ChangeRevisionsStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRevisionsStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRevisionsStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRevisionsStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRevisionsStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRevisionsStatus(requestBody:ChangeRevisionsStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRevisionsStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/ChangeRevisionsStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRevisionsStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -653,30 +801,37 @@ export function post_ChangeRevisionsStatus(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method LoadBookMap
    Description: Get Book/Segment mapping data.
    OperationID: LoadBookMap
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LoadBookMap_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LoadBookMap_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LoadBookMap_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LoadBookMap(requestBody:any, epicorHeaders?:Headers){
+export function post_LoadBookMap(requestBody:LoadBookMap_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LoadBookMap_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/LoadBookMap", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LoadBookMap_output)
           })
       .catch((error) => {
           reject(error)
@@ -688,30 +843,37 @@ export function post_LoadBookMap(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateBookMappingInfo
    Description: Update Book Mapping Data.
    OperationID: UpdateBookMappingInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateBookMappingInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateBookMappingInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateBookMappingInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateBookMappingInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateBookMappingInfo(requestBody:UpdateBookMappingInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateBookMappingInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/UpdateBookMappingInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateBookMappingInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -723,30 +885,37 @@ export function post_UpdateBookMappingInfo(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method CheckBooksExistsRevisionUsedBothBooks
    Description: Check that books exist.
    OperationID: CheckBooksExistsRevisionUsedBothBooks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckBooksExistsRevisionUsedBothBooks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckBooksExistsRevisionUsedBothBooks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckBooksExistsRevisionUsedBothBooks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckBooksExistsRevisionUsedBothBooks(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckBooksExistsRevisionUsedBothBooks(requestBody:CheckBooksExistsRevisionUsedBothBooks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckBooksExistsRevisionUsedBothBooks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/CheckBooksExistsRevisionUsedBothBooks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckBooksExistsRevisionUsedBothBooks_output)
           })
       .catch((error) => {
           reject(error)
@@ -758,30 +927,37 @@ export function post_CheckBooksExistsRevisionUsedBothBooks(requestBody:any, epic
    Summary: Invoke method CheckSourceBooksExistsRevisionUsedBothBooks
    Description: Check Source Books Exists.
    OperationID: CheckSourceBooksExistsRevisionUsedBothBooks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSourceBooksExistsRevisionUsedBothBooks_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSourceBooksExistsRevisionUsedBothBooks_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSourceBooksExistsRevisionUsedBothBooks_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSourceBooksExistsRevisionUsedBothBooks(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSourceBooksExistsRevisionUsedBothBooks(requestBody:CheckSourceBooksExistsRevisionUsedBothBooks_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSourceBooksExistsRevisionUsedBothBooks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/CheckSourceBooksExistsRevisionUsedBothBooks", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSourceBooksExistsRevisionUsedBothBooks_output)
           })
       .catch((error) => {
           reject(error)
@@ -793,30 +969,37 @@ export function post_CheckSourceBooksExistsRevisionUsedBothBooks(requestBody:any
    Summary: Invoke method UpdateMapBookForAll
    Description: Update Mapping Book ds on ColumnChanged event for Map Book.
    OperationID: UpdateMapBookForAll
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateMapBookForAll_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateMapBookForAll_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateMapBookForAll_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateMapBookForAll(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateMapBookForAll(requestBody:UpdateMapBookForAll_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateMapBookForAll_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/UpdateMapBookForAll", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateMapBookForAll_output)
           })
       .catch((error) => {
           reject(error)
@@ -828,30 +1011,37 @@ export function post_UpdateMapBookForAll(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method CheckNoBookingRule
    Description: Check there is no booking rules for the mapped book.
    OperationID: CheckNoBookingRule
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckNoBookingRule_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckNoBookingRule_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckNoBookingRule_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckNoBookingRule(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckNoBookingRule(requestBody:CheckNoBookingRule_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckNoBookingRule_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/CheckNoBookingRule", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckNoBookingRule_output)
           })
       .catch((error) => {
           reject(error)
@@ -863,30 +1053,37 @@ export function post_CheckNoBookingRule(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method IsValidBookMapping
    Description: Checks that Book Mapping is valid.
    OperationID: IsValidBookMapping
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsValidBookMapping_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsValidBookMapping_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsValidBookMapping_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsValidBookMapping(requestBody:any, epicorHeaders?:Headers){
+export function post_IsValidBookMapping(requestBody:IsValidBookMapping_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsValidBookMapping_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/IsValidBookMapping", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsValidBookMapping_output)
           })
       .catch((error) => {
           reject(error)
@@ -898,30 +1095,37 @@ export function post_IsValidBookMapping(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method createAdditionalBooksForAll
    Description: Create additional books for all mapped books.
    OperationID: createAdditionalBooksForAll
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/createAdditionalBooksForAll_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/createAdditionalBooksForAll_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/createAdditionalBooksForAll_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_createAdditionalBooksForAll(requestBody:any, epicorHeaders?:Headers){
+export function post_createAdditionalBooksForAll(requestBody:createAdditionalBooksForAll_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<createAdditionalBooksForAll_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/createAdditionalBooksForAll", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as createAdditionalBooksForAll_output)
           })
       .catch((error) => {
           reject(error)
@@ -933,30 +1137,37 @@ export function post_createAdditionalBooksForAll(requestBody:any, epicorHeaders?
    Summary: Invoke method btnAddMappedBook_OnClick
    Description: Creates additional Mapped book on btnAddMappedBook click.
    OperationID: btnAddMappedBook_OnClick
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/btnAddMappedBook_OnClick_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/btnAddMappedBook_OnClick_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/btnAddMappedBook_OnClick_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_btnAddMappedBook_OnClick(requestBody:any, epicorHeaders?:Headers){
+export function post_btnAddMappedBook_OnClick(requestBody:btnAddMappedBook_OnClick_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<btnAddMappedBook_OnClick_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/btnAddMappedBook_OnClick", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as btnAddMappedBook_OnClick_output)
           })
       .catch((error) => {
           reject(error)
@@ -968,30 +1179,37 @@ export function post_btnAddMappedBook_OnClick(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetMapSegmentsTableFilter
    Description: Get filter for the Map Segments list.
    OperationID: GetMapSegmentsTableFilter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMapSegmentsTableFilter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMapSegmentsTableFilter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMapSegmentsTableFilter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMapSegmentsTableFilter(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMapSegmentsTableFilter(requestBody:GetMapSegmentsTableFilter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMapSegmentsTableFilter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/GetMapSegmentsTableFilter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMapSegmentsTableFilter_output)
           })
       .catch((error) => {
           reject(error)
@@ -1003,30 +1221,37 @@ export function post_GetMapSegmentsTableFilter(requestBody:any, epicorHeaders?:H
    Summary: Invoke method ClearBooksForAllTypes
    Description: Clear books data for all types.
    OperationID: ClearBooksForAllTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ClearBooksForAllTypes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ClearBooksForAllTypes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClearBooksForAllTypes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ClearBooksForAllTypes(requestBody:any, epicorHeaders?:Headers){
+export function post_ClearBooksForAllTypes(requestBody:ClearBooksForAllTypes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClearBooksForAllTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/ClearBooksForAllTypes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClearBooksForAllTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -1038,30 +1263,37 @@ export function post_ClearBooksForAllTypes(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method SetMapSegments
    Description: Upadate Table with Map Segments on the Book Mapping panel after Target Book changes in table of mapping books.
    OperationID: SetMapSegments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetMapSegments_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetMapSegments_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetMapSegments_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetMapSegments(requestBody:any, epicorHeaders?:Headers){
+export function post_SetMapSegments(requestBody:SetMapSegments_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetMapSegments_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/SetMapSegments", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetMapSegments_output)
           })
       .catch((error) => {
           reject(error)
@@ -1073,30 +1305,37 @@ export function post_SetMapSegments(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckImportedBookPackages
    Description: Check imported book packages.
    OperationID: CheckImportedBookPackages
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckImportedBookPackages_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckImportedBookPackages_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckImportedBookPackages_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckImportedBookPackages(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckImportedBookPackages(requestBody:CheckImportedBookPackages_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckImportedBookPackages_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/CheckImportedBookPackages", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckImportedBookPackages_output)
           })
       .catch((error) => {
           reject(error)
@@ -1108,30 +1347,37 @@ export function post_CheckImportedBookPackages(requestBody:any, epicorHeaders?:H
    Summary: Invoke method SinchronizeDataAfterABTVerValidation
    Description: Include changes after ABTVer Validation.
    OperationID: SinchronizeDataAfterABTVerValidation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SinchronizeDataAfterABTVerValidation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SinchronizeDataAfterABTVerValidation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SinchronizeDataAfterABTVerValidation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SinchronizeDataAfterABTVerValidation(requestBody:any, epicorHeaders?:Headers){
+export function post_SinchronizeDataAfterABTVerValidation(requestBody:SinchronizeDataAfterABTVerValidation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SinchronizeDataAfterABTVerValidation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/SinchronizeDataAfterABTVerValidation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SinchronizeDataAfterABTVerValidation_output)
           })
       .catch((error) => {
           reject(error)
@@ -1143,7 +1389,7 @@ export function post_SinchronizeDataAfterABTVerValidation(requestBody:any, epico
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1167,15 +1413,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1187,7 +1440,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1211,15 +1464,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1231,30 +1491,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1266,30 +1533,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ACTTypeRevisionSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1300,16 +1574,33 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ACTTypeRevisionListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_ACTTypeRevisionListRow[],
+   "value":Erp_Tablesets_ACTTypeRevisionListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_ACTTypeRevisionRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_ACTTypeRevisionRow[],
+   "value":Erp_Tablesets_ACTTypeRevisionRow,
 }
 
 export interface Erp_Tablesets_ACTTypeRevisionListRow{
@@ -1384,6 +1675,23 @@ Blocked - indicates a Revision which was previously "Active" but is not anymore 
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1402,7 +1710,7 @@ export interface ChangeRevisionsStatus_input{
 export interface ChangeRevisionsStatus_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ACTTypeRevisionTableset[],
+   ds:Erp_Tablesets_ACTTypeRevisionTableset,
 }
 }
 
@@ -1427,7 +1735,7 @@ export interface CheckBooksExistsRevisionUsedBothBooks_output{
 parameters : {
       /**  output parameters  */  
    errorMessage:string,
-   ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 
@@ -1467,7 +1775,7 @@ export interface CheckNoBookingRule_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 
@@ -1490,7 +1798,7 @@ export interface CheckSourceBooksExistsRevisionUsedBothBooks_output{
 parameters : {
       /**  output parameters  */  
    errorMessage:string,
-   ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 
@@ -1508,7 +1816,7 @@ export interface ClearBooksForAllTypes_input{
 export interface ClearBooksForAllTypes_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 
@@ -1711,7 +2019,7 @@ export interface FillRevisionsTableForImport_output{
 parameters : {
       /**  output parameters  */  
    opwarningAboutSkippedRevisions:string,
-   ds:Erp_Tablesets_ACTTypeRevisionTableset[],
+   ds:Erp_Tablesets_ACTTypeRevisionTableset,
 }
 }
 
@@ -1738,7 +2046,7 @@ export interface FillTempTableForImportFromFile_output{
 parameters : {
       /**  output parameters  */  
    opwarningAboutSkippedRevisions:string,
-   ds:Erp_Tablesets_ACTTypeRevisionTableset[],
+   ds:Erp_Tablesets_ACTTypeRevisionTableset,
 }
 }
 
@@ -1787,7 +2095,7 @@ export interface GetListOfRevisions_input{
 export interface GetListOfRevisions_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ACTTypeRevisionTableset[],
+   ds:Erp_Tablesets_ACTTypeRevisionTableset,
 }
 }
 
@@ -1856,7 +2164,7 @@ parameters : {
    opListOfRevisionCodes:string,
    opListSelectedToDelete:string,
    opListSelectedToExport:string,
-   ds:Erp_Tablesets_ACTTypeRevisionTableset[],
+   ds:Erp_Tablesets_ACTTypeRevisionTableset,
 }
 }
 
@@ -1929,7 +2237,7 @@ export interface IsValidBookMapping_output{
 parameters : {
       /**  output parameters  */  
    errMessage:string,
-   ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 
@@ -1951,8 +2259,8 @@ parameters : {
       /**  output parameters  */  
    xmlACTTypeRevisionsInfo:string,
    xmlMappingInfo:string,
-   ds:Erp_Tablesets_ACTTypeRevisionTableset[],
-   bm_ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_ACTTypeRevisionTableset,
+   bm_ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 
@@ -1981,7 +2289,7 @@ export interface SetMapSegments_output{
 parameters : {
       /**  output parameters  */  
    existsEmptyData:boolean,
-   ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 
@@ -1999,7 +2307,7 @@ parameters : {
       /**  output parameters  */  
    xml_ACTTypeRevision:string,
    isAnyRevsToImport:boolean,
-   ds:Erp_Tablesets_ACTTypeRevisionTableset[],
+   ds:Erp_Tablesets_ACTTypeRevisionTableset,
 }
 }
 
@@ -2018,8 +2326,8 @@ export interface UpdateBookMappingInfo_output{
 parameters : {
       /**  output parameters  */  
    xmlMappingInfoUpdated:string,
-   ds:Erp_Tablesets_ACTTypeRevisionTableset[],
-   bm_ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_ACTTypeRevisionTableset,
+   bm_ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 
@@ -2038,7 +2346,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtACTTypeRevisionTableset[],
+   ds:Erp_Tablesets_UpdExtACTTypeRevisionTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2063,7 +2371,7 @@ export interface UpdateMapBookForAll_input{
 export interface UpdateMapBookForAll_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 
@@ -2077,7 +2385,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ACTTypeRevisionTableset[],
+   ds:Erp_Tablesets_ACTTypeRevisionTableset,
 }
 }
 
@@ -2097,7 +2405,7 @@ export interface btnAddMappedBook_OnClick_input{
 export interface btnAddMappedBook_OnClick_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 
@@ -2113,7 +2421,7 @@ export interface createAdditionalBooksForAll_input{
 export interface createAdditionalBooksForAll_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_BookMappingTableset[],
+   ds:Erp_Tablesets_BookMappingTableset,
 }
 }
 

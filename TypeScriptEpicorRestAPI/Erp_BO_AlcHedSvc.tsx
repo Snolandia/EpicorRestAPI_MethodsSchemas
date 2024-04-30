@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.AlcHedSvc
 // Description: class AlcHedSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcHedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcHedRow
    */  
 export function get_AlcHeds(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_AlcHeds(select?:string, expand?:string, filter?:string, orde
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcHedRow)
           })
@@ -118,15 +158,15 @@ export function get_AlcHeds(select?:string, expand?:string, filter?:string, orde
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlcHeds
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcHedRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcHedRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AlcHedRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AlcHedRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlcHeds(requestBody:any, epicorHeaders?:Headers){
+export function post_AlcHeds(requestBody:Erp_Tablesets_AlcHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_AlcHeds(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_AlcHeds(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcHedRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcHedRow
    */  
 export function get_AlcHeds_Company_AllocID(Company:string, AllocID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_AlcHeds_Company_AllocID(Company:string, AllocID:string, sele
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcHedRow)
           })
@@ -193,15 +247,15 @@ export function get_AlcHeds_Company_AllocID(Company:string, AllocID:string, sele
    OperationID: UpdateExt_AlcHed
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcHedRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcHedRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlcHeds_Company_AllocID(Company:string, AllocID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlcHeds_Company_AllocID(Company:string, AllocID:string, requestBody:Erp_Tablesets_AlcHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_AlcHeds_Company_AllocID(Company:string, AllocID:string, re
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_AlcHeds_Company_AllocID(Company:string, AllocID:string, re
    OperationID: DeleteUpdateExt_AlcHed
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_AlcHeds_Company_AllocID(Company:string, AllocID:string, e
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_AlcHeds_Company_AllocID(Company:string, AllocID:string, e
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcAcctRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcAcctRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcAccts(Company:string, AllocID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_AlcHeds_Company_AllocID_AlcAccts(Company:string, AllocID:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcAcctRow)
           })
@@ -310,10 +385,10 @@ export function get_AlcHeds_Company_AllocID_AlcAccts(Company:string, AllocID:str
       @param AllocGLAcct Desc: AllocGLAcct   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcAcctRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcAcctRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcAccts_Company_AllocID_ParamNbr_AllocGLAcct(Company:string, AllocID:string, ParamNbr:string, AllocGLAcct:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -328,7 +403,14 @@ export function get_AlcHeds_Company_AllocID_AlcAccts_Company_AllocID_ParamNbr_Al
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcAcctRow)
           })
@@ -350,10 +432,10 @@ export function get_AlcHeds_Company_AllocID_AlcAccts_Company_AllocID_ParamNbr_Al
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcAcctCatRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcAcctCatRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcAcctCats(Company:string, AllocID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_AlcHeds_Company_AllocID_AlcAcctCats(Company:string, AllocID:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcAcctCatRow)
           })
@@ -388,10 +477,10 @@ export function get_AlcHeds_Company_AllocID_AlcAcctCats(Company:string, AllocID:
       @param CategoryID Desc: CategoryID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcAcctCatRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcAcctCatRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcAcctCats_Company_AllocID_ParamNbr_CategoryID(Company:string, AllocID:string, ParamNbr:string, CategoryID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -406,7 +495,14 @@ export function get_AlcHeds_Company_AllocID_AlcAcctCats_Company_AllocID_ParamNbr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcAcctCatRow)
           })
@@ -428,10 +524,10 @@ export function get_AlcHeds_Company_AllocID_AlcAcctCats_Company_AllocID_ParamNbr
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcJrnCdRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcJrnCdRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcJrnCds(Company:string, AllocID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -446,7 +542,14 @@ export function get_AlcHeds_Company_AllocID_AlcJrnCds(Company:string, AllocID:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcJrnCdRow)
           })
@@ -466,10 +569,10 @@ export function get_AlcHeds_Company_AllocID_AlcJrnCds(Company:string, AllocID:st
       @param JournalCode Desc: JournalCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcJrnCdRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcJrnCdRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcJrnCds_Company_AllocID_ParamNbr_JournalCode(Company:string, AllocID:string, ParamNbr:string, JournalCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -484,7 +587,14 @@ export function get_AlcHeds_Company_AllocID_AlcJrnCds_Company_AllocID_ParamNbr_J
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcJrnCdRow)
           })
@@ -507,10 +617,10 @@ export function get_AlcHeds_Company_AllocID_AlcJrnCds_Company_AllocID_ParamNbr_J
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcParamsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcParamsRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcParams(Company:string, AllocID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -525,7 +635,14 @@ export function get_AlcHeds_Company_AllocID_AlcParams(Company:string, AllocID:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcParamsRow)
           })
@@ -545,10 +662,10 @@ export function get_AlcHeds_Company_AllocID_AlcParams(Company:string, AllocID:st
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcParamsRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcParamsRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcParams_Company_AllocID_ParamNbr(Company:string, AllocID:string, ParamNbr:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -563,7 +680,14 @@ export function get_AlcHeds_Company_AllocID_AlcParams_Company_AllocID_ParamNbr(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcParamsRow)
           })
@@ -585,10 +709,10 @@ export function get_AlcHeds_Company_AllocID_AlcParams_Company_AllocID_ParamNbr(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcRangeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcRangeRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcRanges(Company:string, AllocID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -603,7 +727,14 @@ export function get_AlcHeds_Company_AllocID_AlcRanges(Company:string, AllocID:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcRangeRow)
           })
@@ -623,10 +754,10 @@ export function get_AlcHeds_Company_AllocID_AlcRanges(Company:string, AllocID:st
       @param SegmentNbr Desc: SegmentNbr   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcRangeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcRangeRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcRanges_Company_AllocID_ParamNbr_SegmentNbr(Company:string, AllocID:string, ParamNbr:string, SegmentNbr:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -641,7 +772,14 @@ export function get_AlcHeds_Company_AllocID_AlcRanges_Company_AllocID_ParamNbr_S
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcRangeRow)
           })
@@ -663,10 +801,10 @@ export function get_AlcHeds_Company_AllocID_AlcRanges_Company_AllocID_ParamNbr_S
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcTargetRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcTargetRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcTargets(Company:string, AllocID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -681,7 +819,14 @@ export function get_AlcHeds_Company_AllocID_AlcTargets(Company:string, AllocID:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcTargetRow)
           })
@@ -700,10 +845,10 @@ export function get_AlcHeds_Company_AllocID_AlcTargets(Company:string, AllocID:s
       @param AllocTgtNbr Desc: AllocTgtNbr   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcTargetRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcTargetRow
    */  
 export function get_AlcHeds_Company_AllocID_AlcTargets_Company_AllocID_AllocTgtNbr(Company:string, AllocID:string, AllocTgtNbr:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -718,7 +863,14 @@ export function get_AlcHeds_Company_AllocID_AlcTargets_Company_AllocID_AllocTgtN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcTargetRow)
           })
@@ -738,10 +890,10 @@ export function get_AlcHeds_Company_AllocID_AlcTargets_Company_AllocID_AllocTgtN
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcAcctRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcAcctRow
    */  
 export function get_AlcAccts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -756,7 +908,14 @@ export function get_AlcAccts(select?:string, filter?:string, orderby?:string, to
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcAcctRow)
           })
@@ -770,15 +929,15 @@ export function get_AlcAccts(select?:string, filter?:string, orderby?:string, to
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlcAccts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcAcctRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcAcctRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AlcAcctRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AlcAcctRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlcAccts(requestBody:any, epicorHeaders?:Headers){
+export function post_AlcAccts(requestBody:Erp_Tablesets_AlcAcctRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -792,7 +951,14 @@ export function post_AlcAccts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -812,10 +978,10 @@ export function post_AlcAccts(requestBody:any, epicorHeaders?:Headers){
       @param AllocGLAcct Desc: AllocGLAcct   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcAcctRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcAcctRow
    */  
 export function get_AlcAccts_Company_AllocID_ParamNbr_AllocGLAcct(Company:string, AllocID:string, ParamNbr:string, AllocGLAcct:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -830,7 +996,14 @@ export function get_AlcAccts_Company_AllocID_ParamNbr_AllocGLAcct(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcAcctRow)
           })
@@ -848,15 +1021,15 @@ export function get_AlcAccts_Company_AllocID_ParamNbr_AllocGLAcct(Company:string
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
       @param AllocGLAcct Desc: AllocGLAcct   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcAcctRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcAcctRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlcAccts_Company_AllocID_ParamNbr_AllocGLAcct(Company:string, AllocID:string, ParamNbr:string, AllocGLAcct:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlcAccts_Company_AllocID_ParamNbr_AllocGLAcct(Company:string, AllocID:string, ParamNbr:string, AllocGLAcct:string, requestBody:Erp_Tablesets_AlcAcctRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -870,7 +1043,14 @@ export function patch_AlcAccts_Company_AllocID_ParamNbr_AllocGLAcct(Company:stri
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -888,7 +1068,7 @@ export function patch_AlcAccts_Company_AllocID_ParamNbr_AllocGLAcct(Company:stri
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
       @param AllocGLAcct Desc: AllocGLAcct   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -907,7 +1087,14 @@ export function delete_AlcAccts_Company_AllocID_ParamNbr_AllocGLAcct(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -927,10 +1114,10 @@ export function delete_AlcAccts_Company_AllocID_ParamNbr_AllocGLAcct(Company:str
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcAcctCatRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcAcctCatRow
    */  
 export function get_AlcAcctCats(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -945,7 +1132,14 @@ export function get_AlcAcctCats(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcAcctCatRow)
           })
@@ -959,15 +1153,15 @@ export function get_AlcAcctCats(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlcAcctCats
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcAcctCatRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcAcctCatRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AlcAcctCatRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AlcAcctCatRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlcAcctCats(requestBody:any, epicorHeaders?:Headers){
+export function post_AlcAcctCats(requestBody:Erp_Tablesets_AlcAcctCatRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -981,7 +1175,14 @@ export function post_AlcAcctCats(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1001,10 +1202,10 @@ export function post_AlcAcctCats(requestBody:any, epicorHeaders?:Headers){
       @param CategoryID Desc: CategoryID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcAcctCatRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcAcctCatRow
    */  
 export function get_AlcAcctCats_Company_AllocID_ParamNbr_CategoryID(Company:string, AllocID:string, ParamNbr:string, CategoryID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1019,7 +1220,14 @@ export function get_AlcAcctCats_Company_AllocID_ParamNbr_CategoryID(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcAcctCatRow)
           })
@@ -1037,15 +1245,15 @@ export function get_AlcAcctCats_Company_AllocID_ParamNbr_CategoryID(Company:stri
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
       @param CategoryID Desc: CategoryID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcAcctCatRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcAcctCatRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlcAcctCats_Company_AllocID_ParamNbr_CategoryID(Company:string, AllocID:string, ParamNbr:string, CategoryID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlcAcctCats_Company_AllocID_ParamNbr_CategoryID(Company:string, AllocID:string, ParamNbr:string, CategoryID:string, requestBody:Erp_Tablesets_AlcAcctCatRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1059,7 +1267,14 @@ export function patch_AlcAcctCats_Company_AllocID_ParamNbr_CategoryID(Company:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1077,7 +1292,7 @@ export function patch_AlcAcctCats_Company_AllocID_ParamNbr_CategoryID(Company:st
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
       @param CategoryID Desc: CategoryID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1096,7 +1311,14 @@ export function delete_AlcAcctCats_Company_AllocID_ParamNbr_CategoryID(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1116,10 +1338,10 @@ export function delete_AlcAcctCats_Company_AllocID_ParamNbr_CategoryID(Company:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcJrnCdRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcJrnCdRow
    */  
 export function get_AlcJrnCds(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1134,7 +1356,14 @@ export function get_AlcJrnCds(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcJrnCdRow)
           })
@@ -1148,15 +1377,15 @@ export function get_AlcJrnCds(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlcJrnCds
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcJrnCdRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcJrnCdRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AlcJrnCdRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AlcJrnCdRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlcJrnCds(requestBody:any, epicorHeaders?:Headers){
+export function post_AlcJrnCds(requestBody:Erp_Tablesets_AlcJrnCdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1170,7 +1399,14 @@ export function post_AlcJrnCds(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1190,10 +1426,10 @@ export function post_AlcJrnCds(requestBody:any, epicorHeaders?:Headers){
       @param JournalCode Desc: JournalCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcJrnCdRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcJrnCdRow
    */  
 export function get_AlcJrnCds_Company_AllocID_ParamNbr_JournalCode(Company:string, AllocID:string, ParamNbr:string, JournalCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1208,7 +1444,14 @@ export function get_AlcJrnCds_Company_AllocID_ParamNbr_JournalCode(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcJrnCdRow)
           })
@@ -1226,15 +1469,15 @@ export function get_AlcJrnCds_Company_AllocID_ParamNbr_JournalCode(Company:strin
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
       @param JournalCode Desc: JournalCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcJrnCdRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcJrnCdRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlcJrnCds_Company_AllocID_ParamNbr_JournalCode(Company:string, AllocID:string, ParamNbr:string, JournalCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlcJrnCds_Company_AllocID_ParamNbr_JournalCode(Company:string, AllocID:string, ParamNbr:string, JournalCode:string, requestBody:Erp_Tablesets_AlcJrnCdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1248,7 +1491,14 @@ export function patch_AlcJrnCds_Company_AllocID_ParamNbr_JournalCode(Company:str
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1266,7 +1516,7 @@ export function patch_AlcJrnCds_Company_AllocID_ParamNbr_JournalCode(Company:str
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
       @param JournalCode Desc: JournalCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1285,7 +1535,14 @@ export function delete_AlcJrnCds_Company_AllocID_ParamNbr_JournalCode(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1306,10 +1563,10 @@ export function delete_AlcJrnCds_Company_AllocID_ParamNbr_JournalCode(Company:st
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcParamsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcParamsRow
    */  
 export function get_AlcParams(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1324,7 +1581,14 @@ export function get_AlcParams(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcParamsRow)
           })
@@ -1338,15 +1602,15 @@ export function get_AlcParams(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlcParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcParamsRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcParamsRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AlcParamsRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AlcParamsRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlcParams(requestBody:any, epicorHeaders?:Headers){
+export function post_AlcParams(requestBody:Erp_Tablesets_AlcParamsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1360,7 +1624,14 @@ export function post_AlcParams(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1380,10 +1651,10 @@ export function post_AlcParams(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcParamsRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcParamsRow
    */  
 export function get_AlcParams_Company_AllocID_ParamNbr(Company:string, AllocID:string, ParamNbr:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1398,7 +1669,14 @@ export function get_AlcParams_Company_AllocID_ParamNbr(Company:string, AllocID:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcParamsRow)
           })
@@ -1415,15 +1693,15 @@ export function get_AlcParams_Company_AllocID_ParamNbr(Company:string, AllocID:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcParamsRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcParamsRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlcParams_Company_AllocID_ParamNbr(Company:string, AllocID:string, ParamNbr:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlcParams_Company_AllocID_ParamNbr(Company:string, AllocID:string, ParamNbr:string, requestBody:Erp_Tablesets_AlcParamsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1437,7 +1715,14 @@ export function patch_AlcParams_Company_AllocID_ParamNbr(Company:string, AllocID
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1454,7 +1739,7 @@ export function patch_AlcParams_Company_AllocID_ParamNbr(Company:string, AllocID
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1473,7 +1758,14 @@ export function delete_AlcParams_Company_AllocID_ParamNbr(Company:string, AllocI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1496,10 +1788,10 @@ export function delete_AlcParams_Company_AllocID_ParamNbr(Company:string, AllocI
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcNFSrcRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcNFSrcRow
    */  
 export function get_AlcParams_Company_AllocID_ParamNbr_AlcNFSrcs(Company:string, AllocID:string, ParamNbr:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1514,7 +1806,14 @@ export function get_AlcParams_Company_AllocID_ParamNbr_AlcNFSrcs(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcNFSrcRow)
           })
@@ -1534,10 +1833,10 @@ export function get_AlcParams_Company_AllocID_ParamNbr_AlcNFSrcs(Company:string,
       @param SrcSeqNbr Desc: SrcSeqNbr   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcNFSrcRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcNFSrcRow
    */  
 export function get_AlcParams_Company_AllocID_ParamNbr_AlcNFSrcs_Company_AllocID_ParamNbr_SrcSeqNbr(Company:string, AllocID:string, ParamNbr:string, SrcSeqNbr:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1552,7 +1851,14 @@ export function get_AlcParams_Company_AllocID_ParamNbr_AlcNFSrcs_Company_AllocID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcNFSrcRow)
           })
@@ -1575,10 +1881,10 @@ export function get_AlcParams_Company_AllocID_ParamNbr_AlcNFSrcs_Company_AllocID
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcParamsBAQRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcParamsBAQRow
    */  
 export function get_AlcParams_Company_AllocID_ParamNbr_AlcParamsBAQs(Company:string, AllocID:string, ParamNbr:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1593,7 +1899,14 @@ export function get_AlcParams_Company_AllocID_ParamNbr_AlcParamsBAQs(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcParamsBAQRow)
           })
@@ -1614,10 +1927,10 @@ export function get_AlcParams_Company_AllocID_ParamNbr_AlcParamsBAQs(Company:str
       @param BAQParamValNbr Desc: BAQParamValNbr   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcParamsBAQRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcParamsBAQRow
    */  
 export function get_AlcParams_Company_AllocID_ParamNbr_AlcParamsBAQs_Company_AllocID_ParamNbr_BAQExportID_BAQParamValNbr(Company:string, AllocID:string, ParamNbr:string, BAQExportID:string, BAQParamValNbr:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1632,7 +1945,14 @@ export function get_AlcParams_Company_AllocID_ParamNbr_AlcParamsBAQs_Company_All
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcParamsBAQRow)
           })
@@ -1652,10 +1972,10 @@ export function get_AlcParams_Company_AllocID_ParamNbr_AlcParamsBAQs_Company_All
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcNFSrcRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcNFSrcRow
    */  
 export function get_AlcNFSrcs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1670,7 +1990,14 @@ export function get_AlcNFSrcs(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcNFSrcRow)
           })
@@ -1684,15 +2011,15 @@ export function get_AlcNFSrcs(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlcNFSrcs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcNFSrcRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcNFSrcRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AlcNFSrcRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AlcNFSrcRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlcNFSrcs(requestBody:any, epicorHeaders?:Headers){
+export function post_AlcNFSrcs(requestBody:Erp_Tablesets_AlcNFSrcRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1706,7 +2033,14 @@ export function post_AlcNFSrcs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1726,10 +2060,10 @@ export function post_AlcNFSrcs(requestBody:any, epicorHeaders?:Headers){
       @param SrcSeqNbr Desc: SrcSeqNbr   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcNFSrcRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcNFSrcRow
    */  
 export function get_AlcNFSrcs_Company_AllocID_ParamNbr_SrcSeqNbr(Company:string, AllocID:string, ParamNbr:string, SrcSeqNbr:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1744,7 +2078,14 @@ export function get_AlcNFSrcs_Company_AllocID_ParamNbr_SrcSeqNbr(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcNFSrcRow)
           })
@@ -1762,15 +2103,15 @@ export function get_AlcNFSrcs_Company_AllocID_ParamNbr_SrcSeqNbr(Company:string,
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
       @param SrcSeqNbr Desc: SrcSeqNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcNFSrcRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcNFSrcRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlcNFSrcs_Company_AllocID_ParamNbr_SrcSeqNbr(Company:string, AllocID:string, ParamNbr:string, SrcSeqNbr:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlcNFSrcs_Company_AllocID_ParamNbr_SrcSeqNbr(Company:string, AllocID:string, ParamNbr:string, SrcSeqNbr:string, requestBody:Erp_Tablesets_AlcNFSrcRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1784,7 +2125,14 @@ export function patch_AlcNFSrcs_Company_AllocID_ParamNbr_SrcSeqNbr(Company:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1802,7 +2150,7 @@ export function patch_AlcNFSrcs_Company_AllocID_ParamNbr_SrcSeqNbr(Company:strin
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
       @param SrcSeqNbr Desc: SrcSeqNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1821,7 +2169,14 @@ export function delete_AlcNFSrcs_Company_AllocID_ParamNbr_SrcSeqNbr(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1841,10 +2196,10 @@ export function delete_AlcNFSrcs_Company_AllocID_ParamNbr_SrcSeqNbr(Company:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcParamsBAQRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcParamsBAQRow
    */  
 export function get_AlcParamsBAQs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1859,7 +2214,14 @@ export function get_AlcParamsBAQs(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcParamsBAQRow)
           })
@@ -1873,15 +2235,15 @@ export function get_AlcParamsBAQs(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlcParamsBAQs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcParamsBAQRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcParamsBAQRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AlcParamsBAQRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AlcParamsBAQRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlcParamsBAQs(requestBody:any, epicorHeaders?:Headers){
+export function post_AlcParamsBAQs(requestBody:Erp_Tablesets_AlcParamsBAQRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1895,7 +2257,14 @@ export function post_AlcParamsBAQs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1916,10 +2285,10 @@ export function post_AlcParamsBAQs(requestBody:any, epicorHeaders?:Headers){
       @param BAQParamValNbr Desc: BAQParamValNbr   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcParamsBAQRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcParamsBAQRow
    */  
 export function get_AlcParamsBAQs_Company_AllocID_ParamNbr_BAQExportID_BAQParamValNbr(Company:string, AllocID:string, ParamNbr:string, BAQExportID:string, BAQParamValNbr:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1934,7 +2303,14 @@ export function get_AlcParamsBAQs_Company_AllocID_ParamNbr_BAQExportID_BAQParamV
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcParamsBAQRow)
           })
@@ -1953,15 +2329,15 @@ export function get_AlcParamsBAQs_Company_AllocID_ParamNbr_BAQExportID_BAQParamV
       @param ParamNbr Desc: ParamNbr   Required: True
       @param BAQExportID Desc: BAQExportID   Required: True   Allow empty value : True
       @param BAQParamValNbr Desc: BAQParamValNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcParamsBAQRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcParamsBAQRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlcParamsBAQs_Company_AllocID_ParamNbr_BAQExportID_BAQParamValNbr(Company:string, AllocID:string, ParamNbr:string, BAQExportID:string, BAQParamValNbr:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlcParamsBAQs_Company_AllocID_ParamNbr_BAQExportID_BAQParamValNbr(Company:string, AllocID:string, ParamNbr:string, BAQExportID:string, BAQParamValNbr:string, requestBody:Erp_Tablesets_AlcParamsBAQRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1975,7 +2351,14 @@ export function patch_AlcParamsBAQs_Company_AllocID_ParamNbr_BAQExportID_BAQPara
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1994,7 +2377,7 @@ export function patch_AlcParamsBAQs_Company_AllocID_ParamNbr_BAQExportID_BAQPara
       @param ParamNbr Desc: ParamNbr   Required: True
       @param BAQExportID Desc: BAQExportID   Required: True   Allow empty value : True
       @param BAQParamValNbr Desc: BAQParamValNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2013,7 +2396,14 @@ export function delete_AlcParamsBAQs_Company_AllocID_ParamNbr_BAQExportID_BAQPar
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2033,10 +2423,10 @@ export function delete_AlcParamsBAQs_Company_AllocID_ParamNbr_BAQExportID_BAQPar
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcRangeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcRangeRow
    */  
 export function get_AlcRanges(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2051,7 +2441,14 @@ export function get_AlcRanges(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcRangeRow)
           })
@@ -2065,15 +2462,15 @@ export function get_AlcRanges(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlcRanges
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcRangeRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcRangeRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AlcRangeRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AlcRangeRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlcRanges(requestBody:any, epicorHeaders?:Headers){
+export function post_AlcRanges(requestBody:Erp_Tablesets_AlcRangeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2087,7 +2484,14 @@ export function post_AlcRanges(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2107,10 +2511,10 @@ export function post_AlcRanges(requestBody:any, epicorHeaders?:Headers){
       @param SegmentNbr Desc: SegmentNbr   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcRangeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcRangeRow
    */  
 export function get_AlcRanges_Company_AllocID_ParamNbr_SegmentNbr(Company:string, AllocID:string, ParamNbr:string, SegmentNbr:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2125,7 +2529,14 @@ export function get_AlcRanges_Company_AllocID_ParamNbr_SegmentNbr(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcRangeRow)
           })
@@ -2143,15 +2554,15 @@ export function get_AlcRanges_Company_AllocID_ParamNbr_SegmentNbr(Company:string
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
       @param SegmentNbr Desc: SegmentNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcRangeRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcRangeRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlcRanges_Company_AllocID_ParamNbr_SegmentNbr(Company:string, AllocID:string, ParamNbr:string, SegmentNbr:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlcRanges_Company_AllocID_ParamNbr_SegmentNbr(Company:string, AllocID:string, ParamNbr:string, SegmentNbr:string, requestBody:Erp_Tablesets_AlcRangeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2165,7 +2576,14 @@ export function patch_AlcRanges_Company_AllocID_ParamNbr_SegmentNbr(Company:stri
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2183,7 +2601,7 @@ export function patch_AlcRanges_Company_AllocID_ParamNbr_SegmentNbr(Company:stri
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param ParamNbr Desc: ParamNbr   Required: True
       @param SegmentNbr Desc: SegmentNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2202,7 +2620,14 @@ export function delete_AlcRanges_Company_AllocID_ParamNbr_SegmentNbr(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2222,10 +2647,10 @@ export function delete_AlcRanges_Company_AllocID_ParamNbr_SegmentNbr(Company:str
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcTargetRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcTargetRow
    */  
 export function get_AlcTargets(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2240,7 +2665,14 @@ export function get_AlcTargets(select?:string, filter?:string, orderby?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcTargetRow)
           })
@@ -2254,15 +2686,15 @@ export function get_AlcTargets(select?:string, filter?:string, orderby?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlcTargets
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcTargetRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AlcTargetRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AlcTargetRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AlcTargetRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlcTargets(requestBody:any, epicorHeaders?:Headers){
+export function post_AlcTargets(requestBody:Erp_Tablesets_AlcTargetRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2276,7 +2708,14 @@ export function post_AlcTargets(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2295,10 +2734,10 @@ export function post_AlcTargets(requestBody:any, epicorHeaders?:Headers){
       @param AllocTgtNbr Desc: AllocTgtNbr   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AlcTargetRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AlcTargetRow
    */  
 export function get_AlcTargets_Company_AllocID_AllocTgtNbr(Company:string, AllocID:string, AllocTgtNbr:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2313,7 +2752,14 @@ export function get_AlcTargets_Company_AllocID_AllocTgtNbr(Company:string, Alloc
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AlcTargetRow)
           })
@@ -2330,15 +2776,15 @@ export function get_AlcTargets_Company_AllocID_AllocTgtNbr(Company:string, Alloc
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param AllocTgtNbr Desc: AllocTgtNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcTargetRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AlcTargetRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlcTargets_Company_AllocID_AllocTgtNbr(Company:string, AllocID:string, AllocTgtNbr:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlcTargets_Company_AllocID_AllocTgtNbr(Company:string, AllocID:string, AllocTgtNbr:string, requestBody:Erp_Tablesets_AlcTargetRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2352,7 +2798,14 @@ export function patch_AlcTargets_Company_AllocID_AllocTgtNbr(Company:string, All
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2369,7 +2822,7 @@ export function patch_AlcTargets_Company_AllocID_AllocTgtNbr(Company:string, All
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AllocID Desc: AllocID   Required: True   Allow empty value : True
       @param AllocTgtNbr Desc: AllocTgtNbr   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2388,7 +2841,14 @@ export function delete_AlcTargets_Company_AllocID_AllocTgtNbr(Company:string, Al
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2408,10 +2868,10 @@ export function delete_AlcTargets_Company_AllocID_AllocTgtNbr(Company:string, Al
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcHedListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AlcHedListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2426,7 +2886,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcHedListRow)
           })
@@ -2438,6 +2905,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -2457,7 +2941,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -2571,15 +3055,22 @@ export function get_GetRows(whereClauseAlcHed:string, whereClauseAlcAcct:string,
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2592,7 +3083,7 @@ export function get_GetRows(whereClauseAlcHed:string, whereClauseAlcAcct:string,
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -2616,15 +3107,22 @@ export function get_GetByID(allocID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2639,7 +3137,7 @@ export function get_GetByID(allocID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -2681,15 +3179,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2702,30 +3207,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Description: Purpose:  Get the Master COA from the proposted External Company
 Parameters:  ProposedExtCompID
    OperationID: getExternalMasterCOA
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/getExternalMasterCOA_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/getExternalMasterCOA_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/getExternalMasterCOA_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_getExternalMasterCOA(requestBody:any, epicorHeaders?:Headers){
+export function post_getExternalMasterCOA(requestBody:getExternalMasterCOA_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<getExternalMasterCOA_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/getExternalMasterCOA", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as getExternalMasterCOA_output)
           })
       .catch((error) => {
           reject(error)
@@ -2741,30 +3253,37 @@ Parameters:
 <param name="ProposedExtCompID">Proposed company ID</param><param name="allocID">AllocID from the AlcHed</param><param name="ds">The GL Journal Entry data set </param>
 Notes:
    OperationID: ChangeExtCompanyID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeExtCompanyID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeExtCompanyID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeExtCompanyID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeExtCompanyID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeExtCompanyID(requestBody:ChangeExtCompanyID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeExtCompanyID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/ChangeExtCompanyID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeExtCompanyID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2779,30 +3298,37 @@ Parameters:
 <param name="ipBAQExportID">BAQ identifier</param><param name="ipAllocID">Allocation code</param><param name="ipParamNbr">Formula parameter number</param><param name="ds">GL Allocations Data Set</param>
 Notes:
    OperationID: createNewBAQParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/createNewBAQParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/createNewBAQParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/createNewBAQParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_createNewBAQParams(requestBody:any, epicorHeaders?:Headers){
+export function post_createNewBAQParams(requestBody:createNewBAQParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<createNewBAQParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/createNewBAQParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as createNewBAQParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -2817,30 +3343,37 @@ Parameters:
 <param name="ipProposedAllocOption">proposed allocation option</param><param name="ds">GL Allocations Data Set</param><param name="opWarningMessage">warning message</param>
 Notes:
    OperationID: ChangeAllocOption
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeAllocOption_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeAllocOption_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeAllocOption_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeAllocOption(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeAllocOption(requestBody:ChangeAllocOption_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeAllocOption_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/ChangeAllocOption", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeAllocOption_output)
           })
       .catch((error) => {
           reject(error)
@@ -2855,30 +3388,37 @@ Parameters:
 <param name="ipProposedAllocType">proposed allocation type</param><param name="ds">GL Allocations Data Set</param>
 Notes:
    OperationID: ChangeAllocationType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeAllocationType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeAllocationType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeAllocationType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeAllocationType(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeAllocationType(requestBody:ChangeAllocationType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeAllocationType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/ChangeAllocationType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeAllocationType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2892,30 +3432,37 @@ export function post_ChangeAllocationType(requestBody:any, epicorHeaders?:Header
 Parameters:
 <param name="ds">GL Allocations Data Set</param>
    OperationID: ChangeBAQEntryType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeBAQEntryType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeBAQEntryType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeBAQEntryType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeBAQEntryType(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeBAQEntryType(requestBody:ChangeBAQEntryType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeBAQEntryType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/ChangeBAQEntryType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeBAQEntryType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2929,30 +3476,37 @@ export function post_ChangeBAQEntryType(requestBody:any, epicorHeaders?:Headers)
 Parameters:
 <param name="ipAllocID">Allocation code</param><param name="ipParamNbr">Parameter number</param><param name="ipSrcSeqNbr">Source srquence number</param><param name="ds">GL Allocations Data Set</param>
    OperationID: ChangeLookupEntryType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeLookupEntryType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeLookupEntryType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeLookupEntryType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeLookupEntryType(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeLookupEntryType(requestBody:ChangeLookupEntryType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeLookupEntryType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/ChangeLookupEntryType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeLookupEntryType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2964,30 +3518,37 @@ export function post_ChangeLookupEntryType(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method CheckArgument
    Description: Validate Argument1 and Argument2 values and return the values in the rigth format.
    OperationID: CheckArgument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckArgument_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckArgument_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckArgument_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckArgument(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckArgument(requestBody:CheckArgument_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckArgument_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckArgument", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckArgument_output)
           })
       .catch((error) => {
           reject(error)
@@ -2999,30 +3560,37 @@ export function post_CheckArgument(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckBAQExportID
    Description: Validate BAQ Export ID
    OperationID: CheckBAQExportID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckBAQExportID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckBAQExportID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckBAQExportID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckBAQExportID(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckBAQExportID(requestBody:CheckBAQExportID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckBAQExportID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckBAQExportID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckBAQExportID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3037,30 +3605,37 @@ Parameters:
 <param name="ipBAQExportID">ipBAQExportID">BAQ to validate the parameter</param><param name="ipFieldName">Field to validate</param>
 Notes:
    OperationID: CheckBAQParameter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckBAQParameter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckBAQParameter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckBAQParameter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckBAQParameter(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckBAQParameter(requestBody:CheckBAQParameter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckBAQParameter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckBAQParameter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckBAQParameter_output)
           })
       .catch((error) => {
           reject(error)
@@ -3075,30 +3650,37 @@ Parameters:
 <param name="ipBAQExportID">ipBAQExportID">BAQ to validate the parameter</param><param name="ipFieldName">Field to validate</param><param name="ipValue">query field value to validate</param>
 Notes:
    OperationID: CheckBAQParameterValue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckBAQParameterValue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckBAQParameterValue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckBAQParameterValue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckBAQParameterValue(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckBAQParameterValue(requestBody:CheckBAQParameterValue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckBAQParameterValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckBAQParameterValue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckBAQParameterValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -3110,30 +3692,37 @@ export function post_CheckBAQParameterValue(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method CheckBook
    Description: Validate the selected book is valid and of type standard
    OperationID: CheckBook
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckBook_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckBook_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckBook_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckBook(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckBook(requestBody:CheckBook_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckBook_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckBook", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckBook_output)
           })
       .catch((error) => {
           reject(error)
@@ -3148,30 +3737,37 @@ Parameters:
 <param name="ipAllocID">Allocation Code</param>
 Notes:
    OperationID: CheckCanAddNewTarget
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckCanAddNewTarget_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckCanAddNewTarget_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckCanAddNewTarget_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckCanAddNewTarget(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckCanAddNewTarget(requestBody:CheckCanAddNewTarget_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckCanAddNewTarget_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckCanAddNewTarget", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckCanAddNewTarget_output)
           })
       .catch((error) => {
           reject(error)
@@ -3183,30 +3779,37 @@ export function post_CheckCanAddNewTarget(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method CheckCategory
    Description: Validate Category
    OperationID: CheckCategory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckCategory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckCategory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckCategory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckCategory(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckCategory(requestBody:CheckCategory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckCategory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckCategory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckCategory_output)
           })
       .catch((error) => {
           reject(error)
@@ -3220,30 +3823,37 @@ export function post_CheckCategory(requestBody:any, epicorHeaders?:Headers){
 Parameters:
 <param name="ipGLAccount">proposed GL Account</param><param name="ipParamNbr">parameter nbr</param><param name="ipAllocID">allocation id</param>
    OperationID: CheckForDuplicateAccount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckForDuplicateAccount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckForDuplicateAccount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckForDuplicateAccount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckForDuplicateAccount(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckForDuplicateAccount(requestBody:CheckForDuplicateAccount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckForDuplicateAccount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckForDuplicateAccount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckForDuplicateAccount_output)
           })
       .catch((error) => {
           reject(error)
@@ -3255,30 +3865,37 @@ export function post_CheckForDuplicateAccount(requestBody:any, epicorHeaders?:He
    Summary: Invoke method CheckJournalCode
    Description: Validate Journal Code
    OperationID: CheckJournalCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckJournalCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckJournalCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckJournalCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckJournalCode(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckJournalCode(requestBody:CheckJournalCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckJournalCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckJournalCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckJournalCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -3290,30 +3907,37 @@ export function post_CheckJournalCode(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckMinMax
    Description: Validate Min and max values
    OperationID: CheckMinMax
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckMinMax_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckMinMax_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckMinMax_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckMinMax(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckMinMax(requestBody:CheckMinMax_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckMinMax_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckMinMax", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckMinMax_output)
           })
       .catch((error) => {
           reject(error)
@@ -3325,30 +3949,37 @@ export function post_CheckMinMax(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckParamName
    Description: Validate parameter name is not a valid math operator.
    OperationID: CheckParamName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckParamName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckParamName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckParamName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckParamName(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckParamName(requestBody:CheckParamName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckParamName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckParamName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckParamName_output)
           })
       .catch((error) => {
           reject(error)
@@ -3362,30 +3993,37 @@ export function post_CheckParamName(requestBody:any, epicorHeaders?:Headers){
 Parameters:  none
 <param name="ipAllocID">Allocation code</param><param name="ipParamNbr">parameter number</param><param name="ipSrcSeqNbr">Source sequence number</param><param name="ipParamOpt">parameter option</param><param name="ds">GL Allocations Data Set</param>
    OperationID: CheckParamOption
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckParamOption_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckParamOption_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckParamOption_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckParamOption(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckParamOption(requestBody:CheckParamOption_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckParamOption_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckParamOption", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckParamOption_output)
           })
       .catch((error) => {
           reject(error)
@@ -3399,30 +4037,37 @@ export function post_CheckParamOption(requestBody:any, epicorHeaders?:Headers){
 Parameters:  none
 <param name="ipParamOpt">parameter option</param><param name="ds">GL Allocations Data Set</param>
    OperationID: CheckParamOptionBAQ
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckParamOptionBAQ_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckParamOptionBAQ_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckParamOptionBAQ_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckParamOptionBAQ(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckParamOptionBAQ(requestBody:CheckParamOptionBAQ_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckParamOptionBAQ_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckParamOptionBAQ", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckParamOptionBAQ_output)
           })
       .catch((error) => {
           reject(error)
@@ -3436,30 +4081,37 @@ export function post_CheckParamOptionBAQ(requestBody:any, epicorHeaders?:Headers
 Parameters:  none
 <param name="ipParamSegmentNbr">parameter option</param><param name="ipParamType">either NonFin or BAQ</param><param name="ds">GL Allocations Data Set</param>
    OperationID: CheckParamSegment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckParamSegment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckParamSegment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckParamSegment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckParamSegment(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckParamSegment(requestBody:CheckParamSegment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckParamSegment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckParamSegment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckParamSegment_output)
           })
       .catch((error) => {
           reject(error)
@@ -3474,30 +4126,37 @@ Parameters:
 <param name="ipAllocID">Allocation Code</param><param name="ipProposedPercentage">percent to allocate</param><param name="opWarnMsg">warning message</param>
 Notes:
    OperationID: CheckPercentageToAllocate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPercentageToAllocate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPercentageToAllocate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPercentageToAllocate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPercentageToAllocate(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPercentageToAllocate(requestBody:CheckPercentageToAllocate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPercentageToAllocate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckPercentageToAllocate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPercentageToAllocate_output)
           })
       .catch((error) => {
           reject(error)
@@ -3512,30 +4171,37 @@ Parameters:
 <param name="ipPriorTgtStamp">proposed source allocation stamp</param><param name="ds">GL Allocations Data Set</param><param name="opWarningMsg">warning message</param>
 Notes:
    OperationID: CheckPriorTgtStamp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPriorTgtStamp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPriorTgtStamp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPriorTgtStamp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPriorTgtStamp(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPriorTgtStamp(requestBody:CheckPriorTgtStamp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPriorTgtStamp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckPriorTgtStamp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPriorTgtStamp_output)
           })
       .catch((error) => {
           reject(error)
@@ -3548,30 +4214,37 @@ export function post_CheckPriorTgtStamp(requestBody:any, epicorHeaders?:Headers)
    Description: This method is to be used in place of GetNewAlcRange.  This method Validates
 there are still COA Segments available.
    OperationID: CheckSegmentNbr
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSegmentNbr_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSegmentNbr_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSegmentNbr_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSegmentNbr(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSegmentNbr(requestBody:CheckSegmentNbr_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSegmentNbr_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckSegmentNbr", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSegmentNbr_output)
           })
       .catch((error) => {
           reject(error)
@@ -3583,30 +4256,37 @@ export function post_CheckSegmentNbr(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckSyntax
    Description: Check Syntax for formula field.
    OperationID: CheckSyntax
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSyntax_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSyntax_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSyntax_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSyntax(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSyntax(requestBody:CheckSyntax_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSyntax_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckSyntax", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSyntax_output)
           })
       .catch((error) => {
           reject(error)
@@ -3621,30 +4301,37 @@ Parameters:
 <param name="ipTgtStamp">outgoing allocation mark</param><param name="ds">GL Allocations Data Set</param><param name="opWarningMsg">warning message</param>
 Notes:
    OperationID: CheckTgtStamp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckTgtStamp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckTgtStamp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckTgtStamp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckTgtStamp(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckTgtStamp(requestBody:CheckTgtStamp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckTgtStamp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckTgtStamp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckTgtStamp_output)
           })
       .catch((error) => {
           reject(error)
@@ -3659,30 +4346,37 @@ Parameters:
 <param name="ipTier">proposed tier</param><param name="ds">GL Allocations Data Set</param>
 Notes:
    OperationID: CheckTier
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckTier_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckTier_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckTier_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckTier(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckTier(requestBody:CheckTier_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckTier_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckTier", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckTier_output)
           })
       .catch((error) => {
           reject(error)
@@ -3697,30 +4391,37 @@ Parameters:
 <param name="ipProposedPercent">Proposed percent</param><param name="ds">GL Allocations Data Set</param><param name="opTotalPercent">Total percent</param>
 Notes:
    OperationID: CheckTotalPercent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckTotalPercent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckTotalPercent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckTotalPercent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckTotalPercent(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckTotalPercent(requestBody:CheckTotalPercent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckTotalPercent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CheckTotalPercent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckTotalPercent_output)
           })
       .catch((error) => {
           reject(error)
@@ -3732,30 +4433,37 @@ export function post_CheckTotalPercent(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CreateAlcNFSrcRecords
    Description: Create Source Fields Records for the selected MapUID
    OperationID: CreateAlcNFSrcRecords
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateAlcNFSrcRecords_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateAlcNFSrcRecords_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateAlcNFSrcRecords_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateAlcNFSrcRecords(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateAlcNFSrcRecords(requestBody:CreateAlcNFSrcRecords_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateAlcNFSrcRecords_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/CreateAlcNFSrcRecords", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateAlcNFSrcRecords_output)
           })
       .catch((error) => {
           reject(error)
@@ -3767,30 +4475,37 @@ export function post_CreateAlcNFSrcRecords(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetLinkList
    Description: Returns a List of valid values for the cmbLinkUID Combo-box
    OperationID: GetLinkList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLinkList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLinkList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLinkList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLinkList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLinkList(requestBody:GetLinkList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLinkList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetLinkList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLinkList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3802,30 +4517,37 @@ export function post_GetLinkList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLookupSrcCodeID
    Description: Returns the Source Field Code in Invariant Format
    OperationID: GetLookupSrcCodeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLookupSrcCodeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLookupSrcCodeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLookupSrcCodeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLookupSrcCodeID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLookupSrcCodeID(requestBody:GetLookupSrcCodeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLookupSrcCodeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetLookupSrcCodeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLookupSrcCodeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3838,30 +4560,37 @@ export function post_GetLookupSrcCodeID(requestBody:any, epicorHeaders?:Headers)
    Description: This method is to be used in place of GetNewAlcNFSrc.  This method Validates
 that only one AlcNFSrc record is created for each AlcParam record created.
    OperationID: GetNewAlcNFSrc1
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcNFSrc1_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcNFSrc1_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcNFSrc1_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcNFSrc1(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcNFSrc1(requestBody:GetNewAlcNFSrc1_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcNFSrc1_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcNFSrc1", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcNFSrc1_output)
           })
       .catch((error) => {
           reject(error)
@@ -3874,30 +4603,37 @@ export function post_GetNewAlcNFSrc1(requestBody:any, epicorHeaders?:Headers){
    Description: This method is to be used in place of GetNewAlcRange.  This method Validates
 there are still COA Segments available.
    OperationID: GetNewAlcRange1
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcRange1_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcRange1_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcRange1_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcRange1(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcRange1(requestBody:GetNewAlcRange1_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcRange1_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcRange1", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcRange1_output)
           })
       .catch((error) => {
           reject(error)
@@ -3909,7 +4645,7 @@ export function post_GetNewAlcRange1(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetOperatorsList
    Description: Return a list of valid operators in a format ready to be use on a combo-box
    OperationID: GetOperatorsList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOperatorsList_output
@@ -3922,15 +4658,22 @@ export function post_GetOperatorsList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOperatorsList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetOperatorsList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOperatorsList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3943,7 +4686,7 @@ export function post_GetOperatorsList(epicorHeaders?:Headers){
    Description: Return a list of valid operators in a format ready to be use on the context Menu
 (i.e - +'Operators~-'Operators~*'Operators~/'Operators~('Operators~)'Operators
    OperationID: GetOperatorsMenuList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOperatorsMenuList_output
@@ -3956,15 +4699,22 @@ export function post_GetOperatorsMenuList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOperatorsMenuList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetOperatorsMenuList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOperatorsMenuList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3976,30 +4726,37 @@ export function post_GetOperatorsMenuList(epicorHeaders?:Headers){
    Summary: Invoke method GetParametersList
    Description: Return a list of available parameters in a format ready to be use on a combo-box
    OperationID: GetParametersList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetParametersList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetParametersList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParametersList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetParametersList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetParametersList(requestBody:GetParametersList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParametersList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetParametersList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParametersList_output)
           })
       .catch((error) => {
           reject(error)
@@ -4011,30 +4768,37 @@ export function post_GetParametersList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetParamMenuList
    Description: Return a list of available parameters in a format ready to be use on the context Menu
    OperationID: GetParamMenuList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetParamMenuList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetParamMenuList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParamMenuList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetParamMenuList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetParamMenuList(requestBody:GetParamMenuList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParamMenuList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetParamMenuList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParamMenuList_output)
           })
       .catch((error) => {
           reject(error)
@@ -4049,30 +4813,37 @@ Parameters:
 <param name="ds">GL Allocations Data Set</param>
 Notes:
    OperationID: RefreshAllocationTotals
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshAllocationTotals_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshAllocationTotals_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshAllocationTotals_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshAllocationTotals(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshAllocationTotals(requestBody:RefreshAllocationTotals_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshAllocationTotals_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/RefreshAllocationTotals", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshAllocationTotals_output)
           })
       .catch((error) => {
           reject(error)
@@ -4086,30 +4857,37 @@ export function post_RefreshAllocationTotals(requestBody:any, epicorHeaders?:Hea
 <param name="ipType">source or target</param><param name="ds">GL Allocations Data Set</param>
 Notes: Do not use, method is obsolete since 11.2.100. DisplayGLAccountDesc field is obsolete in object. Please use GLAcctDispAccountDesc field.
    OperationID: RetrieveGLAcctDesc
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RetrieveGLAcctDesc_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RetrieveGLAcctDesc_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RetrieveGLAcctDesc_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RetrieveGLAcctDesc(requestBody:any, epicorHeaders?:Headers){
+export function post_RetrieveGLAcctDesc(requestBody:RetrieveGLAcctDesc_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RetrieveGLAcctDesc_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/RetrieveGLAcctDesc", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RetrieveGLAcctDesc_output)
           })
       .catch((error) => {
           reject(error)
@@ -4121,30 +4899,37 @@ export function post_RetrieveGLAcctDesc(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method UpdateAcctBalAcct
    Description: Updates Account Balance Account.
    OperationID: UpdateAcctBalAcct
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateAcctBalAcct_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateAcctBalAcct_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateAcctBalAcct_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateAcctBalAcct(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateAcctBalAcct(requestBody:UpdateAcctBalAcct_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateAcctBalAcct_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/UpdateAcctBalAcct", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateAcctBalAcct_output)
           })
       .catch((error) => {
           reject(error)
@@ -4159,30 +4944,37 @@ Parameters:
 <param name="ipAllocID">allocation id</param><param name="opWarnMsg">warning message</param>
 Notes:
    OperationID: ValidatePercentTotals
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidatePercentTotals_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidatePercentTotals_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidatePercentTotals_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidatePercentTotals(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidatePercentTotals(requestBody:ValidatePercentTotals_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidatePercentTotals_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/ValidatePercentTotals", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidatePercentTotals_output)
           })
       .catch((error) => {
           reject(error)
@@ -4197,30 +4989,37 @@ Parameters:
 <param name="ipSegment">COA Segment Value to validate</param><param name="ipAllocID">Allocation Code</param><param name="opWarnMsg">warning message</param>
 Notes:
    OperationID: ValidTgtNatSegment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidTgtNatSegment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidTgtNatSegment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidTgtNatSegment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidTgtNatSegment(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidTgtNatSegment(requestBody:ValidTgtNatSegment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidTgtNatSegment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/ValidTgtNatSegment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidTgtNatSegment_output)
           })
       .catch((error) => {
           reject(error)
@@ -4235,30 +5034,37 @@ Parameters:
 <param name="ipSegment">COA Segment Value to validate</param><param name="ipAllocID">Allocation Code</param><param name="ipParamNbr">Parameter number</param><param name="opWarnMsg">warning message</param>
 Notes:
    OperationID: ValidParamNatSegment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidParamNatSegment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidParamNatSegment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidParamNatSegment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidParamNatSegment(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidParamNatSegment(requestBody:ValidParamNatSegment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidParamNatSegment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/ValidParamNatSegment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidParamNatSegment_output)
           })
       .catch((error) => {
           reject(error)
@@ -4270,30 +5076,37 @@ export function post_ValidParamNatSegment(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method MaskValidate
    Description: Test if account masks are valid
    OperationID: MaskValidate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MaskValidate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MaskValidate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MaskValidate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MaskValidate(requestBody:any, epicorHeaders?:Headers){
+export function post_MaskValidate(requestBody:MaskValidate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MaskValidate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/MaskValidate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MaskValidate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4305,30 +5118,37 @@ export function post_MaskValidate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAlcHed
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlcHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcHed(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcHed(requestBody:GetNewAlcHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -4340,30 +5160,37 @@ export function post_GetNewAlcHed(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAlcAcct
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlcAcct
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcAcct_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcAcct_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcAcct_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcAcct(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcAcct(requestBody:GetNewAlcAcct_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcAcct_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcAcct", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcAcct_output)
           })
       .catch((error) => {
           reject(error)
@@ -4375,30 +5202,37 @@ export function post_GetNewAlcAcct(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAlcAcctCat
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlcAcctCat
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcAcctCat_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcAcctCat_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcAcctCat_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcAcctCat(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcAcctCat(requestBody:GetNewAlcAcctCat_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcAcctCat_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcAcctCat", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcAcctCat_output)
           })
       .catch((error) => {
           reject(error)
@@ -4410,30 +5244,37 @@ export function post_GetNewAlcAcctCat(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAlcJrnCd
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlcJrnCd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcJrnCd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcJrnCd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcJrnCd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcJrnCd(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcJrnCd(requestBody:GetNewAlcJrnCd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcJrnCd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcJrnCd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcJrnCd_output)
           })
       .catch((error) => {
           reject(error)
@@ -4445,30 +5286,37 @@ export function post_GetNewAlcJrnCd(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAlcParams
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlcParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcParams(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcParams(requestBody:GetNewAlcParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -4480,30 +5328,37 @@ export function post_GetNewAlcParams(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAlcNFSrc
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlcNFSrc
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcNFSrc_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcNFSrc_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcNFSrc_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcNFSrc(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcNFSrc(requestBody:GetNewAlcNFSrc_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcNFSrc_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcNFSrc", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcNFSrc_output)
           })
       .catch((error) => {
           reject(error)
@@ -4515,30 +5370,37 @@ export function post_GetNewAlcNFSrc(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAlcParamsBAQ
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlcParamsBAQ
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcParamsBAQ_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcParamsBAQ_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcParamsBAQ_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcParamsBAQ(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcParamsBAQ(requestBody:GetNewAlcParamsBAQ_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcParamsBAQ_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcParamsBAQ", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcParamsBAQ_output)
           })
       .catch((error) => {
           reject(error)
@@ -4550,30 +5412,37 @@ export function post_GetNewAlcParamsBAQ(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewAlcRange
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlcRange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcRange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcRange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcRange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcRange(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcRange(requestBody:GetNewAlcRange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcRange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcRange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcRange_output)
           })
       .catch((error) => {
           reject(error)
@@ -4585,30 +5454,37 @@ export function post_GetNewAlcRange(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewAlcTarget
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlcTarget
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlcTarget_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlcTarget_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlcTarget_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlcTarget(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlcTarget(requestBody:GetNewAlcTarget_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlcTarget_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetNewAlcTarget", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlcTarget_output)
           })
       .catch((error) => {
           reject(error)
@@ -4620,30 +5496,37 @@ export function post_GetNewAlcTarget(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4655,7 +5538,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -4679,15 +5562,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4699,7 +5589,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -4723,15 +5613,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -4743,30 +5640,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -4778,30 +5682,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AlcHedSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -4812,56 +5723,73 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcAcctCatRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AlcAcctCatRow[],
+   "value":Erp_Tablesets_AlcAcctCatRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcAcctRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AlcAcctRow[],
+   "value":Erp_Tablesets_AlcAcctRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcHedListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AlcHedListRow[],
+   "value":Erp_Tablesets_AlcHedListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcHedRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AlcHedRow[],
+   "value":Erp_Tablesets_AlcHedRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcJrnCdRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AlcJrnCdRow[],
+   "value":Erp_Tablesets_AlcJrnCdRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcNFSrcRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AlcNFSrcRow[],
+   "value":Erp_Tablesets_AlcNFSrcRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcParamsBAQRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AlcParamsBAQRow[],
+   "value":Erp_Tablesets_AlcParamsBAQRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcParamsRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AlcParamsRow[],
+   "value":Erp_Tablesets_AlcParamsRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcRangeRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AlcRangeRow[],
+   "value":Erp_Tablesets_AlcRangeRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AlcTargetRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AlcTargetRow[],
+   "value":Erp_Tablesets_AlcTargetRow,
 }
 
 export interface Erp_Tablesets_AlcAcctCatRow{
@@ -5524,6 +6452,23 @@ Allocation units / Total Allocation units is used to distribute the amount. Tota
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -5538,7 +6483,7 @@ export interface ChangeAllocOption_input{
 export interface ChangeAllocOption_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
    opWarningMessage:string,
 }
 }
@@ -5555,7 +6500,7 @@ export interface ChangeAllocationType_input{
 export interface ChangeAllocationType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5569,7 +6514,7 @@ export interface ChangeBAQEntryType_input{
 export interface ChangeBAQEntryType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5587,7 +6532,7 @@ export interface ChangeExtCompanyID_input{
 export interface ChangeExtCompanyID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5607,7 +6552,7 @@ export interface ChangeLookupEntryType_input{
 export interface ChangeLookupEntryType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5646,7 +6591,7 @@ export interface CheckBAQExportID_input{
 export interface CheckBAQExportID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5689,7 +6634,7 @@ export interface CheckBook_input{
 export interface CheckBook_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5716,7 +6661,7 @@ export interface CheckCategory_input{
 export interface CheckCategory_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5747,7 +6692,7 @@ export interface CheckJournalCode_input{
 export interface CheckJournalCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5794,7 +6739,7 @@ export interface CheckParamOptionBAQ_input{
 export interface CheckParamOptionBAQ_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5816,7 +6761,7 @@ export interface CheckParamOption_input{
 export interface CheckParamOption_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5834,7 +6779,7 @@ export interface CheckParamSegment_input{
 export interface CheckParamSegment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5866,7 +6811,7 @@ export interface CheckPriorTgtStamp_input{
 export interface CheckPriorTgtStamp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
    opWarningMsg:string,
 }
 }
@@ -5914,7 +6859,7 @@ export interface CheckTgtStamp_input{
 export interface CheckTgtStamp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
    opWarningMsg:string,
 }
 }
@@ -5931,7 +6876,7 @@ export interface CheckTier_input{
 export interface CheckTier_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -5947,7 +6892,7 @@ export interface CheckTotalPercent_input{
 export interface CheckTotalPercent_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
    opTotalPercent:number,
 }
 }
@@ -5968,7 +6913,7 @@ export interface CreateAlcNFSrcRecords_input{
 export interface CreateAlcNFSrcRecords_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6777,7 +7722,7 @@ export interface GetNewAlcAcctCat_input{
 export interface GetNewAlcAcctCat_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6795,7 +7740,7 @@ export interface GetNewAlcAcct_input{
 export interface GetNewAlcAcct_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6809,7 +7754,7 @@ export interface GetNewAlcHed_input{
 export interface GetNewAlcHed_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6827,7 +7772,7 @@ export interface GetNewAlcJrnCd_input{
 export interface GetNewAlcJrnCd_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6847,7 +7792,7 @@ export interface GetNewAlcNFSrc1_input{
 export interface GetNewAlcNFSrc1_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6865,7 +7810,7 @@ export interface GetNewAlcNFSrc_input{
 export interface GetNewAlcNFSrc_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6885,7 +7830,7 @@ export interface GetNewAlcParamsBAQ_input{
 export interface GetNewAlcParamsBAQ_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6901,7 +7846,7 @@ export interface GetNewAlcParams_input{
 export interface GetNewAlcParams_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6924,7 +7869,7 @@ export interface GetNewAlcRange1_input{
 export interface GetNewAlcRange1_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6942,7 +7887,7 @@ export interface GetNewAlcRange_input{
 export interface GetNewAlcRange_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -6958,7 +7903,7 @@ export interface GetNewAlcTarget_input{
 export interface GetNewAlcTarget_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -7096,7 +8041,7 @@ export interface MaskValidate_input{
 export interface MaskValidate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -7110,7 +8055,7 @@ export interface RefreshAllocationTotals_input{
 export interface RefreshAllocationTotals_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -7126,7 +8071,7 @@ export interface RetrieveGLAcctDesc_input{
 export interface RetrieveGLAcctDesc_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -7143,7 +8088,7 @@ export interface UpdateAcctBalAcct_input{
 export interface UpdateAcctBalAcct_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -7162,7 +8107,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtAlcHedTableset[],
+   ds:Erp_Tablesets_UpdExtAlcHedTableset,
    errorsOccurred:boolean,
 }
 }
@@ -7177,7 +8122,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 
@@ -7245,7 +8190,7 @@ export interface createNewBAQParams_input{
 export interface createNewBAQParams_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AlcHedTableset[],
+   ds:Erp_Tablesets_AlcHedTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.InvoiceIStatTrnSvc
 // Description: Intrastat entry for AP Invoices and AR Invoices
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method APGetInvoiceIStatTrn
    Description: Gets the InvoiceIStatTrn record for an APInvDtl record.
    OperationID: APGetInvoiceIStatTrn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/APGetInvoiceIStatTrn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/APGetInvoiceIStatTrn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/APGetInvoiceIStatTrn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_APGetInvoiceIStatTrn(requestBody:any, epicorHeaders?:Headers){
+export function post_APGetInvoiceIStatTrn(requestBody:APGetInvoiceIStatTrn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<APGetInvoiceIStatTrn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceIStatTrnSvc/APGetInvoiceIStatTrn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as APGetInvoiceIStatTrn_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_APGetInvoiceIStatTrn(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ARGetInvoiceIStatTrn
    Description: Gets the InvoiceIStatTrn record for an AR InvcDtl record.
    OperationID: ARGetInvoiceIStatTrn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ARGetInvoiceIStatTrn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ARGetInvoiceIStatTrn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ARGetInvoiceIStatTrn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ARGetInvoiceIStatTrn(requestBody:any, epicorHeaders?:Headers){
+export function post_ARGetInvoiceIStatTrn(requestBody:ARGetInvoiceIStatTrn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ARGetInvoiceIStatTrn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceIStatTrnSvc/ARGetInvoiceIStatTrn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ARGetInvoiceIStatTrn_output)
           })
       .catch((error) => {
           reject(error)
@@ -156,30 +220,37 @@ export function post_ARGetInvoiceIStatTrn(requestBody:any, epicorHeaders?:Header
    Description: Method to call when changing the commodity code.  Validates the code and
 updates CommodityCodeDescription field for the code.
    OperationID: ChangeCommodityCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCommodityCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCommodityCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCommodityCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCommodityCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCommodityCode(requestBody:ChangeCommodityCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCommodityCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceIStatTrnSvc/ChangeCommodityCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCommodityCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -192,30 +263,37 @@ export function post_ChangeCommodityCode(requestBody:any, epicorHeaders?:Headers
    Description: Method to call when changing the FOB code.  Validates the code and
 updates FOBDescription field for the code.
    OperationID: ChangeFOB
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFOB_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFOB_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFOB_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFOB(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFOB(requestBody:ChangeFOB_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFOB_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceIStatTrnSvc/ChangeFOB", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFOB_output)
           })
       .catch((error) => {
           reject(error)
@@ -228,30 +306,37 @@ export function post_ChangeFOB(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call when changing the ship via code.  Validates the code and
 updates ShipViaDescription field for the code.
    OperationID: ChangeShipVia
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeShipVia_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeShipVia_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeShipVia_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeShipVia(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeShipVia(requestBody:ChangeShipVia_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeShipVia_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceIStatTrnSvc/ChangeShipVia", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeShipVia_output)
           })
       .catch((error) => {
           reject(error)
@@ -263,30 +348,37 @@ export function post_ChangeShipVia(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateIStatTrn
    Description: Updates/creates the IStatTrn record.
    OperationID: UpdateIStatTrn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateIStatTrn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateIStatTrn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateIStatTrn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateIStatTrn(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateIStatTrn(requestBody:UpdateIStatTrn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateIStatTrn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceIStatTrnSvc/UpdateIStatTrn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateIStatTrn_output)
           })
       .catch((error) => {
           reject(error)
@@ -298,7 +390,7 @@ export function post_UpdateIStatTrn(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetFlowList
    Description: Returns the Flow List.
    OperationID: GetFlowList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFlowList_output
@@ -311,15 +403,22 @@ export function post_GetFlowList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFlowList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceIStatTrnSvc/GetFlowList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFlowList_output)
           })
       .catch((error) => {
           reject(error)
@@ -330,11 +429,45 @@ export function post_GetFlowList(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -391,7 +524,7 @@ export interface ChangeCommodityCode_output{
 parameters : {
       /**  output parameters  */  
    cErrMessage:string,
-   ds:Erp_Tablesets_InvoiceIStatTrnTableset[],
+   ds:Erp_Tablesets_InvoiceIStatTrnTableset,
 }
 }
 
@@ -408,7 +541,7 @@ export interface ChangeFOB_input{
 export interface ChangeFOB_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_InvoiceIStatTrnTableset[],
+   ds:Erp_Tablesets_InvoiceIStatTrnTableset,
 }
 }
 
@@ -425,7 +558,7 @@ export interface ChangeShipVia_input{
 export interface ChangeShipVia_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_InvoiceIStatTrnTableset[],
+   ds:Erp_Tablesets_InvoiceIStatTrnTableset,
 }
 }
 
@@ -619,7 +752,7 @@ export interface UpdateIStatTrn_input{
 export interface UpdateIStatTrn_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_InvoiceIStatTrnTableset[],
+   ds:Erp_Tablesets_InvoiceIStatTrnTableset,
 }
 }
 

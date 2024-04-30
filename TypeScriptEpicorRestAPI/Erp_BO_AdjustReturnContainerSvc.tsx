@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.AdjustReturnContainerSvc
 // Description: Allows user to adjust in or out returnable containers
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method ChangeBinNum
    Description: Called when bin num is changed
    OperationID: ChangeBinNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeBinNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeBinNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeBinNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeBinNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeBinNum(requestBody:ChangeBinNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeBinNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/ChangeBinNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeBinNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_ChangeBinNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeQuantity
    Description: Called when quantity is changed - retrieves, validates and sets reason codes based on negative or positive qty
    OperationID: ChangeQuantity
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuantity_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuantity_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuantity_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuantity(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuantity(requestBody:ChangeQuantity_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuantity_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/ChangeQuantity", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuantity_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_ChangeQuantity(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeWarehouse
    Description: Called when quantity is changed - retrieves, validates and sets reason codes based on negative or positive qty
    OperationID: ChangeWarehouse
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeWarehouse_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeWarehouse_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeWarehouse_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeWarehouse(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeWarehouse(requestBody:ChangeWarehouse_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeWarehouse_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/ChangeWarehouse", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeWarehouse_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,7 +261,7 @@ export function post_ChangeWarehouse(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckPackageControlEnabled
    Description: Checks whether Package Control is enabled.
    OperationID: CheckPackageControlEnabled
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPackageControlEnabled_output
@@ -203,15 +274,22 @@ export function post_CheckPackageControlEnabled(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPackageControlEnabled_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/CheckPackageControlEnabled", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPackageControlEnabled_output)
           })
       .catch((error) => {
           reject(error)
@@ -224,30 +302,37 @@ export function post_CheckPackageControlEnabled(epicorHeaders?:Headers){
    Description: Gets the default values for the AdjustReturnContainer data table based on the part
 number entered.
    OperationID: GetAdjustReturnContainer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAdjustReturnContainer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAdjustReturnContainer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAdjustReturnContainer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAdjustReturnContainer(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAdjustReturnContainer(requestBody:GetAdjustReturnContainer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAdjustReturnContainer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/GetAdjustReturnContainer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAdjustReturnContainer_output)
           })
       .catch((error) => {
           reject(error)
@@ -259,30 +344,37 @@ export function post_GetAdjustReturnContainer(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetAdjustReturnContainerBrw
    Description: Populates adjust return container inventory on-hand qty dataset when warehouse is selected
    OperationID: GetAdjustReturnContainerBrw
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAdjustReturnContainerBrw_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAdjustReturnContainerBrw_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAdjustReturnContainerBrw_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAdjustReturnContainerBrw(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAdjustReturnContainerBrw(requestBody:GetAdjustReturnContainerBrw_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAdjustReturnContainerBrw_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/GetAdjustReturnContainerBrw", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAdjustReturnContainerBrw_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,30 +387,37 @@ export function post_GetAdjustReturnContainerBrw(requestBody:any, epicorHeaders?
    Description: Gets the number of matches for the given criteria and populates buffer if only one match found.
 Can pass one of either PartNum, ShipToPartNum, PkgCode, or both PartNum and PkgCode
    OperationID: GetMatchingCount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMatchingCount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMatchingCount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMatchingCount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMatchingCount(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMatchingCount(requestBody:GetMatchingCount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMatchingCount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/GetMatchingCount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMatchingCount_output)
           })
       .catch((error) => {
           reject(error)
@@ -329,30 +428,37 @@ export function post_GetMatchingCount(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method NegativeInventoryAllocationsTest
    OperationID: NegativeInventoryAllocationsTest
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/NegativeInventoryAllocationsTest_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/NegativeInventoryAllocationsTest_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/NegativeInventoryAllocationsTest_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_NegativeInventoryAllocationsTest(requestBody:any, epicorHeaders?:Headers){
+export function post_NegativeInventoryAllocationsTest(requestBody:NegativeInventoryAllocationsTest_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<NegativeInventoryAllocationsTest_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/NegativeInventoryAllocationsTest", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as NegativeInventoryAllocationsTest_output)
           })
       .catch((error) => {
           reject(error)
@@ -369,30 +475,37 @@ it does, the LegalNumberPrompt business objects needs to be called to
 gather that information.  This method should be called when the user
 saves the record but before the Update method is called.
    OperationID: PreSetAdjustReturnContainer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreSetAdjustReturnContainer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreSetAdjustReturnContainer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreSetAdjustReturnContainer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreSetAdjustReturnContainer(requestBody:any, epicorHeaders?:Headers){
+export function post_PreSetAdjustReturnContainer(requestBody:PreSetAdjustReturnContainer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreSetAdjustReturnContainer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/PreSetAdjustReturnContainer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreSetAdjustReturnContainer_output)
           })
       .catch((error) => {
           reject(error)
@@ -403,30 +516,37 @@ export function post_PreSetAdjustReturnContainer(requestBody:any, epicorHeaders?
    /**  
    Summary: Invoke method SetAdjustReturnContainer
    OperationID: SetAdjustReturnContainer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetAdjustReturnContainer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetAdjustReturnContainer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetAdjustReturnContainer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetAdjustReturnContainer(requestBody:any, epicorHeaders?:Headers){
+export function post_SetAdjustReturnContainer(requestBody:SetAdjustReturnContainer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetAdjustReturnContainer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/SetAdjustReturnContainer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetAdjustReturnContainer_output)
           })
       .catch((error) => {
           reject(error)
@@ -438,7 +558,7 @@ export function post_SetAdjustReturnContainer(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetAvailTranDocTypes
    Description: Method to call to get available tran doc types.
    OperationID: GetAvailTranDocTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailTranDocTypes_output
@@ -451,15 +571,22 @@ export function post_GetAvailTranDocTypes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailTranDocTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.AdjustReturnContainerSvc/GetAvailTranDocTypes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailTranDocTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -470,11 +597,45 @@ export function post_GetAvailTranDocTypes(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -491,7 +652,7 @@ export interface ChangeBinNum_input{
 export interface ChangeBinNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AdjustReturnContainerTableset[],
+   ds:Erp_Tablesets_AdjustReturnContainerTableset,
 }
 }
 
@@ -508,7 +669,7 @@ export interface ChangeQuantity_input{
 export interface ChangeQuantity_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AdjustReturnContainerTableset[],
+   ds:Erp_Tablesets_AdjustReturnContainerTableset,
 }
 }
 
@@ -525,7 +686,7 @@ export interface ChangeWarehouse_input{
 export interface ChangeWarehouse_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AdjustReturnContainerTableset[],
+   ds:Erp_Tablesets_AdjustReturnContainerTableset,
 }
 }
 
@@ -782,7 +943,7 @@ export interface PreSetAdjustReturnContainer_input{
 export interface PreSetAdjustReturnContainer_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AdjustReturnContainerTableset[],
+   ds:Erp_Tablesets_AdjustReturnContainerTableset,
    requiresUserInput:boolean,
 }
 }
@@ -797,7 +958,7 @@ export interface SetAdjustReturnContainer_input{
 export interface SetAdjustReturnContainer_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_AdjustReturnContainerTableset[],
+   ds:Erp_Tablesets_AdjustReturnContainerTableset,
 }
 }
 

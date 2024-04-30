@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.LIB.ClientFunctionsSvc
 // Description: Miscellaneous client functions.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method GetAuthenticationModeCodeDescriptionList
    Description: Gets a delimited list of authentication modes.
    OperationID: GetAuthenticationModeCodeDescriptionList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAuthenticationModeCodeDescriptionList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAuthenticationModeCodeDescriptionList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAuthenticationModeCodeDescriptionList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAuthenticationModeCodeDescriptionList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAuthenticationModeCodeDescriptionList(requestBody:GetAuthenticationModeCodeDescriptionList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAuthenticationModeCodeDescriptionList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/GetAuthenticationModeCodeDescriptionList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAuthenticationModeCodeDescriptionList_output)
           })
       .catch((error) => {
           reject(error)
@@ -121,7 +178,7 @@ export function post_GetAuthenticationModeCodeDescriptionList(requestBody:any, e
    Description: This method returns TaxSvcConfig.TaxConnectEnabled for the current Company
 otherwise it returns false.
    OperationID: GetTaxConnect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTaxConnect_output
@@ -134,15 +191,22 @@ export function post_GetTaxConnect(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTaxConnect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/GetTaxConnect", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTaxConnect_output)
           })
       .catch((error) => {
           reject(error)
@@ -154,30 +218,37 @@ export function post_GetTaxConnect(epicorHeaders?:Headers){
    Summary: Invoke method AlertLogAvailable
    Description: Return whether alert log records exist.
    OperationID: AlertLogAvailable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AlertLogAvailable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AlertLogAvailable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AlertLogAvailable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlertLogAvailable(requestBody:any, epicorHeaders?:Headers){
+export function post_AlertLogAvailable(requestBody:AlertLogAvailable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AlertLogAvailable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/AlertLogAvailable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AlertLogAvailable_output)
           })
       .catch((error) => {
           reject(error)
@@ -189,30 +260,37 @@ export function post_AlertLogAvailable(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetWorkstationMethod
    Description: Returns The workstation method for a company.
    OperationID: GetWorkstationMethod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetWorkstationMethod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetWorkstationMethod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetWorkstationMethod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetWorkstationMethod(requestBody:any, epicorHeaders?:Headers){
+export function post_GetWorkstationMethod(requestBody:GetWorkstationMethod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetWorkstationMethod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/GetWorkstationMethod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetWorkstationMethod_output)
           })
       .catch((error) => {
           reject(error)
@@ -224,30 +302,37 @@ export function post_GetWorkstationMethod(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetSSRSPrintOption
    Description: Returns SSRS Printer for a company.
    OperationID: GetSSRSPrintOption
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSSRSPrintOption_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSSRSPrintOption_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSSRSPrintOption_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSSRSPrintOption(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSSRSPrintOption(requestBody:GetSSRSPrintOption_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSSRSPrintOption_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/GetSSRSPrintOption", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSSRSPrintOption_output)
           })
       .catch((error) => {
           reject(error)
@@ -259,30 +344,37 @@ export function post_GetSSRSPrintOption(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetPrinterOptions
    Description: Gets the SSRS Printer Options for a company.
    OperationID: GetPrinterOptions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPrinterOptions_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPrinterOptions_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPrinterOptions_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPrinterOptions(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPrinterOptions(requestBody:GetPrinterOptions_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPrinterOptions_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/GetPrinterOptions", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPrinterOptions_output)
           })
       .catch((error) => {
           reject(error)
@@ -296,30 +388,37 @@ export function post_GetPrinterOptions(requestBody:any, epicorHeaders?:Headers){
 that includes a data payload of some of the method parameters. Zendesk logs the user on with the JWT/payload and uses return_to querystring to navigate user to correct topic.
 The typical action a client will take on the client with the returned URL is (to give a simple js example) javascript: window.open(url,"epHelpWindow",null,false). The token has a 3 minute window to be used.
    OperationID: ProcessZDHelpTopicOrLabel
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessZDHelpTopicOrLabel_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessZDHelpTopicOrLabel_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessZDHelpTopicOrLabel_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessZDHelpTopicOrLabel(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessZDHelpTopicOrLabel(requestBody:ProcessZDHelpTopicOrLabel_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessZDHelpTopicOrLabel_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/ProcessZDHelpTopicOrLabel", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessZDHelpTopicOrLabel_output)
           })
       .catch((error) => {
           reject(error)
@@ -331,7 +430,7 @@ export function post_ProcessZDHelpTopicOrLabel(requestBody:any, epicorHeaders?:H
    Summary: Invoke method ClientDownloadAvailable
    Description: Checks if the configuration required for the client download is available.
    OperationID: ClientDownloadAvailable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClientDownloadAvailable_output
@@ -344,15 +443,22 @@ export function post_ClientDownloadAvailable(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClientDownloadAvailable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/ClientDownloadAvailable", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClientDownloadAvailable_output)
           })
       .catch((error) => {
           reject(error)
@@ -364,7 +470,7 @@ export function post_ClientDownloadAvailable(epicorHeaders?:Headers){
    Summary: Invoke method GetClientDownloadUrl
    Description: Gets the client download URL.
    OperationID: GetClientDownloadUrl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetClientDownloadUrl_output
@@ -377,15 +483,22 @@ export function post_GetClientDownloadUrl(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetClientDownloadUrl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/GetClientDownloadUrl", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetClientDownloadUrl_output)
           })
       .catch((error) => {
           reject(error)
@@ -397,7 +510,7 @@ export function post_GetClientDownloadUrl(epicorHeaders?:Headers){
    Summary: Invoke method GetIsProductionInstance
    Description: Return the boolean value for first  "IsProductionInstance" value from ice.SysLicense table.
    OperationID: GetIsProductionInstance
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetIsProductionInstance_output
@@ -410,15 +523,22 @@ export function post_GetIsProductionInstance(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetIsProductionInstance_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/GetIsProductionInstance", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetIsProductionInstance_output)
           })
       .catch((error) => {
           reject(error)
@@ -430,30 +550,37 @@ export function post_GetIsProductionInstance(epicorHeaders?:Headers){
    Summary: Invoke method SetIsProductionInstance
    Description: Set the server/db combination as a production/non-production server.
    OperationID: SetIsProductionInstance
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetIsProductionInstance_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetIsProductionInstance_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetIsProductionInstance_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetIsProductionInstance(requestBody:any, epicorHeaders?:Headers){
+export function post_SetIsProductionInstance(requestBody:SetIsProductionInstance_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetIsProductionInstance_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/SetIsProductionInstance", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetIsProductionInstance_output)
           })
       .catch((error) => {
           reject(error)
@@ -465,30 +592,37 @@ export function post_SetIsProductionInstance(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method SetInstancePurposes
    Description: Set the isProduction value for all records in ice.SysLienses Table
    OperationID: SetInstancePurposes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetInstancePurposes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetInstancePurposes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetInstancePurposes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetInstancePurposes(requestBody:any, epicorHeaders?:Headers){
+export function post_SetInstancePurposes(requestBody:SetInstancePurposes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetInstancePurposes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/SetInstancePurposes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetInstancePurposes_output)
           })
       .catch((error) => {
           reject(error)
@@ -500,30 +634,37 @@ export function post_SetInstancePurposes(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method SetInstancePurpose
    Description: Set IsProductionInstance Value for the license instance based on the license id, and DB values from current context
    OperationID: SetInstancePurpose
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetInstancePurpose_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetInstancePurpose_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetInstancePurpose_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetInstancePurpose(requestBody:any, epicorHeaders?:Headers){
+export function post_SetInstancePurpose(requestBody:SetInstancePurpose_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetInstancePurpose_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/SetInstancePurpose", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetInstancePurpose_output)
           })
       .catch((error) => {
           reject(error)
@@ -535,7 +676,7 @@ export function post_SetInstancePurpose(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetInstancePurpose
    Description: Getting  the single license purpose based on the installation id in the current context/session
    OperationID: GetInstancePurpose
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInstancePurpose_output
@@ -548,15 +689,22 @@ export function post_GetInstancePurpose(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInstancePurpose_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/GetInstancePurpose", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInstancePurpose_output)
           })
       .catch((error) => {
           reject(error)
@@ -568,7 +716,7 @@ export function post_GetInstancePurpose(epicorHeaders?:Headers){
    Summary: Invoke method GetProductionServerInstances
    Description: Get Production  Server Instance Details from the DB
    OperationID: GetProductionServerInstances
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetProductionServerInstances_output
@@ -581,15 +729,22 @@ export function post_GetProductionServerInstances(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetProductionServerInstances_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/GetProductionServerInstances", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetProductionServerInstances_output)
           })
       .catch((error) => {
           reject(error)
@@ -601,30 +756,37 @@ export function post_GetProductionServerInstances(epicorHeaders?:Headers){
    Summary: Invoke method SetUpdateAvailableToFalse
    Description: Setting UpdateAvailable to false after applying the license
    OperationID: SetUpdateAvailableToFalse
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetUpdateAvailableToFalse_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetUpdateAvailableToFalse_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetUpdateAvailableToFalse_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetUpdateAvailableToFalse(requestBody:any, epicorHeaders?:Headers){
+export function post_SetUpdateAvailableToFalse(requestBody:SetUpdateAvailableToFalse_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetUpdateAvailableToFalse_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/SetUpdateAvailableToFalse", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetUpdateAvailableToFalse_output)
           })
       .catch((error) => {
           reject(error)
@@ -636,30 +798,37 @@ export function post_SetUpdateAvailableToFalse(requestBody:any, epicorHeaders?:H
    Summary: Invoke method SetUpdateAvailableToFalseForAllAppliedLicenses
    Description: Flipping UpdateAvailalble field value to false for a list of licenses
    OperationID: SetUpdateAvailableToFalseForAllAppliedLicenses
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetUpdateAvailableToFalseForAllAppliedLicenses_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetUpdateAvailableToFalseForAllAppliedLicenses_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetUpdateAvailableToFalseForAllAppliedLicenses_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetUpdateAvailableToFalseForAllAppliedLicenses(requestBody:any, epicorHeaders?:Headers){
+export function post_SetUpdateAvailableToFalseForAllAppliedLicenses(requestBody:SetUpdateAvailableToFalseForAllAppliedLicenses_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetUpdateAvailableToFalseForAllAppliedLicenses_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/SetUpdateAvailableToFalseForAllAppliedLicenses", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetUpdateAvailableToFalseForAllAppliedLicenses_output)
           })
       .catch((error) => {
           reject(error)
@@ -671,30 +840,37 @@ export function post_SetUpdateAvailableToFalseForAllAppliedLicenses(requestBody:
    Summary: Invoke method RemoveFromFileStore
    Description: Remove the license content from ice.FileStote, once the license is applied
    OperationID: RemoveFromFileStore
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveFromFileStore_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveFromFileStore_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveFromFileStore_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveFromFileStore(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveFromFileStore(requestBody:RemoveFromFileStore_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveFromFileStore_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/RemoveFromFileStore", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveFromFileStore_output)
           })
       .catch((error) => {
           reject(error)
@@ -706,7 +882,7 @@ export function post_RemoveFromFileStore(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetLicenseLiveStatus
    Description: Get the license live status
    OperationID: GetLicenseLiveStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLicenseLiveStatus_output
@@ -719,15 +895,22 @@ export function post_GetLicenseLiveStatus(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLicenseLiveStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/GetLicenseLiveStatus", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLicenseLiveStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -739,30 +922,37 @@ export function post_GetLicenseLiveStatus(epicorHeaders?:Headers){
    Summary: Invoke method ProcessZDHelpRequestCategory
    Description: Utility method to open online help (in Zendesk) at the category heading level, instead of navigating directly to a topic.
    OperationID: ProcessZDHelpRequestCategory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessZDHelpRequestCategory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessZDHelpRequestCategory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessZDHelpRequestCategory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessZDHelpRequestCategory(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessZDHelpRequestCategory(requestBody:ProcessZDHelpRequestCategory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessZDHelpRequestCategory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.ClientFunctionsSvc/ProcessZDHelpRequestCategory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessZDHelpRequestCategory_output)
           })
       .catch((error) => {
           reject(error)
@@ -773,11 +963,45 @@ export function post_ProcessZDHelpRequestCategory(requestBody:any, epicorHeaders
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

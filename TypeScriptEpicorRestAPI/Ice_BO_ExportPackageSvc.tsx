@@ -1,14 +1,33 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.ExportPackageSvc
 // Description: This object is used to create and export an export package.
 An export package contains a list of records that need to be exported and then
 loaded to a customer's database. Examples of such records include BAQ, zDataset, etc.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -17,7 +36,7 @@ loaded to a customer's database. Examples of such records include BAQ, zDataset,
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -35,7 +54,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -49,7 +75,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -67,7 +93,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ExportPackageRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ExportPackageRow
    */  
 export function get_ExportPackages_PackageID(PackageID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_ExportPackages_PackageID(PackageID:string, select?:string, e
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ExportPackageRow)
           })
@@ -121,10 +161,10 @@ export function get_ExportPackages_PackageID(PackageID:string, select?:string, e
       @param BAQRptID Desc: BAQRptID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPBAQReportRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPBAQReportRow
    */  
 export function get_ExportPackages_PackageID_EPBAQReports_PackageID_BAQRptID(PackageID:string, BAQRptID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -139,7 +179,14 @@ export function get_ExportPackages_PackageID_EPBAQReports_PackageID_BAQRptID(Pac
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPBAQReportRow)
           })
@@ -157,10 +204,10 @@ export function get_ExportPackages_PackageID_EPBAQReports_PackageID_BAQRptID(Pac
       @param DirectiveGroup Desc: DirectiveGroup   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPBpDirectiveGroupRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPBpDirectiveGroupRow
    */  
 export function get_ExportPackages_PackageID_EPBpDirectiveGroups_PackageID_DirectiveGroup(PackageID:string, DirectiveGroup:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -175,7 +222,14 @@ export function get_ExportPackages_PackageID_EPBpDirectiveGroups_PackageID_Direc
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPBpDirectiveGroupRow)
           })
@@ -194,10 +248,10 @@ export function get_ExportPackages_PackageID_EPBpDirectiveGroups_PackageID_Direc
       @param AlertNum Desc: AlertNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPChgLogGARow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPChgLogGARow
    */  
 export function get_ExportPackages_PackageID_EPChgLogGAs_PackageID_Company_AlertNum(PackageID:string, Company:string, AlertNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -212,7 +266,14 @@ export function get_ExportPackages_PackageID_EPChgLogGAs_PackageID_Company_Alert
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPChgLogGARow)
           })
@@ -232,10 +293,10 @@ export function get_ExportPackages_PackageID_EPChgLogGAs_PackageID_Company_Alert
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPDashBdDefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPDashBdDefRow
    */  
 export function get_ExportPackages_PackageID_EPDashBdDefs_PackageID_Company_ProductID_DefinitionID(PackageID:string, Company:string, ProductID:string, DefinitionID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -250,7 +311,14 @@ export function get_ExportPackages_PackageID_EPDashBdDefs_PackageID_Company_Prod
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPDashBdDefRow)
           })
@@ -268,10 +336,10 @@ export function get_ExportPackages_PackageID_EPDashBdDefs_PackageID_Company_Prod
       @param LibraryID Desc: LibraryID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPEfxLibraryRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPEfxLibraryRow
    */  
 export function get_ExportPackages_PackageID_EPEfxLibraries_PackageID_LibraryID(PackageID:string, LibraryID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -286,7 +354,14 @@ export function get_ExportPackages_PackageID_EPEfxLibraries_PackageID_LibraryID(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPEfxLibraryRow)
           })
@@ -307,10 +382,10 @@ export function get_ExportPackages_PackageID_EPEfxLibraries_PackageID_LibraryID(
       @param ExportID Desc: ExportID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPExportsRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPExportsRow
    */  
 export function get_ExportPackages_PackageID_EPExports_PackageID_Company_Approved_UserID_ExportID(PackageID:string, Company:string, Approved:string, UserID:string, ExportID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -325,7 +400,14 @@ export function get_ExportPackages_PackageID_EPExports_PackageID_Company_Approve
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPExportsRow)
           })
@@ -343,10 +425,10 @@ export function get_ExportPackages_PackageID_EPExports_PackageID_Company_Approve
       @param SourcePath Desc: SourcePath   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPFileContentsRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPFileContentsRow
    */  
 export function get_ExportPackages_PackageID_EPFileContents_PackageID_SourcePath(PackageID:string, SourcePath:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -361,7 +443,14 @@ export function get_ExportPackages_PackageID_EPFileContents_PackageID_SourcePath
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPFileContentsRow)
           })
@@ -380,10 +469,10 @@ export function get_ExportPackages_PackageID_EPFileContents_PackageID_SourcePath
       @param ActionDate Desc: ActionDate   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPHistoryRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPHistoryRow
    */  
 export function get_ExportPackages_PackageID_EPHistories_PackageID_ActionNum_ActionDate(PackageID:string, ActionNum:string, ActionDate:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -398,7 +487,14 @@ export function get_ExportPackages_PackageID_EPHistories_PackageID_ActionNum_Act
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPHistoryRow)
           })
@@ -416,10 +512,10 @@ export function get_ExportPackages_PackageID_EPHistories_PackageID_ActionNum_Act
       @param MenuID Desc: MenuID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPMenuRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPMenuRow
    */  
 export function get_ExportPackages_PackageID_EPMenus_PackageID_MenuID(PackageID:string, MenuID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -434,7 +530,14 @@ export function get_ExportPackages_PackageID_EPMenus_PackageID_MenuID(PackageID:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPMenuRow)
           })
@@ -454,10 +557,10 @@ export function get_ExportPackages_PackageID_EPMenus_PackageID_MenuID(PackageID:
       @param QuickSearchID Desc: QuickSearchID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPQuickSearchRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPQuickSearchRow
    */  
 export function get_ExportPackages_PackageID_EPQuickSearches_PackageID_Company_GlbCompany_QuickSearchID(PackageID:string, Company:string, GlbCompany:string, QuickSearchID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -472,7 +575,14 @@ export function get_ExportPackages_PackageID_EPQuickSearches_PackageID_Company_G
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPQuickSearchRow)
           })
@@ -490,10 +600,10 @@ export function get_ExportPackages_PackageID_EPQuickSearches_PackageID_Company_G
       @param ReportID Desc: ReportID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPReportRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPReportRow
    */  
 export function get_ExportPackages_PackageID_EPReports_PackageID_ReportID(PackageID:string, ReportID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -508,7 +618,14 @@ export function get_ExportPackages_PackageID_EPReports_PackageID_ReportID(Packag
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPReportRow)
           })
@@ -527,10 +644,10 @@ export function get_ExportPackages_PackageID_EPReports_PackageID_ReportID(Packag
       @param StyleNum Desc: StyleNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPReportStyleRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPReportStyleRow
    */  
 export function get_ExportPackages_PackageID_EPReportStyles_PackageID_ReportID_StyleNum(PackageID:string, ReportID:string, StyleNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -545,7 +662,14 @@ export function get_ExportPackages_PackageID_EPReportStyles_PackageID_ReportID_S
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPReportStyleRow)
           })
@@ -563,10 +687,10 @@ export function get_ExportPackages_PackageID_EPReportStyles_PackageID_ReportID_S
       @param RptDefID Desc: RptDefID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPRptDataDefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPRptDataDefRow
    */  
 export function get_ExportPackages_PackageID_EPRptDataDefs_PackageID_RptDefID(PackageID:string, RptDefID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -581,7 +705,14 @@ export function get_ExportPackages_PackageID_EPRptDataDefs_PackageID_RptDefID(Pa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPRptDataDefRow)
           })
@@ -600,10 +731,10 @@ export function get_ExportPackages_PackageID_EPRptDataDefs_PackageID_RptDefID(Pa
       @param SecCode Desc: SecCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPSecurityRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPSecurityRow
    */  
 export function get_ExportPackages_PackageID_EPSecurities_PackageID_Company_SecCode(PackageID:string, Company:string, SecCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -618,7 +749,14 @@ export function get_ExportPackages_PackageID_EPSecurities_PackageID_Company_SecC
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPSecurityRow)
           })
@@ -637,10 +775,10 @@ export function get_ExportPackages_PackageID_EPSecurities_PackageID_Company_SecC
       @param CodeTypeID Desc: CodeTypeID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPUDCodeTypeRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPUDCodeTypeRow
    */  
 export function get_ExportPackages_PackageID_EPUDCodeTypes_PackageID_Company_CodeTypeID(PackageID:string, Company:string, CodeTypeID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -655,7 +793,14 @@ export function get_ExportPackages_PackageID_EPUDCodeTypes_PackageID_Company_Cod
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPUDCodeTypeRow)
           })
@@ -673,10 +818,10 @@ export function get_ExportPackages_PackageID_EPUDCodeTypes_PackageID_Company_Cod
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPUserDefinedTableRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPUserDefinedTableRow
    */  
 export function get_ExportPackages_PackageID_EPUserDefinedTables_PackageID_TableName(PackageID:string, TableName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -691,7 +836,14 @@ export function get_ExportPackages_PackageID_EPUserDefinedTables_PackageID_Table
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPUserDefinedTableRow)
           })
@@ -714,10 +866,10 @@ export function get_ExportPackages_PackageID_EPUserDefinedTables_PackageID_Table
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPXXXDefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPXXXDefRow
    */  
 export function get_ExportPackages_PackageID_EPXXXDefs_PackageID_Company_ProductID_TypeCode_Key1_Key2_Key3(PackageID:string, Company:string, ProductID:string, TypeCode:string, Key1:string, Key2:string, Key3:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -732,7 +884,14 @@ export function get_ExportPackages_PackageID_EPXXXDefs_PackageID_Company_Product
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPXXXDefRow)
           })
@@ -751,10 +910,10 @@ export function get_ExportPackages_PackageID_EPXXXDefs_PackageID_Company_Product
       @param ObjectNS Desc: ObjectNS   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPzBODefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPzBODefRow
    */  
 export function get_ExportPackages_PackageID_EPzBODefs_PackageID_ClassName_ObjectNS(PackageID:string, ClassName:string, ObjectNS:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -769,7 +928,14 @@ export function get_ExportPackages_PackageID_EPzBODefs_PackageID_ClassName_Objec
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPzBODefRow)
           })
@@ -787,10 +953,10 @@ export function get_ExportPackages_PackageID_EPzBODefs_PackageID_ClassName_Objec
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPzDataRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPzDataRow
    */  
 export function get_ExportPackages_PackageID_EPzDatas_PackageID_DataTableID(PackageID:string, DataTableID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -805,7 +971,14 @@ export function get_ExportPackages_PackageID_EPzDatas_PackageID_DataTableID(Pack
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPzDataRow)
           })
@@ -823,10 +996,10 @@ export function get_ExportPackages_PackageID_EPzDatas_PackageID_DataTableID(Pack
       @param BAQRptID Desc: BAQRptID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPBAQReportRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPBAQReportRow
    */  
 export function get_EPBAQReports_PackageID_BAQRptID(PackageID:string, BAQRptID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -841,7 +1014,14 @@ export function get_EPBAQReports_PackageID_BAQRptID(PackageID:string, BAQRptID:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPBAQReportRow)
           })
@@ -859,10 +1039,10 @@ export function get_EPBAQReports_PackageID_BAQRptID(PackageID:string, BAQRptID:s
       @param DirectiveGroup Desc: DirectiveGroup   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPBpDirectiveGroupRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPBpDirectiveGroupRow
    */  
 export function get_EPBpDirectiveGroups_PackageID_DirectiveGroup(PackageID:string, DirectiveGroup:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -877,7 +1057,14 @@ export function get_EPBpDirectiveGroups_PackageID_DirectiveGroup(PackageID:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPBpDirectiveGroupRow)
           })
@@ -896,10 +1083,10 @@ export function get_EPBpDirectiveGroups_PackageID_DirectiveGroup(PackageID:strin
       @param AlertNum Desc: AlertNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPChgLogGARow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPChgLogGARow
    */  
 export function get_EPChgLogGAs_PackageID_Company_AlertNum(PackageID:string, Company:string, AlertNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -914,7 +1101,14 @@ export function get_EPChgLogGAs_PackageID_Company_AlertNum(PackageID:string, Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPChgLogGARow)
           })
@@ -934,10 +1128,10 @@ export function get_EPChgLogGAs_PackageID_Company_AlertNum(PackageID:string, Com
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPDashBdDefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPDashBdDefRow
    */  
 export function get_EPDashBdDefs_PackageID_Company_ProductID_DefinitionID(PackageID:string, Company:string, ProductID:string, DefinitionID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -952,7 +1146,14 @@ export function get_EPDashBdDefs_PackageID_Company_ProductID_DefinitionID(Packag
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPDashBdDefRow)
           })
@@ -970,10 +1171,10 @@ export function get_EPDashBdDefs_PackageID_Company_ProductID_DefinitionID(Packag
       @param LibraryID Desc: LibraryID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPEfxLibraryRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPEfxLibraryRow
    */  
 export function get_EPEfxLibraries_PackageID_LibraryID(PackageID:string, LibraryID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -988,7 +1189,14 @@ export function get_EPEfxLibraries_PackageID_LibraryID(PackageID:string, Library
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPEfxLibraryRow)
           })
@@ -1009,10 +1217,10 @@ export function get_EPEfxLibraries_PackageID_LibraryID(PackageID:string, Library
       @param ExportID Desc: ExportID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPExportsRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPExportsRow
    */  
 export function get_EPExports_PackageID_Company_Approved_UserID_ExportID(PackageID:string, Company:string, Approved:string, UserID:string, ExportID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1027,7 +1235,14 @@ export function get_EPExports_PackageID_Company_Approved_UserID_ExportID(Package
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPExportsRow)
           })
@@ -1045,10 +1260,10 @@ export function get_EPExports_PackageID_Company_Approved_UserID_ExportID(Package
       @param SourcePath Desc: SourcePath   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPFileContentsRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPFileContentsRow
    */  
 export function get_EPFileContents_PackageID_SourcePath(PackageID:string, SourcePath:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1063,7 +1278,14 @@ export function get_EPFileContents_PackageID_SourcePath(PackageID:string, Source
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPFileContentsRow)
           })
@@ -1082,10 +1304,10 @@ export function get_EPFileContents_PackageID_SourcePath(PackageID:string, Source
       @param ActionDate Desc: ActionDate   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPHistoryRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPHistoryRow
    */  
 export function get_EPHistories_PackageID_ActionNum_ActionDate(PackageID:string, ActionNum:string, ActionDate:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1100,7 +1322,14 @@ export function get_EPHistories_PackageID_ActionNum_ActionDate(PackageID:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPHistoryRow)
           })
@@ -1118,10 +1347,10 @@ export function get_EPHistories_PackageID_ActionNum_ActionDate(PackageID:string,
       @param MenuID Desc: MenuID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPMenuRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPMenuRow
    */  
 export function get_EPMenus_PackageID_MenuID(PackageID:string, MenuID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1136,7 +1365,14 @@ export function get_EPMenus_PackageID_MenuID(PackageID:string, MenuID:string, se
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPMenuRow)
           })
@@ -1156,10 +1392,10 @@ export function get_EPMenus_PackageID_MenuID(PackageID:string, MenuID:string, se
       @param QuickSearchID Desc: QuickSearchID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPQuickSearchRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPQuickSearchRow
    */  
 export function get_EPQuickSearches_PackageID_Company_GlbCompany_QuickSearchID(PackageID:string, Company:string, GlbCompany:string, QuickSearchID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1174,7 +1410,14 @@ export function get_EPQuickSearches_PackageID_Company_GlbCompany_QuickSearchID(P
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPQuickSearchRow)
           })
@@ -1192,10 +1435,10 @@ export function get_EPQuickSearches_PackageID_Company_GlbCompany_QuickSearchID(P
       @param ReportID Desc: ReportID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPReportRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPReportRow
    */  
 export function get_EPReports_PackageID_ReportID(PackageID:string, ReportID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1210,7 +1453,14 @@ export function get_EPReports_PackageID_ReportID(PackageID:string, ReportID:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPReportRow)
           })
@@ -1229,10 +1479,10 @@ export function get_EPReports_PackageID_ReportID(PackageID:string, ReportID:stri
       @param StyleNum Desc: StyleNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPReportStyleRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPReportStyleRow
    */  
 export function get_EPReportStyles_PackageID_ReportID_StyleNum(PackageID:string, ReportID:string, StyleNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1247,7 +1497,14 @@ export function get_EPReportStyles_PackageID_ReportID_StyleNum(PackageID:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPReportStyleRow)
           })
@@ -1265,10 +1522,10 @@ export function get_EPReportStyles_PackageID_ReportID_StyleNum(PackageID:string,
       @param RptDefID Desc: RptDefID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPRptDataDefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPRptDataDefRow
    */  
 export function get_EPRptDataDefs_PackageID_RptDefID(PackageID:string, RptDefID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1283,7 +1540,14 @@ export function get_EPRptDataDefs_PackageID_RptDefID(PackageID:string, RptDefID:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPRptDataDefRow)
           })
@@ -1302,10 +1566,10 @@ export function get_EPRptDataDefs_PackageID_RptDefID(PackageID:string, RptDefID:
       @param SecCode Desc: SecCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPSecurityRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPSecurityRow
    */  
 export function get_EPSecurities_PackageID_Company_SecCode(PackageID:string, Company:string, SecCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1320,7 +1584,14 @@ export function get_EPSecurities_PackageID_Company_SecCode(PackageID:string, Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPSecurityRow)
           })
@@ -1339,10 +1610,10 @@ export function get_EPSecurities_PackageID_Company_SecCode(PackageID:string, Com
       @param CodeTypeID Desc: CodeTypeID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPUDCodeTypeRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPUDCodeTypeRow
    */  
 export function get_EPUDCodeTypes_PackageID_Company_CodeTypeID(PackageID:string, Company:string, CodeTypeID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1357,7 +1628,14 @@ export function get_EPUDCodeTypes_PackageID_Company_CodeTypeID(PackageID:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPUDCodeTypeRow)
           })
@@ -1375,10 +1653,10 @@ export function get_EPUDCodeTypes_PackageID_Company_CodeTypeID(PackageID:string,
       @param TableName Desc: TableName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPUserDefinedTableRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPUserDefinedTableRow
    */  
 export function get_EPUserDefinedTables_PackageID_TableName(PackageID:string, TableName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1393,7 +1671,14 @@ export function get_EPUserDefinedTables_PackageID_TableName(PackageID:string, Ta
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPUserDefinedTableRow)
           })
@@ -1416,10 +1701,10 @@ export function get_EPUserDefinedTables_PackageID_TableName(PackageID:string, Ta
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPXXXDefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPXXXDefRow
    */  
 export function get_EPXXXDefs_PackageID_Company_ProductID_TypeCode_Key1_Key2_Key3(PackageID:string, Company:string, ProductID:string, TypeCode:string, Key1:string, Key2:string, Key3:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1434,7 +1719,14 @@ export function get_EPXXXDefs_PackageID_Company_ProductID_TypeCode_Key1_Key2_Key
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPXXXDefRow)
           })
@@ -1453,10 +1745,10 @@ export function get_EPXXXDefs_PackageID_Company_ProductID_TypeCode_Key1_Key2_Key
       @param ObjectNS Desc: ObjectNS   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPzBODefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPzBODefRow
    */  
 export function get_EPzBODefs_PackageID_ClassName_ObjectNS(PackageID:string, ClassName:string, ObjectNS:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1471,7 +1763,14 @@ export function get_EPzBODefs_PackageID_ClassName_ObjectNS(PackageID:string, Cla
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPzBODefRow)
           })
@@ -1489,10 +1788,10 @@ export function get_EPzBODefs_PackageID_ClassName_ObjectNS(PackageID:string, Cla
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPzDataRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPzDataRow
    */  
 export function get_EPzDatas_PackageID_DataTableID(PackageID:string, DataTableID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1507,7 +1806,14 @@ export function get_EPzDatas_PackageID_DataTableID(PackageID:string, DataTableID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPzDataRow)
           })
@@ -1524,10 +1830,10 @@ export function get_EPzDatas_PackageID_DataTableID(PackageID:string, DataTableID
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPExtensionSetRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPExtensionSetRow
    */  
 export function get_EPExtensionSets_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1542,7 +1848,14 @@ export function get_EPExtensionSets_SysRowID(SysRowID:string, select?:string, fi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPExtensionSetRow)
           })
@@ -1560,10 +1873,10 @@ export function get_EPExtensionSets_SysRowID(SysRowID:string, select?:string, fi
       @param ForeignSysRowID Desc: ForeignSysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPSolutionDetailRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPSolutionDetailRow
    */  
 export function get_EPSolutionDetails_SolutionID_ForeignSysRowID(SolutionID:string, ForeignSysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1578,7 +1891,14 @@ export function get_EPSolutionDetails_SolutionID_ForeignSysRowID(SolutionID:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPSolutionDetailRow)
           })
@@ -1595,10 +1915,10 @@ export function get_EPSolutionDetails_SolutionID_ForeignSysRowID(SolutionID:stri
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPSolutionDetailDisplayRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPSolutionDetailDisplayRow
    */  
 export function get_EPSolutionDetailDisplays_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1613,7 +1933,14 @@ export function get_EPSolutionDetailDisplays_SysRowID(SysRowID:string, select?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPSolutionDetailDisplayRow)
           })
@@ -1630,10 +1957,10 @@ export function get_EPSolutionDetailDisplays_SysRowID(SysRowID:string, select?:s
       @param SolutionID Desc: SolutionID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPSolutionHeaderRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPSolutionHeaderRow
    */  
 export function get_EPSolutionHeaders_SolutionID(SolutionID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1648,7 +1975,14 @@ export function get_EPSolutionHeaders_SolutionID(SolutionID:string, select?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPSolutionHeaderRow)
           })
@@ -1666,10 +2000,10 @@ export function get_EPSolutionHeaders_SolutionID(SolutionID:string, select?:stri
       @param ForeignSysRowID Desc: ForeignSysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPSolutionPackageRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPSolutionPackageRow
    */  
 export function get_EPSolutionPackages_SolutionID_ForeignSysRowID(SolutionID:string, ForeignSysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1684,7 +2018,14 @@ export function get_EPSolutionPackages_SolutionID_ForeignSysRowID(SolutionID:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPSolutionPackageRow)
           })
@@ -1704,10 +2045,10 @@ export function get_EPSolutionPackages_SolutionID_ForeignSysRowID(SolutionID:str
       @param ForeignSysRowID Desc: ForeignSysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPSolutionTrackerRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPSolutionTrackerRow
    */  
 export function get_EPSolutionTrackers_SolutionID_TableName_LastUpdated_ForeignSysRowID(SolutionID:string, TableName:string, LastUpdated:string, ForeignSysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1722,7 +2063,14 @@ export function get_EPSolutionTrackers_SolutionID_TableName_LastUpdated_ForeignS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPSolutionTrackerRow)
           })
@@ -1739,10 +2087,10 @@ export function get_EPSolutionTrackers_SolutionID_TableName_LastUpdated_ForeignS
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPSolutionTrackerDetailRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPSolutionTrackerDetailRow
    */  
 export function get_EPSolutionTrackerDetails_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1757,7 +2105,14 @@ export function get_EPSolutionTrackerDetails_SysRowID(SysRowID:string, select?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPSolutionTrackerDetailRow)
           })
@@ -1774,10 +2129,10 @@ export function get_EPSolutionTrackerDetails_SysRowID(SysRowID:string, select?:s
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPSolutionTypeRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPSolutionTypeRow
    */  
 export function get_EPSolutionTypes_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1792,7 +2147,14 @@ export function get_EPSolutionTypes_SysRowID(SysRowID:string, select?:string, fi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPSolutionTypeRow)
           })
@@ -1809,10 +2171,10 @@ export function get_EPSolutionTypes_SysRowID(SysRowID:string, select?:string, fi
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.EPStructuredReportRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.EPStructuredReportRow
    */  
 export function get_EPStructuredReports_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1827,7 +2189,14 @@ export function get_EPStructuredReports_SysRowID(SysRowID:string, select?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_EPStructuredReportRow)
           })
@@ -1847,10 +2216,10 @@ export function get_EPStructuredReports_SysRowID(SysRowID:string, select?:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExportPackageListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ExportPackageListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1865,7 +2234,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExportPackageListRow)
           })
@@ -1878,6 +2254,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -1885,30 +2278,37 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Summary: Invoke method GetByID
    Description: This method returns a dataset representing an ExportPackage
    OperationID: GetByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByID(requestBody:GetByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExportPackageListRow>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExportPackageListRow)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1920,30 +2320,37 @@ export function post_GetByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetList
    Description: This method returns a list of solutions
    OperationID: GetList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetList(requestBody:GetList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1955,30 +2362,37 @@ export function post_GetList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method HasUnsupportedContentTypes
    Description: Has solution files invalid/unsupported content types.
    OperationID: HasUnsupportedContentTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/HasUnsupportedContentTypes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/HasUnsupportedContentTypes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/HasUnsupportedContentTypes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_HasUnsupportedContentTypes(requestBody:any, epicorHeaders?:Headers){
+export function post_HasUnsupportedContentTypes(requestBody:HasUnsupportedContentTypes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<HasUnsupportedContentTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/HasUnsupportedContentTypes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as HasUnsupportedContentTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -1990,30 +2404,37 @@ export function post_HasUnsupportedContentTypes(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetNewEPFileContents
    Description: This method creates a EPFileContents row
    OperationID: GetNewEPFileContents
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewEPFileContents_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewEPFileContents_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewEPFileContents_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewEPFileContents(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewEPFileContents(requestBody:GetNewEPFileContents_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewEPFileContents_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetNewEPFileContents", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewEPFileContents_output)
           })
       .catch((error) => {
           reject(error)
@@ -2025,30 +2446,37 @@ export function post_GetNewEPFileContents(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewEPHistory
    Description: This method creates a EPHistory row
    OperationID: GetNewEPHistory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewEPHistory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewEPHistory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewEPHistory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewEPHistory(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewEPHistory(requestBody:GetNewEPHistory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewEPHistory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetNewEPHistory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewEPHistory_output)
           })
       .catch((error) => {
           reject(error)
@@ -2060,30 +2488,37 @@ export function post_GetNewEPHistory(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewExportPackage
    Description: This method creates a new Export package
    OperationID: GetNewExportPackage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewExportPackage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewExportPackage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewExportPackage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewExportPackage(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewExportPackage(requestBody:GetNewExportPackage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewExportPackage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetNewExportPackage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewExportPackage_output)
           })
       .catch((error) => {
           reject(error)
@@ -2095,30 +2530,37 @@ export function post_GetNewExportPackage(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method Update
    Description: Update
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2130,30 +2572,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RemoveWorkbenchPromoteDetailRows
    Description: Removes deleted rows from the SolutionDetail table
    OperationID: RemoveWorkbenchPromoteDetailRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveWorkbenchPromoteDetailRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveWorkbenchPromoteDetailRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveWorkbenchPromoteDetailRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveWorkbenchPromoteDetailRows(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveWorkbenchPromoteDetailRows(requestBody:RemoveWorkbenchPromoteDetailRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveWorkbenchPromoteDetailRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/RemoveWorkbenchPromoteDetailRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveWorkbenchPromoteDetailRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2165,30 +2614,37 @@ export function post_RemoveWorkbenchPromoteDetailRows(requestBody:any, epicorHea
    Summary: Invoke method RemoveWorkbenchTrackerDetailRows
    Description: Selects or Removes the row in the SoltutionTracker table
    OperationID: RemoveWorkbenchTrackerDetailRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveWorkbenchTrackerDetailRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveWorkbenchTrackerDetailRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveWorkbenchTrackerDetailRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveWorkbenchTrackerDetailRows(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveWorkbenchTrackerDetailRows(requestBody:RemoveWorkbenchTrackerDetailRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveWorkbenchTrackerDetailRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/RemoveWorkbenchTrackerDetailRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveWorkbenchTrackerDetailRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2200,30 +2656,37 @@ export function post_RemoveWorkbenchTrackerDetailRows(requestBody:any, epicorHea
    Summary: Invoke method PopulateWorkbenchTrackerDetailPanel
    Description: Populates the detail view in the WorkbenchTrackerDetailPanel
    OperationID: PopulateWorkbenchTrackerDetailPanel
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PopulateWorkbenchTrackerDetailPanel_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PopulateWorkbenchTrackerDetailPanel_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PopulateWorkbenchTrackerDetailPanel_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PopulateWorkbenchTrackerDetailPanel(requestBody:any, epicorHeaders?:Headers){
+export function post_PopulateWorkbenchTrackerDetailPanel(requestBody:PopulateWorkbenchTrackerDetailPanel_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PopulateWorkbenchTrackerDetailPanel_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/PopulateWorkbenchTrackerDetailPanel", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PopulateWorkbenchTrackerDetailPanel_output)
           })
       .catch((error) => {
           reject(error)
@@ -2235,30 +2698,37 @@ export function post_PopulateWorkbenchTrackerDetailPanel(requestBody:any, epicor
    Summary: Invoke method DeleteByID
    Description: Deletes the Solution
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2270,30 +2740,37 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method PopulateWorkbenchPromoteDetailPanel
    Description: Populates the detail view in the WorkbenchPromoteDetailPanel
    OperationID: PopulateWorkbenchPromoteDetailPanel
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PopulateWorkbenchPromoteDetailPanel_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PopulateWorkbenchPromoteDetailPanel_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PopulateWorkbenchPromoteDetailPanel_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PopulateWorkbenchPromoteDetailPanel(requestBody:any, epicorHeaders?:Headers){
+export function post_PopulateWorkbenchPromoteDetailPanel(requestBody:PopulateWorkbenchPromoteDetailPanel_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PopulateWorkbenchPromoteDetailPanel_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/PopulateWorkbenchPromoteDetailPanel", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PopulateWorkbenchPromoteDetailPanel_output)
           })
       .catch((error) => {
           reject(error)
@@ -2305,30 +2782,37 @@ export function post_PopulateWorkbenchPromoteDetailPanel(requestBody:any, epicor
    Summary: Invoke method IsValidBORecByID
    Description: validates the imported row
    OperationID: IsValidBORecByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsValidBORecByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsValidBORecByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsValidBORecByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsValidBORecByID(requestBody:any, epicorHeaders?:Headers){
+export function post_IsValidBORecByID(requestBody:IsValidBORecByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsValidBORecByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/IsValidBORecByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsValidBORecByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2340,30 +2824,37 @@ export function post_IsValidBORecByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBORecByID
    Description: Gets the row to export
    OperationID: GetBORecByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBORecByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBORecByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBORecByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBORecByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBORecByID(requestBody:GetBORecByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBORecByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetBORecByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBORecByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2375,30 +2866,37 @@ export function post_GetBORecByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateMenuModuleType
    Description: update the Module for the Menu row
    OperationID: UpdateMenuModuleType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateMenuModuleType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateMenuModuleType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateMenuModuleType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateMenuModuleType(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateMenuModuleType(requestBody:UpdateMenuModuleType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateMenuModuleType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/UpdateMenuModuleType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateMenuModuleType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2410,30 +2908,37 @@ export function post_UpdateMenuModuleType(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method UpdateDBScript
    Description: updates the database script in the SolutionScriptStore
    OperationID: UpdateDBScript
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateDBScript_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateDBScript_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateDBScript_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateDBScript(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateDBScript(requestBody:UpdateDBScript_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateDBScript_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/UpdateDBScript", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateDBScript_output)
           })
       .catch((error) => {
           reject(error)
@@ -2445,30 +2950,37 @@ export function post_UpdateDBScript(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteSolutionDBScripts
    Description: deletes the database script in the SolutionScriptStore for the solution and company
    OperationID: DeleteSolutionDBScripts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteSolutionDBScripts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteSolutionDBScripts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteSolutionDBScripts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteSolutionDBScripts(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteSolutionDBScripts(requestBody:DeleteSolutionDBScripts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteSolutionDBScripts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/DeleteSolutionDBScripts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteSolutionDBScripts_output)
           })
       .catch((error) => {
           reject(error)
@@ -2480,30 +2992,37 @@ export function post_DeleteSolutionDBScripts(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetElementBOName
    Description: returns the BO associated with the Solution Element
    OperationID: GetElementBOName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetElementBOName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetElementBOName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetElementBOName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetElementBOName(requestBody:any, epicorHeaders?:Headers){
+export function post_GetElementBOName(requestBody:GetElementBOName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetElementBOName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetElementBOName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetElementBOName_output)
           })
       .catch((error) => {
           reject(error)
@@ -2515,30 +3034,37 @@ export function post_GetElementBOName(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetExportRow
    Description: Gets the row to export
    OperationID: GetExportRow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetExportRow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetExportRow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetExportRow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetExportRow(requestBody:any, epicorHeaders?:Headers){
+export function post_GetExportRow(requestBody:GetExportRow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetExportRow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetExportRow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetExportRow_output)
           })
       .catch((error) => {
           reject(error)
@@ -2550,30 +3076,37 @@ export function post_GetExportRow(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MoveTrackedRowsToSolution
    Description: Move Tracked Selected rows to the Solution
    OperationID: MoveTrackedRowsToSolution
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MoveTrackedRowsToSolution_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MoveTrackedRowsToSolution_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MoveTrackedRowsToSolution_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MoveTrackedRowsToSolution(requestBody:any, epicorHeaders?:Headers){
+export function post_MoveTrackedRowsToSolution(requestBody:MoveTrackedRowsToSolution_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MoveTrackedRowsToSolution_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/MoveTrackedRowsToSolution", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MoveTrackedRowsToSolution_output)
           })
       .catch((error) => {
           reject(error)
@@ -2585,30 +3118,37 @@ export function post_MoveTrackedRowsToSolution(requestBody:any, epicorHeaders?:H
    Summary: Invoke method AddItemToSolution
    Description: Add rows (non-tracked) to the Solution
    OperationID: AddItemToSolution
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddItemToSolution_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddItemToSolution_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddItemToSolution_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddItemToSolution(requestBody:any, epicorHeaders?:Headers){
+export function post_AddItemToSolution(requestBody:AddItemToSolution_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddItemToSolution_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/AddItemToSolution", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddItemToSolution_output)
           })
       .catch((error) => {
           reject(error)
@@ -2620,30 +3160,37 @@ export function post_AddItemToSolution(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateSolutionType
    Description: Validates the Solution Type ID
    OperationID: ValidateSolutionType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSolutionType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSolutionType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSolutionType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSolutionType(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSolutionType(requestBody:ValidateSolutionType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSolutionType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/ValidateSolutionType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSolutionType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2655,30 +3202,37 @@ export function post_ValidateSolutionType(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetInstalledSolution
    Description: Get the previous install of a solution.
    OperationID: GetInstalledSolution
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetInstalledSolution_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetInstalledSolution_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInstalledSolution_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetInstalledSolution(requestBody:any, epicorHeaders?:Headers){
+export function post_GetInstalledSolution(requestBody:GetInstalledSolution_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInstalledSolution_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetInstalledSolution", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInstalledSolution_output)
           })
       .catch((error) => {
           reject(error)
@@ -2690,30 +3244,37 @@ export function post_GetInstalledSolution(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DeleteSolutionInstall
    Description: Delete the last record of a solution installation.
    OperationID: DeleteSolutionInstall
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteSolutionInstall_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteSolutionInstall_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteSolutionInstall_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteSolutionInstall(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteSolutionInstall(requestBody:DeleteSolutionInstall_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteSolutionInstall_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/DeleteSolutionInstall", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteSolutionInstall_output)
           })
       .catch((error) => {
           reject(error)
@@ -2725,30 +3286,37 @@ export function post_DeleteSolutionInstall(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method RecordSolutionInstall
    Description: Record the fact that we're installing a solution.
    OperationID: RecordSolutionInstall
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RecordSolutionInstall_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RecordSolutionInstall_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RecordSolutionInstall_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RecordSolutionInstall(requestBody:any, epicorHeaders?:Headers){
+export function post_RecordSolutionInstall(requestBody:RecordSolutionInstall_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RecordSolutionInstall_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/RecordSolutionInstall", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RecordSolutionInstall_output)
           })
       .catch((error) => {
           reject(error)
@@ -2760,7 +3328,7 @@ export function post_RecordSolutionInstall(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetInstalledSolutions
    Description: Get the list of installed solutions.
    OperationID: GetInstalledSolutions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInstalledSolutions_output
@@ -2773,15 +3341,22 @@ export function post_GetInstalledSolutions(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInstalledSolutions_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetInstalledSolutions", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInstalledSolutions_output)
           })
       .catch((error) => {
           reject(error)
@@ -2793,30 +3368,37 @@ export function post_GetInstalledSolutions(epicorHeaders?:Headers){
    Summary: Invoke method GetSolutionHistory
    Description: Get the history of a solution.
    OperationID: GetSolutionHistory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSolutionHistory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSolutionHistory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSolutionHistory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSolutionHistory(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSolutionHistory(requestBody:GetSolutionHistory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSolutionHistory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetSolutionHistory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSolutionHistory_output)
           })
       .catch((error) => {
           reject(error)
@@ -2828,30 +3410,37 @@ export function post_GetSolutionHistory(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method Build
    Description: Build solution package.
    OperationID: Build
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Build_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Build_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Build_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Build(requestBody:any, epicorHeaders?:Headers){
+export function post_Build(requestBody:Build_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Build_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/Build", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Build_output)
           })
       .catch((error) => {
           reject(error)
@@ -2863,30 +3452,37 @@ export function post_Build(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBuildSettings
    Description: Gets build settings.
    OperationID: GetBuildSettings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBuildSettings_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBuildSettings_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBuildSettings_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBuildSettings(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBuildSettings(requestBody:GetBuildSettings_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBuildSettings_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetBuildSettings", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBuildSettings_output)
           })
       .catch((error) => {
           reject(error)
@@ -2898,30 +3494,37 @@ export function post_GetBuildSettings(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateBuildSettings
    Description: Validate build settings.
    OperationID: ValidateBuildSettings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateBuildSettings_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateBuildSettings_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateBuildSettings_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateBuildSettings(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateBuildSettings(requestBody:ValidateBuildSettings_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateBuildSettings_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/ValidateBuildSettings", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateBuildSettings_output)
           })
       .catch((error) => {
           reject(error)
@@ -2933,30 +3536,37 @@ export function post_ValidateBuildSettings(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetInstallSettings
    Description: Get install settings.
    OperationID: GetInstallSettings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetInstallSettings_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetInstallSettings_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInstallSettings_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetInstallSettings(requestBody:any, epicorHeaders?:Headers){
+export function post_GetInstallSettings(requestBody:GetInstallSettings_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInstallSettings_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/GetInstallSettings", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInstallSettings_output)
           })
       .catch((error) => {
           reject(error)
@@ -2968,30 +3578,37 @@ export function post_GetInstallSettings(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ValidateInstallSettings
    Description: Validate install settings.
    OperationID: ValidateInstallSettings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateInstallSettings_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateInstallSettings_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateInstallSettings_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateInstallSettings(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateInstallSettings(requestBody:ValidateInstallSettings_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateInstallSettings_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/ValidateInstallSettings", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateInstallSettings_output)
           })
       .catch((error) => {
           reject(error)
@@ -3003,30 +3620,37 @@ export function post_ValidateInstallSettings(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method Install
    Description: Install solution.
    OperationID: Install
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Install_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Install_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Install_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Install(requestBody:any, epicorHeaders?:Headers){
+export function post_Install(requestBody:Install_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Install_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/Install", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Install_output)
           })
       .catch((error) => {
           reject(error)
@@ -3038,30 +3662,37 @@ export function post_Install(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Delete
    Description: Delete solution.
    OperationID: Delete
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Delete_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Delete_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Delete_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Delete(requestBody:any, epicorHeaders?:Headers){
+export function post_Delete(requestBody:Delete_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Delete_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ExportPackageSvc/Delete", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Delete_output)
           })
       .catch((error) => {
           reject(error)
@@ -3072,11 +3703,28 @@ export function post_Delete(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ExportPackageListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ExportPackageListRow[],
+   "value":Ice_Tablesets_ExportPackageListRow,
 }
 
 export interface Ice_Tablesets_EPBAQReportRow{
@@ -3586,6 +4234,23 @@ export interface Ice_Tablesets_ExportPackageRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -3797,7 +4462,7 @@ export interface GetNewEPFileContents_input{
 export interface GetNewEPFileContents_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExportPackageTableset[],
+   ds:Ice_Tablesets_ExportPackageTableset,
 }
 }
 
@@ -3814,7 +4479,7 @@ export interface GetNewEPHistory_input{
 export interface GetNewEPHistory_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExportPackageTableset[],
+   ds:Ice_Tablesets_ExportPackageTableset,
 }
 }
 
@@ -3828,7 +4493,7 @@ export interface GetNewExportPackage_input{
 export interface GetNewExportPackage_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExportPackageTableset[],
+   ds:Ice_Tablesets_ExportPackageTableset,
 }
 }
 
@@ -4779,7 +5444,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ExportPackageTableset[],
+   ds:Ice_Tablesets_ExportPackageTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PkgControlRepackReclassPCIDSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,7 +135,7 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method Init
    Description: for unit testing
    OperationID: Init
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/Init_output
@@ -98,15 +148,22 @@ export function post_Init(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Init_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlRepackReclassPCIDSvc/Init", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Init_output)
           })
       .catch((error) => {
           reject(error)
@@ -118,30 +175,37 @@ export function post_Init(epicorHeaders?:Headers){
    Summary: Invoke method SetSourcePCID
    Description: Sets the entered PCID as the source container if valid
    OperationID: SetSourcePCID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetSourcePCID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetSourcePCID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetSourcePCID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetSourcePCID(requestBody:any, epicorHeaders?:Headers){
+export function post_SetSourcePCID(requestBody:SetSourcePCID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetSourcePCID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlRepackReclassPCIDSvc/SetSourcePCID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetSourcePCID_output)
           })
       .catch((error) => {
           reject(error)
@@ -159,30 +223,37 @@ gather that information.  This method should be called when the user
 inputs the target PCID or clicks the print button and the source qty > 0,
 and before calling any update method that could generate PartTran.
    OperationID: PreSetPkgControlRepackReclassPCID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreSetPkgControlRepackReclassPCID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreSetPkgControlRepackReclassPCID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreSetPkgControlRepackReclassPCID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreSetPkgControlRepackReclassPCID(requestBody:any, epicorHeaders?:Headers){
+export function post_PreSetPkgControlRepackReclassPCID(requestBody:PreSetPkgControlRepackReclassPCID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreSetPkgControlRepackReclassPCID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlRepackReclassPCIDSvc/PreSetPkgControlRepackReclassPCID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreSetPkgControlRepackReclassPCID_output)
           })
       .catch((error) => {
           reject(error)
@@ -194,30 +265,37 @@ export function post_PreSetPkgControlRepackReclassPCID(requestBody:any, epicorHe
    Summary: Invoke method RepackReclassPCID
    Description: Validates the target PCID and performs the repack based on the qty in the target PkgControlStageItem records.
    OperationID: RepackReclassPCID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RepackReclassPCID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RepackReclassPCID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RepackReclassPCID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RepackReclassPCID(requestBody:any, epicorHeaders?:Headers){
+export function post_RepackReclassPCID(requestBody:RepackReclassPCID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RepackReclassPCID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlRepackReclassPCIDSvc/RepackReclassPCID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RepackReclassPCID_output)
           })
       .catch((error) => {
           reject(error)
@@ -229,7 +307,7 @@ export function post_RepackReclassPCID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method LoadDefaultPrinter
    Description: Loads the first active printer with the lowest DisplaySequence that is defined for the "PKG-RPK" type.
    OperationID: LoadDefaultPrinter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/LoadDefaultPrinter_output
@@ -242,15 +320,22 @@ export function post_LoadDefaultPrinter(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LoadDefaultPrinter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlRepackReclassPCIDSvc/LoadDefaultPrinter", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LoadDefaultPrinter_output)
           })
       .catch((error) => {
           reject(error)
@@ -262,30 +347,37 @@ export function post_LoadDefaultPrinter(epicorHeaders?:Headers){
    Summary: Invoke method ValidatePrinter
    Description: Validates that the printer is active and exists for the "PKG-RPK" type.
    OperationID: ValidatePrinter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidatePrinter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidatePrinter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidatePrinter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidatePrinter(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidatePrinter(requestBody:ValidatePrinter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidatePrinter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlRepackReclassPCIDSvc/ValidatePrinter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidatePrinter_output)
           })
       .catch((error) => {
           reject(error)
@@ -297,30 +389,37 @@ export function post_ValidatePrinter(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GenerateNewPCIDQtyRemaining
    Description: Generates a new PCID for the remaining source PCID qty in preparation for printing the new label for the source; also updates any PkgControlSplitMerge and PkgControlStageHeader OriginalSourcePCID from old to the new PCID generated
    OperationID: GenerateNewPCIDQtyRemaining
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateNewPCIDQtyRemaining_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateNewPCIDQtyRemaining_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateNewPCIDQtyRemaining_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateNewPCIDQtyRemaining(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateNewPCIDQtyRemaining(requestBody:GenerateNewPCIDQtyRemaining_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateNewPCIDQtyRemaining_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlRepackReclassPCIDSvc/GenerateNewPCIDQtyRemaining", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateNewPCIDQtyRemaining_output)
           })
       .catch((error) => {
           reject(error)
@@ -331,30 +430,37 @@ export function post_GenerateNewPCIDQtyRemaining(requestBody:any, epicorHeaders?
    /**  
    Summary: Invoke method CheckPackageCodeAllocNegQty
    OperationID: CheckPackageCodeAllocNegQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPackageCodeAllocNegQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPackageCodeAllocNegQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPackageCodeAllocNegQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPackageCodeAllocNegQty(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPackageCodeAllocNegQty(requestBody:CheckPackageCodeAllocNegQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPackageCodeAllocNegQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PkgControlRepackReclassPCIDSvc/CheckPackageCodeAllocNegQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPackageCodeAllocNegQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -365,11 +471,45 @@ export function post_CheckPackageCodeAllocNegQty(requestBody:any, epicorHeaders?
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -480,7 +620,7 @@ export interface GenerateNewPCIDQtyRemaining_input{
 export interface GenerateNewPCIDQtyRemaining_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlRepackReclassPCIDTableset[],
+   ds:Erp_Tablesets_PkgControlRepackReclassPCIDTableset,
 }
 }
 
@@ -525,7 +665,7 @@ export interface PreSetPkgControlRepackReclassPCID_input{
 export interface PreSetPkgControlRepackReclassPCID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlRepackReclassPCIDTableset[],
+   ds:Erp_Tablesets_PkgControlRepackReclassPCIDTableset,
    requiresUserInput:boolean,
 }
 }
@@ -543,7 +683,7 @@ export interface RepackReclassPCID_input{
 export interface RepackReclassPCID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PkgControlRepackReclassPCIDTableset[],
+   ds:Erp_Tablesets_PkgControlRepackReclassPCIDTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PcLookupTblSvc
 // Description: PcLookupTbl Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupTblHedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupTblHedRow
    */  
 export function get_PcLookupTbls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_PcLookupTbls(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupTblHedRow)
           })
@@ -117,15 +157,15 @@ export function get_PcLookupTbls(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PcLookupTbls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PcLookupTblHedRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PcLookupTbls(requestBody:any, epicorHeaders?:Headers){
+export function post_PcLookupTbls(requestBody:Erp_Tablesets_PcLookupTblHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_PcLookupTbls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -157,10 +204,10 @@ export function post_PcLookupTbls(requestBody:any, epicorHeaders?:Headers){
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PcLookupTblHedRow
    */  
 export function get_PcLookupTbls_Company_LookupTblID(Company:string, LookupTblID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -175,7 +222,14 @@ export function get_PcLookupTbls_Company_LookupTblID(Company:string, LookupTblID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PcLookupTblHedRow)
           })
@@ -191,15 +245,15 @@ export function get_PcLookupTbls_Company_LookupTblID(Company:string, LookupTblID
    OperationID: UpdateExt_PcLookupTbl
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PcLookupTbls_Company_LookupTblID(Company:string, LookupTblID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PcLookupTbls_Company_LookupTblID(Company:string, LookupTblID:string, requestBody:Erp_Tablesets_PcLookupTblHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -213,7 +267,14 @@ export function patch_PcLookupTbls_Company_LookupTblID(Company:string, LookupTbl
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -229,7 +290,7 @@ export function patch_PcLookupTbls_Company_LookupTblID(Company:string, LookupTbl
    OperationID: DeleteUpdateExt_PcLookupTbl
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -248,7 +309,14 @@ export function delete_PcLookupTbls_Company_LookupTblID(Company:string, LookupTb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -268,10 +336,10 @@ export function delete_PcLookupTbls_Company_LookupTblID(Company:string, LookupTb
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupTblHedAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupTblHedAttchRow
    */  
 export function get_PcLookupTblHedAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -286,7 +354,14 @@ export function get_PcLookupTblHedAttches(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupTblHedAttchRow)
           })
@@ -300,15 +375,15 @@ export function get_PcLookupTblHedAttches(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PcLookupTblHedAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PcLookupTblHedAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PcLookupTblHedAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_PcLookupTblHedAttches(requestBody:Erp_Tablesets_PcLookupTblHedAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -322,7 +397,14 @@ export function post_PcLookupTblHedAttches(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -341,10 +423,10 @@ export function post_PcLookupTblHedAttches(requestBody:any, epicorHeaders?:Heade
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PcLookupTblHedAttchRow
    */  
 export function get_PcLookupTblHedAttches_Company_LookupTblID_DrawingSeq(Company:string, LookupTblID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -359,7 +441,14 @@ export function get_PcLookupTblHedAttches_Company_LookupTblID_DrawingSeq(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PcLookupTblHedAttchRow)
           })
@@ -376,15 +465,15 @@ export function get_PcLookupTblHedAttches_Company_LookupTblID_DrawingSeq(Company
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcLookupTblHedAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PcLookupTblHedAttches_Company_LookupTblID_DrawingSeq(Company:string, LookupTblID:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PcLookupTblHedAttches_Company_LookupTblID_DrawingSeq(Company:string, LookupTblID:string, DrawingSeq:string, requestBody:Erp_Tablesets_PcLookupTblHedAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -398,7 +487,14 @@ export function patch_PcLookupTblHedAttches_Company_LookupTblID_DrawingSeq(Compa
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -415,7 +511,7 @@ export function patch_PcLookupTblHedAttches_Company_LookupTblID_DrawingSeq(Compa
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -434,7 +530,14 @@ export function delete_PcLookupTblHedAttches_Company_LookupTblID_DrawingSeq(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -454,10 +557,10 @@ export function delete_PcLookupTblHedAttches_Company_LookupTblID_DrawingSeq(Comp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupColSetHedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupColSetHedRow
    */  
 export function get_PcLookupColSetHeds(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -472,7 +575,14 @@ export function get_PcLookupColSetHeds(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupColSetHedRow)
           })
@@ -486,15 +596,15 @@ export function get_PcLookupColSetHeds(select?:string, filter?:string, orderby?:
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PcLookupColSetHeds
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcLookupColSetHedRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcLookupColSetHedRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PcLookupColSetHedRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PcLookupColSetHedRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PcLookupColSetHeds(requestBody:any, epicorHeaders?:Headers){
+export function post_PcLookupColSetHeds(requestBody:Erp_Tablesets_PcLookupColSetHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -508,7 +618,14 @@ export function post_PcLookupColSetHeds(requestBody:any, epicorHeaders?:Headers)
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -527,10 +644,10 @@ export function post_PcLookupColSetHeds(requestBody:any, epicorHeaders?:Headers)
       @param ColSetID Desc: ColSetID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PcLookupColSetHedRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PcLookupColSetHedRow
    */  
 export function get_PcLookupColSetHeds_Company_LookupTblID_ColSetID(Company:string, LookupTblID:string, ColSetID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -545,7 +662,14 @@ export function get_PcLookupColSetHeds_Company_LookupTblID_ColSetID(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PcLookupColSetHedRow)
           })
@@ -562,15 +686,15 @@ export function get_PcLookupColSetHeds_Company_LookupTblID_ColSetID(Company:stri
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
       @param ColSetID Desc: ColSetID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcLookupColSetHedRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcLookupColSetHedRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PcLookupColSetHeds_Company_LookupTblID_ColSetID(Company:string, LookupTblID:string, ColSetID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PcLookupColSetHeds_Company_LookupTblID_ColSetID(Company:string, LookupTblID:string, ColSetID:string, requestBody:Erp_Tablesets_PcLookupColSetHedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -584,7 +708,14 @@ export function patch_PcLookupColSetHeds_Company_LookupTblID_ColSetID(Company:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -601,7 +732,7 @@ export function patch_PcLookupColSetHeds_Company_LookupTblID_ColSetID(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
       @param ColSetID Desc: ColSetID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -620,7 +751,14 @@ export function delete_PcLookupColSetHeds_Company_LookupTblID_ColSetID(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -640,10 +778,10 @@ export function delete_PcLookupColSetHeds_Company_LookupTblID_ColSetID(Company:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupColSetDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupColSetDtlRow
    */  
 export function get_PcLookupColSetDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -658,7 +796,14 @@ export function get_PcLookupColSetDtls(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupColSetDtlRow)
           })
@@ -672,15 +817,15 @@ export function get_PcLookupColSetDtls(select?:string, filter?:string, orderby?:
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PcLookupColSetDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcLookupColSetDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcLookupColSetDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PcLookupColSetDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PcLookupColSetDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PcLookupColSetDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_PcLookupColSetDtls(requestBody:Erp_Tablesets_PcLookupColSetDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -694,7 +839,14 @@ export function post_PcLookupColSetDtls(requestBody:any, epicorHeaders?:Headers)
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -714,10 +866,10 @@ export function post_PcLookupColSetDtls(requestBody:any, epicorHeaders?:Headers)
       @param ColName Desc: ColName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PcLookupColSetDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PcLookupColSetDtlRow
    */  
 export function get_PcLookupColSetDtls_Company_LookupTblID_ColSetID_ColName(Company:string, LookupTblID:string, ColSetID:string, ColName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -732,7 +884,14 @@ export function get_PcLookupColSetDtls_Company_LookupTblID_ColSetID_ColName(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PcLookupColSetDtlRow)
           })
@@ -750,15 +909,15 @@ export function get_PcLookupColSetDtls_Company_LookupTblID_ColSetID_ColName(Comp
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
       @param ColSetID Desc: ColSetID   Required: True   Allow empty value : True
       @param ColName Desc: ColName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcLookupColSetDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcLookupColSetDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PcLookupColSetDtls_Company_LookupTblID_ColSetID_ColName(Company:string, LookupTblID:string, ColSetID:string, ColName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PcLookupColSetDtls_Company_LookupTblID_ColSetID_ColName(Company:string, LookupTblID:string, ColSetID:string, ColName:string, requestBody:Erp_Tablesets_PcLookupColSetDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -772,7 +931,14 @@ export function patch_PcLookupColSetDtls_Company_LookupTblID_ColSetID_ColName(Co
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -790,7 +956,7 @@ export function patch_PcLookupColSetDtls_Company_LookupTblID_ColSetID_ColName(Co
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
       @param ColSetID Desc: ColSetID   Required: True   Allow empty value : True
       @param ColName Desc: ColName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -809,7 +975,14 @@ export function delete_PcLookupColSetDtls_Company_LookupTblID_ColSetID_ColName(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -829,10 +1002,10 @@ export function delete_PcLookupColSetDtls_Company_LookupTblID_ColSetID_ColName(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupTblValuesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupTblValuesRow
    */  
 export function get_PcLookupTblValues(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -847,7 +1020,14 @@ export function get_PcLookupTblValues(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupTblValuesRow)
           })
@@ -861,15 +1041,15 @@ export function get_PcLookupTblValues(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PcLookupTblValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcLookupTblValuesRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PcLookupTblValuesRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PcLookupTblValuesRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PcLookupTblValuesRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PcLookupTblValues(requestBody:any, epicorHeaders?:Headers){
+export function post_PcLookupTblValues(requestBody:Erp_Tablesets_PcLookupTblValuesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -883,7 +1063,14 @@ export function post_PcLookupTblValues(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -903,10 +1090,10 @@ export function post_PcLookupTblValues(requestBody:any, epicorHeaders?:Headers){
       @param ColName Desc: ColName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PcLookupTblValuesRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PcLookupTblValuesRow
    */  
 export function get_PcLookupTblValues_Company_LookupTblID_RowNum_ColName(Company:string, LookupTblID:string, RowNum:string, ColName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -921,7 +1108,14 @@ export function get_PcLookupTblValues_Company_LookupTblID_RowNum_ColName(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PcLookupTblValuesRow)
           })
@@ -939,15 +1133,15 @@ export function get_PcLookupTblValues_Company_LookupTblID_RowNum_ColName(Company
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
       @param RowNum Desc: RowNum   Required: True
       @param ColName Desc: ColName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcLookupTblValuesRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PcLookupTblValuesRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PcLookupTblValues_Company_LookupTblID_RowNum_ColName(Company:string, LookupTblID:string, RowNum:string, ColName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PcLookupTblValues_Company_LookupTblID_RowNum_ColName(Company:string, LookupTblID:string, RowNum:string, ColName:string, requestBody:Erp_Tablesets_PcLookupTblValuesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -961,7 +1155,14 @@ export function patch_PcLookupTblValues_Company_LookupTblID_RowNum_ColName(Compa
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -979,7 +1180,7 @@ export function patch_PcLookupTblValues_Company_LookupTblID_RowNum_ColName(Compa
       @param LookupTblID Desc: LookupTblID   Required: True   Allow empty value : True
       @param RowNum Desc: RowNum   Required: True
       @param ColName Desc: ColName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -998,7 +1199,14 @@ export function delete_PcLookupTblValues_Company_LookupTblID_RowNum_ColName(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1018,10 +1226,10 @@ export function delete_PcLookupTblValues_Company_LookupTblID_RowNum_ColName(Comp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupTblListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PcLookupTblListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1036,7 +1244,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupTblListRow)
           })
@@ -1048,6 +1263,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1063,7 +1295,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1141,15 +1373,22 @@ export function get_GetRows(whereClausePcLookupTblHed:string, whereClausePcLooku
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1162,7 +1401,7 @@ export function get_GetRows(whereClausePcLookupTblHed:string, whereClausePcLooku
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1186,15 +1425,22 @@ export function get_GetByID(lookupTblID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1209,7 +1455,7 @@ export function get_GetByID(lookupTblID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1251,15 +1497,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1271,30 +1524,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetDisplayColumns
    Description: Generate Columns that will be displayed in the grid
    OperationID: GetDisplayColumns
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDisplayColumns_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDisplayColumns_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDisplayColumns_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDisplayColumns(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDisplayColumns(requestBody:GetDisplayColumns_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDisplayColumns_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetDisplayColumns", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDisplayColumns_output)
           })
       .catch((error) => {
           reject(error)
@@ -1306,30 +1566,37 @@ export function post_GetDisplayColumns(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetFormatOptions
    Description: Get the valid options that are used for populating format options.
    OperationID: GetFormatOptions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFormatOptions_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFormatOptions_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFormatOptions_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFormatOptions(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFormatOptions(requestBody:GetFormatOptions_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFormatOptions_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetFormatOptions", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFormatOptions_output)
           })
       .catch((error) => {
           reject(error)
@@ -1341,30 +1608,37 @@ export function post_GetFormatOptions(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ImportPcLookupTblFromCSV
    Description: Create a new PCLookupImportExportTableset from the imported CSV file and then call the ImportPcLookupTbl to insert it into the database.
    OperationID: ImportPcLookupTblFromCSV
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportPcLookupTblFromCSV_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportPcLookupTblFromCSV_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportPcLookupTblFromCSV_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportPcLookupTblFromCSV(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportPcLookupTblFromCSV(requestBody:ImportPcLookupTblFromCSV_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportPcLookupTblFromCSV_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/ImportPcLookupTblFromCSV", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportPcLookupTblFromCSV_output)
           })
       .catch((error) => {
           reject(error)
@@ -1376,30 +1650,37 @@ export function post_ImportPcLookupTblFromCSV(requestBody:any, epicorHeaders?:He
    Summary: Invoke method ImportPcLookupTbl
    Description: Inserts values into database from the imported file.
    OperationID: ImportPcLookupTbl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportPcLookupTbl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportPcLookupTbl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportPcLookupTbl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportPcLookupTbl(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportPcLookupTbl(requestBody:ImportPcLookupTbl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportPcLookupTbl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/ImportPcLookupTbl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportPcLookupTbl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1411,30 +1692,37 @@ export function post_ImportPcLookupTbl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetExportPcLookupTables
    Description: Gets the PcLookupTbl records set to export
    OperationID: GetExportPcLookupTables
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetExportPcLookupTables_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetExportPcLookupTables_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetExportPcLookupTables_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetExportPcLookupTables(requestBody:any, epicorHeaders?:Headers){
+export function post_GetExportPcLookupTables(requestBody:GetExportPcLookupTables_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetExportPcLookupTables_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetExportPcLookupTables", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetExportPcLookupTables_output)
           })
       .catch((error) => {
           reject(error)
@@ -1445,30 +1733,37 @@ export function post_GetExportPcLookupTables(requestBody:any, epicorHeaders?:Hea
    /**  
    Summary: Invoke method GetDataTable
    OperationID: GetDataTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDataTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDataTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDataTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDataTable(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDataTable(requestBody:GetDataTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDataTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetDataTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDataTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -1480,30 +1775,37 @@ export function post_GetDataTable(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CopyColSet
    Description: Copy column set from source to desctination.
    OperationID: CopyColSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CopyColSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CopyColSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CopyColSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CopyColSet(requestBody:any, epicorHeaders?:Headers){
+export function post_CopyColSet(requestBody:CopyColSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CopyColSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/CopyColSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CopyColSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1515,30 +1817,37 @@ export function post_CopyColSet(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateLookupTblValue
    Description: Update lookup table value
    OperationID: UpdateLookupTblValue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateLookupTblValue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateLookupTblValue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateLookupTblValue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateLookupTblValue(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateLookupTblValue(requestBody:UpdateLookupTblValue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateLookupTblValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/UpdateLookupTblValue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateLookupTblValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -1550,30 +1859,37 @@ export function post_UpdateLookupTblValue(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DeleteLookupTblValue
    Description: Delete lookup table row
    OperationID: DeleteLookupTblValue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteLookupTblValue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteLookupTblValue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteLookupTblValue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteLookupTblValue(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteLookupTblValue(requestBody:DeleteLookupTblValue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteLookupTblValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/DeleteLookupTblValue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteLookupTblValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -1585,30 +1901,37 @@ export function post_DeleteLookupTblValue(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewPcLookupTblDisplay
    Description: Creates new Lookup table row
    OperationID: GetNewPcLookupTblDisplay
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupTblDisplay_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupTblDisplay_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPcLookupTblDisplay_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPcLookupTblDisplay(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPcLookupTblDisplay(requestBody:GetNewPcLookupTblDisplay_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPcLookupTblDisplay_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetNewPcLookupTblDisplay", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPcLookupTblDisplay_output)
           })
       .catch((error) => {
           reject(error)
@@ -1619,30 +1942,37 @@ export function post_GetNewPcLookupTblDisplay(requestBody:any, epicorHeaders?:He
    /**  
    Summary: Invoke method ColSetDtlColumnChanged
    OperationID: ColSetDtlColumnChanged
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ColSetDtlColumnChanged_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ColSetDtlColumnChanged_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ColSetDtlColumnChanged_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ColSetDtlColumnChanged(requestBody:any, epicorHeaders?:Headers){
+export function post_ColSetDtlColumnChanged(requestBody:ColSetDtlColumnChanged_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ColSetDtlColumnChanged_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/ColSetDtlColumnChanged", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ColSetDtlColumnChanged_output)
           })
       .catch((error) => {
           reject(error)
@@ -1654,30 +1984,37 @@ export function post_ColSetDtlColumnChanged(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetMinValueOfDecimals
    Description: Returns minimum value of decimals.
    OperationID: GetMinValueOfDecimals
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMinValueOfDecimals_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMinValueOfDecimals_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMinValueOfDecimals_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMinValueOfDecimals(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMinValueOfDecimals(requestBody:GetMinValueOfDecimals_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMinValueOfDecimals_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetMinValueOfDecimals", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMinValueOfDecimals_output)
           })
       .catch((error) => {
           reject(error)
@@ -1689,30 +2026,37 @@ export function post_GetMinValueOfDecimals(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ExportLookupTbl
    Description: Export table(s) from Kinetic
    OperationID: ExportLookupTbl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportLookupTbl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportLookupTbl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportLookupTbl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportLookupTbl(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportLookupTbl(requestBody:ExportLookupTbl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportLookupTbl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/ExportLookupTbl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportLookupTbl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1724,30 +2068,37 @@ export function post_ExportLookupTbl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ImportPcLookupTableExt
    Description: Main entry point for import files  from Kinetic
    OperationID: ImportPcLookupTableExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportPcLookupTableExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportPcLookupTableExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportPcLookupTableExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportPcLookupTableExt(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportPcLookupTableExt(requestBody:ImportPcLookupTableExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportPcLookupTableExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/ImportPcLookupTableExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportPcLookupTableExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1759,30 +2110,37 @@ export function post_ImportPcLookupTableExt(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ImportPcLookupTableFromCSV
    Description: Process CVS file to DataTable structure
    OperationID: ImportPcLookupTableFromCSV
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportPcLookupTableFromCSV_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportPcLookupTableFromCSV_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportPcLookupTableFromCSV_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportPcLookupTableFromCSV(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportPcLookupTableFromCSV(requestBody:ImportPcLookupTableFromCSV_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportPcLookupTableFromCSV_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/ImportPcLookupTableFromCSV", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportPcLookupTableFromCSV_output)
           })
       .catch((error) => {
           reject(error)
@@ -1793,30 +2151,37 @@ export function post_ImportPcLookupTableFromCSV(requestBody:any, epicorHeaders?:
    /**  
    Summary: Invoke method ColSetIDColumnChanging
    OperationID: ColSetIDColumnChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ColSetIDColumnChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ColSetIDColumnChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ColSetIDColumnChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ColSetIDColumnChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_ColSetIDColumnChanging(requestBody:ColSetIDColumnChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ColSetIDColumnChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/ColSetIDColumnChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ColSetIDColumnChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -1828,30 +2193,37 @@ export function post_ColSetIDColumnChanging(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetNewPcLookupTblHed
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPcLookupTblHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupTblHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupTblHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPcLookupTblHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPcLookupTblHed(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPcLookupTblHed(requestBody:GetNewPcLookupTblHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPcLookupTblHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetNewPcLookupTblHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPcLookupTblHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -1863,30 +2235,37 @@ export function post_GetNewPcLookupTblHed(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewPcLookupTblHedAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPcLookupTblHedAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupTblHedAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupTblHedAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPcLookupTblHedAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPcLookupTblHedAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPcLookupTblHedAttch(requestBody:GetNewPcLookupTblHedAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPcLookupTblHedAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetNewPcLookupTblHedAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPcLookupTblHedAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1898,30 +2277,37 @@ export function post_GetNewPcLookupTblHedAttch(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewPcLookupColSetHed
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPcLookupColSetHed
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupColSetHed_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupColSetHed_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPcLookupColSetHed_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPcLookupColSetHed(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPcLookupColSetHed(requestBody:GetNewPcLookupColSetHed_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPcLookupColSetHed_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetNewPcLookupColSetHed", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPcLookupColSetHed_output)
           })
       .catch((error) => {
           reject(error)
@@ -1933,30 +2319,37 @@ export function post_GetNewPcLookupColSetHed(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewPcLookupColSetDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPcLookupColSetDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupColSetDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupColSetDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPcLookupColSetDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPcLookupColSetDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPcLookupColSetDtl(requestBody:GetNewPcLookupColSetDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPcLookupColSetDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetNewPcLookupColSetDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPcLookupColSetDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1968,30 +2361,37 @@ export function post_GetNewPcLookupColSetDtl(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewPcLookupTblValues
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPcLookupTblValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupTblValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPcLookupTblValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPcLookupTblValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPcLookupTblValues(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPcLookupTblValues(requestBody:GetNewPcLookupTblValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPcLookupTblValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetNewPcLookupTblValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPcLookupTblValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -2003,30 +2403,37 @@ export function post_GetNewPcLookupTblValues(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2038,7 +2445,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2062,15 +2469,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2082,7 +2496,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2106,15 +2520,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2126,30 +2547,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2161,30 +2589,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PcLookupTblSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2195,36 +2630,53 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupColSetDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PcLookupColSetDtlRow[],
+   "value":Erp_Tablesets_PcLookupColSetDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupColSetHedRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PcLookupColSetHedRow[],
+   "value":Erp_Tablesets_PcLookupColSetHedRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupTblHedAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PcLookupTblHedAttchRow[],
+   "value":Erp_Tablesets_PcLookupTblHedAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupTblHedRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PcLookupTblHedRow[],
+   "value":Erp_Tablesets_PcLookupTblHedRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupTblListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PcLookupTblListRow[],
+   "value":Erp_Tablesets_PcLookupTblListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PcLookupTblValuesRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PcLookupTblValuesRow[],
+   "value":Erp_Tablesets_PcLookupTblValuesRow,
 }
 
 export interface Erp_Tablesets_PcLookupColSetDtlRow{
@@ -2380,6 +2832,23 @@ export interface Erp_Tablesets_PcLookupTblValuesRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2394,7 +2863,7 @@ export interface ColSetDtlColumnChanged_input{
 export interface ColSetDtlColumnChanged_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -2410,7 +2879,7 @@ export interface ColSetIDColumnChanging_input{
 export interface ColSetIDColumnChanging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -2430,7 +2899,7 @@ export interface CopyColSet_input{
 export interface CopyColSet_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -2787,7 +3256,7 @@ export interface GetDataTable_output{
    returnObj:any,      //schema had no properties on an object.
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynamicMetadataTableset[],
+   ds:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 
@@ -2865,7 +3334,7 @@ export interface GetMinValueOfDecimals_output{
    returnObj:number,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -2883,7 +3352,7 @@ export interface GetNewPcLookupColSetDtl_input{
 export interface GetNewPcLookupColSetDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -2899,7 +3368,7 @@ export interface GetNewPcLookupColSetHed_input{
 export interface GetNewPcLookupColSetHed_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -2916,7 +3385,7 @@ export interface GetNewPcLookupTblDisplay_output{
    returnObj:any,      //schema had no properties on an object.
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynamicMetadataTableset[],
+   ds:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 
@@ -2932,7 +3401,7 @@ export interface GetNewPcLookupTblHedAttch_input{
 export interface GetNewPcLookupTblHedAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -2946,7 +3415,7 @@ export interface GetNewPcLookupTblHed_input{
 export interface GetNewPcLookupTblHed_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -2964,7 +3433,7 @@ export interface GetNewPcLookupTblValues_input{
 export interface GetNewPcLookupTblValues_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -3050,7 +3519,7 @@ export interface ImportPcLookupTableExt_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -3073,7 +3542,7 @@ export interface ImportPcLookupTableFromCSV_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -3138,7 +3607,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtPcLookupTblTableset[],
+   ds:Erp_Tablesets_UpdExtPcLookupTblTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3166,7 +3635,7 @@ export interface UpdateLookupTblValue_output{
 parameters : {
       /**  output parameters  */  
    rowGuid:string,
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 
@@ -3180,7 +3649,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PcLookupTblTableset[],
+   ds:Erp_Tablesets_PcLookupTblTableset,
 }
 }
 

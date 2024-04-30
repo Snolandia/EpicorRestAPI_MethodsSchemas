@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.CostWorkBenchSvc
 // Description: Costing work bench
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostGrpRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostGrpRow
    */  
 export function get_CostWorkBenches(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_CostWorkBenches(select?:string, expand?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostGrpRow)
           })
@@ -118,15 +158,15 @@ export function get_CostWorkBenches(select?:string, expand?:string, filter?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CostWorkBenches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CostGrpRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CostGrpRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CostGrpRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CostGrpRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CostWorkBenches(requestBody:any, epicorHeaders?:Headers){
+export function post_CostWorkBenches(requestBody:Erp_Tablesets_CostGrpRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_CostWorkBenches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_CostWorkBenches(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CostGrpRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CostGrpRow
    */  
 export function get_CostWorkBenches_Company_GroupID(Company:string, GroupID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_CostWorkBenches_Company_GroupID(Company:string, GroupID:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CostGrpRow)
           })
@@ -193,15 +247,15 @@ export function get_CostWorkBenches_Company_GroupID(Company:string, GroupID:stri
    OperationID: UpdateExt_CostWorkBench
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CostGrpRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CostGrpRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CostWorkBenches_Company_GroupID(Company:string, GroupID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CostWorkBenches_Company_GroupID(Company:string, GroupID:string, requestBody:Erp_Tablesets_CostGrpRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_CostWorkBenches_Company_GroupID(Company:string, GroupID:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_CostWorkBenches_Company_GroupID(Company:string, GroupID:st
    OperationID: DeleteUpdateExt_CostWorkBench
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_CostWorkBenches_Company_GroupID(Company:string, GroupID:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_CostWorkBenches_Company_GroupID(Company:string, GroupID:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostBurdenRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostBurdenRow
    */  
 export function get_CostWorkBenches_Company_GroupID_CostBurdens(Company:string, GroupID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_CostWorkBenches_Company_GroupID_CostBurdens(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostBurdenRow)
           })
@@ -310,10 +385,10 @@ export function get_CostWorkBenches_Company_GroupID_CostBurdens(Company:string, 
       @param SourceID Desc: SourceID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CostBurdenRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CostBurdenRow
    */  
 export function get_CostWorkBenches_Company_GroupID_CostBurdens_Company_GroupID_RateSourceTableName_SourceID(Company:string, GroupID:string, RateSourceTableName:string, SourceID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -328,7 +403,14 @@ export function get_CostWorkBenches_Company_GroupID_CostBurdens_Company_GroupID_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CostBurdenRow)
           })
@@ -350,10 +432,10 @@ export function get_CostWorkBenches_Company_GroupID_CostBurdens_Company_GroupID_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostLaborRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostLaborRow
    */  
 export function get_CostWorkBenches_Company_GroupID_CostLabors(Company:string, GroupID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_CostWorkBenches_Company_GroupID_CostLabors(Company:string, G
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostLaborRow)
           })
@@ -388,10 +477,10 @@ export function get_CostWorkBenches_Company_GroupID_CostLabors(Company:string, G
       @param SourceID Desc: SourceID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CostLaborRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CostLaborRow
    */  
 export function get_CostWorkBenches_Company_GroupID_CostLabors_Company_GroupID_RateSourceTableName_SourceID(Company:string, GroupID:string, RateSourceTableName:string, SourceID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -406,7 +495,14 @@ export function get_CostWorkBenches_Company_GroupID_CostLabors_Company_GroupID_R
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CostLaborRow)
           })
@@ -428,10 +524,10 @@ export function get_CostWorkBenches_Company_GroupID_CostLabors_Company_GroupID_R
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostPartRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostPartRow
    */  
 export function get_CostWorkBenches_Company_GroupID_CostParts(Company:string, GroupID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -446,7 +542,14 @@ export function get_CostWorkBenches_Company_GroupID_CostParts(Company:string, Gr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostPartRow)
           })
@@ -466,10 +569,10 @@ export function get_CostWorkBenches_Company_GroupID_CostParts(Company:string, Gr
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CostPartRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CostPartRow
    */  
 export function get_CostWorkBenches_Company_GroupID_CostParts_Company_GroupID_TypeCode_PartNum(Company:string, GroupID:string, TypeCode:string, PartNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -484,7 +587,14 @@ export function get_CostWorkBenches_Company_GroupID_CostParts_Company_GroupID_Ty
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CostPartRow)
           })
@@ -504,10 +614,10 @@ export function get_CostWorkBenches_Company_GroupID_CostParts_Company_GroupID_Ty
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostBurdenRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostBurdenRow
    */  
 export function get_CostBurdens(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -522,7 +632,14 @@ export function get_CostBurdens(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostBurdenRow)
           })
@@ -536,15 +653,15 @@ export function get_CostBurdens(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CostBurdens
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CostBurdenRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CostBurdenRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CostBurdenRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CostBurdenRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CostBurdens(requestBody:any, epicorHeaders?:Headers){
+export function post_CostBurdens(requestBody:Erp_Tablesets_CostBurdenRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -558,7 +675,14 @@ export function post_CostBurdens(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -578,10 +702,10 @@ export function post_CostBurdens(requestBody:any, epicorHeaders?:Headers){
       @param SourceID Desc: SourceID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CostBurdenRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CostBurdenRow
    */  
 export function get_CostBurdens_Company_GroupID_RateSourceTableName_SourceID(Company:string, GroupID:string, RateSourceTableName:string, SourceID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -596,7 +720,14 @@ export function get_CostBurdens_Company_GroupID_RateSourceTableName_SourceID(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CostBurdenRow)
           })
@@ -614,15 +745,15 @@ export function get_CostBurdens_Company_GroupID_RateSourceTableName_SourceID(Com
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param RateSourceTableName Desc: RateSourceTableName   Required: True   Allow empty value : True
       @param SourceID Desc: SourceID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CostBurdenRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CostBurdenRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CostBurdens_Company_GroupID_RateSourceTableName_SourceID(Company:string, GroupID:string, RateSourceTableName:string, SourceID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CostBurdens_Company_GroupID_RateSourceTableName_SourceID(Company:string, GroupID:string, RateSourceTableName:string, SourceID:string, requestBody:Erp_Tablesets_CostBurdenRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -636,7 +767,14 @@ export function patch_CostBurdens_Company_GroupID_RateSourceTableName_SourceID(C
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -654,7 +792,7 @@ export function patch_CostBurdens_Company_GroupID_RateSourceTableName_SourceID(C
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param RateSourceTableName Desc: RateSourceTableName   Required: True   Allow empty value : True
       @param SourceID Desc: SourceID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -673,7 +811,14 @@ export function delete_CostBurdens_Company_GroupID_RateSourceTableName_SourceID(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -693,10 +838,10 @@ export function delete_CostBurdens_Company_GroupID_RateSourceTableName_SourceID(
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostLaborRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostLaborRow
    */  
 export function get_CostLabors(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -711,7 +856,14 @@ export function get_CostLabors(select?:string, filter?:string, orderby?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostLaborRow)
           })
@@ -725,15 +877,15 @@ export function get_CostLabors(select?:string, filter?:string, orderby?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CostLabors
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CostLaborRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CostLaborRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CostLaborRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CostLaborRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CostLabors(requestBody:any, epicorHeaders?:Headers){
+export function post_CostLabors(requestBody:Erp_Tablesets_CostLaborRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -747,7 +899,14 @@ export function post_CostLabors(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -767,10 +926,10 @@ export function post_CostLabors(requestBody:any, epicorHeaders?:Headers){
       @param SourceID Desc: SourceID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CostLaborRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CostLaborRow
    */  
 export function get_CostLabors_Company_GroupID_RateSourceTableName_SourceID(Company:string, GroupID:string, RateSourceTableName:string, SourceID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -785,7 +944,14 @@ export function get_CostLabors_Company_GroupID_RateSourceTableName_SourceID(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CostLaborRow)
           })
@@ -803,15 +969,15 @@ export function get_CostLabors_Company_GroupID_RateSourceTableName_SourceID(Comp
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param RateSourceTableName Desc: RateSourceTableName   Required: True   Allow empty value : True
       @param SourceID Desc: SourceID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CostLaborRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CostLaborRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CostLabors_Company_GroupID_RateSourceTableName_SourceID(Company:string, GroupID:string, RateSourceTableName:string, SourceID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CostLabors_Company_GroupID_RateSourceTableName_SourceID(Company:string, GroupID:string, RateSourceTableName:string, SourceID:string, requestBody:Erp_Tablesets_CostLaborRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -825,7 +991,14 @@ export function patch_CostLabors_Company_GroupID_RateSourceTableName_SourceID(Co
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -843,7 +1016,7 @@ export function patch_CostLabors_Company_GroupID_RateSourceTableName_SourceID(Co
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param RateSourceTableName Desc: RateSourceTableName   Required: True   Allow empty value : True
       @param SourceID Desc: SourceID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -862,7 +1035,14 @@ export function delete_CostLabors_Company_GroupID_RateSourceTableName_SourceID(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -882,10 +1062,10 @@ export function delete_CostLabors_Company_GroupID_RateSourceTableName_SourceID(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostPartRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostPartRow
    */  
 export function get_CostParts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -900,7 +1080,14 @@ export function get_CostParts(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostPartRow)
           })
@@ -914,15 +1101,15 @@ export function get_CostParts(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CostParts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CostPartRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CostPartRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CostPartRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CostPartRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CostParts(requestBody:any, epicorHeaders?:Headers){
+export function post_CostParts(requestBody:Erp_Tablesets_CostPartRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -936,7 +1123,14 @@ export function post_CostParts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -956,10 +1150,10 @@ export function post_CostParts(requestBody:any, epicorHeaders?:Headers){
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CostPartRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CostPartRow
    */  
 export function get_CostParts_Company_GroupID_TypeCode_PartNum(Company:string, GroupID:string, TypeCode:string, PartNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -974,7 +1168,14 @@ export function get_CostParts_Company_GroupID_TypeCode_PartNum(Company:string, G
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CostPartRow)
           })
@@ -992,15 +1193,15 @@ export function get_CostParts_Company_GroupID_TypeCode_PartNum(Company:string, G
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param TypeCode Desc: TypeCode   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CostPartRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CostPartRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CostParts_Company_GroupID_TypeCode_PartNum(Company:string, GroupID:string, TypeCode:string, PartNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CostParts_Company_GroupID_TypeCode_PartNum(Company:string, GroupID:string, TypeCode:string, PartNum:string, requestBody:Erp_Tablesets_CostPartRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1014,7 +1215,14 @@ export function patch_CostParts_Company_GroupID_TypeCode_PartNum(Company:string,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1032,7 +1240,7 @@ export function patch_CostParts_Company_GroupID_TypeCode_PartNum(Company:string,
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param TypeCode Desc: TypeCode   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1051,7 +1259,14 @@ export function delete_CostParts_Company_GroupID_TypeCode_PartNum(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1071,10 +1286,10 @@ export function delete_CostParts_Company_GroupID_TypeCode_PartNum(Company:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostGrpListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CostGrpListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1089,7 +1304,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostGrpListRow)
           })
@@ -1101,6 +1323,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1115,7 +1354,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1184,15 +1423,22 @@ export function get_GetRows(whereClauseCostGrp:string, whereClauseCostBurden:str
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1205,7 +1451,7 @@ export function get_GetRows(whereClauseCostGrp:string, whereClauseCostBurden:str
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1229,15 +1475,22 @@ export function get_GetByID(groupID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1252,7 +1505,7 @@ export function get_GetByID(groupID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1294,15 +1547,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1314,30 +1574,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetCodeDescList
    Description: Get Code Descripotion List
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1350,30 +1617,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call when changing the copy from group id on the cost group.  Validates the
 group id and updates CostGrp with default values based on the new group id.
    OperationID: ChangeCopyFromGroupID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCopyFromGroupID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCopyFromGroupID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCopyFromGroupID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCopyFromGroupID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCopyFromGroupID(requestBody:ChangeCopyFromGroupID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCopyFromGroupID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ChangeCopyFromGroupID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCopyFromGroupID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1386,30 +1660,37 @@ export function post_ChangeCopyFromGroupID(requestBody:any, epicorHeaders?:Heade
    Description: Method to call when changing the copy from plant cost id on the cost group.  Validates the
 plant cost id and updates CostGrp with default values based on the new plant cost id.
    OperationID: ChangeCopyFromPlantCostID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCopyFromPlantCostID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCopyFromPlantCostID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCopyFromPlantCostID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCopyFromPlantCostID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCopyFromPlantCostID(requestBody:ChangeCopyFromPlantCostID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCopyFromPlantCostID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ChangeCopyFromPlantCostID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCopyFromPlantCostID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1425,30 +1706,37 @@ the new cost id.
 Prior to calling this method all CostWorkBenchPostPlants records must have the
 RowMod value set to U because they will be deleted.
    OperationID: ChangeCWBPostPostToPlantCostID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCWBPostPostToPlantCostID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCWBPostPostToPlantCostID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCWBPostPostToPlantCostID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCWBPostPostToPlantCostID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCWBPostPostToPlantCostID(requestBody:ChangeCWBPostPostToPlantCostID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCWBPostPostToPlantCostID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ChangeCWBPostPostToPlantCostID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCWBPostPostToPlantCostID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1461,30 +1749,37 @@ export function post_ChangeCWBPostPostToPlantCostID(requestBody:any, epicorHeade
    Description: Method to call when changing the primary plant on the cost group.  Validates the plant id
 and updates CostGrp with default values based on the new plant.
    OperationID: ChangePrimaryPlant
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangePrimaryPlant_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangePrimaryPlant_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangePrimaryPlant_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangePrimaryPlant(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangePrimaryPlant(requestBody:ChangePrimaryPlant_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangePrimaryPlant_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ChangePrimaryPlant", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangePrimaryPlant_output)
           })
       .catch((error) => {
           reject(error)
@@ -1496,30 +1791,37 @@ export function post_ChangePrimaryPlant(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method CostPost
    Description: Post costs for the group.
    OperationID: CostPost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CostPost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CostPost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CostPost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CostPost(requestBody:any, epicorHeaders?:Headers){
+export function post_CostPost(requestBody:CostPost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CostPost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/CostPost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CostPost_output)
           })
       .catch((error) => {
           reject(error)
@@ -1531,30 +1833,37 @@ export function post_CostPost(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CostRollUp
    Description: Roll up costs for the group.
    OperationID: CostRollUp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CostRollUp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CostRollUp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CostRollUp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CostRollUp(requestBody:any, epicorHeaders?:Headers){
+export function post_CostRollUp(requestBody:CostRollUp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CostRollUp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/CostRollUp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CostRollUp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1566,30 +1875,37 @@ export function post_CostRollUp(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DEGetImportRatesLockStatus
    Description: Parameters:  none
    OperationID: DEGetImportRatesLockStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DEGetImportRatesLockStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DEGetImportRatesLockStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DEGetImportRatesLockStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DEGetImportRatesLockStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_DEGetImportRatesLockStatus(requestBody:DEGetImportRatesLockStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DEGetImportRatesLockStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/DEGetImportRatesLockStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DEGetImportRatesLockStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -1601,30 +1917,37 @@ export function post_DEGetImportRatesLockStatus(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetCostSet
    Description: This method creates/refreshes the costs for the Cost Group.
    OperationID: GetCostSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCostSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCostSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCostSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCostSet(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCostSet(requestBody:GetCostSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCostSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetCostSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCostSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1639,30 +1962,37 @@ populating the parameters required to update the internal prices
 The WorkstationID, DateFormat and NumericFormat fields are not user updatable
 The Action field is one of 3 values 'All' = 'Calculate, Print, Update', 'Print' = 'Calculate, Print', 'Update' = 'Calculate, Update'
    OperationID: GetCostWBInternalPrices
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCostWBInternalPrices_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCostWBInternalPrices_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCostWBInternalPrices_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCostWBInternalPrices(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCostWBInternalPrices(requestBody:GetCostWBInternalPrices_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCostWBInternalPrices_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetCostWBInternalPrices", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCostWBInternalPrices_output)
           })
       .catch((error) => {
           reject(error)
@@ -1675,30 +2005,37 @@ export function post_GetCostWBInternalPrices(requestBody:any, epicorHeaders?:Hea
    Description: This method will create a CostWorkbenchCostSet record which is used to store
 user options for the getting the CostPart, CostLabor, and CostBurden records.
    OperationID: GetCostWorkBenchCostSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCostWorkBenchCostSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCostWorkBenchCostSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCostWorkBenchCostSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCostWorkBenchCostSet(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCostWorkBenchCostSet(requestBody:GetCostWorkBenchCostSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCostWorkBenchCostSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetCostWorkBenchCostSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCostWorkBenchCostSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1711,30 +2048,37 @@ export function post_GetCostWorkBenchCostSet(requestBody:any, epicorHeaders?:Hea
    Description: This method will create a CostWorkbenchPost record which is used to store
 user options for the Post option.
    OperationID: GetCostWorkBenchPost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCostWorkBenchPost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCostWorkBenchPost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCostWorkBenchPost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCostWorkBenchPost(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCostWorkBenchPost(requestBody:GetCostWorkBenchPost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCostWorkBenchPost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetCostWorkBenchPost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCostWorkBenchPost_output)
           })
       .catch((error) => {
           reject(error)
@@ -1747,30 +2091,37 @@ export function post_GetCostWorkBenchPost(requestBody:any, epicorHeaders?:Header
    Description: This method will create a CostWorkbenchRefresh record which is used to store
 user options for refreshing costs in the CostPart, CostLabor, and CostBurden records.
    OperationID: GetCostWorkBenchRefresh
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCostWorkBenchRefresh_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCostWorkBenchRefresh_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCostWorkBenchRefresh_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCostWorkBenchRefresh(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCostWorkBenchRefresh(requestBody:GetCostWorkBenchRefresh_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCostWorkBenchRefresh_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetCostWorkBenchRefresh", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCostWorkBenchRefresh_output)
           })
       .catch((error) => {
           reject(error)
@@ -1783,30 +2134,37 @@ export function post_GetCostWorkBenchRefresh(requestBody:any, epicorHeaders?:Hea
    Description: This method will create a CostWorkbenchRollUp record which is used to store
 user options for the rollup option.
    OperationID: GetCostWorkBenchRollUp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCostWorkBenchRollUp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCostWorkBenchRollUp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCostWorkBenchRollUp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCostWorkBenchRollUp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCostWorkBenchRollUp(requestBody:GetCostWorkBenchRollUp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCostWorkBenchRollUp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetCostWorkBenchRollUp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCostWorkBenchRollUp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1819,7 +2177,7 @@ export function post_GetCostWorkBenchRollUp(requestBody:any, epicorHeaders?:Head
    Description: Returns the list for Costing Edits.  The list is in
 code1`desc1~code2`desc2 format.
    OperationID: ListCostingEdits
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ListCostingEdits_output
@@ -1832,15 +2190,22 @@ export function post_ListCostingEdits(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ListCostingEdits_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ListCostingEdits", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ListCostingEdits_output)
           })
       .catch((error) => {
           reject(error)
@@ -1852,7 +2217,7 @@ export function post_ListCostingEdits(epicorHeaders?:Headers){
    Summary: Invoke method ListFilters
    Description: Returns the list for filter options for parts.  The list is in code1`desc1~code2`desc2 format.
    OperationID: ListFilters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ListFilters_output
@@ -1865,15 +2230,22 @@ export function post_ListFilters(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ListFilters_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ListFilters", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ListFilters_output)
           })
       .catch((error) => {
           reject(error)
@@ -1886,7 +2258,7 @@ export function post_ListFilters(epicorHeaders?:Headers){
    Description: Returns the list for sort by options for Operations and Resource Groups.
 The list is in code1`desc1~code2`desc2 format.
    OperationID: ListOprAndResourceSortBy
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ListOprAndResourceSortBy_output
@@ -1899,15 +2271,22 @@ export function post_ListOprAndResourceSortBy(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ListOprAndResourceSortBy_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ListOprAndResourceSortBy", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ListOprAndResourceSortBy_output)
           })
       .catch((error) => {
           reject(error)
@@ -1920,7 +2299,7 @@ export function post_ListOprAndResourceSortBy(epicorHeaders?:Headers){
    Description: Returns the list of available costing methods for a part.  The list is in
 code1`desc1~code2`desc2 format.
    OperationID: ListPartCostingMethod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ListPartCostingMethod_output
@@ -1933,15 +2312,22 @@ export function post_ListPartCostingMethod(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ListPartCostingMethod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ListPartCostingMethod", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ListPartCostingMethod_output)
           })
       .catch((error) => {
           reject(error)
@@ -1953,7 +2339,7 @@ export function post_ListPartCostingMethod(epicorHeaders?:Headers){
    Summary: Invoke method ListPartSortBy
    Description: Returns the list for sort by options for parts.  The list is in code1`desc1~code2`desc2 format.
    OperationID: ListPartSortBy
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ListPartSortBy_output
@@ -1966,15 +2352,22 @@ export function post_ListPartSortBy(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ListPartSortBy_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ListPartSortBy", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ListPartSortBy_output)
           })
       .catch((error) => {
           reject(error)
@@ -1987,7 +2380,7 @@ export function post_ListPartSortBy(epicorHeaders?:Headers){
    Description: Returns the list of available rates for Resource Groups and Operations.  The list is in
 code1`desc1~code2`desc2 format.
    OperationID: ListRates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ListRates_output
@@ -2000,15 +2393,22 @@ export function post_ListRates(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ListRates_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ListRates", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ListRates_output)
           })
       .catch((error) => {
           reject(error)
@@ -2023,30 +2423,37 @@ Check if there are unapproved revisions that are in the rollup criteria.  If
 there are, return a message to the UI to ask the user if it is ok to proceed.  If
 pcQuestion is blank, a question does not need to be asked.
    OperationID: PreCostRollUp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreCostRollUp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreCostRollUp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreCostRollUp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreCostRollUp(requestBody:any, epicorHeaders?:Headers){
+export function post_PreCostRollUp(requestBody:PreCostRollUp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreCostRollUp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/PreCostRollUp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreCostRollUp_output)
           })
       .catch((error) => {
           reject(error)
@@ -2058,30 +2465,37 @@ export function post_PreCostRollUp(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RefreshCosts
    Description: This method refreshes the costs for the Cost Group.
    OperationID: RefreshCosts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshCosts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshCosts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshCosts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshCosts(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshCosts(requestBody:RefreshCosts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshCosts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/RefreshCosts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshCosts_output)
           })
       .catch((error) => {
           reject(error)
@@ -2093,30 +2507,37 @@ export function post_RefreshCosts(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ViewCosts
    Description: This method will return the data need to display Part Rev costs.
    OperationID: ViewCosts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ViewCosts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ViewCosts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ViewCosts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ViewCosts(requestBody:any, epicorHeaders?:Headers){
+export function post_ViewCosts(requestBody:ViewCosts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ViewCosts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/ViewCosts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ViewCosts_output)
           })
       .catch((error) => {
           reject(error)
@@ -2128,30 +2549,37 @@ export function post_ViewCosts(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCostGrp
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCostGrp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCostGrp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCostGrp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCostGrp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCostGrp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCostGrp(requestBody:GetNewCostGrp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCostGrp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetNewCostGrp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCostGrp_output)
           })
       .catch((error) => {
           reject(error)
@@ -2163,30 +2591,37 @@ export function post_GetNewCostGrp(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCostBurden
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCostBurden
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCostBurden_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCostBurden_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCostBurden_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCostBurden(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCostBurden(requestBody:GetNewCostBurden_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCostBurden_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetNewCostBurden", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCostBurden_output)
           })
       .catch((error) => {
           reject(error)
@@ -2198,30 +2633,37 @@ export function post_GetNewCostBurden(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCostLabor
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCostLabor
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCostLabor_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCostLabor_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCostLabor_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCostLabor(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCostLabor(requestBody:GetNewCostLabor_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCostLabor_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetNewCostLabor", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCostLabor_output)
           })
       .catch((error) => {
           reject(error)
@@ -2233,30 +2675,37 @@ export function post_GetNewCostLabor(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCostPart
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCostPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCostPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCostPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCostPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCostPart(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCostPart(requestBody:GetNewCostPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCostPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetNewCostPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCostPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -2268,30 +2717,37 @@ export function post_GetNewCostPart(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2303,7 +2759,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2327,15 +2783,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2347,7 +2810,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2371,15 +2834,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2391,30 +2861,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2426,30 +2903,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CostWorkBenchSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2460,31 +2944,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostBurdenRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CostBurdenRow[],
+   "value":Erp_Tablesets_CostBurdenRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostGrpListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CostGrpListRow[],
+   "value":Erp_Tablesets_CostGrpListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostGrpRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CostGrpRow[],
+   "value":Erp_Tablesets_CostGrpRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostLaborRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CostLaborRow[],
+   "value":Erp_Tablesets_CostLaborRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CostPartRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CostPartRow[],
+   "value":Erp_Tablesets_CostPartRow,
 }
 
 export interface Erp_Tablesets_CostBurdenRow{
@@ -2795,6 +3296,23 @@ Rolled up Burden cost. Calculated by the BOM cost rollup routine  */
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2810,7 +3328,7 @@ export interface ChangeCWBPostPostToPlantCostID_input{
 export interface ChangeCWBPostPostToPlantCostID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchPostTableset[],
+   ds:Erp_Tablesets_CostWorkBenchPostTableset,
 }
 }
 
@@ -2827,7 +3345,7 @@ export interface ChangeCopyFromGroupID_input{
 export interface ChangeCopyFromGroupID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchTableset[],
+   ds:Erp_Tablesets_CostWorkBenchTableset,
 }
 }
 
@@ -2844,7 +3362,7 @@ export interface ChangeCopyFromPlantCostID_input{
 export interface ChangeCopyFromPlantCostID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchTableset[],
+   ds:Erp_Tablesets_CostWorkBenchTableset,
 }
 }
 
@@ -2861,7 +3379,7 @@ export interface ChangePrimaryPlant_input{
 export interface ChangePrimaryPlant_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchTableset[],
+   ds:Erp_Tablesets_CostWorkBenchTableset,
 }
 }
 
@@ -2876,7 +3394,7 @@ export interface CostPost_output{
    returnObj:Erp_Tablesets_CostWorkBenchTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchPostTableset[],
+   ds:Erp_Tablesets_CostWorkBenchPostTableset,
    pcCostsNotUpdatedMsg:string,
    pcLegalNumberMessage:string,
 }
@@ -2893,7 +3411,7 @@ export interface CostRollUp_output{
    returnObj:Erp_Tablesets_CostWorkBenchTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchRollUpTableset[],
+   ds:Erp_Tablesets_CostWorkBenchRollUpTableset,
    pcPartsNotUpdatedMsg:string,
 }
 }
@@ -3538,7 +4056,7 @@ export interface GetCostSet_output{
    returnObj:Erp_Tablesets_CostWorkBenchTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchCostSetTableset[],
+   ds:Erp_Tablesets_CostWorkBenchCostSetTableset,
    cReturnMessage:string,
 }
 }
@@ -3639,7 +4157,7 @@ export interface GetNewCostBurden_input{
 export interface GetNewCostBurden_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchTableset[],
+   ds:Erp_Tablesets_CostWorkBenchTableset,
 }
 }
 
@@ -3653,7 +4171,7 @@ export interface GetNewCostGrp_input{
 export interface GetNewCostGrp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchTableset[],
+   ds:Erp_Tablesets_CostWorkBenchTableset,
 }
 }
 
@@ -3671,7 +4189,7 @@ export interface GetNewCostLabor_input{
 export interface GetNewCostLabor_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchTableset[],
+   ds:Erp_Tablesets_CostWorkBenchTableset,
 }
 }
 
@@ -3689,7 +4207,7 @@ export interface GetNewCostPart_input{
 export interface GetNewCostPart_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchTableset[],
+   ds:Erp_Tablesets_CostWorkBenchTableset,
 }
 }
 
@@ -3806,7 +4324,7 @@ export interface PreCostRollUp_input{
 export interface PreCostRollUp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchRollUpTableset[],
+   ds:Erp_Tablesets_CostWorkBenchRollUpTableset,
    pcQuestion:string,
 }
 }
@@ -3822,7 +4340,7 @@ export interface RefreshCosts_output{
    returnObj:Erp_Tablesets_CostWorkBenchTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchRefreshTableset[],
+   ds:Erp_Tablesets_CostWorkBenchRefreshTableset,
 }
 }
 
@@ -3841,7 +4359,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtCostWorkBenchTableset[],
+   ds:Erp_Tablesets_UpdExtCostWorkBenchTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3856,7 +4374,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CostWorkBenchTableset[],
+   ds:Erp_Tablesets_CostWorkBenchTableset,
 }
 }
 

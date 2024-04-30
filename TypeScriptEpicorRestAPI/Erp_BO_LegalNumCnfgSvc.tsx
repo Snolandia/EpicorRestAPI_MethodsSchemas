@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.LegalNumCnfgSvc
 // Description: Add your summary for this object here
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumCnfgRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumCnfgRow
    */  
 export function get_LegalNumCnfgs(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_LegalNumCnfgs(select?:string, expand?:string, filter?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumCnfgRow)
           })
@@ -118,15 +158,15 @@ export function get_LegalNumCnfgs(select?:string, expand?:string, filter?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LegalNumCnfgs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumCnfgRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumCnfgRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LegalNumCnfgRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LegalNumCnfgRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LegalNumCnfgs(requestBody:any, epicorHeaders?:Headers){
+export function post_LegalNumCnfgs(requestBody:Erp_Tablesets_LegalNumCnfgRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_LegalNumCnfgs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_LegalNumCnfgs(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumCnfgRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumCnfgRow
    */  
 export function get_LegalNumCnfgs_Company_LegalNumberID(Company:string, LegalNumberID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_LegalNumCnfgs_Company_LegalNumberID(Company:string, LegalNum
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumCnfgRow)
           })
@@ -193,15 +247,15 @@ export function get_LegalNumCnfgs_Company_LegalNumberID(Company:string, LegalNum
    OperationID: UpdateExt_LegalNumCnfg
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumCnfgRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumCnfgRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LegalNumCnfgs_Company_LegalNumberID(Company:string, LegalNumberID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LegalNumCnfgs_Company_LegalNumberID(Company:string, LegalNumberID:string, requestBody:Erp_Tablesets_LegalNumCnfgRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_LegalNumCnfgs_Company_LegalNumberID(Company:string, LegalN
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_LegalNumCnfgs_Company_LegalNumberID(Company:string, LegalN
    OperationID: DeleteUpdateExt_LegalNumCnfg
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_LegalNumCnfgs_Company_LegalNumberID(Company:string, Legal
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_LegalNumCnfgs_Company_LegalNumberID(Company:string, Legal
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumDocTypeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumDocTypeRow
    */  
 export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumDocTypes(Company:string, LegalNumberID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumDocTypes(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumDocTypeRow)
           })
@@ -309,10 +384,10 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumDocTypes(Company
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumDocTypeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumDocTypeRow
    */  
 export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumDocTypes_Company_LegalNumberID_TranDocTypeID(Company:string, LegalNumberID:string, TranDocTypeID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumDocTypes_Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumDocTypeRow)
           })
@@ -350,10 +432,10 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumDocTypes_Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumPrefixRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumPrefixRow
    */  
 export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumPrefixes(Company:string, LegalNumberID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumPrefixes(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumPrefixRow)
           })
@@ -389,10 +478,10 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumPrefixes(Company
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumPrefixRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumPrefixRow
    */  
 export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant(Company:string, LegalNumberID:string, Prefix:string, Plant:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -407,7 +496,14 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumPrefixes_Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumPrefixRow)
           })
@@ -429,10 +525,10 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumPrefixes_Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumSeqRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumSeqRow
    */  
 export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumSeqs(Company:string, LegalNumberID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -447,7 +543,14 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumSeqs(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumSeqRow)
           })
@@ -470,10 +573,10 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumSeqs(Company:str
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumSeqRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumSeqRow
    */  
 export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumSeqs_Company_LegalNumberID_DefaultPrefix_TransYear_TransYearSuffix_TransPeriod_SysRowID(Company:string, LegalNumberID:string, DefaultPrefix:string, TransYear:string, TransYearSuffix:string, TransPeriod:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -488,7 +591,14 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumSeqs_Company_Leg
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumSeqRow)
           })
@@ -508,10 +618,10 @@ export function get_LegalNumCnfgs_Company_LegalNumberID_LegalNumSeqs_Company_Leg
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumDocTypeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumDocTypeRow
    */  
 export function get_LegalNumDocTypes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -526,7 +636,14 @@ export function get_LegalNumDocTypes(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumDocTypeRow)
           })
@@ -540,15 +657,15 @@ export function get_LegalNumDocTypes(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LegalNumDocTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumDocTypeRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumDocTypeRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LegalNumDocTypeRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LegalNumDocTypeRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LegalNumDocTypes(requestBody:any, epicorHeaders?:Headers){
+export function post_LegalNumDocTypes(requestBody:Erp_Tablesets_LegalNumDocTypeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -562,7 +679,14 @@ export function post_LegalNumDocTypes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -581,10 +705,10 @@ export function post_LegalNumDocTypes(requestBody:any, epicorHeaders?:Headers){
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumDocTypeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumDocTypeRow
    */  
 export function get_LegalNumDocTypes_Company_LegalNumberID_TranDocTypeID(Company:string, LegalNumberID:string, TranDocTypeID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -599,7 +723,14 @@ export function get_LegalNumDocTypes_Company_LegalNumberID_TranDocTypeID(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumDocTypeRow)
           })
@@ -616,15 +747,15 @@ export function get_LegalNumDocTypes_Company_LegalNumberID_TranDocTypeID(Company
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumDocTypeRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumDocTypeRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LegalNumDocTypes_Company_LegalNumberID_TranDocTypeID(Company:string, LegalNumberID:string, TranDocTypeID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LegalNumDocTypes_Company_LegalNumberID_TranDocTypeID(Company:string, LegalNumberID:string, TranDocTypeID:string, requestBody:Erp_Tablesets_LegalNumDocTypeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -638,7 +769,14 @@ export function patch_LegalNumDocTypes_Company_LegalNumberID_TranDocTypeID(Compa
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -655,7 +793,7 @@ export function patch_LegalNumDocTypes_Company_LegalNumberID_TranDocTypeID(Compa
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -674,7 +812,14 @@ export function delete_LegalNumDocTypes_Company_LegalNumberID_TranDocTypeID(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -695,10 +840,10 @@ export function delete_LegalNumDocTypes_Company_LegalNumberID_TranDocTypeID(Comp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumPrefixRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumPrefixRow
    */  
 export function get_LegalNumPrefixes(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -713,7 +858,14 @@ export function get_LegalNumPrefixes(select?:string, expand?:string, filter?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumPrefixRow)
           })
@@ -727,15 +879,15 @@ export function get_LegalNumPrefixes(select?:string, expand?:string, filter?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LegalNumPrefixes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumPrefixRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumPrefixRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LegalNumPrefixRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LegalNumPrefixRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LegalNumPrefixes(requestBody:any, epicorHeaders?:Headers){
+export function post_LegalNumPrefixes(requestBody:Erp_Tablesets_LegalNumPrefixRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -749,7 +901,14 @@ export function post_LegalNumPrefixes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -770,10 +929,10 @@ export function post_LegalNumPrefixes(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumPrefixRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumPrefixRow
    */  
 export function get_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant(Company:string, LegalNumberID:string, Prefix:string, Plant:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -788,7 +947,14 @@ export function get_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumPrefixRow)
           })
@@ -806,15 +972,15 @@ export function get_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant(Company:
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
       @param Prefix Desc: Prefix   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumPrefixRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumPrefixRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant(Company:string, LegalNumberID:string, Prefix:string, Plant:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant(Company:string, LegalNumberID:string, Prefix:string, Plant:string, requestBody:Erp_Tablesets_LegalNumPrefixRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -828,7 +994,14 @@ export function patch_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant(Compan
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -846,7 +1019,7 @@ export function patch_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant(Compan
       @param LegalNumberID Desc: LegalNumberID   Required: True   Allow empty value : True
       @param Prefix Desc: Prefix   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -865,7 +1038,14 @@ export function delete_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -889,10 +1069,10 @@ export function delete_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant(Compa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumSeqPrefixRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumSeqPrefixRow
    */  
 export function get_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant_LegalNumSeqPrefixes(Company:string, LegalNumberID:string, Prefix:string, Plant:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -907,7 +1087,14 @@ export function get_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant_LegalNum
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumSeqPrefixRow)
           })
@@ -931,10 +1118,10 @@ export function get_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant_LegalNum
       @param StartSequence Desc: StartSequence   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumSeqPrefixRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumSeqPrefixRow
    */  
 export function get_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant_LegalNumSeqPrefixes_Company_LegalNumberID_Prefix_Plant_TransYear_TransYearSuffix_TransPeriod_StartSequence(Company:string, LegalNumberID:string, Prefix:string, Plant:string, TransYear:string, TransYearSuffix:string, TransPeriod:string, StartSequence:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -949,7 +1136,14 @@ export function get_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant_LegalNum
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumSeqPrefixRow)
           })
@@ -969,10 +1163,10 @@ export function get_LegalNumPrefixes_Company_LegalNumberID_Prefix_Plant_LegalNum
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumSeqPrefixRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumSeqPrefixRow
    */  
 export function get_LegalNumSeqPrefixes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -987,7 +1181,14 @@ export function get_LegalNumSeqPrefixes(select?:string, filter?:string, orderby?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumSeqPrefixRow)
           })
@@ -1001,15 +1202,15 @@ export function get_LegalNumSeqPrefixes(select?:string, filter?:string, orderby?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LegalNumSeqPrefixes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumSeqPrefixRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumSeqPrefixRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LegalNumSeqPrefixRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LegalNumSeqPrefixRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LegalNumSeqPrefixes(requestBody:any, epicorHeaders?:Headers){
+export function post_LegalNumSeqPrefixes(requestBody:Erp_Tablesets_LegalNumSeqPrefixRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1023,7 +1224,14 @@ export function post_LegalNumSeqPrefixes(requestBody:any, epicorHeaders?:Headers
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1047,10 +1255,10 @@ export function post_LegalNumSeqPrefixes(requestBody:any, epicorHeaders?:Headers
       @param StartSequence Desc: StartSequence   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumSeqPrefixRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumSeqPrefixRow
    */  
 export function get_LegalNumSeqPrefixes_Company_LegalNumberID_Prefix_Plant_TransYear_TransYearSuffix_TransPeriod_StartSequence(Company:string, LegalNumberID:string, Prefix:string, Plant:string, TransYear:string, TransYearSuffix:string, TransPeriod:string, StartSequence:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1065,7 +1273,14 @@ export function get_LegalNumSeqPrefixes_Company_LegalNumberID_Prefix_Plant_Trans
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumSeqPrefixRow)
           })
@@ -1087,15 +1302,15 @@ export function get_LegalNumSeqPrefixes_Company_LegalNumberID_Prefix_Plant_Trans
       @param TransYearSuffix Desc: TransYearSuffix   Required: True   Allow empty value : True
       @param TransPeriod Desc: TransPeriod   Required: True
       @param StartSequence Desc: StartSequence   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumSeqPrefixRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumSeqPrefixRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LegalNumSeqPrefixes_Company_LegalNumberID_Prefix_Plant_TransYear_TransYearSuffix_TransPeriod_StartSequence(Company:string, LegalNumberID:string, Prefix:string, Plant:string, TransYear:string, TransYearSuffix:string, TransPeriod:string, StartSequence:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LegalNumSeqPrefixes_Company_LegalNumberID_Prefix_Plant_TransYear_TransYearSuffix_TransPeriod_StartSequence(Company:string, LegalNumberID:string, Prefix:string, Plant:string, TransYear:string, TransYearSuffix:string, TransPeriod:string, StartSequence:string, requestBody:Erp_Tablesets_LegalNumSeqPrefixRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1109,7 +1324,14 @@ export function patch_LegalNumSeqPrefixes_Company_LegalNumberID_Prefix_Plant_Tra
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1131,7 +1353,7 @@ export function patch_LegalNumSeqPrefixes_Company_LegalNumberID_Prefix_Plant_Tra
       @param TransYearSuffix Desc: TransYearSuffix   Required: True   Allow empty value : True
       @param TransPeriod Desc: TransPeriod   Required: True
       @param StartSequence Desc: StartSequence   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1150,7 +1372,14 @@ export function delete_LegalNumSeqPrefixes_Company_LegalNumberID_Prefix_Plant_Tr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1170,10 +1399,10 @@ export function delete_LegalNumSeqPrefixes_Company_LegalNumberID_Prefix_Plant_Tr
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumSeqRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumSeqRow
    */  
 export function get_LegalNumSeqs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1188,7 +1417,14 @@ export function get_LegalNumSeqs(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumSeqRow)
           })
@@ -1202,15 +1438,15 @@ export function get_LegalNumSeqs(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LegalNumSeqs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumSeqRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LegalNumSeqRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LegalNumSeqRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LegalNumSeqRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LegalNumSeqs(requestBody:any, epicorHeaders?:Headers){
+export function post_LegalNumSeqs(requestBody:Erp_Tablesets_LegalNumSeqRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1224,7 +1460,14 @@ export function post_LegalNumSeqs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1247,10 +1490,10 @@ export function post_LegalNumSeqs(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LegalNumSeqRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LegalNumSeqRow
    */  
 export function get_LegalNumSeqs_Company_LegalNumberID_DefaultPrefix_TransYear_TransYearSuffix_TransPeriod_SysRowID(Company:string, LegalNumberID:string, DefaultPrefix:string, TransYear:string, TransYearSuffix:string, TransPeriod:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1265,7 +1508,14 @@ export function get_LegalNumSeqs_Company_LegalNumberID_DefaultPrefix_TransYear_T
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LegalNumSeqRow)
           })
@@ -1286,15 +1536,15 @@ export function get_LegalNumSeqs_Company_LegalNumberID_DefaultPrefix_TransYear_T
       @param TransYearSuffix Desc: TransYearSuffix   Required: True   Allow empty value : True
       @param TransPeriod Desc: TransPeriod   Required: True
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumSeqRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LegalNumSeqRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LegalNumSeqs_Company_LegalNumberID_DefaultPrefix_TransYear_TransYearSuffix_TransPeriod_SysRowID(Company:string, LegalNumberID:string, DefaultPrefix:string, TransYear:string, TransYearSuffix:string, TransPeriod:string, SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LegalNumSeqs_Company_LegalNumberID_DefaultPrefix_TransYear_TransYearSuffix_TransPeriod_SysRowID(Company:string, LegalNumberID:string, DefaultPrefix:string, TransYear:string, TransYearSuffix:string, TransPeriod:string, SysRowID:string, requestBody:Erp_Tablesets_LegalNumSeqRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1308,7 +1558,14 @@ export function patch_LegalNumSeqs_Company_LegalNumberID_DefaultPrefix_TransYear
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1329,7 +1586,7 @@ export function patch_LegalNumSeqs_Company_LegalNumberID_DefaultPrefix_TransYear
       @param TransYearSuffix Desc: TransYearSuffix   Required: True   Allow empty value : True
       @param TransPeriod Desc: TransPeriod   Required: True
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1348,7 +1605,14 @@ export function delete_LegalNumSeqs_Company_LegalNumberID_DefaultPrefix_TransYea
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1368,10 +1632,10 @@ export function delete_LegalNumSeqs_Company_LegalNumberID_DefaultPrefix_TransYea
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AvailableDocTypeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AvailableDocTypeRow
    */  
 export function get_AvailableDocTypes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1386,7 +1650,14 @@ export function get_AvailableDocTypes(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AvailableDocTypeRow)
           })
@@ -1400,15 +1671,15 @@ export function get_AvailableDocTypes(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AvailableDocTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AvailableDocTypeRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AvailableDocTypeRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AvailableDocTypeRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AvailableDocTypeRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AvailableDocTypes(requestBody:any, epicorHeaders?:Headers){
+export function post_AvailableDocTypes(requestBody:Erp_Tablesets_AvailableDocTypeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1422,7 +1693,14 @@ export function post_AvailableDocTypes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1440,10 +1718,10 @@ export function post_AvailableDocTypes(requestBody:any, epicorHeaders?:Headers){
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AvailableDocTypeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AvailableDocTypeRow
    */  
 export function get_AvailableDocTypes_Company_TranDocTypeID(Company:string, TranDocTypeID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1458,7 +1736,14 @@ export function get_AvailableDocTypes_Company_TranDocTypeID(Company:string, Tran
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AvailableDocTypeRow)
           })
@@ -1474,15 +1759,15 @@ export function get_AvailableDocTypes_Company_TranDocTypeID(Company:string, Tran
    OperationID: UpdateExt_AvailableDocType
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AvailableDocTypeRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AvailableDocTypeRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AvailableDocTypes_Company_TranDocTypeID(Company:string, TranDocTypeID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AvailableDocTypes_Company_TranDocTypeID(Company:string, TranDocTypeID:string, requestBody:Erp_Tablesets_AvailableDocTypeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1496,7 +1781,14 @@ export function patch_AvailableDocTypes_Company_TranDocTypeID(Company:string, Tr
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1512,7 +1804,7 @@ export function patch_AvailableDocTypes_Company_TranDocTypeID(Company:string, Tr
    OperationID: DeleteUpdateExt_AvailableDocType
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param TranDocTypeID Desc: TranDocTypeID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1531,7 +1823,14 @@ export function delete_AvailableDocTypes_Company_TranDocTypeID(Company:string, T
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1551,10 +1850,10 @@ export function delete_AvailableDocTypes_Company_TranDocTypeID(Company:string, T
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AvailableLegalNumFormatRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.AvailableLegalNumFormatRow
    */  
 export function get_AvailableLegalNumFormats(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1569,7 +1868,14 @@ export function get_AvailableLegalNumFormats(select?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AvailableLegalNumFormatRow)
           })
@@ -1583,15 +1889,15 @@ export function get_AvailableLegalNumFormats(select?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AvailableLegalNumFormats
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AvailableLegalNumFormatRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.AvailableLegalNumFormatRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.AvailableLegalNumFormatRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.AvailableLegalNumFormatRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AvailableLegalNumFormats(requestBody:any, epicorHeaders?:Headers){
+export function post_AvailableLegalNumFormats(requestBody:Erp_Tablesets_AvailableLegalNumFormatRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1605,7 +1911,14 @@ export function post_AvailableLegalNumFormats(requestBody:any, epicorHeaders?:He
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1622,10 +1935,10 @@ export function post_AvailableLegalNumFormats(requestBody:any, epicorHeaders?:He
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.AvailableLegalNumFormatRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.AvailableLegalNumFormatRow
    */  
 export function get_AvailableLegalNumFormats_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1640,7 +1953,14 @@ export function get_AvailableLegalNumFormats_SysRowID(SysRowID:string, select?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_AvailableLegalNumFormatRow)
           })
@@ -1655,15 +1975,15 @@ export function get_AvailableLegalNumFormats_SysRowID(SysRowID:string, select?:s
    Description: Calls UpdateExt to update AvailableLegalNumFormat. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_AvailableLegalNumFormat
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.AvailableLegalNumFormatRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.AvailableLegalNumFormatRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AvailableLegalNumFormats_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AvailableLegalNumFormats_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_AvailableLegalNumFormatRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1677,7 +1997,14 @@ export function patch_AvailableLegalNumFormats_SysRowID(SysRowID:string, request
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1692,7 +2019,7 @@ export function patch_AvailableLegalNumFormats_SysRowID(SysRowID:string, request
    Description: Call UpdateExt to delete AvailableLegalNumFormat item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_AvailableLegalNumFormat
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1711,7 +2038,14 @@ export function delete_AvailableLegalNumFormats_SysRowID(SysRowID:string, epicor
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1731,10 +2065,10 @@ export function delete_AvailableLegalNumFormats_SysRowID(SysRowID:string, epicor
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumCnfgListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LegalNumCnfgListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1749,7 +2083,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumCnfgListRow)
           })
@@ -1761,6 +2102,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1778,7 +2136,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1874,15 +2232,22 @@ export function get_GetRows(whereClauseLegalNumCnfg:string, whereClauseLegalNumD
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1895,7 +2260,7 @@ export function get_GetRows(whereClauseLegalNumCnfg:string, whereClauseLegalNumD
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1919,15 +2284,22 @@ export function get_GetByID(legalNumberID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1942,7 +2314,7 @@ export function get_GetByID(legalNumberID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1984,15 +2356,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2004,30 +2383,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetCodeDescList
    Description: CODE TO PROVIDE PUBLIC METHOD TO RETRIEVE THE CORRESPONDING LIST OF DESCRIPTIONS FOR A CODE FIELD
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2039,30 +2425,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetTranDocType
    Description: This method return the TranDoctType that has not already assinged to legalNumber
    OperationID: GetTranDocType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTranDocType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTranDocType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTranDocType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTranDocType(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTranDocType(requestBody:GetTranDocType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTranDocType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetTranDocType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTranDocType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2074,7 +2467,7 @@ export function post_GetTranDocType(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetMXTaxRcptType
    Description: Getting Mexican Tax Receipt Type from Conpany configuration without parameters (by default)
    OperationID: GetMXTaxRcptType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMXTaxRcptType_output
@@ -2087,15 +2480,22 @@ export function post_GetMXTaxRcptType(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMXTaxRcptType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetMXTaxRcptType", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMXTaxRcptType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2107,30 +2507,37 @@ export function post_GetMXTaxRcptType(epicorHeaders?:Headers){
    Summary: Invoke method OnChangeFormat
    Description: This method should be called if the Format changes.
    OperationID: OnChangeFormat
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeFormat_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeFormat_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeFormat_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeFormat(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeFormat(requestBody:OnChangeFormat_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeFormat_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeFormat", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeFormat_output)
           })
       .catch((error) => {
           reject(error)
@@ -2142,30 +2549,37 @@ export function post_OnChangeFormat(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeGenSSCC
    Description: This method should be called if the Generate SSCC changes.
    OperationID: OnChangeGenSSCC
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeGenSSCC_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeGenSSCC_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeGenSSCC_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeGenSSCC(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeGenSSCC(requestBody:OnChangeGenSSCC_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeGenSSCC_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeGenSSCC", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeGenSSCC_output)
           })
       .catch((error) => {
           reject(error)
@@ -2177,30 +2591,37 @@ export function post_OnChangeGenSSCC(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeOfGenerationOption
    Description: This method is called when 'Generate On' (GenerationOption) is changed
    OperationID: OnChangeOfGenerationOption
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfGenerationOption_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfGenerationOption_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfGenerationOption_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfGenerationOption(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfGenerationOption(requestBody:OnChangeOfGenerationOption_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfGenerationOption_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfGenerationOption", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfGenerationOption_output)
           })
       .catch((error) => {
           reject(error)
@@ -2212,30 +2633,37 @@ export function post_OnChangeOfGenerationOption(requestBody:any, epicorHeaders?:
    Summary: Invoke method OnChangeOfGenerationType
    Description: This method should be called if the Generation Type changes.
    OperationID: OnChangeOfGenerationType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfGenerationType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfGenerationType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfGenerationType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfGenerationType(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfGenerationType(requestBody:OnChangeOfGenerationType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfGenerationType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfGenerationType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfGenerationType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2247,30 +2675,37 @@ export function post_OnChangeOfGenerationType(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangeOfLegalNumberType
    Description: This method should be called after the LegalNumberType comboBox changes.
    OperationID: OnChangeOfLegalNumberType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumberType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumberType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfLegalNumberType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfLegalNumberType(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfLegalNumberType(requestBody:OnChangeOfLegalNumberType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfLegalNumberType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfLegalNumberType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfLegalNumberType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2282,30 +2717,37 @@ export function post_OnChangeOfLegalNumberType(requestBody:any, epicorHeaders?:H
    Summary: Invoke method OnChangeOfNumberOption
    Description: This method should be called after the NumberOption comboBox changes.
    OperationID: OnChangeOfNumberOption
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfNumberOption_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfNumberOption_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfNumberOption_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfNumberOption(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfNumberOption(requestBody:OnChangeOfNumberOption_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfNumberOption_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfNumberOption", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfNumberOption_output)
           })
       .catch((error) => {
           reject(error)
@@ -2317,30 +2759,37 @@ export function post_OnChangeOfNumberOption(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnChangeOfPrefixType
    Description: This method should be called if the Prefix Type changes.
    OperationID: OnChangeOfPrefixType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfPrefixType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfPrefixType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfPrefixType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfPrefixType(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfPrefixType(requestBody:OnChangeOfPrefixType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfPrefixType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfPrefixType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfPrefixType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2352,30 +2801,37 @@ export function post_OnChangeOfPrefixType(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeOfLegalNumCnfgAutomaticVoiding
    Description: This method should be called after the Legal Number Configuration Automatic Voiding option changes.
    OperationID: OnChangeOfLegalNumCnfgAutomaticVoiding
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumCnfgAutomaticVoiding_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumCnfgAutomaticVoiding_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfLegalNumCnfgAutomaticVoiding_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfLegalNumCnfgAutomaticVoiding(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfLegalNumCnfgAutomaticVoiding(requestBody:OnChangeOfLegalNumCnfgAutomaticVoiding_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfLegalNumCnfgAutomaticVoiding_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfLegalNumCnfgAutomaticVoiding", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfLegalNumCnfgAutomaticVoiding_output)
           })
       .catch((error) => {
           reject(error)
@@ -2387,30 +2843,37 @@ export function post_OnChangeOfLegalNumCnfgAutomaticVoiding(requestBody:any, epi
    Summary: Invoke method OnChangeOfLegalNumPrefix
    Description: This method should be called if the LegalNumPrefix changes.
    OperationID: OnChangeOfLegalNumPrefix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumPrefix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumPrefix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfLegalNumPrefix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfLegalNumPrefix(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfLegalNumPrefix(requestBody:OnChangeOfLegalNumPrefix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfLegalNumPrefix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfLegalNumPrefix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfLegalNumPrefix_output)
           })
       .catch((error) => {
           reject(error)
@@ -2422,30 +2885,37 @@ export function post_OnChangeOfLegalNumPrefix(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangeOfLegalNumSeqEndSequence
    Description: This method should be called if the End Sequence changes.
    OperationID: OnChangeOfLegalNumSeqEndSequence
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumSeqEndSequence_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumSeqEndSequence_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfLegalNumSeqEndSequence_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfLegalNumSeqEndSequence(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfLegalNumSeqEndSequence(requestBody:OnChangeOfLegalNumSeqEndSequence_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfLegalNumSeqEndSequence_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfLegalNumSeqEndSequence", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfLegalNumSeqEndSequence_output)
           })
       .catch((error) => {
           reject(error)
@@ -2457,30 +2927,37 @@ export function post_OnChangeOfLegalNumSeqEndSequence(requestBody:any, epicorHea
    Summary: Invoke method OnChangeOfLegalNumSeqPrefixEndSequence
    Description: This method should be called if the End Sequence changes.
    OperationID: OnChangeOfLegalNumSeqPrefixEndSequence
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumSeqPrefixEndSequence_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumSeqPrefixEndSequence_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfLegalNumSeqPrefixEndSequence_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfLegalNumSeqPrefixEndSequence(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfLegalNumSeqPrefixEndSequence(requestBody:OnChangeOfLegalNumSeqPrefixEndSequence_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfLegalNumSeqPrefixEndSequence_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfLegalNumSeqPrefixEndSequence", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfLegalNumSeqPrefixEndSequence_output)
           })
       .catch((error) => {
           reject(error)
@@ -2492,30 +2969,37 @@ export function post_OnChangeOfLegalNumSeqPrefixEndSequence(requestBody:any, epi
    Summary: Invoke method OnChangeOfLegalNumSeqStartSequence
    Description: This method should be called if the End Sequence changes.
    OperationID: OnChangeOfLegalNumSeqStartSequence
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumSeqStartSequence_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumSeqStartSequence_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfLegalNumSeqStartSequence_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfLegalNumSeqStartSequence(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfLegalNumSeqStartSequence(requestBody:OnChangeOfLegalNumSeqStartSequence_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfLegalNumSeqStartSequence_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfLegalNumSeqStartSequence", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfLegalNumSeqStartSequence_output)
           })
       .catch((error) => {
           reject(error)
@@ -2527,30 +3011,37 @@ export function post_OnChangeOfLegalNumSeqStartSequence(requestBody:any, epicorH
    Summary: Invoke method OnChangeOfLegalNumSeqPrefixStartSequence
    Description: This method should be called if the End Sequence changes.
    OperationID: OnChangeOfLegalNumSeqPrefixStartSequence
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumSeqPrefixStartSequence_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfLegalNumSeqPrefixStartSequence_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfLegalNumSeqPrefixStartSequence_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfLegalNumSeqPrefixStartSequence(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfLegalNumSeqPrefixStartSequence(requestBody:OnChangeOfLegalNumSeqPrefixStartSequence_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfLegalNumSeqPrefixStartSequence_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/OnChangeOfLegalNumSeqPrefixStartSequence", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfLegalNumSeqPrefixStartSequence_output)
           })
       .catch((error) => {
           reject(error)
@@ -2569,30 +3060,37 @@ sequence.  If opMsgText is not returned as null, it should be displayed to the
 user as a Yes/No question.  If the user answers "Yes" then the method RemoveSequences
 should be called.
    OperationID: ProcessPrefix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessPrefix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessPrefix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessPrefix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessPrefix(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessPrefix(requestBody:ProcessPrefix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessPrefix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/ProcessPrefix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessPrefix_output)
           })
       .catch((error) => {
           reject(error)
@@ -2604,30 +3102,37 @@ export function post_ProcessPrefix(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AltPrefixValidations
    Description: AltPrefixValidations
    OperationID: AltPrefixValidations
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AltPrefixValidations_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AltPrefixValidations_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AltPrefixValidations_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AltPrefixValidations(requestBody:any, epicorHeaders?:Headers){
+export function post_AltPrefixValidations(requestBody:AltPrefixValidations_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AltPrefixValidations_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/AltPrefixValidations", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AltPrefixValidations_output)
           })
       .catch((error) => {
           reject(error)
@@ -2639,30 +3144,37 @@ export function post_AltPrefixValidations(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method RemoveAltPrefix
    Description: RemoveAltPrefix
    OperationID: RemoveAltPrefix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveAltPrefix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveAltPrefix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveAltPrefix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveAltPrefix(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveAltPrefix(requestBody:RemoveAltPrefix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveAltPrefix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/RemoveAltPrefix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveAltPrefix_output)
           })
       .catch((error) => {
           reject(error)
@@ -2676,30 +3188,37 @@ export function post_RemoveAltPrefix(requestBody:any, epicorHeaders?:Headers){
 answer "Yes" to the message returned from ProcessPrefix.  This method will remove
 sequences that are using the old Default Prefix.
    OperationID: RemoveSequences
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveSequences_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveSequences_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveSequences_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveSequences(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveSequences(requestBody:RemoveSequences_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveSequences_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/RemoveSequences", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveSequences_output)
           })
       .catch((error) => {
           reject(error)
@@ -2711,30 +3230,37 @@ export function post_RemoveSequences(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ResetTaxLegalNumber
    Description: This method will remove Legal Number and Tax Print Date from TaxTran and void Legal Number on LegalNumHistory Table.
    OperationID: ResetTaxLegalNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ResetTaxLegalNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ResetTaxLegalNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ResetTaxLegalNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ResetTaxLegalNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_ResetTaxLegalNumber(requestBody:ResetTaxLegalNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ResetTaxLegalNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/ResetTaxLegalNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ResetTaxLegalNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -2747,30 +3273,37 @@ export function post_ResetTaxLegalNumber(requestBody:any, epicorHeaders?:Headers
    Description: This method will build the Payment information using the parameters
 passed into the method.
    OperationID: RetrievePaymentInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RetrievePaymentInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RetrievePaymentInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RetrievePaymentInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RetrievePaymentInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_RetrievePaymentInfo(requestBody:RetrievePaymentInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RetrievePaymentInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/RetrievePaymentInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RetrievePaymentInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -2786,30 +3319,37 @@ Notes:
             
 <param name="ds">legalNumCnfg is to used to set up the parameters used to generate legal numbers.</param>
    OperationID: VoidLegalNumCnfg
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VoidLegalNumCnfg_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VoidLegalNumCnfg_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VoidLegalNumCnfg_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VoidLegalNumCnfg(requestBody:any, epicorHeaders?:Headers){
+export function post_VoidLegalNumCnfg(requestBody:VoidLegalNumCnfg_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VoidLegalNumCnfg_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/VoidLegalNumCnfg", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VoidLegalNumCnfg_output)
           })
       .catch((error) => {
           reject(error)
@@ -2821,7 +3361,7 @@ export function post_VoidLegalNumCnfg(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetAvailableFormatElements
    Description: Load all Element available for the Legal Number format.
    OperationID: GetAvailableFormatElements
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableFormatElements_output
@@ -2834,15 +3374,22 @@ export function post_GetAvailableFormatElements(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableFormatElements_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetAvailableFormatElements", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableFormatElements_output)
           })
       .catch((error) => {
           reject(error)
@@ -2854,30 +3401,37 @@ export function post_GetAvailableFormatElements(epicorHeaders?:Headers){
    Summary: Invoke method GetAvailableFormatElementsExclExceedSeparators
    Description: Load all Element available for the Legal Number format.
    OperationID: GetAvailableFormatElementsExclExceedSeparators
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAvailableFormatElementsExclExceedSeparators_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAvailableFormatElementsExclExceedSeparators_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableFormatElementsExclExceedSeparators_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAvailableFormatElementsExclExceedSeparators(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAvailableFormatElementsExclExceedSeparators(requestBody:GetAvailableFormatElementsExclExceedSeparators_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableFormatElementsExclExceedSeparators_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetAvailableFormatElementsExclExceedSeparators", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableFormatElementsExclExceedSeparators_output)
           })
       .catch((error) => {
           reject(error)
@@ -2889,30 +3443,37 @@ export function post_GetAvailableFormatElementsExclExceedSeparators(requestBody:
    Summary: Invoke method GenerateLegalNumberSample
    Description: Generate Legal Number Sample
    OperationID: GenerateLegalNumberSample
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateLegalNumberSample_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateLegalNumberSample_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateLegalNumberSample_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateLegalNumberSample(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateLegalNumberSample(requestBody:GenerateLegalNumberSample_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateLegalNumberSample_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GenerateLegalNumberSample", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateLegalNumberSample_output)
           })
       .catch((error) => {
           reject(error)
@@ -2924,7 +3485,7 @@ export function post_GenerateLegalNumberSample(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetLegalNumberTypeList
    Description: Get list of Legal Number types
    OperationID: GetLegalNumberTypeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLegalNumberTypeList_output
@@ -2937,15 +3498,22 @@ export function post_GetLegalNumberTypeList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLegalNumberTypeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetLegalNumberTypeList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLegalNumberTypeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2957,30 +3525,37 @@ export function post_GetLegalNumberTypeList(epicorHeaders?:Headers){
    Summary: Invoke method GetChangeLogDetails
    Description: Get Change Log for specific Legal Number
    OperationID: GetChangeLogDetails
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetChangeLogDetails_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetChangeLogDetails_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetChangeLogDetails_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetChangeLogDetails(requestBody:any, epicorHeaders?:Headers){
+export function post_GetChangeLogDetails(requestBody:GetChangeLogDetails_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetChangeLogDetails_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetChangeLogDetails", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetChangeLogDetails_output)
           })
       .catch((error) => {
           reject(error)
@@ -2992,30 +3567,37 @@ export function post_GetChangeLogDetails(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewLegalNumCnfg
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLegalNumCnfg
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLegalNumCnfg_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLegalNumCnfg_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLegalNumCnfg_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLegalNumCnfg(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLegalNumCnfg(requestBody:GetNewLegalNumCnfg_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLegalNumCnfg_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetNewLegalNumCnfg", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLegalNumCnfg_output)
           })
       .catch((error) => {
           reject(error)
@@ -3027,30 +3609,37 @@ export function post_GetNewLegalNumCnfg(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewLegalNumDocType
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLegalNumDocType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLegalNumDocType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLegalNumDocType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLegalNumDocType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLegalNumDocType(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLegalNumDocType(requestBody:GetNewLegalNumDocType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLegalNumDocType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetNewLegalNumDocType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLegalNumDocType_output)
           })
       .catch((error) => {
           reject(error)
@@ -3062,30 +3651,37 @@ export function post_GetNewLegalNumDocType(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewLegalNumPrefix
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLegalNumPrefix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLegalNumPrefix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLegalNumPrefix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLegalNumPrefix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLegalNumPrefix(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLegalNumPrefix(requestBody:GetNewLegalNumPrefix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLegalNumPrefix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetNewLegalNumPrefix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLegalNumPrefix_output)
           })
       .catch((error) => {
           reject(error)
@@ -3097,30 +3693,37 @@ export function post_GetNewLegalNumPrefix(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewLegalNumSeqPrefix
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLegalNumSeqPrefix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLegalNumSeqPrefix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLegalNumSeqPrefix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLegalNumSeqPrefix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLegalNumSeqPrefix(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLegalNumSeqPrefix(requestBody:GetNewLegalNumSeqPrefix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLegalNumSeqPrefix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetNewLegalNumSeqPrefix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLegalNumSeqPrefix_output)
           })
       .catch((error) => {
           reject(error)
@@ -3132,30 +3735,37 @@ export function post_GetNewLegalNumSeqPrefix(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewLegalNumSeq
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLegalNumSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLegalNumSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLegalNumSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLegalNumSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLegalNumSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLegalNumSeq(requestBody:GetNewLegalNumSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLegalNumSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetNewLegalNumSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLegalNumSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -3167,30 +3777,37 @@ export function post_GetNewLegalNumSeq(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3202,7 +3819,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -3226,15 +3843,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3246,7 +3870,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -3270,15 +3894,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -3290,30 +3921,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -3325,30 +3963,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LegalNumCnfgSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -3359,46 +4004,63 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AvailableDocTypeRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AvailableDocTypeRow[],
+   "value":Erp_Tablesets_AvailableDocTypeRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_AvailableLegalNumFormatRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_AvailableLegalNumFormatRow[],
+   "value":Erp_Tablesets_AvailableLegalNumFormatRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumCnfgListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LegalNumCnfgListRow[],
+   "value":Erp_Tablesets_LegalNumCnfgListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumCnfgRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LegalNumCnfgRow[],
+   "value":Erp_Tablesets_LegalNumCnfgRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumDocTypeRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LegalNumDocTypeRow[],
+   "value":Erp_Tablesets_LegalNumDocTypeRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumPrefixRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LegalNumPrefixRow[],
+   "value":Erp_Tablesets_LegalNumPrefixRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumSeqPrefixRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LegalNumSeqPrefixRow[],
+   "value":Erp_Tablesets_LegalNumSeqPrefixRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LegalNumSeqRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LegalNumSeqRow[],
+   "value":Erp_Tablesets_LegalNumSeqRow,
 }
 
 export interface Erp_Tablesets_AvailableDocTypeRow{
@@ -3781,6 +4443,23 @@ export interface Erp_Tablesets_LegalNumSeqRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -3803,7 +4482,7 @@ export interface AltPrefixValidations_input{
 export interface AltPrefixValidations_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
    altPrefixExists:boolean,
    opMsgText:string,
 }
@@ -4255,7 +4934,7 @@ export interface GenerateLegalNumberSample_input{
 export interface GenerateLegalNumberSample_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4376,7 +5055,7 @@ export interface GetNewLegalNumCnfg_input{
 export interface GetNewLegalNumCnfg_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4392,7 +5071,7 @@ export interface GetNewLegalNumDocType_input{
 export interface GetNewLegalNumDocType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4410,7 +5089,7 @@ export interface GetNewLegalNumPrefix_input{
 export interface GetNewLegalNumPrefix_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4436,7 +5115,7 @@ export interface GetNewLegalNumSeqPrefix_input{
 export interface GetNewLegalNumSeqPrefix_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4460,7 +5139,7 @@ export interface GetNewLegalNumSeq_input{
 export interface GetNewLegalNumSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4573,7 +5252,7 @@ export interface OnChangeGenSSCC_input{
 export interface OnChangeGenSSCC_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4587,7 +5266,7 @@ export interface OnChangeOfGenerationOption_input{
 export interface OnChangeOfGenerationOption_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4601,7 +5280,7 @@ export interface OnChangeOfGenerationType_input{
 export interface OnChangeOfGenerationType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4618,7 +5297,7 @@ export interface OnChangeOfLegalNumCnfgAutomaticVoiding_input{
 export interface OnChangeOfLegalNumCnfgAutomaticVoiding_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4634,7 +5313,7 @@ export interface OnChangeOfLegalNumPrefix_input{
 export interface OnChangeOfLegalNumPrefix_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4648,7 +5327,7 @@ export interface OnChangeOfLegalNumSeqEndSequence_input{
 export interface OnChangeOfLegalNumSeqEndSequence_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4662,7 +5341,7 @@ export interface OnChangeOfLegalNumSeqPrefixEndSequence_input{
 export interface OnChangeOfLegalNumSeqPrefixEndSequence_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4676,7 +5355,7 @@ export interface OnChangeOfLegalNumSeqPrefixStartSequence_input{
 export interface OnChangeOfLegalNumSeqPrefixStartSequence_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4690,7 +5369,7 @@ export interface OnChangeOfLegalNumSeqStartSequence_input{
 export interface OnChangeOfLegalNumSeqStartSequence_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4707,7 +5386,7 @@ export interface OnChangeOfLegalNumberType_input{
 export interface OnChangeOfLegalNumberType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4724,7 +5403,7 @@ export interface OnChangeOfNumberOption_input{
 export interface OnChangeOfNumberOption_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4738,7 +5417,7 @@ export interface OnChangeOfPrefixType_input{
 export interface OnChangeOfPrefixType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4759,7 +5438,7 @@ export interface ProcessPrefix_output{
 parameters : {
       /**  output parameters  */  
    opMsgText:string,
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4783,7 +5462,7 @@ export interface RemoveAltPrefix_input{
 export interface RemoveAltPrefix_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4800,7 +5479,7 @@ export interface RemoveSequences_input{
 export interface RemoveSequences_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4814,7 +5493,7 @@ export interface ResetTaxLegalNumber_input{
 export interface ResetTaxLegalNumber_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4828,7 +5507,7 @@ export interface RetrievePaymentInfo_input{
 export interface RetrievePaymentInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4847,7 +5526,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtLegalNumCnfgTableset[],
+   ds:Erp_Tablesets_UpdExtLegalNumCnfgTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4862,7 +5541,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 
@@ -4876,7 +5555,7 @@ export interface VoidLegalNumCnfg_input{
 export interface VoidLegalNumCnfg_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LegalNumCnfgTableset[],
+   ds:Erp_Tablesets_LegalNumCnfgTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.MXWHTaxCertificateSvc
 // Description: CSF Mexico WHT Certificate BO
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertHeadRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertHeadRow
    */  
 export function get_MXWHTaxCertificates(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_MXWHTaxCertificates(select?:string, expand?:string, filter?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertHeadRow)
           })
@@ -118,15 +158,15 @@ export function get_MXWHTaxCertificates(select?:string, expand?:string, filter?:
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MXWHTaxCertificates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertHeadRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MXWHTaxCertificates(requestBody:any, epicorHeaders?:Headers){
+export function post_MXWHTaxCertificates(requestBody:Erp_Tablesets_MXWHTaxCertHeadRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_MXWHTaxCertificates(requestBody:any, epicorHeaders?:Headers
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_MXWHTaxCertificates(requestBody:any, epicorHeaders?:Headers
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertHeadRow
    */  
 export function get_MXWHTaxCertificates_Company_CertificateNum(Company:string, CertificateNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_MXWHTaxCertificates_Company_CertificateNum(Company:string, C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MXWHTaxCertHeadRow)
           })
@@ -193,15 +247,15 @@ export function get_MXWHTaxCertificates_Company_CertificateNum(Company:string, C
    OperationID: UpdateExt_MXWHTaxCertificate
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CertificateNum Desc: CertificateNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MXWHTaxCertificates_Company_CertificateNum(Company:string, CertificateNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MXWHTaxCertificates_Company_CertificateNum(Company:string, CertificateNum:string, requestBody:Erp_Tablesets_MXWHTaxCertHeadRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_MXWHTaxCertificates_Company_CertificateNum(Company:string,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_MXWHTaxCertificates_Company_CertificateNum(Company:string,
    OperationID: DeleteUpdateExt_MXWHTaxCertificate
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CertificateNum Desc: CertificateNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_MXWHTaxCertificates_Company_CertificateNum(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_MXWHTaxCertificates_Company_CertificateNum(Company:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertDtlRow
    */  
 export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertDtls(Company:string, CertificateNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertDtls(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertDtlRow)
           })
@@ -309,10 +384,10 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertDtls(C
       @param LineNum Desc: LineNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertDtlRow
    */  
 export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertDtls_Company_CertificateNum_LineNum(Company:string, CertificateNum:string, LineNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertDtls_C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MXWHTaxCertDtlRow)
           })
@@ -349,10 +431,10 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertDtls_C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertErrorRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertErrorRow
    */  
 export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertErrors(Company:string, CertificateNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -367,7 +449,14 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertErrors
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertErrorRow)
           })
@@ -386,10 +475,10 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertErrors
       @param ErrorSeq Desc: ErrorSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertErrorRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertErrorRow
    */  
 export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertErrors_Company_CertificateNum_ErrorSeq(Company:string, CertificateNum:string, ErrorSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -404,7 +493,14 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertErrors
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MXWHTaxCertErrorRow)
           })
@@ -426,10 +522,10 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertErrors
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertHeadAttchRow
    */  
 export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertHeadAttches(Company:string, CertificateNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -444,7 +540,14 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertHeadAt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertHeadAttchRow)
           })
@@ -463,10 +566,10 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertHeadAt
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertHeadAttchRow
    */  
 export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertHeadAttches_Company_CertificateNum_DrawingSeq(Company:string, CertificateNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -481,7 +584,14 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertHeadAt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MXWHTaxCertHeadAttchRow)
           })
@@ -501,10 +611,10 @@ export function get_MXWHTaxCertificates_Company_CertificateNum_MXWHTaxCertHeadAt
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertDtlRow
    */  
 export function get_MXWHTaxCertDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -519,7 +629,14 @@ export function get_MXWHTaxCertDtls(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertDtlRow)
           })
@@ -533,15 +650,15 @@ export function get_MXWHTaxCertDtls(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MXWHTaxCertDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MXWHTaxCertDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_MXWHTaxCertDtls(requestBody:Erp_Tablesets_MXWHTaxCertDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -555,7 +672,14 @@ export function post_MXWHTaxCertDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -574,10 +698,10 @@ export function post_MXWHTaxCertDtls(requestBody:any, epicorHeaders?:Headers){
       @param LineNum Desc: LineNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertDtlRow
    */  
 export function get_MXWHTaxCertDtls_Company_CertificateNum_LineNum(Company:string, CertificateNum:string, LineNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -592,7 +716,14 @@ export function get_MXWHTaxCertDtls_Company_CertificateNum_LineNum(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MXWHTaxCertDtlRow)
           })
@@ -609,15 +740,15 @@ export function get_MXWHTaxCertDtls_Company_CertificateNum_LineNum(Company:strin
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CertificateNum Desc: CertificateNum   Required: True   Allow empty value : True
       @param LineNum Desc: LineNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MXWHTaxCertDtls_Company_CertificateNum_LineNum(Company:string, CertificateNum:string, LineNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MXWHTaxCertDtls_Company_CertificateNum_LineNum(Company:string, CertificateNum:string, LineNum:string, requestBody:Erp_Tablesets_MXWHTaxCertDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -631,7 +762,14 @@ export function patch_MXWHTaxCertDtls_Company_CertificateNum_LineNum(Company:str
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -648,7 +786,7 @@ export function patch_MXWHTaxCertDtls_Company_CertificateNum_LineNum(Company:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CertificateNum Desc: CertificateNum   Required: True   Allow empty value : True
       @param LineNum Desc: LineNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -667,7 +805,14 @@ export function delete_MXWHTaxCertDtls_Company_CertificateNum_LineNum(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -687,10 +832,10 @@ export function delete_MXWHTaxCertDtls_Company_CertificateNum_LineNum(Company:st
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertErrorRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertErrorRow
    */  
 export function get_MXWHTaxCertErrors(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -705,7 +850,14 @@ export function get_MXWHTaxCertErrors(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertErrorRow)
           })
@@ -719,15 +871,15 @@ export function get_MXWHTaxCertErrors(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MXWHTaxCertErrors
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertErrorRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertErrorRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertErrorRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertErrorRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MXWHTaxCertErrors(requestBody:any, epicorHeaders?:Headers){
+export function post_MXWHTaxCertErrors(requestBody:Erp_Tablesets_MXWHTaxCertErrorRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -741,7 +893,14 @@ export function post_MXWHTaxCertErrors(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -760,10 +919,10 @@ export function post_MXWHTaxCertErrors(requestBody:any, epicorHeaders?:Headers){
       @param ErrorSeq Desc: ErrorSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertErrorRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertErrorRow
    */  
 export function get_MXWHTaxCertErrors_Company_CertificateNum_ErrorSeq(Company:string, CertificateNum:string, ErrorSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -778,7 +937,14 @@ export function get_MXWHTaxCertErrors_Company_CertificateNum_ErrorSeq(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MXWHTaxCertErrorRow)
           })
@@ -795,15 +961,15 @@ export function get_MXWHTaxCertErrors_Company_CertificateNum_ErrorSeq(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CertificateNum Desc: CertificateNum   Required: True   Allow empty value : True
       @param ErrorSeq Desc: ErrorSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertErrorRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertErrorRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MXWHTaxCertErrors_Company_CertificateNum_ErrorSeq(Company:string, CertificateNum:string, ErrorSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MXWHTaxCertErrors_Company_CertificateNum_ErrorSeq(Company:string, CertificateNum:string, ErrorSeq:string, requestBody:Erp_Tablesets_MXWHTaxCertErrorRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -817,7 +983,14 @@ export function patch_MXWHTaxCertErrors_Company_CertificateNum_ErrorSeq(Company:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -834,7 +1007,7 @@ export function patch_MXWHTaxCertErrors_Company_CertificateNum_ErrorSeq(Company:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CertificateNum Desc: CertificateNum   Required: True   Allow empty value : True
       @param ErrorSeq Desc: ErrorSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -853,7 +1026,14 @@ export function delete_MXWHTaxCertErrors_Company_CertificateNum_ErrorSeq(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -873,10 +1053,10 @@ export function delete_MXWHTaxCertErrors_Company_CertificateNum_ErrorSeq(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertHeadAttchRow
    */  
 export function get_MXWHTaxCertHeadAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -891,7 +1071,14 @@ export function get_MXWHTaxCertHeadAttches(select?:string, filter?:string, order
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertHeadAttchRow)
           })
@@ -905,15 +1092,15 @@ export function get_MXWHTaxCertHeadAttches(select?:string, filter?:string, order
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MXWHTaxCertHeadAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertHeadAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MXWHTaxCertHeadAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_MXWHTaxCertHeadAttches(requestBody:Erp_Tablesets_MXWHTaxCertHeadAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -927,7 +1114,14 @@ export function post_MXWHTaxCertHeadAttches(requestBody:any, epicorHeaders?:Head
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -946,10 +1140,10 @@ export function post_MXWHTaxCertHeadAttches(requestBody:any, epicorHeaders?:Head
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MXWHTaxCertHeadAttchRow
    */  
 export function get_MXWHTaxCertHeadAttches_Company_CertificateNum_DrawingSeq(Company:string, CertificateNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -964,7 +1158,14 @@ export function get_MXWHTaxCertHeadAttches_Company_CertificateNum_DrawingSeq(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MXWHTaxCertHeadAttchRow)
           })
@@ -981,15 +1182,15 @@ export function get_MXWHTaxCertHeadAttches_Company_CertificateNum_DrawingSeq(Com
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CertificateNum Desc: CertificateNum   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MXWHTaxCertHeadAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MXWHTaxCertHeadAttches_Company_CertificateNum_DrawingSeq(Company:string, CertificateNum:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MXWHTaxCertHeadAttches_Company_CertificateNum_DrawingSeq(Company:string, CertificateNum:string, DrawingSeq:string, requestBody:Erp_Tablesets_MXWHTaxCertHeadAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1003,7 +1204,14 @@ export function patch_MXWHTaxCertHeadAttches_Company_CertificateNum_DrawingSeq(C
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1020,7 +1228,7 @@ export function patch_MXWHTaxCertHeadAttches_Company_CertificateNum_DrawingSeq(C
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param CertificateNum Desc: CertificateNum   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1039,7 +1247,14 @@ export function delete_MXWHTaxCertHeadAttches_Company_CertificateNum_DrawingSeq(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1059,10 +1274,10 @@ export function delete_MXWHTaxCertHeadAttches_Company_CertificateNum_DrawingSeq(
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertHeadListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MXWHTaxCertHeadListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1077,7 +1292,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertHeadListRow)
           })
@@ -1089,6 +1311,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1103,7 +1342,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1172,15 +1411,22 @@ export function get_GetRows(whereClauseMXWHTaxCertHead:string, whereClauseMXWHTa
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1193,7 +1439,7 @@ export function get_GetRows(whereClauseMXWHTaxCertHead:string, whereClauseMXWHTa
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1217,15 +1463,22 @@ export function get_GetByID(certificateNum:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1240,7 +1493,7 @@ export function get_GetByID(certificateNum:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1282,15 +1535,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1302,30 +1562,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GenerateNewCerts
    Description: Generate New CSF Mexico WHT Certificate Header and Details in DB
    OperationID: GenerateNewCerts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateNewCerts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateNewCerts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateNewCerts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateNewCerts(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateNewCerts(requestBody:GenerateNewCerts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateNewCerts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GenerateNewCerts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateNewCerts_output)
           })
       .catch((error) => {
           reject(error)
@@ -1337,30 +1604,37 @@ export function post_GenerateNewCerts(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GenerateNewCertsForSuppliers
    Description: Generate New CSF Mexico WHT Certificate Header and Details in DB
    OperationID: GenerateNewCertsForSuppliers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateNewCertsForSuppliers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateNewCertsForSuppliers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateNewCertsForSuppliers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateNewCertsForSuppliers(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateNewCertsForSuppliers(requestBody:GenerateNewCertsForSuppliers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateNewCertsForSuppliers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GenerateNewCertsForSuppliers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateNewCertsForSuppliers_output)
           })
       .catch((error) => {
           reject(error)
@@ -1372,7 +1646,7 @@ export function post_GenerateNewCertsForSuppliers(requestBody:any, epicorHeaders
    Summary: Invoke method MXWHTaxCertGetNewFilterSearch
    Description: Return Get New Certificates Search Screen Values
    OperationID: MXWHTaxCertGetNewFilterSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/MXWHTaxCertGetNewFilterSearch_output
@@ -1385,15 +1659,22 @@ export function post_MXWHTaxCertGetNewFilterSearch(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MXWHTaxCertGetNewFilterSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/MXWHTaxCertGetNewFilterSearch", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MXWHTaxCertGetNewFilterSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1405,30 +1686,37 @@ export function post_MXWHTaxCertGetNewFilterSearch(epicorHeaders?:Headers){
    Summary: Invoke method GenerateMXWHTaxCertificate
    Description: Creates MXWHTaxCertificate, stores it to the URL retrieved from docType.BaseURL, add it as attachment.
    OperationID: GenerateMXWHTaxCertificate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateMXWHTaxCertificate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateMXWHTaxCertificate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateMXWHTaxCertificate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateMXWHTaxCertificate(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateMXWHTaxCertificate(requestBody:GenerateMXWHTaxCertificate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateMXWHTaxCertificate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GenerateMXWHTaxCertificate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateMXWHTaxCertificate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1440,30 +1728,37 @@ export function post_GenerateMXWHTaxCertificate(requestBody:any, epicorHeaders?:
    Summary: Invoke method ValidateMXWHTaxCertificate
    Description: Validate MXWHTaxCertificate before generating XML. If some errors found then return error message
    OperationID: ValidateMXWHTaxCertificate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateMXWHTaxCertificate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateMXWHTaxCertificate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateMXWHTaxCertificate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateMXWHTaxCertificate(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateMXWHTaxCertificate(requestBody:ValidateMXWHTaxCertificate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateMXWHTaxCertificate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/ValidateMXWHTaxCertificate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateMXWHTaxCertificate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1475,30 +1770,37 @@ export function post_ValidateMXWHTaxCertificate(requestBody:any, epicorHeaders?:
    Summary: Invoke method ValidateMXWHTaxCertificatesList
    Description: Validate MXWHTaxCertificates List before generating XML. If some errors found then return error message
    OperationID: ValidateMXWHTaxCertificatesList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateMXWHTaxCertificatesList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateMXWHTaxCertificatesList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateMXWHTaxCertificatesList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateMXWHTaxCertificatesList(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateMXWHTaxCertificatesList(requestBody:ValidateMXWHTaxCertificatesList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateMXWHTaxCertificatesList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/ValidateMXWHTaxCertificatesList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateMXWHTaxCertificatesList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1510,30 +1812,37 @@ export function post_ValidateMXWHTaxCertificatesList(requestBody:any, epicorHead
    Summary: Invoke method ValidateMXWHTaxCertificates
    Description: Validate MXWHTaxCertificates List before generating XML. If some errors found then return error message
    OperationID: ValidateMXWHTaxCertificates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateMXWHTaxCertificates_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateMXWHTaxCertificates_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateMXWHTaxCertificates_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateMXWHTaxCertificates(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateMXWHTaxCertificates(requestBody:ValidateMXWHTaxCertificates_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateMXWHTaxCertificates_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/ValidateMXWHTaxCertificates", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateMXWHTaxCertificates_output)
           })
       .catch((error) => {
           reject(error)
@@ -1545,30 +1854,37 @@ export function post_ValidateMXWHTaxCertificates(requestBody:any, epicorHeaders?
    Summary: Invoke method GenerateMXWHTaxCertificates
    Description: Creates MXWHTaxCertificate, stores it to the URL retrieved from docType.BaseURL, add it as attachment for all certificates numbers in the list.
    OperationID: GenerateMXWHTaxCertificates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateMXWHTaxCertificates_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateMXWHTaxCertificates_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateMXWHTaxCertificates_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateMXWHTaxCertificates(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateMXWHTaxCertificates(requestBody:GenerateMXWHTaxCertificates_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateMXWHTaxCertificates_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GenerateMXWHTaxCertificates", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateMXWHTaxCertificates_output)
           })
       .catch((error) => {
           reject(error)
@@ -1580,30 +1896,37 @@ export function post_GenerateMXWHTaxCertificates(requestBody:any, epicorHeaders?
    Summary: Invoke method VoidLegalNumber
    Description: Void Legal Number
    OperationID: VoidLegalNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VoidLegalNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VoidLegalNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VoidLegalNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VoidLegalNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_VoidLegalNumber(requestBody:VoidLegalNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VoidLegalNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/VoidLegalNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VoidLegalNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -1615,30 +1938,37 @@ export function post_VoidLegalNumber(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ExistWHTaxCert
    Description: Validate is WHTaxCertificate already existed
    OperationID: ExistWHTaxCert
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExistWHTaxCert_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExistWHTaxCert_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExistWHTaxCert_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExistWHTaxCert(requestBody:any, epicorHeaders?:Headers){
+export function post_ExistWHTaxCert(requestBody:ExistWHTaxCert_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExistWHTaxCert_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/ExistWHTaxCert", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExistWHTaxCert_output)
           })
       .catch((error) => {
           reject(error)
@@ -1650,30 +1980,37 @@ export function post_ExistWHTaxCert(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ExistWHTaxCert2
    Description: Validate is WHTaxCertificate already existed
    OperationID: ExistWHTaxCert2
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExistWHTaxCert2_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExistWHTaxCert2_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExistWHTaxCert2_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExistWHTaxCert2(requestBody:any, epicorHeaders?:Headers){
+export function post_ExistWHTaxCert2(requestBody:ExistWHTaxCert2_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExistWHTaxCert2_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/ExistWHTaxCert2", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExistWHTaxCert2_output)
           })
       .catch((error) => {
           reject(error)
@@ -1685,30 +2022,37 @@ export function post_ExistWHTaxCert2(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangingRelatedCertificateNum
    Description: RelatedCertificateNum is changing
    OperationID: OnChangingRelatedCertificateNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingRelatedCertificateNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingRelatedCertificateNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingRelatedCertificateNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingRelatedCertificateNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingRelatedCertificateNum(requestBody:OnChangingRelatedCertificateNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingRelatedCertificateNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/OnChangingRelatedCertificateNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingRelatedCertificateNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1720,30 +2064,37 @@ export function post_OnChangingRelatedCertificateNum(requestBody:any, epicorHead
    Summary: Invoke method UnlockSuspendedCertificate
    Description: Revert PACProcessing certificate to XMLGenerated
    OperationID: UnlockSuspendedCertificate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnlockSuspendedCertificate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnlockSuspendedCertificate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnlockSuspendedCertificate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnlockSuspendedCertificate(requestBody:any, epicorHeaders?:Headers){
+export function post_UnlockSuspendedCertificate(requestBody:UnlockSuspendedCertificate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnlockSuspendedCertificate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/UnlockSuspendedCertificate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnlockSuspendedCertificate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1755,30 +2106,37 @@ export function post_UnlockSuspendedCertificate(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetCertificatesByCertNumList
    Description: Returns list of Certificates according to given delimited list of cert numbers
    OperationID: GetCertificatesByCertNumList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCertificatesByCertNumList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCertificatesByCertNumList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCertificatesByCertNumList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCertificatesByCertNumList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCertificatesByCertNumList(requestBody:GetCertificatesByCertNumList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCertificatesByCertNumList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GetCertificatesByCertNumList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCertificatesByCertNumList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1790,30 +2148,37 @@ export function post_GetCertificatesByCertNumList(requestBody:any, epicorHeaders
    Summary: Invoke method GetNewMXWHTaxCertHead
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMXWHTaxCertHead
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMXWHTaxCertHead_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMXWHTaxCertHead_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMXWHTaxCertHead_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMXWHTaxCertHead(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMXWHTaxCertHead(requestBody:GetNewMXWHTaxCertHead_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMXWHTaxCertHead_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GetNewMXWHTaxCertHead", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMXWHTaxCertHead_output)
           })
       .catch((error) => {
           reject(error)
@@ -1825,30 +2190,37 @@ export function post_GetNewMXWHTaxCertHead(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewMXWHTaxCertHeadAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMXWHTaxCertHeadAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMXWHTaxCertHeadAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMXWHTaxCertHeadAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMXWHTaxCertHeadAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMXWHTaxCertHeadAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMXWHTaxCertHeadAttch(requestBody:GetNewMXWHTaxCertHeadAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMXWHTaxCertHeadAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GetNewMXWHTaxCertHeadAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMXWHTaxCertHeadAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1860,30 +2232,37 @@ export function post_GetNewMXWHTaxCertHeadAttch(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetNewMXWHTaxCertDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMXWHTaxCertDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMXWHTaxCertDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMXWHTaxCertDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMXWHTaxCertDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMXWHTaxCertDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMXWHTaxCertDtl(requestBody:GetNewMXWHTaxCertDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMXWHTaxCertDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GetNewMXWHTaxCertDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMXWHTaxCertDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1895,30 +2274,37 @@ export function post_GetNewMXWHTaxCertDtl(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewMXWHTaxCertError
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMXWHTaxCertError
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMXWHTaxCertError_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMXWHTaxCertError_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMXWHTaxCertError_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMXWHTaxCertError(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMXWHTaxCertError(requestBody:GetNewMXWHTaxCertError_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMXWHTaxCertError_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GetNewMXWHTaxCertError", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMXWHTaxCertError_output)
           })
       .catch((error) => {
           reject(error)
@@ -1930,30 +2316,37 @@ export function post_GetNewMXWHTaxCertError(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1965,7 +2358,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1989,15 +2382,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2009,7 +2409,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2033,15 +2433,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2053,30 +2460,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2088,30 +2502,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MXWHTaxCertificateSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2122,31 +2543,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MXWHTaxCertDtlRow[],
+   "value":Erp_Tablesets_MXWHTaxCertDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertErrorRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MXWHTaxCertErrorRow[],
+   "value":Erp_Tablesets_MXWHTaxCertErrorRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertHeadAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MXWHTaxCertHeadAttchRow[],
+   "value":Erp_Tablesets_MXWHTaxCertHeadAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertHeadListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MXWHTaxCertHeadListRow[],
+   "value":Erp_Tablesets_MXWHTaxCertHeadListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MXWHTaxCertHeadRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MXWHTaxCertHeadRow[],
+   "value":Erp_Tablesets_MXWHTaxCertHeadRow,
 }
 
 export interface Erp_Tablesets_MXWHTaxCertDtlRow{
@@ -2357,6 +2795,23 @@ If checkbox is not checked (EsBenefEfectDelCobro equals NO), then the NoBenefici
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2809,7 +3264,7 @@ export interface GetNewMXWHTaxCertDtl_input{
 export interface GetNewMXWHTaxCertDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MXWHTaxCertificateTableset[],
+   ds:Erp_Tablesets_MXWHTaxCertificateTableset,
 }
 }
 
@@ -2825,7 +3280,7 @@ export interface GetNewMXWHTaxCertError_input{
 export interface GetNewMXWHTaxCertError_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MXWHTaxCertificateTableset[],
+   ds:Erp_Tablesets_MXWHTaxCertificateTableset,
 }
 }
 
@@ -2841,7 +3296,7 @@ export interface GetNewMXWHTaxCertHeadAttch_input{
 export interface GetNewMXWHTaxCertHeadAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MXWHTaxCertificateTableset[],
+   ds:Erp_Tablesets_MXWHTaxCertificateTableset,
 }
 }
 
@@ -2855,7 +3310,7 @@ export interface GetNewMXWHTaxCertHead_input{
 export interface GetNewMXWHTaxCertHead_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MXWHTaxCertificateTableset[],
+   ds:Erp_Tablesets_MXWHTaxCertificateTableset,
 }
 }
 
@@ -2960,7 +3415,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtMXWHTaxCertificateTableset[],
+   ds:Erp_Tablesets_UpdExtMXWHTaxCertificateTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2975,7 +3430,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MXWHTaxCertificateTableset[],
+   ds:Erp_Tablesets_MXWHTaxCertificateTableset,
 }
 }
 

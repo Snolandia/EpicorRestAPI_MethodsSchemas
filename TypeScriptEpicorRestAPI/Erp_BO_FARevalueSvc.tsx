@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.FARevalueSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueRow
    */  
 export function get_FARevalues(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_FARevalues(select?:string, expand?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FARevalueRow)
           })
@@ -118,15 +158,15 @@ export function get_FARevalues(select?:string, expand?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FARevalues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FARevalueRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FARevalueRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FARevalueRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FARevalueRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FARevalues(requestBody:any, epicorHeaders?:Headers){
+export function post_FARevalues(requestBody:Erp_Tablesets_FARevalueRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_FARevalues(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -160,10 +207,10 @@ export function post_FARevalues(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FARevalueRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FARevalueRow
    */  
 export function get_FARevalues_Company_AssetNum_RevalueNum(Company:string, AssetNum:string, RevalueNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -178,7 +225,14 @@ export function get_FARevalues_Company_AssetNum_RevalueNum(Company:string, Asset
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FARevalueRow)
           })
@@ -195,15 +249,15 @@ export function get_FARevalues_Company_AssetNum_RevalueNum(Company:string, Asset
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param RevalueNum Desc: RevalueNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FARevalueRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FARevalueRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FARevalues_Company_AssetNum_RevalueNum(Company:string, AssetNum:string, RevalueNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FARevalues_Company_AssetNum_RevalueNum(Company:string, AssetNum:string, RevalueNum:string, requestBody:Erp_Tablesets_FARevalueRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_FARevalues_Company_AssetNum_RevalueNum(Company:string, Ass
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -234,7 +295,7 @@ export function patch_FARevalues_Company_AssetNum_RevalueNum(Company:string, Ass
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param RevalueNum Desc: RevalueNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -253,7 +314,14 @@ export function delete_FARevalues_Company_AssetNum_RevalueNum(Company:string, As
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -276,10 +344,10 @@ export function delete_FARevalues_Company_AssetNum_RevalueNum(Company:string, As
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueRegRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueRegRow
    */  
 export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueRegs(Company:string, AssetNum:string, RevalueNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -294,7 +362,14 @@ export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueRegs(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FARevalueRegRow)
           })
@@ -314,10 +389,10 @@ export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueRegs(Company
       @param AssetRegID Desc: AssetRegID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FARevalueRegRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FARevalueRegRow
    */  
 export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueRegs_Company_AssetNum_RevalueNum_AssetRegID(Company:string, AssetNum:string, RevalueNum:string, AssetRegID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -332,7 +407,14 @@ export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueRegs_Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FARevalueRegRow)
           })
@@ -355,10 +437,10 @@ export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueRegs_Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueAttchRow
    */  
 export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueAttches(Company:string, AssetNum:string, RevalueNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -373,7 +455,14 @@ export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueAttches(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FARevalueAttchRow)
           })
@@ -393,10 +482,10 @@ export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueAttches(Comp
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FARevalueAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FARevalueAttchRow
    */  
 export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueAttches_Company_AssetNum_RevalueNum_DrawingSeq(Company:string, AssetNum:string, RevalueNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -411,7 +500,14 @@ export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueAttches_Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FARevalueAttchRow)
           })
@@ -431,10 +527,10 @@ export function get_FARevalues_Company_AssetNum_RevalueNum_FARevalueAttches_Comp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueRegRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueRegRow
    */  
 export function get_FARevalueRegs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -449,7 +545,14 @@ export function get_FARevalueRegs(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FARevalueRegRow)
           })
@@ -463,15 +566,15 @@ export function get_FARevalueRegs(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FARevalueRegs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FARevalueRegRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FARevalueRegRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FARevalueRegRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FARevalueRegRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FARevalueRegs(requestBody:any, epicorHeaders?:Headers){
+export function post_FARevalueRegs(requestBody:Erp_Tablesets_FARevalueRegRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -485,7 +588,14 @@ export function post_FARevalueRegs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -505,10 +615,10 @@ export function post_FARevalueRegs(requestBody:any, epicorHeaders?:Headers){
       @param AssetRegID Desc: AssetRegID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FARevalueRegRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FARevalueRegRow
    */  
 export function get_FARevalueRegs_Company_AssetNum_RevalueNum_AssetRegID(Company:string, AssetNum:string, RevalueNum:string, AssetRegID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -523,7 +633,14 @@ export function get_FARevalueRegs_Company_AssetNum_RevalueNum_AssetRegID(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FARevalueRegRow)
           })
@@ -541,15 +658,15 @@ export function get_FARevalueRegs_Company_AssetNum_RevalueNum_AssetRegID(Company
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param RevalueNum Desc: RevalueNum   Required: True
       @param AssetRegID Desc: AssetRegID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FARevalueRegRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FARevalueRegRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FARevalueRegs_Company_AssetNum_RevalueNum_AssetRegID(Company:string, AssetNum:string, RevalueNum:string, AssetRegID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FARevalueRegs_Company_AssetNum_RevalueNum_AssetRegID(Company:string, AssetNum:string, RevalueNum:string, AssetRegID:string, requestBody:Erp_Tablesets_FARevalueRegRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -563,7 +680,14 @@ export function patch_FARevalueRegs_Company_AssetNum_RevalueNum_AssetRegID(Compa
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -581,7 +705,7 @@ export function patch_FARevalueRegs_Company_AssetNum_RevalueNum_AssetRegID(Compa
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param RevalueNum Desc: RevalueNum   Required: True
       @param AssetRegID Desc: AssetRegID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -600,7 +724,14 @@ export function delete_FARevalueRegs_Company_AssetNum_RevalueNum_AssetRegID(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -620,10 +751,10 @@ export function delete_FARevalueRegs_Company_AssetNum_RevalueNum_AssetRegID(Comp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueAttchRow
    */  
 export function get_FARevalueAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -638,7 +769,14 @@ export function get_FARevalueAttches(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FARevalueAttchRow)
           })
@@ -652,15 +790,15 @@ export function get_FARevalueAttches(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_FARevalueAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FARevalueAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.FARevalueAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.FARevalueAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.FARevalueAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FARevalueAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_FARevalueAttches(requestBody:Erp_Tablesets_FARevalueAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -674,7 +812,14 @@ export function post_FARevalueAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -694,10 +839,10 @@ export function post_FARevalueAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.FARevalueAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.FARevalueAttchRow
    */  
 export function get_FARevalueAttches_Company_AssetNum_RevalueNum_DrawingSeq(Company:string, AssetNum:string, RevalueNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -712,7 +857,14 @@ export function get_FARevalueAttches_Company_AssetNum_RevalueNum_DrawingSeq(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_FARevalueAttchRow)
           })
@@ -730,15 +882,15 @@ export function get_FARevalueAttches_Company_AssetNum_RevalueNum_DrawingSeq(Comp
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param RevalueNum Desc: RevalueNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.FARevalueAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.FARevalueAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_FARevalueAttches_Company_AssetNum_RevalueNum_DrawingSeq(Company:string, AssetNum:string, RevalueNum:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_FARevalueAttches_Company_AssetNum_RevalueNum_DrawingSeq(Company:string, AssetNum:string, RevalueNum:string, DrawingSeq:string, requestBody:Erp_Tablesets_FARevalueAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -752,7 +904,14 @@ export function patch_FARevalueAttches_Company_AssetNum_RevalueNum_DrawingSeq(Co
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -770,7 +929,7 @@ export function patch_FARevalueAttches_Company_AssetNum_RevalueNum_DrawingSeq(Co
       @param AssetNum Desc: AssetNum   Required: True   Allow empty value : True
       @param RevalueNum Desc: RevalueNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -789,7 +948,14 @@ export function delete_FARevalueAttches_Company_AssetNum_RevalueNum_DrawingSeq(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -809,10 +975,10 @@ export function delete_FARevalueAttches_Company_AssetNum_RevalueNum_DrawingSeq(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.FARevalueListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -827,7 +993,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FARevalueListRow)
           })
@@ -839,6 +1012,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -852,7 +1042,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -912,15 +1102,22 @@ export function get_GetRows(whereClauseFARevalue:string, whereClauseFARevalueAtt
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -934,7 +1131,7 @@ export function get_GetRows(whereClauseFARevalue:string, whereClauseFARevalueAtt
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -967,15 +1164,22 @@ export function get_GetByID(assetNum:string, revalueNum:string, epicorHeaders?:H
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -990,7 +1194,7 @@ export function get_GetByID(assetNum:string, revalueNum:string, epicorHeaders?:H
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1032,15 +1236,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1054,30 +1265,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
 It is required to put ValuationDate and ApplyDate here.
 Standart FARevalueGetNew is generated with AssetNum input parameter only
    OperationID: GetNewRevaluation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRevaluation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRevaluation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRevaluation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRevaluation(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRevaluation(requestBody:GetNewRevaluation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRevaluation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetNewRevaluation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRevaluation_output)
           })
       .catch((error) => {
           reject(error)
@@ -1089,30 +1307,37 @@ export function post_GetNewRevaluation(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRevaluationsWithRecalc
    Description: Return asset's revaluations with registers recalculated
    OperationID: GetRevaluationsWithRecalc
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRevaluationsWithRecalc_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRevaluationsWithRecalc_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRevaluationsWithRecalc_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRevaluationsWithRecalc(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRevaluationsWithRecalc(requestBody:GetRevaluationsWithRecalc_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRevaluationsWithRecalc_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetRevaluationsWithRecalc", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRevaluationsWithRecalc_output)
           })
       .catch((error) => {
           reject(error)
@@ -1123,30 +1348,37 @@ export function post_GetRevaluationsWithRecalc(requestBody:any, epicorHeaders?:H
    /**  
    Summary: Invoke method GetAvailableApplyDate
    OperationID: GetAvailableApplyDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAvailableApplyDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAvailableApplyDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableApplyDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAvailableApplyDate(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAvailableApplyDate(requestBody:GetAvailableApplyDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableApplyDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetAvailableApplyDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableApplyDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1157,30 +1389,37 @@ export function post_GetAvailableApplyDate(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method GetDefaultDates
    OperationID: GetDefaultDates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDefaultDates_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDefaultDates_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultDates_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDefaultDates(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDefaultDates(requestBody:GetDefaultDates_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultDates_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetDefaultDates", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultDates_output)
           })
       .catch((error) => {
           reject(error)
@@ -1191,30 +1430,37 @@ export function post_GetDefaultDates(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CheckApplyDateInClosedPer
    OperationID: CheckApplyDateInClosedPer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckApplyDateInClosedPer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckApplyDateInClosedPer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckApplyDateInClosedPer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckApplyDateInClosedPer(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckApplyDateInClosedPer(requestBody:CheckApplyDateInClosedPer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckApplyDateInClosedPer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/CheckApplyDateInClosedPer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckApplyDateInClosedPer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1226,30 +1472,37 @@ export function post_CheckApplyDateInClosedPer(requestBody:any, epicorHeaders?:H
    Summary: Invoke method CheckAssetTransactions
    Description: Checks if there are any transactions for this Asset marked as Ready To Post
    OperationID: CheckAssetTransactions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckAssetTransactions_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckAssetTransactions_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckAssetTransactions_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckAssetTransactions(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckAssetTransactions(requestBody:CheckAssetTransactions_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckAssetTransactions_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/CheckAssetTransactions", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckAssetTransactions_output)
           })
       .catch((error) => {
           reject(error)
@@ -1261,30 +1514,37 @@ export function post_CheckAssetTransactions(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ClearReadyToPost
    Description: Clears Ready To Post flag on Asset transactions with SysRowID different from the one provided
    OperationID: ClearReadyToPost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ClearReadyToPost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ClearReadyToPost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClearReadyToPost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ClearReadyToPost(requestBody:any, epicorHeaders?:Headers){
+export function post_ClearReadyToPost(requestBody:ClearReadyToPost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClearReadyToPost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/ClearReadyToPost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClearReadyToPost_output)
           })
       .catch((error) => {
           reject(error)
@@ -1296,30 +1556,37 @@ export function post_ClearReadyToPost(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckAssetDepRecalcNeeded
    Description: Check if the asset or any of its registers requires depreciation calculation
    OperationID: CheckAssetDepRecalcNeeded
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckAssetDepRecalcNeeded_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckAssetDepRecalcNeeded_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckAssetDepRecalcNeeded_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckAssetDepRecalcNeeded(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckAssetDepRecalcNeeded(requestBody:CheckAssetDepRecalcNeeded_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckAssetDepRecalcNeeded_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/CheckAssetDepRecalcNeeded", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckAssetDepRecalcNeeded_output)
           })
       .catch((error) => {
           reject(error)
@@ -1331,30 +1598,37 @@ export function post_CheckAssetDepRecalcNeeded(requestBody:any, epicorHeaders?:H
    Summary: Invoke method OnChangeNewBookValue
    Description: Calculates the New Book Values amounts for Revaluation.
    OperationID: OnChangeNewBookValue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeNewBookValue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeNewBookValue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeNewBookValue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeNewBookValue(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeNewBookValue(requestBody:OnChangeNewBookValue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeNewBookValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/OnChangeNewBookValue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeNewBookValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -1366,30 +1640,37 @@ export function post_OnChangeNewBookValue(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeNewResidualValue
    Description: Calculates the New Residual Values amounts for Revaluation Register Details.
    OperationID: OnChangeNewResidualValue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeNewResidualValue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeNewResidualValue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeNewResidualValue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeNewResidualValue(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeNewResidualValue(requestBody:OnChangeNewResidualValue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeNewResidualValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/OnChangeNewResidualValue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeNewResidualValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -1400,30 +1681,37 @@ export function post_OnChangeNewResidualValue(requestBody:any, epicorHeaders?:He
    /**  
    Summary: Invoke method OnChangeReadyToPost
    OperationID: OnChangeReadyToPost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeReadyToPost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeReadyToPost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeReadyToPost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeReadyToPost(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeReadyToPost(requestBody:OnChangeReadyToPost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeReadyToPost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/OnChangeReadyToPost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeReadyToPost_output)
           })
       .catch((error) => {
           reject(error)
@@ -1434,30 +1722,37 @@ export function post_OnChangeReadyToPost(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method OnChangeApplyDate
    OperationID: OnChangeApplyDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeApplyDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeApplyDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeApplyDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeApplyDate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeApplyDate(requestBody:OnChangeApplyDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeApplyDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/OnChangeApplyDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeApplyDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1468,30 +1763,37 @@ export function post_OnChangeApplyDate(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method OnChangeValuationDate
    OperationID: OnChangeValuationDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeValuationDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeValuationDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeValuationDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeValuationDate(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeValuationDate(requestBody:OnChangeValuationDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeValuationDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/OnChangeValuationDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeValuationDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1502,30 +1804,37 @@ export function post_OnChangeValuationDate(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method GetNewRegistersInfo
    OperationID: GetNewRegistersInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRegistersInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRegistersInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRegistersInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRegistersInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRegistersInfo(requestBody:GetNewRegistersInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRegistersInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetNewRegistersInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRegistersInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -1537,30 +1846,37 @@ export function post_GetNewRegistersInfo(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ParseDateValidationMessage
    Description: Parse warning Msg from date validation method.
    OperationID: ParseDateValidationMessage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ParseDateValidationMessage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ParseDateValidationMessage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ParseDateValidationMessage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ParseDateValidationMessage(requestBody:any, epicorHeaders?:Headers){
+export function post_ParseDateValidationMessage(requestBody:ParseDateValidationMessage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ParseDateValidationMessage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/ParseDateValidationMessage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ParseDateValidationMessage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1572,30 +1888,37 @@ export function post_ParseDateValidationMessage(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetNewFARevalue
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFARevalue
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFARevalue_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFARevalue_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFARevalue_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFARevalue(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFARevalue(requestBody:GetNewFARevalue_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFARevalue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetNewFARevalue", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFARevalue_output)
           })
       .catch((error) => {
           reject(error)
@@ -1607,30 +1930,37 @@ export function post_GetNewFARevalue(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFARevalueAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFARevalueAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFARevalueAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFARevalueAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFARevalueAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFARevalueAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFARevalueAttch(requestBody:GetNewFARevalueAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFARevalueAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetNewFARevalueAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFARevalueAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1642,30 +1972,37 @@ export function post_GetNewFARevalueAttch(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewFARevalueReg
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewFARevalueReg
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFARevalueReg_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFARevalueReg_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFARevalueReg_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFARevalueReg(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFARevalueReg(requestBody:GetNewFARevalueReg_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFARevalueReg_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetNewFARevalueReg", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFARevalueReg_output)
           })
       .catch((error) => {
           reject(error)
@@ -1677,30 +2014,37 @@ export function post_GetNewFARevalueReg(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1712,7 +2056,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1736,15 +2080,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1756,7 +2107,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1780,15 +2131,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1800,30 +2158,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1835,30 +2200,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FARevalueSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1869,26 +2241,43 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FARevalueAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FARevalueAttchRow[],
+   "value":Erp_Tablesets_FARevalueAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FARevalueListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FARevalueListRow[],
+   "value":Erp_Tablesets_FARevalueListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FARevalueRegRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FARevalueRegRow[],
+   "value":Erp_Tablesets_FARevalueRegRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_FARevalueRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_FARevalueRow[],
+   "value":Erp_Tablesets_FARevalueRow,
 }
 
 export interface Erp_Tablesets_FARevalueAttchRow{
@@ -2161,6 +2550,23 @@ GROSSVAL - Restate Gross Value and Depreciation  */
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2532,7 +2938,7 @@ export interface GetAvailableApplyDate_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
 }
 }
 
@@ -2626,7 +3032,7 @@ export interface GetNewFARevalueAttch_input{
 export interface GetNewFARevalueAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
 }
 }
 
@@ -2644,7 +3050,7 @@ export interface GetNewFARevalueReg_input{
 export interface GetNewFARevalueReg_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
 }
 }
 
@@ -2660,7 +3066,7 @@ export interface GetNewFARevalue_input{
 export interface GetNewFARevalue_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
 }
 }
 
@@ -2674,7 +3080,7 @@ export interface GetNewRegistersInfo_input{
 export interface GetNewRegistersInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
    warning:string,
 }
 }
@@ -2698,7 +3104,7 @@ export interface GetNewRevaluation_input{
 export interface GetNewRevaluation_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
 }
 }
 
@@ -2714,7 +3120,7 @@ export interface GetRevaluationsWithRecalc_input{
 export interface GetRevaluationsWithRecalc_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
 }
 }
 
@@ -2789,7 +3195,7 @@ export interface OnChangeApplyDate_input{
 export interface OnChangeApplyDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
    warning:string,
 }
 }
@@ -2807,7 +3213,7 @@ export interface OnChangeNewBookValue_input{
 export interface OnChangeNewBookValue_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
 }
 }
 
@@ -2824,7 +3230,7 @@ export interface OnChangeNewResidualValue_input{
 export interface OnChangeNewResidualValue_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
 }
 }
 
@@ -2840,7 +3246,7 @@ export interface OnChangeReadyToPost_input{
 export interface OnChangeReadyToPost_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
    warning:string,
 }
 }
@@ -2857,7 +3263,7 @@ export interface OnChangeValuationDate_input{
 export interface OnChangeValuationDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
    warning:string,
 }
 }
@@ -2892,7 +3298,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtFARevalueTableset[],
+   ds:Erp_Tablesets_UpdExtFARevalueTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2907,7 +3313,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_FARevalueTableset[],
+   ds:Erp_Tablesets_FARevalueTableset,
 }
 }
 

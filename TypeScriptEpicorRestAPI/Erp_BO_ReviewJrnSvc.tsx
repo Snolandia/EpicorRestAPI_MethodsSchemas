@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.ReviewJrnSvc
 // Description: Add your summary for this object here
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnRow
    */  
 export function get_ReviewJrns(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_ReviewJrns(select?:string, expand?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnRow)
           })
@@ -118,15 +158,15 @@ export function get_ReviewJrns(select?:string, expand?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ReviewJrns
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RvJrnRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RvJrnRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RvJrnRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RvJrnRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ReviewJrns(requestBody:any, epicorHeaders?:Headers){
+export function post_ReviewJrns(requestBody:Erp_Tablesets_RvJrnRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_ReviewJrns(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_ReviewJrns(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RvJrnRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RvJrnRow
    */  
 export function get_ReviewJrns_Company_RvJrnUID(Company:string, RvJrnUID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_ReviewJrns_Company_RvJrnUID(Company:string, RvJrnUID:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RvJrnRow)
           })
@@ -193,15 +247,15 @@ export function get_ReviewJrns_Company_RvJrnUID(Company:string, RvJrnUID:string,
    OperationID: UpdateExt_ReviewJrn
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RvJrnUID Desc: RvJrnUID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RvJrnRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RvJrnRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ReviewJrns_Company_RvJrnUID(Company:string, RvJrnUID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ReviewJrns_Company_RvJrnUID(Company:string, RvJrnUID:string, requestBody:Erp_Tablesets_RvJrnRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_ReviewJrns_Company_RvJrnUID(Company:string, RvJrnUID:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_ReviewJrns_Company_RvJrnUID(Company:string, RvJrnUID:strin
    OperationID: DeleteUpdateExt_ReviewJrn
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RvJrnUID Desc: RvJrnUID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_ReviewJrns_Company_RvJrnUID(Company:string, RvJrnUID:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_ReviewJrns_Company_RvJrnUID(Company:string, RvJrnUID:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrRow
    */  
 export function get_ReviewJrns_Company_RvJrnUID_RvJrnTrs(Company:string, RvJrnUID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_ReviewJrns_Company_RvJrnUID_RvJrnTrs(Company:string, RvJrnUI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrRow)
           })
@@ -311,10 +386,10 @@ export function get_ReviewJrns_Company_RvJrnUID_RvJrnTrs(Company:string, RvJrnUI
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RvJrnTrRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RvJrnTrRow
    */  
 export function get_ReviewJrns_Company_RvJrnUID_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_ReviewJrns_Company_RvJrnUID_RvJrnTrs_Company_RvJrnUID_RvJrnT
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RvJrnTrRow)
           })
@@ -350,10 +432,10 @@ export function get_ReviewJrns_Company_RvJrnUID_RvJrnTrs_Company_RvJrnUID_RvJrnT
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrRow
    */  
 export function get_RvJrnTrs(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_RvJrnTrs(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrRow)
           })
@@ -382,15 +471,15 @@ export function get_RvJrnTrs(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RvJrnTrs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RvJrnTrRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RvJrnTrRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RvJrnTrRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RvJrnTrRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RvJrnTrs(requestBody:any, epicorHeaders?:Headers){
+export function post_RvJrnTrs(requestBody:Erp_Tablesets_RvJrnTrRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -404,7 +493,14 @@ export function post_RvJrnTrs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -424,10 +520,10 @@ export function post_RvJrnTrs(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RvJrnTrRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RvJrnTrRow
    */  
 export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -442,7 +538,14 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID(Company:string, RvJrnUI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RvJrnTrRow)
           })
@@ -459,15 +562,15 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID(Company:string, RvJrnUI
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RvJrnUID Desc: RvJrnUID   Required: True
       @param RvJrnTrUID Desc: RvJrnTrUID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RvJrnTrRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RvJrnTrRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, requestBody:Erp_Tablesets_RvJrnTrRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -481,7 +584,14 @@ export function patch_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID(Company:string, RvJrn
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -498,7 +608,7 @@ export function patch_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID(Company:string, RvJrn
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RvJrnUID Desc: RvJrnUID   Required: True
       @param RvJrnTrUID Desc: RvJrnTrUID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -517,7 +627,14 @@ export function delete_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID(Company:string, RvJr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -541,10 +658,10 @@ export function delete_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID(Company:string, RvJr
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrDtlRow
    */  
 export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtls(Company:string, RvJrnUID:string, RvJrnTrUID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -559,7 +676,14 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtls(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrDtlRow)
           })
@@ -580,10 +704,10 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtls(Company:str
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RvJrnTrDtlRow
    */  
 export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, RvJrnTrDtlUID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -598,7 +722,14 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtls_Company_RvJ
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RvJrnTrDtlRow)
           })
@@ -621,10 +752,10 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtls_Company_RvJ
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrTreeLeafRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrTreeLeafRow
    */  
 export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrTreeLeaves(Company:string, RvJrnUID:string, RvJrnTrUID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -639,7 +770,14 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrTreeLeaves(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrTreeLeafRow)
           })
@@ -659,10 +797,10 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrTreeLeaves(Compa
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RvJrnTrTreeLeafRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RvJrnTrTreeLeafRow
    */  
 export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrTreeLeaves_SysRowID(Company:string, RvJrnUID:string, RvJrnTrUID:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -677,7 +815,14 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrTreeLeaves_SysRo
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RvJrnTrTreeLeafRow)
           })
@@ -700,10 +845,10 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_RvJrnTrTreeLeaves_SysRo
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.WErrorRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.WErrorRow
    */  
 export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_WErrors(Company:string, RvJrnUID:string, RvJrnTrUID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -718,7 +863,14 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_WErrors(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_WErrorRow)
           })
@@ -738,10 +890,10 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_WErrors(Company:string,
       @param ErrorUID Desc: ErrorUID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.WErrorRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.WErrorRow
    */  
 export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_WErrors_Company_RvJrnUID_RvJrnTrUID_ErrorUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, ErrorUID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -756,7 +908,14 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_WErrors_Company_RvJrnUI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_WErrorRow)
           })
@@ -777,10 +936,10 @@ export function get_RvJrnTrs_Company_RvJrnUID_RvJrnTrUID_WErrors_Company_RvJrnUI
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrDtlRow
    */  
 export function get_RvJrnTrDtls(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -795,7 +954,14 @@ export function get_RvJrnTrDtls(select?:string, expand?:string, filter?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrDtlRow)
           })
@@ -809,15 +975,15 @@ export function get_RvJrnTrDtls(select?:string, expand?:string, filter?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RvJrnTrDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RvJrnTrDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RvJrnTrDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_RvJrnTrDtls(requestBody:Erp_Tablesets_RvJrnTrDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -831,7 +997,14 @@ export function post_RvJrnTrDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -852,10 +1025,10 @@ export function post_RvJrnTrDtls(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RvJrnTrDtlRow
    */  
 export function get_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, RvJrnTrDtlUID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -870,7 +1043,14 @@ export function get_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RvJrnTrDtlRow)
           })
@@ -888,15 +1068,15 @@ export function get_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID(Compan
       @param RvJrnUID Desc: RvJrnUID   Required: True
       @param RvJrnTrUID Desc: RvJrnTrUID   Required: True
       @param RvJrnTrDtlUID Desc: RvJrnTrDtlUID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, RvJrnTrDtlUID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, RvJrnTrDtlUID:string, requestBody:Erp_Tablesets_RvJrnTrDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -910,7 +1090,14 @@ export function patch_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID(Comp
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -928,7 +1115,7 @@ export function patch_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID(Comp
       @param RvJrnUID Desc: RvJrnUID   Required: True
       @param RvJrnTrUID Desc: RvJrnTrUID   Required: True
       @param RvJrnTrDtlUID Desc: RvJrnTrDtlUID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -947,7 +1134,14 @@ export function delete_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -971,10 +1165,10 @@ export function delete_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID(Com
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrDtlRefRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrDtlRefRow
    */  
 export function get_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID_RvJrnTrDtlRefs(Company:string, RvJrnUID:string, RvJrnTrUID:string, RvJrnTrDtlUID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -989,7 +1183,14 @@ export function get_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID_RvJrnT
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrDtlRefRow)
           })
@@ -1010,10 +1211,10 @@ export function get_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID_RvJrnT
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRefRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RvJrnTrDtlRefRow
    */  
 export function get_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID_RvJrnTrDtlRefs_SysRowID(Company:string, RvJrnUID:string, RvJrnTrUID:string, RvJrnTrDtlUID:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1028,7 +1229,14 @@ export function get_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID_RvJrnT
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RvJrnTrDtlRefRow)
           })
@@ -1048,10 +1256,10 @@ export function get_RvJrnTrDtls_Company_RvJrnUID_RvJrnTrUID_RvJrnTrDtlUID_RvJrnT
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrDtlRefRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrDtlRefRow
    */  
 export function get_RvJrnTrDtlRefs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1066,7 +1274,14 @@ export function get_RvJrnTrDtlRefs(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrDtlRefRow)
           })
@@ -1080,15 +1295,15 @@ export function get_RvJrnTrDtlRefs(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RvJrnTrDtlRefs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRefRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRefRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRefRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RvJrnTrDtlRefRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RvJrnTrDtlRefs(requestBody:any, epicorHeaders?:Headers){
+export function post_RvJrnTrDtlRefs(requestBody:Erp_Tablesets_RvJrnTrDtlRefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1102,7 +1317,14 @@ export function post_RvJrnTrDtlRefs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1119,10 +1341,10 @@ export function post_RvJrnTrDtlRefs(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRefRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RvJrnTrDtlRefRow
    */  
 export function get_RvJrnTrDtlRefs_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1137,7 +1359,14 @@ export function get_RvJrnTrDtlRefs_SysRowID(SysRowID:string, select?:string, fil
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RvJrnTrDtlRefRow)
           })
@@ -1152,15 +1381,15 @@ export function get_RvJrnTrDtlRefs_SysRowID(SysRowID:string, select?:string, fil
    Description: Calls UpdateExt to update RvJrnTrDtlRef. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_RvJrnTrDtlRef
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRefRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RvJrnTrDtlRefRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RvJrnTrDtlRefs_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RvJrnTrDtlRefs_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_RvJrnTrDtlRefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1174,7 +1403,14 @@ export function patch_RvJrnTrDtlRefs_SysRowID(SysRowID:string, requestBody:any, 
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1189,7 +1425,7 @@ export function patch_RvJrnTrDtlRefs_SysRowID(SysRowID:string, requestBody:any, 
    Description: Call UpdateExt to delete RvJrnTrDtlRef item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_RvJrnTrDtlRef
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1208,7 +1444,14 @@ export function delete_RvJrnTrDtlRefs_SysRowID(SysRowID:string, epicorHeaders?:H
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1228,10 +1471,10 @@ export function delete_RvJrnTrDtlRefs_SysRowID(SysRowID:string, epicorHeaders?:H
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrTreeLeafRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnTrTreeLeafRow
    */  
 export function get_RvJrnTrTreeLeaves(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1246,7 +1489,14 @@ export function get_RvJrnTrTreeLeaves(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrTreeLeafRow)
           })
@@ -1260,15 +1510,15 @@ export function get_RvJrnTrTreeLeaves(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_RvJrnTrTreeLeaves
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RvJrnTrTreeLeafRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.RvJrnTrTreeLeafRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.RvJrnTrTreeLeafRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.RvJrnTrTreeLeafRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RvJrnTrTreeLeaves(requestBody:any, epicorHeaders?:Headers){
+export function post_RvJrnTrTreeLeaves(requestBody:Erp_Tablesets_RvJrnTrTreeLeafRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1282,7 +1532,14 @@ export function post_RvJrnTrTreeLeaves(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1299,10 +1556,10 @@ export function post_RvJrnTrTreeLeaves(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.RvJrnTrTreeLeafRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.RvJrnTrTreeLeafRow
    */  
 export function get_RvJrnTrTreeLeaves_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1317,7 +1574,14 @@ export function get_RvJrnTrTreeLeaves_SysRowID(SysRowID:string, select?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_RvJrnTrTreeLeafRow)
           })
@@ -1332,15 +1596,15 @@ export function get_RvJrnTrTreeLeaves_SysRowID(SysRowID:string, select?:string, 
    Description: Calls UpdateExt to update RvJrnTrTreeLeaf. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_RvJrnTrTreeLeaf
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.RvJrnTrTreeLeafRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.RvJrnTrTreeLeafRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_RvJrnTrTreeLeaves_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_RvJrnTrTreeLeaves_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_RvJrnTrTreeLeafRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1354,7 +1618,14 @@ export function patch_RvJrnTrTreeLeaves_SysRowID(SysRowID:string, requestBody:an
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1369,7 +1640,7 @@ export function patch_RvJrnTrTreeLeaves_SysRowID(SysRowID:string, requestBody:an
    Description: Call UpdateExt to delete RvJrnTrTreeLeaf item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_RvJrnTrTreeLeaf
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1388,7 +1659,14 @@ export function delete_RvJrnTrTreeLeaves_SysRowID(SysRowID:string, epicorHeaders
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1408,10 +1686,10 @@ export function delete_RvJrnTrTreeLeaves_SysRowID(SysRowID:string, epicorHeaders
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.WErrorRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.WErrorRow
    */  
 export function get_WErrors(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1426,7 +1704,14 @@ export function get_WErrors(select?:string, filter?:string, orderby?:string, top
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_WErrorRow)
           })
@@ -1440,15 +1725,15 @@ export function get_WErrors(select?:string, filter?:string, orderby?:string, top
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_WErrors
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.WErrorRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.WErrorRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.WErrorRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.WErrorRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_WErrors(requestBody:any, epicorHeaders?:Headers){
+export function post_WErrors(requestBody:Erp_Tablesets_WErrorRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1462,7 +1747,14 @@ export function post_WErrors(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1482,10 +1774,10 @@ export function post_WErrors(requestBody:any, epicorHeaders?:Headers){
       @param ErrorUID Desc: ErrorUID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.WErrorRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.WErrorRow
    */  
 export function get_WErrors_Company_RvJrnUID_RvJrnTrUID_ErrorUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, ErrorUID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1500,7 +1792,14 @@ export function get_WErrors_Company_RvJrnUID_RvJrnTrUID_ErrorUID(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_WErrorRow)
           })
@@ -1518,15 +1817,15 @@ export function get_WErrors_Company_RvJrnUID_RvJrnTrUID_ErrorUID(Company:string,
       @param RvJrnUID Desc: RvJrnUID   Required: True
       @param RvJrnTrUID Desc: RvJrnTrUID   Required: True
       @param ErrorUID Desc: ErrorUID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.WErrorRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.WErrorRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_WErrors_Company_RvJrnUID_RvJrnTrUID_ErrorUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, ErrorUID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_WErrors_Company_RvJrnUID_RvJrnTrUID_ErrorUID(Company:string, RvJrnUID:string, RvJrnTrUID:string, ErrorUID:string, requestBody:Erp_Tablesets_WErrorRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1540,7 +1839,14 @@ export function patch_WErrors_Company_RvJrnUID_RvJrnTrUID_ErrorUID(Company:strin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1558,7 +1864,7 @@ export function patch_WErrors_Company_RvJrnUID_RvJrnTrUID_ErrorUID(Company:strin
       @param RvJrnUID Desc: RvJrnUID   Required: True
       @param RvJrnTrUID Desc: RvJrnTrUID   Required: True
       @param ErrorUID Desc: ErrorUID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1577,7 +1883,14 @@ export function delete_WErrors_Company_RvJrnUID_RvJrnTrUID_ErrorUID(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1597,10 +1910,10 @@ export function delete_WErrors_Company_RvJrnUID_RvJrnTrUID_ErrorUID(Company:stri
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.RvJrnListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1615,7 +1928,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnListRow)
           })
@@ -1627,6 +1947,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1643,7 +1980,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1730,15 +2067,22 @@ export function get_GetRows(whereClauseRvJrn:string, whereClauseRvJrnTr:string, 
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1751,7 +2095,7 @@ export function get_GetRows(whereClauseRvJrn:string, whereClauseRvJrnTr:string, 
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1775,15 +2119,22 @@ export function get_GetByID(rvJrnUID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1798,7 +2149,7 @@ export function get_GetByID(rvJrnUID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1840,15 +2191,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1859,30 +2217,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    /**  
    Summary: Invoke method GetJournalHeader
    OperationID: GetJournalHeader
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetJournalHeader_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetJournalHeader_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetJournalHeader_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetJournalHeader(requestBody:any, epicorHeaders?:Headers){
+export function post_GetJournalHeader(requestBody:GetJournalHeader_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetJournalHeader_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetJournalHeader", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetJournalHeader_output)
           })
       .catch((error) => {
           reject(error)
@@ -1895,30 +2260,37 @@ export function post_GetJournalHeader(requestBody:any, epicorHeaders?:Headers){
    Description: This method populates RvJrnTrDtl datatable in reference ReviewJrnTableset dataset.
 It depends on ipRvJrnTrUID, ipTreeLeafUID (Leef Node number) and Leef records limit (1000 by the default).
    OperationID: GetJournalTreeLeaf
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetJournalTreeLeaf_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetJournalTreeLeaf_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetJournalTreeLeaf_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetJournalTreeLeaf(requestBody:any, epicorHeaders?:Headers){
+export function post_GetJournalTreeLeaf(requestBody:GetJournalTreeLeaf_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetJournalTreeLeaf_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetJournalTreeLeaf", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetJournalTreeLeaf_output)
           })
       .catch((error) => {
           reject(error)
@@ -1929,30 +2301,37 @@ export function post_GetJournalTreeLeaf(requestBody:any, epicorHeaders?:Headers)
    /**  
    Summary: Invoke method RestoreTmpJournalLine
    OperationID: RestoreTmpJournalLine
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RestoreTmpJournalLine_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RestoreTmpJournalLine_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RestoreTmpJournalLine_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RestoreTmpJournalLine(requestBody:any, epicorHeaders?:Headers){
+export function post_RestoreTmpJournalLine(requestBody:RestoreTmpJournalLine_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RestoreTmpJournalLine_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/RestoreTmpJournalLine", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RestoreTmpJournalLine_output)
           })
       .catch((error) => {
           reject(error)
@@ -1964,30 +2343,37 @@ export function post_RestoreTmpJournalLine(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ExcludeFromList
    Description: Exclude journals from the list with do not conform search criteria.
    OperationID: ExcludeFromList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExcludeFromList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExcludeFromList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExcludeFromList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExcludeFromList(requestBody:any, epicorHeaders?:Headers){
+export function post_ExcludeFromList(requestBody:ExcludeFromList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExcludeFromList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/ExcludeFromList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExcludeFromList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1999,7 +2385,7 @@ export function post_ExcludeFromList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRefTypeList
    Description: Get list of reference types.
    OperationID: GetRefTypeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRefTypeList_output
@@ -2012,15 +2398,22 @@ export function post_GetRefTypeList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRefTypeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetRefTypeList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRefTypeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2032,30 +2425,37 @@ export function post_GetRefTypeList(epicorHeaders?:Headers){
    Summary: Invoke method ProcessJournal
    Description: Confirm or cancel journal entry.
    OperationID: ProcessJournal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ProcessJournal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ProcessJournal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessJournal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ProcessJournal(requestBody:any, epicorHeaders?:Headers){
+export function post_ProcessJournal(requestBody:ProcessJournal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessJournal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/ProcessJournal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessJournal_output)
           })
       .catch((error) => {
           reject(error)
@@ -2067,7 +2467,7 @@ export function post_ProcessJournal(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLockRecords
    Description: Populates Lock records list. Based on RvLock table (ABTUID = '').
    OperationID: GetLockRecords
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLockRecords_output
@@ -2080,15 +2480,22 @@ export function post_GetLockRecords(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLockRecords_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetLockRecords", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLockRecords_output)
           })
       .catch((error) => {
           reject(error)
@@ -2100,30 +2507,37 @@ export function post_GetLockRecords(epicorHeaders?:Headers){
    Summary: Invoke method DeleteRvLockRecords
    Description: This method removed selected RvLock records with child related lockings from the database
    OperationID: DeleteRvLockRecords
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteRvLockRecords_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteRvLockRecords_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteRvLockRecords_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteRvLockRecords(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteRvLockRecords(requestBody:DeleteRvLockRecords_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteRvLockRecords_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/DeleteRvLockRecords", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteRvLockRecords_output)
           })
       .catch((error) => {
           reject(error)
@@ -2135,30 +2549,37 @@ export function post_DeleteRvLockRecords(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method TransValidate
    Description: Validate Transactions for current journal.
    OperationID: TransValidate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TransValidate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TransValidate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TransValidate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TransValidate(requestBody:any, epicorHeaders?:Headers){
+export function post_TransValidate(requestBody:TransValidate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TransValidate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/TransValidate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TransValidate_output)
           })
       .catch((error) => {
           reject(error)
@@ -2170,30 +2591,37 @@ export function post_TransValidate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCodeDescList
    Description: GetCodeDescList
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2205,30 +2633,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetRowsWithGroupCheck
    Description: The extended method for retireving rows with additional filter by Group
    OperationID: GetRowsWithGroupCheck
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsWithGroupCheck_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsWithGroupCheck_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsWithGroupCheck_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsWithGroupCheck(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsWithGroupCheck(requestBody:GetRowsWithGroupCheck_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsWithGroupCheck_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetRowsWithGroupCheck", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsWithGroupCheck_output)
           })
       .catch((error) => {
           reject(error)
@@ -2240,30 +2675,37 @@ export function post_GetRowsWithGroupCheck(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewRvJrn
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRvJrn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRvJrn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRvJrn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRvJrn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRvJrn(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRvJrn(requestBody:GetNewRvJrn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRvJrn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetNewRvJrn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRvJrn_output)
           })
       .catch((error) => {
           reject(error)
@@ -2275,30 +2717,37 @@ export function post_GetNewRvJrn(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewRvJrnTr
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRvJrnTr
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRvJrnTr_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRvJrnTr_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRvJrnTr_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRvJrnTr(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRvJrnTr(requestBody:GetNewRvJrnTr_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRvJrnTr_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetNewRvJrnTr", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRvJrnTr_output)
           })
       .catch((error) => {
           reject(error)
@@ -2310,30 +2759,37 @@ export function post_GetNewRvJrnTr(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewRvJrnTrDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewRvJrnTrDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewRvJrnTrDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewRvJrnTrDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewRvJrnTrDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewRvJrnTrDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewRvJrnTrDtl(requestBody:GetNewRvJrnTrDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewRvJrnTrDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetNewRvJrnTrDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewRvJrnTrDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2345,30 +2801,37 @@ export function post_GetNewRvJrnTrDtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewWError
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewWError
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewWError_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewWError_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewWError_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewWError(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewWError(requestBody:GetNewWError_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewWError_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetNewWError", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewWError_output)
           })
       .catch((error) => {
           reject(error)
@@ -2380,30 +2843,37 @@ export function post_GetNewWError(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2415,7 +2885,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2439,15 +2909,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2459,7 +2936,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2483,15 +2960,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2503,30 +2987,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2538,30 +3029,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReviewJrnSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2572,41 +3070,58 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RvJrnListRow[],
+   "value":Erp_Tablesets_RvJrnListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RvJrnRow[],
+   "value":Erp_Tablesets_RvJrnRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrDtlRefRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RvJrnTrDtlRefRow[],
+   "value":Erp_Tablesets_RvJrnTrDtlRefRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RvJrnTrDtlRow[],
+   "value":Erp_Tablesets_RvJrnTrDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RvJrnTrRow[],
+   "value":Erp_Tablesets_RvJrnTrRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_RvJrnTrTreeLeafRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_RvJrnTrTreeLeafRow[],
+   "value":Erp_Tablesets_RvJrnTrTreeLeafRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_WErrorRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_WErrorRow[],
+   "value":Erp_Tablesets_WErrorRow,
 }
 
 export interface Erp_Tablesets_RvJrnListRow{
@@ -3168,6 +3683,23 @@ export interface Erp_Tablesets_WErrorRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -3190,7 +3722,7 @@ export interface DeleteRvLockRecords_input{
 export interface DeleteRvLockRecords_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RvLockTableset[],
+   ds:Erp_Tablesets_RvLockTableset,
 }
 }
 
@@ -3914,7 +4446,7 @@ export interface GetJournalHeader_input{
 export interface GetJournalHeader_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReviewJrnTableset[],
+   ds:Erp_Tablesets_ReviewJrnTableset,
 }
 }
 
@@ -3943,7 +4475,7 @@ export interface GetJournalTreeLeaf_input{
 export interface GetJournalTreeLeaf_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReviewJrnTableset[],
+   ds:Erp_Tablesets_ReviewJrnTableset,
 }
 }
 
@@ -3987,7 +4519,7 @@ export interface GetNewRvJrnTrDtl_input{
 export interface GetNewRvJrnTrDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReviewJrnTableset[],
+   ds:Erp_Tablesets_ReviewJrnTableset,
 }
 }
 
@@ -4003,7 +4535,7 @@ export interface GetNewRvJrnTr_input{
 export interface GetNewRvJrnTr_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReviewJrnTableset[],
+   ds:Erp_Tablesets_ReviewJrnTableset,
 }
 }
 
@@ -4017,7 +4549,7 @@ export interface GetNewRvJrn_input{
 export interface GetNewRvJrn_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReviewJrnTableset[],
+   ds:Erp_Tablesets_ReviewJrnTableset,
 }
 }
 
@@ -4035,7 +4567,7 @@ export interface GetNewWError_input{
 export interface GetNewWError_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReviewJrnTableset[],
+   ds:Erp_Tablesets_ReviewJrnTableset,
 }
 }
 
@@ -4179,7 +4711,7 @@ export interface RestoreTmpJournalLine_input{
 export interface RestoreTmpJournalLine_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReviewJrnTableset[],
+   ds:Erp_Tablesets_ReviewJrnTableset,
 }
 }
 
@@ -4213,7 +4745,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtReviewJrnTableset[],
+   ds:Erp_Tablesets_UpdExtReviewJrnTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4228,7 +4760,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReviewJrnTableset[],
+   ds:Erp_Tablesets_ReviewJrnTableset,
 }
 }
 

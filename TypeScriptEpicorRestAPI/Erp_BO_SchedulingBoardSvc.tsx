@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.SchedulingBoardSvc
 // Description: Provide data for the scheduling boards.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -77,6 +110,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -90,30 +140,37 @@ If ipJobNum and ipProjectID are both blank or unknown you will get all jobs for 
 or if ipJobNum is not blank then just that job, or if ipjobnum is blank and
 ipProjectID is not, then all jobs associated with that projectid.
    OperationID: BuildJobLine
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildJobLine_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildJobLine_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildJobLine_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildJobLine(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildJobLine(requestBody:BuildJobLine_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildJobLine_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SchedulingBoardSvc/BuildJobLine", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildJobLine_output)
           })
       .catch((error) => {
           reject(error)
@@ -127,30 +184,37 @@ export function post_BuildJobLine(requestBody:any, epicorHeaders?:Headers){
 be a SchedulingBoard record that would represent the ResourceTimeUsed and it's assoc
 information.
    OperationID: BuildResourceLine
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildResourceLine_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildResourceLine_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildResourceLine_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildResourceLine(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildResourceLine(requestBody:BuildResourceLine_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildResourceLine_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SchedulingBoardSvc/BuildResourceLine", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildResourceLine_output)
           })
       .catch((error) => {
           reject(error)
@@ -161,30 +225,37 @@ export function post_BuildResourceLine(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method UpdateComment
    OperationID: UpdateComment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateComment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateComment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateComment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateComment(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateComment(requestBody:UpdateComment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateComment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SchedulingBoardSvc/UpdateComment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateComment_output)
           })
       .catch((error) => {
           reject(error)
@@ -196,7 +267,7 @@ export function post_UpdateComment(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewSchedulingRec
    Description: This methods will create new record of the SchedulingBoard.
    OperationID: GetNewSchedulingRec
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSchedulingRec_output
@@ -209,15 +280,22 @@ export function post_GetNewSchedulingRec(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSchedulingRec_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SchedulingBoardSvc/GetNewSchedulingRec", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSchedulingRec_output)
           })
       .catch((error) => {
           reject(error)
@@ -230,30 +308,37 @@ export function post_GetNewSchedulingRec(epicorHeaders?:Headers){
    Description: This method will restore the schedule based on the schedule id and return
 and potential errors or warings with the restore in the SchedRestoreLog table.
    OperationID: Restore
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Restore_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Restore_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Restore_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Restore(requestBody:any, epicorHeaders?:Headers){
+export function post_Restore(requestBody:Restore_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Restore_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SchedulingBoardSvc/Restore", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Restore_output)
           })
       .catch((error) => {
           reject(error)
@@ -266,30 +351,37 @@ export function post_Restore(requestBody:any, epicorHeaders?:Headers){
    Description: This methods will return the calendar id information along with whether or not
 this calendar information can be used.
    OperationID: ReturnCalendarID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ReturnCalendarID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ReturnCalendarID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ReturnCalendarID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ReturnCalendarID(requestBody:any, epicorHeaders?:Headers){
+export function post_ReturnCalendarID(requestBody:ReturnCalendarID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ReturnCalendarID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SchedulingBoardSvc/ReturnCalendarID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ReturnCalendarID_output)
           })
       .catch((error) => {
           reject(error)
@@ -301,30 +393,37 @@ export function post_ReturnCalendarID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetLockSched
    Description: This method locks/unlocks the schedule of a specific jobnum.
    OperationID: SetLockSched
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetLockSched_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetLockSched_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetLockSched_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetLockSched(requestBody:any, epicorHeaders?:Headers){
+export function post_SetLockSched(requestBody:SetLockSched_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetLockSched_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SchedulingBoardSvc/SetLockSched", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetLockSched_output)
           })
       .catch((error) => {
           reject(error)
@@ -336,7 +435,7 @@ export function post_SetLockSched(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateAccess
    Description: Validate if the Use3rdPartySched is checked send a message that access is not allowed.
    OperationID: ValidateAccess
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateAccess_output
@@ -349,15 +448,22 @@ export function post_ValidateAccess(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateAccess_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SchedulingBoardSvc/ValidateAccess", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateAccess_output)
           })
       .catch((error) => {
           reject(error)
@@ -368,11 +474,45 @@ export function post_ValidateAccess(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -386,7 +526,7 @@ export interface BuildJobLine_input{
 export interface BuildJobLine_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SchedulingBoardTableset[],
+   ds:Erp_Tablesets_SchedulingBoardTableset,
 }
 }
 
@@ -763,7 +903,7 @@ export interface SetLockSched_input{
 export interface SetLockSched_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SchedulingBoardTableset[],
+   ds:Erp_Tablesets_SchedulingBoardTableset,
 }
 }
 
@@ -777,7 +917,7 @@ export interface UpdateComment_input{
 export interface UpdateComment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SchedulingBoardTableset[],
+   ds:Erp_Tablesets_SchedulingBoardTableset,
 }
 }
 

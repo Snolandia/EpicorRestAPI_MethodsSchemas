@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.CRMCallSvc
 // Description: CRMCall Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallRow
    */  
 export function get_CRMCalls(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_CRMCalls(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallRow)
           })
@@ -118,15 +158,15 @@ export function get_CRMCalls(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CRMCalls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CRMCallRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CRMCallRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CRMCallRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CRMCallRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CRMCalls(requestBody:any, epicorHeaders?:Headers){
+export function post_CRMCalls(requestBody:Erp_Tablesets_CRMCallRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_CRMCalls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -163,10 +210,10 @@ export function post_CRMCalls(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CRMCallRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CRMCallRow
    */  
 export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -181,7 +228,14 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CRMCallRow)
           })
@@ -201,15 +255,15 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(Com
       @param Key2 Desc: Key2   Required: True   Allow empty value : True
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param CallSeqNum Desc: CallSeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CRMCallRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CRMCallRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, requestBody:Erp_Tablesets_CRMCallRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -223,7 +277,14 @@ export function patch_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(C
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -243,7 +304,7 @@ export function patch_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(C
       @param Key2 Desc: Key2   Required: True   Allow empty value : True
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param CallSeqNum Desc: CallSeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -262,7 +323,14 @@ export function delete_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -288,10 +356,10 @@ export function delete_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallCntRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallCntRow
    */  
 export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRMCallCnts(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -306,7 +374,14 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallCntRow)
           })
@@ -329,10 +404,10 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
       @param PerConLnkRowID Desc: PerConLnkRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CRMCallCntRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CRMCallCntRow
    */  
 export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRMCallCnts_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_PerConLnkRowID(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, PerConLnkRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -347,7 +422,14 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CRMCallCntRow)
           })
@@ -373,10 +455,10 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallHistoryRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallHistoryRow
    */  
 export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRMCallHistories(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -391,7 +473,14 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallHistoryRow)
           })
@@ -413,10 +502,10 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
       @param CallSeqNum Desc: CallSeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CRMCallHistoryRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CRMCallHistoryRow
    */  
 export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRMCallHistories_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -431,7 +520,14 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CRMCallHistoryRow)
           })
@@ -457,10 +553,10 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallAttchRow
    */  
 export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRMCallAttches(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -475,7 +571,14 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallAttchRow)
           })
@@ -498,10 +601,10 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CRMCallAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CRMCallAttchRow
    */  
 export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRMCallAttches_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_DrawingSeq(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -516,7 +619,14 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CRMCallAttchRow)
           })
@@ -536,10 +646,10 @@ export function get_CRMCalls_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_CRM
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallCntRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallCntRow
    */  
 export function get_CRMCallCnts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -554,7 +664,14 @@ export function get_CRMCallCnts(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallCntRow)
           })
@@ -568,15 +685,15 @@ export function get_CRMCallCnts(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CRMCallCnts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CRMCallCntRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CRMCallCntRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CRMCallCntRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CRMCallCntRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CRMCallCnts(requestBody:any, epicorHeaders?:Headers){
+export function post_CRMCallCnts(requestBody:Erp_Tablesets_CRMCallCntRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -590,7 +707,14 @@ export function post_CRMCallCnts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -613,10 +737,10 @@ export function post_CRMCallCnts(requestBody:any, epicorHeaders?:Headers){
       @param PerConLnkRowID Desc: PerConLnkRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CRMCallCntRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CRMCallCntRow
    */  
 export function get_CRMCallCnts_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_PerConLnkRowID(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, PerConLnkRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -631,7 +755,14 @@ export function get_CRMCallCnts_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CRMCallCntRow)
           })
@@ -652,15 +783,15 @@ export function get_CRMCallCnts_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param CallSeqNum Desc: CallSeqNum   Required: True
       @param PerConLnkRowID Desc: PerConLnkRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CRMCallCntRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CRMCallCntRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CRMCallCnts_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_PerConLnkRowID(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, PerConLnkRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CRMCallCnts_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_PerConLnkRowID(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, PerConLnkRowID:string, requestBody:Erp_Tablesets_CRMCallCntRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -674,7 +805,14 @@ export function patch_CRMCallCnts_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNu
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -695,7 +833,7 @@ export function patch_CRMCallCnts_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNu
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param CallSeqNum Desc: CallSeqNum   Required: True
       @param PerConLnkRowID Desc: PerConLnkRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -714,7 +852,14 @@ export function delete_CRMCallCnts_Company_RelatedToFile_Key1_Key2_Key3_CallSeqN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -734,10 +879,10 @@ export function delete_CRMCallCnts_Company_RelatedToFile_Key1_Key2_Key3_CallSeqN
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallHistoryRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallHistoryRow
    */  
 export function get_CRMCallHistories(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -752,7 +897,14 @@ export function get_CRMCallHistories(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallHistoryRow)
           })
@@ -766,15 +918,15 @@ export function get_CRMCallHistories(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CRMCallHistories
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CRMCallHistoryRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CRMCallHistoryRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CRMCallHistoryRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CRMCallHistoryRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CRMCallHistories(requestBody:any, epicorHeaders?:Headers){
+export function post_CRMCallHistories(requestBody:Erp_Tablesets_CRMCallHistoryRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -788,7 +940,14 @@ export function post_CRMCallHistories(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -810,10 +969,10 @@ export function post_CRMCallHistories(requestBody:any, epicorHeaders?:Headers){
       @param CallSeqNum Desc: CallSeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CRMCallHistoryRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CRMCallHistoryRow
    */  
 export function get_CRMCallHistories_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -828,7 +987,14 @@ export function get_CRMCallHistories_Company_RelatedToFile_Key1_Key2_Key3_CallSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CRMCallHistoryRow)
           })
@@ -848,15 +1014,15 @@ export function get_CRMCallHistories_Company_RelatedToFile_Key1_Key2_Key3_CallSe
       @param Key2 Desc: Key2   Required: True   Allow empty value : True
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param CallSeqNum Desc: CallSeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CRMCallHistoryRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CRMCallHistoryRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CRMCallHistories_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CRMCallHistories_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, requestBody:Erp_Tablesets_CRMCallHistoryRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -870,7 +1036,14 @@ export function patch_CRMCallHistories_Company_RelatedToFile_Key1_Key2_Key3_Call
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -890,7 +1063,7 @@ export function patch_CRMCallHistories_Company_RelatedToFile_Key1_Key2_Key3_Call
       @param Key2 Desc: Key2   Required: True   Allow empty value : True
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param CallSeqNum Desc: CallSeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -909,7 +1082,14 @@ export function delete_CRMCallHistories_Company_RelatedToFile_Key1_Key2_Key3_Cal
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -929,10 +1109,10 @@ export function delete_CRMCallHistories_Company_RelatedToFile_Key1_Key2_Key3_Cal
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallAttchRow
    */  
 export function get_CRMCallAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -947,7 +1127,14 @@ export function get_CRMCallAttches(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallAttchRow)
           })
@@ -961,15 +1148,15 @@ export function get_CRMCallAttches(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CRMCallAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CRMCallAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CRMCallAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CRMCallAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CRMCallAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CRMCallAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_CRMCallAttches(requestBody:Erp_Tablesets_CRMCallAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -983,7 +1170,14 @@ export function post_CRMCallAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1006,10 +1200,10 @@ export function post_CRMCallAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CRMCallAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CRMCallAttchRow
    */  
 export function get_CRMCallAttches_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_DrawingSeq(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1024,7 +1218,14 @@ export function get_CRMCallAttches_Company_RelatedToFile_Key1_Key2_Key3_CallSeqN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CRMCallAttchRow)
           })
@@ -1045,15 +1246,15 @@ export function get_CRMCallAttches_Company_RelatedToFile_Key1_Key2_Key3_CallSeqN
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param CallSeqNum Desc: CallSeqNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CRMCallAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CRMCallAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CRMCallAttches_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_DrawingSeq(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CRMCallAttches_Company_RelatedToFile_Key1_Key2_Key3_CallSeqNum_DrawingSeq(Company:string, RelatedToFile:string, Key1:string, Key2:string, Key3:string, CallSeqNum:string, DrawingSeq:string, requestBody:Erp_Tablesets_CRMCallAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1067,7 +1268,14 @@ export function patch_CRMCallAttches_Company_RelatedToFile_Key1_Key2_Key3_CallSe
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1088,7 +1296,7 @@ export function patch_CRMCallAttches_Company_RelatedToFile_Key1_Key2_Key3_CallSe
       @param Key3 Desc: Key3   Required: True   Allow empty value : True
       @param CallSeqNum Desc: CallSeqNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1107,7 +1315,14 @@ export function delete_CRMCallAttches_Company_RelatedToFile_Key1_Key2_Key3_CallS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1127,10 +1342,10 @@ export function delete_CRMCallAttches_Company_RelatedToFile_Key1_Key2_Key3_CallS
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CRMCallListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1145,7 +1360,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallListRow)
           })
@@ -1157,6 +1379,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1171,7 +1410,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1240,15 +1479,22 @@ export function get_GetRows(whereClauseCRMCall:string, whereClauseCRMCallAttch:s
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1265,7 +1511,7 @@ export function get_GetRows(whereClauseCRMCall:string, whereClauseCRMCallAttch:s
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1325,15 +1571,22 @@ export function get_GetByID(relatedToFile:string, key1:string, key2:string, key3
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1348,7 +1601,7 @@ export function get_GetByID(relatedToFile:string, key1:string, key2:string, key3
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1390,15 +1643,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1410,30 +1670,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method ChangeConName
    Description: Update CRMCallCnt information when the contact Name is changed.
    OperationID: ChangeConName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeConName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeConName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeConName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeConName(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeConName(requestBody:ChangeConName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeConName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeConName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeConName_output)
           })
       .catch((error) => {
           reject(error)
@@ -1445,30 +1712,37 @@ export function post_ChangeConName(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeConPerConLnkRowID
    Description: Update CRMCallCnt information when the contact PerConLnkRowID is changed.
    OperationID: ChangeConPerConLnkRowID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeConPerConLnkRowID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeConPerConLnkRowID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeConPerConLnkRowID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeConPerConLnkRowID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeConPerConLnkRowID(requestBody:ChangeConPerConLnkRowID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeConPerConLnkRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeConPerConLnkRowID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeConPerConLnkRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1480,30 +1754,37 @@ export function post_ChangeConPerConLnkRowID(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ChangeCustomerID
    Description: Update CRMCall information when the CustomerId is changed.
    OperationID: ChangeCustomerID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCustomerID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCustomerID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCustomerID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCustomerID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCustomerID(requestBody:ChangeCustomerID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCustomerID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeCustomerID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCustomerID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1515,30 +1796,37 @@ export function post_ChangeCustomerID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeFSCallNum
    Description: Update CRMCall information when the FSCall Number is changed.
    OperationID: ChangeFSCallNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeFSCallNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeFSCallNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeFSCallNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeFSCallNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeFSCallNum(requestBody:ChangeFSCallNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeFSCallNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeFSCallNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeFSCallNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1550,30 +1838,37 @@ export function post_ChangeFSCallNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeHDCaseNum
    Description: Update CRMCall information when the Case Number is changed.
    OperationID: ChangeHDCaseNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeHDCaseNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeHDCaseNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeHDCaseNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeHDCaseNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeHDCaseNum(requestBody:ChangeHDCaseNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeHDCaseNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeHDCaseNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeHDCaseNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1585,30 +1880,37 @@ export function post_ChangeHDCaseNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeInvoiceNum
    Description: Update CRMCall information when the AR Invoice Number is changed.
    OperationID: ChangeInvoiceNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeInvoiceNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeInvoiceNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeInvoiceNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeInvoiceNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeInvoiceNum(requestBody:ChangeInvoiceNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeInvoiceNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeInvoiceNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeInvoiceNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1620,30 +1922,37 @@ export function post_ChangeInvoiceNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeOrderNum
    Description: Update CRMCall information when the Order Number is changed.
    OperationID: ChangeOrderNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOrderNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOrderNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOrderNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOrderNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOrderNum(requestBody:ChangeOrderNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOrderNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeOrderNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOrderNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1655,30 +1964,37 @@ export function post_ChangeOrderNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangePurPoint
    Description: Update CRMCall information when the Purchase Point is changed.
    OperationID: ChangePurPoint
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangePurPoint_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangePurPoint_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangePurPoint_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangePurPoint(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangePurPoint(requestBody:ChangePurPoint_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangePurPoint_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangePurPoint", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangePurPoint_output)
           })
       .catch((error) => {
           reject(error)
@@ -1690,30 +2006,37 @@ export function post_ChangePurPoint(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeQuoteNum
    Description: Update CRMCall information when the Quote Number is changed.
    OperationID: ChangeQuoteNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteNum(requestBody:ChangeQuoteNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeQuoteNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1725,30 +2048,37 @@ export function post_ChangeQuoteNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeProjectID
    Description: Update CRMCall information when the Project ID is changed.
    OperationID: ChangeProjectID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeProjectID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeProjectID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeProjectID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeProjectID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeProjectID(requestBody:ChangeProjectID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeProjectID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeProjectID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeProjectID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1760,30 +2090,37 @@ export function post_ChangeProjectID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeRMANum
    Description: Update CRMCall information when the RMA Number is changed.
    OperationID: ChangeRMANum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeRMANum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeRMANum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeRMANum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeRMANum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeRMANum(requestBody:ChangeRMANum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeRMANum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeRMANum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeRMANum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1795,30 +2132,37 @@ export function post_ChangeRMANum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeShipToNum
    Description: Update CRMCall information when the ShipToNum is changed.
    OperationID: ChangeShipToNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeShipToNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeShipToNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeShipToNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeShipToNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeShipToNum(requestBody:ChangeShipToNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeShipToNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeShipToNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeShipToNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1830,30 +2174,37 @@ export function post_ChangeShipToNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeTaskID
    Description: Update CRMCall information when the Task ID is changed.
    OperationID: ChangeTaskID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeTaskID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeTaskID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeTaskID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeTaskID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeTaskID(requestBody:ChangeTaskID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeTaskID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeTaskID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeTaskID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1865,30 +2216,37 @@ export function post_ChangeTaskID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeVendorID
    Description: Update CRMCall information when the VendorID (Supplier ID) is changed.
    OperationID: ChangeVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeVendorID(requestBody:ChangeVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/ChangeVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1900,30 +2258,37 @@ export function post_ChangeVendorID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCRMCallBySysRowID
    Description: Get CRMCall by SysRowID after refresh.
    OperationID: GetCRMCallBySysRowID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCRMCallBySysRowID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCRMCallBySysRowID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCRMCallBySysRowID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCRMCallBySysRowID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCRMCallBySysRowID(requestBody:GetCRMCallBySysRowID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCRMCallBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetCRMCallBySysRowID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCRMCallBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1935,30 +2300,37 @@ export function post_GetCRMCallBySysRowID(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DefaultContactFields
    Description: Update CRMCall information when the contact is changed.
    OperationID: DefaultContactFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DefaultContactFields_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DefaultContactFields_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DefaultContactFields_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DefaultContactFields(requestBody:any, epicorHeaders?:Headers){
+export function post_DefaultContactFields(requestBody:DefaultContactFields_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DefaultContactFields_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/DefaultContactFields", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DefaultContactFields_output)
           })
       .catch((error) => {
           reject(error)
@@ -1970,30 +2342,37 @@ export function post_DefaultContactFields(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DefaultSupplierCntFields
    Description: Update CRMCall information when the supplier contact is changed.
    OperationID: DefaultSupplierCntFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DefaultSupplierCntFields_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DefaultSupplierCntFields_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DefaultSupplierCntFields_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DefaultSupplierCntFields(requestBody:any, epicorHeaders?:Headers){
+export function post_DefaultSupplierCntFields(requestBody:DefaultSupplierCntFields_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DefaultSupplierCntFields_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/DefaultSupplierCntFields", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DefaultSupplierCntFields_output)
           })
       .catch((error) => {
           reject(error)
@@ -2005,7 +2384,7 @@ export function post_DefaultSupplierCntFields(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetCRMCallsToShow
    Description: Gets the number of CRM Calls to show at startup according to the Company settings.
    OperationID: GetCRMCallsToShow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCRMCallsToShow_output
@@ -2018,15 +2397,22 @@ export function post_GetCRMCallsToShow(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCRMCallsToShow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetCRMCallsToShow", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCRMCallsToShow_output)
           })
       .catch((error) => {
           reject(error)
@@ -2038,30 +2424,37 @@ export function post_GetCRMCallsToShow(epicorHeaders?:Headers){
    Summary: Invoke method GetRowsContactTracker
    Description: Called from Contact tracker for better performance.
    OperationID: GetRowsContactTracker
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsContactTracker_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsContactTracker_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsContactTracker_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsContactTracker(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsContactTracker(requestBody:GetRowsContactTracker_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsContactTracker_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetRowsContactTracker", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsContactTracker_output)
           })
       .catch((error) => {
           reject(error)
@@ -2073,30 +2466,37 @@ export function post_GetRowsContactTracker(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetRowsCustomerTracker
    Description: Called from Customer tracker for better performance.
    OperationID: GetRowsCustomerTracker
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsCustomerTracker_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsCustomerTracker_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsCustomerTracker_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsCustomerTracker(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsCustomerTracker(requestBody:GetRowsCustomerTracker_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsCustomerTracker_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetRowsCustomerTracker", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsCustomerTracker_output)
           })
       .catch((error) => {
           reject(error)
@@ -2108,30 +2508,37 @@ export function post_GetRowsCustomerTracker(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetRowsForPerson
    Description: Gets the list of calls where the DcdUserID is an authorized user for the Workforce specified in the call.
    OperationID: GetRowsForPerson
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsForPerson_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsForPerson_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsForPerson_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsForPerson(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsForPerson(requestBody:GetRowsForPerson_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsForPerson_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetRowsForPerson", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsForPerson_output)
           })
       .catch((error) => {
           reject(error)
@@ -2143,30 +2550,37 @@ export function post_GetRowsForPerson(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetFilteredRowsForPerson
    Description: Gets the list of calls where the DcdUserID is an authorized user for the Workforce specified in the call.
    OperationID: GetFilteredRowsForPerson
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFilteredRowsForPerson_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFilteredRowsForPerson_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFilteredRowsForPerson_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFilteredRowsForPerson(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFilteredRowsForPerson(requestBody:GetFilteredRowsForPerson_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFilteredRowsForPerson_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetFilteredRowsForPerson", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFilteredRowsForPerson_output)
           })
       .catch((error) => {
           reject(error)
@@ -2178,30 +2592,37 @@ export function post_GetFilteredRowsForPerson(requestBody:any, epicorHeaders?:He
    Summary: Invoke method SortByData
    Description: Return a list of the sort by options based on the data passed in.
    OperationID: SortByData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SortByData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SortByData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SortByData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SortByData(requestBody:any, epicorHeaders?:Headers){
+export function post_SortByData(requestBody:SortByData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SortByData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/SortByData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SortByData_output)
           })
       .catch((error) => {
           reject(error)
@@ -2213,30 +2634,37 @@ export function post_SortByData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UserIsAuthorized
    Description: Checks if user is authorized
    OperationID: UserIsAuthorized
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UserIsAuthorized_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UserIsAuthorized_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UserIsAuthorized_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UserIsAuthorized(requestBody:any, epicorHeaders?:Headers){
+export function post_UserIsAuthorized(requestBody:UserIsAuthorized_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UserIsAuthorized_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/UserIsAuthorized", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UserIsAuthorized_output)
           })
       .catch((error) => {
           reject(error)
@@ -2248,30 +2676,37 @@ export function post_UserIsAuthorized(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCRMSummarize
    Description: Summarizes CRM call text/description for the rows in the input dataset
    OperationID: GetCRMSummarize
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCRMSummarize_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCRMSummarize_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCRMSummarize_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCRMSummarize(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCRMSummarize(requestBody:GetCRMSummarize_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCRMSummarize_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetCRMSummarize", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCRMSummarize_output)
           })
       .catch((error) => {
           reject(error)
@@ -2283,30 +2718,37 @@ export function post_GetCRMSummarize(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCRMCall
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCRMCall
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCRMCall_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCRMCall_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCRMCall_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCRMCall(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCRMCall(requestBody:GetNewCRMCall_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCRMCall_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetNewCRMCall", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCRMCall_output)
           })
       .catch((error) => {
           reject(error)
@@ -2318,30 +2760,37 @@ export function post_GetNewCRMCall(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCRMCallAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCRMCallAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCRMCallAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCRMCallAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCRMCallAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCRMCallAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCRMCallAttch(requestBody:GetNewCRMCallAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCRMCallAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetNewCRMCallAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCRMCallAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -2353,30 +2802,37 @@ export function post_GetNewCRMCallAttch(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewCRMCallCnt
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCRMCallCnt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCRMCallCnt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCRMCallCnt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCRMCallCnt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCRMCallCnt(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCRMCallCnt(requestBody:GetNewCRMCallCnt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCRMCallCnt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetNewCRMCallCnt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCRMCallCnt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2388,30 +2844,37 @@ export function post_GetNewCRMCallCnt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCRMCallHistory
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCRMCallHistory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCRMCallHistory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCRMCallHistory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCRMCallHistory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCRMCallHistory(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCRMCallHistory(requestBody:GetNewCRMCallHistory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCRMCallHistory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetNewCRMCallHistory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCRMCallHistory_output)
           })
       .catch((error) => {
           reject(error)
@@ -2423,30 +2886,37 @@ export function post_GetNewCRMCallHistory(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2458,7 +2928,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2482,15 +2952,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2502,7 +2979,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2526,15 +3003,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2546,30 +3030,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2581,30 +3072,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CRMCallSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2615,31 +3113,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CRMCallAttchRow[],
+   "value":Erp_Tablesets_CRMCallAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallCntRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CRMCallCntRow[],
+   "value":Erp_Tablesets_CRMCallCntRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallHistoryRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CRMCallHistoryRow[],
+   "value":Erp_Tablesets_CRMCallHistoryRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CRMCallListRow[],
+   "value":Erp_Tablesets_CRMCallListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CRMCallRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CRMCallRow[],
+   "value":Erp_Tablesets_CRMCallRow,
 }
 
 export interface Erp_Tablesets_CRMCallAttchRow{
@@ -2976,6 +3491,23 @@ Default is based on related to field.  If its a QOL then Customer will default. 
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2991,7 +3523,7 @@ export interface ChangeConName_input{
 export interface ChangeConName_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3008,7 +3540,7 @@ export interface ChangeConPerConLnkRowID_input{
 export interface ChangeConPerConLnkRowID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3025,7 +3557,7 @@ export interface ChangeCustomerID_input{
 export interface ChangeCustomerID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3042,7 +3574,7 @@ export interface ChangeFSCallNum_input{
 export interface ChangeFSCallNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3059,7 +3591,7 @@ export interface ChangeHDCaseNum_input{
 export interface ChangeHDCaseNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3076,7 +3608,7 @@ export interface ChangeInvoiceNum_input{
 export interface ChangeInvoiceNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3093,7 +3625,7 @@ export interface ChangeOrderNum_input{
 export interface ChangeOrderNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3110,7 +3642,7 @@ export interface ChangeProjectID_input{
 export interface ChangeProjectID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3130,7 +3662,7 @@ export interface ChangePurPoint_input{
 export interface ChangePurPoint_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3147,7 +3679,7 @@ export interface ChangeQuoteNum_input{
 export interface ChangeQuoteNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3164,7 +3696,7 @@ export interface ChangeRMANum_input{
 export interface ChangeRMANum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3184,7 +3716,7 @@ export interface ChangeShipToNum_input{
 export interface ChangeShipToNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3201,7 +3733,7 @@ export interface ChangeTaskID_input{
 export interface ChangeTaskID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3218,7 +3750,7 @@ export interface ChangeVendorID_input{
 export interface ChangeVendorID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3232,7 +3764,7 @@ export interface DefaultContactFields_input{
 export interface DefaultContactFields_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3246,7 +3778,7 @@ export interface DefaultSupplierCntFields_input{
 export interface DefaultSupplierCntFields_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3673,7 +4205,7 @@ export interface GetCRMCallBySysRowID_input{
 export interface GetCRMCallBySysRowID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3765,7 +4297,7 @@ export interface GetNewCRMCallAttch_input{
 export interface GetNewCRMCallAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3789,7 +4321,7 @@ export interface GetNewCRMCallCnt_input{
 export interface GetNewCRMCallCnt_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3811,7 +4343,7 @@ export interface GetNewCRMCallHistory_input{
 export interface GetNewCRMCallHistory_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -3833,7 +4365,7 @@ export interface GetNewCRMCall_input{
 export interface GetNewCRMCall_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 
@@ -4021,7 +4553,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtCRMCallTableset[],
+   ds:Erp_Tablesets_UpdExtCRMCallTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4036,7 +4568,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CRMCallTableset[],
+   ds:Erp_Tablesets_CRMCallTableset,
 }
 }
 

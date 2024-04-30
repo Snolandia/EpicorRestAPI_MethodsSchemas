@@ -1,15 +1,34 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.CapPromiseSvc
 // Description: bo/CapPromise/CapPromise.p
            Capable To Promise business object
            smr
            07/15/04
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -18,7 +37,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -36,7 +55,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -50,7 +76,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -68,7 +94,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -81,6 +114,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -90,30 +140,37 @@ export function get_metadata(epicorHeaders?:Headers){
 Before calling this method all CapPromiseDtl records must have the RowMod
 field set to 'U'.
    OperationID: CalculateCTP
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CalculateCTP_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CalculateCTP_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CalculateCTP_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CalculateCTP(requestBody:any, epicorHeaders?:Headers){
+export function post_CalculateCTP(requestBody:CalculateCTP_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CalculateCTP_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/CalculateCTP", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CalculateCTP_output)
           })
       .catch((error) => {
           reject(error)
@@ -127,30 +184,37 @@ export function post_CalculateCTP(requestBody:any, epicorHeaders?:Headers){
 Before calling this method all CapPromiseDtl records must have the RowMod
 field set to 'U'.
    OperationID: CancelCTP
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CancelCTP_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CancelCTP_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CancelCTP_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CancelCTP(requestBody:any, epicorHeaders?:Headers){
+export function post_CancelCTP(requestBody:CancelCTP_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CancelCTP_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/CancelCTP", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CancelCTP_output)
           })
       .catch((error) => {
           reject(error)
@@ -163,30 +227,37 @@ export function post_CancelCTP(requestBody:any, epicorHeaders?:Headers){
    Description: Creates a temporary record to store information needed for the
 Capable To Promise process.
    OperationID: CapPromiseDmdGetNew
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CapPromiseDmdGetNew_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CapPromiseDmdGetNew_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CapPromiseDmdGetNew_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CapPromiseDmdGetNew(requestBody:any, epicorHeaders?:Headers){
+export function post_CapPromiseDmdGetNew(requestBody:CapPromiseDmdGetNew_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CapPromiseDmdGetNew_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/CapPromiseDmdGetNew", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CapPromiseDmdGetNew_output)
           })
       .catch((error) => {
           reject(error)
@@ -199,30 +270,37 @@ export function post_CapPromiseDmdGetNew(requestBody:any, epicorHeaders?:Headers
    Description: Creates a temporary record to store information needed for the
 Capable To Promise process.
    OperationID: CapPromiseGetNew
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CapPromiseGetNew_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CapPromiseGetNew_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CapPromiseGetNew_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CapPromiseGetNew(requestBody:any, epicorHeaders?:Headers){
+export function post_CapPromiseGetNew(requestBody:CapPromiseGetNew_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CapPromiseGetNew_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/CapPromiseGetNew", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CapPromiseGetNew_output)
           })
       .catch((error) => {
           reject(error)
@@ -235,30 +313,37 @@ export function post_CapPromiseGetNew(requestBody:any, epicorHeaders?:Headers){
    Description: Reassigns the OverrideMtlConstraints and EnableOverrideMtlConstraints
 fields based on the value of FiniteSchedule.
    OperationID: ChangeCapPromiseDtlFiniteSchedule
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCapPromiseDtlFiniteSchedule_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCapPromiseDtlFiniteSchedule_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCapPromiseDtlFiniteSchedule_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCapPromiseDtlFiniteSchedule(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCapPromiseDtlFiniteSchedule(requestBody:ChangeCapPromiseDtlFiniteSchedule_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCapPromiseDtlFiniteSchedule_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/ChangeCapPromiseDtlFiniteSchedule", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCapPromiseDtlFiniteSchedule_output)
           })
       .catch((error) => {
           reject(error)
@@ -272,30 +357,37 @@ export function post_ChangeCapPromiseDtlFiniteSchedule(requestBody:any, epicorHe
 Before calling this method all CapPromiseDtl records must have the RowMod
 field set to 'U'.
    OperationID: ChangeCapPromiseGlobalCTP
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCapPromiseGlobalCTP_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCapPromiseGlobalCTP_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCapPromiseGlobalCTP_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCapPromiseGlobalCTP(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCapPromiseGlobalCTP(requestBody:ChangeCapPromiseGlobalCTP_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCapPromiseGlobalCTP_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/ChangeCapPromiseGlobalCTP", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCapPromiseGlobalCTP_output)
           })
       .catch((error) => {
           reject(error)
@@ -310,30 +402,37 @@ CapPromise.ProjectedStartDate.
 Before calling this method all CapPromiseDtl records must have the RowMod
 field set to 'U'.
    OperationID: ChangeCapPromiseProjectedStartDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCapPromiseProjectedStartDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCapPromiseProjectedStartDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCapPromiseProjectedStartDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCapPromiseProjectedStartDate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCapPromiseProjectedStartDate(requestBody:ChangeCapPromiseProjectedStartDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCapPromiseProjectedStartDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/ChangeCapPromiseProjectedStartDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCapPromiseProjectedStartDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -347,30 +446,37 @@ export function post_ChangeCapPromiseProjectedStartDate(requestBody:any, epicorH
 Before calling this method all CapPromiseDtl records must have the RowMod
 field set to 'U'.
    OperationID: ConfirmCTP
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ConfirmCTP_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ConfirmCTP_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ConfirmCTP_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ConfirmCTP(requestBody:any, epicorHeaders?:Headers){
+export function post_ConfirmCTP(requestBody:ConfirmCTP_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ConfirmCTP_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/ConfirmCTP", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ConfirmCTP_output)
           })
       .catch((error) => {
           reject(error)
@@ -382,30 +488,37 @@ export function post_ConfirmCTP(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ConfirmCTPPOSug
    Description: Performs the confirmation logic for the PO Suggestion created for CTP.
    OperationID: ConfirmCTPPOSug
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ConfirmCTPPOSug_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ConfirmCTPPOSug_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ConfirmCTPPOSug_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ConfirmCTPPOSug(requestBody:any, epicorHeaders?:Headers){
+export function post_ConfirmCTPPOSug(requestBody:ConfirmCTPPOSug_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ConfirmCTPPOSug_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/ConfirmCTPPOSug", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ConfirmCTPPOSug_output)
           })
       .catch((error) => {
           reject(error)
@@ -422,7 +535,7 @@ Notes:       First the temporal job "CTP Job" is deleted and then as we alraedy 
 CTP calculation into the ttCapPromise ds, we just update the OrderDtl and OrderRel records.
 DEVELOPER NOTE: this method is also called from OM\ProcessDemand.cs and will require changes there if the parameters are changed.
    OperationID: deleteJob
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/deleteJob_output
@@ -435,15 +548,22 @@ export function post_deleteJob(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<deleteJob_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/deleteJob", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as deleteJob_output)
           })
       .catch((error) => {
           reject(error)
@@ -454,30 +574,37 @@ export function post_deleteJob(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method DoWhseAtp
    OperationID: DoWhseAtp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DoWhseAtp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DoWhseAtp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DoWhseAtp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DoWhseAtp(requestBody:any, epicorHeaders?:Headers){
+export function post_DoWhseAtp(requestBody:DoWhseAtp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DoWhseAtp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/DoWhseAtp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DoWhseAtp_output)
           })
       .catch((error) => {
           reject(error)
@@ -489,30 +616,37 @@ export function post_DoWhseAtp(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method FindMaxConv
    Description: Purpose:  Find the maximum convertable quantity for giving unit of measure and quantity
    OperationID: FindMaxConv
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindMaxConv_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindMaxConv_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindMaxConv_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindMaxConv(requestBody:any, epicorHeaders?:Headers){
+export function post_FindMaxConv(requestBody:FindMaxConv_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindMaxConv_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/FindMaxConv", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindMaxConv_output)
           })
       .catch((error) => {
           reject(error)
@@ -527,30 +661,37 @@ of the detail records.
 Before calling this method all CapPromiseDtl records must have the RowMod
 field set to 'U'.
    OperationID: SetOrderPromiseDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetOrderPromiseDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetOrderPromiseDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetOrderPromiseDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetOrderPromiseDate(requestBody:any, epicorHeaders?:Headers){
+export function post_SetOrderPromiseDate(requestBody:SetOrderPromiseDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetOrderPromiseDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CapPromiseSvc/SetOrderPromiseDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetOrderPromiseDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -561,11 +702,45 @@ export function post_SetOrderPromiseDate(requestBody:any, epicorHeaders?:Headers
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -583,7 +758,7 @@ export interface CalculateCTP_output{
 parameters : {
       /**  output parameters  */  
    outMessage:string,
-   ds:Erp_Tablesets_CapPromiseTableset[],
+   ds:Erp_Tablesets_CapPromiseTableset,
 }
 }
 
@@ -599,7 +774,7 @@ export interface CancelCTP_input{
 export interface CancelCTP_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CapPromiseTableset[],
+   ds:Erp_Tablesets_CapPromiseTableset,
 }
 }
 
@@ -658,7 +833,7 @@ export interface ChangeCapPromiseDtlFiniteSchedule_input{
 export interface ChangeCapPromiseDtlFiniteSchedule_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CapPromiseTableset[],
+   ds:Erp_Tablesets_CapPromiseTableset,
 }
 }
 
@@ -675,7 +850,7 @@ export interface ChangeCapPromiseGlobalCTP_input{
 export interface ChangeCapPromiseGlobalCTP_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CapPromiseTableset[],
+   ds:Erp_Tablesets_CapPromiseTableset,
 }
 }
 
@@ -692,7 +867,7 @@ export interface ChangeCapPromiseProjectedStartDate_input{
 export interface ChangeCapPromiseProjectedStartDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CapPromiseTableset[],
+   ds:Erp_Tablesets_CapPromiseTableset,
 }
 }
 
@@ -722,7 +897,7 @@ export interface ConfirmCTP_output{
 parameters : {
       /**  output parameters  */  
    opError:string,
-   ds:Erp_Tablesets_CapPromiseTableset[],
+   ds:Erp_Tablesets_CapPromiseTableset,
 }
 }
 
@@ -916,7 +1091,7 @@ export interface SetOrderPromiseDate_input{
 export interface SetOrderPromiseDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CapPromiseTableset[],
+   ds:Erp_Tablesets_CapPromiseTableset,
 }
 }
 

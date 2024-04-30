@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.LIB.EfxLibraryDesignerSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,36 +111,60 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
    /**  
    Summary: Invoke method ApplyChanges
    OperationID: ApplyChanges
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ApplyChanges_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ApplyChanges_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ApplyChanges_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ApplyChanges(requestBody:any, epicorHeaders?:Headers){
+export function post_ApplyChanges(requestBody:ApplyChanges_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ApplyChanges_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/ApplyChanges", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ApplyChanges_output)
           })
       .catch((error) => {
           reject(error)
@@ -118,30 +175,37 @@ export function post_ApplyChanges(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ApplyChangesWithDiagnostics
    OperationID: ApplyChangesWithDiagnostics
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ApplyChangesWithDiagnostics_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ApplyChangesWithDiagnostics_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ApplyChangesWithDiagnostics_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ApplyChangesWithDiagnostics(requestBody:any, epicorHeaders?:Headers){
+export function post_ApplyChangesWithDiagnostics(requestBody:ApplyChangesWithDiagnostics_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ApplyChangesWithDiagnostics_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/ApplyChangesWithDiagnostics", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ApplyChangesWithDiagnostics_output)
           })
       .catch((error) => {
           reject(error)
@@ -153,30 +217,37 @@ export function post_ApplyChangesWithDiagnostics(requestBody:any, epicorHeaders?
    Summary: Invoke method ChangeOwner
    Description: Changes ownership of specified library to specified user
    OperationID: ChangeOwner
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOwner_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOwner_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOwner_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOwner(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOwner(requestBody:ChangeOwner_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOwner_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/ChangeOwner", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOwner_output)
           })
       .catch((error) => {
           reject(error)
@@ -187,7 +258,7 @@ export function post_ChangeOwner(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetDefaults
    OperationID: GetDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaults_output
@@ -200,15 +271,22 @@ export function post_GetDefaults(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/GetDefaults", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -219,30 +297,37 @@ export function post_GetDefaults(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetFunctionInfo
    OperationID: GetFunctionInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFunctionInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFunctionInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFunctionInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFunctionInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFunctionInfo(requestBody:GetFunctionInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFunctionInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/GetFunctionInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFunctionInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -253,30 +338,37 @@ export function post_GetFunctionInfo(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetFunctionList
    OperationID: GetFunctionList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFunctionList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFunctionList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFunctionList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFunctionList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFunctionList(requestBody:GetFunctionList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFunctionList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/GetFunctionList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFunctionList_output)
           })
       .catch((error) => {
           reject(error)
@@ -288,30 +380,37 @@ export function post_GetFunctionList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetFunctionList2
    Description: Kinetic REST params do not support FunctionSearchOptions.
    OperationID: GetFunctionList2
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFunctionList2_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFunctionList2_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFunctionList2_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFunctionList2(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFunctionList2(requestBody:GetFunctionList2_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFunctionList2_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/GetFunctionList2", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFunctionList2_output)
           })
       .catch((error) => {
           reject(error)
@@ -322,30 +421,37 @@ export function post_GetFunctionList2(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetLibraryInfo
    OperationID: GetLibraryInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLibraryInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLibraryInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLibraryInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLibraryInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLibraryInfo(requestBody:GetLibraryInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLibraryInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/GetLibraryInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLibraryInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -357,30 +463,37 @@ export function post_GetLibraryInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLibraryList
    Description: Gets a list of libraries.
    OperationID: GetLibraryList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLibraryList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLibraryList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLibraryList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLibraryList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLibraryList(requestBody:GetLibraryList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLibraryList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/GetLibraryList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLibraryList_output)
           })
       .catch((error) => {
           reject(error)
@@ -392,30 +505,37 @@ export function post_GetLibraryList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLibraryList2
    Description: Gets a list of libraries.
    OperationID: GetLibraryList2
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLibraryList2_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLibraryList2_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLibraryList2_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLibraryList2(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLibraryList2(requestBody:GetLibraryList2_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLibraryList2_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/GetLibraryList2", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLibraryList2_output)
           })
       .catch((error) => {
           reject(error)
@@ -427,30 +547,37 @@ export function post_GetLibraryList2(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLibrary
    Description: Finds a library by its ID.
    OperationID: GetLibrary
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLibrary_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLibrary_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLibrary_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLibrary(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLibrary(requestBody:GetLibrary_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLibrary_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/GetLibrary", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLibrary_output)
           })
       .catch((error) => {
           reject(error)
@@ -462,30 +589,37 @@ export function post_GetLibrary(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLibraries
    Description: Gets a list of libraries.
    OperationID: GetLibraries
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLibraries_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLibraries_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLibraries_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLibraries(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLibraries(requestBody:GetLibraries_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLibraries_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/GetLibraries", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLibraries_output)
           })
       .catch((error) => {
           reject(error)
@@ -498,30 +632,37 @@ export function post_GetLibraries(requestBody:any, epicorHeaders?:Headers){
    Description: Method returns true first found circular reference path for the specified library configuration if any.
 Otherwise, it returns an empty array.
    OperationID: DetectCircularReferences
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DetectCircularReferences_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DetectCircularReferences_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DetectCircularReferences_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DetectCircularReferences(requestBody:any, epicorHeaders?:Headers){
+export function post_DetectCircularReferences(requestBody:DetectCircularReferences_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DetectCircularReferences_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/DetectCircularReferences", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DetectCircularReferences_output)
           })
       .catch((error) => {
           reject(error)
@@ -533,30 +674,37 @@ export function post_DetectCircularReferences(requestBody:any, epicorHeaders?:He
    Summary: Invoke method LockLibrary
    Description: Locks a library.
    OperationID: LockLibrary
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LockLibrary_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LockLibrary_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LockLibrary_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LockLibrary(requestBody:any, epicorHeaders?:Headers){
+export function post_LockLibrary(requestBody:LockLibrary_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LockLibrary_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/LockLibrary", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LockLibrary_output)
           })
       .catch((error) => {
           reject(error)
@@ -568,30 +716,37 @@ export function post_LockLibrary(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ReleaseLibrary
    Description: Releases a library.
    OperationID: ReleaseLibrary
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ReleaseLibrary_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ReleaseLibrary_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ReleaseLibrary_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ReleaseLibrary(requestBody:any, epicorHeaders?:Headers){
+export function post_ReleaseLibrary(requestBody:ReleaseLibrary_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ReleaseLibrary_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/ReleaseLibrary", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ReleaseLibrary_output)
           })
       .catch((error) => {
           reject(error)
@@ -603,30 +758,37 @@ export function post_ReleaseLibrary(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method PromoteToProduction
    Description: Promote specified library to production
    OperationID: PromoteToProduction
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PromoteToProduction_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PromoteToProduction_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PromoteToProduction_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PromoteToProduction(requestBody:any, epicorHeaders?:Headers){
+export function post_PromoteToProduction(requestBody:PromoteToProduction_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PromoteToProduction_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/PromoteToProduction", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PromoteToProduction_output)
           })
       .catch((error) => {
           reject(error)
@@ -638,30 +800,37 @@ export function post_PromoteToProduction(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method DemoteFromProduction
    Description: Demote the specified library from production to staging
    OperationID: DemoteFromProduction
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DemoteFromProduction_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DemoteFromProduction_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DemoteFromProduction_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DemoteFromProduction(requestBody:any, epicorHeaders?:Headers){
+export function post_DemoteFromProduction(requestBody:DemoteFromProduction_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DemoteFromProduction_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/DemoteFromProduction", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DemoteFromProduction_output)
           })
       .catch((error) => {
           reject(error)
@@ -672,30 +841,37 @@ export function post_DemoteFromProduction(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method RegenerateLibrary
    OperationID: RegenerateLibrary
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RegenerateLibrary_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RegenerateLibrary_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RegenerateLibrary_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RegenerateLibrary(requestBody:any, epicorHeaders?:Headers){
+export function post_RegenerateLibrary(requestBody:RegenerateLibrary_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RegenerateLibrary_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/RegenerateLibrary", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RegenerateLibrary_output)
           })
       .catch((error) => {
           reject(error)
@@ -706,7 +882,7 @@ export function post_RegenerateLibrary(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method RegenerateAllLibraries
    OperationID: RegenerateAllLibraries
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/RegenerateAllLibraries_output
@@ -719,15 +895,22 @@ export function post_RegenerateAllLibraries(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RegenerateAllLibraries_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/RegenerateAllLibraries", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RegenerateAllLibraries_output)
           })
       .catch((error) => {
           reject(error)
@@ -739,30 +922,37 @@ export function post_RegenerateAllLibraries(epicorHeaders?:Headers){
    Summary: Invoke method ExportLibrary
    Description: Exports the specified library.
    OperationID: ExportLibrary
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportLibrary_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportLibrary_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportLibrary_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportLibrary(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportLibrary(requestBody:ExportLibrary_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportLibrary_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/ExportLibrary", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportLibrary_output)
           })
       .catch((error) => {
           reject(error)
@@ -774,30 +964,37 @@ export function post_ExportLibrary(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ImportLibrary
    Description: Imports the provided library.
    OperationID: ImportLibrary
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportLibrary_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportLibrary_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportLibrary_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportLibrary(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportLibrary(requestBody:ImportLibrary_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportLibrary_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/ImportLibrary", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportLibrary_output)
           })
       .catch((error) => {
           reject(error)
@@ -808,30 +1005,37 @@ export function post_ImportLibrary(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method InstallLibrary
    OperationID: InstallLibrary
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InstallLibrary_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InstallLibrary_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InstallLibrary_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InstallLibrary(requestBody:any, epicorHeaders?:Headers){
+export function post_InstallLibrary(requestBody:InstallLibrary_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InstallLibrary_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/InstallLibrary", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InstallLibrary_output)
           })
       .catch((error) => {
           reject(error)
@@ -843,30 +1047,37 @@ export function post_InstallLibrary(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UninstallLibrary
    Description: Removes previously installed library.
    OperationID: UninstallLibrary
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UninstallLibrary_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UninstallLibrary_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UninstallLibrary_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UninstallLibrary(requestBody:any, epicorHeaders?:Headers){
+export function post_UninstallLibrary(requestBody:UninstallLibrary_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UninstallLibrary_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/UninstallLibrary", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UninstallLibrary_output)
           })
       .catch((error) => {
           reject(error)
@@ -878,30 +1089,37 @@ export function post_UninstallLibrary(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DetermineInstallationOrder
    Description: Tries to order specified library Id from most independent to most dependent.
    OperationID: DetermineInstallationOrder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DetermineInstallationOrder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DetermineInstallationOrder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DetermineInstallationOrder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DetermineInstallationOrder(requestBody:any, epicorHeaders?:Headers){
+export function post_DetermineInstallationOrder(requestBody:DetermineInstallationOrder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DetermineInstallationOrder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.EfxLibraryDesignerSvc/DetermineInstallationOrder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DetermineInstallationOrder_output)
           })
       .catch((error) => {
           reject(error)
@@ -912,11 +1130,45 @@ export function post_DetermineInstallationOrder(requestBody:any, epicorHeaders?:
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -930,7 +1182,7 @@ export interface ApplyChangesWithDiagnostics_input{
 export interface ApplyChangesWithDiagnostics_output{
 parameters : {
       /**  output parameters  */  
-   libraryTableset:Ice_Tablesets_EfxLibraryTableset[],
+   libraryTableset:Ice_Tablesets_EfxLibraryTableset,
    diagnostics:any[],
 }
 }
@@ -945,7 +1197,7 @@ export interface ApplyChanges_input{
 export interface ApplyChanges_output{
 parameters : {
       /**  output parameters  */  
-   input:Ice_Tablesets_EfxLibraryTableset[],
+   input:Ice_Tablesets_EfxLibraryTableset,
 }
 }
 

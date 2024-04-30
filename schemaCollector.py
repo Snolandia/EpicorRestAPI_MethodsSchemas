@@ -2462,15 +2462,35 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
     typescriptText += "\n"
     typescriptText += "\n"
     typescriptText += "\n"
+    typescriptText += "/** " + "\n"
     if("title" in odataObj["info"]):
         typescriptText += "// Title: " + odataObj["info"]["title"] + "\n"
     if("description" in odataObj["info"]):
         typescriptText += "// Description: " + odataObj["info"]["description"] + "\n"
     if("version" in odataObj["info"]):
         typescriptText += "// Version: " + odataObj["info"]["version"] + "\n"
+        
+    typescriptText += "*/ " + "\n"
     typescriptText += "\n"
     typescriptText += "\n"
     typescriptText += "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
     typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
     typescriptText += "// OData methods:" + "\n"
     typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
@@ -2495,7 +2515,7 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                     
             if(modKey[len(modKey)-1] == "_"):
                 modKey = modKey[0:len(modKey)-1]
-            
+                
             parameters = ""
             first = 0
             if("parameters" in methodValue.keys()):
@@ -2516,7 +2536,16 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                         parameters += name + "?:string, "
                     first += 1
             if("requestBody" in methodValue.keys()):
-                parameters += "requestBody:any, "
+                if("content" in methodValue["requestBody"]):
+                    if("application/json" in methodValue["requestBody"]["content"]):
+                        if("schema" in methodValue["requestBody"]["content"]["application/json"]):
+                            if("$ref" in methodValue["requestBody"]["content"]["application/json"]["schema"]):
+                                parType = methodValue["requestBody"]["content"]["application/json"]["schema"]["$ref"]
+                                parType = str(parType).replace("#/components/schemas/","")
+                                parType = parType.replace(".","_")
+                                parameters += "requestBody:" + parType + ", "
+                else:
+                    parameters += "requestBody:any, "
                 hasRequestBody = True
             if(modKey == ""):
                 modKey = "ServiceDocument"
@@ -2543,10 +2572,11 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                     if("allowEmptyValue" in param.keys()):
                         typescriptText += "   Allow empty value : " + str(param["allowEmptyValue"])
                     typescriptText += "\n"
-            typescriptText += "      :param epicorHeaders: A string representing the epicor log in information to be used, "+ "\n"
+            typescriptText += "      @param epicorHeaders A string representing the epicor log in information to be used, "+ "\n"
             typescriptText += "         already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers" + "\n"
+            
             if("requestBody" in methodValue.keys()):
-                typescriptText += "      :param requestBody: Desc: " + methodValue["requestBody"]["description"] + " "
+                typescriptText += "      @param requestBody  Desc: " + methodValue["requestBody"]["description"] + " "
                 if("content" in methodValue["requestBody"]):
                         if("application/json" in methodValue["requestBody"]["content"]):
                             if("schema" in methodValue["requestBody"]["content"]["application/json"]):
@@ -2560,6 +2590,7 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                             typescriptText += " => content"
                 typescriptText += "\n"
             returnType = "any"                
+            
             if("responses" in methodValue.keys()):
                 typescriptText += "   Returns: " + "\n"
                 for response, responseValue in methodValue["responses"].items():
@@ -2572,7 +2603,7 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                                         if(responseValue["description"] == "OK"):
                                             returnType = str(responseValue["content"]["application/json"]["schema"]["$ref"]).replace("#/components/schemas/","")
                                             returnType = returnType.replace(".","_")
-                                    typescriptText += " => reference" + responseValue["content"]["application/json"]["schema"]["$ref"]
+                                    typescriptText += " => reference " + responseValue["content"]["application/json"]["schema"]["$ref"]
                                 else:
                                     typescriptText += " => application/json/schema"
                             else:
@@ -2637,7 +2668,14 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                 typescriptText += "          body: JSON.stringify(requestBody)" + "\n"
             typescriptText += "      })" + "\n"
             typescriptText += "      fetch(request)" + "\n"
-            typescriptText += "      .then((res) => res.json())" + "\n"
+            typescriptText += "      .then((res) => {" + "\n"
+            typescriptText += "         if(res.ok){" + "\n"
+            typescriptText += "             return res.json()" + "\n"
+            typescriptText += "         }" + "\n"
+            typescriptText += "         else{" + "\n"
+            typescriptText += "             return res.json().then(text => {throw new Error(text[\"ErrorMessage\"]) })" + "\n"
+            typescriptText += "         }" + "\n"
+            typescriptText += "      })" + "\n"
             typescriptText += "      .then((data) => {" + "\n"
             typescriptText += "         resolve(data as " + returnType + ")" + "\n"
             typescriptText += "          })" + "\n"
@@ -2651,6 +2689,23 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
     typescriptText += "\n"
     typescriptText += "\n"
     typescriptText += "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
     typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
     typescriptText += "// Custom methods:" + "\n"
     typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
@@ -2702,9 +2757,16 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                         parameters += name + "?:string, "
                     first += 1
             if("requestBody" in methodValue.keys()):
-                # if(first > 0):
-                    # parameters += ", "
-                parameters += "requestBody:any, "
+                if("content" in methodValue["requestBody"]):
+                    if("application/json" in methodValue["requestBody"]["content"]):
+                        if("schema" in methodValue["requestBody"]["content"]["application/json"]):
+                            if("$ref" in methodValue["requestBody"]["content"]["application/json"]["schema"]):
+                                parType = methodValue["requestBody"]["content"]["application/json"]["schema"]["$ref"]
+                                parType = str(parType).replace("#/components/schemas/","")
+                                parType = parType.replace(".","_")
+                                parameters += "requestBody:" + parType + ", "
+                else:
+                    parameters += "requestBody:any, "
                 hasRequestBody = True
             if(modKey == ""):
                 modKey = "ServiceDocument"
@@ -2729,30 +2791,34 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                     if("allowEmptyValue" in param.keys()):
                         typescriptText += "   Allow empty value : " + str(param["allowEmptyValue"])
                     typescriptText += "\n"
-            typescriptText += "      :param epicorHeaders: A string representing the epicor log in information to be used, "+ "\n"
+            typescriptText += "      @param epicorHeaders A string representing the epicor log in information to be used, "+ "\n"
             typescriptText += "         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds" + "\n"
             if("requestBody" in methodValue.keys()):
-                typescriptText += "      :param requestBody: Desc: " + methodValue["requestBody"]["description"] + " "
+                typescriptText += "      @param requestBody Desc: " + methodValue["requestBody"]["description"] + " "
                 if("content" in methodValue["requestBody"]):
                         if("application/json" in methodValue["requestBody"]["content"]):
                             if("schema" in methodValue["requestBody"]["content"]["application/json"]):
                                 if("$ref" in methodValue["requestBody"]["content"]["application/json"]["schema"]):
-                                    if("description" in responseValue):
-                                        if(responseValue["description"] == "OK"):
-                                            returnType = str(responseValue["content"]["application/json"]["schema"]["$ref"]).replace("#/components/schemas/","")
-                                            returnType = returnType.replace(".","_")
                                     typescriptText += " => reference" + methodValue["requestBody"]["content"]["application/json"]["schema"]["$ref"]
                                 else:
                                     typescriptText += " => application/json/schema"
                             else:
-                                if("description" in responseValue):
-                                    if(responseValue["description"] == "OK"):
-                                        returnType = "JSON"
                                 typescriptText += " => application/json"
                         else:
                             typescriptText += " => content"
                 typescriptText += "\n"
                 
+                    # if(modKey == "_GetNextJobNum"):
+                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
+                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
+                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
+                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
+                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
+                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
+                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
+                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
+                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
+                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
             if("responses" in methodValue.keys()):
                 typescriptText += "   Returns: " + "\n"
                 for response, responseValue in methodValue["responses"].items():
@@ -2761,10 +2827,17 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                         if("application/json" in responseValue["content"]):
                             if("schema" in responseValue["content"]["application/json"]):
                                 if("$ref" in responseValue["content"]["application/json"]["schema"]):
+                                    if("description" in responseValue):
+                                        if(responseValue["description"] == "OK"):
+                                            returnType = str(responseValue["content"]["application/json"]["schema"]["$ref"]).replace("#/components/schemas/","")
+                                            returnType = returnType.replace(".","_")
                                     typescriptText += " => reference" + responseValue["content"]["application/json"]["schema"]["$ref"]
                                 else:
                                     typescriptText += " => application/json/schema"
                             else:
+                                if("description" in responseValue):
+                                    if(responseValue["description"] == "OK"):
+                                        returnType = "JSON"
                                 typescriptText += " => application/json"
                         else:
                             typescriptText += " => content"
@@ -2825,7 +2898,14 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                 typescriptText += "          body: JSON.stringify(requestBody)" + "\n"
             typescriptText += "      })" + "\n"
             typescriptText += "      fetch(request)" + "\n"
-            typescriptText += "      .then((res) => res.json())" + "\n"
+            typescriptText += "      .then((res) => {" + "\n"
+            typescriptText += "         if(res.ok){" + "\n"
+            typescriptText += "             return res.json()" + "\n"
+            typescriptText += "         }" + "\n"
+            typescriptText += "         else{" + "\n"
+            typescriptText += "             return res.json().then(text => {throw new Error(text[\"ErrorMessage\"]) })" + "\n"
+            typescriptText += "         }" + "\n"
+            typescriptText += "      })" + "\n"
             typescriptText += "      .then((data) => {" + "\n"
             typescriptText += "         resolve(data as " + returnType + ")" + "\n"
             typescriptText += "          })" + "\n"
@@ -2842,6 +2922,23 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
     typescriptText += "\n"
     typescriptText += "\n"
     typescriptText += "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
     typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
     typescriptText += "// OData Schemas:" + "\n"
     typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
@@ -2877,7 +2974,7 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                                     if("." in refName):
                                         refName = refName.replace(".","_")
                                         
-                                    typescriptText +=  ":" + refName  + "[]," + "\n"
+                                    typescriptText +=  ":" + refName  + "," + "\n"
                             
                         elif (propertyValue["type"] == "string"):
                             typescriptText +=  ":string," + "\n"
@@ -2904,6 +3001,23 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
     typescriptText += "\n"
     typescriptText += "\n"
     typescriptText += "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
+    typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
     typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
     typescriptText += "// Custom Schemas:" + "\n"
     typescriptText += "//////////////////////////////////////////////////////////////////////////" + "\n"
@@ -3057,7 +3171,7 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                                         if("." in refName):
                                             refName = refName.replace(".","_")
                                             
-                                        typescriptText +=  ":" + refName  + "[]," + "\n"
+                                        typescriptText +=  ":" + refName  + "," + "\n"
                                     elif("type" in pValue):
                                         if (pValue["type"] == "boolean"):
                                             typescriptText +=  ":boolean," + "\n"
@@ -3079,7 +3193,7 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                                 refName = refName.replace("#/components/schemas/","")                                
                             if("." in refName):
                                 refName = refName.replace(".","_")    
-                            typescriptText +=  ":" + refName  + "[]," + "\n"
+                            typescriptText +=  ":" + refName  + "," + "\n"
                         
                         typescriptText += "}" + "\n"
                         # typescriptText += "\n"

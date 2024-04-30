@@ -1,15 +1,34 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.BomSearchSvc
 // Description: bo/BomSearch/BomSearch.p
            To return records from the bom option for drag/drop inside
            Job Entry, QuoteAsm Entry, and Engineering Work Bench and any
            other places that may need to search this data.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -18,7 +37,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -36,7 +55,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -50,7 +76,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -68,7 +94,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -81,6 +114,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -88,7 +138,7 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method CreatePartMtlRefDes
    Description: Create Part Material Reference
    OperationID: CreatePartMtlRefDes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreatePartMtlRefDes_output
@@ -101,15 +151,22 @@ export function post_CreatePartMtlRefDes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreatePartMtlRefDes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BomSearchSvc/CreatePartMtlRefDes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreatePartMtlRefDes_output)
           })
       .catch((error) => {
           reject(error)
@@ -126,30 +183,37 @@ ALL ALTERNATES OF THE PARTREVISION WILL BE RETURNED if ipcomplete is true
 This method will also allow you to return the whole dataset or allow the user to specify how
 far down the tree they would like to return possible "part" records for.
    OperationID: GetAllAlternateTrees
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAllAlternateTrees_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAllAlternateTrees_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAllAlternateTrees_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAllAlternateTrees(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAllAlternateTrees(requestBody:GetAllAlternateTrees_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAllAlternateTrees_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BomSearchSvc/GetAllAlternateTrees", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAllAlternateTrees_output)
           })
       .catch((error) => {
           reject(error)
@@ -165,30 +229,37 @@ records exist for the appropriate input parameters.
 This method will also allow you to return the whole dataset or allow the user to specify how
 the revision to return possible "part" records for.
    OperationID: GetDatasetForTree
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDatasetForTree_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDatasetForTree_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDatasetForTree_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDatasetForTree(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDatasetForTree(requestBody:GetDatasetForTree_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDatasetForTree_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BomSearchSvc/GetDatasetForTree", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDatasetForTree_output)
           })
       .catch((error) => {
           reject(error)
@@ -204,30 +275,37 @@ records exist for the appropriate input parameters.
 This method will also allow you to return the whole dataset or allow the user to specify how
 the revision to return possible "part" records for.
    OperationID: GetDatasetForTreeByProcessMfgID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDatasetForTreeByProcessMfgID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDatasetForTreeByProcessMfgID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDatasetForTreeByProcessMfgID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDatasetForTreeByProcessMfgID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDatasetForTreeByProcessMfgID(requestBody:GetDatasetForTreeByProcessMfgID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDatasetForTreeByProcessMfgID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BomSearchSvc/GetDatasetForTreeByProcessMfgID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDatasetForTreeByProcessMfgID_output)
           })
       .catch((error) => {
           reject(error)
@@ -239,30 +317,37 @@ export function post_GetDatasetForTreeByProcessMfgID(requestBody:any, epicorHead
    Summary: Invoke method GetDatasetForTreeWithPartValidation
    Description: Validates Part, finds default revision based on asOfDate and invokes GetDatasetForTree.
    OperationID: GetDatasetForTreeWithPartValidation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDatasetForTreeWithPartValidation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDatasetForTreeWithPartValidation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDatasetForTreeWithPartValidation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDatasetForTreeWithPartValidation(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDatasetForTreeWithPartValidation(requestBody:GetDatasetForTreeWithPartValidation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDatasetForTreeWithPartValidation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BomSearchSvc/GetDatasetForTreeWithPartValidation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDatasetForTreeWithPartValidation_output)
           })
       .catch((error) => {
           reject(error)
@@ -274,30 +359,37 @@ export function post_GetDatasetForTreeWithPartValidation(requestBody:any, epicor
    Summary: Invoke method PartRevExists
    Description: Part Revision Exists
    OperationID: PartRevExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PartRevExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PartRevExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PartRevExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartRevExists(requestBody:any, epicorHeaders?:Headers){
+export function post_PartRevExists(requestBody:PartRevExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PartRevExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BomSearchSvc/PartRevExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PartRevExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -309,30 +401,37 @@ export function post_PartRevExists(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPartNumSource
    Description: Gets PartNum of the source record
    OperationID: GetPartNumSource
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartNumSource_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartNumSource_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartNumSource_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartNumSource(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartNumSource(requestBody:GetPartNumSource_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartNumSource_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.BomSearchSvc/GetPartNumSource", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartNumSource_output)
           })
       .catch((error) => {
           reject(error)
@@ -343,11 +442,45 @@ export function post_GetPartNumSource(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -758,6 +891,8 @@ Mandatory, and must be a valid UOM of the Part's UOMClass.  */
    MtlRevisionNum:string,
       /**  Revision number which is used to uniquely identify the revision of the part.  */  
    SalvageRevisionNum:string,
+   RevisionNumRevShortDesc:string,
+   RevisionNumRevDescription:string,
    ExpandTree:boolean,
    GeneratedRuleTag:string,
       /**  The material part number mfg comment.  */  
@@ -810,8 +945,6 @@ Possible Values are: EffectiveApprovedAsOfDate = 1, EffectiveNotApprovedAsOfDate
    PartNumPricePerCode:string,
    PartNumTrackLots:boolean,
    PartNumTrackSerialNum:boolean,
-   RevisionNumRevShortDesc:string,
-   RevisionNumRevDescription:string,
    SalvagePartNumTrackLots:boolean,
    SalvagePartNumTrackDimension:boolean,
    SalvagePartNumSalesUM:string,
@@ -880,6 +1013,9 @@ export interface Erp_Tablesets_PartOpDtlRow{
    SysRowID:string,
       /**  The identifier of related Process Manufacturing.  */  
    ProcessMfgID:string,
+   OprSeqAPSSchedulerName:string,
+   RevisionNumRevDescription:string,
+   RevisionNumRevShortDesc:string,
       /**  Resource description  */  
    ResourceDesc:string,
       /**  Capability description  */  
@@ -888,7 +1024,6 @@ export interface Erp_Tablesets_PartOpDtlRow{
    ResourceGrpDesc:string,
    BitFlag:number,
    CapabilityIDDescription:string,
-   OprSeqAPSSchedulerName:string,
    PartNumTrackLots:boolean,
    PartNumSellingFactor:number,
    PartNumTrackSerialNum:boolean,
@@ -897,8 +1032,6 @@ export interface Erp_Tablesets_PartOpDtlRow{
    PartNumPartDescription:string,
    PartNumPricePerCode:string,
    PartNumIUM:string,
-   RevisionNumRevDescription:string,
-   RevisionNumRevShortDesc:string,
       /**  RowMod  */  
    RowMod:string,
 }
@@ -1460,6 +1593,8 @@ secondary operation will scheduled to start after the offset period.  */
    TemplateID:string,
       /**  SubRevisionNum  */  
    SubRevisionNum:string,
+   RevisionNumRevDescription:string,
+   RevisionNumRevShortDesc:string,
       /**  Auto receive?  */  
    AutoReceive:boolean,
    DspBillAddr:string,
@@ -1488,8 +1623,6 @@ secondary operation will scheduled to start after the offset period.  */
    PartNumPricePerCode:string,
    PartNumTrackLots:boolean,
    PartNumPartDescription:string,
-   RevisionNumRevDescription:string,
-   RevisionNumRevShortDesc:string,
    SetupGroupDescription:string,
    StageNoDescription:string,
    SubPartNumTrackInventoryAttributes:boolean,

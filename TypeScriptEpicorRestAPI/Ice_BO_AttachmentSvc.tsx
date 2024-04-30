@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.AttachmentSvc
 // Description: Class for handling of attachments.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.XFileAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.XFileAttchRow
    */  
 export function get_Attachments(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_Attachments(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_XFileAttchRow)
           })
@@ -117,15 +157,15 @@ export function get_Attachments(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_Attachments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.XFileAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.XFileAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.XFileAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.XFileAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Attachments(requestBody:any, epicorHeaders?:Headers){
+export function post_Attachments(requestBody:Ice_Tablesets_XFileAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_Attachments(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_Attachments(requestBody:any, epicorHeaders?:Headers){
       @param AttachNum Desc: AttachNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.XFileAttchRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.XFileAttchRow
    */  
 export function get_Attachments_RelatedToSchemaName_RelatedToFile_ForeignSysRowID_AttachNum(RelatedToSchemaName:string, RelatedToFile:string, ForeignSysRowID:string, AttachNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_Attachments_RelatedToSchemaName_RelatedToFile_ForeignSysRowI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_XFileAttchRow)
           })
@@ -195,15 +249,15 @@ export function get_Attachments_RelatedToSchemaName_RelatedToFile_ForeignSysRowI
       @param RelatedToFile Desc: RelatedToFile   Required: True   Allow empty value : True
       @param ForeignSysRowID Desc: ForeignSysRowID   Required: True   Allow empty value : True
       @param AttachNum Desc: AttachNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.XFileAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.XFileAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_Attachments_RelatedToSchemaName_RelatedToFile_ForeignSysRowID_AttachNum(RelatedToSchemaName:string, RelatedToFile:string, ForeignSysRowID:string, AttachNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_Attachments_RelatedToSchemaName_RelatedToFile_ForeignSysRowID_AttachNum(RelatedToSchemaName:string, RelatedToFile:string, ForeignSysRowID:string, AttachNum:string, requestBody:Ice_Tablesets_XFileAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_Attachments_RelatedToSchemaName_RelatedToFile_ForeignSysRo
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -235,7 +296,7 @@ export function patch_Attachments_RelatedToSchemaName_RelatedToFile_ForeignSysRo
       @param RelatedToFile Desc: RelatedToFile   Required: True   Allow empty value : True
       @param ForeignSysRowID Desc: ForeignSysRowID   Required: True   Allow empty value : True
       @param AttachNum Desc: AttachNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -254,7 +315,14 @@ export function delete_Attachments_RelatedToSchemaName_RelatedToFile_ForeignSysR
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -274,10 +342,10 @@ export function delete_Attachments_RelatedToSchemaName_RelatedToFile_ForeignSysR
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AttachmentCredentialsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AttachmentCredentialsRow
    */  
 export function get_AttachmentCredentials(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -292,7 +360,14 @@ export function get_AttachmentCredentials(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AttachmentCredentialsRow)
           })
@@ -306,15 +381,15 @@ export function get_AttachmentCredentials(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AttachmentCredentials
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.AttachmentCredentialsRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.AttachmentCredentialsRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.AttachmentCredentialsRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.AttachmentCredentialsRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AttachmentCredentials(requestBody:any, epicorHeaders?:Headers){
+export function post_AttachmentCredentials(requestBody:Ice_Tablesets_AttachmentCredentialsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -328,7 +403,14 @@ export function post_AttachmentCredentials(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -345,10 +427,10 @@ export function post_AttachmentCredentials(requestBody:any, epicorHeaders?:Heade
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.AttachmentCredentialsRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.AttachmentCredentialsRow
    */  
 export function get_AttachmentCredentials_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -363,7 +445,14 @@ export function get_AttachmentCredentials_SysRowID(SysRowID:string, select?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_AttachmentCredentialsRow)
           })
@@ -378,15 +467,15 @@ export function get_AttachmentCredentials_SysRowID(SysRowID:string, select?:stri
    Description: Calls UpdateExt to update AttachmentCredential. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_AttachmentCredential
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.AttachmentCredentialsRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.AttachmentCredentialsRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AttachmentCredentials_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AttachmentCredentials_SysRowID(SysRowID:string, requestBody:Ice_Tablesets_AttachmentCredentialsRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -400,7 +489,14 @@ export function patch_AttachmentCredentials_SysRowID(SysRowID:string, requestBod
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -415,7 +511,7 @@ export function patch_AttachmentCredentials_SysRowID(SysRowID:string, requestBod
    Description: Call UpdateExt to delete AttachmentCredential item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_AttachmentCredential
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -434,7 +530,14 @@ export function delete_AttachmentCredentials_SysRowID(SysRowID:string, epicorHea
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -454,10 +557,10 @@ export function delete_AttachmentCredentials_SysRowID(SysRowID:string, epicorHea
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.XFileAttchListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.XFileAttchListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -472,7 +575,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_XFileAttchListRow)
           })
@@ -485,6 +595,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -496,7 +623,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -547,15 +674,22 @@ export function get_GetRows(whereClauseXFileAttch:string, whereClauseAttachmentC
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -571,7 +705,7 @@ export function get_GetRows(whereClauseXFileAttch:string, whereClauseAttachmentC
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -622,15 +756,22 @@ export function get_GetByID(relatedToSchemaName:string, relatedToFile:string, fo
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -645,7 +786,7 @@ export function get_GetByID(relatedToSchemaName:string, relatedToFile:string, fo
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -687,15 +828,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -707,30 +855,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetPathReferences
    Description: Returns a list of rows that reference the same path.
    OperationID: GetPathReferences
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPathReferences_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPathReferences_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPathReferences_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPathReferences(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPathReferences(requestBody:GetPathReferences_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPathReferences_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetPathReferences", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPathReferences_output)
           })
       .catch((error) => {
           reject(error)
@@ -746,30 +901,37 @@ known in the database. That is, does a XFileRef record exist.
 Client program should pass the current values from the dataset for the given parameters.
 The returned parameter values should unconditionally moved to the corresponding fields in the dataset.
    OperationID: OnChangeOfFileName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfFileName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfFileName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfFileName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfFileName(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfFileName(requestBody:OnChangeOfFileName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfFileName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/OnChangeOfFileName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfFileName_output)
           })
       .catch((error) => {
           reject(error)
@@ -783,30 +945,37 @@ export function post_OnChangeOfFileName(requestBody:any, epicorHeaders?:Headers)
 Will reset the path portion of the file name with the BaseURL of the DocType.
 Note: It will not overlay a fully qualified filename.
    OperationID: OnChangeOfDocType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOfDocType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOfDocType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOfDocType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOfDocType(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOfDocType(requestBody:OnChangeOfDocType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOfDocType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/OnChangeOfDocType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOfDocType_output)
           })
       .catch((error) => {
           reject(error)
@@ -818,30 +987,37 @@ export function post_OnChangeOfDocType(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ServerDirectoryExists
    Description: Determines whether the given path refers to an existing directory on the server.
    OperationID: ServerDirectoryExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ServerDirectoryExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ServerDirectoryExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ServerDirectoryExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ServerDirectoryExists(requestBody:any, epicorHeaders?:Headers){
+export function post_ServerDirectoryExists(requestBody:ServerDirectoryExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ServerDirectoryExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/ServerDirectoryExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ServerDirectoryExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -853,30 +1029,37 @@ export function post_ServerDirectoryExists(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method DownloadFile
    Description: Get a file's content from the server
    OperationID: DownloadFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DownloadFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DownloadFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DownloadFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DownloadFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DownloadFile(requestBody:DownloadFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DownloadFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DownloadFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DownloadFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -888,30 +1071,37 @@ export function post_DownloadFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UploadFile
    Description: Set a file's content on the server
    OperationID: UploadFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UploadFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UploadFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UploadFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UploadFile(requestBody:any, epicorHeaders?:Headers){
+export function post_UploadFile(requestBody:UploadFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UploadFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/UploadFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UploadFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -923,30 +1113,37 @@ export function post_UploadFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method FileExists
    Description: Check if file exists on the server
    OperationID: FileExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FileExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FileExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FileExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FileExists(requestBody:any, epicorHeaders?:Headers){
+export function post_FileExists(requestBody:FileExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FileExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/FileExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FileExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -958,30 +1155,37 @@ export function post_FileExists(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteFile
    Description: Deletes the specified file.
    OperationID: DeleteFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteFile(requestBody:DeleteFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DeleteFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -996,30 +1200,37 @@ document transfer.  If no storage type is specified then will return the company
 storage type transfer mode if a company default is specified. Returns the literal 'NONE' if
 no storage type found.
    OperationID: DetermineTransferModeByStorageType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DetermineTransferModeByStorageType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DetermineTransferModeByStorageType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DetermineTransferModeByStorageType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DetermineTransferModeByStorageType(requestBody:any, epicorHeaders?:Headers){
+export function post_DetermineTransferModeByStorageType(requestBody:DetermineTransferModeByStorageType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DetermineTransferModeByStorageType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DetermineTransferModeByStorageType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DetermineTransferModeByStorageType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1031,30 +1242,37 @@ export function post_DetermineTransferModeByStorageType(requestBody:any, epicorH
    Summary: Invoke method UploadFileToDocTypeStorage
    Description: Upload file to the storage defined by document type (or default company storage)
    OperationID: UploadFileToDocTypeStorage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UploadFileToDocTypeStorage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UploadFileToDocTypeStorage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UploadFileToDocTypeStorage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UploadFileToDocTypeStorage(requestBody:any, epicorHeaders?:Headers){
+export function post_UploadFileToDocTypeStorage(requestBody:UploadFileToDocTypeStorage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UploadFileToDocTypeStorage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/UploadFileToDocTypeStorage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UploadFileToDocTypeStorage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1066,30 +1284,37 @@ export function post_UploadFileToDocTypeStorage(requestBody:any, epicorHeaders?:
    Summary: Invoke method UploadNonERPFileToDocTypeStorage
    Description: Upload a NON ERP file to the storage defined by document type (or default company storage)
    OperationID: UploadNonERPFileToDocTypeStorage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UploadNonERPFileToDocTypeStorage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UploadNonERPFileToDocTypeStorage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UploadNonERPFileToDocTypeStorage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UploadNonERPFileToDocTypeStorage(requestBody:any, epicorHeaders?:Headers){
+export function post_UploadNonERPFileToDocTypeStorage(requestBody:UploadNonERPFileToDocTypeStorage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UploadNonERPFileToDocTypeStorage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/UploadNonERPFileToDocTypeStorage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UploadNonERPFileToDocTypeStorage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1100,30 +1325,37 @@ export function post_UploadNonERPFileToDocTypeStorage(requestBody:any, epicorHea
    /**  
    Summary: Invoke method DownloadFileFromDocumentStorage
    OperationID: DownloadFileFromDocumentStorage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DownloadFileFromDocumentStorage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DownloadFileFromDocumentStorage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DownloadFileFromDocumentStorage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DownloadFileFromDocumentStorage(requestBody:any, epicorHeaders?:Headers){
+export function post_DownloadFileFromDocumentStorage(requestBody:DownloadFileFromDocumentStorage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DownloadFileFromDocumentStorage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DownloadFileFromDocumentStorage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DownloadFileFromDocumentStorage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1134,30 +1366,37 @@ export function post_DownloadFileFromDocumentStorage(requestBody:any, epicorHead
    /**  
    Summary: Invoke method DownloadNonERPFileFromDocumentStorage
    OperationID: DownloadNonERPFileFromDocumentStorage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DownloadNonERPFileFromDocumentStorage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DownloadNonERPFileFromDocumentStorage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DownloadNonERPFileFromDocumentStorage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DownloadNonERPFileFromDocumentStorage(requestBody:any, epicorHeaders?:Headers){
+export function post_DownloadNonERPFileFromDocumentStorage(requestBody:DownloadNonERPFileFromDocumentStorage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DownloadNonERPFileFromDocumentStorage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DownloadNonERPFileFromDocumentStorage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DownloadNonERPFileFromDocumentStorage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1169,30 +1408,37 @@ export function post_DownloadNonERPFileFromDocumentStorage(requestBody:any, epic
    Summary: Invoke method DeleteFileFromDocumentStorage
    Description: Delete a file from its associated storage system.
    OperationID: DeleteFileFromDocumentStorage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteFileFromDocumentStorage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteFileFromDocumentStorage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteFileFromDocumentStorage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteFileFromDocumentStorage(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteFileFromDocumentStorage(requestBody:DeleteFileFromDocumentStorage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteFileFromDocumentStorage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DeleteFileFromDocumentStorage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteFileFromDocumentStorage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1204,30 +1450,37 @@ export function post_DeleteFileFromDocumentStorage(requestBody:any, epicorHeader
    Summary: Invoke method DeleteNonERPFileFromDocumentStorage
    Description: Delete a file from its associated storage system.
    OperationID: DeleteNonERPFileFromDocumentStorage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteNonERPFileFromDocumentStorage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteNonERPFileFromDocumentStorage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteNonERPFileFromDocumentStorage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteNonERPFileFromDocumentStorage(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteNonERPFileFromDocumentStorage(requestBody:DeleteNonERPFileFromDocumentStorage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteNonERPFileFromDocumentStorage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DeleteNonERPFileFromDocumentStorage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteNonERPFileFromDocumentStorage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1238,30 +1491,37 @@ export function post_DeleteNonERPFileFromDocumentStorage(requestBody:any, epicor
    /**  
    Summary: Invoke method GetFileMetaDataFromDocumentStorage
    OperationID: GetFileMetaDataFromDocumentStorage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFileMetaDataFromDocumentStorage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFileMetaDataFromDocumentStorage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFileMetaDataFromDocumentStorage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFileMetaDataFromDocumentStorage(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFileMetaDataFromDocumentStorage(requestBody:GetFileMetaDataFromDocumentStorage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFileMetaDataFromDocumentStorage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetFileMetaDataFromDocumentStorage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFileMetaDataFromDocumentStorage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1273,30 +1533,37 @@ export function post_GetFileMetaDataFromDocumentStorage(requestBody:any, epicorH
    Summary: Invoke method UpdateMetadataOnDocumentStorage
    Description: Updates the files metadata on the storage system.
    OperationID: UpdateMetadataOnDocumentStorage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateMetadataOnDocumentStorage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateMetadataOnDocumentStorage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateMetadataOnDocumentStorage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateMetadataOnDocumentStorage(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateMetadataOnDocumentStorage(requestBody:UpdateMetadataOnDocumentStorage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateMetadataOnDocumentStorage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/UpdateMetadataOnDocumentStorage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateMetadataOnDocumentStorage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1308,30 +1575,37 @@ export function post_UpdateMetadataOnDocumentStorage(requestBody:any, epicorHead
    Summary: Invoke method FileExistsOnDocumentStorage
    Description: Determines if the document already exists in storage.
    OperationID: FileExistsOnDocumentStorage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FileExistsOnDocumentStorage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FileExistsOnDocumentStorage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FileExistsOnDocumentStorage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FileExistsOnDocumentStorage(requestBody:any, epicorHeaders?:Headers){
+export function post_FileExistsOnDocumentStorage(requestBody:FileExistsOnDocumentStorage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FileExistsOnDocumentStorage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/FileExistsOnDocumentStorage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FileExistsOnDocumentStorage_output)
           })
       .catch((error) => {
           reject(error)
@@ -1343,30 +1617,37 @@ export function post_FileExistsOnDocumentStorage(requestBody:any, epicorHeaders?
    Summary: Invoke method GetCredentialsForServer
    Description: Get external attachment system credentials (username, domain and authentication type) for this company or document type.
    OperationID: GetCredentialsForServer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCredentialsForServer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCredentialsForServer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCredentialsForServer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCredentialsForServer(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCredentialsForServer(requestBody:GetCredentialsForServer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCredentialsForServer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetCredentialsForServer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCredentialsForServer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1378,30 +1659,37 @@ export function post_GetCredentialsForServer(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetAccountForServer
    Description: Get external attachment system account user name for this company or doc type.
    OperationID: GetAccountForServer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAccountForServer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAccountForServer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAccountForServer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAccountForServer(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAccountForServer(requestBody:GetAccountForServer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAccountForServer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetAccountForServer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAccountForServer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1413,30 +1701,37 @@ export function post_GetAccountForServer(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method SetAccountForServer
    Description: Set external attachment system account info for the company or doc type. Security Manager access right is requried.
    OperationID: SetAccountForServer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetAccountForServer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetAccountForServer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetAccountForServer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetAccountForServer(requestBody:any, epicorHeaders?:Headers){
+export function post_SetAccountForServer(requestBody:SetAccountForServer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetAccountForServer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SetAccountForServer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetAccountForServer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1448,30 +1743,37 @@ export function post_SetAccountForServer(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetAccountForUser
    Description: Get external attachment system account info for this company or doc type for logged in user
    OperationID: GetAccountForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAccountForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAccountForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAccountForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAccountForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAccountForUser(requestBody:GetAccountForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAccountForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetAccountForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAccountForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -1483,30 +1785,37 @@ export function post_GetAccountForUser(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetAccountForUser
    Description: Set SP account info for the company or doc type for loggedin user
    OperationID: SetAccountForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetAccountForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetAccountForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetAccountForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetAccountForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_SetAccountForUser(requestBody:SetAccountForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetAccountForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SetAccountForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetAccountForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -1518,30 +1827,37 @@ export function post_SetAccountForUser(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ClearAccountsForUser
    Description: Clear stored external attachment system user accounts for current company and any document type
    OperationID: ClearAccountsForUser
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ClearAccountsForUser_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ClearAccountsForUser_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClearAccountsForUser_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ClearAccountsForUser(requestBody:any, epicorHeaders?:Headers){
+export function post_ClearAccountsForUser(requestBody:ClearAccountsForUser_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClearAccountsForUser_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/ClearAccountsForUser", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClearAccountsForUser_output)
           })
       .catch((error) => {
           reject(error)
@@ -1553,30 +1869,37 @@ export function post_ClearAccountsForUser(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewXFileAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewXFileAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewXFileAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewXFileAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewXFileAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewXFileAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewXFileAttch(requestBody:GetNewXFileAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewXFileAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetNewXFileAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewXFileAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1588,30 +1911,37 @@ export function post_GetNewXFileAttch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1623,7 +1953,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1647,15 +1977,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1667,7 +2004,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1691,15 +2028,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1711,30 +2055,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1746,30 +2097,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1781,30 +2139,37 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DocStarTestConnection
    Description: Test connection to DocStar system.
    OperationID: DocStarTestConnection
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarTestConnection_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarTestConnection_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarTestConnection_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarTestConnection(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarTestConnection(requestBody:DocStarTestConnection_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarTestConnection_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarTestConnection", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarTestConnection_output)
           })
       .catch((error) => {
           reject(error)
@@ -1816,30 +2181,37 @@ export function post_DocStarTestConnection(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method DocStarTestConnectionCompany
    Description: Test connection to DocStar system.
    OperationID: DocStarTestConnectionCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarTestConnectionCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarTestConnectionCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarTestConnectionCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarTestConnectionCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarTestConnectionCompany(requestBody:DocStarTestConnectionCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarTestConnectionCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarTestConnectionCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarTestConnectionCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -1851,7 +2223,7 @@ export function post_DocStarTestConnectionCompany(requestBody:any, epicorHeaders
    Summary: Invoke method DocStarCreateCompanyFolder
    Description: Create folder for company in the DocStar system
    OperationID: DocStarCreateCompanyFolder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarCreateCompanyFolder_output
@@ -1864,15 +2236,22 @@ export function post_DocStarCreateCompanyFolder(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarCreateCompanyFolder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarCreateCompanyFolder", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarCreateCompanyFolder_output)
           })
       .catch((error) => {
           reject(error)
@@ -1884,30 +2263,37 @@ export function post_DocStarCreateCompanyFolder(epicorHeaders?:Headers){
    Summary: Invoke method DocStarCreateDocumentTypeFolder
    Description: Create folder for document type in the DocStar system
    OperationID: DocStarCreateDocumentTypeFolder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarCreateDocumentTypeFolder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarCreateDocumentTypeFolder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarCreateDocumentTypeFolder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarCreateDocumentTypeFolder(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarCreateDocumentTypeFolder(requestBody:DocStarCreateDocumentTypeFolder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarCreateDocumentTypeFolder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarCreateDocumentTypeFolder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarCreateDocumentTypeFolder_output)
           })
       .catch((error) => {
           reject(error)
@@ -1919,30 +2305,37 @@ export function post_DocStarCreateDocumentTypeFolder(requestBody:any, epicorHead
    Summary: Invoke method DocStarCreateDocumentFolder
    Description: Create folder for table inside document type folder in the DocStar system
    OperationID: DocStarCreateDocumentFolder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarCreateDocumentFolder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarCreateDocumentFolder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarCreateDocumentFolder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarCreateDocumentFolder(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarCreateDocumentFolder(requestBody:DocStarCreateDocumentFolder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarCreateDocumentFolder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarCreateDocumentFolder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarCreateDocumentFolder_output)
           })
       .catch((error) => {
           reject(error)
@@ -1954,30 +2347,37 @@ export function post_DocStarCreateDocumentFolder(requestBody:any, epicorHeaders?
    Summary: Invoke method DocStarCreateCustomFields
    Description: Create custom fields in DocStar system
    OperationID: DocStarCreateCustomFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarCreateCustomFields_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarCreateCustomFields_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarCreateCustomFields_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarCreateCustomFields(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarCreateCustomFields(requestBody:DocStarCreateCustomFields_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarCreateCustomFields_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarCreateCustomFields", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarCreateCustomFields_output)
           })
       .catch((error) => {
           reject(error)
@@ -1989,30 +2389,37 @@ export function post_DocStarCreateCustomFields(requestBody:any, epicorHeaders?:H
    Summary: Invoke method DocStarUploadFile
    Description: Upload file to DocStar system and store metadata
    OperationID: DocStarUploadFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarUploadFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarUploadFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarUploadFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarUploadFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarUploadFile(requestBody:DocStarUploadFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarUploadFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarUploadFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarUploadFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2024,30 +2431,37 @@ export function post_DocStarUploadFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DocStarUploadFileAsVersion
    Description: Upload file to DocStar system and store metadata
    OperationID: DocStarUploadFileAsVersion
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarUploadFileAsVersion_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarUploadFileAsVersion_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarUploadFileAsVersion_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarUploadFileAsVersion(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarUploadFileAsVersion(requestBody:DocStarUploadFileAsVersion_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarUploadFileAsVersion_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarUploadFileAsVersion", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarUploadFileAsVersion_output)
           })
       .catch((error) => {
           reject(error)
@@ -2058,30 +2472,37 @@ export function post_DocStarUploadFileAsVersion(requestBody:any, epicorHeaders?:
    /**  
    Summary: Invoke method DocStarDownloadFile
    OperationID: DocStarDownloadFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarDownloadFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarDownloadFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarDownloadFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarDownloadFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarDownloadFile(requestBody:DocStarDownloadFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarDownloadFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarDownloadFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarDownloadFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2092,30 +2513,37 @@ export function post_DocStarDownloadFile(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method DocStarDownloadNonERPFile
    OperationID: DocStarDownloadNonERPFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarDownloadNonERPFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarDownloadNonERPFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarDownloadNonERPFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarDownloadNonERPFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarDownloadNonERPFile(requestBody:DocStarDownloadNonERPFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarDownloadNonERPFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarDownloadNonERPFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarDownloadNonERPFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2127,30 +2555,37 @@ export function post_DocStarDownloadNonERPFile(requestBody:any, epicorHeaders?:H
    Summary: Invoke method DocStarUpdateMetadata
    Description: Update metadata for the file
    OperationID: DocStarUpdateMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarUpdateMetadata_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarUpdateMetadata_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarUpdateMetadata_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarUpdateMetadata(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarUpdateMetadata(requestBody:DocStarUpdateMetadata_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarUpdateMetadata_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarUpdateMetadata", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarUpdateMetadata_output)
           })
       .catch((error) => {
           reject(error)
@@ -2161,30 +2596,37 @@ export function post_DocStarUpdateMetadata(requestBody:any, epicorHeaders?:Heade
    /**  
    Summary: Invoke method DocStarGetMetadata
    OperationID: DocStarGetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarGetMetadata_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarGetMetadata_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarGetMetadata_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarGetMetadata(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarGetMetadata(requestBody:DocStarGetMetadata_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarGetMetadata_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarGetMetadata", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarGetMetadata_output)
           })
       .catch((error) => {
           reject(error)
@@ -2196,30 +2638,37 @@ export function post_DocStarGetMetadata(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method DocStarDeleteNonERPFile
    Description: Delete file to Recycle Bin
    OperationID: DocStarDeleteNonERPFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarDeleteNonERPFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarDeleteNonERPFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarDeleteNonERPFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarDeleteNonERPFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarDeleteNonERPFile(requestBody:DocStarDeleteNonERPFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarDeleteNonERPFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarDeleteNonERPFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarDeleteNonERPFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2231,30 +2680,37 @@ export function post_DocStarDeleteNonERPFile(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method DocStarDeleteFile
    Description: Delete file to Recycle Bin
    OperationID: DocStarDeleteFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarDeleteFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarDeleteFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarDeleteFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarDeleteFile(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarDeleteFile(requestBody:DocStarDeleteFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarDeleteFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarDeleteFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarDeleteFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2266,30 +2722,37 @@ export function post_DocStarDeleteFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DocStarFileExistsForTableRow
    Description: Check if docStar file with the same name already exists in the XFileRef attachment table for this Epicor table record
    OperationID: DocStarFileExistsForTableRow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarFileExistsForTableRow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarFileExistsForTableRow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarFileExistsForTableRow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarFileExistsForTableRow(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarFileExistsForTableRow(requestBody:DocStarFileExistsForTableRow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarFileExistsForTableRow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarFileExistsForTableRow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarFileExistsForTableRow_output)
           })
       .catch((error) => {
           reject(error)
@@ -2301,30 +2764,37 @@ export function post_DocStarFileExistsForTableRow(requestBody:any, epicorHeaders
    Summary: Invoke method DocStarCreateBrowserUrl
    Description: Builds a URL in DocStar which will be used to open the attachment within DocStar.
    OperationID: DocStarCreateBrowserUrl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DocStarCreateBrowserUrl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DocStarCreateBrowserUrl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DocStarCreateBrowserUrl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DocStarCreateBrowserUrl(requestBody:any, epicorHeaders?:Headers){
+export function post_DocStarCreateBrowserUrl(requestBody:DocStarCreateBrowserUrl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DocStarCreateBrowserUrl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DocStarCreateBrowserUrl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DocStarCreateBrowserUrl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2336,30 +2806,37 @@ export function post_DocStarCreateBrowserUrl(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method DropboxFileExists
    Description: Determines if the file exists on Dropbox using the given path.
    OperationID: DropboxFileExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DropboxFileExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DropboxFileExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DropboxFileExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DropboxFileExists(requestBody:any, epicorHeaders?:Headers){
+export function post_DropboxFileExists(requestBody:DropboxFileExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DropboxFileExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/DropboxFileExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DropboxFileExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -2371,30 +2848,37 @@ export function post_DropboxFileExists(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GoogleUpdateMetaData
    Description: Updates the file metadata.
    OperationID: GoogleUpdateMetaData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GoogleUpdateMetaData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GoogleUpdateMetaData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GoogleUpdateMetaData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GoogleUpdateMetaData(requestBody:any, epicorHeaders?:Headers){
+export function post_GoogleUpdateMetaData(requestBody:GoogleUpdateMetaData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GoogleUpdateMetaData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/GoogleUpdateMetaData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GoogleUpdateMetaData_output)
           })
       .catch((error) => {
           reject(error)
@@ -2406,30 +2890,37 @@ export function post_GoogleUpdateMetaData(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method SpUploadFile
    Description: Upload file to Sharepoint and store metadata
    OperationID: SpUploadFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpUploadFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpUploadFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpUploadFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpUploadFile(requestBody:any, epicorHeaders?:Headers){
+export function post_SpUploadFile(requestBody:SpUploadFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpUploadFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpUploadFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpUploadFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2441,30 +2932,37 @@ export function post_SpUploadFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SpDownloadFile
    Description: Download file and its metadata from SharePoint
    OperationID: SpDownloadFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpDownloadFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpDownloadFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpDownloadFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpDownloadFile(requestBody:any, epicorHeaders?:Headers){
+export function post_SpDownloadFile(requestBody:SpDownloadFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpDownloadFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpDownloadFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpDownloadFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2475,30 +2973,37 @@ export function post_SpDownloadFile(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method SpGetMetadata
    OperationID: SpGetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpGetMetadata_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpGetMetadata_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpGetMetadata_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpGetMetadata(requestBody:any, epicorHeaders?:Headers){
+export function post_SpGetMetadata(requestBody:SpGetMetadata_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpGetMetadata_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpGetMetadata", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpGetMetadata_output)
           })
       .catch((error) => {
           reject(error)
@@ -2510,30 +3015,37 @@ export function post_SpGetMetadata(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SpUpdateMetadata
    Description: Update metadata for Sharepoint file
    OperationID: SpUpdateMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpUpdateMetadata_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpUpdateMetadata_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpUpdateMetadata_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpUpdateMetadata(requestBody:any, epicorHeaders?:Headers){
+export function post_SpUpdateMetadata(requestBody:SpUpdateMetadata_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpUpdateMetadata_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpUpdateMetadata", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpUpdateMetadata_output)
           })
       .catch((error) => {
           reject(error)
@@ -2545,30 +3057,37 @@ export function post_SpUpdateMetadata(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SpDeleteFile
    Description: Delete file from SharePoint
    OperationID: SpDeleteFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpDeleteFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpDeleteFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpDeleteFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpDeleteFile(requestBody:any, epicorHeaders?:Headers){
+export function post_SpDeleteFile(requestBody:SpDeleteFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpDeleteFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpDeleteFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpDeleteFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2580,30 +3099,37 @@ export function post_SpDeleteFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SpFileExists
    Description: Check if file exists on the sharepoint site
    OperationID: SpFileExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpFileExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpFileExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpFileExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpFileExists(requestBody:any, epicorHeaders?:Headers){
+export function post_SpFileExists(requestBody:SpFileExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpFileExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpFileExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpFileExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -2615,30 +3141,37 @@ export function post_SpFileExists(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SpCreateDocumentLibrary
    Description: Create Sharepoint Document library.
    OperationID: SpCreateDocumentLibrary
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpCreateDocumentLibrary_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpCreateDocumentLibrary_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpCreateDocumentLibrary_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpCreateDocumentLibrary(requestBody:any, epicorHeaders?:Headers){
+export function post_SpCreateDocumentLibrary(requestBody:SpCreateDocumentLibrary_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpCreateDocumentLibrary_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpCreateDocumentLibrary", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpCreateDocumentLibrary_output)
           })
       .catch((error) => {
           reject(error)
@@ -2650,30 +3183,37 @@ export function post_SpCreateDocumentLibrary(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method SpCreateDocumentFolder
    Description: Create Sharepoint document folder for table.
    OperationID: SpCreateDocumentFolder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpCreateDocumentFolder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpCreateDocumentFolder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpCreateDocumentFolder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpCreateDocumentFolder(requestBody:any, epicorHeaders?:Headers){
+export function post_SpCreateDocumentFolder(requestBody:SpCreateDocumentFolder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpCreateDocumentFolder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpCreateDocumentFolder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpCreateDocumentFolder_output)
           })
       .catch((error) => {
           reject(error)
@@ -2685,30 +3225,37 @@ export function post_SpCreateDocumentFolder(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method SpCreateContentType
    Description: Create Sharepoint Content type.
    OperationID: SpCreateContentType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpCreateContentType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpCreateContentType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpCreateContentType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpCreateContentType(requestBody:any, epicorHeaders?:Headers){
+export function post_SpCreateContentType(requestBody:SpCreateContentType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpCreateContentType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpCreateContentType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpCreateContentType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2720,30 +3267,37 @@ export function post_SpCreateContentType(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method SpAddFieldToContentType
    Description: Add field to the Sharepoint content type. Security Manager access right is requried.
    OperationID: SpAddFieldToContentType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpAddFieldToContentType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpAddFieldToContentType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpAddFieldToContentType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpAddFieldToContentType(requestBody:any, epicorHeaders?:Headers){
+export function post_SpAddFieldToContentType(requestBody:SpAddFieldToContentType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpAddFieldToContentType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpAddFieldToContentType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpAddFieldToContentType_output)
           })
       .catch((error) => {
           reject(error)
@@ -2755,30 +3309,37 @@ export function post_SpAddFieldToContentType(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method SpTestConnection
    Description: Test connection to SharePoint
    OperationID: SpTestConnection
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpTestConnection_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpTestConnection_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpTestConnection_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpTestConnection(requestBody:any, epicorHeaders?:Headers){
+export function post_SpTestConnection(requestBody:SpTestConnection_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpTestConnection_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpTestConnection", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpTestConnection_output)
           })
       .catch((error) => {
           reject(error)
@@ -2790,30 +3351,37 @@ export function post_SpTestConnection(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SpTestConnectionCompany
    Description: Test connection to SharePoint
    OperationID: SpTestConnectionCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpTestConnectionCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpTestConnectionCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpTestConnectionCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpTestConnectionCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_SpTestConnectionCompany(requestBody:SpTestConnectionCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpTestConnectionCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpTestConnectionCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpTestConnectionCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -2825,30 +3393,37 @@ export function post_SpTestConnectionCompany(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method SpOnlineTestConnectionCompany
    Description: Test connection to SharePoint Online.
    OperationID: SpOnlineTestConnectionCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SpOnlineTestConnectionCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SpOnlineTestConnectionCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SpOnlineTestConnectionCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SpOnlineTestConnectionCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_SpOnlineTestConnectionCompany(requestBody:SpOnlineTestConnectionCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SpOnlineTestConnectionCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.AttachmentSvc/SpOnlineTestConnectionCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SpOnlineTestConnectionCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -2859,21 +3434,38 @@ export function post_SpOnlineTestConnectionCompany(requestBody:any, epicorHeader
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AttachmentCredentialsRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_AttachmentCredentialsRow[],
+   "value":Ice_Tablesets_AttachmentCredentialsRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_XFileAttchListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_XFileAttchListRow[],
+   "value":Ice_Tablesets_XFileAttchListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_XFileAttchRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_XFileAttchRow[],
+   "value":Ice_Tablesets_XFileAttchRow,
 }
 
 export interface Ice_Tablesets_AttachmentCredentialsRow{
@@ -3003,6 +3595,23 @@ The usage of this field is dependent record type.  */
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -3618,7 +4227,7 @@ export interface GetNewXFileAttch_input{
 export interface GetNewXFileAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_AttachmentTableset[],
+   ds:Ice_Tablesets_AttachmentTableset,
 }
 }
 
@@ -4218,7 +4827,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtAttachmentTableset[],
+   ds:Ice_Tablesets_UpdExtAttachmentTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4247,7 +4856,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_AttachmentTableset[],
+   ds:Ice_Tablesets_AttachmentTableset,
 }
 }
 

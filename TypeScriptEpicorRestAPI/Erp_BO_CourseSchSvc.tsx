@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.CourseSchSvc
 // Description: Course Schedule Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchRow
    */  
 export function get_CourseSches(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_CourseSches(select?:string, expand?:string, filter?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CourseSchRow)
           })
@@ -118,15 +158,15 @@ export function get_CourseSches(select?:string, expand?:string, filter?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CourseSches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CourseSchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CourseSchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CourseSchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CourseSchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CourseSches(requestBody:any, epicorHeaders?:Headers){
+export function post_CourseSches(requestBody:Erp_Tablesets_CourseSchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_CourseSches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -162,10 +209,10 @@ export function post_CourseSches(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CourseSchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CourseSchRow
    */  
 export function get_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -180,7 +227,14 @@ export function get_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CourseSchRow)
           })
@@ -199,15 +253,15 @@ export function get_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate(
       @param RevisionCode Desc: RevisionCode   Required: True   Allow empty value : True
       @param StartDate Desc: StartDate   Required: True   Allow empty value : True
       @param EndDate Desc: EndDate   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CourseSchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CourseSchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, requestBody:Erp_Tablesets_CourseSchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -221,7 +275,14 @@ export function patch_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDat
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -240,7 +301,7 @@ export function patch_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDat
       @param RevisionCode Desc: RevisionCode   Required: True   Allow empty value : True
       @param StartDate Desc: StartDate   Required: True   Allow empty value : True
       @param EndDate Desc: EndDate   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -259,7 +320,14 @@ export function delete_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -285,10 +353,10 @@ export function delete_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchAttdRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchAttdRow
    */  
 export function get_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate_CourseSchAttds(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -303,7 +371,14 @@ export function get_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CourseSchAttdRow)
           })
@@ -326,10 +401,10 @@ export function get_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate_
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CourseSchAttdRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CourseSchAttdRow
    */  
 export function get_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDate_EmpID(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, EmpID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -344,7 +419,14 @@ export function get_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CourseSchAttdRow)
           })
@@ -365,10 +447,10 @@ export function get_CourseSches_Company_CourseID_RevisionCode_StartDate_EndDate_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchAttdRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchAttdRow
    */  
 export function get_CourseSchAttds(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -383,7 +465,14 @@ export function get_CourseSchAttds(select?:string, expand?:string, filter?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CourseSchAttdRow)
           })
@@ -397,15 +486,15 @@ export function get_CourseSchAttds(select?:string, expand?:string, filter?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CourseSchAttds
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CourseSchAttdRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CourseSchAttdRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CourseSchAttdRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CourseSchAttdRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CourseSchAttds(requestBody:any, epicorHeaders?:Headers){
+export function post_CourseSchAttds(requestBody:Erp_Tablesets_CourseSchAttdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -419,7 +508,14 @@ export function post_CourseSchAttds(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -442,10 +538,10 @@ export function post_CourseSchAttds(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CourseSchAttdRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CourseSchAttdRow
    */  
 export function get_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDate_EmpID(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, EmpID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -460,7 +556,14 @@ export function get_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CourseSchAttdRow)
           })
@@ -480,15 +583,15 @@ export function get_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDa
       @param StartDate Desc: StartDate   Required: True   Allow empty value : True
       @param EndDate Desc: EndDate   Required: True   Allow empty value : True
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CourseSchAttdRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CourseSchAttdRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDate_EmpID(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, EmpID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDate_EmpID(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, EmpID:string, requestBody:Erp_Tablesets_CourseSchAttdRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -502,7 +605,14 @@ export function patch_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_End
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -522,7 +632,7 @@ export function patch_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_End
       @param StartDate Desc: StartDate   Required: True   Allow empty value : True
       @param EndDate Desc: EndDate   Required: True   Allow empty value : True
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -541,7 +651,14 @@ export function delete_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_En
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -567,10 +684,10 @@ export function delete_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_En
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchAttdAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchAttdAttchRow
    */  
 export function get_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDate_EmpID_CourseSchAttdAttches(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, EmpID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -585,7 +702,14 @@ export function get_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CourseSchAttdAttchRow)
           })
@@ -608,10 +732,10 @@ export function get_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDa
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CourseSchAttdAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CourseSchAttdAttchRow
    */  
 export function get_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDate_EmpID_CourseSchAttdAttches_Company_CourseID_RevisionCode_StartDate_EndDate_EmpID_DrawingSeq(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, EmpID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -626,7 +750,14 @@ export function get_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CourseSchAttdAttchRow)
           })
@@ -646,10 +777,10 @@ export function get_CourseSchAttds_Company_CourseID_RevisionCode_StartDate_EndDa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchAttdAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchAttdAttchRow
    */  
 export function get_CourseSchAttdAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -664,7 +795,14 @@ export function get_CourseSchAttdAttches(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CourseSchAttdAttchRow)
           })
@@ -678,15 +816,15 @@ export function get_CourseSchAttdAttches(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_CourseSchAttdAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CourseSchAttdAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.CourseSchAttdAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.CourseSchAttdAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.CourseSchAttdAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CourseSchAttdAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_CourseSchAttdAttches(requestBody:Erp_Tablesets_CourseSchAttdAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -700,7 +838,14 @@ export function post_CourseSchAttdAttches(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -723,10 +868,10 @@ export function post_CourseSchAttdAttches(requestBody:any, epicorHeaders?:Header
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.CourseSchAttdAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.CourseSchAttdAttchRow
    */  
 export function get_CourseSchAttdAttches_Company_CourseID_RevisionCode_StartDate_EndDate_EmpID_DrawingSeq(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, EmpID:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -741,7 +886,14 @@ export function get_CourseSchAttdAttches_Company_CourseID_RevisionCode_StartDate
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_CourseSchAttdAttchRow)
           })
@@ -762,15 +914,15 @@ export function get_CourseSchAttdAttches_Company_CourseID_RevisionCode_StartDate
       @param EndDate Desc: EndDate   Required: True   Allow empty value : True
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.CourseSchAttdAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.CourseSchAttdAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_CourseSchAttdAttches_Company_CourseID_RevisionCode_StartDate_EndDate_EmpID_DrawingSeq(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, EmpID:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_CourseSchAttdAttches_Company_CourseID_RevisionCode_StartDate_EndDate_EmpID_DrawingSeq(Company:string, CourseID:string, RevisionCode:string, StartDate:string, EndDate:string, EmpID:string, DrawingSeq:string, requestBody:Erp_Tablesets_CourseSchAttdAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -784,7 +936,14 @@ export function patch_CourseSchAttdAttches_Company_CourseID_RevisionCode_StartDa
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -805,7 +964,7 @@ export function patch_CourseSchAttdAttches_Company_CourseID_RevisionCode_StartDa
       @param EndDate Desc: EndDate   Required: True   Allow empty value : True
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -824,7 +983,14 @@ export function delete_CourseSchAttdAttches_Company_CourseID_RevisionCode_StartD
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -844,10 +1010,10 @@ export function delete_CourseSchAttdAttches_Company_CourseID_RevisionCode_StartD
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.CourseSchListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -862,7 +1028,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CourseSchListRow)
           })
@@ -874,6 +1047,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -887,7 +1077,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -947,15 +1137,22 @@ export function get_GetRows(whereClauseCourseSch:string, whereClauseCourseSchAtt
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -971,7 +1168,7 @@ export function get_GetRows(whereClauseCourseSch:string, whereClauseCourseSchAtt
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1022,15 +1219,22 @@ export function get_GetByID(courseID:string, revisionCode:string, startDate:stri
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1045,7 +1249,7 @@ export function get_GetByID(courseID:string, revisionCode:string, startDate:stri
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1087,15 +1291,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1107,30 +1318,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method InstrTypeChanged
    Description: Method to call when changing the InstrType field.
    OperationID: InstrTypeChanged
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InstrTypeChanged_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InstrTypeChanged_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InstrTypeChanged_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InstrTypeChanged(requestBody:any, epicorHeaders?:Headers){
+export function post_InstrTypeChanged(requestBody:InstrTypeChanged_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InstrTypeChanged_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/InstrTypeChanged", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InstrTypeChanged_output)
           })
       .catch((error) => {
           reject(error)
@@ -1142,30 +1360,37 @@ export function post_InstrTypeChanged(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CourseResultChanged
    Description: Method to call when changing the CourseResult field.
    OperationID: CourseResultChanged
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CourseResultChanged_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CourseResultChanged_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CourseResultChanged_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CourseResultChanged(requestBody:any, epicorHeaders?:Headers){
+export function post_CourseResultChanged(requestBody:CourseResultChanged_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CourseResultChanged_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/CourseResultChanged", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CourseResultChanged_output)
           })
       .catch((error) => {
           reject(error)
@@ -1177,30 +1402,37 @@ export function post_CourseResultChanged(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method CourseSchAttdEmpIDChanging
    Description: Method to call when changing Course Schedule Attendee employee
    OperationID: CourseSchAttdEmpIDChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CourseSchAttdEmpIDChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CourseSchAttdEmpIDChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CourseSchAttdEmpIDChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CourseSchAttdEmpIDChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_CourseSchAttdEmpIDChanging(requestBody:CourseSchAttdEmpIDChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CourseSchAttdEmpIDChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/CourseSchAttdEmpIDChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CourseSchAttdEmpIDChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -1212,30 +1444,37 @@ export function post_CourseSchAttdEmpIDChanging(requestBody:any, epicorHeaders?:
    Summary: Invoke method OnStartDateChanging
    Description: Method to call when changing the StartDate field.
    OperationID: OnStartDateChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnStartDateChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnStartDateChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnStartDateChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnStartDateChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_OnStartDateChanging(requestBody:OnStartDateChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnStartDateChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/OnStartDateChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnStartDateChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -1247,30 +1486,37 @@ export function post_OnStartDateChanging(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method CourseSchEmpIDChanging
    Description: Method to call when changing Course Schedule employee
    OperationID: CourseSchEmpIDChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CourseSchEmpIDChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CourseSchEmpIDChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CourseSchEmpIDChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CourseSchEmpIDChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_CourseSchEmpIDChanging(requestBody:CourseSchEmpIDChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CourseSchEmpIDChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/CourseSchEmpIDChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CourseSchEmpIDChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -1282,30 +1528,37 @@ export function post_CourseSchEmpIDChanging(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method CourseSchSupplierIDChanging
    Description: Method to call when changing Course Schedule supplier
    OperationID: CourseSchSupplierIDChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CourseSchSupplierIDChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CourseSchSupplierIDChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CourseSchSupplierIDChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CourseSchSupplierIDChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_CourseSchSupplierIDChanging(requestBody:CourseSchSupplierIDChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CourseSchSupplierIDChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/CourseSchSupplierIDChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CourseSchSupplierIDChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -1317,30 +1570,37 @@ export function post_CourseSchSupplierIDChanging(requestBody:any, epicorHeaders?
    Summary: Invoke method CourseSchCustIDChanging
    Description: Method to call when changing Course Schedule customer
    OperationID: CourseSchCustIDChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CourseSchCustIDChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CourseSchCustIDChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CourseSchCustIDChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CourseSchCustIDChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_CourseSchCustIDChanging(requestBody:CourseSchCustIDChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CourseSchCustIDChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/CourseSchCustIDChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CourseSchCustIDChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -1352,7 +1612,7 @@ export function post_CourseSchCustIDChanging(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetInstrTypes
    Description: Returns instructor type list
    OperationID: GetInstrTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInstrTypes_output
@@ -1365,15 +1625,22 @@ export function post_GetInstrTypes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInstrTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/GetInstrTypes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInstrTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -1385,30 +1652,37 @@ export function post_GetInstrTypes(epicorHeaders?:Headers){
    Summary: Invoke method AddAttendees
    Description: The method for assigning employees to the scheduled course.
    OperationID: AddAttendees
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddAttendees_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddAttendees_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddAttendees_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddAttendees(requestBody:any, epicorHeaders?:Headers){
+export function post_AddAttendees(requestBody:AddAttendees_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddAttendees_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/AddAttendees", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddAttendees_output)
           })
       .catch((error) => {
           reject(error)
@@ -1420,30 +1694,37 @@ export function post_AddAttendees(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckFreeSpotsForCourseAttendee
    Description: The method for assigning employees to the scheduled course.
    OperationID: CheckFreeSpotsForCourseAttendee
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckFreeSpotsForCourseAttendee_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckFreeSpotsForCourseAttendee_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckFreeSpotsForCourseAttendee_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckFreeSpotsForCourseAttendee(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckFreeSpotsForCourseAttendee(requestBody:CheckFreeSpotsForCourseAttendee_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckFreeSpotsForCourseAttendee_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/CheckFreeSpotsForCourseAttendee", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckFreeSpotsForCourseAttendee_output)
           })
       .catch((error) => {
           reject(error)
@@ -1455,30 +1736,37 @@ export function post_CheckFreeSpotsForCourseAttendee(requestBody:any, epicorHead
    Summary: Invoke method GetNewCourseSch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCourseSch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCourseSch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCourseSch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCourseSch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCourseSch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCourseSch(requestBody:GetNewCourseSch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCourseSch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/GetNewCourseSch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCourseSch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1490,30 +1778,37 @@ export function post_GetNewCourseSch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCourseSchAttd
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCourseSchAttd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCourseSchAttd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCourseSchAttd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCourseSchAttd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCourseSchAttd(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCourseSchAttd(requestBody:GetNewCourseSchAttd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCourseSchAttd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/GetNewCourseSchAttd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCourseSchAttd_output)
           })
       .catch((error) => {
           reject(error)
@@ -1525,30 +1820,37 @@ export function post_GetNewCourseSchAttd(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewCourseSchAttdAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewCourseSchAttdAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCourseSchAttdAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCourseSchAttdAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCourseSchAttdAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCourseSchAttdAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCourseSchAttdAttch(requestBody:GetNewCourseSchAttdAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCourseSchAttdAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/GetNewCourseSchAttdAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCourseSchAttdAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1560,30 +1862,37 @@ export function post_GetNewCourseSchAttdAttch(requestBody:any, epicorHeaders?:He
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1595,7 +1904,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1619,15 +1928,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1639,7 +1955,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1663,15 +1979,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1683,30 +2006,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1718,30 +2048,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.CourseSchSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1752,26 +2089,43 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CourseSchAttdAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CourseSchAttdAttchRow[],
+   "value":Erp_Tablesets_CourseSchAttdAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CourseSchAttdRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CourseSchAttdRow[],
+   "value":Erp_Tablesets_CourseSchAttdRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CourseSchListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CourseSchListRow[],
+   "value":Erp_Tablesets_CourseSchListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_CourseSchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_CourseSchRow[],
+   "value":Erp_Tablesets_CourseSchRow,
 }
 
 export interface Erp_Tablesets_CourseSchAttdAttchRow{
@@ -1936,6 +2290,23 @@ export interface Erp_Tablesets_CourseSchRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1963,7 +2334,7 @@ export interface AddAttendees_input{
 export interface AddAttendees_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2007,7 +2378,7 @@ export interface CourseResultChanged_input{
 export interface CourseResultChanged_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2023,7 +2394,7 @@ export interface CourseSchAttdEmpIDChanging_input{
 export interface CourseSchAttdEmpIDChanging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2039,7 +2410,7 @@ export interface CourseSchCustIDChanging_input{
 export interface CourseSchCustIDChanging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2055,7 +2426,7 @@ export interface CourseSchEmpIDChanging_input{
 export interface CourseSchEmpIDChanging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2071,7 +2442,7 @@ export interface CourseSchSupplierIDChanging_input{
 export interface CourseSchSupplierIDChanging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2353,7 +2724,7 @@ export interface GetNewCourseSchAttdAttch_input{
 export interface GetNewCourseSchAttdAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2375,7 +2746,7 @@ export interface GetNewCourseSchAttd_input{
 export interface GetNewCourseSchAttd_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2395,7 +2766,7 @@ export interface GetNewCourseSch_input{
 export interface GetNewCourseSch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2471,7 +2842,7 @@ export interface InstrTypeChanged_input{
 export interface InstrTypeChanged_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2488,7 +2859,7 @@ export interface OnStartDateChanging_input{
 export interface OnStartDateChanging_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 
@@ -2507,7 +2878,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtCourseSchTableset[],
+   ds:Erp_Tablesets_UpdExtCourseSchTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2522,7 +2893,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CourseSchTableset[],
+   ds:Erp_Tablesets_CourseSchTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.EmpYTDLoadSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -86,30 +136,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Description: Deletes the PRCheck record.  The delete trigger for PRCheck deletes the
 PRChkDtl, PRChkTax and PRChkDed records.
    OperationID: DeleteEmpYTDLoad
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteEmpYTDLoad_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteEmpYTDLoad_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteEmpYTDLoad_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteEmpYTDLoad(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteEmpYTDLoad(requestBody:DeleteEmpYTDLoad_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteEmpYTDLoad_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.EmpYTDLoadSvc/DeleteEmpYTDLoad", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteEmpYTDLoad_output)
           })
       .catch((error) => {
           reject(error)
@@ -121,30 +178,37 @@ export function post_DeleteEmpYTDLoad(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetEmpYTDLoadForEmpID
    Description: Gets the data for Deductions, Earnings, and Tax for a specific employee id.
    OperationID: GetEmpYTDLoadForEmpID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetEmpYTDLoadForEmpID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetEmpYTDLoadForEmpID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEmpYTDLoadForEmpID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetEmpYTDLoadForEmpID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetEmpYTDLoadForEmpID(requestBody:GetEmpYTDLoadForEmpID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEmpYTDLoadForEmpID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.EmpYTDLoadSvc/GetEmpYTDLoadForEmpID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEmpYTDLoadForEmpID_output)
           })
       .catch((error) => {
           reject(error)
@@ -157,30 +221,37 @@ export function post_GetEmpYTDLoadForEmpID(requestBody:any, epicorHeaders?:Heade
    Description: Gets the data for the Deductions, Earnings and Tax temp tables based on the
 employee ID's from the Employee ID temp table.
    OperationID: GetEmpYTDLoad
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetEmpYTDLoad_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetEmpYTDLoad_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEmpYTDLoad_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetEmpYTDLoad(requestBody:any, epicorHeaders?:Headers){
+export function post_GetEmpYTDLoad(requestBody:GetEmpYTDLoad_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEmpYTDLoad_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.EmpYTDLoadSvc/GetEmpYTDLoad", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEmpYTDLoad_output)
           })
       .catch((error) => {
           reject(error)
@@ -193,7 +264,7 @@ export function post_GetEmpYTDLoad(requestBody:any, epicorHeaders?:Headers){
    Description: This method is only to be used in the BL Tester to get a EmployeeList
 record for employee 100.
    OperationID: GetNewEmployeeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewEmployeeList_output
@@ -206,15 +277,22 @@ export function post_GetNewEmployeeList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewEmployeeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.EmpYTDLoadSvc/GetNewEmployeeList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewEmployeeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -227,30 +305,37 @@ export function post_GetNewEmployeeList(epicorHeaders?:Headers){
    Description: Updates the appropriate tables with the data for the Deductions, Earnings and
 Tax temp tables.
    OperationID: SetEmpYTDLoad
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetEmpYTDLoad_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetEmpYTDLoad_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetEmpYTDLoad_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetEmpYTDLoad(requestBody:any, epicorHeaders?:Headers){
+export function post_SetEmpYTDLoad(requestBody:SetEmpYTDLoad_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetEmpYTDLoad_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.EmpYTDLoadSvc/SetEmpYTDLoad", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetEmpYTDLoad_output)
           })
       .catch((error) => {
           reject(error)
@@ -261,7 +346,7 @@ export function post_SetEmpYTDLoad(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetPRPeriodEndDate
    OperationID: GetPRPeriodEndDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPRPeriodEndDate_output
@@ -274,15 +359,22 @@ export function post_GetPRPeriodEndDate(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPRPeriodEndDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.EmpYTDLoadSvc/GetPRPeriodEndDate", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPRPeriodEndDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -294,30 +386,37 @@ export function post_GetPRPeriodEndDate(epicorHeaders?:Headers){
    Summary: Invoke method GetEmpYTDLoadTotals
    Description: Calculates Employee YTD Load totals and returns the values in a dataset
    OperationID: GetEmpYTDLoadTotals
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetEmpYTDLoadTotals_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetEmpYTDLoadTotals_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEmpYTDLoadTotals_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetEmpYTDLoadTotals(requestBody:any, epicorHeaders?:Headers){
+export function post_GetEmpYTDLoadTotals(requestBody:GetEmpYTDLoadTotals_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEmpYTDLoadTotals_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.EmpYTDLoadSvc/GetEmpYTDLoadTotals", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEmpYTDLoadTotals_output)
           })
       .catch((error) => {
           reject(error)
@@ -328,11 +427,45 @@ export function post_GetEmpYTDLoadTotals(requestBody:any, epicorHeaders?:Headers
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -494,7 +627,7 @@ export interface GetEmpYTDLoad_output{
    returnObj:Erp_Tablesets_EmpYTDLoadTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_EmployeeIDListTableset[],
+   ds:Erp_Tablesets_EmployeeIDListTableset,
 }
 }
 
@@ -541,7 +674,7 @@ export interface SetEmpYTDLoad_input{
 export interface SetEmpYTDLoad_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_EmpYTDLoadTableset[],
+   ds:Erp_Tablesets_EmpYTDLoadTableset,
 }
 }
 

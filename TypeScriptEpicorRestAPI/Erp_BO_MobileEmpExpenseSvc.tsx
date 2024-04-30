@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.MobileEmpExpenseSvc
 // Description: Mobile Employee Expense Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseRow
    */  
 export function get_MobileEmpExpenses(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_MobileEmpExpenses(select?:string, expand?:string, filter?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileEmpExpenseRow)
           })
@@ -118,15 +158,15 @@ export function get_MobileEmpExpenses(select?:string, expand?:string, filter?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileEmpExpenses
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileEmpExpenseRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileEmpExpenses(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileEmpExpenses(requestBody:Erp_Tablesets_MobileEmpExpenseRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_MobileEmpExpenses(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -160,10 +207,10 @@ export function post_MobileEmpExpenses(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileEmpExpenseRow
    */  
 export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum(Company:string, EmpID:string, EmpExpenseNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -178,7 +225,14 @@ export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileEmpExpenseRow)
           })
@@ -195,15 +249,15 @@ export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum(Company:string
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param EmpExpenseNum Desc: EmpExpenseNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileEmpExpenses_Company_EmpID_EmpExpenseNum(Company:string, EmpID:string, EmpExpenseNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileEmpExpenses_Company_EmpID_EmpExpenseNum(Company:string, EmpID:string, EmpExpenseNum:string, requestBody:Erp_Tablesets_MobileEmpExpenseRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_MobileEmpExpenses_Company_EmpID_EmpExpenseNum(Company:stri
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -234,7 +295,7 @@ export function patch_MobileEmpExpenses_Company_EmpID_EmpExpenseNum(Company:stri
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param EmpExpenseNum Desc: EmpExpenseNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -253,7 +314,14 @@ export function delete_MobileEmpExpenses_Company_EmpID_EmpExpenseNum(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -276,10 +344,10 @@ export function delete_MobileEmpExpenses_Company_EmpID_EmpExpenseNum(Company:str
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseCommentRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseCommentRow
    */  
 export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpenseComments(Company:string, EmpID:string, EmpExpenseNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -294,7 +362,14 @@ export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpen
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileEmpExpenseCommentRow)
           })
@@ -314,10 +389,10 @@ export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpen
       @param CommentNum Desc: CommentNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseCommentRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileEmpExpenseCommentRow
    */  
 export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpenseComments_Company_EmpID_EmpExpenseNum_CommentNum(Company:string, EmpID:string, EmpExpenseNum:string, CommentNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -332,7 +407,14 @@ export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpen
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileEmpExpenseCommentRow)
           })
@@ -355,10 +437,10 @@ export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpen
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseAttchRow
    */  
 export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpenseAttches(Company:string, EmpID:string, EmpExpenseNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -373,7 +455,14 @@ export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpen
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileEmpExpenseAttchRow)
           })
@@ -393,10 +482,10 @@ export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpen
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileEmpExpenseAttchRow
    */  
 export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpenseAttches_Company_EmpID_EmpExpenseNum_DrawingSeq(Company:string, EmpID:string, EmpExpenseNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -411,7 +500,14 @@ export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpen
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileEmpExpenseAttchRow)
           })
@@ -431,10 +527,10 @@ export function get_MobileEmpExpenses_Company_EmpID_EmpExpenseNum_MobileEmpExpen
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseCommentRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseCommentRow
    */  
 export function get_MobileEmpExpenseComments(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -449,7 +545,14 @@ export function get_MobileEmpExpenseComments(select?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileEmpExpenseCommentRow)
           })
@@ -463,15 +566,15 @@ export function get_MobileEmpExpenseComments(select?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileEmpExpenseComments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseCommentRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseCommentRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseCommentRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileEmpExpenseCommentRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileEmpExpenseComments(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileEmpExpenseComments(requestBody:Erp_Tablesets_MobileEmpExpenseCommentRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -485,7 +588,14 @@ export function post_MobileEmpExpenseComments(requestBody:any, epicorHeaders?:He
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -505,10 +615,10 @@ export function post_MobileEmpExpenseComments(requestBody:any, epicorHeaders?:He
       @param CommentNum Desc: CommentNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseCommentRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileEmpExpenseCommentRow
    */  
 export function get_MobileEmpExpenseComments_Company_EmpID_EmpExpenseNum_CommentNum(Company:string, EmpID:string, EmpExpenseNum:string, CommentNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -523,7 +633,14 @@ export function get_MobileEmpExpenseComments_Company_EmpID_EmpExpenseNum_Comment
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileEmpExpenseCommentRow)
           })
@@ -541,15 +658,15 @@ export function get_MobileEmpExpenseComments_Company_EmpID_EmpExpenseNum_Comment
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param EmpExpenseNum Desc: EmpExpenseNum   Required: True
       @param CommentNum Desc: CommentNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseCommentRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseCommentRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileEmpExpenseComments_Company_EmpID_EmpExpenseNum_CommentNum(Company:string, EmpID:string, EmpExpenseNum:string, CommentNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileEmpExpenseComments_Company_EmpID_EmpExpenseNum_CommentNum(Company:string, EmpID:string, EmpExpenseNum:string, CommentNum:string, requestBody:Erp_Tablesets_MobileEmpExpenseCommentRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -563,7 +680,14 @@ export function patch_MobileEmpExpenseComments_Company_EmpID_EmpExpenseNum_Comme
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -581,7 +705,7 @@ export function patch_MobileEmpExpenseComments_Company_EmpID_EmpExpenseNum_Comme
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param EmpExpenseNum Desc: EmpExpenseNum   Required: True
       @param CommentNum Desc: CommentNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -600,7 +724,14 @@ export function delete_MobileEmpExpenseComments_Company_EmpID_EmpExpenseNum_Comm
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -620,10 +751,10 @@ export function delete_MobileEmpExpenseComments_Company_EmpID_EmpExpenseNum_Comm
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseAttchRow
    */  
 export function get_MobileEmpExpenseAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -638,7 +769,14 @@ export function get_MobileEmpExpenseAttches(select?:string, filter?:string, orde
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileEmpExpenseAttchRow)
           })
@@ -652,15 +790,15 @@ export function get_MobileEmpExpenseAttches(select?:string, filter?:string, orde
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileEmpExpenseAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileEmpExpenseAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileEmpExpenseAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileEmpExpenseAttches(requestBody:Erp_Tablesets_MobileEmpExpenseAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -674,7 +812,14 @@ export function post_MobileEmpExpenseAttches(requestBody:any, epicorHeaders?:Hea
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -694,10 +839,10 @@ export function post_MobileEmpExpenseAttches(requestBody:any, epicorHeaders?:Hea
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileEmpExpenseAttchRow
    */  
 export function get_MobileEmpExpenseAttches_Company_EmpID_EmpExpenseNum_DrawingSeq(Company:string, EmpID:string, EmpExpenseNum:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -712,7 +857,14 @@ export function get_MobileEmpExpenseAttches_Company_EmpID_EmpExpenseNum_DrawingS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileEmpExpenseAttchRow)
           })
@@ -730,15 +882,15 @@ export function get_MobileEmpExpenseAttches_Company_EmpID_EmpExpenseNum_DrawingS
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param EmpExpenseNum Desc: EmpExpenseNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileEmpExpenseAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileEmpExpenseAttches_Company_EmpID_EmpExpenseNum_DrawingSeq(Company:string, EmpID:string, EmpExpenseNum:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileEmpExpenseAttches_Company_EmpID_EmpExpenseNum_DrawingSeq(Company:string, EmpID:string, EmpExpenseNum:string, DrawingSeq:string, requestBody:Erp_Tablesets_MobileEmpExpenseAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -752,7 +904,14 @@ export function patch_MobileEmpExpenseAttches_Company_EmpID_EmpExpenseNum_Drawin
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -770,7 +929,7 @@ export function patch_MobileEmpExpenseAttches_Company_EmpID_EmpExpenseNum_Drawin
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param EmpExpenseNum Desc: EmpExpenseNum   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -789,7 +948,14 @@ export function delete_MobileEmpExpenseAttches_Company_EmpID_EmpExpenseNum_Drawi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -809,10 +975,10 @@ export function delete_MobileEmpExpenseAttches_Company_EmpID_EmpExpenseNum_Drawi
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileApproverListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileApproverListRow
    */  
 export function get_MobileApproverLists(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -827,7 +993,14 @@ export function get_MobileApproverLists(select?:string, filter?:string, orderby?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileApproverListRow)
           })
@@ -841,15 +1014,15 @@ export function get_MobileApproverLists(select?:string, filter?:string, orderby?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_MobileApproverLists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.MobileApproverListRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileApproverLists(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileApproverLists(requestBody:Erp_Tablesets_MobileApproverListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -863,7 +1036,14 @@ export function post_MobileApproverLists(requestBody:any, epicorHeaders?:Headers
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -880,10 +1060,10 @@ export function post_MobileApproverLists(requestBody:any, epicorHeaders?:Headers
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.MobileApproverListRow
    */  
 export function get_MobileApproverLists_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -898,7 +1078,14 @@ export function get_MobileApproverLists_SysRowID(SysRowID:string, select?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_MobileApproverListRow)
           })
@@ -913,15 +1100,15 @@ export function get_MobileApproverLists_SysRowID(SysRowID:string, select?:string
    Description: Calls UpdateExt to update MobileApproverList. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_MobileApproverList
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.MobileApproverListRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_MobileApproverLists_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_MobileApproverLists_SysRowID(SysRowID:string, requestBody:Erp_Tablesets_MobileApproverListRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -935,7 +1122,14 @@ export function patch_MobileApproverLists_SysRowID(SysRowID:string, requestBody:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -950,7 +1144,7 @@ export function patch_MobileApproverLists_SysRowID(SysRowID:string, requestBody:
    Description: Call UpdateExt to delete MobileApproverList item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_MobileApproverList
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -969,7 +1163,14 @@ export function delete_MobileApproverLists_SysRowID(SysRowID:string, epicorHeade
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -989,10 +1190,10 @@ export function delete_MobileApproverLists_SysRowID(SysRowID:string, epicorHeade
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.MobileEmpExpenseListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1007,7 +1208,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileEmpExpenseListRow)
           })
@@ -1019,6 +1227,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1033,7 +1258,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1102,15 +1327,22 @@ export function get_GetRows(whereClauseMobileEmpExpense:string, whereClauseMobil
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1124,7 +1356,7 @@ export function get_GetRows(whereClauseMobileEmpExpense:string, whereClauseMobil
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1157,15 +1389,22 @@ export function get_GetByID(empID:string, empExpenseNum:string, epicorHeaders?:H
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1180,7 +1419,7 @@ export function get_GetByID(empID:string, empExpenseNum:string, epicorHeaders?:H
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1222,15 +1461,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1242,30 +1488,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetMobileEmpExpenseAttchs
    Description: Custom Method to retrieve only the MobileEmpExpenseAttch records for the current expense
    OperationID: GetMobileEmpExpenseAttchs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMobileEmpExpenseAttchs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMobileEmpExpenseAttchs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMobileEmpExpenseAttchs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMobileEmpExpenseAttchs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMobileEmpExpenseAttchs(requestBody:GetMobileEmpExpenseAttchs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMobileEmpExpenseAttchs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetMobileEmpExpenseAttchs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMobileEmpExpenseAttchs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1277,30 +1530,37 @@ export function post_GetMobileEmpExpenseAttchs(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetMobileEmpExpenseComments
    Description: Custom Method to retrieve only the MobileEmpExpenseComment records for the current expense
    OperationID: GetMobileEmpExpenseComments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMobileEmpExpenseComments_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMobileEmpExpenseComments_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMobileEmpExpenseComments_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMobileEmpExpenseComments(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMobileEmpExpenseComments(requestBody:GetMobileEmpExpenseComments_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMobileEmpExpenseComments_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetMobileEmpExpenseComments", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMobileEmpExpenseComments_output)
           })
       .catch((error) => {
           reject(error)
@@ -1312,30 +1572,37 @@ export function post_GetMobileEmpExpenseComments(requestBody:any, epicorHeaders?
    Summary: Invoke method MobileGetApprovalStatus
    Description: Populates the MobileApproverList Temp Table with the current expense's approver data.
    OperationID: MobileGetApprovalStatus
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetApprovalStatus_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetApprovalStatus_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetApprovalStatus_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetApprovalStatus(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetApprovalStatus(requestBody:MobileGetApprovalStatus_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetApprovalStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileGetApprovalStatus", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetApprovalStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -1347,30 +1614,37 @@ export function post_MobileGetApprovalStatus(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method MobileGetByID
    Description: GetByID method
    OperationID: MobileGetByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetByID(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetByID(requestBody:MobileGetByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileGetByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1382,30 +1656,37 @@ export function post_MobileGetByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileGetRows
    Description: Returns MobileEmpExpense dataset containing all rows that satisfy the where clauses
    OperationID: MobileGetRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetRows(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetRows(requestBody:MobileGetRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileGetRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1417,30 +1698,37 @@ export function post_MobileGetRows(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileGetRowsApprover
    Description: Retrieves all approver expenses to be approved / rejected / recalled from approval.
    OperationID: MobileGetRowsApprover
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetRowsApprover_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetRowsApprover_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetRowsApprover_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetRowsApprover(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetRowsApprover(requestBody:MobileGetRowsApprover_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetRowsApprover_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileGetRowsApprover", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetRowsApprover_output)
           })
       .catch((error) => {
           reject(error)
@@ -1452,30 +1740,37 @@ export function post_MobileGetRowsApprover(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method MobileGetList
    Description: Get List method
    OperationID: MobileGetList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetList(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetList(requestBody:MobileGetList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileGetList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1486,30 +1781,37 @@ export function post_MobileGetList(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetHomePageData
    OperationID: GetHomePageData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetHomePageData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetHomePageData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetHomePageData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetHomePageData(requestBody:any, epicorHeaders?:Headers){
+export function post_GetHomePageData(requestBody:GetHomePageData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetHomePageData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetHomePageData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetHomePageData_output)
           })
       .catch((error) => {
           reject(error)
@@ -1521,30 +1823,37 @@ export function post_GetHomePageData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileGetNewEmpExpense
    Description: Create a new mobile EmpExpense dataset row
    OperationID: MobileGetNewEmpExpense
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewEmpExpense_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewEmpExpense_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewEmpExpense_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewEmpExpense(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewEmpExpense(requestBody:MobileGetNewEmpExpense_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewEmpExpense_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileGetNewEmpExpense", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewEmpExpense_output)
           })
       .catch((error) => {
           reject(error)
@@ -1556,30 +1865,37 @@ export function post_MobileGetNewEmpExpense(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method MobileGetNewEmpExpenseAttch
    Description: Create a new mobile EmpExpense dataset attachment row
    OperationID: MobileGetNewEmpExpenseAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewEmpExpenseAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewEmpExpenseAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewEmpExpenseAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewEmpExpenseAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewEmpExpenseAttch(requestBody:MobileGetNewEmpExpenseAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewEmpExpenseAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileGetNewEmpExpenseAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewEmpExpenseAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -1591,30 +1907,37 @@ export function post_MobileGetNewEmpExpenseAttch(requestBody:any, epicorHeaders?
    Summary: Invoke method MobileGetNewEmpExpenseComment
    Description: Create a new mobile EmpExpense dataset comment row
    OperationID: MobileGetNewEmpExpenseComment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileGetNewEmpExpenseComment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileGetNewEmpExpenseComment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileGetNewEmpExpenseComment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileGetNewEmpExpenseComment(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileGetNewEmpExpenseComment(requestBody:MobileGetNewEmpExpenseComment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileGetNewEmpExpenseComment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileGetNewEmpExpenseComment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileGetNewEmpExpenseComment_output)
           })
       .catch((error) => {
           reject(error)
@@ -1626,30 +1949,37 @@ export function post_MobileGetNewEmpExpenseComment(requestBody:any, epicorHeader
    Summary: Invoke method MobileDelete
    Description: Method to call to delete expense records
    OperationID: MobileDelete
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileDelete_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileDelete_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileDelete_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileDelete(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileDelete(requestBody:MobileDelete_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileDelete_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileDelete", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileDelete_output)
           })
       .catch((error) => {
           reject(error)
@@ -1661,30 +1991,37 @@ export function post_MobileDelete(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileSync
    Description: Method to call to synchronize draft records to the database
    OperationID: MobileSync
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileSync_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileSync_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileSync_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileSync(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileSync(requestBody:MobileSync_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileSync_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileSync", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileSync_output)
           })
       .catch((error) => {
           reject(error)
@@ -1696,30 +2033,37 @@ export function post_MobileSync(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MobileSyncSuccessful
    Description: Receives the fields needed to find and delete the validation record created when synchronization is successful
    OperationID: MobileSyncSuccessful
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileSyncSuccessful_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileSyncSuccessful_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileSyncSuccessful_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileSyncSuccessful(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileSyncSuccessful(requestBody:MobileSyncSuccessful_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileSyncSuccessful_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileSyncSuccessful", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileSyncSuccessful_output)
           })
       .catch((error) => {
           reject(error)
@@ -1731,30 +2075,37 @@ export function post_MobileSyncSuccessful(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method MobileAttachmentUpdate
    Description: Method to call to update attachment record and upload file to the storage defined by document type (or default company storage)
    OperationID: MobileAttachmentUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileAttachmentUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileAttachmentUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileAttachmentUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileAttachmentUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileAttachmentUpdate(requestBody:MobileAttachmentUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileAttachmentUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileAttachmentUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileAttachmentUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1766,30 +2117,37 @@ export function post_MobileAttachmentUpdate(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method MobileUpdate
    Description: Method to call to update the table set
    OperationID: MobileUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MobileUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MobileUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MobileUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MobileUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_MobileUpdate(requestBody:MobileUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MobileUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/MobileUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MobileUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1801,7 +2159,7 @@ export function post_MobileUpdate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetVersion
    Description: Returns BO Version
    OperationID: GetVersion
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetVersion_output
@@ -1814,15 +2172,22 @@ export function post_GetVersion(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetVersion_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetVersion", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetVersion_output)
           })
       .catch((error) => {
           reject(error)
@@ -1834,30 +2199,37 @@ export function post_GetVersion(epicorHeaders?:Headers){
    Summary: Invoke method RecallEmpExpense
    Description: Method to call when recalling submitted expense records
    OperationID: RecallEmpExpense
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RecallEmpExpense_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RecallEmpExpense_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RecallEmpExpense_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RecallEmpExpense(requestBody:any, epicorHeaders?:Headers){
+export function post_RecallEmpExpense(requestBody:RecallEmpExpense_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RecallEmpExpense_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/RecallEmpExpense", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RecallEmpExpense_output)
           })
       .catch((error) => {
           reject(error)
@@ -1869,30 +2241,37 @@ export function post_RecallEmpExpense(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SubmitSelected
    Description: Method to call to submit selected expenses
    OperationID: SubmitSelected
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SubmitSelected_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SubmitSelected_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SubmitSelected_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubmitSelected(requestBody:any, epicorHeaders?:Headers){
+export function post_SubmitSelected(requestBody:SubmitSelected_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SubmitSelected_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/SubmitSelected", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SubmitSelected_output)
           })
       .catch((error) => {
           reject(error)
@@ -1906,30 +2285,37 @@ export function post_SubmitSelected(requestBody:any, epicorHeaders?:Headers){
 if subsequent approvals have occurred.  If they have the user
 will have the opportunity to cancel the recall.
    OperationID: CheckRecallFromApproval
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckRecallFromApproval_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckRecallFromApproval_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckRecallFromApproval_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckRecallFromApproval(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckRecallFromApproval(requestBody:CheckRecallFromApproval_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckRecallFromApproval_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/CheckRecallFromApproval", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckRecallFromApproval_output)
           })
       .catch((error) => {
           reject(error)
@@ -1941,30 +2327,37 @@ export function post_CheckRecallFromApproval(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method RecallFromApproval
    Description: Method to call when recalling from approval entry
    OperationID: RecallFromApproval
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RecallFromApproval_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RecallFromApproval_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RecallFromApproval_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RecallFromApproval(requestBody:any, epicorHeaders?:Headers){
+export function post_RecallFromApproval(requestBody:RecallFromApproval_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RecallFromApproval_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/RecallFromApproval", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RecallFromApproval_output)
           })
       .catch((error) => {
           reject(error)
@@ -1976,30 +2369,37 @@ export function post_RecallFromApproval(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ApproveReject
    Description: The procedure is called when the user selects EmpExpense records for reject or approve
    OperationID: ApproveReject
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ApproveReject_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ApproveReject_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ApproveReject_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ApproveReject(requestBody:any, epicorHeaders?:Headers){
+export function post_ApproveReject(requestBody:ApproveReject_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ApproveReject_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/ApproveReject", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ApproveReject_output)
           })
       .catch((error) => {
           reject(error)
@@ -2011,30 +2411,37 @@ export function post_ApproveReject(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CopyEmpExpense
    Description: Method to copy the vales from one EmpExpense record to a new EmpExpense record.
    OperationID: CopyEmpExpense
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CopyEmpExpense_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CopyEmpExpense_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CopyEmpExpense_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CopyEmpExpense(requestBody:any, epicorHeaders?:Headers){
+export function post_CopyEmpExpense(requestBody:CopyEmpExpense_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CopyEmpExpense_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/CopyEmpExpense", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CopyEmpExpense_output)
           })
       .catch((error) => {
           reject(error)
@@ -2046,30 +2453,37 @@ export function post_CopyEmpExpense(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewMobileEmpExpense
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMobileEmpExpense
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMobileEmpExpense_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMobileEmpExpense_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMobileEmpExpense_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMobileEmpExpense(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMobileEmpExpense(requestBody:GetNewMobileEmpExpense_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMobileEmpExpense_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetNewMobileEmpExpense", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMobileEmpExpense_output)
           })
       .catch((error) => {
           reject(error)
@@ -2081,30 +2495,37 @@ export function post_GetNewMobileEmpExpense(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetNewMobileEmpExpenseAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMobileEmpExpenseAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMobileEmpExpenseAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMobileEmpExpenseAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMobileEmpExpenseAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMobileEmpExpenseAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMobileEmpExpenseAttch(requestBody:GetNewMobileEmpExpenseAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMobileEmpExpenseAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetNewMobileEmpExpenseAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMobileEmpExpenseAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -2116,30 +2537,37 @@ export function post_GetNewMobileEmpExpenseAttch(requestBody:any, epicorHeaders?
    Summary: Invoke method GetNewMobileEmpExpenseComment
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewMobileEmpExpenseComment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewMobileEmpExpenseComment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewMobileEmpExpenseComment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewMobileEmpExpenseComment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewMobileEmpExpenseComment(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewMobileEmpExpenseComment(requestBody:GetNewMobileEmpExpenseComment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewMobileEmpExpenseComment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetNewMobileEmpExpenseComment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewMobileEmpExpenseComment_output)
           })
       .catch((error) => {
           reject(error)
@@ -2151,30 +2579,37 @@ export function post_GetNewMobileEmpExpenseComment(requestBody:any, epicorHeader
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2186,7 +2621,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2210,15 +2645,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2230,7 +2672,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2254,15 +2696,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2274,30 +2723,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2309,30 +2765,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MobileEmpExpenseSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2343,31 +2806,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileApproverListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileApproverListRow[],
+   "value":Erp_Tablesets_MobileApproverListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileEmpExpenseAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileEmpExpenseAttchRow[],
+   "value":Erp_Tablesets_MobileEmpExpenseAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileEmpExpenseCommentRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileEmpExpenseCommentRow[],
+   "value":Erp_Tablesets_MobileEmpExpenseCommentRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileEmpExpenseListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileEmpExpenseListRow[],
+   "value":Erp_Tablesets_MobileEmpExpenseListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_MobileEmpExpenseRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_MobileEmpExpenseRow[],
+   "value":Erp_Tablesets_MobileEmpExpenseRow,
 }
 
 export interface Erp_Tablesets_MobileApproverListRow{
@@ -2619,6 +3099,23 @@ R - Rejected  */
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2640,7 +3137,7 @@ export interface ApproveReject_input{
 export interface ApproveReject_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
    outMessage:string,
 }
 }
@@ -2658,7 +3155,7 @@ export interface CheckRecallFromApproval_input{
 export interface CheckRecallFromApproval_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
    outRecallMsg:string,
 }
 }
@@ -2673,7 +3170,7 @@ export interface CopyEmpExpense_input{
 export interface CopyEmpExpense_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
    messageText:string,
 }
 }
@@ -3085,7 +3582,7 @@ export interface GetNewMobileEmpExpenseAttch_input{
 export interface GetNewMobileEmpExpenseAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 
@@ -3103,7 +3600,7 @@ export interface GetNewMobileEmpExpenseComment_input{
 export interface GetNewMobileEmpExpenseComment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 
@@ -3119,7 +3616,7 @@ export interface GetNewMobileEmpExpense_input{
 export interface GetNewMobileEmpExpense_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 
@@ -3213,7 +3710,7 @@ export interface MobileAttachmentUpdate_input{
 export interface MobileAttachmentUpdate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 
@@ -3227,7 +3724,7 @@ export interface MobileDelete_input{
 export interface MobileDelete_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 
@@ -3296,7 +3793,7 @@ export interface MobileGetNewEmpExpenseAttch_input{
 export interface MobileGetNewEmpExpenseAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 
@@ -3316,7 +3813,7 @@ export interface MobileGetNewEmpExpenseComment_input{
 export interface MobileGetNewEmpExpenseComment_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 
@@ -3333,7 +3830,7 @@ export interface MobileGetNewEmpExpense_input{
 export interface MobileGetNewEmpExpense_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 
@@ -3431,7 +3928,7 @@ export interface MobileSync_input{
 export interface MobileSync_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
    outMessage:string,
 }
 }
@@ -3446,7 +3943,7 @@ export interface MobileUpdate_input{
 export interface MobileUpdate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 
@@ -3460,7 +3957,7 @@ export interface RecallEmpExpense_input{
 export interface RecallEmpExpense_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 
@@ -3477,7 +3974,7 @@ export interface RecallFromApproval_input{
 export interface RecallFromApproval_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
    outMessage:string,
 }
 }
@@ -3492,7 +3989,7 @@ export interface SubmitSelected_input{
 export interface SubmitSelected_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
    outMessage:string,
 }
 }
@@ -3512,7 +4009,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtMobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_UpdExtMobileEmpExpenseTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3527,7 +4024,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MobileEmpExpenseTableset[],
+   ds:Erp_Tablesets_MobileEmpExpenseTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PartAllocRuleClassSvc
 // Description: PartAllocRuleClassSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartAllocRuleClassRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartAllocRuleClassRow
    */  
 export function get_PartAllocRuleClasses(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_PartAllocRuleClasses(select?:string, expand?:string, filter?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartAllocRuleClassRow)
           })
@@ -118,15 +158,15 @@ export function get_PartAllocRuleClasses(select?:string, expand?:string, filter?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PartAllocRuleClasses
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PartAllocRuleClassRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartAllocRuleClasses(requestBody:any, epicorHeaders?:Headers){
+export function post_PartAllocRuleClasses(requestBody:Erp_Tablesets_PartAllocRuleClassRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_PartAllocRuleClasses(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_PartAllocRuleClasses(requestBody:any, epicorHeaders?:Header
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PartAllocRuleClassRow
    */  
 export function get_PartAllocRuleClasses_Company_RuleClassID(Company:string, RuleClassID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_PartAllocRuleClasses_Company_RuleClassID(Company:string, Rul
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PartAllocRuleClassRow)
           })
@@ -193,15 +247,15 @@ export function get_PartAllocRuleClasses_Company_RuleClassID(Company:string, Rul
    OperationID: UpdateExt_PartAllocRuleClass
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RuleClassID Desc: RuleClassID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PartAllocRuleClasses_Company_RuleClassID(Company:string, RuleClassID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PartAllocRuleClasses_Company_RuleClassID(Company:string, RuleClassID:string, requestBody:Erp_Tablesets_PartAllocRuleClassRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_PartAllocRuleClasses_Company_RuleClassID(Company:string, R
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_PartAllocRuleClasses_Company_RuleClassID(Company:string, R
    OperationID: DeleteUpdateExt_PartAllocRuleClass
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RuleClassID Desc: RuleClassID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_PartAllocRuleClasses_Company_RuleClassID(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_PartAllocRuleClasses_Company_RuleClassID(Company:string, 
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartAllocRuleClassDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartAllocRuleClassDtlRow
    */  
 export function get_PartAllocRuleClasses_Company_RuleClassID_PartAllocRuleClassDtls(Company:string, RuleClassID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_PartAllocRuleClasses_Company_RuleClassID_PartAllocRuleClassD
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartAllocRuleClassDtlRow)
           })
@@ -309,10 +384,10 @@ export function get_PartAllocRuleClasses_Company_RuleClassID_PartAllocRuleClassD
       @param RuleID Desc: RuleID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PartAllocRuleClassDtlRow
    */  
 export function get_PartAllocRuleClasses_Company_RuleClassID_PartAllocRuleClassDtls_Company_RuleClassID_RuleID(Company:string, RuleClassID:string, RuleID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_PartAllocRuleClasses_Company_RuleClassID_PartAllocRuleClassD
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PartAllocRuleClassDtlRow)
           })
@@ -347,10 +429,10 @@ export function get_PartAllocRuleClasses_Company_RuleClassID_PartAllocRuleClassD
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartAllocRuleClassDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartAllocRuleClassDtlRow
    */  
 export function get_PartAllocRuleClassDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -365,7 +447,14 @@ export function get_PartAllocRuleClassDtls(select?:string, filter?:string, order
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartAllocRuleClassDtlRow)
           })
@@ -379,15 +468,15 @@ export function get_PartAllocRuleClassDtls(select?:string, filter?:string, order
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PartAllocRuleClassDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PartAllocRuleClassDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartAllocRuleClassDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_PartAllocRuleClassDtls(requestBody:Erp_Tablesets_PartAllocRuleClassDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -401,7 +490,14 @@ export function post_PartAllocRuleClassDtls(requestBody:any, epicorHeaders?:Head
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -420,10 +516,10 @@ export function post_PartAllocRuleClassDtls(requestBody:any, epicorHeaders?:Head
       @param RuleID Desc: RuleID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PartAllocRuleClassDtlRow
    */  
 export function get_PartAllocRuleClassDtls_Company_RuleClassID_RuleID(Company:string, RuleClassID:string, RuleID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -438,7 +534,14 @@ export function get_PartAllocRuleClassDtls_Company_RuleClassID_RuleID(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PartAllocRuleClassDtlRow)
           })
@@ -455,15 +558,15 @@ export function get_PartAllocRuleClassDtls_Company_RuleClassID_RuleID(Company:st
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RuleClassID Desc: RuleClassID   Required: True   Allow empty value : True
       @param RuleID Desc: RuleID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartAllocRuleClassDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PartAllocRuleClassDtls_Company_RuleClassID_RuleID(Company:string, RuleClassID:string, RuleID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PartAllocRuleClassDtls_Company_RuleClassID_RuleID(Company:string, RuleClassID:string, RuleID:string, requestBody:Erp_Tablesets_PartAllocRuleClassDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -477,7 +580,14 @@ export function patch_PartAllocRuleClassDtls_Company_RuleClassID_RuleID(Company:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -494,7 +604,7 @@ export function patch_PartAllocRuleClassDtls_Company_RuleClassID_RuleID(Company:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param RuleClassID Desc: RuleClassID   Required: True   Allow empty value : True
       @param RuleID Desc: RuleID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -513,7 +623,14 @@ export function delete_PartAllocRuleClassDtls_Company_RuleClassID_RuleID(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -533,10 +650,10 @@ export function delete_PartAllocRuleClassDtls_Company_RuleClassID_RuleID(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartAllocRuleClassListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartAllocRuleClassListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -551,7 +668,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartAllocRuleClassListRow)
           })
@@ -564,6 +688,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -575,7 +716,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -626,15 +767,22 @@ export function get_GetRows(whereClausePartAllocRuleClass:string, whereClausePar
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -647,7 +795,7 @@ export function get_GetRows(whereClausePartAllocRuleClass:string, whereClausePar
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -671,15 +819,22 @@ export function get_GetByID(ruleClassID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -694,7 +849,7 @@ export function get_GetByID(ruleClassID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -736,15 +891,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -756,30 +918,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method CopyPartAllocRuleClass
    Description: Copies the current rule class and all rules to a new rule class of the specified name.
    OperationID: CopyPartAllocRuleClass
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CopyPartAllocRuleClass_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CopyPartAllocRuleClass_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CopyPartAllocRuleClass_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CopyPartAllocRuleClass(requestBody:any, epicorHeaders?:Headers){
+export function post_CopyPartAllocRuleClass(requestBody:CopyPartAllocRuleClass_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CopyPartAllocRuleClass_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/CopyPartAllocRuleClass", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CopyPartAllocRuleClass_output)
           })
       .catch((error) => {
           reject(error)
@@ -791,30 +960,37 @@ export function post_CopyPartAllocRuleClass(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnChangePartAllocRuleClassActive
    Description: Invoked when the PartAllocRuleClass Active flag is changed.  Returns a warning message string if there are potential issues with the rules
    OperationID: OnChangePartAllocRuleClassActive
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassActive_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassActive_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartAllocRuleClassActive_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartAllocRuleClassActive(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartAllocRuleClassActive(requestBody:OnChangePartAllocRuleClassActive_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartAllocRuleClassActive_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/OnChangePartAllocRuleClassActive", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartAllocRuleClassActive_output)
           })
       .catch((error) => {
           reject(error)
@@ -826,30 +1002,37 @@ export function post_OnChangePartAllocRuleClassActive(requestBody:any, epicorHea
    Summary: Invoke method OnChangePartAllocRuleClassDtlAction
    Description: Invoked when PartAllocRuleClassDtl Action is changed.
    OperationID: OnChangePartAllocRuleClassDtlAction
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassDtlAction_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassDtlAction_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartAllocRuleClassDtlAction_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartAllocRuleClassDtlAction(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartAllocRuleClassDtlAction(requestBody:OnChangePartAllocRuleClassDtlAction_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartAllocRuleClassDtlAction_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/OnChangePartAllocRuleClassDtlAction", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartAllocRuleClassDtlAction_output)
           })
       .catch((error) => {
           reject(error)
@@ -861,30 +1044,37 @@ export function post_OnChangePartAllocRuleClassDtlAction(requestBody:any, epicor
    Summary: Invoke method OnChangePartAllocRuleClassDtlAllocTemplateID
    Description: Invoked when PartAllocRuleClassDtl AllocTemplateID is changed.
    OperationID: OnChangePartAllocRuleClassDtlAllocTemplateID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassDtlAllocTemplateID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassDtlAllocTemplateID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartAllocRuleClassDtlAllocTemplateID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartAllocRuleClassDtlAllocTemplateID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartAllocRuleClassDtlAllocTemplateID(requestBody:OnChangePartAllocRuleClassDtlAllocTemplateID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartAllocRuleClassDtlAllocTemplateID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/OnChangePartAllocRuleClassDtlAllocTemplateID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartAllocRuleClassDtlAllocTemplateID_output)
           })
       .catch((error) => {
           reject(error)
@@ -896,30 +1086,37 @@ export function post_OnChangePartAllocRuleClassDtlAllocTemplateID(requestBody:an
    Summary: Invoke method OnChangePartAllocRuleClassDtlMasterRuleID
    Description: Invoked when MasterRuleID is changed.  Updates fields from PartAllocRuleMasterDtl
    OperationID: OnChangePartAllocRuleClassDtlMasterRuleID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassDtlMasterRuleID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassDtlMasterRuleID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartAllocRuleClassDtlMasterRuleID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartAllocRuleClassDtlMasterRuleID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartAllocRuleClassDtlMasterRuleID(requestBody:OnChangePartAllocRuleClassDtlMasterRuleID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartAllocRuleClassDtlMasterRuleID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/OnChangePartAllocRuleClassDtlMasterRuleID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartAllocRuleClassDtlMasterRuleID_output)
           })
       .catch((error) => {
           reject(error)
@@ -931,30 +1128,37 @@ export function post_OnChangePartAllocRuleClassDtlMasterRuleID(requestBody:any, 
    Summary: Invoke method OnChangePartAllocRuleClassDtlMasterDtlSync
    Description: Invoked when MasterDtlSync is set true. Updates fields from PartAllocRuleMasterDtl
    OperationID: OnChangePartAllocRuleClassDtlMasterDtlSync
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassDtlMasterDtlSync_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassDtlMasterDtlSync_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartAllocRuleClassDtlMasterDtlSync_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartAllocRuleClassDtlMasterDtlSync(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartAllocRuleClassDtlMasterDtlSync(requestBody:OnChangePartAllocRuleClassDtlMasterDtlSync_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartAllocRuleClassDtlMasterDtlSync_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/OnChangePartAllocRuleClassDtlMasterDtlSync", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartAllocRuleClassDtlMasterDtlSync_output)
           })
       .catch((error) => {
           reject(error)
@@ -966,30 +1170,37 @@ export function post_OnChangePartAllocRuleClassDtlMasterDtlSync(requestBody:any,
    Summary: Invoke method OnChangePartAllocRuleClassDtlQueryID
    Description: Invoked when PartAllocRuleClassDtl QueryID is changed.  Query must have PartAllocQueueInfo as its first table.
    OperationID: OnChangePartAllocRuleClassDtlQueryID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassDtlQueryID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartAllocRuleClassDtlQueryID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartAllocRuleClassDtlQueryID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartAllocRuleClassDtlQueryID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartAllocRuleClassDtlQueryID(requestBody:OnChangePartAllocRuleClassDtlQueryID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartAllocRuleClassDtlQueryID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/OnChangePartAllocRuleClassDtlQueryID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartAllocRuleClassDtlQueryID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1001,30 +1212,37 @@ export function post_OnChangePartAllocRuleClassDtlQueryID(requestBody:any, epico
    Summary: Invoke method BuildTree
    Description: Returns a DataSet with information required to build the Data and Functions trees in Expression Editor
    OperationID: BuildTree
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildTree_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildTree_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildTree_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildTree(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildTree(requestBody:BuildTree_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildTree_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/BuildTree", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildTree_output)
           })
       .catch((error) => {
           reject(error)
@@ -1036,30 +1254,37 @@ export function post_BuildTree(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckSyntax
    Description: Invoked from Expression Editor. Checks the syntax of the formula. If a query is defined the joins are extracted from the BAQ.
    OperationID: CheckSyntax
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSyntax_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSyntax_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSyntax_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSyntax(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSyntax(requestBody:CheckSyntax_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSyntax_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/CheckSyntax", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSyntax_output)
           })
       .catch((error) => {
           reject(error)
@@ -1073,30 +1298,37 @@ export function post_CheckSyntax(requestBody:any, epicorHeaders?:Headers){
 1) After each rule is executed, a snapshot of PartAllocQueueInfo is taken stamped with the RuleClassID and RuleID
 2) Log entries that would be written to the Automated Fulfillment Process log during the execution of the Rule are written to a file called AutomatedFulfillmentRuleTester.log.
    OperationID: TestFulfillmentRuleClass
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/TestFulfillmentRuleClass_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/TestFulfillmentRuleClass_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/TestFulfillmentRuleClass_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_TestFulfillmentRuleClass(requestBody:any, epicorHeaders?:Headers){
+export function post_TestFulfillmentRuleClass(requestBody:TestFulfillmentRuleClass_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<TestFulfillmentRuleClass_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/TestFulfillmentRuleClass", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as TestFulfillmentRuleClass_output)
           })
       .catch((error) => {
           reject(error)
@@ -1108,30 +1340,37 @@ export function post_TestFulfillmentRuleClass(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetFulfillmentRuleTesterTableset
    Description: Called from Automated Fulfillment Rule Entry to display a snapshot of PartAllocQueueInfo taken after the execution of the Rule
    OperationID: GetFulfillmentRuleTesterTableset
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFulfillmentRuleTesterTableset_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFulfillmentRuleTesterTableset_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFulfillmentRuleTesterTableset_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFulfillmentRuleTesterTableset(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFulfillmentRuleTesterTableset(requestBody:GetFulfillmentRuleTesterTableset_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFulfillmentRuleTesterTableset_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/GetFulfillmentRuleTesterTableset", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFulfillmentRuleTesterTableset_output)
           })
       .catch((error) => {
           reject(error)
@@ -1143,30 +1382,37 @@ export function post_GetFulfillmentRuleTesterTableset(requestBody:any, epicorHea
    Summary: Invoke method GetNewPartAllocRuleClass
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPartAllocRuleClass
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPartAllocRuleClass_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPartAllocRuleClass_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPartAllocRuleClass_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPartAllocRuleClass(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPartAllocRuleClass(requestBody:GetNewPartAllocRuleClass_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPartAllocRuleClass_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/GetNewPartAllocRuleClass", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPartAllocRuleClass_output)
           })
       .catch((error) => {
           reject(error)
@@ -1178,30 +1424,37 @@ export function post_GetNewPartAllocRuleClass(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetNewPartAllocRuleClassDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPartAllocRuleClassDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPartAllocRuleClassDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPartAllocRuleClassDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPartAllocRuleClassDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPartAllocRuleClassDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPartAllocRuleClassDtl(requestBody:GetNewPartAllocRuleClassDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPartAllocRuleClassDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/GetNewPartAllocRuleClassDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPartAllocRuleClassDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -1213,30 +1466,37 @@ export function post_GetNewPartAllocRuleClassDtl(requestBody:any, epicorHeaders?
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1248,7 +1508,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1272,15 +1532,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1292,7 +1559,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1316,15 +1583,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1336,30 +1610,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1371,30 +1652,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartAllocRuleClassSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1405,21 +1693,38 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartAllocRuleClassDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PartAllocRuleClassDtlRow[],
+   "value":Erp_Tablesets_PartAllocRuleClassDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartAllocRuleClassListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PartAllocRuleClassListRow[],
+   "value":Erp_Tablesets_PartAllocRuleClassListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartAllocRuleClassRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PartAllocRuleClassRow[],
+   "value":Erp_Tablesets_PartAllocRuleClassRow,
 }
 
 export interface Erp_Tablesets_PartAllocRuleClassDtlRow{
@@ -1524,6 +1829,23 @@ export interface Erp_Tablesets_PartAllocRuleClassRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2215,7 +2537,7 @@ export interface GetNewPartAllocRuleClassDtl_input{
 export interface GetNewPartAllocRuleClassDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartAllocRuleClassTableset[],
+   ds:Erp_Tablesets_PartAllocRuleClassTableset,
 }
 }
 
@@ -2229,7 +2551,7 @@ export interface GetNewPartAllocRuleClass_input{
 export interface GetNewPartAllocRuleClass_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartAllocRuleClassTableset[],
+   ds:Erp_Tablesets_PartAllocRuleClassTableset,
 }
 }
 
@@ -2321,7 +2643,7 @@ export interface OnChangePartAllocRuleClassDtlAction_output{
 parameters : {
       /**  output parameters  */  
    warningMsg:string,
-   ds:Erp_Tablesets_PartAllocRuleClassTableset[],
+   ds:Erp_Tablesets_PartAllocRuleClassTableset,
 }
 }
 
@@ -2337,7 +2659,7 @@ export interface OnChangePartAllocRuleClassDtlAllocTemplateID_input{
 export interface OnChangePartAllocRuleClassDtlAllocTemplateID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartAllocRuleClassTableset[],
+   ds:Erp_Tablesets_PartAllocRuleClassTableset,
 }
 }
 
@@ -2353,7 +2675,7 @@ export interface OnChangePartAllocRuleClassDtlMasterDtlSync_input{
 export interface OnChangePartAllocRuleClassDtlMasterDtlSync_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartAllocRuleClassTableset[],
+   ds:Erp_Tablesets_PartAllocRuleClassTableset,
 }
 }
 
@@ -2372,7 +2694,7 @@ export interface OnChangePartAllocRuleClassDtlMasterRuleID_output{
 parameters : {
       /**  output parameters  */  
    overrideWarning:string,
-   ds:Erp_Tablesets_PartAllocRuleClassTableset[],
+   ds:Erp_Tablesets_PartAllocRuleClassTableset,
 }
 }
 
@@ -2391,7 +2713,7 @@ export interface OnChangePartAllocRuleClassDtlQueryID_output{
 parameters : {
       /**  output parameters  */  
    warningMsg:string,
-   ds:Erp_Tablesets_PartAllocRuleClassTableset[],
+   ds:Erp_Tablesets_PartAllocRuleClassTableset,
 }
 }
 
@@ -2420,7 +2742,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtPartAllocRuleClassTableset[],
+   ds:Erp_Tablesets_UpdExtPartAllocRuleClassTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2435,7 +2757,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartAllocRuleClassTableset[],
+   ds:Erp_Tablesets_PartAllocRuleClassTableset,
 }
 }
 

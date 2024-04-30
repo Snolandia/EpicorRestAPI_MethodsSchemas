@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.InvoiceReceiptMatchSvc
 // Description: Invoice Receipt Match business object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvoiceMatchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvoiceMatchRow
    */  
 export function get_InvoiceReceiptMatches(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_InvoiceReceiptMatches(select?:string, expand?:string, filter
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvoiceMatchRow)
           })
@@ -127,10 +167,10 @@ export function get_InvoiceReceiptMatches(select?:string, expand?:string, filter
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APInvoiceMatchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APInvoiceMatchRow
    */  
 export function get_InvoiceReceiptMatches_Company_InvoiceNum_InvoiceLine_PONum_POLine_PORelNum(Company:string, InvoiceNum:string, InvoiceLine:string, PONum:string, POLine:string, PORelNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -145,7 +185,14 @@ export function get_InvoiceReceiptMatches_Company_InvoiceNum_InvoiceLine_PONum_P
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APInvoiceMatchRow)
           })
@@ -171,10 +218,10 @@ export function get_InvoiceReceiptMatches_Company_InvoiceNum_InvoiceLine_PONum_P
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvcRcptDtlMatchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvcRcptDtlMatchRow
    */  
 export function get_InvoiceReceiptMatches_Company_InvoiceNum_InvoiceLine_PONum_POLine_PORelNum_APInvcRcptDtlMatches(Company:string, InvoiceNum:string, InvoiceLine:string, PONum:string, POLine:string, PORelNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -189,7 +236,14 @@ export function get_InvoiceReceiptMatches_Company_InvoiceNum_InvoiceLine_PONum_P
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvcRcptDtlMatchRow)
           })
@@ -215,10 +269,10 @@ export function get_InvoiceReceiptMatches_Company_InvoiceNum_InvoiceLine_PONum_P
       @param PackLine Desc: PackLine   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APInvcRcptDtlMatchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APInvcRcptDtlMatchRow
    */  
 export function get_InvoiceReceiptMatches_Company_InvoiceNum_InvoiceLine_PONum_POLine_PORelNum_APInvcRcptDtlMatches_Company_VendorNum_PurPoint_PackSlip_PackLine_InvoiceNum_InvoiceLine(Company:string, InvoiceNum:string, InvoiceLine:string, PONum:string, POLine:string, PORelNum:string, VendorNum:string, PurPoint:string, PackSlip:string, PackLine:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -233,7 +287,14 @@ export function get_InvoiceReceiptMatches_Company_InvoiceNum_InvoiceLine_PONum_P
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APInvcRcptDtlMatchRow)
           })
@@ -253,10 +314,10 @@ export function get_InvoiceReceiptMatches_Company_InvoiceNum_InvoiceLine_PONum_P
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvcRcptDtlMatchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvcRcptDtlMatchRow
    */  
 export function get_APInvcRcptDtlMatches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -271,7 +332,14 @@ export function get_APInvcRcptDtlMatches(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvcRcptDtlMatchRow)
           })
@@ -294,10 +362,10 @@ export function get_APInvcRcptDtlMatches(select?:string, filter?:string, orderby
       @param InvoiceLine Desc: InvoiceLine   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.APInvcRcptDtlMatchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.APInvcRcptDtlMatchRow
    */  
 export function get_APInvcRcptDtlMatches_Company_VendorNum_PurPoint_PackSlip_PackLine_InvoiceNum_InvoiceLine(Company:string, VendorNum:string, PurPoint:string, PackSlip:string, PackLine:string, InvoiceNum:string, InvoiceLine:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -312,7 +380,14 @@ export function get_APInvcRcptDtlMatches_Company_VendorNum_PurPoint_PackSlip_Pac
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_APInvcRcptDtlMatchRow)
           })
@@ -332,10 +407,10 @@ export function get_APInvcRcptDtlMatches_Company_VendorNum_PurPoint_PackSlip_Pac
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvoiceMatchListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.APInvoiceMatchListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -350,7 +425,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvoiceMatchListRow)
           })
@@ -363,6 +445,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -373,7 +472,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -415,15 +514,22 @@ export function get_GetRows(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -438,7 +544,7 @@ export function get_GetRows(whereClause:string, pageSize:string, absolutePage:st
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -480,15 +586,22 @@ export function get_GetByID(invoiceNum:string, invoiceLine:string, vendorNum:str
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -503,7 +616,7 @@ export function get_GetByID(invoiceNum:string, invoiceLine:string, vendorNum:str
       @param whereClause Desc: Where clause   Required: True   Allow empty value : True
       @param pageSize Desc: Page Size   Required: True
       @param absolutePage Desc: Absolute Page   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -545,15 +658,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -568,7 +688,7 @@ PostMatches method.  A question is returned to ask the user if they want to cont
 with the post or not if the interface is not available.  If the answer is no, the
 PostMatches method is not run.
    OperationID: CheckGLInterfaceForPost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckGLInterfaceForPost_output
@@ -581,15 +701,22 @@ export function post_CheckGLInterfaceForPost(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckGLInterfaceForPost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/CheckGLInterfaceForPost", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckGLInterfaceForPost_output)
           })
       .catch((error) => {
           reject(error)
@@ -601,30 +728,37 @@ export function post_CheckGLInterfaceForPost(epicorHeaders?:Headers){
    Summary: Invoke method GetAPIRMtch
    Description: Get the APIRMtch records.
    OperationID: GetAPIRMtch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAPIRMtch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAPIRMtch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAPIRMtch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAPIRMtch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAPIRMtch(requestBody:GetAPIRMtch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAPIRMtch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/GetAPIRMtch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAPIRMtch_output)
           })
       .catch((error) => {
           reject(error)
@@ -636,30 +770,37 @@ export function post_GetAPIRMtch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetInvoiceReceiptMatch
    Description: Get the InvoiceReceipt records from the list dataset.
    OperationID: GetInvoiceReceiptMatch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetInvoiceReceiptMatch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetInvoiceReceiptMatch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInvoiceReceiptMatch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetInvoiceReceiptMatch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetInvoiceReceiptMatch(requestBody:GetInvoiceReceiptMatch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInvoiceReceiptMatch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/GetInvoiceReceiptMatch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInvoiceReceiptMatch_output)
           })
       .catch((error) => {
           reject(error)
@@ -671,30 +812,37 @@ export function post_GetInvoiceReceiptMatch(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetSupplierXRefParts
    Description: This method gets the XRef information for a given supplier part
    OperationID: GetSupplierXRefParts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSupplierXRefParts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSupplierXRefParts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSupplierXRefParts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSupplierXRefParts(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSupplierXRefParts(requestBody:GetSupplierXRefParts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSupplierXRefParts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/GetSupplierXRefParts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSupplierXRefParts_output)
           })
       .catch((error) => {
           reject(error)
@@ -706,30 +854,37 @@ export function post_GetSupplierXRefParts(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method MatchInvoiceReceipt
    Description: Match an invoice and a receipt.
    OperationID: MatchInvoiceReceipt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MatchInvoiceReceipt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MatchInvoiceReceipt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MatchInvoiceReceipt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MatchInvoiceReceipt(requestBody:any, epicorHeaders?:Headers){
+export function post_MatchInvoiceReceipt(requestBody:MatchInvoiceReceipt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MatchInvoiceReceipt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/MatchInvoiceReceipt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MatchInvoiceReceipt_output)
           })
       .catch((error) => {
           reject(error)
@@ -741,30 +896,37 @@ export function post_MatchInvoiceReceipt(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method PostMatches
    Description: Post the Invoice/Receipt matches.
    OperationID: PostMatches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PostMatches_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PostMatches_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PostMatches_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PostMatches(requestBody:any, epicorHeaders?:Headers){
+export function post_PostMatches(requestBody:PostMatches_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PostMatches_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/PostMatches", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PostMatches_output)
           })
       .catch((error) => {
           reject(error)
@@ -776,30 +938,37 @@ export function post_PostMatches(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SetSupplierXRefParts
    Description: This method sets the XRef fields for a supplier part
    OperationID: SetSupplierXRefParts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetSupplierXRefParts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetSupplierXRefParts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetSupplierXRefParts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetSupplierXRefParts(requestBody:any, epicorHeaders?:Headers){
+export function post_SetSupplierXRefParts(requestBody:SetSupplierXRefParts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetSupplierXRefParts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/SetSupplierXRefParts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetSupplierXRefParts_output)
           })
       .catch((error) => {
           reject(error)
@@ -811,30 +980,37 @@ export function post_SetSupplierXRefParts(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method UnMatchInvoiceReceipt
    Description: Unmatch an invoice and a receipt.
    OperationID: UnMatchInvoiceReceipt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnMatchInvoiceReceipt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnMatchInvoiceReceipt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnMatchInvoiceReceipt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnMatchInvoiceReceipt(requestBody:any, epicorHeaders?:Headers){
+export function post_UnMatchInvoiceReceipt(requestBody:UnMatchInvoiceReceipt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnMatchInvoiceReceipt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.InvoiceReceiptMatchSvc/UnMatchInvoiceReceipt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnMatchInvoiceReceipt_output)
           })
       .catch((error) => {
           reject(error)
@@ -845,21 +1021,38 @@ export function post_UnMatchInvoiceReceipt(requestBody:any, epicorHeaders?:Heade
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvcRcptDtlMatchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APInvcRcptDtlMatchRow[],
+   "value":Erp_Tablesets_APInvcRcptDtlMatchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvoiceMatchListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APInvoiceMatchListRow[],
+   "value":Erp_Tablesets_APInvoiceMatchListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_APInvoiceMatchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_APInvoiceMatchRow[],
+   "value":Erp_Tablesets_APInvoiceMatchRow,
 }
 
 export interface Erp_Tablesets_APInvcRcptDtlMatchRow{
@@ -957,6 +1150,23 @@ export interface Erp_Tablesets_APInvoiceMatchRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1195,7 +1405,7 @@ export interface GetInvoiceReceiptMatch_output{
    returnObj:Erp_Tablesets_InvoiceReceiptMatchTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvoiceMatchListTableset[],
+   ds:Erp_Tablesets_APInvoiceMatchListTableset,
 }
 }
 
@@ -1320,7 +1530,7 @@ export interface MatchInvoiceReceipt_output{
    returnObj:Erp_Tablesets_APIRMtchTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_InvoiceReceiptMatchTableset[],
+   ds:Erp_Tablesets_InvoiceReceiptMatchTableset,
 }
 }
 
@@ -1334,7 +1544,7 @@ export interface PostMatches_input{
 export interface PostMatches_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_APInvoiceMatchListTableset[],
+   ds:Erp_Tablesets_APInvoiceMatchListTableset,
    cPostErrorLog:string,
    cErrorLogMsg:string,
 }
@@ -1350,7 +1560,7 @@ export interface SetSupplierXRefParts_input{
 export interface SetSupplierXRefParts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SupplierXRefTableset[],
+   ds:Erp_Tablesets_SupplierXRefTableset,
 }
 }
 
@@ -1383,7 +1593,7 @@ export interface UnMatchInvoiceReceipt_output{
    returnObj:Erp_Tablesets_APIRMtchTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_InvoiceReceiptMatchTableset[],
+   ds:Erp_Tablesets_InvoiceReceiptMatchTableset,
 }
 }
 

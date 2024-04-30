@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.ARBOEMultiGenSvc
 // Description: Add your summary for this object here
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,36 +111,60 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
    /**  
    Summary: Invoke method GetCodeDescList
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARBOEMultiGenSvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -119,30 +176,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeBOEInvcAmount
    Description: Update total boe amount when the boe invoice amount changes
    OperationID: ChangeBOEInvcAmount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeBOEInvcAmount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeBOEInvcAmount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeBOEInvcAmount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeBOEInvcAmount(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeBOEInvcAmount(requestBody:ChangeBOEInvcAmount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeBOEInvcAmount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARBOEMultiGenSvc/ChangeBOEInvcAmount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeBOEInvcAmount_output)
           })
       .catch((error) => {
           reject(error)
@@ -154,30 +218,37 @@ export function post_ChangeBOEInvcAmount(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ChangeCustomer
    Description: Update default information based on the customer changing
    OperationID: ChangeCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeCustomer(requestBody:ChangeCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARBOEMultiGenSvc/ChangeCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -189,30 +260,37 @@ export function post_ChangeCustomer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CreateARBOEMultiGenInvcs
    Description: Create records in the ARBOEMultiGenInvcs datatable.
    OperationID: CreateARBOEMultiGenInvcs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateARBOEMultiGenInvcs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateARBOEMultiGenInvcs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateARBOEMultiGenInvcs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateARBOEMultiGenInvcs(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateARBOEMultiGenInvcs(requestBody:CreateARBOEMultiGenInvcs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateARBOEMultiGenInvcs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARBOEMultiGenSvc/CreateARBOEMultiGenInvcs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateARBOEMultiGenInvcs_output)
           })
       .catch((error) => {
           reject(error)
@@ -224,30 +302,37 @@ export function post_CreateARBOEMultiGenInvcs(requestBody:any, epicorHeaders?:He
    Summary: Invoke method DeleteARBOEMultiGenInvcs
    Description: Delete a record in the ARBOEMultiGenInvcs datatable.
    OperationID: DeleteARBOEMultiGenInvcs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteARBOEMultiGenInvcs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteARBOEMultiGenInvcs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteARBOEMultiGenInvcs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteARBOEMultiGenInvcs(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteARBOEMultiGenInvcs(requestBody:DeleteARBOEMultiGenInvcs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteARBOEMultiGenInvcs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARBOEMultiGenSvc/DeleteARBOEMultiGenInvcs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteARBOEMultiGenInvcs_output)
           })
       .catch((error) => {
           reject(error)
@@ -259,30 +344,37 @@ export function post_DeleteARBOEMultiGenInvcs(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GenerateBOEInvoices
    Description: Generate BOE Invoices.
    OperationID: GenerateBOEInvoices
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateBOEInvoices_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateBOEInvoices_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateBOEInvoices_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateBOEInvoices(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateBOEInvoices(requestBody:GenerateBOEInvoices_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateBOEInvoices_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARBOEMultiGenSvc/GenerateBOEInvoices", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateBOEInvoices_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,30 +387,37 @@ export function post_GenerateBOEInvoices(requestBody:any, epicorHeaders?:Headers
    Description: Creates a temporary record to store information needed to create multiple
 Bill of Exchange invoices.
    OperationID: GetARBOEMultiGen
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetARBOEMultiGen_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetARBOEMultiGen_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetARBOEMultiGen_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetARBOEMultiGen(requestBody:any, epicorHeaders?:Headers){
+export function post_GetARBOEMultiGen(requestBody:GetARBOEMultiGen_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetARBOEMultiGen_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARBOEMultiGenSvc/GetARBOEMultiGen", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetARBOEMultiGen_output)
           })
       .catch((error) => {
           reject(error)
@@ -331,30 +430,37 @@ export function post_GetARBOEMultiGen(requestBody:any, epicorHeaders?:Headers){
    Description: Convert Amount to BOE currency
 Bill of Exchange invoices.
    OperationID: GetConvertedAmount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetConvertedAmount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetConvertedAmount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetConvertedAmount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetConvertedAmount(requestBody:any, epicorHeaders?:Headers){
+export function post_GetConvertedAmount(requestBody:GetConvertedAmount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetConvertedAmount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARBOEMultiGenSvc/GetConvertedAmount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetConvertedAmount_output)
           })
       .catch((error) => {
           reject(error)
@@ -366,30 +472,37 @@ export function post_GetConvertedAmount(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetInvcsForSelection
    Description: This procedure returns the invoices for BOE selection
    OperationID: GetInvcsForSelection
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetInvcsForSelection_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetInvcsForSelection_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetInvcsForSelection_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetInvcsForSelection(requestBody:any, epicorHeaders?:Headers){
+export function post_GetInvcsForSelection(requestBody:GetInvcsForSelection_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetInvcsForSelection_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARBOEMultiGenSvc/GetInvcsForSelection", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetInvcsForSelection_output)
           })
       .catch((error) => {
           reject(error)
@@ -401,30 +514,37 @@ export function post_GetInvcsForSelection(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method RecalcTotalBOEAmount
    Description: Recalculates total amount of BOEs to be generated.
    OperationID: RecalcTotalBOEAmount
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RecalcTotalBOEAmount_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RecalcTotalBOEAmount_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RecalcTotalBOEAmount_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RecalcTotalBOEAmount(requestBody:any, epicorHeaders?:Headers){
+export function post_RecalcTotalBOEAmount(requestBody:RecalcTotalBOEAmount_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RecalcTotalBOEAmount_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ARBOEMultiGenSvc/RecalcTotalBOEAmount", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RecalcTotalBOEAmount_output)
           })
       .catch((error) => {
           reject(error)
@@ -435,11 +555,45 @@ export function post_RecalcTotalBOEAmount(requestBody:any, epicorHeaders?:Header
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -459,7 +613,7 @@ export interface ChangeBOEInvcAmount_input{
 export interface ChangeBOEInvcAmount_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARBOEMultiGenTableset[],
+   ds:Erp_Tablesets_ARBOEMultiGenTableset,
 }
 }
 
@@ -476,7 +630,7 @@ export interface ChangeCustomer_input{
 export interface ChangeCustomer_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARBOEMultiGenTableset[],
+   ds:Erp_Tablesets_ARBOEMultiGenTableset,
 }
 }
 
@@ -493,7 +647,7 @@ export interface CreateARBOEMultiGenInvcs_input{
 export interface CreateARBOEMultiGenInvcs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARBOEMultiGenTableset[],
+   ds:Erp_Tablesets_ARBOEMultiGenTableset,
 }
 }
 
@@ -510,7 +664,7 @@ export interface DeleteARBOEMultiGenInvcs_input{
 export interface DeleteARBOEMultiGenInvcs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARBOEMultiGenTableset[],
+   ds:Erp_Tablesets_ARBOEMultiGenTableset,
 }
 }
 
@@ -1551,7 +1705,7 @@ export interface GenerateBOEInvoices_input{
 export interface GenerateBOEInvoices_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARBOEMultiGenTableset[],
+   ds:Erp_Tablesets_ARBOEMultiGenTableset,
    outMessage:string,
    outAssignLN:boolean,
 }
@@ -1625,7 +1779,7 @@ export interface GetInvcsForSelection_input{
 export interface GetInvcsForSelection_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARBOEMultiGenTableset[],
+   ds:Erp_Tablesets_ARBOEMultiGenTableset,
 }
 }
 
@@ -1660,7 +1814,7 @@ export interface RecalcTotalBOEAmount_input{
 export interface RecalcTotalBOEAmount_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ARBOEMultiGenTableset[],
+   ds:Erp_Tablesets_ARBOEMultiGenTableset,
 }
 }
 

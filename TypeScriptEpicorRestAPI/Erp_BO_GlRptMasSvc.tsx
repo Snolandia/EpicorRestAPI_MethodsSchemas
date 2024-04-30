@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.GlRptMasSvc
 // Description: Financial Report Designer business object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlRptMasRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlRptMasRow
    */  
 export function get_GlRptMas(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_GlRptMas(select?:string, expand?:string, filter?:string, ord
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlRptMasRow)
           })
@@ -118,15 +158,15 @@ export function get_GlRptMas(select?:string, expand?:string, filter?:string, ord
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GlRptMas
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlRptMasRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlRptMasRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GlRptMasRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GlRptMasRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GlRptMas(requestBody:any, epicorHeaders?:Headers){
+export function post_GlRptMas(requestBody:Erp_Tablesets_GlRptMasRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_GlRptMas(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_GlRptMas(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GlRptMasRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GlRptMasRow
    */  
 export function get_GlRptMas_Company_ReportID(Company:string, ReportID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_GlRptMas_Company_ReportID(Company:string, ReportID:string, s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GlRptMasRow)
           })
@@ -193,15 +247,15 @@ export function get_GlRptMas_Company_ReportID(Company:string, ReportID:string, s
    OperationID: UpdateExt_GlRptMa
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ReportID Desc: ReportID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlRptMasRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlRptMasRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GlRptMas_Company_ReportID(Company:string, ReportID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GlRptMas_Company_ReportID(Company:string, ReportID:string, requestBody:Erp_Tablesets_GlRptMasRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_GlRptMas_Company_ReportID(Company:string, ReportID:string,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_GlRptMas_Company_ReportID(Company:string, ReportID:string,
    OperationID: DeleteUpdateExt_GlRptMa
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ReportID Desc: ReportID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_GlRptMas_Company_ReportID(Company:string, ReportID:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_GlRptMas_Company_ReportID(Company:string, ReportID:string
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptColSetRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptColSetRow
    */  
 export function get_GlRptMas_Company_ReportID_GLRptColSets(Company:string, ReportID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_GlRptMas_Company_ReportID_GLRptColSets(Company:string, Repor
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLRptColSetRow)
           })
@@ -311,10 +386,10 @@ export function get_GlRptMas_Company_ReportID_GLRptColSets(Company:string, Repor
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLRptColSetRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLRptColSetRow
    */  
 export function get_GlRptMas_Company_ReportID_GLRptColSets_Company_ReportID_ColSetSeq(Company:string, ReportID:string, ColSetSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_GlRptMas_Company_ReportID_GLRptColSets_Company_ReportID_ColS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLRptColSetRow)
           })
@@ -352,10 +434,10 @@ export function get_GlRptMas_Company_ReportID_GLRptColSets_Company_ReportID_ColS
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlRptRowRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlRptRowRow
    */  
 export function get_GlRptMas_Company_ReportID_GlRptRows(Company:string, ReportID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -370,7 +452,14 @@ export function get_GlRptMas_Company_ReportID_GlRptRows(Company:string, ReportID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlRptRowRow)
           })
@@ -390,10 +479,10 @@ export function get_GlRptMas_Company_ReportID_GlRptRows(Company:string, ReportID
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GlRptRowRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GlRptRowRow
    */  
 export function get_GlRptMas_Company_ReportID_GlRptRows_Company_ReportID_LineNum(Company:string, ReportID:string, LineNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -408,7 +497,14 @@ export function get_GlRptMas_Company_ReportID_GlRptRows_Company_ReportID_LineNum
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GlRptRowRow)
           })
@@ -429,10 +525,10 @@ export function get_GlRptMas_Company_ReportID_GlRptRows_Company_ReportID_LineNum
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptColSetRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptColSetRow
    */  
 export function get_GLRptColSets(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -447,7 +543,14 @@ export function get_GLRptColSets(select?:string, expand?:string, filter?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLRptColSetRow)
           })
@@ -461,15 +564,15 @@ export function get_GLRptColSets(select?:string, expand?:string, filter?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GLRptColSets
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLRptColSetRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLRptColSetRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GLRptColSetRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GLRptColSetRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLRptColSets(requestBody:any, epicorHeaders?:Headers){
+export function post_GLRptColSets(requestBody:Erp_Tablesets_GLRptColSetRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -483,7 +586,14 @@ export function post_GLRptColSets(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -503,10 +613,10 @@ export function post_GLRptColSets(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLRptColSetRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLRptColSetRow
    */  
 export function get_GLRptColSets_Company_ReportID_ColSetSeq(Company:string, ReportID:string, ColSetSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -521,7 +631,14 @@ export function get_GLRptColSets_Company_ReportID_ColSetSeq(Company:string, Repo
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLRptColSetRow)
           })
@@ -538,15 +655,15 @@ export function get_GLRptColSets_Company_ReportID_ColSetSeq(Company:string, Repo
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ReportID Desc: ReportID   Required: True   Allow empty value : True
       @param ColSetSeq Desc: ColSetSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLRptColSetRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLRptColSetRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GLRptColSets_Company_ReportID_ColSetSeq(Company:string, ReportID:string, ColSetSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GLRptColSets_Company_ReportID_ColSetSeq(Company:string, ReportID:string, ColSetSeq:string, requestBody:Erp_Tablesets_GLRptColSetRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -560,7 +677,14 @@ export function patch_GLRptColSets_Company_ReportID_ColSetSeq(Company:string, Re
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -577,7 +701,7 @@ export function patch_GLRptColSets_Company_ReportID_ColSetSeq(Company:string, Re
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ReportID Desc: ReportID   Required: True   Allow empty value : True
       @param ColSetSeq Desc: ColSetSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -596,7 +720,14 @@ export function delete_GLRptColSets_Company_ReportID_ColSetSeq(Company:string, R
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -619,10 +750,10 @@ export function delete_GLRptColSets_Company_ReportID_ColSetSeq(Company:string, R
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptColRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptColRow
    */  
 export function get_GLRptColSets_Company_ReportID_ColSetSeq_GLRptCols(Company:string, ReportID:string, ColSetSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -637,7 +768,14 @@ export function get_GLRptColSets_Company_ReportID_ColSetSeq_GLRptCols(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLRptColRow)
           })
@@ -659,10 +797,10 @@ export function get_GLRptColSets_Company_ReportID_ColSetSeq_GLRptCols(Company:st
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLRptColRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLRptColRow
    */  
 export function get_GLRptColSets_Company_ReportID_ColSetSeq_GLRptCols_Company_ReportID_ColSetID_ColumnNum_SysRowID(Company:string, ReportID:string, ColSetSeq:string, ColSetID:string, ColumnNum:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -677,7 +815,14 @@ export function get_GLRptColSets_Company_ReportID_ColSetSeq_GLRptCols_Company_Re
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLRptColRow)
           })
@@ -697,10 +842,10 @@ export function get_GLRptColSets_Company_ReportID_ColSetSeq_GLRptCols_Company_Re
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptColRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptColRow
    */  
 export function get_GLRptCols(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -715,7 +860,14 @@ export function get_GLRptCols(select?:string, filter?:string, orderby?:string, t
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLRptColRow)
           })
@@ -729,15 +881,15 @@ export function get_GLRptCols(select?:string, filter?:string, orderby?:string, t
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GLRptCols
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLRptColRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLRptColRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GLRptColRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GLRptColRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLRptCols(requestBody:any, epicorHeaders?:Headers){
+export function post_GLRptCols(requestBody:Erp_Tablesets_GLRptColRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -751,7 +903,14 @@ export function post_GLRptCols(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -772,10 +931,10 @@ export function post_GLRptCols(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLRptColRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLRptColRow
    */  
 export function get_GLRptCols_Company_ReportID_ColSetID_ColumnNum_SysRowID(Company:string, ReportID:string, ColSetID:string, ColumnNum:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -790,7 +949,14 @@ export function get_GLRptCols_Company_ReportID_ColSetID_ColumnNum_SysRowID(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLRptColRow)
           })
@@ -809,15 +975,15 @@ export function get_GLRptCols_Company_ReportID_ColSetID_ColumnNum_SysRowID(Compa
       @param ColSetID Desc: ColSetID   Required: True   Allow empty value : True
       @param ColumnNum Desc: ColumnNum   Required: True
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLRptColRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLRptColRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GLRptCols_Company_ReportID_ColSetID_ColumnNum_SysRowID(Company:string, ReportID:string, ColSetID:string, ColumnNum:string, SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GLRptCols_Company_ReportID_ColSetID_ColumnNum_SysRowID(Company:string, ReportID:string, ColSetID:string, ColumnNum:string, SysRowID:string, requestBody:Erp_Tablesets_GLRptColRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -831,7 +997,14 @@ export function patch_GLRptCols_Company_ReportID_ColSetID_ColumnNum_SysRowID(Com
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -850,7 +1023,7 @@ export function patch_GLRptCols_Company_ReportID_ColSetID_ColumnNum_SysRowID(Com
       @param ColSetID Desc: ColSetID   Required: True   Allow empty value : True
       @param ColumnNum Desc: ColumnNum   Required: True
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -869,7 +1042,14 @@ export function delete_GLRptCols_Company_ReportID_ColSetID_ColumnNum_SysRowID(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -890,10 +1070,10 @@ export function delete_GLRptCols_Company_ReportID_ColSetID_ColumnNum_SysRowID(Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlRptRowRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlRptRowRow
    */  
 export function get_GlRptRows(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -908,7 +1088,14 @@ export function get_GlRptRows(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlRptRowRow)
           })
@@ -922,15 +1109,15 @@ export function get_GlRptRows(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GlRptRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlRptRowRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GlRptRowRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GlRptRowRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GlRptRowRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GlRptRows(requestBody:any, epicorHeaders?:Headers){
+export function post_GlRptRows(requestBody:Erp_Tablesets_GlRptRowRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -944,7 +1131,14 @@ export function post_GlRptRows(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -964,10 +1158,10 @@ export function post_GlRptRows(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GlRptRowRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GlRptRowRow
    */  
 export function get_GlRptRows_Company_ReportID_LineNum(Company:string, ReportID:string, LineNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -982,7 +1176,14 @@ export function get_GlRptRows_Company_ReportID_LineNum(Company:string, ReportID:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GlRptRowRow)
           })
@@ -999,15 +1200,15 @@ export function get_GlRptRows_Company_ReportID_LineNum(Company:string, ReportID:
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ReportID Desc: ReportID   Required: True   Allow empty value : True
       @param LineNum Desc: LineNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlRptRowRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GlRptRowRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GlRptRows_Company_ReportID_LineNum(Company:string, ReportID:string, LineNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GlRptRows_Company_ReportID_LineNum(Company:string, ReportID:string, LineNum:string, requestBody:Erp_Tablesets_GlRptRowRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1021,7 +1222,14 @@ export function patch_GlRptRows_Company_ReportID_LineNum(Company:string, ReportI
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1038,7 +1246,7 @@ export function patch_GlRptRows_Company_ReportID_LineNum(Company:string, ReportI
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param ReportID Desc: ReportID   Required: True   Allow empty value : True
       @param LineNum Desc: LineNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1057,7 +1265,14 @@ export function delete_GlRptRows_Company_ReportID_LineNum(Company:string, Report
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1080,10 +1295,10 @@ export function delete_GlRptRows_Company_ReportID_LineNum(Company:string, Report
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptRowAcctRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptRowAcctRow
    */  
 export function get_GlRptRows_Company_ReportID_LineNum_GLRptRowAccts(Company:string, ReportID:string, LineNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1098,7 +1313,14 @@ export function get_GlRptRows_Company_ReportID_LineNum_GLRptRowAccts(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLRptRowAcctRow)
           })
@@ -1118,10 +1340,10 @@ export function get_GlRptRows_Company_ReportID_LineNum_GLRptRowAccts(Company:str
       @param SeqNum Desc: SeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLRptRowAcctRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLRptRowAcctRow
    */  
 export function get_GlRptRows_Company_ReportID_LineNum_GLRptRowAccts_Company_ReportID_LineNum_SeqNum(Company:string, ReportID:string, LineNum:string, SeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1136,7 +1358,14 @@ export function get_GlRptRows_Company_ReportID_LineNum_GLRptRowAccts_Company_Rep
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLRptRowAcctRow)
           })
@@ -1156,10 +1385,10 @@ export function get_GlRptRows_Company_ReportID_LineNum_GLRptRowAccts_Company_Rep
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptRowAcctRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GLRptRowAcctRow
    */  
 export function get_GLRptRowAccts(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1174,7 +1403,14 @@ export function get_GLRptRowAccts(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLRptRowAcctRow)
           })
@@ -1188,15 +1424,15 @@ export function get_GLRptRowAccts(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_GLRptRowAccts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLRptRowAcctRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.GLRptRowAcctRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.GLRptRowAcctRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.GLRptRowAcctRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GLRptRowAccts(requestBody:any, epicorHeaders?:Headers){
+export function post_GLRptRowAccts(requestBody:Erp_Tablesets_GLRptRowAcctRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1210,7 +1446,14 @@ export function post_GLRptRowAccts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1230,10 +1473,10 @@ export function post_GLRptRowAccts(requestBody:any, epicorHeaders?:Headers){
       @param SeqNum Desc: SeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.GLRptRowAcctRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.GLRptRowAcctRow
    */  
 export function get_GLRptRowAccts_Company_ReportID_LineNum_SeqNum(Company:string, ReportID:string, LineNum:string, SeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1248,7 +1491,14 @@ export function get_GLRptRowAccts_Company_ReportID_LineNum_SeqNum(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_GLRptRowAcctRow)
           })
@@ -1266,15 +1516,15 @@ export function get_GLRptRowAccts_Company_ReportID_LineNum_SeqNum(Company:string
       @param ReportID Desc: ReportID   Required: True   Allow empty value : True
       @param LineNum Desc: LineNum   Required: True
       @param SeqNum Desc: SeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLRptRowAcctRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.GLRptRowAcctRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_GLRptRowAccts_Company_ReportID_LineNum_SeqNum(Company:string, ReportID:string, LineNum:string, SeqNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_GLRptRowAccts_Company_ReportID_LineNum_SeqNum(Company:string, ReportID:string, LineNum:string, SeqNum:string, requestBody:Erp_Tablesets_GLRptRowAcctRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1288,7 +1538,14 @@ export function patch_GLRptRowAccts_Company_ReportID_LineNum_SeqNum(Company:stri
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1306,7 +1563,7 @@ export function patch_GLRptRowAccts_Company_ReportID_LineNum_SeqNum(Company:stri
       @param ReportID Desc: ReportID   Required: True   Allow empty value : True
       @param LineNum Desc: LineNum   Required: True
       @param SeqNum Desc: SeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1325,7 +1582,14 @@ export function delete_GLRptRowAccts_Company_ReportID_LineNum_SeqNum(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1345,10 +1609,10 @@ export function delete_GLRptRowAccts_Company_ReportID_LineNum_SeqNum(Company:str
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlRptMasListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.GlRptMasListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1363,7 +1627,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlRptMasListRow)
           })
@@ -1375,6 +1646,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1390,7 +1678,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1468,15 +1756,22 @@ export function get_GetRows(whereClauseGlRptMas:string, whereClauseGLRptColSet:s
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1489,7 +1784,7 @@ export function get_GetRows(whereClauseGlRptMas:string, whereClauseGLRptColSet:s
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1513,15 +1808,22 @@ export function get_GetByID(reportID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1536,7 +1838,7 @@ export function get_GetByID(reportID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1578,15 +1880,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1599,7 +1908,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Description: Method to call to get the list for Category or Accounts option.  The list is
 returned in code1`code desc1~code2`code desc2 format.
    OperationID: CategoryOrAccountsList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CategoryOrAccountsList_output
@@ -1612,15 +1921,22 @@ export function post_CategoryOrAccountsList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CategoryOrAccountsList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/CategoryOrAccountsList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CategoryOrAccountsList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1636,30 +1952,37 @@ GLRptColSet record.
 Prior to calling this method, the GLRptColSet record that exists for the GLRptCol
 record needs to have the RowMod field set to 'U'.
    OperationID: ChangeGLRptColColSetID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeGLRptColColSetID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeGLRptColColSetID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeGLRptColColSetID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeGLRptColColSetID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeGLRptColColSetID(requestBody:ChangeGLRptColColSetID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeGLRptColColSetID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ChangeGLRptColColSetID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeGLRptColColSetID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1671,30 +1994,37 @@ export function post_ChangeGLRptColColSetID(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ChangeGLRptColColumnType
    Description: Method to call to reset values in a GLRptCol record when the column type changes.
    OperationID: ChangeGLRptColColumnType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeGLRptColColumnType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeGLRptColColumnType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeGLRptColColumnType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeGLRptColColumnType(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeGLRptColColumnType(requestBody:ChangeGLRptColColumnType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeGLRptColColumnType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ChangeGLRptColColumnType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeGLRptColColumnType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1706,30 +2036,37 @@ export function post_ChangeGLRptColColumnType(requestBody:any, epicorHeaders?:He
    Summary: Invoke method ChangeGLRptColIntervalType
    Description: Method to call when the GLRptCol.IntervalType value changes.
    OperationID: ChangeGLRptColIntervalType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeGLRptColIntervalType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeGLRptColIntervalType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeGLRptColIntervalType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeGLRptColIntervalType(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeGLRptColIntervalType(requestBody:ChangeGLRptColIntervalType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeGLRptColIntervalType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ChangeGLRptColIntervalType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeGLRptColIntervalType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1741,30 +2078,37 @@ export function post_ChangeGLRptColIntervalType(requestBody:any, epicorHeaders?:
    Summary: Invoke method ChangeGLRptMasBookID
    Description: Method to call when the GLRptMas.BookID value changes.
    OperationID: ChangeGLRptMasBookID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeGLRptMasBookID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeGLRptMasBookID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeGLRptMasBookID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeGLRptMasBookID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeGLRptMasBookID(requestBody:ChangeGLRptMasBookID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeGLRptMasBookID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ChangeGLRptMasBookID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeGLRptMasBookID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1780,30 +2124,37 @@ Prior to calling this method, any GLRptRow subrecords that exist for the GLRptRo
 record need to have the RowMod field set to 'U'.  The subtables for GLRptRow are:
 GLRptRowAccounts, GLRptRowCharts, GLRptRowDepts, GLRptRowDivisions.
    OperationID: ChangeGLRptRowCategoryOrAccounts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeGLRptRowCategoryOrAccounts_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeGLRptRowCategoryOrAccounts_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeGLRptRowCategoryOrAccounts_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeGLRptRowCategoryOrAccounts(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeGLRptRowCategoryOrAccounts(requestBody:ChangeGLRptRowCategoryOrAccounts_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeGLRptRowCategoryOrAccounts_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ChangeGLRptRowCategoryOrAccounts", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeGLRptRowCategoryOrAccounts_output)
           })
       .catch((error) => {
           reject(error)
@@ -1818,30 +2169,37 @@ Prior to calling this method, any GLRptRow subrecords that exist for the GLRptRo
 record need to have the RowMod field set to 'U'.  The subtables for GLRptRow are:
 GLRptRowAccounts, GLRptRowCharts, GLRptRowDepts, GLRptRowDivisions.
    OperationID: ChangeGLRptRowLineType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeGLRptRowLineType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeGLRptRowLineType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeGLRptRowLineType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeGLRptRowLineType(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeGLRptRowLineType(requestBody:ChangeGLRptRowLineType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeGLRptRowLineType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ChangeGLRptRowLineType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeGLRptRowLineType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1854,7 +2212,7 @@ export function post_ChangeGLRptRowLineType(requestBody:any, epicorHeaders?:Head
    Description: Method to call to get the list of valid column types.  The list is returned in
 code1`code desc1~code2`code desc2 format.
    OperationID: ColumnTypeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ColumnTypeList_output
@@ -1867,15 +2225,22 @@ export function post_ColumnTypeList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ColumnTypeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ColumnTypeList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ColumnTypeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1888,30 +2253,37 @@ export function post_ColumnTypeList(epicorHeaders?:Headers){
    Description: Method to call to delete a column set for a financial report.  This method
 delete the records in the column set and return the GlRptMas dataset.
    OperationID: DeleteColSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteColSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteColSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteColSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteColSet(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteColSet(requestBody:DeleteColSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteColSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/DeleteColSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteColSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -1924,30 +2296,37 @@ export function post_DeleteColSet(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call to duplicate a financial report.  This method will return the
 newly created records in the GlRptMas dataset.
    OperationID: DuplicateFinancialReport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DuplicateFinancialReport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DuplicateFinancialReport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DuplicateFinancialReport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DuplicateFinancialReport(requestBody:any, epicorHeaders?:Headers){
+export function post_DuplicateFinancialReport(requestBody:DuplicateFinancialReport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DuplicateFinancialReport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/DuplicateFinancialReport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DuplicateFinancialReport_output)
           })
       .catch((error) => {
           reject(error)
@@ -1959,30 +2338,37 @@ export function post_DuplicateFinancialReport(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetNewGLRptRowAcctForType
    Description: Creates a new GLRptRowAcct record based on type.
    OperationID: GetNewGLRptRowAcctForType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLRptRowAcctForType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLRptRowAcctForType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGLRptRowAcctForType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGLRptRowAcctForType(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGLRptRowAcctForType(requestBody:GetNewGLRptRowAcctForType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGLRptRowAcctForType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetNewGLRptRowAcctForType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGLRptRowAcctForType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1994,30 +2380,37 @@ export function post_GetNewGLRptRowAcctForType(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetCodeDescList
    Description: GetCodeDescList
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2030,7 +2423,7 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call to get the list of valid line types.  The list is returned in
 code1`code desc1~code2`code desc2 format.
    OperationID: LineTypeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/LineTypeList_output
@@ -2043,15 +2436,22 @@ export function post_LineTypeList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LineTypeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/LineTypeList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LineTypeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2064,30 +2464,37 @@ export function post_LineTypeList(epicorHeaders?:Headers){
    Description: Method to call to move a report column down within a column set.  This method
 resequences the columns as appropriate and returns the updated dataset.
    OperationID: MoveGLRptColDown
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MoveGLRptColDown_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MoveGLRptColDown_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MoveGLRptColDown_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MoveGLRptColDown(requestBody:any, epicorHeaders?:Headers){
+export function post_MoveGLRptColDown(requestBody:MoveGLRptColDown_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MoveGLRptColDown_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/MoveGLRptColDown", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MoveGLRptColDown_output)
           })
       .catch((error) => {
           reject(error)
@@ -2100,30 +2507,37 @@ export function post_MoveGLRptColDown(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call to move a report column up within a column set.  This method
 resequences the columns as appropriate and returns the updated dataset.
    OperationID: MoveGLRptColUp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MoveGLRptColUp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MoveGLRptColUp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MoveGLRptColUp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MoveGLRptColUp(requestBody:any, epicorHeaders?:Headers){
+export function post_MoveGLRptColUp(requestBody:MoveGLRptColUp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MoveGLRptColUp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/MoveGLRptColUp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MoveGLRptColUp_output)
           })
       .catch((error) => {
           reject(error)
@@ -2136,30 +2550,37 @@ export function post_MoveGLRptColUp(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call to create a financial report using a wizard.  The wizard
 will create a template report that be modified via the GlRptMas dataset.
    OperationID: ReportWizard
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ReportWizard_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ReportWizard_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ReportWizard_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ReportWizard(requestBody:any, epicorHeaders?:Headers){
+export function post_ReportWizard(requestBody:ReportWizard_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ReportWizard_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ReportWizard", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ReportWizard_output)
           })
       .catch((error) => {
           reject(error)
@@ -2172,7 +2593,7 @@ export function post_ReportWizard(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call to get the list of valid options for the report wizard.
 The list is returned in code1`code desc1~code2`code desc2 format.
    OperationID: ReportWizardOptionsList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ReportWizardOptionsList_output
@@ -2185,15 +2606,22 @@ export function post_ReportWizardOptionsList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ReportWizardOptionsList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ReportWizardOptionsList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ReportWizardOptionsList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2206,30 +2634,37 @@ export function post_ReportWizardOptionsList(epicorHeaders?:Headers){
    Description: Method to call to check the syntax of a report.  Syntax errors that occured
 will be stored in datatable GLRptSyntaxErrors.
    OperationID: SyntaxCheck
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SyntaxCheck_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SyntaxCheck_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SyntaxCheck_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SyntaxCheck(requestBody:any, epicorHeaders?:Headers){
+export function post_SyntaxCheck(requestBody:SyntaxCheck_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SyntaxCheck_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/SyntaxCheck", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SyntaxCheck_output)
           })
       .catch((error) => {
           reject(error)
@@ -2243,30 +2678,37 @@ export function post_SyntaxCheck(requestBody:any, epicorHeaders?:Headers){
 will be stored in datatable GLRptSyntaxErrors.
 Introduced for web use only.
    OperationID: SyntaxCheckForWeb
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SyntaxCheckForWeb_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SyntaxCheckForWeb_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SyntaxCheckForWeb_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SyntaxCheckForWeb(requestBody:any, epicorHeaders?:Headers){
+export function post_SyntaxCheckForWeb(requestBody:SyntaxCheckForWeb_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SyntaxCheckForWeb_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/SyntaxCheckForWeb", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SyntaxCheckForWeb_output)
           })
       .catch((error) => {
           reject(error)
@@ -2279,7 +2721,7 @@ export function post_SyntaxCheckForWeb(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call to get the list of valid options for the syntax check.
 The list is returned in code1`code desc1~code2`code desc2 format.
    OperationID: SyntaxCheckOptionsList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/SyntaxCheckOptionsList_output
@@ -2292,15 +2734,22 @@ export function post_SyntaxCheckOptionsList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SyntaxCheckOptionsList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/SyntaxCheckOptionsList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SyntaxCheckOptionsList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2314,30 +2763,37 @@ export function post_SyntaxCheckOptionsList(epicorHeaders?:Headers){
 if applicable.  If accounts or charts are required, an exception will be thrown.
 This method should be called prior to leaving the row for a different row.
    OperationID: ValidateGLRptRow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateGLRptRow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateGLRptRow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateGLRptRow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateGLRptRow(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateGLRptRow(requestBody:ValidateGLRptRow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateGLRptRow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ValidateGLRptRow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateGLRptRow_output)
           })
       .catch((error) => {
           reject(error)
@@ -2350,7 +2806,7 @@ export function post_ValidateGLRptRow(requestBody:any, epicorHeaders?:Headers){
    Description: Method to call to get the list of valid entries for Yes/No/Default options.
 The list is returned in code1`code desc1~code2`code desc2 format.
    OperationID: YesNoDefaultList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/YesNoDefaultList_output
@@ -2363,15 +2819,22 @@ export function post_YesNoDefaultList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<YesNoDefaultList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/YesNoDefaultList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as YesNoDefaultList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2383,30 +2846,37 @@ export function post_YesNoDefaultList(epicorHeaders?:Headers){
    Summary: Invoke method ExportReportDefinition
    Description: Export Report Definition to XML
    OperationID: ExportReportDefinition
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportReportDefinition_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportReportDefinition_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportReportDefinition_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportReportDefinition(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportReportDefinition(requestBody:ExportReportDefinition_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportReportDefinition_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ExportReportDefinition", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportReportDefinition_output)
           })
       .catch((error) => {
           reject(error)
@@ -2418,30 +2888,37 @@ export function post_ExportReportDefinition(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ExportReportDefinition2
    Description: Export Report Definition to XML, web make.
    OperationID: ExportReportDefinition2
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportReportDefinition2_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportReportDefinition2_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportReportDefinition2_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportReportDefinition2(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportReportDefinition2(requestBody:ExportReportDefinition2_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportReportDefinition2_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ExportReportDefinition2", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportReportDefinition2_output)
           })
       .catch((error) => {
           reject(error)
@@ -2453,30 +2930,37 @@ export function post_ExportReportDefinition2(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method ValidateImportedReportDefinition
    Description: Validates imported (as an XML file) report definition.
    OperationID: ValidateImportedReportDefinition
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateImportedReportDefinition_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateImportedReportDefinition_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateImportedReportDefinition_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateImportedReportDefinition(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateImportedReportDefinition(requestBody:ValidateImportedReportDefinition_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateImportedReportDefinition_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ValidateImportedReportDefinition", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateImportedReportDefinition_output)
           })
       .catch((error) => {
           reject(error)
@@ -2488,30 +2972,37 @@ export function post_ValidateImportedReportDefinition(requestBody:any, epicorHea
    Summary: Invoke method ImportReportDefinition
    Description: Import Report Definition from XML Data
    OperationID: ImportReportDefinition
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportReportDefinition_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportReportDefinition_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportReportDefinition_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportReportDefinition(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportReportDefinition(requestBody:ImportReportDefinition_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportReportDefinition_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ImportReportDefinition", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportReportDefinition_output)
           })
       .catch((error) => {
           reject(error)
@@ -2523,30 +3014,37 @@ export function post_ImportReportDefinition(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ImportReportDefinition2
    Description: Import Report Definition from XML Data, web make.
    OperationID: ImportReportDefinition2
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportReportDefinition2_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportReportDefinition2_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportReportDefinition2_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportReportDefinition2(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportReportDefinition2(requestBody:ImportReportDefinition2_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportReportDefinition2_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/ImportReportDefinition2", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportReportDefinition2_output)
           })
       .catch((error) => {
           reject(error)
@@ -2558,30 +3056,37 @@ export function post_ImportReportDefinition2(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewGlRptMas
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGlRptMas
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGlRptMas_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGlRptMas_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGlRptMas_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGlRptMas(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGlRptMas(requestBody:GetNewGlRptMas_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGlRptMas_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetNewGlRptMas", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGlRptMas_output)
           })
       .catch((error) => {
           reject(error)
@@ -2593,30 +3098,37 @@ export function post_GetNewGlRptMas(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewGLRptCol
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGLRptCol
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLRptCol_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLRptCol_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGLRptCol_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGLRptCol(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGLRptCol(requestBody:GetNewGLRptCol_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGLRptCol_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetNewGLRptCol", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGLRptCol_output)
           })
       .catch((error) => {
           reject(error)
@@ -2628,30 +3140,37 @@ export function post_GetNewGLRptCol(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewGlRptRow
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGlRptRow
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGlRptRow_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGlRptRow_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGlRptRow_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGlRptRow(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGlRptRow(requestBody:GetNewGlRptRow_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGlRptRow_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetNewGlRptRow", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGlRptRow_output)
           })
       .catch((error) => {
           reject(error)
@@ -2663,30 +3182,37 @@ export function post_GetNewGlRptRow(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewGLRptRowAcct
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewGLRptRowAcct
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGLRptRowAcct_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGLRptRowAcct_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGLRptRowAcct_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGLRptRowAcct(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGLRptRowAcct(requestBody:GetNewGLRptRowAcct_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGLRptRowAcct_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetNewGLRptRowAcct", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGLRptRowAcct_output)
           })
       .catch((error) => {
           reject(error)
@@ -2698,30 +3224,37 @@ export function post_GetNewGLRptRowAcct(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2733,7 +3266,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2757,15 +3290,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2777,7 +3317,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2801,15 +3341,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2821,30 +3368,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2856,30 +3410,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.GlRptMasSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2890,36 +3451,53 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLRptColRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLRptColRow[],
+   "value":Erp_Tablesets_GLRptColRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLRptColSetRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLRptColSetRow[],
+   "value":Erp_Tablesets_GLRptColSetRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GLRptRowAcctRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GLRptRowAcctRow[],
+   "value":Erp_Tablesets_GLRptRowAcctRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlRptMasListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GlRptMasListRow[],
+   "value":Erp_Tablesets_GlRptMasListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlRptMasRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GlRptMasRow[],
+   "value":Erp_Tablesets_GlRptMasRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_GlRptRowRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_GlRptRowRow[],
+   "value":Erp_Tablesets_GlRptRowRow,
 }
 
 export interface Erp_Tablesets_GLRptColRow{
@@ -3386,6 +3964,23 @@ Default is GLRptCol.DataItalic/GLRptMas.ReporItalic.  */
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface CategoryOrAccountsList_output{
@@ -3408,7 +4003,7 @@ export interface ChangeGLRptColColSetID_input{
 export interface ChangeGLRptColColSetID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -3425,7 +4020,7 @@ export interface ChangeGLRptColColumnType_input{
 export interface ChangeGLRptColColumnType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -3442,7 +4037,7 @@ export interface ChangeGLRptColIntervalType_input{
 export interface ChangeGLRptColIntervalType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -3459,7 +4054,7 @@ export interface ChangeGLRptMasBookID_input{
 export interface ChangeGLRptMasBookID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -3476,7 +4071,7 @@ export interface ChangeGLRptRowCategoryOrAccounts_input{
 export interface ChangeGLRptRowCategoryOrAccounts_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -3493,7 +4088,7 @@ export interface ChangeGLRptRowLineType_input{
 export interface ChangeGLRptRowLineType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -3530,7 +4125,7 @@ export interface DeleteColSet_input{
 export interface DeleteColSet_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -3556,7 +4151,7 @@ export interface DuplicateFinancialReport_input{
 export interface DuplicateFinancialReport_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -4176,7 +4771,7 @@ export interface GetNewGLRptCol_input{
 export interface GetNewGLRptCol_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -4201,7 +4796,7 @@ export interface GetNewGLRptRowAcctForType_input{
 export interface GetNewGLRptRowAcctForType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -4219,7 +4814,7 @@ export interface GetNewGLRptRowAcct_input{
 export interface GetNewGLRptRowAcct_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -4233,7 +4828,7 @@ export interface GetNewGlRptMas_input{
 export interface GetNewGlRptMas_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -4249,7 +4844,7 @@ export interface GetNewGlRptRow_input{
 export interface GetNewGlRptRow_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -4379,7 +4974,7 @@ export interface MoveGLRptColDown_input{
 export interface MoveGLRptColDown_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -4405,7 +5000,7 @@ export interface MoveGLRptColUp_input{
 export interface MoveGLRptColUp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -4433,7 +5028,7 @@ export interface ReportWizard_input{
 export interface ReportWizard_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 
@@ -4491,7 +5086,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtGlRptMasTableset[],
+   ds:Erp_Tablesets_UpdExtGlRptMasTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4506,7 +5101,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_GlRptMasTableset[],
+   ds:Erp_Tablesets_GlRptMasTableset,
 }
 }
 

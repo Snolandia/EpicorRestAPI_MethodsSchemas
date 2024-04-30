@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.RFQDecisionWizardSvc
 // Description: The Decision Wizard from Buyer Workbench.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -77,6 +110,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -92,30 +142,37 @@ Once the RFQ has been created and vendor responds, the trigger will create a POS
 Set rest of vendor responses for this rfq to status = NO,
 close rfqLine/item
    OperationID: Accept
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Accept_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Accept_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Accept_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Accept(requestBody:any, epicorHeaders?:Headers){
+export function post_Accept(requestBody:Accept_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Accept_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQDecisionWizardSvc/Accept", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Accept_output)
           })
       .catch((error) => {
           reject(error)
@@ -128,30 +185,37 @@ export function post_Accept(requestBody:any, epicorHeaders?:Headers){
    Description: This method will create the RFQReadyVend records associated with the RFQFilterDW
 record and the selected filter and sort options.
    OperationID: Apply
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Apply_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Apply_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Apply_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Apply(requestBody:any, epicorHeaders?:Headers){
+export function post_Apply(requestBody:Apply_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Apply_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQDecisionWizardSvc/Apply", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Apply_output)
           })
       .catch((error) => {
           reject(error)
@@ -163,30 +227,37 @@ export function post_Apply(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckBeforeCreatePO
    Description: Asks user before create the PO for a Quoted Item
    OperationID: CheckBeforeCreatePO
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckBeforeCreatePO_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckBeforeCreatePO_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckBeforeCreatePO_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckBeforeCreatePO(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckBeforeCreatePO(requestBody:CheckBeforeCreatePO_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckBeforeCreatePO_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQDecisionWizardSvc/CheckBeforeCreatePO", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckBeforeCreatePO_output)
           })
       .catch((error) => {
           reject(error)
@@ -198,30 +269,37 @@ export function post_CheckBeforeCreatePO(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method CreatePO
    Description: This method create the purchase order for this rfqitem.
    OperationID: CreatePO
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreatePO_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreatePO_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreatePO_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreatePO(requestBody:any, epicorHeaders?:Headers){
+export function post_CreatePO(requestBody:CreatePO_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreatePO_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQDecisionWizardSvc/CreatePO", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreatePO_output)
           })
       .catch((error) => {
           reject(error)
@@ -236,30 +314,37 @@ populate the attributes to include/exclude and sort options.  The record created
 here will then be used for the Apply method to generate the RFQReadyVend records.
 Run this as the first method.
    OperationID: GetHeaderRecord
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetHeaderRecord_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetHeaderRecord_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetHeaderRecord_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetHeaderRecord(requestBody:any, epicorHeaders?:Headers){
+export function post_GetHeaderRecord(requestBody:GetHeaderRecord_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetHeaderRecord_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQDecisionWizardSvc/GetHeaderRecord", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetHeaderRecord_output)
           })
       .catch((error) => {
           reject(error)
@@ -273,30 +358,37 @@ export function post_GetHeaderRecord(requestBody:any, epicorHeaders?:Headers){
 to update the Qty, duedate and promise date fields.
 Run this before CreatePO.
    OperationID: GetLineQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLineQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLineQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLineQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLineQty(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLineQty(requestBody:GetLineQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLineQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQDecisionWizardSvc/GetLineQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLineQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -311,30 +403,37 @@ a choice of continuing with the Accept.  Call this before the Accept method and
 then pass into the Accept method the logical choice from the user's response
 to the potential message from this method.
    OperationID: PreAccept
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreAccept_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreAccept_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreAccept_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreAccept(requestBody:any, epicorHeaders?:Headers){
+export function post_PreAccept(requestBody:PreAccept_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreAccept_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.RFQDecisionWizardSvc/PreAccept", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreAccept_output)
           })
       .catch((error) => {
           reject(error)
@@ -345,11 +444,45 @@ export function post_PreAccept(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -378,7 +511,7 @@ export interface Accept_input{
 export interface Accept_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQDecisionWizardTableset[],
+   ds:Erp_Tablesets_RFQDecisionWizardTableset,
 }
 }
 
@@ -392,7 +525,7 @@ export interface Apply_input{
 export interface Apply_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_RFQDecisionWizardTableset[],
+   ds:Erp_Tablesets_RFQDecisionWizardTableset,
 }
 }
 
@@ -443,7 +576,7 @@ export interface CreatePO_output{
 parameters : {
       /**  output parameters  */  
    opStatusMsg:string,
-   ds:Erp_Tablesets_RFQDecisionWizardTableset[],
+   ds:Erp_Tablesets_RFQDecisionWizardTableset,
 }
 }
 

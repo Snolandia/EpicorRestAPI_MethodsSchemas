@@ -1,13 +1,32 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.BpMethodSvc
 // Description: Manages BPM directives for customizing business object methods.
 Contains BPM 4GL code generator for BPM directives.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -16,7 +35,7 @@ Contains BPM 4GL code generator for BPM directives.
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -34,7 +53,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -48,7 +74,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -66,7 +92,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -87,10 +120,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpMethodRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpMethodRow
    */  
 export function get_BpMethods(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -105,7 +138,14 @@ export function get_BpMethods(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BpMethodRow)
           })
@@ -119,15 +159,15 @@ export function get_BpMethods(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BpMethods
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BpMethodRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BpMethodRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.BpMethodRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.BpMethodRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BpMethods(requestBody:any, epicorHeaders?:Headers){
+export function post_BpMethods(requestBody:Ice_Tablesets_BpMethodRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -141,7 +181,14 @@ export function post_BpMethods(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -160,10 +207,10 @@ export function post_BpMethods(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BpMethodRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BpMethodRow
    */  
 export function get_BpMethods_Source_BpMethodCode(Source:string, BpMethodCode:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -178,7 +225,14 @@ export function get_BpMethods_Source_BpMethodCode(Source:string, BpMethodCode:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BpMethodRow)
           })
@@ -194,15 +248,15 @@ export function get_BpMethods_Source_BpMethodCode(Source:string, BpMethodCode:st
    OperationID: UpdateExt_BpMethod
       @param Source Desc: Source   Required: True   Allow empty value : True
       @param BpMethodCode Desc: BpMethodCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.BpMethodRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.BpMethodRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BpMethods_Source_BpMethodCode(Source:string, BpMethodCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BpMethods_Source_BpMethodCode(Source:string, BpMethodCode:string, requestBody:Ice_Tablesets_BpMethodRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -216,7 +270,14 @@ export function patch_BpMethods_Source_BpMethodCode(Source:string, BpMethodCode:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -232,7 +293,7 @@ export function patch_BpMethods_Source_BpMethodCode(Source:string, BpMethodCode:
    OperationID: DeleteUpdateExt_BpMethod
       @param Source Desc: Source   Required: True   Allow empty value : True
       @param BpMethodCode Desc: BpMethodCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -251,7 +312,14 @@ export function delete_BpMethods_Source_BpMethodCode(Source:string, BpMethodCode
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_BpMethods_Source_BpMethodCode(Source:string, BpMethodCode
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpArgumentRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpArgumentRow
    */  
 export function get_BpMethods_Source_BpMethodCode_BpArguments(Source:string, BpMethodCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_BpMethods_Source_BpMethodCode_BpArguments(Source:string, BpM
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BpArgumentRow)
           })
@@ -310,10 +385,10 @@ export function get_BpMethods_Source_BpMethodCode_BpArguments(Source:string, BpM
       @param Order Desc: Order   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BpArgumentRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BpArgumentRow
    */  
 export function get_BpMethods_Source_BpMethodCode_BpArguments_Source_BpMethodCode_Order(Source:string, BpMethodCode:string, Order:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -328,7 +403,14 @@ export function get_BpMethods_Source_BpMethodCode_BpArguments_Source_BpMethodCod
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BpArgumentRow)
           })
@@ -350,10 +432,10 @@ export function get_BpMethods_Source_BpMethodCode_BpArguments_Source_BpMethodCod
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpDirectiveRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpDirectiveRow
    */  
 export function get_BpMethods_Source_BpMethodCode_BpDirectives(Source:string, BpMethodCode:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_BpMethods_Source_BpMethodCode_BpDirectives(Source:string, Bp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BpDirectiveRow)
           })
@@ -387,10 +476,10 @@ export function get_BpMethods_Source_BpMethodCode_BpDirectives(Source:string, Bp
       @param DirectiveID Desc: DirectiveID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BpDirectiveRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BpDirectiveRow
    */  
 export function get_BpMethods_Source_BpMethodCode_BpDirectives_DirectiveID(Source:string, BpMethodCode:string, DirectiveID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -405,7 +494,14 @@ export function get_BpMethods_Source_BpMethodCode_BpDirectives_DirectiveID(Sourc
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BpDirectiveRow)
           })
@@ -425,10 +521,10 @@ export function get_BpMethods_Source_BpMethodCode_BpDirectives_DirectiveID(Sourc
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpArgumentRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpArgumentRow
    */  
 export function get_BpArguments(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -443,7 +539,14 @@ export function get_BpArguments(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BpArgumentRow)
           })
@@ -457,15 +560,15 @@ export function get_BpArguments(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BpArguments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BpArgumentRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BpArgumentRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.BpArgumentRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.BpArgumentRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BpArguments(requestBody:any, epicorHeaders?:Headers){
+export function post_BpArguments(requestBody:Ice_Tablesets_BpArgumentRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -479,7 +582,14 @@ export function post_BpArguments(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -498,10 +608,10 @@ export function post_BpArguments(requestBody:any, epicorHeaders?:Headers){
       @param Order Desc: Order   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BpArgumentRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BpArgumentRow
    */  
 export function get_BpArguments_Source_BpMethodCode_Order(Source:string, BpMethodCode:string, Order:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -516,7 +626,14 @@ export function get_BpArguments_Source_BpMethodCode_Order(Source:string, BpMetho
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BpArgumentRow)
           })
@@ -533,15 +650,15 @@ export function get_BpArguments_Source_BpMethodCode_Order(Source:string, BpMetho
       @param Source Desc: Source   Required: True   Allow empty value : True
       @param BpMethodCode Desc: BpMethodCode   Required: True   Allow empty value : True
       @param Order Desc: Order   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.BpArgumentRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.BpArgumentRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BpArguments_Source_BpMethodCode_Order(Source:string, BpMethodCode:string, Order:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BpArguments_Source_BpMethodCode_Order(Source:string, BpMethodCode:string, Order:string, requestBody:Ice_Tablesets_BpArgumentRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -555,7 +672,14 @@ export function patch_BpArguments_Source_BpMethodCode_Order(Source:string, BpMet
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -572,7 +696,7 @@ export function patch_BpArguments_Source_BpMethodCode_Order(Source:string, BpMet
       @param Source Desc: Source   Required: True   Allow empty value : True
       @param BpMethodCode Desc: BpMethodCode   Required: True   Allow empty value : True
       @param Order Desc: Order   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -591,7 +715,14 @@ export function delete_BpArguments_Source_BpMethodCode_Order(Source:string, BpMe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -611,10 +742,10 @@ export function delete_BpArguments_Source_BpMethodCode_Order(Source:string, BpMe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpDirectiveRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpDirectiveRow
    */  
 export function get_BpDirectives(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -629,7 +760,14 @@ export function get_BpDirectives(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BpDirectiveRow)
           })
@@ -643,15 +781,15 @@ export function get_BpDirectives(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_BpDirectives
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BpDirectiveRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.BpDirectiveRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.BpDirectiveRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.BpDirectiveRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BpDirectives(requestBody:any, epicorHeaders?:Headers){
+export function post_BpDirectives(requestBody:Ice_Tablesets_BpDirectiveRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -665,7 +803,14 @@ export function post_BpDirectives(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -682,10 +827,10 @@ export function post_BpDirectives(requestBody:any, epicorHeaders?:Headers){
       @param DirectiveID Desc: DirectiveID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.BpDirectiveRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.BpDirectiveRow
    */  
 export function get_BpDirectives_DirectiveID(DirectiveID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -700,7 +845,14 @@ export function get_BpDirectives_DirectiveID(DirectiveID:string, select?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_BpDirectiveRow)
           })
@@ -715,15 +867,15 @@ export function get_BpDirectives_DirectiveID(DirectiveID:string, select?:string,
    Description: Calls UpdateExt to update BpDirective. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_BpDirective
       @param DirectiveID Desc: DirectiveID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.BpDirectiveRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.BpDirectiveRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_BpDirectives_DirectiveID(DirectiveID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_BpDirectives_DirectiveID(DirectiveID:string, requestBody:Ice_Tablesets_BpDirectiveRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -737,7 +889,14 @@ export function patch_BpDirectives_DirectiveID(DirectiveID:string, requestBody:a
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -752,7 +911,7 @@ export function patch_BpDirectives_DirectiveID(DirectiveID:string, requestBody:a
    Description: Call UpdateExt to delete BpDirective item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_BpDirective
       @param DirectiveID Desc: DirectiveID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -771,7 +930,14 @@ export function delete_BpDirectives_DirectiveID(DirectiveID:string, epicorHeader
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -791,10 +957,10 @@ export function delete_BpDirectives_DirectiveID(DirectiveID:string, epicorHeader
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpMethodListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.BpMethodListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -809,7 +975,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BpMethodListRow)
           })
@@ -821,6 +994,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -834,7 +1024,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -894,15 +1084,22 @@ export function get_GetRows(whereClauseBpMethod:string, whereClauseBpArgument:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -916,7 +1113,7 @@ export function get_GetRows(whereClauseBpMethod:string, whereClauseBpArgument:st
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -949,15 +1146,22 @@ export function get_GetByID(source:string, bpMethodCode:string, epicorHeaders?:H
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -972,7 +1176,7 @@ export function get_GetByID(source:string, bpMethodCode:string, epicorHeaders?:H
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1014,15 +1218,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1034,30 +1245,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method DeleteDirectiveGroup
    Description: Deletes directives by group name for business objects and data tables. UBAQ directives are not involved in this process
    OperationID: DeleteDirectiveGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteDirectiveGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteDirectiveGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteDirectiveGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteDirectiveGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteDirectiveGroup(requestBody:DeleteDirectiveGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteDirectiveGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/DeleteDirectiveGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteDirectiveGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1069,30 +1287,37 @@ export function post_DeleteDirectiveGroup(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetAvailableReferences
    Description: Gets the available references.
    OperationID: GetAvailableReferences
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAvailableReferences_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAvailableReferences_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableReferences_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAvailableReferences(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAvailableReferences(requestBody:GetAvailableReferences_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableReferences_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetAvailableReferences", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableReferences_output)
           })
       .catch((error) => {
           reject(error)
@@ -1104,30 +1329,37 @@ export function post_GetAvailableReferences(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetPagedAvailableReferences
    Description: Gets the available references.
    OperationID: GetPagedAvailableReferences
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPagedAvailableReferences_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPagedAvailableReferences_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPagedAvailableReferences_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPagedAvailableReferences(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPagedAvailableReferences(requestBody:GetPagedAvailableReferences_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPagedAvailableReferences_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetPagedAvailableReferences", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPagedAvailableReferences_output)
           })
       .catch((error) => {
           reject(error)
@@ -1139,30 +1371,37 @@ export function post_GetPagedAvailableReferences(requestBody:any, epicorHeaders?
    Summary: Invoke method GetMethodsByDirectiveGroup
    Description: Gets list of methods which have directives belong to specified directive group.
    OperationID: GetMethodsByDirectiveGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMethodsByDirectiveGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMethodsByDirectiveGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMethodsByDirectiveGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMethodsByDirectiveGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMethodsByDirectiveGroup(requestBody:GetMethodsByDirectiveGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMethodsByDirectiveGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetMethodsByDirectiveGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMethodsByDirectiveGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1174,30 +1413,37 @@ export function post_GetMethodsByDirectiveGroup(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetMethodsByDirectiveGroupAndSCCredentials
    Description: Gets list of methods which have directives belong to specified directive group and contain SC action with specified SC credentials.
    OperationID: GetMethodsByDirectiveGroupAndSCCredentials
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMethodsByDirectiveGroupAndSCCredentials_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMethodsByDirectiveGroupAndSCCredentials_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMethodsByDirectiveGroupAndSCCredentials_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMethodsByDirectiveGroupAndSCCredentials(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMethodsByDirectiveGroupAndSCCredentials(requestBody:GetMethodsByDirectiveGroupAndSCCredentials_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMethodsByDirectiveGroupAndSCCredentials_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetMethodsByDirectiveGroupAndSCCredentials", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMethodsByDirectiveGroupAndSCCredentials_output)
           })
       .catch((error) => {
           reject(error)
@@ -1209,30 +1455,37 @@ export function post_GetMethodsByDirectiveGroupAndSCCredentials(requestBody:any,
    Summary: Invoke method GetMethodsByDirectiveFlags
    Description: Gets list of methods which have directives with specified flags
    OperationID: GetMethodsByDirectiveFlags
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMethodsByDirectiveFlags_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMethodsByDirectiveFlags_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMethodsByDirectiveFlags_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMethodsByDirectiveFlags(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMethodsByDirectiveFlags(requestBody:GetMethodsByDirectiveFlags_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMethodsByDirectiveFlags_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetMethodsByDirectiveFlags", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMethodsByDirectiveFlags_output)
           })
       .catch((error) => {
           reject(error)
@@ -1244,30 +1497,37 @@ export function post_GetMethodsByDirectiveFlags(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetDirectiveGroups
    Description: Gets the directive groups.
    OperationID: GetDirectiveGroups
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDirectiveGroups_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDirectiveGroups_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDirectiveGroups_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDirectiveGroups(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDirectiveGroups(requestBody:GetDirectiveGroups_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDirectiveGroups_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetDirectiveGroups", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDirectiveGroups_output)
           })
       .catch((error) => {
           reject(error)
@@ -1279,30 +1539,37 @@ export function post_GetDirectiveGroups(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetEntityList
    Description: Gets the entity list.
    OperationID: GetEntityList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetEntityList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetEntityList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEntityList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetEntityList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetEntityList(requestBody:GetEntityList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEntityList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetEntityList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEntityList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1314,30 +1581,37 @@ export function post_GetEntityList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetMatchedClasses
    Description: Gets the matched classes.
    OperationID: GetMatchedClasses
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMatchedClasses_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMatchedClasses_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMatchedClasses_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMatchedClasses(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMatchedClasses(requestBody:GetMatchedClasses_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMatchedClasses_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetMatchedClasses", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMatchedClasses_output)
           })
       .catch((error) => {
           reject(error)
@@ -1349,30 +1623,37 @@ export function post_GetMatchedClasses(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetMatchedTypes
    Description: Gets the matched types.
    OperationID: GetMatchedTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMatchedTypes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMatchedTypes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMatchedTypes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMatchedTypes(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMatchedTypes(requestBody:GetMatchedTypes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMatchedTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetMatchedTypes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMatchedTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -1384,30 +1665,37 @@ export function post_GetMatchedTypes(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBpDirectiveEx
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBpDirectiveEx
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBpDirectiveEx_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBpDirectiveEx_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBpDirectiveEx_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBpDirectiveEx(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBpDirectiveEx(requestBody:GetNewBpDirectiveEx_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBpDirectiveEx_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetNewBpDirectiveEx", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBpDirectiveEx_output)
           })
       .catch((error) => {
           reject(error)
@@ -1418,30 +1706,37 @@ export function post_GetNewBpDirectiveEx(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method GetRowsEx
    OperationID: GetRowsEx
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRowsEx_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRowsEx_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRowsEx_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRowsEx(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRowsEx(requestBody:GetRowsEx_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRowsEx_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetRowsEx", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRowsEx_output)
           })
       .catch((error) => {
           reject(error)
@@ -1453,30 +1748,37 @@ export function post_GetRowsEx(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ImportMethod
    Description: Imports the method's directives into the current company.
    OperationID: ImportMethod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportMethod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportMethod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportMethod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportMethod(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportMethod(requestBody:ImportMethod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportMethod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ImportMethod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportMethod_output)
           })
       .catch((error) => {
           reject(error)
@@ -1488,7 +1790,7 @@ export function post_ImportMethod(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method InvalidateCaches
    Description: Invalidate services specific caches.
    OperationID: InvalidateCaches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/InvalidateCaches_output
@@ -1501,15 +1803,22 @@ export function post_InvalidateCaches(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InvalidateCaches_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/InvalidateCaches", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InvalidateCaches_output)
           })
       .catch((error) => {
           reject(error)
@@ -1521,30 +1830,37 @@ export function post_InvalidateCaches(epicorHeaders?:Headers){
    Summary: Invoke method PrepareArguments
    Description: Gets the method arguments.
    OperationID: PrepareArguments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PrepareArguments_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PrepareArguments_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PrepareArguments_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PrepareArguments(requestBody:any, epicorHeaders?:Headers){
+export function post_PrepareArguments(requestBody:PrepareArguments_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PrepareArguments_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/PrepareArguments", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PrepareArguments_output)
           })
       .catch((error) => {
           reject(error)
@@ -1556,30 +1872,37 @@ export function post_PrepareArguments(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method PrepareTriggerDefinitions
    Description: Prepares the trigger definitions.
    OperationID: PrepareTriggerDefinitions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PrepareTriggerDefinitions_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PrepareTriggerDefinitions_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PrepareTriggerDefinitions_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PrepareTriggerDefinitions(requestBody:any, epicorHeaders?:Headers){
+export function post_PrepareTriggerDefinitions(requestBody:PrepareTriggerDefinitions_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PrepareTriggerDefinitions_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/PrepareTriggerDefinitions", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PrepareTriggerDefinitions_output)
           })
       .catch((error) => {
           reject(error)
@@ -1592,30 +1915,37 @@ export function post_PrepareTriggerDefinitions(requestBody:any, epicorHeaders?:H
    Description: Creates or updated Service Method customization entry.
 Method returns Method Codes of registered entries (e.g., "Ice.BO.Tip.Update")
    OperationID: RegisterMethodCustomization
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RegisterMethodCustomization_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RegisterMethodCustomization_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RegisterMethodCustomization_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RegisterMethodCustomization(requestBody:any, epicorHeaders?:Headers){
+export function post_RegisterMethodCustomization(requestBody:RegisterMethodCustomization_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RegisterMethodCustomization_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/RegisterMethodCustomization", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RegisterMethodCustomization_output)
           })
       .catch((error) => {
           reject(error)
@@ -1627,30 +1957,37 @@ export function post_RegisterMethodCustomization(requestBody:any, epicorHeaders?
    Summary: Invoke method UpdateDirectivesByMethod
    Description: Updates all directives belong to specified method according to settings in DirectiveUpdateInfo
    OperationID: UpdateDirectivesByMethod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateDirectivesByMethod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateDirectivesByMethod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateDirectivesByMethod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateDirectivesByMethod(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateDirectivesByMethod(requestBody:UpdateDirectivesByMethod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateDirectivesByMethod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/UpdateDirectivesByMethod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateDirectivesByMethod_output)
           })
       .catch((error) => {
           reject(error)
@@ -1662,30 +1999,37 @@ export function post_UpdateDirectivesByMethod(requestBody:any, epicorHeaders?:He
    Summary: Invoke method ValidateMethod
    Description: Validates the method.
    OperationID: ValidateMethod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateMethod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateMethod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateMethod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateMethod(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateMethod(requestBody:ValidateMethod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateMethod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ValidateMethod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateMethod_output)
           })
       .catch((error) => {
           reject(error)
@@ -1697,30 +2041,37 @@ export function post_ValidateMethod(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateUserCode
    Description: Validates the user code.
    OperationID: ValidateUserCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateUserCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateUserCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateUserCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateUserCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateUserCode(requestBody:ValidateUserCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateUserCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ValidateUserCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateUserCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1732,30 +2083,37 @@ export function post_ValidateUserCode(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDirectivesForMethodsCollection
    Description: Get all available directives for particular methods
    OperationID: GetDirectivesForMethodsCollection
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDirectivesForMethodsCollection_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDirectivesForMethodsCollection_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDirectivesForMethodsCollection_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDirectivesForMethodsCollection(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDirectivesForMethodsCollection(requestBody:GetDirectivesForMethodsCollection_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDirectivesForMethodsCollection_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetDirectivesForMethodsCollection", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDirectivesForMethodsCollection_output)
           })
       .catch((error) => {
           reject(error)
@@ -1767,30 +2125,37 @@ export function post_GetDirectivesForMethodsCollection(requestBody:any, epicorHe
    Summary: Invoke method ExportByDirectiveGroup
    Description: Exports directives by group.
    OperationID: ExportByDirectiveGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportByDirectiveGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportByDirectiveGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportByDirectiveGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportByDirectiveGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportByDirectiveGroup(requestBody:ExportByDirectiveGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportByDirectiveGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ExportByDirectiveGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportByDirectiveGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -1802,30 +2167,37 @@ export function post_ExportByDirectiveGroup(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ExportByService
    Description: Exports directives by service.
    OperationID: ExportByService
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportByService_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportByService_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportByService_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportByService(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportByService(requestBody:ExportByService_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportByService_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ExportByService", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportByService_output)
           })
       .catch((error) => {
           reject(error)
@@ -1837,30 +2209,37 @@ export function post_ExportByService(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ExportByTable
    Description: Exports directives by table.
    OperationID: ExportByTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExportByTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExportByTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportByTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExportByTable(requestBody:any, epicorHeaders?:Headers){
+export function post_ExportByTable(requestBody:ExportByTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportByTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ExportByTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportByTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -1872,30 +2251,37 @@ export function post_ExportByTable(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Import
    Description: Imports directives.
    OperationID: Import
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Import_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Import_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Import_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Import(requestBody:any, epicorHeaders?:Headers){
+export function post_Import(requestBody:Import_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Import_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/Import", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Import_output)
           })
       .catch((error) => {
           reject(error)
@@ -1907,30 +2293,37 @@ export function post_Import(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ImportBySource
    Description: Imports directives by source.
    OperationID: ImportBySource
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportBySource_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportBySource_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportBySource_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportBySource(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportBySource(requestBody:ImportBySource_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportBySource_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ImportBySource", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportBySource_output)
           })
       .catch((error) => {
           reject(error)
@@ -1942,30 +2335,37 @@ export function post_ImportBySource(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ShallowValidate
    Description: Validates that the data selected for import appears valid.
    OperationID: ShallowValidate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ShallowValidate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ShallowValidate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ShallowValidate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ShallowValidate(requestBody:any, epicorHeaders?:Headers){
+export function post_ShallowValidate(requestBody:ShallowValidate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ShallowValidate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ShallowValidate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ShallowValidate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1977,30 +2377,37 @@ export function post_ShallowValidate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBpmDirectiveGroupsTS
    Description: Get BPM Directive groups as typed tableset.
    OperationID: GetBpmDirectiveGroupsTS
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBpmDirectiveGroupsTS_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBpmDirectiveGroupsTS_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBpmDirectiveGroupsTS_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBpmDirectiveGroupsTS(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBpmDirectiveGroupsTS(requestBody:GetBpmDirectiveGroupsTS_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBpmDirectiveGroupsTS_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetBpmDirectiveGroupsTS", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBpmDirectiveGroupsTS_output)
           })
       .catch((error) => {
           reject(error)
@@ -2012,30 +2419,37 @@ export function post_GetBpmDirectiveGroupsTS(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewBpMethod
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBpMethod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBpMethod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBpMethod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBpMethod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBpMethod(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBpMethod(requestBody:GetNewBpMethod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBpMethod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetNewBpMethod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBpMethod_output)
           })
       .catch((error) => {
           reject(error)
@@ -2047,30 +2461,37 @@ export function post_GetNewBpMethod(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBpArgument
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBpArgument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBpArgument_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBpArgument_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBpArgument_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBpArgument(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBpArgument(requestBody:GetNewBpArgument_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBpArgument_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetNewBpArgument", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBpArgument_output)
           })
       .catch((error) => {
           reject(error)
@@ -2082,30 +2503,37 @@ export function post_GetNewBpArgument(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewBpDirective
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewBpDirective
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewBpDirective_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewBpDirective_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewBpDirective_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewBpDirective(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewBpDirective(requestBody:GetNewBpDirective_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewBpDirective_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetNewBpDirective", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewBpDirective_output)
           })
       .catch((error) => {
           reject(error)
@@ -2117,30 +2545,37 @@ export function post_GetNewBpDirective(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2152,7 +2587,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2176,15 +2611,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2196,7 +2638,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2220,15 +2662,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2240,30 +2689,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2275,30 +2731,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2310,7 +2773,7 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDirectiveVariableTypes
    Description: Returns a list of available directive variable types
    OperationID: GetDirectiveVariableTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDirectiveVariableTypes_output
@@ -2323,15 +2786,22 @@ export function post_GetDirectiveVariableTypes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDirectiveVariableTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetDirectiveVariableTypes", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDirectiveVariableTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -2342,30 +2812,37 @@ export function post_GetDirectiveVariableTypes(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetByIDBpMethod
    OperationID: GetByIDBpMethod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByIDBpMethod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByIDBpMethod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByIDBpMethod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByIDBpMethod(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByIDBpMethod(requestBody:GetByIDBpMethod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByIDBpMethod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetByIDBpMethod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByIDBpMethod_output)
           })
       .catch((error) => {
           reject(error)
@@ -2378,7 +2855,7 @@ export function post_GetByIDBpMethod(requestBody:any, epicorHeaders?:Headers){
    Description: Get XAML directive transformed into JSON for Kinetic browser UI.
    OperationID: Get_GetKineticDirective
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetKineticDirective_output
@@ -2402,15 +2879,22 @@ export function get_GetKineticDirective(directiveId:string, epicorHeaders?:Heade
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetKineticDirective_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetKineticDirective" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetKineticDirective_output)
           })
       .catch((error) => {
           reject(error)
@@ -2422,30 +2906,37 @@ export function get_GetKineticDirective(directiveId:string, epicorHeaders?:Heade
    Summary: Invoke method GetTablesetRelations
    Description: Get tableset relations for execution rules.
    OperationID: GetTablesetRelations
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetTablesetRelations_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetTablesetRelations_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTablesetRelations_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetTablesetRelations(requestBody:any, epicorHeaders?:Headers){
+export function post_GetTablesetRelations(requestBody:GetTablesetRelations_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTablesetRelations_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetTablesetRelations", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTablesetRelations_output)
           })
       .catch((error) => {
           reject(error)
@@ -2457,30 +2948,37 @@ export function post_GetTablesetRelations(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method PreProcessExpression
    Description: Prepare table parameters for the expression.
    OperationID: PreProcessExpression
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreProcessExpression_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreProcessExpression_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreProcessExpression_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreProcessExpression(requestBody:any, epicorHeaders?:Headers){
+export function post_PreProcessExpression(requestBody:PreProcessExpression_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreProcessExpression_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/PreProcessExpression", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreProcessExpression_output)
           })
       .catch((error) => {
           reject(error)
@@ -2492,30 +2990,37 @@ export function post_PreProcessExpression(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ValidateExpression
    Description: Validate expression.
    OperationID: ValidateExpression
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateExpression_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateExpression_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateExpression_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateExpression(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateExpression(requestBody:ValidateExpression_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateExpression_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ValidateExpression", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateExpression_output)
           })
       .catch((error) => {
           reject(error)
@@ -2527,30 +3032,37 @@ export function post_ValidateExpression(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ValidateCustomCode
    Description: Validate custom code.
    OperationID: ValidateCustomCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCustomCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCustomCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCustomCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCustomCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCustomCode(requestBody:ValidateCustomCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCustomCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ValidateCustomCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCustomCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -2562,30 +3074,37 @@ export function post_ValidateCustomCode(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method IsValidIdentifier
    Description: Verify variable name.
    OperationID: IsValidIdentifier
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsValidIdentifier_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsValidIdentifier_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsValidIdentifier_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsValidIdentifier(requestBody:any, epicorHeaders?:Headers){
+export function post_IsValidIdentifier(requestBody:IsValidIdentifier_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsValidIdentifier_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/IsValidIdentifier", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsValidIdentifier_output)
           })
       .catch((error) => {
           reject(error)
@@ -2597,30 +3116,37 @@ export function post_IsValidIdentifier(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetAvailableReferencesWithFilter
    Description: Gets the available references.
    OperationID: GetAvailableReferencesWithFilter
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAvailableReferencesWithFilter_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAvailableReferencesWithFilter_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAvailableReferencesWithFilter_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAvailableReferencesWithFilter(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAvailableReferencesWithFilter(requestBody:GetAvailableReferencesWithFilter_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAvailableReferencesWithFilter_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetAvailableReferencesWithFilter", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAvailableReferencesWithFilter_output)
           })
       .catch((error) => {
           reject(error)
@@ -2632,7 +3158,7 @@ export function post_GetAvailableReferencesWithFilter(requestBody:any, epicorHea
    Summary: Invoke method GetFoldersForExternalAssemblies
    Description: Get external assembly directory.
    OperationID: GetFoldersForExternalAssemblies
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFoldersForExternalAssemblies_output
@@ -2645,15 +3171,22 @@ export function post_GetFoldersForExternalAssemblies(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFoldersForExternalAssemblies_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetFoldersForExternalAssemblies", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFoldersForExternalAssemblies_output)
           })
       .catch((error) => {
           reject(error)
@@ -2665,30 +3198,37 @@ export function post_GetFoldersForExternalAssemblies(epicorHeaders?:Headers){
    Summary: Invoke method ValidateKineticDirective
    Description: Validate directive from Kinetic browser UI.
    OperationID: ValidateKineticDirective
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateKineticDirective_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateKineticDirective_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateKineticDirective_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateKineticDirective(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateKineticDirective(requestBody:ValidateKineticDirective_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateKineticDirective_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/ValidateKineticDirective", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateKineticDirective_output)
           })
       .catch((error) => {
           reject(error)
@@ -2700,30 +3240,37 @@ export function post_ValidateKineticDirective(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GeneratePICode
    Description: Generates the Programming Interface code.
    OperationID: GeneratePICode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GeneratePICode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GeneratePICode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GeneratePICode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GeneratePICode(requestBody:any, epicorHeaders?:Headers){
+export function post_GeneratePICode(requestBody:GeneratePICode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GeneratePICode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GeneratePICode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GeneratePICode_output)
           })
       .catch((error) => {
           reject(error)
@@ -2740,7 +3287,7 @@ export function post_GeneratePICode(requestBody:any, epicorHeaders?:Headers){
       @param whereClause Desc: Filtering and sorting.   Required: True   Allow empty value : True
       @param pageSize Desc: Page size.   Required: True
       @param absolutePage Desc: Page to show.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDirectiveLandingPageList_output
@@ -2800,15 +3347,22 @@ export function get_GetDirectiveLandingPageList(source:string, group:string, whe
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDirectiveLandingPageList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetDirectiveLandingPageList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDirectiveLandingPageList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2819,30 +3373,37 @@ export function get_GetDirectiveLandingPageList(source:string, group:string, whe
    /**  
    Summary: Invoke method PrepareAndSearchMethodRows
    OperationID: PrepareAndSearchMethodRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PrepareAndSearchMethodRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PrepareAndSearchMethodRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PrepareAndSearchMethodRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PrepareAndSearchMethodRows(requestBody:any, epicorHeaders?:Headers){
+export function post_PrepareAndSearchMethodRows(requestBody:PrepareAndSearchMethodRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PrepareAndSearchMethodRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/PrepareAndSearchMethodRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PrepareAndSearchMethodRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2854,7 +3415,7 @@ export function post_PrepareAndSearchMethodRows(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetWidgets
    Description: Get list of BPM widgets.
    OperationID: Get_GetWidgets
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetWidgets_output
@@ -2867,15 +3428,22 @@ export function get_GetWidgets(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetWidgets_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.BpMethodSvc/GetWidgets", {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetWidgets_output)
           })
       .catch((error) => {
           reject(error)
@@ -2886,26 +3454,43 @@ export function get_GetWidgets(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BpArgumentRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BpArgumentRow[],
+   "value":Ice_Tablesets_BpArgumentRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BpDirectiveRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BpDirectiveRow[],
+   "value":Ice_Tablesets_BpDirectiveRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BpMethodListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BpMethodListRow[],
+   "value":Ice_Tablesets_BpMethodListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_BpMethodRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_BpMethodRow[],
+   "value":Ice_Tablesets_BpMethodRow,
 }
 
 export interface Ice_Tablesets_BpArgumentRow{
@@ -3065,6 +3650,23 @@ export interface Ice_Tablesets_BpMethodRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -3492,7 +4094,7 @@ export interface GetNewBpArgument_input{
 export interface GetNewBpArgument_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BpMethodTableset[],
+   ds:Ice_Tablesets_BpMethodTableset,
 }
 }
 
@@ -3512,7 +4114,7 @@ export interface GetNewBpDirectiveEx_input{
 export interface GetNewBpDirectiveEx_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BpMethodTableset[],
+   ds:Ice_Tablesets_BpMethodTableset,
 }
 }
 
@@ -3526,7 +4128,7 @@ export interface GetNewBpDirective_input{
 export interface GetNewBpDirective_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BpMethodTableset[],
+   ds:Ice_Tablesets_BpMethodTableset,
 }
 }
 
@@ -3542,7 +4144,7 @@ export interface GetNewBpMethod_input{
 export interface GetNewBpMethod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BpMethodTableset[],
+   ds:Ice_Tablesets_BpMethodTableset,
 }
 }
 
@@ -4049,7 +4651,7 @@ export interface PrepareArguments_output{
    returnObj:Ice_Tablesets_BpArgumentRow[],
 parameters : {
       /**  output parameters  */  
-   methodRow:Ice_Tablesets_BpMethodRow[],
+   methodRow:Ice_Tablesets_BpMethodRow,
 }
 }
 
@@ -4138,7 +4740,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtBpMethodTableset[],
+   ds:Ice_Tablesets_UpdExtBpMethodTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4153,7 +4755,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_BpMethodTableset[],
+   ds:Ice_Tablesets_BpMethodTableset,
 }
 }
 

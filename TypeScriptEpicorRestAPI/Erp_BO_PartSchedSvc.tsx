@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.PartSchedSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedRow
    */  
 export function get_PartScheds(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_PartScheds(select?:string, expand?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartSchedRow)
           })
@@ -118,15 +158,15 @@ export function get_PartScheds(select?:string, expand?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PartScheds
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartSchedRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartSchedRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PartSchedRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PartSchedRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartScheds(requestBody:any, epicorHeaders?:Headers){
+export function post_PartScheds(requestBody:Erp_Tablesets_PartSchedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_PartScheds(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -160,10 +207,10 @@ export function post_PartScheds(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PartSchedRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PartSchedRow
    */  
 export function get_PartScheds_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -178,7 +225,14 @@ export function get_PartScheds_Company_PartNum_Plant(Company:string, PartNum:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PartSchedRow)
           })
@@ -195,15 +249,15 @@ export function get_PartScheds_Company_PartNum_Plant(Company:string, PartNum:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartSchedRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartSchedRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PartScheds_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PartScheds_Company_PartNum_Plant(Company:string, PartNum:string, Plant:string, requestBody:Erp_Tablesets_PartSchedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -217,7 +271,14 @@ export function patch_PartScheds_Company_PartNum_Plant(Company:string, PartNum:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -234,7 +295,7 @@ export function patch_PartScheds_Company_PartNum_Plant(Company:string, PartNum:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param PartNum Desc: PartNum   Required: True   Allow empty value : True
       @param Plant Desc: Plant   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -253,7 +314,14 @@ export function delete_PartScheds_Company_PartNum_Plant(Company:string, PartNum:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -276,10 +344,10 @@ export function delete_PartScheds_Company_PartNum_Plant(Company:string, PartNum:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedVendRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedVendRow
    */  
 export function get_PartScheds_Company_PartNum_Plant_PartSchedVends(Company:string, PartNum:string, Plant:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -294,7 +362,14 @@ export function get_PartScheds_Company_PartNum_Plant_PartSchedVends(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartSchedVendRow)
           })
@@ -315,10 +390,10 @@ export function get_PartScheds_Company_PartNum_Plant_PartSchedVends(Company:stri
       @param PurPoint Desc: PurPoint   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PartSchedVendRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PartSchedVendRow
    */  
 export function get_PartScheds_Company_PartNum_Plant_PartSchedVends_Company_PartNum_Plant_VendorNum_PurPoint(Company:string, PartNum:string, Plant:string, VendorNum:string, PurPoint:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -333,7 +408,14 @@ export function get_PartScheds_Company_PartNum_Plant_PartSchedVends_Company_Part
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PartSchedVendRow)
           })
@@ -356,10 +438,10 @@ export function get_PartScheds_Company_PartNum_Plant_PartSchedVends_Company_Part
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedVendPORow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedVendPORow
    */  
 export function get_PartScheds_Company_PartNum_Plant_PartSchedVendPOes(Company:string, PartNum:string, Plant:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -374,7 +456,14 @@ export function get_PartScheds_Company_PartNum_Plant_PartSchedVendPOes(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartSchedVendPORow)
           })
@@ -397,10 +486,10 @@ export function get_PartScheds_Company_PartNum_Plant_PartSchedVendPOes(Company:s
       @param ContractPOLine Desc: ContractPOLine   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PartSchedVendPORow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PartSchedVendPORow
    */  
 export function get_PartScheds_Company_PartNum_Plant_PartSchedVendPOes_Company_PartNum_Plant_VendorNum_PurPoint_ContractPONum_ContractPOLine(Company:string, PartNum:string, Plant:string, VendorNum:string, PurPoint:string, ContractPONum:string, ContractPOLine:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -415,7 +504,14 @@ export function get_PartScheds_Company_PartNum_Plant_PartSchedVendPOes_Company_P
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PartSchedVendPORow)
           })
@@ -435,10 +531,10 @@ export function get_PartScheds_Company_PartNum_Plant_PartSchedVendPOes_Company_P
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedVendRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedVendRow
    */  
 export function get_PartSchedVends(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -453,7 +549,14 @@ export function get_PartSchedVends(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartSchedVendRow)
           })
@@ -467,15 +570,15 @@ export function get_PartSchedVends(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PartSchedVends
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartSchedVendRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartSchedVendRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PartSchedVendRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PartSchedVendRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartSchedVends(requestBody:any, epicorHeaders?:Headers){
+export function post_PartSchedVends(requestBody:Erp_Tablesets_PartSchedVendRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -489,7 +592,14 @@ export function post_PartSchedVends(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -510,10 +620,10 @@ export function post_PartSchedVends(requestBody:any, epicorHeaders?:Headers){
       @param PurPoint Desc: PurPoint   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PartSchedVendRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PartSchedVendRow
    */  
 export function get_PartSchedVends_Company_PartNum_Plant_VendorNum_PurPoint(Company:string, PartNum:string, Plant:string, VendorNum:string, PurPoint:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -528,7 +638,14 @@ export function get_PartSchedVends_Company_PartNum_Plant_VendorNum_PurPoint(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PartSchedVendRow)
           })
@@ -547,15 +664,15 @@ export function get_PartSchedVends_Company_PartNum_Plant_VendorNum_PurPoint(Comp
       @param Plant Desc: Plant   Required: True   Allow empty value : True
       @param VendorNum Desc: VendorNum   Required: True
       @param PurPoint Desc: PurPoint   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartSchedVendRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartSchedVendRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PartSchedVends_Company_PartNum_Plant_VendorNum_PurPoint(Company:string, PartNum:string, Plant:string, VendorNum:string, PurPoint:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PartSchedVends_Company_PartNum_Plant_VendorNum_PurPoint(Company:string, PartNum:string, Plant:string, VendorNum:string, PurPoint:string, requestBody:Erp_Tablesets_PartSchedVendRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -569,7 +686,14 @@ export function patch_PartSchedVends_Company_PartNum_Plant_VendorNum_PurPoint(Co
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -588,7 +712,7 @@ export function patch_PartSchedVends_Company_PartNum_Plant_VendorNum_PurPoint(Co
       @param Plant Desc: Plant   Required: True   Allow empty value : True
       @param VendorNum Desc: VendorNum   Required: True
       @param PurPoint Desc: PurPoint   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -607,7 +731,14 @@ export function delete_PartSchedVends_Company_PartNum_Plant_VendorNum_PurPoint(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -627,10 +758,10 @@ export function delete_PartSchedVends_Company_PartNum_Plant_VendorNum_PurPoint(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedVendPORow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedVendPORow
    */  
 export function get_PartSchedVendPOes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -645,7 +776,14 @@ export function get_PartSchedVendPOes(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartSchedVendPORow)
           })
@@ -659,15 +797,15 @@ export function get_PartSchedVendPOes(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_PartSchedVendPOes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartSchedVendPORow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.PartSchedVendPORow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.PartSchedVendPORow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.PartSchedVendPORow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartSchedVendPOes(requestBody:any, epicorHeaders?:Headers){
+export function post_PartSchedVendPOes(requestBody:Erp_Tablesets_PartSchedVendPORow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -681,7 +819,14 @@ export function post_PartSchedVendPOes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -704,10 +849,10 @@ export function post_PartSchedVendPOes(requestBody:any, epicorHeaders?:Headers){
       @param ContractPOLine Desc: ContractPOLine   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.PartSchedVendPORow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.PartSchedVendPORow
    */  
 export function get_PartSchedVendPOes_Company_PartNum_Plant_VendorNum_PurPoint_ContractPONum_ContractPOLine(Company:string, PartNum:string, Plant:string, VendorNum:string, PurPoint:string, ContractPONum:string, ContractPOLine:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -722,7 +867,14 @@ export function get_PartSchedVendPOes_Company_PartNum_Plant_VendorNum_PurPoint_C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_PartSchedVendPORow)
           })
@@ -743,15 +895,15 @@ export function get_PartSchedVendPOes_Company_PartNum_Plant_VendorNum_PurPoint_C
       @param PurPoint Desc: PurPoint   Required: True   Allow empty value : True
       @param ContractPONum Desc: ContractPONum   Required: True
       @param ContractPOLine Desc: ContractPOLine   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartSchedVendPORow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.PartSchedVendPORow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_PartSchedVendPOes_Company_PartNum_Plant_VendorNum_PurPoint_ContractPONum_ContractPOLine(Company:string, PartNum:string, Plant:string, VendorNum:string, PurPoint:string, ContractPONum:string, ContractPOLine:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_PartSchedVendPOes_Company_PartNum_Plant_VendorNum_PurPoint_ContractPONum_ContractPOLine(Company:string, PartNum:string, Plant:string, VendorNum:string, PurPoint:string, ContractPONum:string, ContractPOLine:string, requestBody:Erp_Tablesets_PartSchedVendPORow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -765,7 +917,14 @@ export function patch_PartSchedVendPOes_Company_PartNum_Plant_VendorNum_PurPoint
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -786,7 +945,7 @@ export function patch_PartSchedVendPOes_Company_PartNum_Plant_VendorNum_PurPoint
       @param PurPoint Desc: PurPoint   Required: True   Allow empty value : True
       @param ContractPONum Desc: ContractPONum   Required: True
       @param ContractPOLine Desc: ContractPOLine   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -805,7 +964,14 @@ export function delete_PartSchedVendPOes_Company_PartNum_Plant_VendorNum_PurPoin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -825,10 +991,10 @@ export function delete_PartSchedVendPOes_Company_PartNum_Plant_VendorNum_PurPoin
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.PartSchedListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -843,7 +1009,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartSchedListRow)
           })
@@ -855,6 +1028,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -868,7 +1058,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -928,15 +1118,22 @@ export function get_GetRows(whereClausePartSched:string, whereClausePartSchedVen
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -950,7 +1147,7 @@ export function get_GetRows(whereClausePartSched:string, whereClausePartSchedVen
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -983,15 +1180,22 @@ export function get_GetByID(partNum:string, plant:string, epicorHeaders?:Headers
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1006,7 +1210,7 @@ export function get_GetByID(partNum:string, plant:string, epicorHeaders?:Headers
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1048,15 +1252,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1068,30 +1279,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetPartXRefInfo
    Description: This method defaults PartAdvisor fields when the PartNum field changes
    OperationID: GetPartXRefInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartXRefInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartXRefInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartXRefInfo(requestBody:GetPartXRefInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartXRefInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetPartXRefInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartXRefInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -1103,30 +1321,37 @@ export function post_GetPartXRefInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeCalendarID
    Description: Validate CalendarId value
    OperationID: OnChangeCalendarID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeCalendarID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeCalendarID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeCalendarID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeCalendarID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeCalendarID(requestBody:OnChangeCalendarID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeCalendarID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangeCalendarID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeCalendarID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1138,30 +1363,37 @@ export function post_OnChangeCalendarID(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeInspNextDelivery
    Description: Validate InspNextDelivery value
    OperationID: OnChangeInspNextDelivery
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeInspNextDelivery_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeInspNextDelivery_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeInspNextDelivery_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeInspNextDelivery(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeInspNextDelivery(requestBody:OnChangeInspNextDelivery_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeInspNextDelivery_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangeInspNextDelivery", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeInspNextDelivery_output)
           })
       .catch((error) => {
           reject(error)
@@ -1173,30 +1405,37 @@ export function post_OnChangeInspNextDelivery(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangeMinDeliveryQty1
    Description: Validate MinDeliveryQty1 value
    OperationID: OnChangeMinDeliveryQty1
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeMinDeliveryQty1_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeMinDeliveryQty1_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeMinDeliveryQty1_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeMinDeliveryQty1(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeMinDeliveryQty1(requestBody:OnChangeMinDeliveryQty1_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeMinDeliveryQty1_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangeMinDeliveryQty1", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeMinDeliveryQty1_output)
           })
       .catch((error) => {
           reject(error)
@@ -1208,30 +1447,37 @@ export function post_OnChangeMinDeliveryQty1(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method OnChangeMinDeliveryQty2
    Description: Validate MinDeliveryQty2 value
    OperationID: OnChangeMinDeliveryQty2
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeMinDeliveryQty2_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeMinDeliveryQty2_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeMinDeliveryQty2_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeMinDeliveryQty2(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeMinDeliveryQty2(requestBody:OnChangeMinDeliveryQty2_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeMinDeliveryQty2_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangeMinDeliveryQty2", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeMinDeliveryQty2_output)
           })
       .catch((error) => {
           reject(error)
@@ -1243,30 +1489,37 @@ export function post_OnChangeMinDeliveryQty2(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method OnChangeMinForwardSpan
    Description: Validate MinForwardSpan value
    OperationID: OnChangeMinForwardSpan
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeMinForwardSpan_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeMinForwardSpan_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeMinForwardSpan_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeMinForwardSpan(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeMinForwardSpan(requestBody:OnChangeMinForwardSpan_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeMinForwardSpan_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangeMinForwardSpan", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeMinForwardSpan_output)
           })
       .catch((error) => {
           reject(error)
@@ -1278,30 +1531,37 @@ export function post_OnChangeMinForwardSpan(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnChangeOrderCover
    Description: Validate OrderCover value
    OperationID: OnChangeOrderCover
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOrderCover_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOrderCover_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOrderCover_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOrderCover(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOrderCover(requestBody:OnChangeOrderCover_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOrderCover_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangeOrderCover", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOrderCover_output)
           })
       .catch((error) => {
           reject(error)
@@ -1313,30 +1573,37 @@ export function post_OnChangeOrderCover(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangePartNum
    Description: Validate PartNum value
    OperationID: OnChangePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePartNum(requestBody:OnChangePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1348,30 +1615,37 @@ export function post_OnChangePartNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangePercentShare
    Description: Validate PercentShare value
    OperationID: OnChangePercentShare
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePercentShare_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePercentShare_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePercentShare_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePercentShare(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePercentShare(requestBody:OnChangePercentShare_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePercentShare_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangePercentShare", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePercentShare_output)
           })
       .catch((error) => {
           reject(error)
@@ -1383,30 +1657,37 @@ export function post_OnChangePercentShare(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangePeriodicityCode1
    Description: Validate PeriodicityCode1 value
    OperationID: OnChangePeriodicityCode1
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePeriodicityCode1_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePeriodicityCode1_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePeriodicityCode1_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePeriodicityCode1(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePeriodicityCode1(requestBody:OnChangePeriodicityCode1_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePeriodicityCode1_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangePeriodicityCode1", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePeriodicityCode1_output)
           })
       .catch((error) => {
           reject(error)
@@ -1418,30 +1699,37 @@ export function post_OnChangePeriodicityCode1(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangePeriodicityCode2
    Description: Validate PeriodicityCode2 value
    OperationID: OnChangePeriodicityCode2
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePeriodicityCode2_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePeriodicityCode2_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePeriodicityCode2_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePeriodicityCode2(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePeriodicityCode2(requestBody:OnChangePeriodicityCode2_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePeriodicityCode2_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangePeriodicityCode2", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePeriodicityCode2_output)
           })
       .catch((error) => {
           reject(error)
@@ -1453,30 +1741,37 @@ export function post_OnChangePeriodicityCode2(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangePeriodShift
    Description: Validate PeriodShift value
    OperationID: OnChangePeriodShift
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePeriodShift_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePeriodShift_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePeriodShift_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePeriodShift(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePeriodShift(requestBody:OnChangePeriodShift_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePeriodShift_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangePeriodShift", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePeriodShift_output)
           })
       .catch((error) => {
           reject(error)
@@ -1488,30 +1783,37 @@ export function post_OnChangePeriodShift(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method OnChangePrintLength
    Description: Validate PrintLength value
    OperationID: OnChangePrintLength
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePrintLength_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePrintLength_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePrintLength_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePrintLength(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePrintLength(requestBody:OnChangePrintLength_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePrintLength_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangePrintLength", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePrintLength_output)
           })
       .catch((error) => {
           reject(error)
@@ -1523,30 +1825,37 @@ export function post_OnChangePrintLength(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method OnChangePurPoint
    Description: Validate PurPoint value
    OperationID: OnChangePurPoint
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePurPoint_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePurPoint_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePurPoint_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePurPoint(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePurPoint(requestBody:OnChangePurPoint_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePurPoint_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangePurPoint", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePurPoint_output)
           })
       .catch((error) => {
           reject(error)
@@ -1558,30 +1867,37 @@ export function post_OnChangePurPoint(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeScheduleFirm
    Description: Validate ScheduleFirm value
    OperationID: OnChangeScheduleFirm
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeScheduleFirm_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeScheduleFirm_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeScheduleFirm_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeScheduleFirm(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeScheduleFirm(requestBody:OnChangeScheduleFirm_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeScheduleFirm_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangeScheduleFirm", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeScheduleFirm_output)
           })
       .catch((error) => {
           reject(error)
@@ -1593,30 +1909,37 @@ export function post_OnChangeScheduleFirm(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeScheduleLength
    Description: Validate ScheduleLength value
    OperationID: OnChangeScheduleLength
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeScheduleLength_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeScheduleLength_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeScheduleLength_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeScheduleLength(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeScheduleLength(requestBody:OnChangeScheduleLength_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeScheduleLength_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangeScheduleLength", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeScheduleLength_output)
           })
       .catch((error) => {
           reject(error)
@@ -1628,30 +1951,37 @@ export function post_OnChangeScheduleLength(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method OnChangeVendorID
    Description: Validate VendorId value
    OperationID: OnChangeVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeVendorID(requestBody:OnChangeVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangeVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1663,30 +1993,37 @@ export function post_OnChangeVendorID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeVendorNum
    Description: Validate VendorNum value
    OperationID: OnChangeVendorNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeVendorNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeVendorNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeVendorNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeVendorNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeVendorNum(requestBody:OnChangeVendorNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeVendorNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/OnChangeVendorNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeVendorNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1698,30 +2035,37 @@ export function post_OnChangeVendorNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method PartPlantIsLinkedToContract
    Description: Read the Link To Contract flag from PartPlant.
    OperationID: PartPlantIsLinkedToContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PartPlantIsLinkedToContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PartPlantIsLinkedToContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PartPlantIsLinkedToContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PartPlantIsLinkedToContract(requestBody:any, epicorHeaders?:Headers){
+export function post_PartPlantIsLinkedToContract(requestBody:PartPlantIsLinkedToContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PartPlantIsLinkedToContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/PartPlantIsLinkedToContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PartPlantIsLinkedToContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -1732,30 +2076,37 @@ export function post_PartPlantIsLinkedToContract(requestBody:any, epicorHeaders?
    /**  
    Summary: Invoke method GetCodeDescList
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1766,30 +2117,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method FindPart
    OperationID: FindPart
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindPart_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindPart_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindPart_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindPart(requestBody:any, epicorHeaders?:Headers){
+export function post_FindPart(requestBody:FindPart_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindPart_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/FindPart", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindPart_output)
           })
       .catch((error) => {
           reject(error)
@@ -1800,30 +2158,37 @@ export function post_FindPart(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetPartFromRowID
    OperationID: GetPartFromRowID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetPartFromRowID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetPartFromRowID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPartFromRowID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetPartFromRowID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetPartFromRowID(requestBody:GetPartFromRowID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPartFromRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetPartFromRowID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPartFromRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1835,30 +2200,37 @@ export function post_GetPartFromRowID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetValidAndProjectedWorkingDate
    Description: Projects forwards the Days to add from the base date only counting working days, and then using existing function to ensure that projected date is valid
    OperationID: GetValidAndProjectedWorkingDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetValidAndProjectedWorkingDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetValidAndProjectedWorkingDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetValidAndProjectedWorkingDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetValidAndProjectedWorkingDate(requestBody:any, epicorHeaders?:Headers){
+export function post_GetValidAndProjectedWorkingDate(requestBody:GetValidAndProjectedWorkingDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetValidAndProjectedWorkingDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetValidAndProjectedWorkingDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetValidAndProjectedWorkingDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -1870,30 +2242,37 @@ export function post_GetValidAndProjectedWorkingDate(requestBody:any, epicorHead
    Summary: Invoke method GetNewPartSched
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPartSched
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPartSched_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPartSched_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPartSched_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPartSched(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPartSched(requestBody:GetNewPartSched_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPartSched_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetNewPartSched", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPartSched_output)
           })
       .catch((error) => {
           reject(error)
@@ -1905,30 +2284,37 @@ export function post_GetNewPartSched(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewPartSchedVend
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPartSchedVend
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPartSchedVend_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPartSchedVend_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPartSchedVend_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPartSchedVend(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPartSchedVend(requestBody:GetNewPartSchedVend_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPartSchedVend_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetNewPartSchedVend", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPartSchedVend_output)
           })
       .catch((error) => {
           reject(error)
@@ -1940,30 +2326,37 @@ export function post_GetNewPartSchedVend(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewPartSchedVendPO
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewPartSchedVendPO
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewPartSchedVendPO_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewPartSchedVendPO_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewPartSchedVendPO_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewPartSchedVendPO(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewPartSchedVendPO(requestBody:GetNewPartSchedVendPO_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewPartSchedVendPO_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetNewPartSchedVendPO", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewPartSchedVendPO_output)
           })
       .catch((error) => {
           reject(error)
@@ -1975,30 +2368,37 @@ export function post_GetNewPartSchedVendPO(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2010,7 +2410,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2034,15 +2434,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2054,7 +2461,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2078,15 +2485,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2098,30 +2512,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2133,30 +2554,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSchedSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2167,26 +2595,43 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartSchedListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PartSchedListRow[],
+   "value":Erp_Tablesets_PartSchedListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartSchedRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PartSchedRow[],
+   "value":Erp_Tablesets_PartSchedRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartSchedVendPORow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PartSchedVendPORow[],
+   "value":Erp_Tablesets_PartSchedVendPORow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_PartSchedVendRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_PartSchedVendRow[],
+   "value":Erp_Tablesets_PartSchedVendRow,
 }
 
 export interface Erp_Tablesets_PartSchedListRow{
@@ -2415,6 +2860,23 @@ export interface Erp_Tablesets_PartSchedVendRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2778,7 +3240,7 @@ export interface GetNewPartSchedVendPO_input{
 export interface GetNewPartSchedVendPO_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -2798,7 +3260,7 @@ export interface GetNewPartSchedVend_input{
 export interface GetNewPartSchedVend_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -2814,7 +3276,7 @@ export interface GetNewPartSched_input{
 export interface GetNewPartSched_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -2950,7 +3412,7 @@ export interface OnChangeCalendarID_input{
 export interface OnChangeCalendarID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -2967,7 +3429,7 @@ export interface OnChangeInspNextDelivery_input{
 export interface OnChangeInspNextDelivery_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -2984,7 +3446,7 @@ export interface OnChangeMinDeliveryQty1_input{
 export interface OnChangeMinDeliveryQty1_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3001,7 +3463,7 @@ export interface OnChangeMinDeliveryQty2_input{
 export interface OnChangeMinDeliveryQty2_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3018,7 +3480,7 @@ export interface OnChangeMinForwardSpan_input{
 export interface OnChangeMinForwardSpan_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3035,7 +3497,7 @@ export interface OnChangeOrderCover_input{
 export interface OnChangeOrderCover_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3055,7 +3517,7 @@ export interface OnChangePartNum_input{
 export interface OnChangePartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3072,7 +3534,7 @@ export interface OnChangePercentShare_input{
 export interface OnChangePercentShare_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3089,7 +3551,7 @@ export interface OnChangePeriodShift_input{
 export interface OnChangePeriodShift_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3106,7 +3568,7 @@ export interface OnChangePeriodicityCode1_input{
 export interface OnChangePeriodicityCode1_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3123,7 +3585,7 @@ export interface OnChangePeriodicityCode2_input{
 export interface OnChangePeriodicityCode2_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3140,7 +3602,7 @@ export interface OnChangePrintLength_input{
 export interface OnChangePrintLength_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3157,7 +3619,7 @@ export interface OnChangePurPoint_input{
 export interface OnChangePurPoint_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3174,7 +3636,7 @@ export interface OnChangeScheduleFirm_input{
 export interface OnChangeScheduleFirm_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3191,7 +3653,7 @@ export interface OnChangeScheduleLength_input{
 export interface OnChangeScheduleLength_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3208,7 +3670,7 @@ export interface OnChangeVendorID_input{
 export interface OnChangeVendorID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3225,7 +3687,7 @@ export interface OnChangeVendorNum_input{
 export interface OnChangeVendorNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 
@@ -3259,7 +3721,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtPartSchedTableset[],
+   ds:Erp_Tablesets_UpdExtPartSchedTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3274,7 +3736,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_PartSchedTableset[],
+   ds:Erp_Tablesets_PartSchedTableset,
 }
 }
 

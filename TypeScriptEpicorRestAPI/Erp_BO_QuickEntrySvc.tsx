@@ -1,11 +1,30 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.QuickEntrySvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -14,7 +33,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -32,7 +51,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -46,7 +72,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -64,7 +90,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.EmpBasicRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.EmpBasicRow
    */  
 export function get_QuickEntries(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_QuickEntries(select?:string, expand?:string, filter?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_EmpBasicRow)
           })
@@ -117,15 +157,15 @@ export function get_QuickEntries(select?:string, expand?:string, filter?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuickEntries
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.EmpBasicRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.EmpBasicRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.EmpBasicRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.EmpBasicRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuickEntries(requestBody:any, epicorHeaders?:Headers){
+export function post_QuickEntries(requestBody:Erp_Tablesets_EmpBasicRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_QuickEntries(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -158,10 +205,10 @@ export function post_QuickEntries(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.EmpBasicRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.EmpBasicRow
    */  
 export function get_QuickEntries_Company_EmpID(Company:string, EmpID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -176,7 +223,14 @@ export function get_QuickEntries_Company_EmpID(Company:string, EmpID:string, sel
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_EmpBasicRow)
           })
@@ -192,15 +246,15 @@ export function get_QuickEntries_Company_EmpID(Company:string, EmpID:string, sel
    OperationID: UpdateExt_QuickEntry
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.EmpBasicRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.EmpBasicRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuickEntries_Company_EmpID(Company:string, EmpID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuickEntries_Company_EmpID(Company:string, EmpID:string, requestBody:Erp_Tablesets_EmpBasicRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -214,7 +268,14 @@ export function patch_QuickEntries_Company_EmpID(Company:string, EmpID:string, r
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -230,7 +291,7 @@ export function patch_QuickEntries_Company_EmpID(Company:string, EmpID:string, r
    OperationID: DeleteUpdateExt_QuickEntry
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -249,7 +310,14 @@ export function delete_QuickEntries_Company_EmpID(Company:string, EmpID:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -271,10 +339,10 @@ export function delete_QuickEntries_Company_EmpID(Company:string, EmpID:string, 
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuickEntryExpenseRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuickEntryExpenseRow
    */  
 export function get_QuickEntries_Company_EmpID_QuickEntryExpenses(Company:string, EmpID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -289,7 +357,14 @@ export function get_QuickEntries_Company_EmpID_QuickEntryExpenses(Company:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuickEntryExpenseRow)
           })
@@ -309,10 +384,10 @@ export function get_QuickEntries_Company_EmpID_QuickEntryExpenses(Company:string
       @param QuickEntryCode Desc: QuickEntryCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuickEntryExpenseRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuickEntryExpenseRow
    */  
 export function get_QuickEntries_Company_EmpID_QuickEntryExpenses_Company_EmpID_QuickEntryType_QuickEntryCode(Company:string, EmpID:string, QuickEntryType:string, QuickEntryCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_QuickEntries_Company_EmpID_QuickEntryExpenses_Company_EmpID_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuickEntryExpenseRow)
           })
@@ -349,10 +431,10 @@ export function get_QuickEntries_Company_EmpID_QuickEntryExpenses_Company_EmpID_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuickEntryTimeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuickEntryTimeRow
    */  
 export function get_QuickEntries_Company_EmpID_QuickEntryTimes(Company:string, EmpID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -367,7 +449,14 @@ export function get_QuickEntries_Company_EmpID_QuickEntryTimes(Company:string, E
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuickEntryTimeRow)
           })
@@ -387,10 +476,10 @@ export function get_QuickEntries_Company_EmpID_QuickEntryTimes(Company:string, E
       @param QuickEntryCode Desc: QuickEntryCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuickEntryTimeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuickEntryTimeRow
    */  
 export function get_QuickEntries_Company_EmpID_QuickEntryTimes_Company_EmpID_QuickEntryType_QuickEntryCode(Company:string, EmpID:string, QuickEntryType:string, QuickEntryCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -405,7 +494,14 @@ export function get_QuickEntries_Company_EmpID_QuickEntryTimes_Company_EmpID_Qui
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuickEntryTimeRow)
           })
@@ -425,10 +521,10 @@ export function get_QuickEntries_Company_EmpID_QuickEntryTimes_Company_EmpID_Qui
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuickEntryExpenseRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuickEntryExpenseRow
    */  
 export function get_QuickEntryExpenses(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -443,7 +539,14 @@ export function get_QuickEntryExpenses(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuickEntryExpenseRow)
           })
@@ -457,15 +560,15 @@ export function get_QuickEntryExpenses(select?:string, filter?:string, orderby?:
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuickEntryExpenses
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuickEntryExpenseRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuickEntryExpenseRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuickEntryExpenseRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuickEntryExpenseRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuickEntryExpenses(requestBody:any, epicorHeaders?:Headers){
+export function post_QuickEntryExpenses(requestBody:Erp_Tablesets_QuickEntryExpenseRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -479,7 +582,14 @@ export function post_QuickEntryExpenses(requestBody:any, epicorHeaders?:Headers)
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -499,10 +609,10 @@ export function post_QuickEntryExpenses(requestBody:any, epicorHeaders?:Headers)
       @param QuickEntryCode Desc: QuickEntryCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuickEntryExpenseRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuickEntryExpenseRow
    */  
 export function get_QuickEntryExpenses_Company_EmpID_QuickEntryType_QuickEntryCode(Company:string, EmpID:string, QuickEntryType:string, QuickEntryCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -517,7 +627,14 @@ export function get_QuickEntryExpenses_Company_EmpID_QuickEntryType_QuickEntryCo
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuickEntryExpenseRow)
           })
@@ -535,15 +652,15 @@ export function get_QuickEntryExpenses_Company_EmpID_QuickEntryType_QuickEntryCo
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param QuickEntryType Desc: QuickEntryType   Required: True   Allow empty value : True
       @param QuickEntryCode Desc: QuickEntryCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuickEntryExpenseRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuickEntryExpenseRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuickEntryExpenses_Company_EmpID_QuickEntryType_QuickEntryCode(Company:string, EmpID:string, QuickEntryType:string, QuickEntryCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuickEntryExpenses_Company_EmpID_QuickEntryType_QuickEntryCode(Company:string, EmpID:string, QuickEntryType:string, QuickEntryCode:string, requestBody:Erp_Tablesets_QuickEntryExpenseRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -557,7 +674,14 @@ export function patch_QuickEntryExpenses_Company_EmpID_QuickEntryType_QuickEntry
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -575,7 +699,7 @@ export function patch_QuickEntryExpenses_Company_EmpID_QuickEntryType_QuickEntry
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param QuickEntryType Desc: QuickEntryType   Required: True   Allow empty value : True
       @param QuickEntryCode Desc: QuickEntryCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -594,7 +718,14 @@ export function delete_QuickEntryExpenses_Company_EmpID_QuickEntryType_QuickEntr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -614,10 +745,10 @@ export function delete_QuickEntryExpenses_Company_EmpID_QuickEntryType_QuickEntr
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuickEntryTimeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuickEntryTimeRow
    */  
 export function get_QuickEntryTimes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -632,7 +763,14 @@ export function get_QuickEntryTimes(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuickEntryTimeRow)
           })
@@ -646,15 +784,15 @@ export function get_QuickEntryTimes(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuickEntryTimes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuickEntryTimeRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuickEntryTimeRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuickEntryTimeRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuickEntryTimeRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuickEntryTimes(requestBody:any, epicorHeaders?:Headers){
+export function post_QuickEntryTimes(requestBody:Erp_Tablesets_QuickEntryTimeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -668,7 +806,14 @@ export function post_QuickEntryTimes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -688,10 +833,10 @@ export function post_QuickEntryTimes(requestBody:any, epicorHeaders?:Headers){
       @param QuickEntryCode Desc: QuickEntryCode   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuickEntryTimeRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuickEntryTimeRow
    */  
 export function get_QuickEntryTimes_Company_EmpID_QuickEntryType_QuickEntryCode(Company:string, EmpID:string, QuickEntryType:string, QuickEntryCode:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -706,7 +851,14 @@ export function get_QuickEntryTimes_Company_EmpID_QuickEntryType_QuickEntryCode(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuickEntryTimeRow)
           })
@@ -724,15 +876,15 @@ export function get_QuickEntryTimes_Company_EmpID_QuickEntryType_QuickEntryCode(
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param QuickEntryType Desc: QuickEntryType   Required: True   Allow empty value : True
       @param QuickEntryCode Desc: QuickEntryCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuickEntryTimeRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuickEntryTimeRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuickEntryTimes_Company_EmpID_QuickEntryType_QuickEntryCode(Company:string, EmpID:string, QuickEntryType:string, QuickEntryCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuickEntryTimes_Company_EmpID_QuickEntryType_QuickEntryCode(Company:string, EmpID:string, QuickEntryType:string, QuickEntryCode:string, requestBody:Erp_Tablesets_QuickEntryTimeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -746,7 +898,14 @@ export function patch_QuickEntryTimes_Company_EmpID_QuickEntryType_QuickEntryCod
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -764,7 +923,7 @@ export function patch_QuickEntryTimes_Company_EmpID_QuickEntryType_QuickEntryCod
       @param EmpID Desc: EmpID   Required: True   Allow empty value : True
       @param QuickEntryType Desc: QuickEntryType   Required: True   Allow empty value : True
       @param QuickEntryCode Desc: QuickEntryCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -783,7 +942,14 @@ export function delete_QuickEntryTimes_Company_EmpID_QuickEntryType_QuickEntryCo
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -803,10 +969,10 @@ export function delete_QuickEntryTimes_Company_EmpID_QuickEntryType_QuickEntryCo
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.EmpBasicListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.EmpBasicListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -821,7 +987,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_EmpBasicListRow)
           })
@@ -833,6 +1006,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -846,7 +1036,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -906,15 +1096,22 @@ export function get_GetRows(whereClauseEmpBasic:string, whereClauseQuickEntryExp
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -927,7 +1124,7 @@ export function get_GetRows(whereClauseEmpBasic:string, whereClauseQuickEntryExp
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -951,15 +1148,22 @@ export function get_GetByID(empID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -974,7 +1178,7 @@ export function get_GetByID(empID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1016,15 +1220,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1035,30 +1246,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    /**  
    Summary: Invoke method GetCodeDescList
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1070,30 +1288,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeIndirectCode
    Description: Method to call when changing the Indirect Code
    OperationID: OnChangeIndirectCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeIndirectCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeIndirectCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeIndirectCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeIndirectCode(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeIndirectCode(requestBody:OnChangeIndirectCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeIndirectCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/OnChangeIndirectCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeIndirectCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1105,30 +1330,37 @@ export function post_OnChangeIndirectCode(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method OnChangeLaborType
    Description: Method to call when changing the Labor Type
    OperationID: OnChangeLaborType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeLaborType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeLaborType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeLaborType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeLaborType(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeLaborType(requestBody:OnChangeLaborType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeLaborType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/OnChangeLaborType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeLaborType_output)
           })
       .catch((error) => {
           reject(error)
@@ -1140,30 +1372,37 @@ export function post_OnChangeLaborType(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeMiscCode
    Description: Method to call when changing the Miscellaneous Code.
    OperationID: OnChangeMiscCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeMiscCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeMiscCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeMiscCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeMiscCode(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeMiscCode(requestBody:OnChangeMiscCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeMiscCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/OnChangeMiscCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeMiscCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1175,30 +1414,37 @@ export function post_OnChangeMiscCode(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeOprSeq
    Description: Method to call when changing the Operation Sequence
    OperationID: OnChangeOprSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOprSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOprSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOprSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOprSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOprSeq(requestBody:OnChangeOprSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOprSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/OnChangeOprSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOprSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -1210,30 +1456,37 @@ export function post_OnChangeOprSeq(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangePaymentMethod
    Description: Method to call when changing the Payment Method.
    OperationID: OnChangePaymentMethod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePaymentMethod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePaymentMethod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePaymentMethod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePaymentMethod(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePaymentMethod(requestBody:OnChangePaymentMethod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePaymentMethod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/OnChangePaymentMethod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePaymentMethod_output)
           })
       .catch((error) => {
           reject(error)
@@ -1245,30 +1498,37 @@ export function post_OnChangePaymentMethod(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method OnChangePhaseID
    Description: Method to call when changing the Phase ID.
    OperationID: OnChangePhaseID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePhaseID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePhaseID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePhaseID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePhaseID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePhaseID(requestBody:OnChangePhaseID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePhaseID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/OnChangePhaseID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePhaseID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1280,30 +1540,37 @@ export function post_OnChangePhaseID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeProjectID
    Description: Method to call when changing the Project ID.
    OperationID: OnChangeProjectID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeProjectID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeProjectID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeProjectID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeProjectID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeProjectID(requestBody:OnChangeProjectID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeProjectID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/OnChangeProjectID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeProjectID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1315,30 +1582,37 @@ export function post_OnChangeProjectID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeRoleCd
    Description: This method defaults dataset fields when the RoleCd field changes.
    OperationID: OnChangeRoleCd
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeRoleCd_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeRoleCd_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeRoleCd_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeRoleCd(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeRoleCd(requestBody:OnChangeRoleCd_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeRoleCd_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/OnChangeRoleCd", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeRoleCd_output)
           })
       .catch((error) => {
           reject(error)
@@ -1349,30 +1623,37 @@ export function post_OnChangeRoleCd(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method BuildRoleCodeWhereClause
    OperationID: BuildRoleCodeWhereClause
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildRoleCodeWhereClause_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildRoleCodeWhereClause_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildRoleCodeWhereClause_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildRoleCodeWhereClause(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildRoleCodeWhereClause(requestBody:BuildRoleCodeWhereClause_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildRoleCodeWhereClause_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/BuildRoleCodeWhereClause", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildRoleCodeWhereClause_output)
           })
       .catch((error) => {
           reject(error)
@@ -1383,30 +1664,37 @@ export function post_BuildRoleCodeWhereClause(requestBody:any, epicorHeaders?:He
    /**  
    Summary: Invoke method EmployeeExists
    OperationID: EmployeeExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/EmployeeExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/EmployeeExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/EmployeeExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_EmployeeExists(requestBody:any, epicorHeaders?:Headers){
+export function post_EmployeeExists(requestBody:EmployeeExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<EmployeeExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/EmployeeExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as EmployeeExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -1417,30 +1705,37 @@ export function post_EmployeeExists(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method IsEmpAuthToBookTime
    OperationID: IsEmpAuthToBookTime
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsEmpAuthToBookTime_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsEmpAuthToBookTime_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsEmpAuthToBookTime_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsEmpAuthToBookTime(requestBody:any, epicorHeaders?:Headers){
+export function post_IsEmpAuthToBookTime(requestBody:IsEmpAuthToBookTime_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsEmpAuthToBookTime_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/IsEmpAuthToBookTime", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsEmpAuthToBookTime_output)
           })
       .catch((error) => {
           reject(error)
@@ -1452,30 +1747,37 @@ export function post_IsEmpAuthToBookTime(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetFilteredRoleCdList
    Description: Returns Filtered Role Codes.
    OperationID: GetFilteredRoleCdList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetFilteredRoleCdList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetFilteredRoleCdList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetFilteredRoleCdList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetFilteredRoleCdList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetFilteredRoleCdList(requestBody:GetFilteredRoleCdList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetFilteredRoleCdList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/GetFilteredRoleCdList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetFilteredRoleCdList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1487,30 +1789,37 @@ export function post_GetFilteredRoleCdList(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewEmpBasic
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewEmpBasic
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewEmpBasic_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewEmpBasic_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewEmpBasic_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewEmpBasic(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewEmpBasic(requestBody:GetNewEmpBasic_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewEmpBasic_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/GetNewEmpBasic", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewEmpBasic_output)
           })
       .catch((error) => {
           reject(error)
@@ -1522,30 +1831,37 @@ export function post_GetNewEmpBasic(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewQuickEntryExpense
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuickEntryExpense
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuickEntryExpense_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuickEntryExpense_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuickEntryExpense_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuickEntryExpense(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuickEntryExpense(requestBody:GetNewQuickEntryExpense_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuickEntryExpense_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/GetNewQuickEntryExpense", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuickEntryExpense_output)
           })
       .catch((error) => {
           reject(error)
@@ -1557,30 +1873,37 @@ export function post_GetNewQuickEntryExpense(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewQuickEntryTime
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuickEntryTime
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuickEntryTime_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuickEntryTime_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuickEntryTime_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuickEntryTime(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuickEntryTime(requestBody:GetNewQuickEntryTime_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuickEntryTime_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/GetNewQuickEntryTime", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuickEntryTime_output)
           })
       .catch((error) => {
           reject(error)
@@ -1592,30 +1915,37 @@ export function post_GetNewQuickEntryTime(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1627,7 +1957,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1651,15 +1981,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1671,7 +2008,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1695,15 +2032,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1715,30 +2059,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1750,30 +2101,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuickEntrySvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -1784,26 +2142,43 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_EmpBasicListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_EmpBasicListRow[],
+   "value":Erp_Tablesets_EmpBasicListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_EmpBasicRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_EmpBasicRow[],
+   "value":Erp_Tablesets_EmpBasicRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuickEntryExpenseRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuickEntryExpenseRow[],
+   "value":Erp_Tablesets_QuickEntryExpenseRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuickEntryTimeRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuickEntryTimeRow[],
+   "value":Erp_Tablesets_QuickEntryTimeRow,
 }
 
 export interface Erp_Tablesets_EmpBasicListRow{
@@ -2315,6 +2690,23 @@ export interface Erp_Tablesets_QuickEntryTimeRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2980,7 +3372,7 @@ export interface GetNewEmpBasic_input{
 export interface GetNewEmpBasic_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -2998,7 +3390,7 @@ export interface GetNewQuickEntryExpense_input{
 export interface GetNewQuickEntryExpense_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -3016,7 +3408,7 @@ export interface GetNewQuickEntryTime_input{
 export interface GetNewQuickEntryTime_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -3105,7 +3497,7 @@ export interface OnChangeIndirectCode_input{
 export interface OnChangeIndirectCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -3122,7 +3514,7 @@ export interface OnChangeLaborType_input{
 export interface OnChangeLaborType_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -3139,7 +3531,7 @@ export interface OnChangeMiscCode_input{
 export interface OnChangeMiscCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -3156,7 +3548,7 @@ export interface OnChangeOprSeq_input{
 export interface OnChangeOprSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -3173,7 +3565,7 @@ export interface OnChangePaymentMethod_input{
 export interface OnChangePaymentMethod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -3190,7 +3582,7 @@ export interface OnChangePhaseID_input{
 export interface OnChangePhaseID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -3207,7 +3599,7 @@ export interface OnChangeProjectID_input{
 export interface OnChangeProjectID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -3224,7 +3616,7 @@ export interface OnChangeRoleCd_input{
 export interface OnChangeRoleCd_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 
@@ -3243,7 +3635,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtQuickEntryTableset[],
+   ds:Erp_Tablesets_UpdExtQuickEntryTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3258,7 +3650,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuickEntryTableset[],
+   ds:Erp_Tablesets_QuickEntryTableset,
 }
 }
 

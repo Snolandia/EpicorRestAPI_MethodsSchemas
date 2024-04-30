@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.DashBoardSvc
 // Description: The DashBoard server logic.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdDefRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdDefRow
    */  
 export function get_DashBoards(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_DashBoards(select?:string, expand?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdDefRow)
           })
@@ -118,15 +158,15 @@ export function get_DashBoards(select?:string, expand?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DashBoards
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.DashBdDefRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.DashBdDefRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.DashBdDefRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.DashBdDefRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DashBoards(requestBody:any, epicorHeaders?:Headers){
+export function post_DashBoards(requestBody:Ice_Tablesets_DashBdDefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_DashBoards(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -162,10 +209,10 @@ export function post_DashBoards(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.DashBdDefRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.DashBdDefRow
    */  
 export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -180,7 +227,14 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_DashBdDefRow)
           })
@@ -199,15 +253,15 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
       @param GlbCompany Desc: GlbCompany   Required: True   Allow empty value : True
       @param CGCCode Desc: CGCCode   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.DashBdDefRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.DashBdDefRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, requestBody:Ice_Tablesets_DashBdDefRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -221,7 +275,14 @@ export function patch_DashBoards_Company_ProductID_GlbCompany_CGCCode_Definition
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -240,7 +301,7 @@ export function patch_DashBoards_Company_ProductID_GlbCompany_CGCCode_Definition
       @param GlbCompany Desc: GlbCompany   Required: True   Allow empty value : True
       @param CGCCode Desc: CGCCode   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -259,7 +320,14 @@ export function delete_DashBoards_Company_ProductID_GlbCompany_CGCCode_Definitio
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -284,10 +352,10 @@ export function delete_DashBoards_Company_ProductID_GlbCompany_CGCCode_Definitio
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdBAQRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdBAQRow
    */  
 export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID_DashBdBAQs(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -302,7 +370,14 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdBAQRow)
           })
@@ -324,10 +399,10 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
       @param QueryID Desc: QueryID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.DashBdBAQRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.DashBdBAQRow
    */  
 export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID_DashBdBAQs_Company_ProductID_GlbCompany_CGCCode_DefinitionID_QueryID(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, QueryID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -342,7 +417,14 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_DashBdBAQRow)
           })
@@ -367,10 +449,10 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdChunkRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdChunkRow
    */  
 export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID_DashBdChunks(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -385,7 +467,14 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdChunkRow)
           })
@@ -407,10 +496,10 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
       @param SeqNum Desc: SeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.DashBdChunkRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.DashBdChunkRow
    */  
 export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID_DashBdChunks_Company_ProductID_GlbCompany_CGCCode_DefinitionID_SeqNum(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, SeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -425,7 +514,14 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_DashBdChunkRow)
           })
@@ -450,10 +546,10 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdLikeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdLikeRow
    */  
 export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID_DashBdLikes(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -468,7 +564,14 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdLikeRow)
           })
@@ -490,10 +593,10 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
       @param LikeField Desc: LikeField   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.DashBdLikeRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.DashBdLikeRow
    */  
 export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID_DashBdLikes_Company_ProductID_GlbCompany_CGCCode_DefinitionID_LikeField(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, LikeField:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -508,7 +611,14 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_DashBdLikeRow)
           })
@@ -528,10 +638,10 @@ export function get_DashBoards_Company_ProductID_GlbCompany_CGCCode_DefinitionID
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdBAQRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdBAQRow
    */  
 export function get_DashBdBAQs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -546,7 +656,14 @@ export function get_DashBdBAQs(select?:string, filter?:string, orderby?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdBAQRow)
           })
@@ -560,15 +677,15 @@ export function get_DashBdBAQs(select?:string, filter?:string, orderby?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DashBdBAQs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.DashBdBAQRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.DashBdBAQRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.DashBdBAQRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.DashBdBAQRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DashBdBAQs(requestBody:any, epicorHeaders?:Headers){
+export function post_DashBdBAQs(requestBody:Ice_Tablesets_DashBdBAQRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -582,7 +699,14 @@ export function post_DashBdBAQs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -604,10 +728,10 @@ export function post_DashBdBAQs(requestBody:any, epicorHeaders?:Headers){
       @param QueryID Desc: QueryID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.DashBdBAQRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.DashBdBAQRow
    */  
 export function get_DashBdBAQs_Company_ProductID_GlbCompany_CGCCode_DefinitionID_QueryID(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, QueryID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -622,7 +746,14 @@ export function get_DashBdBAQs_Company_ProductID_GlbCompany_CGCCode_DefinitionID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_DashBdBAQRow)
           })
@@ -642,15 +773,15 @@ export function get_DashBdBAQs_Company_ProductID_GlbCompany_CGCCode_DefinitionID
       @param CGCCode Desc: CGCCode   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param QueryID Desc: QueryID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.DashBdBAQRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.DashBdBAQRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DashBdBAQs_Company_ProductID_GlbCompany_CGCCode_DefinitionID_QueryID(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, QueryID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DashBdBAQs_Company_ProductID_GlbCompany_CGCCode_DefinitionID_QueryID(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, QueryID:string, requestBody:Ice_Tablesets_DashBdBAQRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -664,7 +795,14 @@ export function patch_DashBdBAQs_Company_ProductID_GlbCompany_CGCCode_Definition
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -684,7 +822,7 @@ export function patch_DashBdBAQs_Company_ProductID_GlbCompany_CGCCode_Definition
       @param CGCCode Desc: CGCCode   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param QueryID Desc: QueryID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -703,7 +841,14 @@ export function delete_DashBdBAQs_Company_ProductID_GlbCompany_CGCCode_Definitio
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -723,10 +868,10 @@ export function delete_DashBdBAQs_Company_ProductID_GlbCompany_CGCCode_Definitio
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdChunkRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdChunkRow
    */  
 export function get_DashBdChunks(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -741,7 +886,14 @@ export function get_DashBdChunks(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdChunkRow)
           })
@@ -755,15 +907,15 @@ export function get_DashBdChunks(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DashBdChunks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.DashBdChunkRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.DashBdChunkRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.DashBdChunkRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.DashBdChunkRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DashBdChunks(requestBody:any, epicorHeaders?:Headers){
+export function post_DashBdChunks(requestBody:Ice_Tablesets_DashBdChunkRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -777,7 +929,14 @@ export function post_DashBdChunks(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -799,10 +958,10 @@ export function post_DashBdChunks(requestBody:any, epicorHeaders?:Headers){
       @param SeqNum Desc: SeqNum   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.DashBdChunkRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.DashBdChunkRow
    */  
 export function get_DashBdChunks_Company_ProductID_GlbCompany_CGCCode_DefinitionID_SeqNum(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, SeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -817,7 +976,14 @@ export function get_DashBdChunks_Company_ProductID_GlbCompany_CGCCode_Definition
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_DashBdChunkRow)
           })
@@ -837,15 +1003,15 @@ export function get_DashBdChunks_Company_ProductID_GlbCompany_CGCCode_Definition
       @param CGCCode Desc: CGCCode   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param SeqNum Desc: SeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.DashBdChunkRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.DashBdChunkRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DashBdChunks_Company_ProductID_GlbCompany_CGCCode_DefinitionID_SeqNum(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, SeqNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DashBdChunks_Company_ProductID_GlbCompany_CGCCode_DefinitionID_SeqNum(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, SeqNum:string, requestBody:Ice_Tablesets_DashBdChunkRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -859,7 +1025,14 @@ export function patch_DashBdChunks_Company_ProductID_GlbCompany_CGCCode_Definiti
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -879,7 +1052,7 @@ export function patch_DashBdChunks_Company_ProductID_GlbCompany_CGCCode_Definiti
       @param CGCCode Desc: CGCCode   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param SeqNum Desc: SeqNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -898,7 +1071,14 @@ export function delete_DashBdChunks_Company_ProductID_GlbCompany_CGCCode_Definit
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -918,10 +1098,10 @@ export function delete_DashBdChunks_Company_ProductID_GlbCompany_CGCCode_Definit
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdLikeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdLikeRow
    */  
 export function get_DashBdLikes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -936,7 +1116,14 @@ export function get_DashBdLikes(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdLikeRow)
           })
@@ -950,15 +1137,15 @@ export function get_DashBdLikes(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_DashBdLikes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.DashBdLikeRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.DashBdLikeRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.DashBdLikeRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.DashBdLikeRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DashBdLikes(requestBody:any, epicorHeaders?:Headers){
+export function post_DashBdLikes(requestBody:Ice_Tablesets_DashBdLikeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -972,7 +1159,14 @@ export function post_DashBdLikes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -994,10 +1188,10 @@ export function post_DashBdLikes(requestBody:any, epicorHeaders?:Headers){
       @param LikeField Desc: LikeField   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.DashBdLikeRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.DashBdLikeRow
    */  
 export function get_DashBdLikes_Company_ProductID_GlbCompany_CGCCode_DefinitionID_LikeField(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, LikeField:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1012,7 +1206,14 @@ export function get_DashBdLikes_Company_ProductID_GlbCompany_CGCCode_DefinitionI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_DashBdLikeRow)
           })
@@ -1032,15 +1233,15 @@ export function get_DashBdLikes_Company_ProductID_GlbCompany_CGCCode_DefinitionI
       @param CGCCode Desc: CGCCode   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param LikeField Desc: LikeField   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.DashBdLikeRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.DashBdLikeRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_DashBdLikes_Company_ProductID_GlbCompany_CGCCode_DefinitionID_LikeField(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, LikeField:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_DashBdLikes_Company_ProductID_GlbCompany_CGCCode_DefinitionID_LikeField(Company:string, ProductID:string, GlbCompany:string, CGCCode:string, DefinitionID:string, LikeField:string, requestBody:Ice_Tablesets_DashBdLikeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1054,7 +1255,14 @@ export function patch_DashBdLikes_Company_ProductID_GlbCompany_CGCCode_Definitio
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1074,7 +1282,7 @@ export function patch_DashBdLikes_Company_ProductID_GlbCompany_CGCCode_Definitio
       @param CGCCode Desc: CGCCode   Required: True   Allow empty value : True
       @param DefinitionID Desc: DefinitionID   Required: True   Allow empty value : True
       @param LikeField Desc: LikeField   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1093,7 +1301,14 @@ export function delete_DashBdLikes_Company_ProductID_GlbCompany_CGCCode_Definiti
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1113,10 +1328,10 @@ export function delete_DashBdLikes_Company_ProductID_GlbCompany_CGCCode_Definiti
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdDefListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DashBdDefListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1131,7 +1346,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdDefListRow)
           })
@@ -1143,6 +1365,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1157,7 +1396,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1226,15 +1465,22 @@ export function get_GetRows(whereClauseDashBdDef:string, whereClauseDashBdBAQ:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1251,7 +1497,7 @@ export function get_GetRows(whereClauseDashBdDef:string, whereClauseDashBdBAQ:st
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1311,15 +1557,22 @@ export function get_GetByID(company:string, productID:string, glbCompany:string,
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1331,30 +1584,37 @@ export function get_GetByID(company:string, productID:string, glbCompany:string,
    Summary: Invoke method GetSourceCompany
    Description: Get the source company for any Global Dashboard that is in the same tenant
    OperationID: GetSourceCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSourceCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSourceCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSourceCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSourceCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSourceCompany(requestBody:GetSourceCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSourceCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetSourceCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSourceCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -1366,30 +1626,37 @@ export function post_GetSourceCompany(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetDashboardVersionInTenant
    Description: This method will get the DashBdVersion
    OperationID: GetDashboardVersionInTenant
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDashboardVersionInTenant_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDashboardVersionInTenant_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDashboardVersionInTenant_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDashboardVersionInTenant(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDashboardVersionInTenant(requestBody:GetDashboardVersionInTenant_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDashboardVersionInTenant_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetDashboardVersionInTenant", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDashboardVersionInTenant_output)
           })
       .catch((error) => {
           reject(error)
@@ -1401,30 +1668,37 @@ export function post_GetDashboardVersionInTenant(requestBody:any, epicorHeaders?
    Summary: Invoke method VerifyHyphenInId
    Description: verify the DashboardId  make sure no rows match where hyphen in same position as underscore
    OperationID: VerifyHyphenInId
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/VerifyHyphenInId_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/VerifyHyphenInId_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/VerifyHyphenInId_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_VerifyHyphenInId(requestBody:any, epicorHeaders?:Headers){
+export function post_VerifyHyphenInId(requestBody:VerifyHyphenInId_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<VerifyHyphenInId_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/VerifyHyphenInId", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as VerifyHyphenInId_output)
           })
       .catch((error) => {
           reject(error)
@@ -1438,30 +1712,37 @@ export function post_VerifyHyphenInId(requestBody:any, epicorHeaders?:Headers){
 first will invoke GetByID() looking for direct hit in current company,
 else will find the first dashboard by definitionID in the collection of AssociatedCompanies
    OperationID: GetDashboardAssemblyInTenant
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDashboardAssemblyInTenant_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDashboardAssemblyInTenant_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDashboardAssemblyInTenant_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDashboardAssemblyInTenant(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDashboardAssemblyInTenant(requestBody:GetDashboardAssemblyInTenant_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDashboardAssemblyInTenant_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetDashboardAssemblyInTenant", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDashboardAssemblyInTenant_output)
           })
       .catch((error) => {
           reject(error)
@@ -1474,30 +1755,37 @@ export function post_GetDashboardAssemblyInTenant(requestBody:any, epicorHeaders
    Description: This methods returns a "list" dataset with possible DashBdDef records that match the current company,
 inputted product identifier and inputted query identifier for each DashBdBAQ record.
    OperationID: GetDashboardsWithBAQ
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDashboardsWithBAQ_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDashboardsWithBAQ_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDashboardsWithBAQ_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDashboardsWithBAQ(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDashboardsWithBAQ(requestBody:GetDashboardsWithBAQ_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDashboardsWithBAQ_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetDashboardsWithBAQ", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDashboardsWithBAQ_output)
           })
       .catch((error) => {
           reject(error)
@@ -1510,30 +1798,37 @@ export function post_GetDashboardsWithBAQ(requestBody:any, epicorHeaders?:Header
    Description: This methods returns a "list" dataset with possible DashBdDef records that match the current company (or are visible to all companies),
 product identifier and like field for each DashBdLike record.
    OperationID: GetDashboardsWithLike
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDashboardsWithLike_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDashboardsWithLike_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDashboardsWithLike_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDashboardsWithLike(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDashboardsWithLike(requestBody:GetDashboardsWithLike_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDashboardsWithLike_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetDashboardsWithLike", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDashboardsWithLike_output)
           })
       .catch((error) => {
           reject(error)
@@ -1546,30 +1841,37 @@ export function post_GetDashboardsWithLike(requestBody:any, epicorHeaders?:Heade
    Description: This methods returns a "list" dataset with possible DashBdDef records that match the current company,
 inputted product identifier and inputted like field for each DashBdLike record.
    OperationID: GetDashboardsRecs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDashboardsRecs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDashboardsRecs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDashboardsRecs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDashboardsRecs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDashboardsRecs(requestBody:GetDashboardsRecs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDashboardsRecs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetDashboardsRecs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDashboardsRecs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1581,30 +1883,37 @@ export function post_GetDashboardsRecs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetAllCompaniesDashboard
    Description: Returns company id when there exists an AllCompanies Dashboard on different Company using the same DefinitionID
    OperationID: GetAllCompaniesDashboard
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAllCompaniesDashboard_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAllCompaniesDashboard_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAllCompaniesDashboard_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAllCompaniesDashboard(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAllCompaniesDashboard(requestBody:GetAllCompaniesDashboard_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAllCompaniesDashboard_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetAllCompaniesDashboard", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAllCompaniesDashboard_output)
           })
       .catch((error) => {
           reject(error)
@@ -1624,30 +1933,37 @@ This 'StoreData' process is basically a complete 'overlay' of the DashBoard data
 This method will require that all dataset records have a value of 'A' in the corresponding
 SysRowId field/column.
    OperationID: StoreData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/StoreData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/StoreData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/StoreData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_StoreData(requestBody:any, epicorHeaders?:Headers){
+export function post_StoreData(requestBody:StoreData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<StoreData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/StoreData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as StoreData_output)
           })
       .catch((error) => {
           reject(error)
@@ -1659,30 +1975,37 @@ export function post_StoreData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewDashBdDef
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDashBdDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDashBdDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDashBdDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDashBdDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDashBdDef(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDashBdDef(requestBody:GetNewDashBdDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDashBdDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetNewDashBdDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDashBdDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -1694,30 +2017,37 @@ export function post_GetNewDashBdDef(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewDashBdBAQ
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDashBdBAQ
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDashBdBAQ_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDashBdBAQ_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDashBdBAQ_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDashBdBAQ(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDashBdBAQ(requestBody:GetNewDashBdBAQ_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDashBdBAQ_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetNewDashBdBAQ", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDashBdBAQ_output)
           })
       .catch((error) => {
           reject(error)
@@ -1729,30 +2059,37 @@ export function post_GetNewDashBdBAQ(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewDashBdChunk
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDashBdChunk
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDashBdChunk_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDashBdChunk_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDashBdChunk_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDashBdChunk(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDashBdChunk(requestBody:GetNewDashBdChunk_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDashBdChunk_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetNewDashBdChunk", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDashBdChunk_output)
           })
       .catch((error) => {
           reject(error)
@@ -1764,30 +2101,37 @@ export function post_GetNewDashBdChunk(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewDashBdLike
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewDashBdLike
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewDashBdLike_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewDashBdLike_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewDashBdLike_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewDashBdLike(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewDashBdLike(requestBody:GetNewDashBdLike_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewDashBdLike_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetNewDashBdLike", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewDashBdLike_output)
           })
       .catch((error) => {
           reject(error)
@@ -1799,30 +2143,37 @@ export function post_GetNewDashBdLike(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1837,7 +2188,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1879,15 +2230,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1899,7 +2257,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1923,15 +2281,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1943,7 +2308,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1967,15 +2332,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1987,30 +2359,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2022,30 +2401,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DashBoardSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2056,31 +2442,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdBAQRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_DashBdBAQRow[],
+   "value":Ice_Tablesets_DashBdBAQRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdChunkRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_DashBdChunkRow[],
+   "value":Ice_Tablesets_DashBdChunkRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdDefListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_DashBdDefListRow[],
+   "value":Ice_Tablesets_DashBdDefListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdDefRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_DashBdDefRow[],
+   "value":Ice_Tablesets_DashBdDefRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DashBdLikeRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_DashBdLikeRow[],
+   "value":Ice_Tablesets_DashBdLikeRow,
 }
 
 export interface Ice_Tablesets_DashBdBAQRow{
@@ -2257,6 +2660,23 @@ export interface Ice_Tablesets_DashBdLikeRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2457,7 +2877,7 @@ export interface GetNewDashBdBAQ_input{
 export interface GetNewDashBdBAQ_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_DashBoardTableset[],
+   ds:Ice_Tablesets_DashBoardTableset,
 }
 }
 
@@ -2481,7 +2901,7 @@ export interface GetNewDashBdChunk_input{
 export interface GetNewDashBdChunk_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_DashBoardTableset[],
+   ds:Ice_Tablesets_DashBoardTableset,
 }
 }
 
@@ -2503,7 +2923,7 @@ export interface GetNewDashBdDef_input{
 export interface GetNewDashBdDef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_DashBoardTableset[],
+   ds:Ice_Tablesets_DashBoardTableset,
 }
 }
 
@@ -2527,7 +2947,7 @@ export interface GetNewDashBdLike_input{
 export interface GetNewDashBdLike_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_DashBoardTableset[],
+   ds:Ice_Tablesets_DashBoardTableset,
 }
 }
 
@@ -2807,7 +3227,7 @@ export interface StoreData_input{
 export interface StoreData_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_DashBoardTableset[],
+   ds:Ice_Tablesets_DashBoardTableset,
 }
 }
 
@@ -2826,7 +3246,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtDashBoardTableset[],
+   ds:Ice_Tablesets_UpdExtDashBoardTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2841,7 +3261,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_DashBoardTableset[],
+   ds:Ice_Tablesets_DashBoardTableset,
 }
 }
 

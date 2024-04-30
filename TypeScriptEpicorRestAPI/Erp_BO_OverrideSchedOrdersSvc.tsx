@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.OverrideSchedOrdersSvc
 // Description: OverrideSchedOrdersSvc Business Object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method DeleteRec
    Description: Delete current record and reset values (Job Number - number or list
    OperationID: DeleteRec
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteRec_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteRec_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteRec_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteRec(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteRec(requestBody:DeleteRec_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteRec_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/DeleteRec", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteRec_output)
           })
       .catch((error) => {
           reject(error)
@@ -121,30 +178,37 @@ export function post_DeleteRec(requestBody:any, epicorHeaders?:Headers){
    Description: /// Populates ttOverrideSchedOrders table from JobHead, PatchFld
 ///
    OperationID: LoadOverrideSched
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LoadOverrideSched_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LoadOverrideSched_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LoadOverrideSched_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LoadOverrideSched(requestBody:any, epicorHeaders?:Headers){
+export function post_LoadOverrideSched(requestBody:LoadOverrideSched_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LoadOverrideSched_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/LoadOverrideSched", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LoadOverrideSched_output)
           })
       .catch((error) => {
           reject(error)
@@ -156,30 +220,37 @@ export function post_LoadOverrideSched(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method MultiJobUpdateSchedPri
    Description: Update default information based on the warehouse changing
    OperationID: MultiJobUpdateSchedPri
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/MultiJobUpdateSchedPri_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/MultiJobUpdateSchedPri_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/MultiJobUpdateSchedPri_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_MultiJobUpdateSchedPri(requestBody:any, epicorHeaders?:Headers){
+export function post_MultiJobUpdateSchedPri(requestBody:MultiJobUpdateSchedPri_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<MultiJobUpdateSchedPri_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/MultiJobUpdateSchedPri", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as MultiJobUpdateSchedPri_output)
           })
       .catch((error) => {
           reject(error)
@@ -191,30 +262,37 @@ export function post_MultiJobUpdateSchedPri(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method UpdateSchedPri
    Description: Update default information based on the warehouse changing
    OperationID: UpdateSchedPri
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateSchedPri_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateSchedPri_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateSchedPri_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateSchedPri(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateSchedPri(requestBody:UpdateSchedPri_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateSchedPri_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/UpdateSchedPri", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateSchedPri_output)
           })
       .catch((error) => {
           reject(error)
@@ -226,30 +304,37 @@ export function post_UpdateSchedPri(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetCalculateGlobalSchedulingLastRun
    Description: Get multi job Flag used in the Last Run of the Scheduling
    OperationID: GetCalculateGlobalSchedulingLastRun
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCalculateGlobalSchedulingLastRun_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCalculateGlobalSchedulingLastRun_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCalculateGlobalSchedulingLastRun_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCalculateGlobalSchedulingLastRun(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCalculateGlobalSchedulingLastRun(requestBody:GetCalculateGlobalSchedulingLastRun_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCalculateGlobalSchedulingLastRun_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/GetCalculateGlobalSchedulingLastRun", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCalculateGlobalSchedulingLastRun_output)
           })
       .catch((error) => {
           reject(error)
@@ -261,30 +346,37 @@ export function post_GetCalculateGlobalSchedulingLastRun(requestBody:any, epicor
    Summary: Invoke method OnChangeBackwards
    Description: Column Changed for Backwards
    OperationID: OnChangeBackwards
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeBackwards_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeBackwards_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeBackwards_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeBackwards(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeBackwards(requestBody:OnChangeBackwards_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeBackwards_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/OnChangeBackwards", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeBackwards_output)
           })
       .catch((error) => {
           reject(error)
@@ -296,30 +388,37 @@ export function post_OnChangeBackwards(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeMultiJobSchedSeq
    Description: Column Changed for MultiJobSchedSeq
    OperationID: OnChangeMultiJobSchedSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeMultiJobSchedSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeMultiJobSchedSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeMultiJobSchedSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeMultiJobSchedSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeMultiJobSchedSeq(requestBody:OnChangeMultiJobSchedSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeMultiJobSchedSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/OnChangeMultiJobSchedSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeMultiJobSchedSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -331,30 +430,37 @@ export function post_OnChangeMultiJobSchedSeq(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangingSchedSeq
    Description: On changing of MultiJobSchedSeq
    OperationID: OnChangingSchedSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingSchedSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingSchedSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingSchedSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingSchedSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingSchedSeq(requestBody:OnChangingSchedSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingSchedSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/OnChangingSchedSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingSchedSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -366,30 +472,37 @@ export function post_OnChangingSchedSeq(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method LoadOverrideSchedOrderView
    Description: Add rows from the JobHead dataset to the OverrideSchedOrders dataset.
    OperationID: LoadOverrideSchedOrderView
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LoadOverrideSchedOrderView_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LoadOverrideSchedOrderView_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LoadOverrideSchedOrderView_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LoadOverrideSchedOrderView(requestBody:any, epicorHeaders?:Headers){
+export function post_LoadOverrideSchedOrderView(requestBody:LoadOverrideSchedOrderView_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LoadOverrideSchedOrderView_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/LoadOverrideSchedOrderView", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LoadOverrideSchedOrderView_output)
           })
       .catch((error) => {
           reject(error)
@@ -400,30 +513,37 @@ export function post_LoadOverrideSchedOrderView(requestBody:any, epicorHeaders?:
    /**  
    Summary: Invoke method LoadOverrideSchedOrderViewList
    OperationID: LoadOverrideSchedOrderViewList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LoadOverrideSchedOrderViewList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LoadOverrideSchedOrderViewList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LoadOverrideSchedOrderViewList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LoadOverrideSchedOrderViewList(requestBody:any, epicorHeaders?:Headers){
+export function post_LoadOverrideSchedOrderViewList(requestBody:LoadOverrideSchedOrderViewList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LoadOverrideSchedOrderViewList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/LoadOverrideSchedOrderViewList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LoadOverrideSchedOrderViewList_output)
           })
       .catch((error) => {
           reject(error)
@@ -435,30 +555,37 @@ export function post_LoadOverrideSchedOrderViewList(requestBody:any, epicorHeade
    Summary: Invoke method RefreshOverrideSchedOrderView
    Description: Custom Refresh of jobs
    OperationID: RefreshOverrideSchedOrderView
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshOverrideSchedOrderView_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshOverrideSchedOrderView_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshOverrideSchedOrderView_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshOverrideSchedOrderView(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshOverrideSchedOrderView(requestBody:RefreshOverrideSchedOrderView_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshOverrideSchedOrderView_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/RefreshOverrideSchedOrderView", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshOverrideSchedOrderView_output)
           })
       .catch((error) => {
           reject(error)
@@ -470,30 +597,37 @@ export function post_RefreshOverrideSchedOrderView(requestBody:any, epicorHeader
    Summary: Invoke method SeqIsDecimal
    Description: determine if multiJobSchedSeq is a decimal
    OperationID: SeqIsDecimal
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SeqIsDecimal_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SeqIsDecimal_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SeqIsDecimal_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SeqIsDecimal(requestBody:any, epicorHeaders?:Headers){
+export function post_SeqIsDecimal(requestBody:SeqIsDecimal_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SeqIsDecimal_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OverrideSchedOrdersSvc/SeqIsDecimal", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SeqIsDecimal_output)
           })
       .catch((error) => {
           reject(error)
@@ -504,11 +638,45 @@ export function post_SeqIsDecimal(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -2367,8 +2535,8 @@ export interface LoadOverrideSchedOrderViewList_input{
 export interface LoadOverrideSchedOrderViewList_output{
 parameters : {
       /**  output parameters  */  
-   jobDs:Erp_Tablesets_JobHeadListTableset[],
-   ds:Erp_Tablesets_OverrideSchedOrdersTableset[],
+   jobDs:Erp_Tablesets_JobHeadListTableset,
+   ds:Erp_Tablesets_OverrideSchedOrdersTableset,
 }
 }
 
@@ -2384,8 +2552,8 @@ export interface LoadOverrideSchedOrderView_input{
 export interface LoadOverrideSchedOrderView_output{
 parameters : {
       /**  output parameters  */  
-   jobDs:Erp_Tablesets_JobEntryTableset[],
-   ds:Erp_Tablesets_OverrideSchedOrdersTableset[],
+   jobDs:Erp_Tablesets_JobEntryTableset,
+   ds:Erp_Tablesets_OverrideSchedOrdersTableset,
 }
 }
 
@@ -2400,7 +2568,7 @@ export interface LoadOverrideSched_output{
 parameters : {
       /**  output parameters  */  
    WasChanged:boolean,
-   ds:Erp_Tablesets_OverrideSchedOrdersTableset[],
+   ds:Erp_Tablesets_OverrideSchedOrdersTableset,
 }
 }
 
@@ -2414,7 +2582,7 @@ export interface MultiJobUpdateSchedPri_input{
 export interface MultiJobUpdateSchedPri_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_OverrideSchedOrdersTableset[],
+   ds:Erp_Tablesets_OverrideSchedOrdersTableset,
 }
 }
 
@@ -2428,7 +2596,7 @@ export interface OnChangeBackwards_input{
 export interface OnChangeBackwards_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_OverrideSchedOrdersTableset[],
+   ds:Erp_Tablesets_OverrideSchedOrdersTableset,
 }
 }
 
@@ -2446,7 +2614,7 @@ export interface OnChangeMultiJobSchedSeq_input{
 export interface OnChangeMultiJobSchedSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_OverrideSchedOrdersTableset[],
+   ds:Erp_Tablesets_OverrideSchedOrdersTableset,
 }
 }
 
@@ -2481,7 +2649,7 @@ export interface RefreshOverrideSchedOrderView_input{
 export interface RefreshOverrideSchedOrderView_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_OverrideSchedOrdersTableset[],
+   ds:Erp_Tablesets_OverrideSchedOrdersTableset,
 }
 }
 
@@ -2509,7 +2677,7 @@ export interface UpdateSchedPri_input{
 export interface UpdateSchedPri_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_OverrideSchedOrdersTableset[],
+   ds:Erp_Tablesets_OverrideSchedOrdersTableset,
 }
 }
 

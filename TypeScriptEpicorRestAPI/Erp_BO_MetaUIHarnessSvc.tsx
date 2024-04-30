@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.MetaUIHarnessSvc
 // Description: Meta UI Harness related functionality
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method GetListSpecial
    Description: GetListSpecial - returns random list data w/scalars - whereClause has no effect
    OperationID: GetListSpecial
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListSpecial_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListSpecial_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListSpecial_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListSpecial(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListSpecial(requestBody:GetListSpecial_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListSpecial_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/GetListSpecial", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListSpecial_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_GetListSpecial(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetSampleRows
    Description: GetSampleRows - returns random row data
    OperationID: GetSampleRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSampleRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSampleRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSampleRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSampleRows(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSampleRows(requestBody:GetSampleRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSampleRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/GetSampleRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSampleRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_GetSampleRows(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetSampleRowsAdded
    Description: GetSampleRowsAdded - returns random row data
    OperationID: GetSampleRowsAdded
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSampleRowsAdded_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSampleRowsAdded_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSampleRowsAdded_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSampleRowsAdded(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSampleRowsAdded(requestBody:GetSampleRowsAdded_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSampleRowsAdded_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/GetSampleRowsAdded", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSampleRowsAdded_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_GetSampleRowsAdded(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetSampleRowsAddedNoSysRowID
    Description: GetSampleRowsAdded - returns random row data with blank SysRowID
    OperationID: GetSampleRowsAddedNoSysRowID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSampleRowsAddedNoSysRowID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSampleRowsAddedNoSysRowID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSampleRowsAddedNoSysRowID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSampleRowsAddedNoSysRowID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSampleRowsAddedNoSysRowID(requestBody:GetSampleRowsAddedNoSysRowID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSampleRowsAddedNoSysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/GetSampleRowsAddedNoSysRowID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSampleRowsAddedNoSysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,30 +303,37 @@ export function post_GetSampleRowsAddedNoSysRowID(requestBody:any, epicorHeaders
    Summary: Invoke method GetDynamicData
    Description: GetDynamicData - returns an untyped dynamic dataset
    OperationID: GetDynamicData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDynamicData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDynamicData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDynamicData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDynamicData(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDynamicData(requestBody:GetDynamicData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDynamicData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/GetDynamicData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDynamicData_output)
           })
       .catch((error) => {
           reject(error)
@@ -260,30 +345,37 @@ export function post_GetDynamicData(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateSpecial
    Description: Updates all the modified rows
    OperationID: UpdateSpecial
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateSpecial_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateSpecial_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateSpecial_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateSpecial(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateSpecial(requestBody:UpdateSpecial_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateSpecial_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/UpdateSpecial", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateSpecial_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,30 +387,37 @@ export function post_UpdateSpecial(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Updates all the modified / Added rows
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -330,30 +429,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ModifyRows
    Description: Set Approved to true for all modified rows
    OperationID: ModifyRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ModifyRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ModifyRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ModifyRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ModifyRows(requestBody:any, epicorHeaders?:Headers){
+export function post_ModifyRows(requestBody:ModifyRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ModifyRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/ModifyRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ModifyRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -365,30 +471,37 @@ export function post_ModifyRows(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeQuantity1
    Description: Invoked on change of Quantity1.  Approve set true if quantity is greater than 50, false if less than.
    OperationID: OnChangeQuantity1
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeQuantity1_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeQuantity1_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeQuantity1_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeQuantity1(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeQuantity1(requestBody:OnChangeQuantity1_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeQuantity1_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/OnChangeQuantity1", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeQuantity1_output)
           })
       .catch((error) => {
           reject(error)
@@ -400,30 +513,37 @@ export function post_OnChangeQuantity1(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ModifyRowsReturnUnChanged
    Description: Set Approved to true for all modified rows and return them as unchanged
    OperationID: ModifyRowsReturnUnChanged
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ModifyRowsReturnUnChanged_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ModifyRowsReturnUnChanged_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ModifyRowsReturnUnChanged_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ModifyRowsReturnUnChanged(requestBody:any, epicorHeaders?:Headers){
+export function post_ModifyRowsReturnUnChanged(requestBody:ModifyRowsReturnUnChanged_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ModifyRowsReturnUnChanged_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/ModifyRowsReturnUnChanged", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ModifyRowsReturnUnChanged_output)
           })
       .catch((error) => {
           reject(error)
@@ -435,30 +555,37 @@ export function post_ModifyRowsReturnUnChanged(requestBody:any, epicorHeaders?:H
    Summary: Invoke method DeleteRows
    Description: Delete all modified rows
    OperationID: DeleteRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteRows(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteRows(requestBody:DeleteRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/DeleteRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -471,30 +598,37 @@ export function post_DeleteRows(requestBody:any, epicorHeaders?:Headers){
    Description: This will expect three rows and then delete the first row / leave 2nd row unchanged / Modify the third row
 It will then add one 'unchanged' row and one with rowMod = 'A'
    OperationID: ModifyAddDeleteRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ModifyAddDeleteRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ModifyAddDeleteRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ModifyAddDeleteRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ModifyAddDeleteRows(requestBody:any, epicorHeaders?:Headers){
+export function post_ModifyAddDeleteRows(requestBody:ModifyAddDeleteRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ModifyAddDeleteRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/ModifyAddDeleteRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ModifyAddDeleteRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -506,30 +640,37 @@ export function post_ModifyAddDeleteRows(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ReturnMultipleUnModifiedRows
    Description: This will expect a row and change it but return two unmodified rows which are different and we need to ensure that the 'last' row is the one that is shown in the Harness
    OperationID: ReturnMultipleUnModifiedRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ReturnMultipleUnModifiedRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ReturnMultipleUnModifiedRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ReturnMultipleUnModifiedRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ReturnMultipleUnModifiedRows(requestBody:any, epicorHeaders?:Headers){
+export function post_ReturnMultipleUnModifiedRows(requestBody:ReturnMultipleUnModifiedRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ReturnMultipleUnModifiedRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/ReturnMultipleUnModifiedRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ReturnMultipleUnModifiedRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -541,7 +682,7 @@ export function post_ReturnMultipleUnModifiedRows(requestBody:any, epicorHeaders
    Summary: Invoke method GetDefaultEvents
    Description: Returns sample rows for epScheduler control in Misc harness
    OperationID: GetDefaultEvents
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultEvents_output
@@ -554,15 +695,22 @@ export function post_GetDefaultEvents(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultEvents_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/GetDefaultEvents", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultEvents_output)
           })
       .catch((error) => {
           reject(error)
@@ -574,30 +722,37 @@ export function post_GetDefaultEvents(epicorHeaders?:Headers){
    Summary: Invoke method GetNewEvent
    Description: Get a new event for the ep-scheduler control
    OperationID: GetNewEvent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewEvent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewEvent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewEvent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewEvent(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewEvent(requestBody:GetNewEvent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewEvent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/GetNewEvent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewEvent_output)
           })
       .catch((error) => {
           reject(error)
@@ -609,30 +764,37 @@ export function post_GetNewEvent(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetSampleDataTreeStructure
    Description: GetSampleDataTreeStructure
    OperationID: GetSampleDataTreeStructure
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSampleDataTreeStructure_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSampleDataTreeStructure_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSampleDataTreeStructure_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSampleDataTreeStructure(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSampleDataTreeStructure(requestBody:GetSampleDataTreeStructure_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSampleDataTreeStructure_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/GetSampleDataTreeStructure", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSampleDataTreeStructure_output)
           })
       .catch((error) => {
           reject(error)
@@ -644,30 +806,37 @@ export function post_GetSampleDataTreeStructure(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetSomeDatasetsOneType
    Description: Returns two datasets with the same type.
    OperationID: GetSomeDatasetsOneType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSomeDatasetsOneType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSomeDatasetsOneType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSomeDatasetsOneType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSomeDatasetsOneType(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSomeDatasetsOneType(requestBody:GetSomeDatasetsOneType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSomeDatasetsOneType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/GetSomeDatasetsOneType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSomeDatasetsOneType_output)
           })
       .catch((error) => {
           reject(error)
@@ -679,7 +848,7 @@ export function post_GetSomeDatasetsOneType(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method NullStringTestNonEmptyResult
    Description: Returns non-empty string
    OperationID: NullStringTestNonEmptyResult
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/NullStringTestNonEmptyResult_output
@@ -692,15 +861,22 @@ export function post_NullStringTestNonEmptyResult(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<NullStringTestNonEmptyResult_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/NullStringTestNonEmptyResult", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as NullStringTestNonEmptyResult_output)
           })
       .catch((error) => {
           reject(error)
@@ -712,7 +888,7 @@ export function post_NullStringTestNonEmptyResult(epicorHeaders?:Headers){
    Summary: Invoke method NullStringTestNullResult
    Description: Returns null result
    OperationID: NullStringTestNullResult
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/NullStringTestNullResult_output
@@ -725,15 +901,22 @@ export function post_NullStringTestNullResult(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<NullStringTestNullResult_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.MetaUIHarnessSvc/NullStringTestNullResult", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as NullStringTestNullResult_output)
           })
       .catch((error) => {
           reject(error)
@@ -744,11 +927,45 @@ export function post_NullStringTestNullResult(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -762,7 +979,7 @@ export interface DeleteRows_input{
 export interface DeleteRows_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -898,7 +1115,7 @@ export interface GetDynamicData_output{
    returnObj:any,      //schema had no properties on an object.
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_DynamicMetadataTableset[],
+   ds:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
 
@@ -935,7 +1152,7 @@ export interface GetNewEvent_input{
 export interface GetNewEvent_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -968,7 +1185,7 @@ export interface GetSampleRowsAddedNoSysRowID_input{
 export interface GetSampleRowsAddedNoSysRowID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -988,7 +1205,7 @@ export interface GetSampleRowsAdded_input{
 export interface GetSampleRowsAdded_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -1019,8 +1236,8 @@ export interface GetSomeDatasetsOneType_input{
 export interface GetSomeDatasetsOneType_output{
 parameters : {
       /**  output parameters  */  
-   firstDSParam:Erp_Tablesets_MetaUIHarnessTableset[],
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   firstDSParam:Erp_Tablesets_MetaUIHarnessTableset,
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -1055,7 +1272,7 @@ export interface ModifyAddDeleteRows_input{
 export interface ModifyAddDeleteRows_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -1069,7 +1286,7 @@ export interface ModifyRowsReturnUnChanged_input{
 export interface ModifyRowsReturnUnChanged_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -1083,7 +1300,7 @@ export interface ModifyRows_input{
 export interface ModifyRows_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -1109,7 +1326,7 @@ export interface OnChangeQuantity1_input{
 export interface OnChangeQuantity1_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -1123,7 +1340,7 @@ export interface ReturnMultipleUnModifiedRows_input{
 export interface ReturnMultipleUnModifiedRows_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -1137,7 +1354,7 @@ export interface UpdateSpecial_input{
 export interface UpdateSpecial_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 
@@ -1151,7 +1368,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_MetaUIHarnessTableset[],
+   ds:Erp_Tablesets_MetaUIHarnessTableset,
 }
 }
 

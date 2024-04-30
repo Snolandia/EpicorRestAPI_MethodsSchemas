@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.RPT.CurrencyRevalueSvc
 // Description: CurrencyRevalueSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -89,7 +139,7 @@ the General Ledger.
 Example output:
 "WARNING: A/P is NOT interfaced with General Ledger.  G/L transactions will NOT be created.  Do you wish to continue?"
    OperationID: CheckAP
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckAP_output
@@ -102,15 +152,22 @@ export function post_CheckAP(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckAP_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/CheckAP", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckAP_output)
           })
       .catch((error) => {
           reject(error)
@@ -126,7 +183,7 @@ the General Ledger.
 Example output:
 "WARNING: A/R is NOT interfaced with General Ledger.  G/L transactions will NOT be created.  Do you wish to continue?"
    OperationID: CheckAR
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckAR_output
@@ -139,15 +196,22 @@ export function post_CheckAR(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckAR_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/CheckAR", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckAR_output)
           })
       .catch((error) => {
           reject(error)
@@ -159,30 +223,37 @@ export function post_CheckAR(epicorHeaders?:Headers){
    Summary: Invoke method GetApplyDate
    Description: Update Apply Date information based on the UseApplyDate changing.
    OperationID: GetApplyDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetApplyDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetApplyDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetApplyDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetApplyDate(requestBody:any, epicorHeaders?:Headers){
+export function post_GetApplyDate(requestBody:GetApplyDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetApplyDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetApplyDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetApplyDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -195,7 +266,7 @@ export function post_GetApplyDate(requestBody:any, epicorHeaders?:Headers){
    Description: Call this method to get the delimited list of valid values available for the
 APSortyBy parameter.
    OperationID: GetAPSortByList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAPSortByList_output
@@ -208,15 +279,22 @@ export function post_GetAPSortByList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAPSortByList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetAPSortByList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAPSortByList_output)
           })
       .catch((error) => {
           reject(error)
@@ -229,7 +307,7 @@ export function post_GetAPSortByList(epicorHeaders?:Headers){
    Description: Call this method to get the delimited list of valid values available for the
 ARSortyBy parameter.
    OperationID: GetARSortByList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetARSortByList_output
@@ -242,15 +320,22 @@ export function post_GetARSortByList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetARSortByList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetARSortByList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetARSortByList_output)
           })
       .catch((error) => {
           reject(error)
@@ -263,7 +348,7 @@ export function post_GetARSortByList(epicorHeaders?:Headers){
    Description: Call this method to get the delimited list of valid values available for the
 BASortyBy parameter.
    OperationID: GetBASortByList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBASortByList_output
@@ -276,15 +361,22 @@ export function post_GetBASortByList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBASortByList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetBASortByList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBASortByList_output)
           })
       .catch((error) => {
           reject(error)
@@ -297,7 +389,7 @@ export function post_GetBASortByList(epicorHeaders?:Headers){
    Description: Call this method to get the delimited list of valid values available for the
 sorting top level parameter.
    OperationID: GetTopLevelSortByList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTopLevelSortByList_output
@@ -310,15 +402,22 @@ export function post_GetTopLevelSortByList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTopLevelSortByList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetTopLevelSortByList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTopLevelSortByList_output)
           })
       .catch((error) => {
           reject(error)
@@ -330,30 +429,37 @@ export function post_GetTopLevelSortByList(epicorHeaders?:Headers){
    Summary: Invoke method GetExchangeDate
    Description: Update Exchange Date information based on the UseExchangeDate changing.
    OperationID: GetExchangeDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetExchangeDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetExchangeDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetExchangeDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetExchangeDate(requestBody:any, epicorHeaders?:Headers){
+export function post_GetExchangeDate(requestBody:GetExchangeDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetExchangeDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetExchangeDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetExchangeDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -366,7 +472,7 @@ export function post_GetExchangeDate(requestBody:any, epicorHeaders?:Headers){
    Description: Call this method to get the delimited list of valid values available for the
 PCDSortyBy parameter.
    OperationID: GetPCDSordByList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPCDSordByList_output
@@ -379,15 +485,22 @@ export function post_GetPCDSordByList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPCDSordByList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetPCDSordByList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPCDSordByList_output)
           })
       .catch((error) => {
           reject(error)
@@ -400,7 +513,7 @@ export function post_GetPCDSordByList(epicorHeaders?:Headers){
    Description: Call this method to get the delimited list of valid values available for the
 POSortyBy parameter.
    OperationID: GetPOSortByList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPOSortByList_output
@@ -413,15 +526,22 @@ export function post_GetPOSortByList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPOSortByList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetPOSortByList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPOSortByList_output)
           })
       .catch((error) => {
           reject(error)
@@ -433,30 +553,37 @@ export function post_GetPOSortByList(epicorHeaders?:Headers){
    Summary: Invoke method GetRevaluationOption
    Description: Update the revaluation value based on the Override option changing.
    OperationID: GetRevaluationOption
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRevaluationOption_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRevaluationOption_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRevaluationOption_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRevaluationOption(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRevaluationOption(requestBody:GetRevaluationOption_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRevaluationOption_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetRevaluationOption", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRevaluationOption_output)
           })
       .catch((error) => {
           reject(error)
@@ -468,30 +595,37 @@ export function post_GetRevaluationOption(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetReverseDate
    Description: Update Reverse Date based on Revalue Date, Apply Date, or UseApplyDate changing
    OperationID: GetReverseDate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetReverseDate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetReverseDate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetReverseDate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetReverseDate(requestBody:any, epicorHeaders?:Headers){
+export function post_GetReverseDate(requestBody:GetReverseDate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetReverseDate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetReverseDate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetReverseDate_output)
           })
       .catch((error) => {
           reject(error)
@@ -504,7 +638,7 @@ export function post_GetReverseDate(requestBody:any, epicorHeaders?:Headers){
    Description: Call this method to get the delimited list of valid values available for the
 SOSortyBy parameter.
    OperationID: GetSOSortByList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSOSortByList_output
@@ -517,15 +651,22 @@ export function post_GetSOSortByList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSOSortByList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetSOSortByList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSOSortByList_output)
           })
       .catch((error) => {
           reject(error)
@@ -536,30 +677,37 @@ export function post_GetSOSortByList(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method inOpenFiscalPeriod
    OperationID: inOpenFiscalPeriod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/inOpenFiscalPeriod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/inOpenFiscalPeriod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/inOpenFiscalPeriod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_inOpenFiscalPeriod(requestBody:any, epicorHeaders?:Headers){
+export function post_inOpenFiscalPeriod(requestBody:inOpenFiscalPeriod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<inOpenFiscalPeriod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/inOpenFiscalPeriod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as inOpenFiscalPeriod_output)
           })
       .catch((error) => {
           reject(error)
@@ -571,30 +719,37 @@ export function post_inOpenFiscalPeriod(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ValidateRateTypeGrpSubs
    Description: Call this method to check if RateTypeGrpSubs is valid
    OperationID: ValidateRateTypeGrpSubs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateRateTypeGrpSubs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateRateTypeGrpSubs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateRateTypeGrpSubs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateRateTypeGrpSubs(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateRateTypeGrpSubs(requestBody:ValidateRateTypeGrpSubs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateRateTypeGrpSubs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/ValidateRateTypeGrpSubs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateRateTypeGrpSubs_output)
           })
       .catch((error) => {
           reject(error)
@@ -606,7 +761,7 @@ export function post_ValidateRateTypeGrpSubs(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetCAllCurrenciesList
    Description: Call this method from Kinetic UI to load all Currencies
    OperationID: GetCAllCurrenciesList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCAllCurrenciesList_output
@@ -619,15 +774,22 @@ export function post_GetCAllCurrenciesList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCAllCurrenciesList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetCAllCurrenciesList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCAllCurrenciesList_output)
           })
       .catch((error) => {
           reject(error)
@@ -640,7 +802,7 @@ export function post_GetCAllCurrenciesList(epicorHeaders?:Headers){
    Description: Returns a comma separated list of valid tokens for the given datatype.
    OperationID: Get_GetTokenList
       @param tokenDataType Desc: Type of token for which you want the list of valid values. Valid Types are; Date, FiscalPeriod, FiscalYear   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTokenList_output
@@ -664,15 +826,22 @@ export function get_GetTokenList(tokenDataType:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTokenList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetTokenList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTokenList_output)
           })
       .catch((error) => {
           reject(error)
@@ -685,7 +854,7 @@ export function get_GetTokenList(tokenDataType:string, epicorHeaders?:Headers){
    Description: Returns a token list of values based on a type that is passed in.
    OperationID: Get_GetTokenValue
       @param pcValue Desc: Type of token   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTokenValue_output
@@ -709,15 +878,22 @@ export function get_GetTokenValue(pcValue:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTokenValue_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetTokenValue" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTokenValue_output)
           })
       .catch((error) => {
           reject(error)
@@ -729,7 +905,7 @@ export function get_GetTokenValue(pcValue:string, epicorHeaders?:Headers){
    Summary: Invoke method GetRptArchiveList
    Description: Returns a sub-delimited list of valid archive codes/descriptions.
    OperationID: GetRptArchiveList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRptArchiveList_output
@@ -742,15 +918,22 @@ export function post_GetRptArchiveList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRptArchiveList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetRptArchiveList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRptArchiveList_output)
           })
       .catch((error) => {
           reject(error)
@@ -762,30 +945,37 @@ export function post_GetRptArchiveList(epicorHeaders?:Headers){
    Summary: Invoke method SubmitToAgent
    Description: Submits this report to a System Agent. The system agent will run the task based on the defined schedule.
    OperationID: SubmitToAgent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SubmitToAgent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SubmitToAgent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SubmitToAgent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SubmitToAgent(requestBody:any, epicorHeaders?:Headers){
+export function post_SubmitToAgent(requestBody:SubmitToAgent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SubmitToAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/SubmitToAgent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SubmitToAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -803,30 +993,37 @@ designated as ParamSetID.
 As is the case in GLFinancial Reports the GLFinancialParam.GLReportID is used as the ParamSetID field.
 Another possible use would be to Reset the screen to default values.
    OperationID: GetDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDefaults(requestBody:GetDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -839,7 +1036,7 @@ export function post_GetDefaults(requestBody:any, epicorHeaders?:Headers){
    Description: Creates a new (parameter record) in the dataset.
 Note: A parameter dataset should never contain more than one record.
    OperationID: Get_GetNewParameters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewParameters_output
@@ -852,15 +1049,22 @@ export function get_GetNewParameters(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewParameters_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetNewParameters", {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewParameters_output)
           })
       .catch((error) => {
           reject(error)
@@ -877,7 +1081,7 @@ used to retrieve those values and return them in the specific dataset.
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParamsFromAgent_output
@@ -919,15 +1123,22 @@ export function get_GetParamsFromAgent(agentID:string, agentSchedNum:string, age
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParamsFromAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetParamsFromAgent" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParamsFromAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -941,30 +1152,37 @@ export function get_GetParamsFromAgent(agentID:string, agentSchedNum:string, age
 It is provided to provide the ability to get the defaults after the user has enter a value into the field
 designated as ParamSetID.
    OperationID: GetParamTaskDef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetParamTaskDef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetParamTaskDef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetParamTaskDef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetParamTaskDef(requestBody:any, epicorHeaders?:Headers){
+export function post_GetParamTaskDef(requestBody:GetParamTaskDef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetParamTaskDef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/GetParamTaskDef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetParamTaskDef_output)
           })
       .catch((error) => {
           reject(error)
@@ -976,30 +1194,37 @@ export function post_GetParamTaskDef(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RemoveDefaults
    Description: Use to remove the current parameter defaults that the user has established for this report.
    OperationID: RemoveDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RemoveDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RemoveDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RemoveDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RemoveDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_RemoveDefaults(requestBody:RemoveDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RemoveDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/RemoveDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RemoveDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -1011,30 +1236,37 @@ export function post_RemoveDefaults(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RunDirect
    Description: Use to run the process directly from the client instead of submitting to a System Agent.
    OperationID: RunDirect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunDirect_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunDirect_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunDirect_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunDirect(requestBody:any, epicorHeaders?:Headers){
+export function post_RunDirect(requestBody:RunDirect_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunDirect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/RunDirect", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunDirect_output)
           })
       .catch((error) => {
           reject(error)
@@ -1046,30 +1278,37 @@ export function post_RunDirect(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SaveDefaults
    Description: Use to save the current parameters as the users defaults for this report
    OperationID: SaveDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveDefaults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveDefaults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveDefaults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveDefaults(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveDefaults(requestBody:SaveDefaults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/SaveDefaults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -1082,30 +1321,37 @@ export function post_SaveDefaults(requestBody:any, epicorHeaders?:Headers){
    Description: Use to save the current parameters as the users defaults for this report
 <param name="maintProgram">UI Maintenance program </param><param name="ds" />
    OperationID: SaveProcessTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveProcessTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveProcessTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveProcessTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveProcessTask(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveProcessTask(requestBody:SaveProcessTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveProcessTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.RPT.CurrencyRevalueSvc/SaveProcessTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveProcessTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -1116,11 +1362,45 @@ export function post_SaveProcessTask(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -1405,7 +1685,7 @@ export interface GetApplyDate_input{
 export interface GetApplyDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CurrencyRevalueTableset[],
+   ds:Erp_Tablesets_CurrencyRevalueTableset,
 }
 }
 
@@ -1433,7 +1713,7 @@ export interface GetDefaults_input{
 export interface GetDefaults_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CurrencyRevalueTableset[],
+   ds:Erp_Tablesets_CurrencyRevalueTableset,
 }
 }
 
@@ -1450,7 +1730,7 @@ export interface GetExchangeDate_input{
 export interface GetExchangeDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CurrencyRevalueTableset[],
+   ds:Erp_Tablesets_CurrencyRevalueTableset,
 }
 }
 
@@ -1482,7 +1762,7 @@ export interface GetParamTaskDef_input{
 export interface GetParamTaskDef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CurrencyRevalueTableset[],
+   ds:Erp_Tablesets_CurrencyRevalueTableset,
 }
 }
 
@@ -1517,7 +1797,7 @@ export interface GetRevaluationOption_input{
 export interface GetRevaluationOption_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CurrencyRevalueTableset[],
+   ds:Erp_Tablesets_CurrencyRevalueTableset,
 }
 }
 
@@ -1531,7 +1811,7 @@ export interface GetReverseDate_input{
 export interface GetReverseDate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_CurrencyRevalueTableset[],
+   ds:Erp_Tablesets_CurrencyRevalueTableset,
 }
 }
 

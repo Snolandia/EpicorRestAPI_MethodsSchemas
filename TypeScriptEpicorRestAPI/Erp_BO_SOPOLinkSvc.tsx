@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.SOPOLinkSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.IMOrderHedListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.IMOrderHedListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_IMOrderHedListRow)
           })
@@ -116,36 +156,60 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
    /**  
    Summary: Invoke method GetRows
    OperationID: GetRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetRows(requestBody:any, epicorHeaders?:Headers){
+export function post_GetRows(requestBody:GetRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_IMOrderHedListRow>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/GetRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_IMOrderHedListRow)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -157,30 +221,37 @@ export function post_GetRows(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetOrderHedIntQueID
    Description: Get the IntQueID associated with this ICPONum
    OperationID: GetOrderHedIntQueID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetOrderHedIntQueID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetOrderHedIntQueID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOrderHedIntQueID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetOrderHedIntQueID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetOrderHedIntQueID(requestBody:GetOrderHedIntQueID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOrderHedIntQueID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/GetOrderHedIntQueID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOrderHedIntQueID_output)
           })
       .catch((error) => {
           reject(error)
@@ -192,30 +263,37 @@ export function post_GetOrderHedIntQueID(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ChangeMiscCode
    Description: Update PO Link Misc Charge information when the MiscCode is changed.
    OperationID: ChangeMiscCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeMiscCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeMiscCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeMiscCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeMiscCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeMiscCode(requestBody:ChangeMiscCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeMiscCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/ChangeMiscCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeMiscCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -227,30 +305,37 @@ export function post_ChangeMiscCode(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangePartNum
    Description: Update PO Link information with values from the Part Number when the Part Number is changed.
    OperationID: ChangePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangePartNum(requestBody:ChangePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/ChangePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -262,30 +347,37 @@ export function post_ChangePartNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeSoldToID
    Description: Update PO Link information with values from the Sold To when the Sold To is changed.
    OperationID: ChangeSoldToID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSoldToID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSoldToID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSoldToID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSoldToID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSoldToID(requestBody:ChangeSoldToID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSoldToID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/ChangeSoldToID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSoldToID_output)
           })
       .catch((error) => {
           reject(error)
@@ -299,30 +391,37 @@ export function post_ChangeSoldToID(requestBody:any, epicorHeaders?:Headers){
 The method returns a character string if the customer will go over their credit limit
 and the user is given the choice of continuing or not.
    OperationID: CheckCustomerCreditLimit
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckCustomerCreditLimit_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckCustomerCreditLimit_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckCustomerCreditLimit_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckCustomerCreditLimit(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckCustomerCreditLimit(requestBody:CheckCustomerCreditLimit_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckCustomerCreditLimit_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/CheckCustomerCreditLimit", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckCustomerCreditLimit_output)
           })
       .catch((error) => {
           reject(error)
@@ -336,30 +435,37 @@ export function post_CheckCustomerCreditLimit(requestBody:any, epicorHeaders?:He
 before the ChangePart or Update methods are run.
 This returns all the questions that need to be asked before a part can be changed.
    OperationID: CheckPartChange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPartChange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPartChange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPartChange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPartChange(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPartChange(requestBody:CheckPartChange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPartChange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/CheckPartChange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPartChange_output)
           })
       .catch((error) => {
           reject(error)
@@ -371,30 +477,37 @@ export function post_CheckPartChange(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckReadyForOrder
    Description: Validate/return questions to ask the user before marking a record ReadyForOrder.
    OperationID: CheckReadyForOrder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckReadyForOrder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckReadyForOrder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckReadyForOrder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckReadyForOrder(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckReadyForOrder(requestBody:CheckReadyForOrder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckReadyForOrder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/CheckReadyForOrder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckReadyForOrder_output)
           })
       .catch((error) => {
           reject(error)
@@ -407,30 +520,37 @@ export function post_CheckReadyForOrder(requestBody:any, epicorHeaders?:Headers)
    Description: Return text of messages to present to the user informing them unit prices differ
 on detail lines or miscellaneous charges, or the currencies are different on the SO and PO.
    OperationID: CheckSOPODifferences
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckSOPODifferences_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckSOPODifferences_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckSOPODifferences_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckSOPODifferences(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckSOPODifferences(requestBody:CheckSOPODifferences_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckSOPODifferences_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/CheckSOPODifferences", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckSOPODifferences_output)
           })
       .catch((error) => {
           reject(error)
@@ -444,30 +564,37 @@ export function post_CheckSOPODifferences(requestBody:any, epicorHeaders?:Header
 components for each kit. This method is called after processing the ICPO Suggestions and once that the
 order has been created and the user had already answered the Configuration Q-A
    OperationID: CreateConfigKits
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateConfigKits_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateConfigKits_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateConfigKits_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateConfigKits(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateConfigKits(requestBody:CreateConfigKits_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateConfigKits_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/CreateConfigKits", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateConfigKits_output)
           })
       .catch((error) => {
           reject(error)
@@ -479,30 +606,37 @@ export function post_CreateConfigKits(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetOrder
    Description: Populates SOPOOrderTableset for a given Order.
    OperationID: GetOrder
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetOrder_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetOrder_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOrder_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetOrder(requestBody:any, epicorHeaders?:Headers){
+export function post_GetOrder(requestBody:GetOrder_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOrder_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/GetOrder", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOrder_output)
           })
       .catch((error) => {
           reject(error)
@@ -514,30 +648,37 @@ export function post_GetOrder(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetOrderDtl
    Description: Get the OrderDtl record related to the IMOrderDtl record.
    OperationID: GetOrderDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetOrderDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetOrderDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOrderDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetOrderDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetOrderDtl(requestBody:GetOrderDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOrderDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/GetOrderDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOrderDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -549,30 +690,37 @@ export function post_GetOrderDtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetOrderMsc
    Description: Get the OrderMsc record related to the IMOrderMsc record.
    OperationID: GetOrderMsc
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetOrderMsc_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetOrderMsc_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOrderMsc_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetOrderMsc(requestBody:any, epicorHeaders?:Headers){
+export function post_GetOrderMsc(requestBody:GetOrderMsc_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOrderMsc_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/GetOrderMsc", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOrderMsc_output)
           })
       .catch((error) => {
           reject(error)
@@ -584,30 +732,37 @@ export function post_GetOrderMsc(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetOrderRel
    Description: Get the OrderRel record related to the IMOrderRel record.
    OperationID: GetOrderRel
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetOrderRel_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetOrderRel_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOrderRel_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetOrderRel(requestBody:any, epicorHeaders?:Headers){
+export function post_GetOrderRel(requestBody:GetOrderRel_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOrderRel_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/GetOrderRel", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOrderRel_output)
           })
       .catch((error) => {
           reject(error)
@@ -620,30 +775,37 @@ export function post_GetOrderRel(requestBody:any, epicorHeaders?:Headers){
    Description: Checks to see if the po link can be rejected and returns a question to be asked
 of the user if necessary.
    OperationID: PreRejectICPOLink
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreRejectICPOLink_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreRejectICPOLink_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreRejectICPOLink_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreRejectICPOLink(requestBody:any, epicorHeaders?:Headers){
+export function post_PreRejectICPOLink(requestBody:PreRejectICPOLink_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreRejectICPOLink_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/PreRejectICPOLink", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreRejectICPOLink_output)
           })
       .catch((error) => {
           reject(error)
@@ -655,7 +817,7 @@ export function post_PreRejectICPOLink(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ProcessSuggestions
    Description: ProcessSuggestions
    OperationID: ProcessSuggestions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ProcessSuggestions_output
@@ -668,15 +830,22 @@ export function post_ProcessSuggestions(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ProcessSuggestions_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/ProcessSuggestions", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ProcessSuggestions_output)
           })
       .catch((error) => {
           reject(error)
@@ -688,30 +857,37 @@ export function post_ProcessSuggestions(epicorHeaders?:Headers){
    Summary: Invoke method ReadyForOrderAll
    Description: Mark a list of records as ready to order.
    OperationID: ReadyForOrderAll
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ReadyForOrderAll_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ReadyForOrderAll_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ReadyForOrderAll_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ReadyForOrderAll(requestBody:any, epicorHeaders?:Headers){
+export function post_ReadyForOrderAll(requestBody:ReadyForOrderAll_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ReadyForOrderAll_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/ReadyForOrderAll", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ReadyForOrderAll_output)
           })
       .catch((error) => {
           reject(error)
@@ -724,30 +900,37 @@ export function post_ReadyForOrderAll(requestBody:any, epicorHeaders?:Headers){
    Description: Validation for marking all orders as Ready For Order.  This method should be
 called before method ReadyForOrderAll is called.
    OperationID: ValidateReadyForOrderAll
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateReadyForOrderAll_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateReadyForOrderAll_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateReadyForOrderAll_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateReadyForOrderAll(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateReadyForOrderAll(requestBody:ValidateReadyForOrderAll_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateReadyForOrderAll_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/ValidateReadyForOrderAll", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateReadyForOrderAll_output)
           })
       .catch((error) => {
           reject(error)
@@ -762,7 +945,7 @@ export function post_ValidateReadyForOrderAll(requestBody:any, epicorHeaders?:He
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -804,15 +987,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -823,30 +1013,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    /**  
    Summary: Invoke method CustomGetByID
    OperationID: CustomGetByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CustomGetByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CustomGetByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CustomGetByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustomGetByID(requestBody:any, epicorHeaders?:Headers){
+export function post_CustomGetByID(requestBody:CustomGetByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CustomGetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/CustomGetByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CustomGetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -858,30 +1055,37 @@ export function post_CustomGetByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetByIDIncoming
    Description: Invokes CustomGetByID with an incomingOutgoing value of "I".  Throws RecordNotFoundException if no IMOrderHed record found.
    OperationID: GetByIDIncoming
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByIDIncoming_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByIDIncoming_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByIDIncoming_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByIDIncoming(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByIDIncoming(requestBody:GetByIDIncoming_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByIDIncoming_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/GetByIDIncoming", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByIDIncoming_output)
           })
       .catch((error) => {
           reject(error)
@@ -893,30 +1097,37 @@ export function post_GetByIDIncoming(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Since this is a 'simple' BO we must manually code the Update
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.SOPOLinkSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -927,11 +1138,28 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_IMOrderHedListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_IMOrderHedListRow[],
+   "value":Erp_Tablesets_IMOrderHedListRow,
 }
 
 export interface Erp_Tablesets_IMOrderHedListRow{
@@ -1030,6 +1258,23 @@ CurrRate.CurrentRate. Conversion rates will be calculated as System Base = Forei
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -1042,7 +1287,7 @@ export interface ChangeMiscCode_input{
 export interface ChangeMiscCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SOPOLinkTableset[],
+   ds:Erp_Tablesets_SOPOLinkTableset,
 }
 }
 
@@ -1059,7 +1304,7 @@ export interface ChangePartNum_input{
 export interface ChangePartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SOPOLinkTableset[],
+   ds:Erp_Tablesets_SOPOLinkTableset,
    cReturnMessage:string,
 }
 }
@@ -1074,7 +1319,7 @@ export interface ChangeSoldToID_input{
 export interface ChangeSoldToID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SOPOLinkTableset[],
+   ds:Erp_Tablesets_SOPOLinkTableset,
    cReturnMessage:string,
 }
 }
@@ -1175,7 +1420,7 @@ export interface CreateConfigKits_input{
 export interface CreateConfigKits_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SOPOOrderDtlTableset[],
+   ds:Erp_Tablesets_SOPOOrderDtlTableset,
 }
 }
 
@@ -5098,7 +5343,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_SOPOLinkTableset[],
+   ds:Erp_Tablesets_SOPOLinkTableset,
 }
 }
 

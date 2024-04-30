@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.LIB.MetaFXSvc
 // Description: 
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -86,7 +136,7 @@ export function get_metadata(epicorHeaders?:Headers){
    Description: View JSON layout and other metadata information
    OperationID: Get_GetApp
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetApp_output
@@ -110,15 +160,22 @@ export function get_GetApp(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetApp" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -130,7 +187,7 @@ export function get_GetApp(request:string, epicorHeaders?:Headers){
    Summary: Invoke method GetViews
    Description: Get all views. Used in Menu maintenance
    OperationID: Get_GetViews
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetViews_output
@@ -143,15 +200,22 @@ export function get_GetViews(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetViews_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetViews", {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetViews_output)
           })
       .catch((error) => {
           reject(error)
@@ -164,7 +228,7 @@ export function get_GetViews(epicorHeaders?:Headers){
    Description: Search dialog request and other metadata information
    OperationID: Get_GetSearch
       @param request Desc: EpMetaFxSearchRequest   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSearch_output
@@ -188,15 +252,22 @@ export function get_GetSearch(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetSearch" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -209,7 +280,7 @@ export function get_GetSearch(request:string, epicorHeaders?:Headers){
    Description: Get default search folder and subfolder name for specified table
    OperationID: Get_GetDefaultSearch
       @param request Desc: Request parameters for finding default search   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultSearch_output
@@ -233,15 +304,22 @@ export function get_GetDefaultSearch(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetDefaultSearch" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -254,7 +332,7 @@ export function get_GetDefaultSearch(request:string, epicorHeaders?:Headers){
    Description: Check for LIKE property folder
    OperationID: Get_GetSearchForm
       @param request Desc: EpMetaFxSearchRequest   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSearchForm_output
@@ -278,15 +356,22 @@ export function get_GetSearchForm(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSearchForm_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetSearchForm" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSearchForm_output)
           })
       .catch((error) => {
           reject(error)
@@ -299,7 +384,7 @@ export function get_GetSearchForm(request:string, epicorHeaders?:Headers){
    Description: Get Peek metadata information
    OperationID: Get_GetPeek
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPeek_output
@@ -323,15 +408,22 @@ export function get_GetPeek(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPeek_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetPeek" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPeek_output)
           })
       .catch((error) => {
           reject(error)
@@ -343,7 +435,7 @@ export function get_GetPeek(request:string, epicorHeaders?:Headers){
    Summary: Invoke method GetPeeks
    Description: Gets folders and sub folders from peek folder.
    OperationID: Get_GetPeeks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPeeks_output
@@ -356,15 +448,22 @@ export function get_GetPeeks(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPeeks_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetPeeks", {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPeeks_output)
           })
       .catch((error) => {
           reject(error)
@@ -377,7 +476,7 @@ export function get_GetPeeks(epicorHeaders?:Headers){
    Description: Gets the pre-defined templates like report/process etc
    OperationID: Get_GetTemplateView
       @param templateType Desc: EpMetaFxViewRequest   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetTemplateView_output
@@ -401,15 +500,22 @@ export function get_GetTemplateView(templateType:string, epicorHeaders?:Headers)
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetTemplateView_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetTemplateView" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetTemplateView_output)
           })
       .catch((error) => {
           reject(error)
@@ -422,7 +528,7 @@ export function get_GetTemplateView(templateType:string, epicorHeaders?:Headers)
    Description: Gets JSON files extended properties from the comobs
    OperationID: Get_GetCombosData
       @param request Desc: EpMetaFxComboRequest   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCombosData_output
@@ -446,15 +552,22 @@ export function get_GetCombosData(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCombosData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetCombosData" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCombosData_output)
           })
       .catch((error) => {
           reject(error)
@@ -466,7 +579,7 @@ export function get_GetCombosData(request:string, epicorHeaders?:Headers){
    Summary: Invoke method GetCombos
    Description: Gets folders and sub folders names from combo shared folder
    OperationID: Get_GetCombos
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCombos_output
@@ -479,15 +592,22 @@ export function get_GetCombos(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCombos_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetCombos", {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCombos_output)
           })
       .catch((error) => {
           reject(error)
@@ -499,30 +619,37 @@ export function get_GetCombos(epicorHeaders?:Headers){
    Summary: Invoke method Upgrade
    Description: Upgrades the view
    OperationID: Upgrade
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Upgrade_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Upgrade_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Upgrade_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Upgrade(requestBody:any, epicorHeaders?:Headers){
+export function post_Upgrade(requestBody:Upgrade_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Upgrade_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/Upgrade", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Upgrade_output)
           })
       .catch((error) => {
           reject(error)
@@ -534,30 +661,37 @@ export function post_Upgrade(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpgradeLayer
    Description: Upgrade layer
    OperationID: UpgradeLayer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpgradeLayer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpgradeLayer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpgradeLayer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpgradeLayer(requestBody:any, epicorHeaders?:Headers){
+export function post_UpgradeLayer(requestBody:UpgradeLayer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpgradeLayer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/UpgradeLayer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpgradeLayer_output)
           })
       .catch((error) => {
           reject(error)
@@ -570,30 +704,37 @@ export function post_UpgradeLayer(requestBody:any, epicorHeaders?:Headers){
    Description: Executes custom data fix routines on customization layers for a given product version. Not supported for Base layers.
 This is different from the upgrade because the fix up uses the original version of the base from which the layer was created.
    OperationID: RunDataFixForLayers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunDataFixForLayers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunDataFixForLayers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunDataFixForLayers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunDataFixForLayers(requestBody:any, epicorHeaders?:Headers){
+export function post_RunDataFixForLayers(requestBody:RunDataFixForLayers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunDataFixForLayers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/RunDataFixForLayers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunDataFixForLayers_output)
           })
       .catch((error) => {
           reject(error)
@@ -607,30 +748,37 @@ export function post_RunDataFixForLayers(requestBody:any, epicorHeaders?:Headers
 - In case of customization it saves as draft
 - In case of layers, it saves in DB as WIP
    OperationID: SaveApp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SaveApp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SaveApp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SaveApp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SaveApp(requestBody:any, epicorHeaders?:Headers){
+export function post_SaveApp(requestBody:SaveApp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SaveApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/SaveApp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SaveApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -644,30 +792,37 @@ export function post_SaveApp(requestBody:any, epicorHeaders?:Headers){
 - In case of customization it replaces the actual file
 - In case of layers, it saves in DB
    OperationID: PublishApp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PublishApp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PublishApp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PublishApp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PublishApp(requestBody:any, epicorHeaders?:Headers){
+export function post_PublishApp(requestBody:PublishApp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PublishApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/PublishApp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PublishApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -679,30 +834,37 @@ export function post_PublishApp(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method BulkPublishLayers
    Description: Publishes all the layers in the list. Parent layers are not published automatically.
    OperationID: BulkPublishLayers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BulkPublishLayers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BulkPublishLayers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BulkPublishLayers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BulkPublishLayers(requestBody:any, epicorHeaders?:Headers){
+export function post_BulkPublishLayers(requestBody:BulkPublishLayers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BulkPublishLayers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/BulkPublishLayers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BulkPublishLayers_output)
           })
       .catch((error) => {
           reject(error)
@@ -716,30 +878,37 @@ export function post_BulkPublishLayers(requestBody:any, epicorHeaders?:Headers){
 - SDK users can delete all applications and layers.
 - Non SDK users can delete applications if they can customize applications or if application does not have any layers.
    OperationID: BulkDeleteLayers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BulkDeleteLayers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BulkDeleteLayers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BulkDeleteLayers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BulkDeleteLayers(requestBody:any, epicorHeaders?:Headers){
+export function post_BulkDeleteLayers(requestBody:BulkDeleteLayers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BulkDeleteLayers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/BulkDeleteLayers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BulkDeleteLayers_output)
           })
       .catch((error) => {
           reject(error)
@@ -751,30 +920,37 @@ export function post_BulkDeleteLayers(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method InvalidateCache
    Description: Deletes cache folder
    OperationID: InvalidateCache
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InvalidateCache_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InvalidateCache_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InvalidateCache_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InvalidateCache(requestBody:any, epicorHeaders?:Headers){
+export function post_InvalidateCache(requestBody:InvalidateCache_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InvalidateCache_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/InvalidateCache", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InvalidateCache_output)
           })
       .catch((error) => {
           reject(error)
@@ -786,7 +962,7 @@ export function post_InvalidateCache(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetViewTypes
    Description: returns all the folder names except common from root path(.\MetaUI\Shared\ViewTypes).
    OperationID: Get_GetViewTypes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetViewTypes_output
@@ -799,15 +975,22 @@ export function get_GetViewTypes(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetViewTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetViewTypes", {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetViewTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -820,7 +1003,7 @@ export function get_GetViewTypes(epicorHeaders?:Headers){
    Description: Gets the layer.
    OperationID: Get_GetLayer
       @param request Desc: Request to get layer.   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLayer_output
@@ -844,15 +1027,22 @@ export function get_GetLayer(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLayer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetLayer" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLayer_output)
           })
       .catch((error) => {
           reject(error)
@@ -865,7 +1055,7 @@ export function get_GetLayer(request:string, epicorHeaders?:Headers){
    Description: Get the layers.
    OperationID: Get_GetLayers
       @param request Desc: Request to get layers.   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLayers_output
@@ -889,15 +1079,22 @@ export function get_GetLayers(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLayers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetLayers" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLayers_output)
           })
       .catch((error) => {
           reject(error)
@@ -909,30 +1106,37 @@ export function get_GetLayers(request:string, epicorHeaders?:Headers){
    Summary: Invoke method DeleteLayer
    Description: Deletes the layer.
    OperationID: DeleteLayer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteLayer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteLayer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteLayer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteLayer(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteLayer(requestBody:DeleteLayer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteLayer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/DeleteLayer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteLayer_output)
           })
       .catch((error) => {
           reject(error)
@@ -944,30 +1148,37 @@ export function post_DeleteLayer(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ApplicationExists
    Description: Checks if the application exists.
    OperationID: ApplicationExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ApplicationExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ApplicationExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ApplicationExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ApplicationExists(requestBody:any, epicorHeaders?:Headers){
+export function post_ApplicationExists(requestBody:ApplicationExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ApplicationExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/ApplicationExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ApplicationExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -979,30 +1190,37 @@ export function post_ApplicationExists(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ComponentExists
    Description: Checks if the component exists.
    OperationID: ComponentExists
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ComponentExists_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ComponentExists_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ComponentExists_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ComponentExists(requestBody:any, epicorHeaders?:Headers){
+export function post_ComponentExists(requestBody:ComponentExists_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ComponentExists_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/ComponentExists", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ComponentExists_output)
           })
       .catch((error) => {
           reject(error)
@@ -1014,30 +1232,37 @@ export function post_ComponentExists(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GenerateView
    Description: Generates the view.
    OperationID: GenerateView
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GenerateView_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GenerateView_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GenerateView_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GenerateView(requestBody:any, epicorHeaders?:Headers){
+export function post_GenerateView(requestBody:GenerateView_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GenerateView_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GenerateView", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GenerateView_output)
           })
       .catch((error) => {
           reject(error)
@@ -1050,7 +1275,7 @@ export function post_GenerateView(requestBody:any, epicorHeaders?:Headers){
    Description: This method returns audit log for layers.
    OperationID: Get_GetAuditLogs
       @param request Desc: request   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAuditLogs_output
@@ -1074,15 +1299,22 @@ export function get_GetAuditLogs(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAuditLogs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetAuditLogs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAuditLogs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1095,7 +1327,7 @@ export function get_GetAuditLogs(request:string, epicorHeaders?:Headers){
    Description: Download event schema
    OperationID: Get_DownloadSchema
       @param request Desc: DownloadSchemaRequest   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/DownloadSchema_output
@@ -1119,15 +1351,22 @@ export function get_DownloadSchema(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DownloadSchema_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/DownloadSchema" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DownloadSchema_output)
           })
       .catch((error) => {
           reject(error)
@@ -1139,30 +1378,37 @@ export function get_DownloadSchema(request:string, epicorHeaders?:Headers){
    Summary: Invoke method GetEventDesigner
    Description: This method gets the event designer.
    OperationID: GetEventDesigner
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetEventDesigner_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetEventDesigner_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetEventDesigner_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetEventDesigner(requestBody:any, epicorHeaders?:Headers){
+export function post_GetEventDesigner(requestBody:GetEventDesigner_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetEventDesigner_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetEventDesigner", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetEventDesigner_output)
           })
       .catch((error) => {
           reject(error)
@@ -1175,7 +1421,7 @@ export function post_GetEventDesigner(requestBody:any, epicorHeaders?:Headers){
    Description: Get Application Types.
    OperationID: Get_GetApplicationSubTypes
       @param applicationType Desc: applicationType   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetApplicationSubTypes_output
@@ -1199,15 +1445,22 @@ export function get_GetApplicationSubTypes(applicationType:string, epicorHeaders
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetApplicationSubTypes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetApplicationSubTypes" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetApplicationSubTypes_output)
           })
       .catch((error) => {
           reject(error)
@@ -1220,7 +1473,7 @@ export function get_GetApplicationSubTypes(applicationType:string, epicorHeaders
    Description: Get Applications.
    OperationID: Get_GetApplications
       @param request Desc: request   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetApplications_output
@@ -1244,15 +1497,22 @@ export function get_GetApplications(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetApplications_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetApplications" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetApplications_output)
           })
       .catch((error) => {
           reject(error)
@@ -1265,7 +1525,7 @@ export function get_GetApplications(request:string, epicorHeaders?:Headers){
    Description: Get New Application.
    OperationID: Get_GetNewApplication
       @param request Desc: request   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewApplication_output
@@ -1289,15 +1549,22 @@ export function get_GetNewApplication(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewApplication_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetNewApplication" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewApplication_output)
           })
       .catch((error) => {
           reject(error)
@@ -1310,7 +1577,7 @@ export function get_GetNewApplication(request:string, epicorHeaders?:Headers){
    Description: Export App
    OperationID: Get_ExportApp
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportApp_output
@@ -1334,15 +1601,22 @@ export function get_ExportApp(viewId:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/ExportApp" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1354,30 +1628,37 @@ export function get_ExportApp(viewId:string, epicorHeaders?:Headers){
    Summary: Invoke method ImportApp
    Description: Import App
    OperationID: ImportApp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportApp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportApp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportApp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportApp(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportApp(requestBody:ImportApp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/ImportApp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1391,7 +1672,7 @@ export function post_ImportApp(requestBody:any, epicorHeaders?:Headers){
 Export currently supported for Custom Apps and layers not for System Apps
    OperationID: Get_ExportLayers
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExportLayers_output
@@ -1415,15 +1696,22 @@ export function get_ExportLayers(apps:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExportLayers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/ExportLayers" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExportLayers_output)
           })
       .catch((error) => {
           reject(error)
@@ -1436,30 +1724,37 @@ export function get_ExportLayers(apps:string, epicorHeaders?:Headers){
    Description: Import Layers
 The method imports Custom Apps and layers. System Apps are not supported.
    OperationID: ImportLayers
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ImportLayers_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ImportLayers_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ImportLayers_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportLayers(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportLayers(requestBody:ImportLayers_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ImportLayers_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/ImportLayers", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ImportLayers_output)
           })
       .catch((error) => {
           reject(error)
@@ -1471,30 +1766,37 @@ export function post_ImportLayers(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DuplicateApp
    Description: Duplicate Applications
    OperationID: DuplicateApp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DuplicateApp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DuplicateApp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DuplicateApp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DuplicateApp(requestBody:any, epicorHeaders?:Headers){
+export function post_DuplicateApp(requestBody:DuplicateApp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DuplicateApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/DuplicateApp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DuplicateApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1506,30 +1808,37 @@ export function post_DuplicateApp(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteApp
    Description: Delete Applicatons
    OperationID: DeleteApp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteApp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteApp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteApp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteApp(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteApp(requestBody:DeleteApp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteApp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/DeleteApp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteApp_output)
           })
       .catch((error) => {
           reject(error)
@@ -1542,7 +1851,7 @@ export function post_DeleteApp(requestBody:any, epicorHeaders?:Headers){
    Description: Check for SystemFlag.
    OperationID: Get_GetSystemApplicationStatus
       @param viewId Desc: viewId   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSystemApplicationStatus_output
@@ -1566,15 +1875,22 @@ export function get_GetSystemApplicationStatus(viewId:string, epicorHeaders?:Hea
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSystemApplicationStatus_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/GetSystemApplicationStatus" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSystemApplicationStatus_output)
           })
       .catch((error) => {
           reject(error)
@@ -1588,7 +1904,7 @@ export function get_GetSystemApplicationStatus(viewId:string, epicorHeaders?:Hea
    OperationID: Get_SetSecurityCodeForApplication
       @param viewId Desc: viewId   Required: True   Allow empty value : True
       @param securityCode Desc: securityCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetSecurityCodeForApplication_output
@@ -1621,15 +1937,22 @@ export function get_SetSecurityCodeForApplication(viewId:string, securityCode:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetSecurityCodeForApplication_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/SetSecurityCodeForApplication" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetSecurityCodeForApplication_output)
           })
       .catch((error) => {
           reject(error)
@@ -1642,7 +1965,7 @@ export function get_SetSecurityCodeForApplication(viewId:string, securityCode:st
    Description: Restores the version into the draft.
    OperationID: Get_RestoreVersion
       @param request Desc: Request object   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/RestoreVersion_output
@@ -1666,15 +1989,22 @@ export function get_RestoreVersion(request:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RestoreVersion_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.LIB.MetaFXSvc/RestoreVersion" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RestoreVersion_output)
           })
       .catch((error) => {
           reject(error)
@@ -1685,11 +2015,45 @@ export function get_RestoreVersion(request:string, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

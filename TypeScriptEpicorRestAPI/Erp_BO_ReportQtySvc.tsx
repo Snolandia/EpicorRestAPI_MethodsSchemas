@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.ReportQtySvc
 // Description: Quantity Reporting from MES menu
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method CheckInspResults
    Description: This method validates if InspResults has been entered when the Inspection Data is allowed for the current OprSeq.
    OperationID: CheckInspResults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckInspResults_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckInspResults_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckInspResults_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckInspResults(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckInspResults(requestBody:CheckInspResults_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckInspResults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/CheckInspResults", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckInspResults_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,30 +177,37 @@ export function post_CheckInspResults(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteLaborEquip
    Description: This method should call when EquipID is changed
    OperationID: DeleteLaborEquip
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteLaborEquip_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteLaborEquip_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteLaborEquip_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteLaborEquip(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteLaborEquip(requestBody:DeleteLaborEquip_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteLaborEquip_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/DeleteLaborEquip", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteLaborEquip_output)
           })
       .catch((error) => {
           reject(error)
@@ -155,30 +219,37 @@ export function post_DeleteLaborEquip(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewLaborEquip
    Description: This method returns the new Labor Equipment
    OperationID: GetNewLaborEquip
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLaborEquip_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLaborEquip_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLaborEquip_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLaborEquip(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLaborEquip(requestBody:GetNewLaborEquip_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLaborEquip_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/GetNewLaborEquip", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLaborEquip_output)
           })
       .catch((error) => {
           reject(error)
@@ -190,30 +261,37 @@ export function post_GetNewLaborEquip(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewReportQty
    Description: This method returns the new ReportQty dataset in place of the standard GetNew method.
    OperationID: GetNewReportQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewReportQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewReportQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewReportQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewReportQty(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewReportQty(requestBody:GetNewReportQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewReportQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/GetNewReportQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewReportQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -225,30 +303,37 @@ export function post_GetNewReportQty(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeAsmSeq
    Description: This method validates the Assembly sequence.
    OperationID: OnChangeAsmSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeAsmSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeAsmSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeAsmSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeAsmSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeAsmSeq(requestBody:OnChangeAsmSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeAsmSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/OnChangeAsmSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeAsmSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -260,30 +345,37 @@ export function post_OnChangeAsmSeq(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeEquipID
    Description: This method should call when EquipID is changed
    OperationID: OnChangeEquipID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeEquipID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeEquipID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeEquipID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeEquipID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeEquipID(requestBody:OnChangeEquipID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeEquipID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/OnChangeEquipID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeEquipID_output)
           })
       .catch((error) => {
           reject(error)
@@ -295,30 +387,37 @@ export function post_OnChangeEquipID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeJobNum
    Description: This method validates the Operation sequence.
    OperationID: OnChangeJobNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeJobNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeJobNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeJobNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeJobNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeJobNum(requestBody:OnChangeJobNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeJobNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/OnChangeJobNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeJobNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -330,30 +429,37 @@ export function post_OnChangeJobNum(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeNextOprSeq
    Description: This method validates the Next Operation sequence.
    OperationID: OnChangeNextOprSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeNextOprSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeNextOprSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeNextOprSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeNextOprSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeNextOprSeq(requestBody:OnChangeNextOprSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeNextOprSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/OnChangeNextOprSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeNextOprSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -365,30 +471,37 @@ export function post_OnChangeNextOprSeq(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method OnChangeOprSeq
    Description: This method validates the Operation sequence.
    OperationID: OnChangeOprSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeOprSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeOprSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeOprSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeOprSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeOprSeq(requestBody:OnChangeOprSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeOprSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/OnChangeOprSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeOprSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -400,30 +513,37 @@ export function post_OnChangeOprSeq(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangePCID
    Description: This method validates the PCID
    OperationID: OnChangePCID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangePCID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangePCID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangePCID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangePCID(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangePCID(requestBody:OnChangePCID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangePCID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/OnChangePCID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangePCID_output)
           })
       .catch((error) => {
           reject(error)
@@ -435,30 +555,37 @@ export function post_OnChangePCID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method OnChangeResource
    Description: This method validates the ResourceID.
    OperationID: OnChangeResource
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangeResource_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangeResource_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangeResource_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangeResource(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangeResource(requestBody:OnChangeResource_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangeResource_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/OnChangeResource", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangeResource_output)
           })
       .catch((error) => {
           reject(error)
@@ -470,30 +597,37 @@ export function post_OnChangeResource(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ReportQuantity
    Description: This method reports the quantity changes to the database
    OperationID: ReportQuantity
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ReportQuantity_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ReportQuantity_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ReportQuantity_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ReportQuantity(requestBody:any, epicorHeaders?:Headers){
+export function post_ReportQuantity(requestBody:ReportQuantity_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ReportQuantity_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/ReportQuantity", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ReportQuantity_output)
           })
       .catch((error) => {
           reject(error)
@@ -505,30 +639,37 @@ export function post_ReportQuantity(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateLaborEquip
    Description: This method should call when EquipID is changed
    OperationID: UpdateLaborEquip
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateLaborEquip_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateLaborEquip_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateLaborEquip_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateLaborEquip(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateLaborEquip(requestBody:UpdateLaborEquip_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateLaborEquip_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/UpdateLaborEquip", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateLaborEquip_output)
           })
       .catch((error) => {
           reject(error)
@@ -540,30 +681,37 @@ export function post_UpdateLaborEquip(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateSerialBeforeSelect
    Description: Call before allowing the select of serial numbers
    OperationID: ValidateSerialBeforeSelect
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSerialBeforeSelect_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSerialBeforeSelect_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSerialBeforeSelect_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSerialBeforeSelect(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSerialBeforeSelect(requestBody:ValidateSerialBeforeSelect_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSerialBeforeSelect_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/ValidateSerialBeforeSelect", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSerialBeforeSelect_output)
           })
       .catch((error) => {
           reject(error)
@@ -575,30 +723,37 @@ export function post_ValidateSerialBeforeSelect(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetSelectSerialNumbersParams
    Description: Gets parameters required for launching Select Serial Numbers
    OperationID: GetSelectSerialNumbersParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetSelectSerialNumbersParams_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetSelectSerialNumbersParams_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSelectSerialNumbersParams_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetSelectSerialNumbersParams(requestBody:any, epicorHeaders?:Headers){
+export function post_GetSelectSerialNumbersParams(requestBody:GetSelectSerialNumbersParams_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSelectSerialNumbersParams_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/GetSelectSerialNumbersParams", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSelectSerialNumbersParams_output)
           })
       .catch((error) => {
           reject(error)
@@ -610,30 +765,37 @@ export function post_GetSelectSerialNumbersParams(requestBody:any, epicorHeaders
    Summary: Invoke method ValidateSN
    Description: Validates that a single serial number is valid for this transaction
    OperationID: ValidateSN
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSN_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSN_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSN_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSN(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSN(requestBody:ValidateSN_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSN_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReportQtySvc/ValidateSN", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSN_output)
           })
       .catch((error) => {
           reject(error)
@@ -644,11 +806,45 @@ export function post_ValidateSN(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -695,7 +891,7 @@ export interface DeleteLaborEquip_input{
 export interface DeleteLaborEquip_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -996,7 +1192,7 @@ export interface GetNewLaborEquip_input{
 export interface GetNewLaborEquip_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1035,7 +1231,7 @@ export interface GetSelectSerialNumbersParams_output{
    returnObj:Erp_Tablesets_SelectSerialNumbersParamsTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1073,7 +1269,7 @@ export interface OnChangeAsmSeq_input{
 export interface OnChangeAsmSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1096,7 +1292,7 @@ export interface OnChangeEquipID_input{
 export interface OnChangeEquipID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1113,7 +1309,7 @@ export interface OnChangeJobNum_input{
 export interface OnChangeJobNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1130,7 +1326,7 @@ export interface OnChangeNextOprSeq_input{
 export interface OnChangeNextOprSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1147,7 +1343,7 @@ export interface OnChangeOprSeq_input{
 export interface OnChangeOprSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1164,7 +1360,7 @@ export interface OnChangePCID_input{
 export interface OnChangePCID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1181,7 +1377,7 @@ export interface OnChangeResource_input{
 export interface OnChangeResource_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1202,7 +1398,7 @@ export interface ReportQuantity_output{
 parameters : {
       /**  output parameters  */  
    opMessage:string,
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1228,7 +1424,7 @@ export interface UpdateLaborEquip_input{
 export interface UpdateLaborEquip_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
 }
 }
 
@@ -1251,7 +1447,7 @@ export interface ValidateSN_input{
 export interface ValidateSN_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
    isVoided:boolean,
 }
 }
@@ -1272,7 +1468,7 @@ export interface ValidateSerialBeforeSelect_input{
 export interface ValidateSerialBeforeSelect_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_ReportQtyTableset[],
+   ds:Erp_Tablesets_ReportQtyTableset,
    notEnoughSerials:string,
    totSNReq:number,
    totNewSNReq:number,

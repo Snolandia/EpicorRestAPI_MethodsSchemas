@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.DynamicQuerySvc
 // Description: This is the DynamicQuery object. It has various methods for executing a query.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DynamicQueryRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.DynamicQueryRow
    */  
 export function get_DynamicQueries(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_DynamicQueries(select?:string, expand?:string, filter?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DynamicQueryRow)
           })
@@ -123,10 +163,10 @@ export function get_DynamicQueries(select?:string, expand?:string, filter?:strin
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.DynamicQueryRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.DynamicQueryRow
    */  
 export function get_DynamicQueries_Company_QueryID(Company:string, QueryID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -141,7 +181,14 @@ export function get_DynamicQueries_Company_QueryID(Company:string, QueryID:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_DynamicQueryRow)
           })
@@ -164,10 +211,10 @@ export function get_DynamicQueries_Company_QueryID(Company:string, QueryID:strin
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCtrlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCtrlRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryCtrls(Company:string, QueryID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -182,7 +229,14 @@ export function get_DynamicQueries_Company_QueryID_QueryCtrls(Company:string, Qu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryCtrlRow)
           })
@@ -202,10 +256,10 @@ export function get_DynamicQueries_Company_QueryID_QueryCtrls(Company:string, Qu
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryCtrlRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryCtrlRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryCtrls_Company_QueryID_ControlID(Company:string, QueryID:string, ControlID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -220,7 +274,14 @@ export function get_DynamicQueries_Company_QueryID_QueryCtrls_Company_QueryID_Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryCtrlRow)
           })
@@ -242,10 +303,10 @@ export function get_DynamicQueries_Company_QueryID_QueryCtrls_Company_QueryID_Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCustomActionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCustomActionRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryCustomActions(Company:string, QueryID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -260,7 +321,14 @@ export function get_DynamicQueries_Company_QueryID_QueryCustomActions(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryCustomActionRow)
           })
@@ -279,10 +347,10 @@ export function get_DynamicQueries_Company_QueryID_QueryCustomActions(Company:st
       @param ActionID Desc: ActionID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryCustomActionRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryCustomActionRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryCustomActions_Company_QueryID_ActionID(Company:string, QueryID:string, ActionID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -297,7 +365,14 @@ export function get_DynamicQueries_Company_QueryID_QueryCustomActions_Company_Qu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryCustomActionRow)
           })
@@ -319,10 +394,10 @@ export function get_DynamicQueries_Company_QueryID_QueryCustomActions_Company_Qu
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryExecuteSettingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryExecuteSettingRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryExecuteSettings(Company:string, QueryID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -337,7 +412,14 @@ export function get_DynamicQueries_Company_QueryID_QueryExecuteSettings(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryExecuteSettingRow)
           })
@@ -356,10 +438,10 @@ export function get_DynamicQueries_Company_QueryID_QueryExecuteSettings(Company:
       @param SettingID Desc: SettingID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryExecuteSettingRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryExecuteSettingRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryExecuteSettings_Company_QueryID_SettingID(Company:string, QueryID:string, SettingID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -374,7 +456,14 @@ export function get_DynamicQueries_Company_QueryID_QueryExecuteSettings_Company_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryExecuteSettingRow)
           })
@@ -396,10 +485,10 @@ export function get_DynamicQueries_Company_QueryID_QueryExecuteSettings_Company_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryParameterRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryParameterRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryParameters(Company:string, QueryID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -414,7 +503,14 @@ export function get_DynamicQueries_Company_QueryID_QueryParameters(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryParameterRow)
           })
@@ -433,10 +529,10 @@ export function get_DynamicQueries_Company_QueryID_QueryParameters(Company:strin
       @param ParameterID Desc: ParameterID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryParameterRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryParameterRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryParameters_Company_QueryID_ParameterID(Company:string, QueryID:string, ParameterID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -451,7 +547,14 @@ export function get_DynamicQueries_Company_QueryID_QueryParameters_Company_Query
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryParameterRow)
           })
@@ -474,10 +577,10 @@ export function get_DynamicQueries_Company_QueryID_QueryParameters_Company_Query
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryReferenceRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryReferenceRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryReferences(Company:string, QueryID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -492,7 +595,14 @@ export function get_DynamicQueries_Company_QueryID_QueryReferences(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryReferenceRow)
           })
@@ -512,10 +622,10 @@ export function get_DynamicQueries_Company_QueryID_QueryReferences(Company:strin
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryReferenceRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryReferenceRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryReferences_Company_QueryID_ReferenceID(Company:string, QueryID:string, ReferenceID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -530,7 +640,14 @@ export function get_DynamicQueries_Company_QueryID_QueryReferences_Company_Query
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryReferenceRow)
           })
@@ -553,10 +670,10 @@ export function get_DynamicQueries_Company_QueryID_QueryReferences_Company_Query
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuerySubQueryRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuerySubQueryRow
    */  
 export function get_DynamicQueries_Company_QueryID_QuerySubQueries(Company:string, QueryID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -571,7 +688,14 @@ export function get_DynamicQueries_Company_QueryID_QuerySubQueries(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuerySubQueryRow)
           })
@@ -591,10 +715,10 @@ export function get_DynamicQueries_Company_QueryID_QuerySubQueries(Company:strin
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QuerySubQueryRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QuerySubQueryRow
    */  
 export function get_DynamicQueries_Company_QueryID_QuerySubQueries_Company_QueryID_SubQueryID(Company:string, QueryID:string, SubQueryID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -609,7 +733,14 @@ export function get_DynamicQueries_Company_QueryID_QuerySubQueries_Company_Query
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QuerySubQueryRow)
           })
@@ -631,10 +762,10 @@ export function get_DynamicQueries_Company_QueryID_QuerySubQueries_Company_Query
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryUpdateFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryUpdateFieldRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryUpdateFields(Company:string, QueryID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -649,7 +780,14 @@ export function get_DynamicQueries_Company_QueryID_QueryUpdateFields(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryUpdateFieldRow)
           })
@@ -670,10 +808,10 @@ export function get_DynamicQueries_Company_QueryID_QueryUpdateFields(Company:str
       @param Direction Desc: Direction   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryUpdateFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryUpdateFieldRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryUpdateFields_Company_QueryID_MapTableName_MapFieldName_Direction(Company:string, QueryID:string, MapTableName:string, MapFieldName:string, Direction:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -688,7 +826,14 @@ export function get_DynamicQueries_Company_QueryID_QueryUpdateFields_Company_Que
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryUpdateFieldRow)
           })
@@ -710,10 +855,10 @@ export function get_DynamicQueries_Company_QueryID_QueryUpdateFields_Company_Que
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryUpdateSettingsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryUpdateSettingsRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryUpdateSettings(Company:string, QueryID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -728,7 +873,14 @@ export function get_DynamicQueries_Company_QueryID_QueryUpdateSettings(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryUpdateSettingsRow)
           })
@@ -746,10 +898,10 @@ export function get_DynamicQueries_Company_QueryID_QueryUpdateSettings(Company:s
       @param QueryID Desc: QueryID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryUpdateSettingsRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryUpdateSettingsRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryUpdateSettings_Company_QueryID(Company:string, QueryID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -764,7 +916,14 @@ export function get_DynamicQueries_Company_QueryID_QueryUpdateSettings_Company_Q
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryUpdateSettingsRow)
           })
@@ -786,10 +945,10 @@ export function get_DynamicQueries_Company_QueryID_QueryUpdateSettings_Company_Q
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryValueSetItemsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryValueSetItemsRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryValueSetItems(Company:string, QueryID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -804,7 +963,14 @@ export function get_DynamicQueries_Company_QueryID_QueryValueSetItems(Company:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryValueSetItemsRow)
           })
@@ -824,10 +990,10 @@ export function get_DynamicQueries_Company_QueryID_QueryValueSetItems(Company:st
       @param ItemValue Desc: ItemValue   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryValueSetItemsRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryValueSetItemsRow
    */  
 export function get_DynamicQueries_Company_QueryID_QueryValueSetItems_Company_QueryID_ValueSetID_ItemValue(Company:string, QueryID:string, ValueSetID:string, ItemValue:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -842,7 +1008,14 @@ export function get_DynamicQueries_Company_QueryID_QueryValueSetItems_Company_Qu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryValueSetItemsRow)
           })
@@ -863,10 +1036,10 @@ export function get_DynamicQueries_Company_QueryID_QueryValueSetItems_Company_Qu
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCtrlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCtrlRow
    */  
 export function get_QueryCtrls(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -881,7 +1054,14 @@ export function get_QueryCtrls(select?:string, expand?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryCtrlRow)
           })
@@ -901,10 +1081,10 @@ export function get_QueryCtrls(select?:string, expand?:string, filter?:string, o
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryCtrlRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryCtrlRow
    */  
 export function get_QueryCtrls_Company_QueryID_ControlID(Company:string, QueryID:string, ControlID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -919,7 +1099,14 @@ export function get_QueryCtrls_Company_QueryID_ControlID(Company:string, QueryID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryCtrlRow)
           })
@@ -942,10 +1129,10 @@ export function get_QueryCtrls_Company_QueryID_ControlID(Company:string, QueryID
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCtrlValuesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCtrlValuesRow
    */  
 export function get_QueryCtrls_Company_QueryID_ControlID_QueryCtrlValues(Company:string, QueryID:string, ControlID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -960,7 +1147,14 @@ export function get_QueryCtrls_Company_QueryID_ControlID_QueryCtrlValues(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryCtrlValuesRow)
           })
@@ -980,10 +1174,10 @@ export function get_QueryCtrls_Company_QueryID_ControlID_QueryCtrlValues(Company
       @param ID Desc: ID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryCtrlValuesRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryCtrlValuesRow
    */  
 export function get_QueryCtrls_Company_QueryID_ControlID_QueryCtrlValues_Company_QueryID_ControlID_ID(Company:string, QueryID:string, ControlID:string, ID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -998,7 +1192,14 @@ export function get_QueryCtrls_Company_QueryID_ControlID_QueryCtrlValues_Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryCtrlValuesRow)
           })
@@ -1018,10 +1219,10 @@ export function get_QueryCtrls_Company_QueryID_ControlID_QueryCtrlValues_Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCtrlValuesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCtrlValuesRow
    */  
 export function get_QueryCtrlValues(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1036,7 +1237,14 @@ export function get_QueryCtrlValues(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryCtrlValuesRow)
           })
@@ -1056,10 +1264,10 @@ export function get_QueryCtrlValues(select?:string, filter?:string, orderby?:str
       @param ID Desc: ID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryCtrlValuesRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryCtrlValuesRow
    */  
 export function get_QueryCtrlValues_Company_QueryID_ControlID_ID(Company:string, QueryID:string, ControlID:string, ID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1074,7 +1282,14 @@ export function get_QueryCtrlValues_Company_QueryID_ControlID_ID(Company:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryCtrlValuesRow)
           })
@@ -1094,10 +1309,10 @@ export function get_QueryCtrlValues_Company_QueryID_ControlID_ID(Company:string,
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCustomActionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryCustomActionRow
    */  
 export function get_QueryCustomActions(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1112,7 +1327,14 @@ export function get_QueryCustomActions(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryCustomActionRow)
           })
@@ -1131,10 +1353,10 @@ export function get_QueryCustomActions(select?:string, filter?:string, orderby?:
       @param ActionID Desc: ActionID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryCustomActionRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryCustomActionRow
    */  
 export function get_QueryCustomActions_Company_QueryID_ActionID(Company:string, QueryID:string, ActionID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1149,7 +1371,14 @@ export function get_QueryCustomActions_Company_QueryID_ActionID(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryCustomActionRow)
           })
@@ -1169,10 +1398,10 @@ export function get_QueryCustomActions_Company_QueryID_ActionID(Company:string, 
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryExecuteSettingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryExecuteSettingRow
    */  
 export function get_QueryExecuteSettings(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1187,7 +1416,14 @@ export function get_QueryExecuteSettings(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryExecuteSettingRow)
           })
@@ -1206,10 +1442,10 @@ export function get_QueryExecuteSettings(select?:string, filter?:string, orderby
       @param SettingID Desc: SettingID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryExecuteSettingRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryExecuteSettingRow
    */  
 export function get_QueryExecuteSettings_Company_QueryID_SettingID(Company:string, QueryID:string, SettingID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1224,7 +1460,14 @@ export function get_QueryExecuteSettings_Company_QueryID_SettingID(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryExecuteSettingRow)
           })
@@ -1244,10 +1487,10 @@ export function get_QueryExecuteSettings_Company_QueryID_SettingID(Company:strin
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryParameterRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryParameterRow
    */  
 export function get_QueryParameters(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1262,7 +1505,14 @@ export function get_QueryParameters(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryParameterRow)
           })
@@ -1281,10 +1531,10 @@ export function get_QueryParameters(select?:string, filter?:string, orderby?:str
       @param ParameterID Desc: ParameterID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryParameterRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryParameterRow
    */  
 export function get_QueryParameters_Company_QueryID_ParameterID(Company:string, QueryID:string, ParameterID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1299,7 +1549,14 @@ export function get_QueryParameters_Company_QueryID_ParameterID(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryParameterRow)
           })
@@ -1320,10 +1577,10 @@ export function get_QueryParameters_Company_QueryID_ParameterID(Company:string, 
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryReferenceRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryReferenceRow
    */  
 export function get_QueryReferences(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1338,7 +1595,14 @@ export function get_QueryReferences(select?:string, expand?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryReferenceRow)
           })
@@ -1358,10 +1622,10 @@ export function get_QueryReferences(select?:string, expand?:string, filter?:stri
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryReferenceRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryReferenceRow
    */  
 export function get_QueryReferences_Company_QueryID_ReferenceID(Company:string, QueryID:string, ReferenceID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1376,7 +1640,14 @@ export function get_QueryReferences_Company_QueryID_ReferenceID(Company:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryReferenceRow)
           })
@@ -1399,10 +1670,10 @@ export function get_QueryReferences_Company_QueryID_ReferenceID(Company:string, 
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryParameterBindingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryParameterBindingRow
    */  
 export function get_QueryReferences_Company_QueryID_ReferenceID_QueryParameterBindings(Company:string, QueryID:string, ReferenceID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1417,7 +1688,14 @@ export function get_QueryReferences_Company_QueryID_ReferenceID_QueryParameterBi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryParameterBindingRow)
           })
@@ -1437,10 +1715,10 @@ export function get_QueryReferences_Company_QueryID_ReferenceID_QueryParameterBi
       @param ParameterID Desc: ParameterID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryParameterBindingRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryParameterBindingRow
    */  
 export function get_QueryReferences_Company_QueryID_ReferenceID_QueryParameterBindings_Company_QueryID_ReferenceID_ParameterID(Company:string, QueryID:string, ReferenceID:string, ParameterID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1455,7 +1733,14 @@ export function get_QueryReferences_Company_QueryID_ReferenceID_QueryParameterBi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryParameterBindingRow)
           })
@@ -1475,10 +1760,10 @@ export function get_QueryReferences_Company_QueryID_ReferenceID_QueryParameterBi
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryParameterBindingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryParameterBindingRow
    */  
 export function get_QueryParameterBindings(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1493,7 +1778,14 @@ export function get_QueryParameterBindings(select?:string, filter?:string, order
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryParameterBindingRow)
           })
@@ -1513,10 +1805,10 @@ export function get_QueryParameterBindings(select?:string, filter?:string, order
       @param ParameterID Desc: ParameterID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryParameterBindingRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryParameterBindingRow
    */  
 export function get_QueryParameterBindings_Company_QueryID_ReferenceID_ParameterID(Company:string, QueryID:string, ReferenceID:string, ParameterID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1531,7 +1823,14 @@ export function get_QueryParameterBindings_Company_QueryID_ReferenceID_Parameter
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryParameterBindingRow)
           })
@@ -1552,10 +1851,10 @@ export function get_QueryParameterBindings_Company_QueryID_ReferenceID_Parameter
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuerySubQueryRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuerySubQueryRow
    */  
 export function get_QuerySubQueries(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1570,7 +1869,14 @@ export function get_QuerySubQueries(select?:string, expand?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuerySubQueryRow)
           })
@@ -1590,10 +1896,10 @@ export function get_QuerySubQueries(select?:string, expand?:string, filter?:stri
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QuerySubQueryRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QuerySubQueryRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID(Company:string, QueryID:string, SubQueryID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1608,7 +1914,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID(Company:string, Q
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QuerySubQueryRow)
           })
@@ -1632,10 +1945,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID(Company:string, Q
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryRelationRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryRelationRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryRelations(Company:string, QueryID:string, SubQueryID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1650,7 +1963,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryRelations(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryRelationRow)
           })
@@ -1671,10 +1991,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryRelations(Co
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryRelationRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryRelationRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryRelations_Company_QueryID_SubQueryID_RelationID(Company:string, QueryID:string, SubQueryID:string, RelationID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1689,7 +2009,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryRelations_Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryRelationRow)
           })
@@ -1712,10 +2039,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryRelations_Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuerySortByRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuerySortByRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID_QuerySortBies(Company:string, QueryID:string, SubQueryID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1730,7 +2057,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QuerySortBies(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuerySortByRow)
           })
@@ -1751,10 +2085,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QuerySortBies(Com
       @param FieldName Desc: FieldName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QuerySortByRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QuerySortByRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID_QuerySortBies_Company_QueryID_SubQueryID_TableID_FieldName(Company:string, QueryID:string, SubQueryID:string, TableID:string, FieldName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1769,7 +2103,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QuerySortBies_Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QuerySortByRow)
           })
@@ -1792,10 +2133,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QuerySortBies_Com
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryWhereItemRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryWhereItemRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryWhereItems(Company:string, QueryID:string, SubQueryID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1810,7 +2151,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryWhereItems(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryWhereItemRow)
           })
@@ -1830,10 +2178,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryWhereItems(C
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryWhereItemRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryWhereItemRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryWhereItems_SysRowID(Company:string, QueryID:string, SubQueryID:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1848,7 +2196,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryWhereItems_S
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryWhereItemRow)
           })
@@ -1871,10 +2226,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryWhereItems_S
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryGroupByRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryGroupByRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryGroupBies(Company:string, QueryID:string, SubQueryID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1889,7 +2244,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryGroupBies(Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryGroupByRow)
           })
@@ -1909,10 +2271,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryGroupBies(Co
       @param GroupByID Desc: GroupByID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryGroupByRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryGroupByRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryGroupBies_Company_QueryID_SubQueryID_GroupByID(Company:string, QueryID:string, SubQueryID:string, GroupByID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1927,7 +2289,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryGroupBies_Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryGroupByRow)
           })
@@ -1951,10 +2320,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryGroupBies_Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryTableRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryTableRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryTables(Company:string, QueryID:string, SubQueryID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1969,7 +2338,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryTables(Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryTableRow)
           })
@@ -1990,10 +2366,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryTables(Compa
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryTableRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryTableRow
    */  
 export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryTables_Company_QueryID_SubQueryID_TableID(Company:string, QueryID:string, SubQueryID:string, TableID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2008,7 +2384,14 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryTables_Compa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryTableRow)
           })
@@ -2029,10 +2412,10 @@ export function get_QuerySubQueries_Company_QueryID_SubQueryID_QueryTables_Compa
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryRelationRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryRelationRow
    */  
 export function get_QueryRelations(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2047,7 +2430,14 @@ export function get_QueryRelations(select?:string, expand?:string, filter?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryRelationRow)
           })
@@ -2068,10 +2458,10 @@ export function get_QueryRelations(select?:string, expand?:string, filter?:strin
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryRelationRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryRelationRow
    */  
 export function get_QueryRelations_Company_QueryID_SubQueryID_RelationID(Company:string, QueryID:string, SubQueryID:string, RelationID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2086,7 +2476,14 @@ export function get_QueryRelations_Company_QueryID_SubQueryID_RelationID(Company
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryRelationRow)
           })
@@ -2110,10 +2507,10 @@ export function get_QueryRelations_Company_QueryID_SubQueryID_RelationID(Company
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryRelationFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryRelationFieldRow
    */  
 export function get_QueryRelations_Company_QueryID_SubQueryID_RelationID_QueryRelationFields(Company:string, QueryID:string, SubQueryID:string, RelationID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2128,7 +2525,14 @@ export function get_QueryRelations_Company_QueryID_SubQueryID_RelationID_QueryRe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryRelationFieldRow)
           })
@@ -2149,10 +2553,10 @@ export function get_QueryRelations_Company_QueryID_SubQueryID_RelationID_QueryRe
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryRelationFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryRelationFieldRow
    */  
 export function get_QueryRelations_Company_QueryID_SubQueryID_RelationID_QueryRelationFields_Company_QueryID_SubQueryID_RelationID_Seq(Company:string, QueryID:string, SubQueryID:string, RelationID:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2167,7 +2571,14 @@ export function get_QueryRelations_Company_QueryID_SubQueryID_RelationID_QueryRe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryRelationFieldRow)
           })
@@ -2187,10 +2598,10 @@ export function get_QueryRelations_Company_QueryID_SubQueryID_RelationID_QueryRe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryRelationFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryRelationFieldRow
    */  
 export function get_QueryRelationFields(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2205,7 +2616,14 @@ export function get_QueryRelationFields(select?:string, filter?:string, orderby?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryRelationFieldRow)
           })
@@ -2226,10 +2644,10 @@ export function get_QueryRelationFields(select?:string, filter?:string, orderby?
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryRelationFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryRelationFieldRow
    */  
 export function get_QueryRelationFields_Company_QueryID_SubQueryID_RelationID_Seq(Company:string, QueryID:string, SubQueryID:string, RelationID:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2244,7 +2662,14 @@ export function get_QueryRelationFields_Company_QueryID_SubQueryID_RelationID_Se
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryRelationFieldRow)
           })
@@ -2264,10 +2689,10 @@ export function get_QueryRelationFields_Company_QueryID_SubQueryID_RelationID_Se
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuerySortByRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QuerySortByRow
    */  
 export function get_QuerySortBies(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2282,7 +2707,14 @@ export function get_QuerySortBies(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuerySortByRow)
           })
@@ -2303,10 +2735,10 @@ export function get_QuerySortBies(select?:string, filter?:string, orderby?:strin
       @param FieldName Desc: FieldName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QuerySortByRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QuerySortByRow
    */  
 export function get_QuerySortBies_Company_QueryID_SubQueryID_TableID_FieldName(Company:string, QueryID:string, SubQueryID:string, TableID:string, FieldName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2321,7 +2753,14 @@ export function get_QuerySortBies_Company_QueryID_SubQueryID_TableID_FieldName(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QuerySortByRow)
           })
@@ -2341,10 +2780,10 @@ export function get_QuerySortBies_Company_QueryID_SubQueryID_TableID_FieldName(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryWhereItemRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryWhereItemRow
    */  
 export function get_QueryWhereItems(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2359,7 +2798,14 @@ export function get_QueryWhereItems(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryWhereItemRow)
           })
@@ -2376,10 +2822,10 @@ export function get_QueryWhereItems(select?:string, filter?:string, orderby?:str
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryWhereItemRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryWhereItemRow
    */  
 export function get_QueryWhereItems_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2394,7 +2840,14 @@ export function get_QueryWhereItems_SysRowID(SysRowID:string, select?:string, fi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryWhereItemRow)
           })
@@ -2414,10 +2867,10 @@ export function get_QueryWhereItems_SysRowID(SysRowID:string, select?:string, fi
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryGroupByRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryGroupByRow
    */  
 export function get_QueryGroupBies(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2432,7 +2885,14 @@ export function get_QueryGroupBies(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryGroupByRow)
           })
@@ -2452,10 +2912,10 @@ export function get_QueryGroupBies(select?:string, filter?:string, orderby?:stri
       @param GroupByID Desc: GroupByID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryGroupByRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryGroupByRow
    */  
 export function get_QueryGroupBies_Company_QueryID_SubQueryID_GroupByID(Company:string, QueryID:string, SubQueryID:string, GroupByID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2470,7 +2930,14 @@ export function get_QueryGroupBies_Company_QueryID_SubQueryID_GroupByID(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryGroupByRow)
           })
@@ -2491,10 +2958,10 @@ export function get_QueryGroupBies_Company_QueryID_SubQueryID_GroupByID(Company:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryTableRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryTableRow
    */  
 export function get_QueryTables(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2509,7 +2976,14 @@ export function get_QueryTables(select?:string, expand?:string, filter?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryTableRow)
           })
@@ -2530,10 +3004,10 @@ export function get_QueryTables(select?:string, expand?:string, filter?:string, 
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryTableRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryTableRow
    */  
 export function get_QueryTables_Company_QueryID_SubQueryID_TableID(Company:string, QueryID:string, SubQueryID:string, TableID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2548,7 +3022,14 @@ export function get_QueryTables_Company_QueryID_SubQueryID_TableID(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryTableRow)
           })
@@ -2573,10 +3054,10 @@ export function get_QueryTables_Company_QueryID_SubQueryID_TableID(Company:strin
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFieldRow
    */  
 export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFields(Company:string, QueryID:string, SubQueryID:string, TableID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2591,7 +3072,14 @@ export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFields(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryFieldRow)
           })
@@ -2613,10 +3101,10 @@ export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFields(C
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryFieldRow
    */  
 export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFields_Company_QueryID_SubQueryID_TableID_FieldName(Company:string, QueryID:string, SubQueryID:string, TableID:string, FieldName:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2631,7 +3119,14 @@ export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFields_C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryFieldRow)
           })
@@ -2655,10 +3150,10 @@ export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFields_C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFunctionCallRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFunctionCallRow
    */  
 export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFunctionCalls(Company:string, QueryID:string, SubQueryID:string, TableID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2673,7 +3168,14 @@ export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFunction
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryFunctionCallRow)
           })
@@ -2695,10 +3197,10 @@ export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFunction
       @param ParameterName Desc: ParameterName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryFunctionCallRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryFunctionCallRow
    */  
 export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFunctionCalls_Company_QueryID_SubQueryID_FunctionID_ParameterName(Company:string, QueryID:string, SubQueryID:string, TableID:string, FunctionID:string, ParameterName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2713,7 +3215,14 @@ export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFunction
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryFunctionCallRow)
           })
@@ -2734,10 +3243,10 @@ export function get_QueryTables_Company_QueryID_SubQueryID_TableID_QueryFunction
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFieldRow
    */  
 export function get_QueryFields(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2752,7 +3261,14 @@ export function get_QueryFields(select?:string, expand?:string, filter?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryFieldRow)
           })
@@ -2774,10 +3290,10 @@ export function get_QueryFields(select?:string, expand?:string, filter?:string, 
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryFieldRow
    */  
 export function get_QueryFields_Company_QueryID_SubQueryID_TableID_FieldName(Company:string, QueryID:string, SubQueryID:string, TableID:string, FieldName:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2792,7 +3308,14 @@ export function get_QueryFields_Company_QueryID_SubQueryID_TableID_FieldName(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryFieldRow)
           })
@@ -2817,10 +3340,10 @@ export function get_QueryFields_Company_QueryID_SubQueryID_TableID_FieldName(Com
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFieldAttributeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFieldAttributeRow
    */  
 export function get_QueryFields_Company_QueryID_SubQueryID_TableID_FieldName_QueryFieldAttributes(Company:string, QueryID:string, SubQueryID:string, TableID:string, FieldName:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2835,7 +3358,14 @@ export function get_QueryFields_Company_QueryID_SubQueryID_TableID_FieldName_Que
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryFieldAttributeRow)
           })
@@ -2857,10 +3387,10 @@ export function get_QueryFields_Company_QueryID_SubQueryID_TableID_FieldName_Que
       @param AttributeName Desc: AttributeName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryFieldAttributeRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryFieldAttributeRow
    */  
 export function get_QueryFields_Company_QueryID_SubQueryID_TableID_FieldName_QueryFieldAttributes_Company_QueryID_SubQueryID_TableID_FieldName_AttributeName(Company:string, QueryID:string, SubQueryID:string, TableID:string, FieldName:string, AttributeName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2875,7 +3405,14 @@ export function get_QueryFields_Company_QueryID_SubQueryID_TableID_FieldName_Que
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryFieldAttributeRow)
           })
@@ -2895,10 +3432,10 @@ export function get_QueryFields_Company_QueryID_SubQueryID_TableID_FieldName_Que
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFieldAttributeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFieldAttributeRow
    */  
 export function get_QueryFieldAttributes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2913,7 +3450,14 @@ export function get_QueryFieldAttributes(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryFieldAttributeRow)
           })
@@ -2935,10 +3479,10 @@ export function get_QueryFieldAttributes(select?:string, filter?:string, orderby
       @param AttributeName Desc: AttributeName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryFieldAttributeRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryFieldAttributeRow
    */  
 export function get_QueryFieldAttributes_Company_QueryID_SubQueryID_TableID_FieldName_AttributeName(Company:string, QueryID:string, SubQueryID:string, TableID:string, FieldName:string, AttributeName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2953,7 +3497,14 @@ export function get_QueryFieldAttributes_Company_QueryID_SubQueryID_TableID_Fiel
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryFieldAttributeRow)
           })
@@ -2973,10 +3524,10 @@ export function get_QueryFieldAttributes_Company_QueryID_SubQueryID_TableID_Fiel
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFunctionCallRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryFunctionCallRow
    */  
 export function get_QueryFunctionCalls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2991,7 +3542,14 @@ export function get_QueryFunctionCalls(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryFunctionCallRow)
           })
@@ -3012,10 +3570,10 @@ export function get_QueryFunctionCalls(select?:string, filter?:string, orderby?:
       @param ParameterName Desc: ParameterName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryFunctionCallRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryFunctionCallRow
    */  
 export function get_QueryFunctionCalls_Company_QueryID_SubQueryID_FunctionID_ParameterName(Company:string, QueryID:string, SubQueryID:string, FunctionID:string, ParameterName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -3030,7 +3588,14 @@ export function get_QueryFunctionCalls_Company_QueryID_SubQueryID_FunctionID_Par
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryFunctionCallRow)
           })
@@ -3050,10 +3615,10 @@ export function get_QueryFunctionCalls_Company_QueryID_SubQueryID_FunctionID_Par
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryUpdateFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryUpdateFieldRow
    */  
 export function get_QueryUpdateFields(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -3068,7 +3633,14 @@ export function get_QueryUpdateFields(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryUpdateFieldRow)
           })
@@ -3089,10 +3661,10 @@ export function get_QueryUpdateFields(select?:string, filter?:string, orderby?:s
       @param Direction Desc: Direction   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryUpdateFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryUpdateFieldRow
    */  
 export function get_QueryUpdateFields_Company_QueryID_MapTableName_MapFieldName_Direction(Company:string, QueryID:string, MapTableName:string, MapFieldName:string, Direction:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -3107,7 +3679,14 @@ export function get_QueryUpdateFields_Company_QueryID_MapTableName_MapFieldName_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryUpdateFieldRow)
           })
@@ -3127,10 +3706,10 @@ export function get_QueryUpdateFields_Company_QueryID_MapTableName_MapFieldName_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryUpdateSettingsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryUpdateSettingsRow
    */  
 export function get_QueryUpdateSettings(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -3145,7 +3724,14 @@ export function get_QueryUpdateSettings(select?:string, filter?:string, orderby?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryUpdateSettingsRow)
           })
@@ -3163,10 +3749,10 @@ export function get_QueryUpdateSettings(select?:string, filter?:string, orderby?
       @param QueryID Desc: QueryID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryUpdateSettingsRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryUpdateSettingsRow
    */  
 export function get_QueryUpdateSettings_Company_QueryID(Company:string, QueryID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -3181,7 +3767,14 @@ export function get_QueryUpdateSettings_Company_QueryID(Company:string, QueryID:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryUpdateSettingsRow)
           })
@@ -3201,10 +3794,10 @@ export function get_QueryUpdateSettings_Company_QueryID(Company:string, QueryID:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryValueSetItemsRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.QueryValueSetItemsRow
    */  
 export function get_QueryValueSetItems(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -3219,7 +3812,14 @@ export function get_QueryValueSetItems(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryValueSetItemsRow)
           })
@@ -3239,10 +3839,10 @@ export function get_QueryValueSetItems(select?:string, filter?:string, orderby?:
       @param ItemValue Desc: ItemValue   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.QueryValueSetItemsRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.QueryValueSetItemsRow
    */  
 export function get_QueryValueSetItems_Company_QueryID_ValueSetID_ItemValue(Company:string, QueryID:string, ValueSetID:string, ItemValue:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -3257,7 +3857,14 @@ export function get_QueryValueSetItems_Company_QueryID_ValueSetID_ItemValue(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_QueryValueSetItemsRow)
           })
@@ -3269,6 +3876,23 @@ export function get_QueryValueSetItems_Company_QueryID_ValueSetID_ItemValue(Comp
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -3301,7 +3925,7 @@ Used by: Server\bo\EpiSearch\EpiSearch.p
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -3523,15 +4147,22 @@ export function get_GetRows(whereClauseDynamicQuery:string, whereClauseQueryCtrl
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -3543,30 +4174,121 @@ export function get_GetRows(whereClauseDynamicQuery:string, whereClauseQueryCtrl
    Summary: Invoke method GetByID
    Description: This method returns a dataset containing definition of the query.
    OperationID: GetByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByID(requestBody:GetByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetQueryEmptyResultSetByID
+   Description: This method returns an empty result dataset. It is useful if client need information about result set schema only
+   OperationID: GetQueryEmptyResultSetByID
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryEmptyResultSetByID_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetQueryEmptyResultSetByID_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_GetQueryEmptyResultSetByID(requestBody:GetQueryEmptyResultSetByID_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetQueryEmptyResultSetByID_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryEmptyResultSetByID", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetQueryEmptyResultSetByID_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetQueryExecutionParametersByID
+   Description: This method returns a dataset representing an query's execution parameters information
+   OperationID: GetQueryExecutionParametersByID
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryExecutionParametersByID_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetQueryExecutionParametersByID_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_GetQueryExecutionParametersByID(requestBody:GetQueryExecutionParametersByID_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetQueryExecutionParametersByID_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryExecutionParametersByID", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetQueryExecutionParametersByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3578,30 +4300,37 @@ export function post_GetByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetList
    Description: This method runs an updatable query and returns result dataset.
    OperationID: GetList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetList(requestBody:GetList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3613,30 +4342,37 @@ export function post_GetList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetByIDs
    Description: This method returns a dataset containing definition of queries with ids listed in parameter
    OperationID: GetByIDs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByIDs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByIDs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByIDs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByIDs(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByIDs(requestBody:GetByIDs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetByIDs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -3648,30 +4384,37 @@ export function post_GetByIDs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetByIDsTranslated
    Description: This method returns a dataset containing definition of queries with ids listed in parameter with translated labels.
    OperationID: GetByIDsTranslated
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByIDsTranslated_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByIDsTranslated_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByIDsTranslated_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByIDsTranslated(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByIDsTranslated(requestBody:GetByIDsTranslated_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByIDsTranslated_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetByIDsTranslated", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByIDsTranslated_output)
           })
       .catch((error) => {
           reject(error)
@@ -3683,30 +4426,37 @@ export function post_GetByIDsTranslated(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ExecuteByID
    Description: This method run an existing query and returns an untyped dataset
    OperationID: ExecuteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ExecuteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ExecuteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ExecuteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ExecuteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_ExecuteByID(requestBody:ExecuteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ExecuteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/ExecuteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ExecuteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3719,30 +4469,37 @@ export function post_ExecuteByID(requestBody:any, epicorHeaders?:Headers){
    Description: This method runs a query based on default settings.
 Used by: Server\Bpm\BpmQuery.i
    OperationID: Execute
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Execute_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Execute_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Execute_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Execute(requestBody:any, epicorHeaders?:Headers){
+export function post_Execute(requestBody:Execute_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Execute_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/Execute", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Execute_output)
           })
       .catch((error) => {
           reject(error)
@@ -3754,30 +4511,37 @@ export function post_Execute(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CheckTestQueryExecution
    Description: For MS SQL query checks if it is executed right now and cancel it if requested
    OperationID: CheckTestQueryExecution
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckTestQueryExecution_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckTestQueryExecution_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckTestQueryExecution_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckTestQueryExecution(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckTestQueryExecution(requestBody:CheckTestQueryExecution_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckTestQueryExecution_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/CheckTestQueryExecution", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckTestQueryExecution_output)
           })
       .catch((error) => {
           reject(error)
@@ -3789,30 +4553,37 @@ export function post_CheckTestQueryExecution(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetQueryExecutionPlan
    Description: For MS SQL query returns query execution plan
    OperationID: GetQueryExecutionPlan
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetQueryExecutionPlan_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryExecutionPlan_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQueryExecutionPlan_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetQueryExecutionPlan(requestBody:any, epicorHeaders?:Headers){
+export function post_GetQueryExecutionPlan(requestBody:GetQueryExecutionPlan_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQueryExecutionPlan_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryExecutionPlan", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQueryExecutionPlan_output)
           })
       .catch((error) => {
           reject(error)
@@ -3825,30 +4596,37 @@ export function post_GetQueryExecutionPlan(requestBody:any, epicorHeaders?:Heade
    Description: This method returns a list of BAQs that have a specific like field
 Used by: Server\bo\EpiSearch\EpiSearch.p
    OperationID: GetQueryListFromLike
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetQueryListFromLike_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryListFromLike_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQueryListFromLike_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetQueryListFromLike(requestBody:any, epicorHeaders?:Headers){
+export function post_GetQueryListFromLike(requestBody:GetQueryListFromLike_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQueryListFromLike_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryListFromLike", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQueryListFromLike_output)
           })
       .catch((error) => {
           reject(error)
@@ -3860,65 +4638,37 @@ export function post_GetQueryListFromLike(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetQueryExecutionParameters
    Description: This method returns a dataset representing an query's execution parameters information
    OperationID: GetQueryExecutionParameters
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetQueryExecutionParameters_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryExecutionParameters_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQueryExecutionParameters_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetQueryExecutionParameters(requestBody:any, epicorHeaders?:Headers){
+export function post_GetQueryExecutionParameters(requestBody:GetQueryExecutionParameters_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQueryExecutionParameters_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryExecutionParameters", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
       })
-   }))
-}
-
-   /**  
-   Summary: Invoke method GetQueryExecutionParametersByID
-   Description: This method returns a dataset representing an query's execution parameters information
-   OperationID: GetQueryExecutionParametersByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetQueryExecutionParametersByID_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetQueryExecutionParametersByID_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_GetQueryExecutionParametersByID(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryExecutionParametersByID", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQueryExecutionParameters_output)
           })
       .catch((error) => {
           reject(error)
@@ -3930,65 +4680,37 @@ export function post_GetQueryExecutionParametersByID(requestBody:any, epicorHead
    Summary: Invoke method GetQueryEmptyResultSet
    Description: This method returns an empty result dataset. It is useful if client need information about result set schema only
    OperationID: GetQueryEmptyResultSet
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetQueryEmptyResultSet_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryEmptyResultSet_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQueryEmptyResultSet_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetQueryEmptyResultSet(requestBody:any, epicorHeaders?:Headers){
+export function post_GetQueryEmptyResultSet(requestBody:GetQueryEmptyResultSet_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQueryEmptyResultSet_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryEmptyResultSet", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
-      .then((data) => {
-         resolve(data as any)
-          })
-      .catch((error) => {
-          reject(error)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
       })
-   }))
-}
-
-   /**  
-   Summary: Invoke method GetQueryEmptyResultSetByID
-   Description: This method returns an empty result dataset. It is useful if client need information about result set schema only
-   OperationID: GetQueryEmptyResultSetByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetQueryEmptyResultSetByID_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetQueryEmptyResultSetByID_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_GetQueryEmptyResultSetByID(requestBody:any, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<any>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryEmptyResultSetByID", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => res.json())
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQueryEmptyResultSet_output)
           })
       .catch((error) => {
           reject(error)
@@ -4000,30 +4722,37 @@ export function post_GetQueryEmptyResultSetByID(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetQueryEmptyResultSetByIDAndCompany
    Description: This method returns an empty result dataset. It is useful if client need information about result set schema only
    OperationID: GetQueryEmptyResultSetByIDAndCompany
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetQueryEmptyResultSetByIDAndCompany_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryEmptyResultSetByIDAndCompany_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQueryEmptyResultSetByIDAndCompany_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetQueryEmptyResultSetByIDAndCompany(requestBody:any, epicorHeaders?:Headers){
+export function post_GetQueryEmptyResultSetByIDAndCompany(requestBody:GetQueryEmptyResultSetByIDAndCompany_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQueryEmptyResultSetByIDAndCompany_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryEmptyResultSetByIDAndCompany", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQueryEmptyResultSetByIDAndCompany_output)
           })
       .catch((error) => {
           reject(error)
@@ -4036,30 +4765,37 @@ export function post_GetQueryEmptyResultSetByIDAndCompany(requestBody:any, epico
    Description: This method returns a list of groups of attributes and values, each group per query's display field.
 Attributes expose information about the field: Caption, Format, DataType, ReadOnly, etc.
    OperationID: GetQueryResultSetMetadataByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetQueryResultSetMetadataByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryResultSetMetadataByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQueryResultSetMetadataByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetQueryResultSetMetadataByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetQueryResultSetMetadataByID(requestBody:GetQueryResultSetMetadataByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQueryResultSetMetadataByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryResultSetMetadataByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQueryResultSetMetadataByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4070,30 +4806,37 @@ export function post_GetQueryResultSetMetadataByID(requestBody:any, epicorHeader
    /**  
    Summary: Invoke method Analyze
    OperationID: Analyze
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Analyze_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Analyze_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Analyze_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Analyze(requestBody:any, epicorHeaders?:Headers){
+export function post_Analyze(requestBody:Analyze_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Analyze_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/Analyze", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Analyze_output)
           })
       .catch((error) => {
           reject(error)
@@ -4108,7 +4851,7 @@ export function post_Analyze(requestBody:any, epicorHeaders?:Headers){
       @param whereClause Desc: The criteria   Required: True   Allow empty value : True
       @param pageSize Desc: Size of the page   Required: True
       @param absolutePage Desc: The number of the page to return   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQueryList_output
@@ -4150,15 +4893,22 @@ export function get_GetQueryList(whereClause:string, pageSize:string, absolutePa
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQueryList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQueryList_output)
           })
       .catch((error) => {
           reject(error)
@@ -4170,30 +4920,37 @@ export function get_GetQueryList(whereClause:string, pageSize:string, absolutePa
    Summary: Invoke method GetListByID
    Description: This method runs an updatable query and returns result dataset.
    OperationID: GetListByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetListByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetListByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetListByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetListByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetListByID(requestBody:GetListByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetListByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetListByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetListByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4205,30 +4962,37 @@ export function post_GetListByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Call Update method of an updatable query and return result dataset
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -4240,30 +5004,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateByID
    Description: Call Update method of an updatable query and return result dataset
    OperationID: UpdateByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateByID(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateByID(requestBody:UpdateByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/UpdateByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4275,30 +5046,37 @@ export function post_UpdateByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNew
    Description: Calls GetNew method of an updatable query and return result set with added row.
    OperationID: GetNew
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNew_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNew_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNew_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNew(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNew(requestBody:GetNew_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNew_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetNew", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNew_output)
           })
       .catch((error) => {
           reject(error)
@@ -4310,30 +5088,37 @@ export function post_GetNew(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewByID
    Description: Calls GetNew method of an updatable query and return result set with added row.
    OperationID: GetNewByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewByID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewByID(requestBody:GetNewByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetNewByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4345,30 +5130,37 @@ export function post_GetNewByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method FieldUpdate
    Description: Calls FieldUpdate method of an updatable query and return result set.
    OperationID: FieldUpdate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FieldUpdate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FieldUpdate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FieldUpdate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FieldUpdate(requestBody:any, epicorHeaders?:Headers){
+export function post_FieldUpdate(requestBody:FieldUpdate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FieldUpdate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/FieldUpdate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FieldUpdate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4380,30 +5172,37 @@ export function post_FieldUpdate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method FieldUpdateByID
    Description: Calls FieldUpdate method of an updatable query and return result set.
    OperationID: FieldUpdateByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FieldUpdateByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FieldUpdateByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FieldUpdateByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FieldUpdateByID(requestBody:any, epicorHeaders?:Headers){
+export function post_FieldUpdateByID(requestBody:FieldUpdateByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FieldUpdateByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/FieldUpdateByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FieldUpdateByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4415,30 +5214,37 @@ export function post_FieldUpdateByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method FieldValidate
    Description: Calls FieldUpdate method of an updatable query and return result set.
    OperationID: FieldValidate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FieldValidate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FieldValidate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FieldValidate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FieldValidate(requestBody:any, epicorHeaders?:Headers){
+export function post_FieldValidate(requestBody:FieldValidate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FieldValidate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/FieldValidate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FieldValidate_output)
           })
       .catch((error) => {
           reject(error)
@@ -4450,30 +5256,37 @@ export function post_FieldValidate(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method FieldValidateByID
    Description: Calls FieldUpdate method of an updatable query and return result set.
    OperationID: FieldValidateByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FieldValidateByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FieldValidateByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FieldValidateByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FieldValidateByID(requestBody:any, epicorHeaders?:Headers){
+export function post_FieldValidateByID(requestBody:FieldValidateByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FieldValidateByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/FieldValidateByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FieldValidateByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4486,30 +5299,37 @@ export function post_FieldValidateByID(requestBody:any, epicorHeaders?:Headers){
    Description: This method does nothing per se, but is useful if there are BPM directives
 attached to the query. Directives can examine actionId value and perform some actions.
    OperationID: RunCustomAction
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunCustomAction_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunCustomAction_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunCustomAction_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunCustomAction(requestBody:any, epicorHeaders?:Headers){
+export function post_RunCustomAction(requestBody:RunCustomAction_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunCustomAction_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/RunCustomAction", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunCustomAction_output)
           })
       .catch((error) => {
           reject(error)
@@ -4522,30 +5342,37 @@ export function post_RunCustomAction(requestBody:any, epicorHeaders?:Headers){
    Description: This method does nothing per se, but is useful if there are BPM directives
 attached to the query. Directives can examine actionId value and perform some actions.
    OperationID: RunCustomActionByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RunCustomActionByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RunCustomActionByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RunCustomActionByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RunCustomActionByID(requestBody:any, epicorHeaders?:Headers){
+export function post_RunCustomActionByID(requestBody:RunCustomActionByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RunCustomActionByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/RunCustomActionByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RunCustomActionByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4557,30 +5384,37 @@ export function post_RunCustomActionByID(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetDistinctValues
    Description: This method runs a query based on default settings and passed execution parameters and return lists of distinct values of specified fields.
    OperationID: GetDistinctValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDistinctValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDistinctValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDistinctValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDistinctValues(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDistinctValues(requestBody:GetDistinctValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDistinctValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetDistinctValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDistinctValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -4592,30 +5426,37 @@ export function post_GetDistinctValues(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method InvalidateRuntimeQueryCache
    Description: Removes query definition from the runtime cache. It will be reloaded on the next execution.
    OperationID: InvalidateRuntimeQueryCache
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InvalidateRuntimeQueryCache_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InvalidateRuntimeQueryCache_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InvalidateRuntimeQueryCache_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InvalidateRuntimeQueryCache(requestBody:any, epicorHeaders?:Headers){
+export function post_InvalidateRuntimeQueryCache(requestBody:InvalidateRuntimeQueryCache_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InvalidateRuntimeQueryCache_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/InvalidateRuntimeQueryCache", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InvalidateRuntimeQueryCache_output)
           })
       .catch((error) => {
           reject(error)
@@ -4627,30 +5468,37 @@ export function post_InvalidateRuntimeQueryCache(requestBody:any, epicorHeaders?
    Summary: Invoke method GetByIDTranslated
    Description: This method returns a dataset containing definition of the query with translated labels.
    OperationID: GetByIDTranslated
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByIDTranslated_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByIDTranslated_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByIDTranslated_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByIDTranslated(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByIDTranslated(requestBody:GetByIDTranslated_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByIDTranslated_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetByIDTranslated", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByIDTranslated_output)
           })
       .catch((error) => {
           reject(error)
@@ -4661,111 +5509,128 @@ export function post_GetByIDTranslated(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_DynamicQueryRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_DynamicQueryRow[],
+   "value":Ice_Tablesets_DynamicQueryRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryCtrlRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryCtrlRow[],
+   "value":Ice_Tablesets_QueryCtrlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryCtrlValuesRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryCtrlValuesRow[],
+   "value":Ice_Tablesets_QueryCtrlValuesRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryCustomActionRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryCustomActionRow[],
+   "value":Ice_Tablesets_QueryCustomActionRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryExecuteSettingRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryExecuteSettingRow[],
+   "value":Ice_Tablesets_QueryExecuteSettingRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryFieldAttributeRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryFieldAttributeRow[],
+   "value":Ice_Tablesets_QueryFieldAttributeRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryFieldRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryFieldRow[],
+   "value":Ice_Tablesets_QueryFieldRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryFunctionCallRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryFunctionCallRow[],
+   "value":Ice_Tablesets_QueryFunctionCallRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryGroupByRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryGroupByRow[],
+   "value":Ice_Tablesets_QueryGroupByRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryParameterBindingRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryParameterBindingRow[],
+   "value":Ice_Tablesets_QueryParameterBindingRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryParameterRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryParameterRow[],
+   "value":Ice_Tablesets_QueryParameterRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryReferenceRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryReferenceRow[],
+   "value":Ice_Tablesets_QueryReferenceRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryRelationFieldRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryRelationFieldRow[],
+   "value":Ice_Tablesets_QueryRelationFieldRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryRelationRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryRelationRow[],
+   "value":Ice_Tablesets_QueryRelationRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuerySortByRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QuerySortByRow[],
+   "value":Ice_Tablesets_QuerySortByRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QuerySubQueryRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QuerySubQueryRow[],
+   "value":Ice_Tablesets_QuerySubQueryRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryTableRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryTableRow[],
+   "value":Ice_Tablesets_QueryTableRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryUpdateFieldRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryUpdateFieldRow[],
+   "value":Ice_Tablesets_QueryUpdateFieldRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryUpdateSettingsRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryUpdateSettingsRow[],
+   "value":Ice_Tablesets_QueryUpdateSettingsRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryValueSetItemsRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryValueSetItemsRow[],
+   "value":Ice_Tablesets_QueryValueSetItemsRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_QueryWhereItemRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_QueryWhereItemRow[],
+   "value":Ice_Tablesets_QueryWhereItemRow,
 }
 
 export interface Ice_Tablesets_DynamicQueryRow{
@@ -5454,6 +6319,23 @@ export interface Ice_Tablesets_QueryWhereItemRow{
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.ZDataTableSvc
 // Description: The ZDataTable service.
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZDataTableRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZDataTableRow
    */  
 export function get_ZDataTables(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_ZDataTables(select?:string, expand?:string, filter?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZDataTableRow)
           })
@@ -118,15 +158,15 @@ export function get_ZDataTables(select?:string, expand?:string, filter?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ZDataTables
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZDataTableRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZDataTableRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ZDataTableRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ZDataTableRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ZDataTables(requestBody:any, epicorHeaders?:Headers){
+export function post_ZDataTables(requestBody:Ice_Tablesets_ZDataTableRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_ZDataTables(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_ZDataTables(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZDataTableRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZDataTableRow
    */  
 export function get_ZDataTables_SystemCode_DataTableID(SystemCode:string, DataTableID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_ZDataTables_SystemCode_DataTableID(SystemCode:string, DataTa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZDataTableRow)
           })
@@ -193,15 +247,15 @@ export function get_ZDataTables_SystemCode_DataTableID(SystemCode:string, DataTa
    OperationID: UpdateExt_ZDataTable
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZDataTableRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZDataTableRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ZDataTables_SystemCode_DataTableID(SystemCode:string, DataTableID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ZDataTables_SystemCode_DataTableID(SystemCode:string, DataTableID:string, requestBody:Ice_Tablesets_ZDataTableRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_ZDataTables_SystemCode_DataTableID(SystemCode:string, Data
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_ZDataTables_SystemCode_DataTableID(SystemCode:string, Data
    OperationID: DeleteUpdateExt_ZDataTable
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_ZDataTables_SystemCode_DataTableID(SystemCode:string, Dat
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_ZDataTables_SystemCode_DataTableID(SystemCode:string, Dat
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLookupLinkRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLookupLinkRow
    */  
 export function get_ZDataTables_SystemCode_DataTableID_ZLookupLinks(SystemCode:string, DataTableID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_ZDataTables_SystemCode_DataTableID_ZLookupLinks(SystemCode:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZLookupLinkRow)
           })
@@ -311,10 +386,10 @@ export function get_ZDataTables_SystemCode_DataTableID_ZLookupLinks(SystemCode:s
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZLookupLinkRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZLookupLinkRow
    */  
 export function get_ZDataTables_SystemCode_DataTableID_ZLookupLinks_SystemCode_DataTableID_LookupID(SystemCode:string, DataTableID:string, LookupID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_ZDataTables_SystemCode_DataTableID_ZLookupLinks_SystemCode_D
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZLookupLinkRow)
           })
@@ -351,10 +433,10 @@ export function get_ZDataTables_SystemCode_DataTableID_ZLookupLinks_SystemCode_D
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZDataFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZDataFieldRow
    */  
 export function get_ZDataTables_SystemCode_DataTableID_ZDataFields(SystemCode:string, DataTableID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -369,7 +451,14 @@ export function get_ZDataTables_SystemCode_DataTableID_ZDataFields(SystemCode:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZDataFieldRow)
           })
@@ -388,10 +477,10 @@ export function get_ZDataTables_SystemCode_DataTableID_ZDataFields(SystemCode:st
       @param FieldName Desc: FieldName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZDataFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZDataFieldRow
    */  
 export function get_ZDataTables_SystemCode_DataTableID_ZDataFields_SystemCode_DataTableID_FieldName(SystemCode:string, DataTableID:string, FieldName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -406,7 +495,14 @@ export function get_ZDataTables_SystemCode_DataTableID_ZDataFields_SystemCode_Da
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZDataFieldRow)
           })
@@ -429,10 +525,10 @@ export function get_ZDataTables_SystemCode_DataTableID_ZDataFields_SystemCode_Da
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZKeyRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZKeyRow
    */  
 export function get_ZDataTables_SystemCode_DataTableID_ZKeys(SystemCode:string, DataTableID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -447,7 +543,14 @@ export function get_ZDataTables_SystemCode_DataTableID_ZKeys(SystemCode:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZKeyRow)
           })
@@ -467,10 +570,10 @@ export function get_ZDataTables_SystemCode_DataTableID_ZKeys(SystemCode:string, 
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZKeyRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZKeyRow
    */  
 export function get_ZDataTables_SystemCode_DataTableID_ZKeys_SystemCode_DataTableID_KeyID(SystemCode:string, DataTableID:string, KeyID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -485,7 +588,14 @@ export function get_ZDataTables_SystemCode_DataTableID_ZKeys_SystemCode_DataTabl
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZKeyRow)
           })
@@ -506,10 +616,10 @@ export function get_ZDataTables_SystemCode_DataTableID_ZKeys_SystemCode_DataTabl
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLookupLinkRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLookupLinkRow
    */  
 export function get_ZLookupLinks(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -524,7 +634,14 @@ export function get_ZLookupLinks(select?:string, expand?:string, filter?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZLookupLinkRow)
           })
@@ -538,15 +655,15 @@ export function get_ZLookupLinks(select?:string, expand?:string, filter?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ZLookupLinks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZLookupLinkRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZLookupLinkRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ZLookupLinkRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ZLookupLinkRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ZLookupLinks(requestBody:any, epicorHeaders?:Headers){
+export function post_ZLookupLinks(requestBody:Ice_Tablesets_ZLookupLinkRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -560,7 +677,14 @@ export function post_ZLookupLinks(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -580,10 +704,10 @@ export function post_ZLookupLinks(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZLookupLinkRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZLookupLinkRow
    */  
 export function get_ZLookupLinks_SystemCode_DataTableID_LookupID(SystemCode:string, DataTableID:string, LookupID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -598,7 +722,14 @@ export function get_ZLookupLinks_SystemCode_DataTableID_LookupID(SystemCode:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZLookupLinkRow)
           })
@@ -615,15 +746,15 @@ export function get_ZLookupLinks_SystemCode_DataTableID_LookupID(SystemCode:stri
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param LookupID Desc: LookupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZLookupLinkRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZLookupLinkRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ZLookupLinks_SystemCode_DataTableID_LookupID(SystemCode:string, DataTableID:string, LookupID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ZLookupLinks_SystemCode_DataTableID_LookupID(SystemCode:string, DataTableID:string, LookupID:string, requestBody:Ice_Tablesets_ZLookupLinkRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -637,7 +768,14 @@ export function patch_ZLookupLinks_SystemCode_DataTableID_LookupID(SystemCode:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -654,7 +792,7 @@ export function patch_ZLookupLinks_SystemCode_DataTableID_LookupID(SystemCode:st
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param LookupID Desc: LookupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -673,7 +811,14 @@ export function delete_ZLookupLinks_SystemCode_DataTableID_LookupID(SystemCode:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -696,10 +841,10 @@ export function delete_ZLookupLinks_SystemCode_DataTableID_LookupID(SystemCode:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLinkColumnRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLinkColumnRow
    */  
 export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLinkColumns(SystemCode:string, DataTableID:string, LookupID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -714,7 +859,14 @@ export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLinkColumns(Sy
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZLinkColumnRow)
           })
@@ -735,10 +887,10 @@ export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLinkColumns(Sy
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZLinkColumnRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZLinkColumnRow
    */  
 export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLinkColumns_SystemCode_DataTableID_LinkID_SysRowID(SystemCode:string, DataTableID:string, LookupID:string, LinkID:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -753,7 +905,14 @@ export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLinkColumns_Sy
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZLinkColumnRow)
           })
@@ -776,10 +935,10 @@ export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLinkColumns_Sy
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLookupFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLookupFieldRow
    */  
 export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLookupFields(SystemCode:string, DataTableID:string, LookupID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -794,7 +953,14 @@ export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLookupFields(S
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZLookupFieldRow)
           })
@@ -814,10 +980,10 @@ export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLookupFields(S
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZLookupFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZLookupFieldRow
    */  
 export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLookupFields_SystemCode_DataTableID_LookupID_Seq(SystemCode:string, DataTableID:string, LookupID:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -832,7 +998,14 @@ export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLookupFields_S
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZLookupFieldRow)
           })
@@ -852,10 +1025,10 @@ export function get_ZLookupLinks_SystemCode_DataTableID_LookupID_ZLookupFields_S
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLinkColumnRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLinkColumnRow
    */  
 export function get_ZLinkColumns(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -870,7 +1043,14 @@ export function get_ZLinkColumns(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZLinkColumnRow)
           })
@@ -884,15 +1064,15 @@ export function get_ZLinkColumns(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ZLinkColumns
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZLinkColumnRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZLinkColumnRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ZLinkColumnRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ZLinkColumnRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ZLinkColumns(requestBody:any, epicorHeaders?:Headers){
+export function post_ZLinkColumns(requestBody:Ice_Tablesets_ZLinkColumnRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -906,7 +1086,14 @@ export function post_ZLinkColumns(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -926,10 +1113,10 @@ export function post_ZLinkColumns(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZLinkColumnRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZLinkColumnRow
    */  
 export function get_ZLinkColumns_SystemCode_DataTableID_LinkID_SysRowID(SystemCode:string, DataTableID:string, LinkID:string, SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -944,7 +1131,14 @@ export function get_ZLinkColumns_SystemCode_DataTableID_LinkID_SysRowID(SystemCo
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZLinkColumnRow)
           })
@@ -962,15 +1156,15 @@ export function get_ZLinkColumns_SystemCode_DataTableID_LinkID_SysRowID(SystemCo
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param LinkID Desc: LinkID   Required: True   Allow empty value : True
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZLinkColumnRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZLinkColumnRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ZLinkColumns_SystemCode_DataTableID_LinkID_SysRowID(SystemCode:string, DataTableID:string, LinkID:string, SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ZLinkColumns_SystemCode_DataTableID_LinkID_SysRowID(SystemCode:string, DataTableID:string, LinkID:string, SysRowID:string, requestBody:Ice_Tablesets_ZLinkColumnRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -984,7 +1178,14 @@ export function patch_ZLinkColumns_SystemCode_DataTableID_LinkID_SysRowID(System
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1002,7 +1203,7 @@ export function patch_ZLinkColumns_SystemCode_DataTableID_LinkID_SysRowID(System
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param LinkID Desc: LinkID   Required: True   Allow empty value : True
       @param SysRowID Desc: SysRowID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1021,7 +1222,14 @@ export function delete_ZLinkColumns_SystemCode_DataTableID_LinkID_SysRowID(Syste
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1041,10 +1249,10 @@ export function delete_ZLinkColumns_SystemCode_DataTableID_LinkID_SysRowID(Syste
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLookupFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZLookupFieldRow
    */  
 export function get_ZLookupFields(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1059,7 +1267,14 @@ export function get_ZLookupFields(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZLookupFieldRow)
           })
@@ -1073,15 +1288,15 @@ export function get_ZLookupFields(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ZLookupFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZLookupFieldRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZLookupFieldRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ZLookupFieldRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ZLookupFieldRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ZLookupFields(requestBody:any, epicorHeaders?:Headers){
+export function post_ZLookupFields(requestBody:Ice_Tablesets_ZLookupFieldRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1095,7 +1310,14 @@ export function post_ZLookupFields(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1115,10 +1337,10 @@ export function post_ZLookupFields(requestBody:any, epicorHeaders?:Headers){
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZLookupFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZLookupFieldRow
    */  
 export function get_ZLookupFields_SystemCode_DataTableID_LookupID_Seq(SystemCode:string, DataTableID:string, LookupID:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1133,7 +1355,14 @@ export function get_ZLookupFields_SystemCode_DataTableID_LookupID_Seq(SystemCode
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZLookupFieldRow)
           })
@@ -1151,15 +1380,15 @@ export function get_ZLookupFields_SystemCode_DataTableID_LookupID_Seq(SystemCode
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param LookupID Desc: LookupID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZLookupFieldRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZLookupFieldRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ZLookupFields_SystemCode_DataTableID_LookupID_Seq(SystemCode:string, DataTableID:string, LookupID:string, Seq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ZLookupFields_SystemCode_DataTableID_LookupID_Seq(SystemCode:string, DataTableID:string, LookupID:string, Seq:string, requestBody:Ice_Tablesets_ZLookupFieldRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1173,7 +1402,14 @@ export function patch_ZLookupFields_SystemCode_DataTableID_LookupID_Seq(SystemCo
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1191,7 +1427,7 @@ export function patch_ZLookupFields_SystemCode_DataTableID_LookupID_Seq(SystemCo
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param LookupID Desc: LookupID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1210,7 +1446,14 @@ export function delete_ZLookupFields_SystemCode_DataTableID_LookupID_Seq(SystemC
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1230,10 +1473,10 @@ export function delete_ZLookupFields_SystemCode_DataTableID_LookupID_Seq(SystemC
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZDataFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZDataFieldRow
    */  
 export function get_ZDataFields(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1248,7 +1491,14 @@ export function get_ZDataFields(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZDataFieldRow)
           })
@@ -1262,15 +1512,15 @@ export function get_ZDataFields(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ZDataFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZDataFieldRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZDataFieldRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ZDataFieldRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ZDataFieldRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ZDataFields(requestBody:any, epicorHeaders?:Headers){
+export function post_ZDataFields(requestBody:Ice_Tablesets_ZDataFieldRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1284,7 +1534,14 @@ export function post_ZDataFields(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1303,10 +1560,10 @@ export function post_ZDataFields(requestBody:any, epicorHeaders?:Headers){
       @param FieldName Desc: FieldName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZDataFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZDataFieldRow
    */  
 export function get_ZDataFields_SystemCode_DataTableID_FieldName(SystemCode:string, DataTableID:string, FieldName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1321,7 +1578,14 @@ export function get_ZDataFields_SystemCode_DataTableID_FieldName(SystemCode:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZDataFieldRow)
           })
@@ -1338,15 +1602,15 @@ export function get_ZDataFields_SystemCode_DataTableID_FieldName(SystemCode:stri
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param FieldName Desc: FieldName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZDataFieldRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZDataFieldRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ZDataFields_SystemCode_DataTableID_FieldName(SystemCode:string, DataTableID:string, FieldName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ZDataFields_SystemCode_DataTableID_FieldName(SystemCode:string, DataTableID:string, FieldName:string, requestBody:Ice_Tablesets_ZDataFieldRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1360,7 +1624,14 @@ export function patch_ZDataFields_SystemCode_DataTableID_FieldName(SystemCode:st
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1377,7 +1648,7 @@ export function patch_ZDataFields_SystemCode_DataTableID_FieldName(SystemCode:st
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param FieldName Desc: FieldName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1396,7 +1667,14 @@ export function delete_ZDataFields_SystemCode_DataTableID_FieldName(SystemCode:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1417,10 +1695,10 @@ export function delete_ZDataFields_SystemCode_DataTableID_FieldName(SystemCode:s
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZKeyRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZKeyRow
    */  
 export function get_ZKeys(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1435,7 +1713,14 @@ export function get_ZKeys(select?:string, expand?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZKeyRow)
           })
@@ -1449,15 +1734,15 @@ export function get_ZKeys(select?:string, expand?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ZKeys
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZKeyRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZKeyRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ZKeyRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ZKeyRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ZKeys(requestBody:any, epicorHeaders?:Headers){
+export function post_ZKeys(requestBody:Ice_Tablesets_ZKeyRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1471,7 +1756,14 @@ export function post_ZKeys(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1491,10 +1783,10 @@ export function post_ZKeys(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZKeyRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZKeyRow
    */  
 export function get_ZKeys_SystemCode_DataTableID_KeyID(SystemCode:string, DataTableID:string, KeyID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1509,7 +1801,14 @@ export function get_ZKeys_SystemCode_DataTableID_KeyID(SystemCode:string, DataTa
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZKeyRow)
           })
@@ -1526,15 +1825,15 @@ export function get_ZKeys_SystemCode_DataTableID_KeyID(SystemCode:string, DataTa
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param KeyID Desc: KeyID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZKeyRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZKeyRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ZKeys_SystemCode_DataTableID_KeyID(SystemCode:string, DataTableID:string, KeyID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ZKeys_SystemCode_DataTableID_KeyID(SystemCode:string, DataTableID:string, KeyID:string, requestBody:Ice_Tablesets_ZKeyRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1548,7 +1847,14 @@ export function patch_ZKeys_SystemCode_DataTableID_KeyID(SystemCode:string, Data
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1565,7 +1871,7 @@ export function patch_ZKeys_SystemCode_DataTableID_KeyID(SystemCode:string, Data
       @param SystemCode Desc: SystemCode   Required: True   Allow empty value : True
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param KeyID Desc: KeyID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1584,7 +1890,14 @@ export function delete_ZKeys_SystemCode_DataTableID_KeyID(SystemCode:string, Dat
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1607,10 +1920,10 @@ export function delete_ZKeys_SystemCode_DataTableID_KeyID(SystemCode:string, Dat
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZKeyFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZKeyFieldRow
    */  
 export function get_ZKeys_SystemCode_DataTableID_KeyID_ZKeyFields(SystemCode:string, DataTableID:string, KeyID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1625,7 +1938,14 @@ export function get_ZKeys_SystemCode_DataTableID_KeyID_ZKeyFields(SystemCode:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZKeyFieldRow)
           })
@@ -1645,10 +1965,10 @@ export function get_ZKeys_SystemCode_DataTableID_KeyID_ZKeyFields(SystemCode:str
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZKeyFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZKeyFieldRow
    */  
 export function get_ZKeys_SystemCode_DataTableID_KeyID_ZKeyFields_SystemCode_DataTableID_KeyID_Seq(SystemCode:string, DataTableID:string, KeyID:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1663,7 +1983,14 @@ export function get_ZKeys_SystemCode_DataTableID_KeyID_ZKeyFields_SystemCode_Dat
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZKeyFieldRow)
           })
@@ -1683,10 +2010,10 @@ export function get_ZKeys_SystemCode_DataTableID_KeyID_ZKeyFields_SystemCode_Dat
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZKeyFieldRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZKeyFieldRow
    */  
 export function get_ZKeyFields(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1701,7 +2028,14 @@ export function get_ZKeyFields(select?:string, filter?:string, orderby?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZKeyFieldRow)
           })
@@ -1715,15 +2049,15 @@ export function get_ZKeyFields(select?:string, filter?:string, orderby?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ZKeyFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZKeyFieldRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ZKeyFieldRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ZKeyFieldRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ZKeyFieldRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ZKeyFields(requestBody:any, epicorHeaders?:Headers){
+export function post_ZKeyFields(requestBody:Ice_Tablesets_ZKeyFieldRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1737,7 +2071,14 @@ export function post_ZKeyFields(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1757,10 +2098,10 @@ export function post_ZKeyFields(requestBody:any, epicorHeaders?:Headers){
       @param Seq Desc: Seq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ZKeyFieldRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ZKeyFieldRow
    */  
 export function get_ZKeyFields_SystemCode_DataTableID_KeyID_Seq(SystemCode:string, DataTableID:string, KeyID:string, Seq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1775,7 +2116,14 @@ export function get_ZKeyFields_SystemCode_DataTableID_KeyID_Seq(SystemCode:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ZKeyFieldRow)
           })
@@ -1793,15 +2141,15 @@ export function get_ZKeyFields_SystemCode_DataTableID_KeyID_Seq(SystemCode:strin
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param KeyID Desc: KeyID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZKeyFieldRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ZKeyFieldRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ZKeyFields_SystemCode_DataTableID_KeyID_Seq(SystemCode:string, DataTableID:string, KeyID:string, Seq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ZKeyFields_SystemCode_DataTableID_KeyID_Seq(SystemCode:string, DataTableID:string, KeyID:string, Seq:string, requestBody:Ice_Tablesets_ZKeyFieldRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1815,7 +2163,14 @@ export function patch_ZKeyFields_SystemCode_DataTableID_KeyID_Seq(SystemCode:str
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1833,7 +2188,7 @@ export function patch_ZKeyFields_SystemCode_DataTableID_KeyID_Seq(SystemCode:str
       @param DataTableID Desc: DataTableID   Required: True   Allow empty value : True
       @param KeyID Desc: KeyID   Required: True   Allow empty value : True
       @param Seq Desc: Seq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1852,7 +2207,14 @@ export function delete_ZKeyFields_SystemCode_DataTableID_KeyID_Seq(SystemCode:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1872,10 +2234,10 @@ export function delete_ZKeyFields_SystemCode_DataTableID_KeyID_Seq(SystemCode:st
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZDataTableListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ZDataTableListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1890,7 +2252,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZDataTableListRow)
           })
@@ -1902,6 +2271,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1919,7 +2305,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -2015,15 +2401,22 @@ export function get_GetRows(whereClauseZDataTable:string, whereClauseZLookupLink
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2037,7 +2430,7 @@ export function get_GetRows(whereClauseZDataTable:string, whereClauseZLookupLink
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -2070,15 +2463,22 @@ export function get_GetByID(systemCode:string, dataTableID:string, epicorHeaders
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2090,30 +2490,37 @@ export function get_GetByID(systemCode:string, dataTableID:string, epicorHeaders
    Summary: Invoke method ChangeLikeDataFieldName
    Description: This method should be invoked when the LikeFieldName changes.
    OperationID: ChangeLikeDataFieldName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeLikeDataFieldName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeLikeDataFieldName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeLikeDataFieldName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeLikeDataFieldName(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeLikeDataFieldName(requestBody:ChangeLikeDataFieldName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeLikeDataFieldName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/ChangeLikeDataFieldName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeLikeDataFieldName_output)
           })
       .catch((error) => {
           reject(error)
@@ -2125,30 +2532,37 @@ export function post_ChangeLikeDataFieldName(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetKeyFields
    Description: Get key fields.
    OperationID: GetKeyFields
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetKeyFields_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetKeyFields_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetKeyFields_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetKeyFields(requestBody:any, epicorHeaders?:Headers){
+export function post_GetKeyFields(requestBody:GetKeyFields_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetKeyFields_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetKeyFields", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetKeyFields_output)
           })
       .catch((error) => {
           reject(error)
@@ -2160,30 +2574,37 @@ export function post_GetKeyFields(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetKeys
    Description: Get key fields for table
    OperationID: GetKeys
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetKeys_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetKeys_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetKeys_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetKeys(requestBody:any, epicorHeaders?:Headers){
+export function post_GetKeys(requestBody:GetKeys_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetKeys_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetKeys", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetKeys_output)
           })
       .catch((error) => {
           reject(error)
@@ -2195,30 +2616,37 @@ export function post_GetKeys(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateGuid
    Description: Validate the GUID
    OperationID: ValidateGuid
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateGuid_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateGuid_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateGuid_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateGuid(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateGuid(requestBody:ValidateGuid_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateGuid_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/ValidateGuid", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateGuid_output)
           })
       .catch((error) => {
           reject(error)
@@ -2230,30 +2658,37 @@ export function post_ValidateGuid(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateNFormatString
    Description: Get the formated string
    OperationID: ValidateNFormatString
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateNFormatString_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateNFormatString_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateNFormatString_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateNFormatString(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateNFormatString(requestBody:ValidateNFormatString_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateNFormatString_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/ValidateNFormatString", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateNFormatString_output)
           })
       .catch((error) => {
           reject(error)
@@ -2265,30 +2700,37 @@ export function post_ValidateNFormatString(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ValidateNFormatNumber
    Description: Get the formated number
    OperationID: ValidateNFormatNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateNFormatNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateNFormatNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateNFormatNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateNFormatNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateNFormatNumber(requestBody:ValidateNFormatNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateNFormatNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/ValidateNFormatNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateNFormatNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -2300,30 +2742,37 @@ export function post_ValidateNFormatNumber(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method Synchronize
    Description: Synchronize one table
    OperationID: Synchronize
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Synchronize_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Synchronize_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Synchronize_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Synchronize(requestBody:any, epicorHeaders?:Headers){
+export function post_Synchronize(requestBody:Synchronize_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Synchronize_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/Synchronize", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Synchronize_output)
           })
       .catch((error) => {
           reject(error)
@@ -2335,30 +2784,37 @@ export function post_Synchronize(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method SynchronizeClass
    Description: Synchronize all the tables of a class
    OperationID: SynchronizeClass
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SynchronizeClass_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SynchronizeClass_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SynchronizeClass_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SynchronizeClass(requestBody:any, epicorHeaders?:Headers){
+export function post_SynchronizeClass(requestBody:SynchronizeClass_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SynchronizeClass_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/SynchronizeClass", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SynchronizeClass_output)
           })
       .catch((error) => {
           reject(error)
@@ -2370,30 +2826,37 @@ export function post_SynchronizeClass(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method HasDBTable
    Description: Checks if DB table exists in database
    OperationID: HasDBTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/HasDBTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/HasDBTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/HasDBTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_HasDBTable(requestBody:any, epicorHeaders?:Headers){
+export function post_HasDBTable(requestBody:HasDBTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<HasDBTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/HasDBTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as HasDBTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -2405,30 +2868,37 @@ export function post_HasDBTable(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method HasZDataTable
    Description: Checks if DB table exists in database
    OperationID: HasZDataTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/HasZDataTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/HasZDataTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/HasZDataTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_HasZDataTable(requestBody:any, epicorHeaders?:Headers){
+export function post_HasZDataTable(requestBody:HasZDataTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<HasZDataTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/HasZDataTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as HasZDataTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -2440,30 +2910,37 @@ export function post_HasZDataTable(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetExtendedTableSyncInfo
    Description: Get extended table sync information.
    OperationID: GetExtendedTableSyncInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetExtendedTableSyncInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetExtendedTableSyncInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetExtendedTableSyncInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetExtendedTableSyncInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetExtendedTableSyncInfo(requestBody:GetExtendedTableSyncInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetExtendedTableSyncInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetExtendedTableSyncInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetExtendedTableSyncInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -2475,30 +2952,37 @@ export function post_GetExtendedTableSyncInfo(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetExtendedTableSyncDetailsMessage
    Description: Get extended table sync information.
    OperationID: GetExtendedTableSyncDetailsMessage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetExtendedTableSyncDetailsMessage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetExtendedTableSyncDetailsMessage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetExtendedTableSyncDetailsMessage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetExtendedTableSyncDetailsMessage(requestBody:any, epicorHeaders?:Headers){
+export function post_GetExtendedTableSyncDetailsMessage(requestBody:GetExtendedTableSyncDetailsMessage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetExtendedTableSyncDetailsMessage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetExtendedTableSyncDetailsMessage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetExtendedTableSyncDetailsMessage_output)
           })
       .catch((error) => {
           reject(error)
@@ -2510,30 +2994,37 @@ export function post_GetExtendedTableSyncDetailsMessage(requestBody:any, epicorH
    Summary: Invoke method CanModifyUDFieldFormat
    Description: Check if UD Field Format can be modified
    OperationID: CanModifyUDFieldFormat
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CanModifyUDFieldFormat_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CanModifyUDFieldFormat_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CanModifyUDFieldFormat_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CanModifyUDFieldFormat(requestBody:any, epicorHeaders?:Headers){
+export function post_CanModifyUDFieldFormat(requestBody:CanModifyUDFieldFormat_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CanModifyUDFieldFormat_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/CanModifyUDFieldFormat", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CanModifyUDFieldFormat_output)
           })
       .catch((error) => {
           reject(error)
@@ -2545,30 +3036,37 @@ export function post_CanModifyUDFieldFormat(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method ClassicFieldName
    Description: Check if UD Field Name is the classic fieldName
    OperationID: ClassicFieldName
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ClassicFieldName_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ClassicFieldName_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ClassicFieldName_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ClassicFieldName(requestBody:any, epicorHeaders?:Headers){
+export function post_ClassicFieldName(requestBody:ClassicFieldName_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ClassicFieldName_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/ClassicFieldName", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ClassicFieldName_output)
           })
       .catch((error) => {
           reject(error)
@@ -2580,30 +3078,37 @@ export function post_ClassicFieldName(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewZDataTable
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewZDataTable
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewZDataTable_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewZDataTable_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewZDataTable_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewZDataTable(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewZDataTable(requestBody:GetNewZDataTable_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewZDataTable_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetNewZDataTable", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewZDataTable_output)
           })
       .catch((error) => {
           reject(error)
@@ -2615,30 +3120,37 @@ export function post_GetNewZDataTable(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewZLookupLink
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewZLookupLink
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewZLookupLink_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewZLookupLink_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewZLookupLink_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewZLookupLink(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewZLookupLink(requestBody:GetNewZLookupLink_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewZLookupLink_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetNewZLookupLink", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewZLookupLink_output)
           })
       .catch((error) => {
           reject(error)
@@ -2650,30 +3162,37 @@ export function post_GetNewZLookupLink(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewZLinkColumn
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewZLinkColumn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewZLinkColumn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewZLinkColumn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewZLinkColumn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewZLinkColumn(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewZLinkColumn(requestBody:GetNewZLinkColumn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewZLinkColumn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetNewZLinkColumn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewZLinkColumn_output)
           })
       .catch((error) => {
           reject(error)
@@ -2685,30 +3204,37 @@ export function post_GetNewZLinkColumn(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewZLookupField
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewZLookupField
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewZLookupField_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewZLookupField_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewZLookupField_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewZLookupField(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewZLookupField(requestBody:GetNewZLookupField_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewZLookupField_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetNewZLookupField", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewZLookupField_output)
           })
       .catch((error) => {
           reject(error)
@@ -2720,30 +3246,37 @@ export function post_GetNewZLookupField(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewZDataField
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewZDataField
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewZDataField_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewZDataField_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewZDataField_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewZDataField(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewZDataField(requestBody:GetNewZDataField_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewZDataField_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetNewZDataField", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewZDataField_output)
           })
       .catch((error) => {
           reject(error)
@@ -2755,30 +3288,37 @@ export function post_GetNewZDataField(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewZKey
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewZKey
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewZKey_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewZKey_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewZKey_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewZKey(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewZKey(requestBody:GetNewZKey_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewZKey_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetNewZKey", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewZKey_output)
           })
       .catch((error) => {
           reject(error)
@@ -2790,30 +3330,37 @@ export function post_GetNewZKey(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewZKeyField
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewZKeyField
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewZKeyField_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewZKeyField_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewZKeyField_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewZKeyField(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewZKeyField(requestBody:GetNewZKeyField_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewZKeyField_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetNewZKeyField", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewZKeyField_output)
           })
       .catch((error) => {
           reject(error)
@@ -2825,30 +3372,37 @@ export function post_GetNewZKeyField(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2863,7 +3417,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -2905,15 +3459,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2925,7 +3486,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2949,15 +3510,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2969,7 +3537,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2993,15 +3561,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -3013,30 +3588,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -3048,30 +3630,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ZDataTableSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -3082,46 +3671,63 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZDataFieldRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ZDataFieldRow[],
+   "value":Ice_Tablesets_ZDataFieldRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZDataTableListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ZDataTableListRow[],
+   "value":Ice_Tablesets_ZDataTableListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZDataTableRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ZDataTableRow[],
+   "value":Ice_Tablesets_ZDataTableRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZKeyFieldRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ZKeyFieldRow[],
+   "value":Ice_Tablesets_ZKeyFieldRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZKeyRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ZKeyRow[],
+   "value":Ice_Tablesets_ZKeyRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZLinkColumnRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ZLinkColumnRow[],
+   "value":Ice_Tablesets_ZLinkColumnRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZLookupFieldRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ZLookupFieldRow[],
+   "value":Ice_Tablesets_ZLookupFieldRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ZLookupLinkRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ZLookupLinkRow[],
+   "value":Ice_Tablesets_ZLookupLinkRow,
 }
 
 export interface Ice_Tablesets_ZDataFieldRow{
@@ -3450,6 +4056,23 @@ export interface Ice_Tablesets_ZLookupLinkRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -3671,7 +4294,7 @@ export interface GetNewZDataField_input{
 export interface GetNewZDataField_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ZDataTableTableset[],
+   ds:Ice_Tablesets_ZDataTableTableset,
 }
 }
 
@@ -3687,7 +4310,7 @@ export interface GetNewZDataTable_input{
 export interface GetNewZDataTable_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ZDataTableTableset[],
+   ds:Ice_Tablesets_ZDataTableTableset,
 }
 }
 
@@ -3707,7 +4330,7 @@ export interface GetNewZKeyField_input{
 export interface GetNewZKeyField_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ZDataTableTableset[],
+   ds:Ice_Tablesets_ZDataTableTableset,
 }
 }
 
@@ -3725,7 +4348,7 @@ export interface GetNewZKey_input{
 export interface GetNewZKey_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ZDataTableTableset[],
+   ds:Ice_Tablesets_ZDataTableTableset,
 }
 }
 
@@ -3745,7 +4368,7 @@ export interface GetNewZLinkColumn_input{
 export interface GetNewZLinkColumn_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ZDataTableTableset[],
+   ds:Ice_Tablesets_ZDataTableTableset,
 }
 }
 
@@ -3765,7 +4388,7 @@ export interface GetNewZLookupField_input{
 export interface GetNewZLookupField_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ZDataTableTableset[],
+   ds:Ice_Tablesets_ZDataTableTableset,
 }
 }
 
@@ -3783,7 +4406,7 @@ export interface GetNewZLookupLink_input{
 export interface GetNewZLookupLink_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ZDataTableTableset[],
+   ds:Ice_Tablesets_ZDataTableTableset,
 }
 }
 
@@ -4277,7 +4900,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtZDataTableTableset[],
+   ds:Ice_Tablesets_UpdExtZDataTableTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4292,7 +4915,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ZDataTableTableset[],
+   ds:Ice_Tablesets_ZDataTableTableset,
 }
 }
 

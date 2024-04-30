@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.ContextMenuDataSvc
 // Description: Represents the ContextMenuDataSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuRow
    */  
 export function get_ContextMenuDatas(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_ContextMenuDatas(select?:string, expand?:string, filter?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuRow)
           })
@@ -118,15 +158,15 @@ export function get_ContextMenuDatas(select?:string, expand?:string, filter?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ContextMenuDatas
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ContextMenuRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ContextMenuRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ContextMenuRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ContextMenuRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ContextMenuDatas(requestBody:any, epicorHeaders?:Headers){
+export function post_ContextMenuDatas(requestBody:Ice_Tablesets_ContextMenuRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_ContextMenuDatas(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_ContextMenuDatas(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ContextMenuRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ContextMenuRow
    */  
 export function get_ContextMenuDatas_LikeID_ContextTypeCode(LikeID:string, ContextTypeCode:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_ContextMenuDatas_LikeID_ContextTypeCode(LikeID:string, Conte
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ContextMenuRow)
           })
@@ -193,15 +247,15 @@ export function get_ContextMenuDatas_LikeID_ContextTypeCode(LikeID:string, Conte
    OperationID: UpdateExt_ContextMenuData
       @param LikeID Desc: LikeID   Required: True   Allow empty value : True
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ContextMenuRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ContextMenuRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ContextMenuDatas_LikeID_ContextTypeCode(LikeID:string, ContextTypeCode:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ContextMenuDatas_LikeID_ContextTypeCode(LikeID:string, ContextTypeCode:string, requestBody:Ice_Tablesets_ContextMenuRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_ContextMenuDatas_LikeID_ContextTypeCode(LikeID:string, Con
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_ContextMenuDatas_LikeID_ContextTypeCode(LikeID:string, Con
    OperationID: DeleteUpdateExt_ContextMenuData
       @param LikeID Desc: LikeID   Required: True   Allow empty value : True
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_ContextMenuDatas_LikeID_ContextTypeCode(LikeID:string, Co
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_ContextMenuDatas_LikeID_ContextTypeCode(LikeID:string, Co
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuItemRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuItemRow
    */  
 export function get_ContextMenuDatas_LikeID_ContextTypeCode_ContextMenuItems(LikeID:string, ContextTypeCode:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_ContextMenuDatas_LikeID_ContextTypeCode_ContextMenuItems(Lik
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuItemRow)
           })
@@ -311,10 +386,10 @@ export function get_ContextMenuDatas_LikeID_ContextTypeCode_ContextMenuItems(Lik
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ContextMenuItemRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ContextMenuItemRow
    */  
 export function get_ContextMenuDatas_LikeID_ContextTypeCode_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID(LikeID:string, ContextTypeCode:string, ContextMenuID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_ContextMenuDatas_LikeID_ContextTypeCode_ContextMenuItems_Lik
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ContextMenuItemRow)
           })
@@ -350,10 +432,10 @@ export function get_ContextMenuDatas_LikeID_ContextTypeCode_ContextMenuItems_Lik
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuItemRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuItemRow
    */  
 export function get_ContextMenuItems(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_ContextMenuItems(select?:string, expand?:string, filter?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuItemRow)
           })
@@ -382,15 +471,15 @@ export function get_ContextMenuItems(select?:string, expand?:string, filter?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ContextMenuItems
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ContextMenuItemRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ContextMenuItemRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ContextMenuItemRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ContextMenuItemRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ContextMenuItems(requestBody:any, epicorHeaders?:Headers){
+export function post_ContextMenuItems(requestBody:Ice_Tablesets_ContextMenuItemRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -404,7 +493,14 @@ export function post_ContextMenuItems(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -424,10 +520,10 @@ export function post_ContextMenuItems(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ContextMenuItemRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ContextMenuItemRow
    */  
 export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID(LikeID:string, ContextTypeCode:string, ContextMenuID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -442,7 +538,14 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID(LikeID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ContextMenuItemRow)
           })
@@ -459,15 +562,15 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID(LikeID
       @param LikeID Desc: LikeID   Required: True   Allow empty value : True
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ContextMenuItemRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ContextMenuItemRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID(LikeID:string, ContextTypeCode:string, ContextMenuID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID(LikeID:string, ContextTypeCode:string, ContextMenuID:string, requestBody:Ice_Tablesets_ContextMenuItemRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -481,7 +584,14 @@ export function patch_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID(Like
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -498,7 +608,7 @@ export function patch_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID(Like
       @param LikeID Desc: LikeID   Required: True   Allow empty value : True
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -517,7 +627,14 @@ export function delete_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID(Lik
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -540,10 +657,10 @@ export function delete_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID(Lik
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyLikeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyLikeRow
    */  
 export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_AlternateKeyLikes(LikeID:string, ContextTypeCode:string, ContextMenuID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -558,7 +675,14 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Altern
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AlternateKeyLikeRow)
           })
@@ -578,10 +702,10 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Altern
       @param LikeField Desc: LikeField   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.AlternateKeyLikeRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.AlternateKeyLikeRow
    */  
 export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_AlternateKeyLikes_LikeID_ContextTypeCode_ContextMenuID_LikeField(LikeID:string, ContextTypeCode:string, ContextMenuID:string, LikeField:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -596,7 +720,14 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Altern
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_AlternateKeyLikeRow)
           })
@@ -620,10 +751,10 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Altern
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.LaunchOptionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.LaunchOptionRow
    */  
 export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_LaunchOptions(LikeID:string, ContextTypeCode:string, ContextMenuID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -638,7 +769,14 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Launch
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_LaunchOptionRow)
           })
@@ -659,10 +797,10 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Launch
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.LaunchOptionRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.LaunchOptionRow
    */  
 export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -677,7 +815,14 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Launch
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_LaunchOptionRow)
           })
@@ -701,10 +846,10 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Launch
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SearchOptionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SearchOptionRow
    */  
 export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_SearchOptions(LikeID:string, ContextTypeCode:string, ContextMenuID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -719,7 +864,14 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Search
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SearchOptionRow)
           })
@@ -740,10 +892,10 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Search
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.SearchOptionRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.SearchOptionRow
    */  
 export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -758,7 +910,14 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Search
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_SearchOptionRow)
           })
@@ -778,10 +937,10 @@ export function get_ContextMenuItems_LikeID_ContextTypeCode_ContextMenuID_Search
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyLikeRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyLikeRow
    */  
 export function get_AlternateKeyLikes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -796,7 +955,14 @@ export function get_AlternateKeyLikes(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AlternateKeyLikeRow)
           })
@@ -810,15 +976,15 @@ export function get_AlternateKeyLikes(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlternateKeyLikes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.AlternateKeyLikeRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.AlternateKeyLikeRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.AlternateKeyLikeRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.AlternateKeyLikeRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlternateKeyLikes(requestBody:any, epicorHeaders?:Headers){
+export function post_AlternateKeyLikes(requestBody:Ice_Tablesets_AlternateKeyLikeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -832,7 +998,14 @@ export function post_AlternateKeyLikes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -852,10 +1025,10 @@ export function post_AlternateKeyLikes(requestBody:any, epicorHeaders?:Headers){
       @param LikeField Desc: LikeField   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.AlternateKeyLikeRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.AlternateKeyLikeRow
    */  
 export function get_AlternateKeyLikes_LikeID_ContextTypeCode_ContextMenuID_LikeField(LikeID:string, ContextTypeCode:string, ContextMenuID:string, LikeField:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -870,7 +1043,14 @@ export function get_AlternateKeyLikes_LikeID_ContextTypeCode_ContextMenuID_LikeF
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_AlternateKeyLikeRow)
           })
@@ -888,15 +1068,15 @@ export function get_AlternateKeyLikes_LikeID_ContextTypeCode_ContextMenuID_LikeF
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
       @param LikeField Desc: LikeField   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.AlternateKeyLikeRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.AlternateKeyLikeRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlternateKeyLikes_LikeID_ContextTypeCode_ContextMenuID_LikeField(LikeID:string, ContextTypeCode:string, ContextMenuID:string, LikeField:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlternateKeyLikes_LikeID_ContextTypeCode_ContextMenuID_LikeField(LikeID:string, ContextTypeCode:string, ContextMenuID:string, LikeField:string, requestBody:Ice_Tablesets_AlternateKeyLikeRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -910,7 +1090,14 @@ export function patch_AlternateKeyLikes_LikeID_ContextTypeCode_ContextMenuID_Lik
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -928,7 +1115,7 @@ export function patch_AlternateKeyLikes_LikeID_ContextTypeCode_ContextMenuID_Lik
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
       @param LikeField Desc: LikeField   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -947,7 +1134,14 @@ export function delete_AlternateKeyLikes_LikeID_ContextTypeCode_ContextMenuID_Li
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -968,10 +1162,10 @@ export function delete_AlternateKeyLikes_LikeID_ContextTypeCode_ContextMenuID_Li
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.LaunchOptionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.LaunchOptionRow
    */  
 export function get_LaunchOptions(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -986,7 +1180,14 @@ export function get_LaunchOptions(select?:string, expand?:string, filter?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_LaunchOptionRow)
           })
@@ -1000,15 +1201,15 @@ export function get_LaunchOptions(select?:string, expand?:string, filter?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LaunchOptions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.LaunchOptionRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.LaunchOptionRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.LaunchOptionRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.LaunchOptionRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LaunchOptions(requestBody:any, epicorHeaders?:Headers){
+export function post_LaunchOptions(requestBody:Ice_Tablesets_LaunchOptionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1022,7 +1223,14 @@ export function post_LaunchOptions(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1043,10 +1251,10 @@ export function post_LaunchOptions(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.LaunchOptionRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.LaunchOptionRow
    */  
 export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1061,7 +1269,14 @@ export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_LaunchOptionRow)
           })
@@ -1079,15 +1294,15 @@ export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.LaunchOptionRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.LaunchOptionRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, requestBody:Ice_Tablesets_LaunchOptionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1101,7 +1316,14 @@ export function patch_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledF
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1119,7 +1341,7 @@ export function patch_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledF
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1138,7 +1360,14 @@ export function delete_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_Called
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1162,10 +1391,10 @@ export function delete_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_Called
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyBindingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyBindingRow
    */  
 export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_AlternateKeyBindings(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1180,7 +1409,14 @@ export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AlternateKeyBindingRow)
           })
@@ -1202,10 +1438,10 @@ export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param AlternateKeyBinding1 Desc: AlternateKeyBinding1   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.AlternateKeyBindingRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.AlternateKeyBindingRow
    */  
 export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_AlternateKeyBindings_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding_AlternateKeyBinding1(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, AlternateKeyBinding1:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1220,7 +1456,14 @@ export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_AlternateKeyBindingRow)
           })
@@ -1244,10 +1487,10 @@ export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyRow
    */  
 export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_AlternateKeys(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1262,7 +1505,14 @@ export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AlternateKeyRow)
           })
@@ -1283,10 +1533,10 @@ export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.AlternateKeyRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.AlternateKeyRow
    */  
 export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_AlternateKeys_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1301,7 +1551,14 @@ export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_AlternateKeyRow)
           })
@@ -1321,10 +1578,10 @@ export function get_LaunchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyBindingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyBindingRow
    */  
 export function get_AlternateKeyBindings(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1339,7 +1596,14 @@ export function get_AlternateKeyBindings(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AlternateKeyBindingRow)
           })
@@ -1353,15 +1617,15 @@ export function get_AlternateKeyBindings(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlternateKeyBindings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.AlternateKeyBindingRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.AlternateKeyBindingRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.AlternateKeyBindingRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.AlternateKeyBindingRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlternateKeyBindings(requestBody:any, epicorHeaders?:Headers){
+export function post_AlternateKeyBindings(requestBody:Ice_Tablesets_AlternateKeyBindingRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1375,7 +1639,14 @@ export function post_AlternateKeyBindings(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1397,10 +1668,10 @@ export function post_AlternateKeyBindings(requestBody:any, epicorHeaders?:Header
       @param AlternateKeyBinding1 Desc: AlternateKeyBinding1   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.AlternateKeyBindingRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.AlternateKeyBindingRow
    */  
 export function get_AlternateKeyBindings_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding_AlternateKeyBinding1(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, AlternateKeyBinding1:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1415,7 +1686,14 @@ export function get_AlternateKeyBindings_LikeID_ContextTypeCode_ContextMenuID_Ca
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_AlternateKeyBindingRow)
           })
@@ -1435,15 +1713,15 @@ export function get_AlternateKeyBindings_LikeID_ContextTypeCode_ContextMenuID_Ca
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
       @param AlternateKeyBinding1 Desc: AlternateKeyBinding1   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.AlternateKeyBindingRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.AlternateKeyBindingRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlternateKeyBindings_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding_AlternateKeyBinding1(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, AlternateKeyBinding1:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlternateKeyBindings_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding_AlternateKeyBinding1(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, AlternateKeyBinding1:string, requestBody:Ice_Tablesets_AlternateKeyBindingRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1457,7 +1735,14 @@ export function patch_AlternateKeyBindings_LikeID_ContextTypeCode_ContextMenuID_
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1477,7 +1762,7 @@ export function patch_AlternateKeyBindings_LikeID_ContextTypeCode_ContextMenuID_
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
       @param AlternateKeyBinding1 Desc: AlternateKeyBinding1   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1496,7 +1781,14 @@ export function delete_AlternateKeyBindings_LikeID_ContextTypeCode_ContextMenuID
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1516,10 +1808,10 @@ export function delete_AlternateKeyBindings_LikeID_ContextTypeCode_ContextMenuID
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.AlternateKeyRow
    */  
 export function get_AlternateKeys(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1534,7 +1826,14 @@ export function get_AlternateKeys(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AlternateKeyRow)
           })
@@ -1548,15 +1847,15 @@ export function get_AlternateKeys(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_AlternateKeys
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.AlternateKeyRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.AlternateKeyRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.AlternateKeyRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.AlternateKeyRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AlternateKeys(requestBody:any, epicorHeaders?:Headers){
+export function post_AlternateKeys(requestBody:Ice_Tablesets_AlternateKeyRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1570,7 +1869,14 @@ export function post_AlternateKeys(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1591,10 +1897,10 @@ export function post_AlternateKeys(requestBody:any, epicorHeaders?:Headers){
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.AlternateKeyRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.AlternateKeyRow
    */  
 export function get_AlternateKeys_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1609,7 +1915,14 @@ export function get_AlternateKeys_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_AlternateKeyRow)
           })
@@ -1628,15 +1941,15 @@ export function get_AlternateKeys_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.AlternateKeyRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.AlternateKeyRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_AlternateKeys_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_AlternateKeys_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, requestBody:Ice_Tablesets_AlternateKeyRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1650,7 +1963,14 @@ export function patch_AlternateKeys_LikeID_ContextTypeCode_ContextMenuID_CalledF
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1669,7 +1989,7 @@ export function patch_AlternateKeys_LikeID_ContextTypeCode_ContextMenuID_CalledF
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1688,7 +2008,14 @@ export function delete_AlternateKeys_LikeID_ContextTypeCode_ContextMenuID_Called
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1709,10 +2036,10 @@ export function delete_AlternateKeys_LikeID_ContextTypeCode_ContextMenuID_Called
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SearchOptionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SearchOptionRow
    */  
 export function get_SearchOptions(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1727,7 +2054,14 @@ export function get_SearchOptions(select?:string, expand?:string, filter?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SearchOptionRow)
           })
@@ -1741,15 +2075,15 @@ export function get_SearchOptions(select?:string, expand?:string, filter?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SearchOptions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.SearchOptionRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.SearchOptionRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.SearchOptionRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.SearchOptionRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SearchOptions(requestBody:any, epicorHeaders?:Headers){
+export function post_SearchOptions(requestBody:Ice_Tablesets_SearchOptionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1763,7 +2097,14 @@ export function post_SearchOptions(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1784,10 +2125,10 @@ export function post_SearchOptions(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.SearchOptionRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.SearchOptionRow
    */  
 export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1802,7 +2143,14 @@ export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_SearchOptionRow)
           })
@@ -1820,15 +2168,15 @@ export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.SearchOptionRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.SearchOptionRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, requestBody:Ice_Tablesets_SearchOptionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1842,7 +2190,14 @@ export function patch_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledF
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1860,7 +2215,7 @@ export function patch_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledF
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1879,7 +2234,14 @@ export function delete_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_Called
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1903,10 +2265,10 @@ export function delete_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_Called
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.WhereClauseBindingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.WhereClauseBindingRow
    */  
 export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_WhereClauseBindings(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1921,7 +2283,14 @@ export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_WhereClauseBindingRow)
           })
@@ -1942,10 +2311,10 @@ export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.WhereClauseBindingRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.WhereClauseBindingRow
    */  
 export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_WhereClauseBindings_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1960,7 +2329,14 @@ export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_WhereClauseBindingRow)
           })
@@ -1984,10 +2360,10 @@ export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.WhereClauseTokenRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.WhereClauseTokenRow
    */  
 export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_WhereClauseTokens(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2002,7 +2378,14 @@ export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_WhereClauseTokenRow)
           })
@@ -2024,10 +2407,10 @@ export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param BindingToken Desc: BindingToken   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.WhereClauseTokenRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.WhereClauseTokenRow
    */  
 export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_WhereClauseTokens_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding_BindingToken(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, BindingToken:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2042,7 +2425,14 @@ export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_WhereClauseTokenRow)
           })
@@ -2062,10 +2452,10 @@ export function get_SearchOptions_LikeID_ContextTypeCode_ContextMenuID_CalledFro
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.WhereClauseBindingRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.WhereClauseBindingRow
    */  
 export function get_WhereClauseBindings(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2080,7 +2470,14 @@ export function get_WhereClauseBindings(select?:string, filter?:string, orderby?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_WhereClauseBindingRow)
           })
@@ -2094,15 +2491,15 @@ export function get_WhereClauseBindings(select?:string, filter?:string, orderby?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_WhereClauseBindings
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.WhereClauseBindingRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.WhereClauseBindingRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.WhereClauseBindingRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.WhereClauseBindingRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_WhereClauseBindings(requestBody:any, epicorHeaders?:Headers){
+export function post_WhereClauseBindings(requestBody:Ice_Tablesets_WhereClauseBindingRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2116,7 +2513,14 @@ export function post_WhereClauseBindings(requestBody:any, epicorHeaders?:Headers
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2137,10 +2541,10 @@ export function post_WhereClauseBindings(requestBody:any, epicorHeaders?:Headers
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.WhereClauseBindingRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.WhereClauseBindingRow
    */  
 export function get_WhereClauseBindings_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2155,7 +2559,14 @@ export function get_WhereClauseBindings_LikeID_ContextTypeCode_ContextMenuID_Cal
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_WhereClauseBindingRow)
           })
@@ -2174,15 +2585,15 @@ export function get_WhereClauseBindings_LikeID_ContextTypeCode_ContextMenuID_Cal
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.WhereClauseBindingRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.WhereClauseBindingRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_WhereClauseBindings_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_WhereClauseBindings_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, requestBody:Ice_Tablesets_WhereClauseBindingRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2196,7 +2607,14 @@ export function patch_WhereClauseBindings_LikeID_ContextTypeCode_ContextMenuID_C
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2215,7 +2633,7 @@ export function patch_WhereClauseBindings_LikeID_ContextTypeCode_ContextMenuID_C
       @param ContextMenuID Desc: ContextMenuID   Required: True   Allow empty value : True
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2234,7 +2652,14 @@ export function delete_WhereClauseBindings_LikeID_ContextTypeCode_ContextMenuID_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2254,10 +2679,10 @@ export function delete_WhereClauseBindings_LikeID_ContextTypeCode_ContextMenuID_
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.WhereClauseTokenRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.WhereClauseTokenRow
    */  
 export function get_WhereClauseTokens(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2272,7 +2697,14 @@ export function get_WhereClauseTokens(select?:string, filter?:string, orderby?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_WhereClauseTokenRow)
           })
@@ -2286,15 +2718,15 @@ export function get_WhereClauseTokens(select?:string, filter?:string, orderby?:s
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_WhereClauseTokens
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.WhereClauseTokenRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.WhereClauseTokenRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.WhereClauseTokenRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.WhereClauseTokenRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_WhereClauseTokens(requestBody:any, epicorHeaders?:Headers){
+export function post_WhereClauseTokens(requestBody:Ice_Tablesets_WhereClauseTokenRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2308,7 +2740,14 @@ export function post_WhereClauseTokens(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2330,10 +2769,10 @@ export function post_WhereClauseTokens(requestBody:any, epicorHeaders?:Headers){
       @param BindingToken Desc: BindingToken   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.WhereClauseTokenRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.WhereClauseTokenRow
    */  
 export function get_WhereClauseTokens_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding_BindingToken(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, BindingToken:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2348,7 +2787,14 @@ export function get_WhereClauseTokens_LikeID_ContextTypeCode_ContextMenuID_Calle
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_WhereClauseTokenRow)
           })
@@ -2368,15 +2814,15 @@ export function get_WhereClauseTokens_LikeID_ContextTypeCode_ContextMenuID_Calle
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
       @param BindingToken Desc: BindingToken   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.WhereClauseTokenRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.WhereClauseTokenRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_WhereClauseTokens_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding_BindingToken(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, BindingToken:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_WhereClauseTokens_LikeID_ContextTypeCode_ContextMenuID_CalledFrom_CurrentBinding_BindingToken(LikeID:string, ContextTypeCode:string, ContextMenuID:string, CalledFrom:string, CurrentBinding:string, BindingToken:string, requestBody:Ice_Tablesets_WhereClauseTokenRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2390,7 +2836,14 @@ export function patch_WhereClauseTokens_LikeID_ContextTypeCode_ContextMenuID_Cal
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2410,7 +2863,7 @@ export function patch_WhereClauseTokens_LikeID_ContextTypeCode_ContextMenuID_Cal
       @param CalledFrom Desc: CalledFrom   Required: True   Allow empty value : True
       @param CurrentBinding Desc: CurrentBinding   Required: True   Allow empty value : True
       @param BindingToken Desc: BindingToken   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2429,7 +2882,14 @@ export function delete_WhereClauseTokens_LikeID_ContextTypeCode_ContextMenuID_Ca
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2449,10 +2909,10 @@ export function delete_WhereClauseTokens_LikeID_ContextTypeCode_ContextMenuID_Ca
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuItemTempRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuItemTempRow
    */  
 export function get_ContextMenuItemTemps(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2467,7 +2927,14 @@ export function get_ContextMenuItemTemps(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuItemTempRow)
           })
@@ -2481,15 +2948,15 @@ export function get_ContextMenuItemTemps(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ContextMenuItemTemps
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ContextMenuItemTempRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ContextMenuItemTempRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ContextMenuItemTempRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ContextMenuItemTempRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ContextMenuItemTemps(requestBody:any, epicorHeaders?:Headers){
+export function post_ContextMenuItemTemps(requestBody:Ice_Tablesets_ContextMenuItemTempRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2503,7 +2970,14 @@ export function post_ContextMenuItemTemps(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2520,10 +2994,10 @@ export function post_ContextMenuItemTemps(requestBody:any, epicorHeaders?:Header
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ContextMenuItemTempRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ContextMenuItemTempRow
    */  
 export function get_ContextMenuItemTemps_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2538,7 +3012,14 @@ export function get_ContextMenuItemTemps_SysRowID(SysRowID:string, select?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ContextMenuItemTempRow)
           })
@@ -2553,15 +3034,15 @@ export function get_ContextMenuItemTemps_SysRowID(SysRowID:string, select?:strin
    Description: Calls UpdateExt to update ContextMenuItemTemp. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_ContextMenuItemTemp
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ContextMenuItemTempRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ContextMenuItemTempRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ContextMenuItemTemps_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ContextMenuItemTemps_SysRowID(SysRowID:string, requestBody:Ice_Tablesets_ContextMenuItemTempRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2575,7 +3056,14 @@ export function patch_ContextMenuItemTemps_SysRowID(SysRowID:string, requestBody
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2590,7 +3078,7 @@ export function patch_ContextMenuItemTemps_SysRowID(SysRowID:string, requestBody
    Description: Call UpdateExt to delete ContextMenuItemTemp item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_ContextMenuItemTemp
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2609,7 +3097,14 @@ export function delete_ContextMenuItemTemps_SysRowID(SysRowID:string, epicorHead
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2629,10 +3124,10 @@ export function delete_ContextMenuItemTemps_SysRowID(SysRowID:string, epicorHead
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuTempRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuTempRow
    */  
 export function get_ContextMenuTemps(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2647,7 +3142,14 @@ export function get_ContextMenuTemps(select?:string, filter?:string, orderby?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuTempRow)
           })
@@ -2661,15 +3163,15 @@ export function get_ContextMenuTemps(select?:string, filter?:string, orderby?:st
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ContextMenuTemps
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ContextMenuTempRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ContextMenuTempRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ContextMenuTempRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ContextMenuTempRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ContextMenuTemps(requestBody:any, epicorHeaders?:Headers){
+export function post_ContextMenuTemps(requestBody:Ice_Tablesets_ContextMenuTempRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2683,7 +3185,14 @@ export function post_ContextMenuTemps(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2700,10 +3209,10 @@ export function post_ContextMenuTemps(requestBody:any, epicorHeaders?:Headers){
       @param SysRowID Desc: SysRowID   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ContextMenuTempRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ContextMenuTempRow
    */  
 export function get_ContextMenuTemps_SysRowID(SysRowID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2718,7 +3227,14 @@ export function get_ContextMenuTemps_SysRowID(SysRowID:string, select?:string, f
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ContextMenuTempRow)
           })
@@ -2733,15 +3249,15 @@ export function get_ContextMenuTemps_SysRowID(SysRowID:string, select?:string, f
    Description: Calls UpdateExt to update ContextMenuTemp. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_ContextMenuTemp
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ContextMenuTempRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ContextMenuTempRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ContextMenuTemps_SysRowID(SysRowID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ContextMenuTemps_SysRowID(SysRowID:string, requestBody:Ice_Tablesets_ContextMenuTempRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2755,7 +3271,14 @@ export function patch_ContextMenuTemps_SysRowID(SysRowID:string, requestBody:any
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2770,7 +3293,7 @@ export function patch_ContextMenuTemps_SysRowID(SysRowID:string, requestBody:any
    Description: Call UpdateExt to delete ContextMenuTemp item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_ContextMenuTemp
       @param SysRowID Desc: SysRowID   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2789,7 +3312,14 @@ export function delete_ContextMenuTemps_SysRowID(SysRowID:string, epicorHeaders?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2809,10 +3339,10 @@ export function delete_ContextMenuTemps_SysRowID(SysRowID:string, epicorHeaders?
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextValidationRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextValidationRow
    */  
 export function get_ContextValidations(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2827,7 +3357,14 @@ export function get_ContextValidations(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextValidationRow)
           })
@@ -2841,15 +3378,15 @@ export function get_ContextValidations(select?:string, filter?:string, orderby?:
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ContextValidations
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ContextValidationRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ContextValidationRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ContextValidationRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ContextValidationRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ContextValidations(requestBody:any, epicorHeaders?:Headers){
+export function post_ContextValidations(requestBody:Ice_Tablesets_ContextValidationRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2863,7 +3400,14 @@ export function post_ContextValidations(requestBody:any, epicorHeaders?:Headers)
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2882,10 +3426,10 @@ export function post_ContextValidations(requestBody:any, epicorHeaders?:Headers)
       @param ValidationAdapter Desc: ValidationAdapter   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ContextValidationRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ContextValidationRow
    */  
 export function get_ContextValidations_LikeID_ContextTypeCode_ValidationAdapter(LikeID:string, ContextTypeCode:string, ValidationAdapter:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2900,7 +3444,14 @@ export function get_ContextValidations_LikeID_ContextTypeCode_ValidationAdapter(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ContextValidationRow)
           })
@@ -2917,15 +3468,15 @@ export function get_ContextValidations_LikeID_ContextTypeCode_ValidationAdapter(
       @param LikeID Desc: LikeID   Required: True   Allow empty value : True
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
       @param ValidationAdapter Desc: ValidationAdapter   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ContextValidationRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ContextValidationRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ContextValidations_LikeID_ContextTypeCode_ValidationAdapter(LikeID:string, ContextTypeCode:string, ValidationAdapter:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ContextValidations_LikeID_ContextTypeCode_ValidationAdapter(LikeID:string, ContextTypeCode:string, ValidationAdapter:string, requestBody:Ice_Tablesets_ContextValidationRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2939,7 +3490,14 @@ export function patch_ContextValidations_LikeID_ContextTypeCode_ValidationAdapte
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2956,7 +3514,7 @@ export function patch_ContextValidations_LikeID_ContextTypeCode_ValidationAdapte
       @param LikeID Desc: LikeID   Required: True   Allow empty value : True
       @param ContextTypeCode Desc: ContextTypeCode   Required: True   Allow empty value : True
       @param ValidationAdapter Desc: ValidationAdapter   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2975,7 +3533,14 @@ export function delete_ContextValidations_LikeID_ContextTypeCode_ValidationAdapt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2995,10 +3560,10 @@ export function delete_ContextValidations_LikeID_ContextTypeCode_ValidationAdapt
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ContextMenuListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -3013,7 +3578,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuListRow)
           })
@@ -3025,6 +3597,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -3047,7 +3636,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -3188,15 +3777,22 @@ export function get_GetRows(whereClauseContextMenu:string, whereClauseContextMen
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -3210,7 +3806,7 @@ export function get_GetRows(whereClauseContextMenu:string, whereClauseContextMen
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -3243,15 +3839,22 @@ export function get_GetByID(likeID:string, contextTypeCode:string, epicorHeaders
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3266,7 +3869,7 @@ export function get_GetByID(likeID:string, contextTypeCode:string, epicorHeaders
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -3308,15 +3911,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3328,7 +3938,7 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetCustomRows
    Description: Returns a dataset containing all rows that satisfy the where clauses.
    OperationID: GetCustomRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCustomRows_output
@@ -3341,15 +3951,22 @@ export function post_GetCustomRows(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCustomRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetCustomRows", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCustomRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -3361,30 +3978,37 @@ export function post_GetCustomRows(epicorHeaders?:Headers){
    Summary: Invoke method GetContextMenuLikeList
    Description: Get the Context Menu as Collection of LikeListInfo records
    OperationID: GetContextMenuLikeList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextMenuLikeList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContextMenuLikeList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContextMenuLikeList(requestBody:GetContextMenuLikeList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextMenuLikeList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetContextMenuLikeList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextMenuLikeList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3396,30 +4020,37 @@ export function post_GetContextMenuLikeList(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetContextMenuLikeListItem
    Description: Get the LikeListInfo item that represents the Context Menu Item
    OperationID: GetContextMenuLikeListItem
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeListItem_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeListItem_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextMenuLikeListItem_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContextMenuLikeListItem(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContextMenuLikeListItem(requestBody:GetContextMenuLikeListItem_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextMenuLikeListItem_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetContextMenuLikeListItem", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextMenuLikeListItem_output)
           })
       .catch((error) => {
           reject(error)
@@ -3431,30 +4062,37 @@ export function post_GetContextMenuLikeListItem(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetContextMenuLikeListItems
    Description: Get the list of LikeListInfo items that represent the Context Menu Items
    OperationID: GetContextMenuLikeListItems
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeListItems_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeListItems_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextMenuLikeListItems_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContextMenuLikeListItems(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContextMenuLikeListItems(requestBody:GetContextMenuLikeListItems_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextMenuLikeListItems_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetContextMenuLikeListItems", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextMenuLikeListItems_output)
           })
       .catch((error) => {
           reject(error)
@@ -3466,30 +4104,37 @@ export function post_GetContextMenuLikeListItems(requestBody:any, epicorHeaders?
    Summary: Invoke method GetContextMenuLikeDetailItem
    Description: Get the LikeListInfo item that represents the Detailed Context Menu Item with search
    OperationID: GetContextMenuLikeDetailItem
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeDetailItem_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeDetailItem_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextMenuLikeDetailItem_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContextMenuLikeDetailItem(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContextMenuLikeDetailItem(requestBody:GetContextMenuLikeDetailItem_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextMenuLikeDetailItem_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetContextMenuLikeDetailItem", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextMenuLikeDetailItem_output)
           })
       .catch((error) => {
           reject(error)
@@ -3501,30 +4146,37 @@ export function post_GetContextMenuLikeDetailItem(requestBody:any, epicorHeaders
    Summary: Invoke method GetContextMenuLikeDetailItems
    Description: Get the list of LikeListInfo items that represent the Detailed Context Menu Item with search
    OperationID: GetContextMenuLikeDetailItems
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeDetailItems_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeDetailItems_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextMenuLikeDetailItems_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContextMenuLikeDetailItems(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContextMenuLikeDetailItems(requestBody:GetContextMenuLikeDetailItems_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextMenuLikeDetailItems_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetContextMenuLikeDetailItems", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextMenuLikeDetailItems_output)
           })
       .catch((error) => {
           reject(error)
@@ -3536,30 +4188,37 @@ export function post_GetContextMenuLikeDetailItems(requestBody:any, epicorHeader
    Summary: Invoke method UpdateContextMenuLikeItems
    Description: Updates the context menu XML document based upon the update mode.
    OperationID: UpdateContextMenuLikeItems
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateContextMenuLikeItems_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateContextMenuLikeItems_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateContextMenuLikeItems_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateContextMenuLikeItems(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateContextMenuLikeItems(requestBody:UpdateContextMenuLikeItems_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateContextMenuLikeItems_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/UpdateContextMenuLikeItems", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateContextMenuLikeItems_output)
           })
       .catch((error) => {
           reject(error)
@@ -3571,30 +4230,37 @@ export function post_UpdateContextMenuLikeItems(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetContextMenuLikeItemForLayer
    Description: Gets the context menu item for the given like and all it's child nodes for the specified layer.
    OperationID: GetContextMenuLikeItemForLayer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeItemForLayer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeItemForLayer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextMenuLikeItemForLayer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContextMenuLikeItemForLayer(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContextMenuLikeItemForLayer(requestBody:GetContextMenuLikeItemForLayer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextMenuLikeItemForLayer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetContextMenuLikeItemForLayer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextMenuLikeItemForLayer_output)
           })
       .catch((error) => {
           reject(error)
@@ -3606,30 +4272,37 @@ export function post_GetContextMenuLikeItemForLayer(requestBody:any, epicorHeade
    Summary: Invoke method GetContextMenuLikeHeaderByLikeID
    Description: Gets the context menu item for the given like and all it's child nodes for the specified layer.
    OperationID: GetContextMenuLikeHeaderByLikeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeHeaderByLikeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeHeaderByLikeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextMenuLikeHeaderByLikeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContextMenuLikeHeaderByLikeID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContextMenuLikeHeaderByLikeID(requestBody:GetContextMenuLikeHeaderByLikeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextMenuLikeHeaderByLikeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetContextMenuLikeHeaderByLikeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextMenuLikeHeaderByLikeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3641,30 +4314,37 @@ export function post_GetContextMenuLikeHeaderByLikeID(requestBody:any, epicorHea
    Summary: Invoke method GetContextMenuLikeHeader
    Description: Gets the context menu item for the given like and all it's child nodes for the specified layer.
    OperationID: GetContextMenuLikeHeader
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeHeader_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContextMenuLikeHeader_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextMenuLikeHeader_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContextMenuLikeHeader(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContextMenuLikeHeader(requestBody:GetContextMenuLikeHeader_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextMenuLikeHeader_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetContextMenuLikeHeader", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextMenuLikeHeader_output)
           })
       .catch((error) => {
           reject(error)
@@ -3676,30 +4356,37 @@ export function post_GetContextMenuLikeHeader(requestBody:any, epicorHeaders?:He
    Summary: Invoke method AddNewQuickSearch
    Description: Adds a QS context menu item to the context menu XML stored in XXXDef.
    OperationID: AddNewQuickSearch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddNewQuickSearch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddNewQuickSearch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddNewQuickSearch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddNewQuickSearch(requestBody:any, epicorHeaders?:Headers){
+export function post_AddNewQuickSearch(requestBody:AddNewQuickSearch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddNewQuickSearch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/AddNewQuickSearch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddNewQuickSearch_output)
           })
       .catch((error) => {
           reject(error)
@@ -3711,30 +4398,37 @@ export function post_AddNewQuickSearch(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteQuickSearchOption
    Description: Deletes the specified Quick Search from the context menu XML stored in XXXDef.
    OperationID: DeleteQuickSearchOption
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteQuickSearchOption_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteQuickSearchOption_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteQuickSearchOption_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteQuickSearchOption(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteQuickSearchOption(requestBody:DeleteQuickSearchOption_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteQuickSearchOption_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/DeleteQuickSearchOption", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteQuickSearchOption_output)
           })
       .catch((error) => {
           reject(error)
@@ -3746,7 +4440,7 @@ export function post_DeleteQuickSearchOption(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetContextMenuDataList
    Description: Get List of existing Context Menu data.
    OperationID: GetContextMenuDataList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextMenuDataList_output
@@ -3759,15 +4453,22 @@ export function post_GetContextMenuDataList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextMenuDataList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetContextMenuDataList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextMenuDataList_output)
           })
       .catch((error) => {
           reject(error)
@@ -3779,30 +4480,37 @@ export function post_GetContextMenuDataList(epicorHeaders?:Headers){
    Summary: Invoke method CustomGetByID
    Description: Get By ID of existing ContextMenu from Temp.
    OperationID: CustomGetByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CustomGetByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CustomGetByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CustomGetByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustomGetByID(requestBody:any, epicorHeaders?:Headers){
+export function post_CustomGetByID(requestBody:CustomGetByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CustomGetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/CustomGetByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CustomGetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3814,30 +4522,37 @@ export function post_CustomGetByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CustomGetByIDorError
    Description: Get By ID of existing ContextMenu from Temp.
    OperationID: CustomGetByIDorError
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CustomGetByIDorError_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CustomGetByIDorError_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CustomGetByIDorError_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CustomGetByIDorError(requestBody:any, epicorHeaders?:Headers){
+export function post_CustomGetByIDorError(requestBody:CustomGetByIDorError_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CustomGetByIDorError_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/CustomGetByIDorError", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CustomGetByIDorError_output)
           })
       .catch((error) => {
           reject(error)
@@ -3849,30 +4564,37 @@ export function post_CustomGetByIDorError(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method LikeIDChanging
    Description: Likeid changing validataion.
    OperationID: LikeIDChanging
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LikeIDChanging_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LikeIDChanging_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LikeIDChanging_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LikeIDChanging(requestBody:any, epicorHeaders?:Headers){
+export function post_LikeIDChanging(requestBody:LikeIDChanging_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LikeIDChanging_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/LikeIDChanging", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LikeIDChanging_output)
           })
       .catch((error) => {
           reject(error)
@@ -3884,30 +4606,37 @@ export function post_LikeIDChanging(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ValidateLikeID
    Description: Checks if the LikeID string would make a valid XML node name
    OperationID: ValidateLikeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateLikeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateLikeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateLikeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateLikeID(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateLikeID(requestBody:ValidateLikeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateLikeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/ValidateLikeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateLikeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3919,30 +4648,37 @@ export function post_ValidateLikeID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method IsValidLikeID
    Description: Checks if the given LikeID does not start with a reserved key word used in the base Context Menu
    OperationID: IsValidLikeID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/IsValidLikeID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/IsValidLikeID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/IsValidLikeID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_IsValidLikeID(requestBody:any, epicorHeaders?:Headers){
+export function post_IsValidLikeID(requestBody:IsValidLikeID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<IsValidLikeID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/IsValidLikeID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as IsValidLikeID_output)
           })
       .catch((error) => {
           reject(error)
@@ -3953,30 +4689,37 @@ export function post_IsValidLikeID(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetContextMenuRows
    OperationID: GetContextMenuRows
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetContextMenuRows_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetContextMenuRows_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetContextMenuRows_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetContextMenuRows(requestBody:any, epicorHeaders?:Headers){
+export function post_GetContextMenuRows(requestBody:GetContextMenuRows_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetContextMenuRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetContextMenuRows", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetContextMenuRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -3988,7 +4731,7 @@ export function post_GetContextMenuRows(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method CustomizationRights
    Description: Return if user can customize.
    OperationID: CustomizationRights
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/CustomizationRights_output
@@ -4001,15 +4744,22 @@ export function post_CustomizationRights(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CustomizationRights_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/CustomizationRights", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CustomizationRights_output)
           })
       .catch((error) => {
           reject(error)
@@ -4021,30 +4771,37 @@ export function post_CustomizationRights(epicorHeaders?:Headers){
    Summary: Invoke method GetNewContextMenu
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewContextMenu
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewContextMenu_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewContextMenu_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewContextMenu_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewContextMenu(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewContextMenu(requestBody:GetNewContextMenu_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewContextMenu_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetNewContextMenu", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewContextMenu_output)
           })
       .catch((error) => {
           reject(error)
@@ -4056,30 +4813,37 @@ export function post_GetNewContextMenu(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewContextMenuItem
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewContextMenuItem
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewContextMenuItem_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewContextMenuItem_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewContextMenuItem_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewContextMenuItem(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewContextMenuItem(requestBody:GetNewContextMenuItem_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewContextMenuItem_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetNewContextMenuItem", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewContextMenuItem_output)
           })
       .catch((error) => {
           reject(error)
@@ -4091,30 +4855,37 @@ export function post_GetNewContextMenuItem(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewAlternateKeyLike
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlternateKeyLike
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlternateKeyLike_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlternateKeyLike_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlternateKeyLike_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlternateKeyLike(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlternateKeyLike(requestBody:GetNewAlternateKeyLike_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlternateKeyLike_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetNewAlternateKeyLike", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlternateKeyLike_output)
           })
       .catch((error) => {
           reject(error)
@@ -4126,30 +4897,37 @@ export function post_GetNewAlternateKeyLike(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetNewLaunchOption
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLaunchOption
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLaunchOption_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLaunchOption_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLaunchOption_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLaunchOption(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLaunchOption(requestBody:GetNewLaunchOption_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLaunchOption_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetNewLaunchOption", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLaunchOption_output)
           })
       .catch((error) => {
           reject(error)
@@ -4161,30 +4939,37 @@ export function post_GetNewLaunchOption(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewAlternateKeyBinding
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlternateKeyBinding
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlternateKeyBinding_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlternateKeyBinding_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlternateKeyBinding_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlternateKeyBinding(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlternateKeyBinding(requestBody:GetNewAlternateKeyBinding_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlternateKeyBinding_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetNewAlternateKeyBinding", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlternateKeyBinding_output)
           })
       .catch((error) => {
           reject(error)
@@ -4196,30 +4981,37 @@ export function post_GetNewAlternateKeyBinding(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewAlternateKey
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewAlternateKey
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAlternateKey_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAlternateKey_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAlternateKey_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAlternateKey(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAlternateKey(requestBody:GetNewAlternateKey_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAlternateKey_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetNewAlternateKey", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAlternateKey_output)
           })
       .catch((error) => {
           reject(error)
@@ -4231,30 +5023,37 @@ export function post_GetNewAlternateKey(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewSearchOption
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewSearchOption
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSearchOption_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSearchOption_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSearchOption_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSearchOption(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSearchOption(requestBody:GetNewSearchOption_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSearchOption_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetNewSearchOption", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSearchOption_output)
           })
       .catch((error) => {
           reject(error)
@@ -4266,30 +5065,37 @@ export function post_GetNewSearchOption(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewWhereClauseBinding
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewWhereClauseBinding
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewWhereClauseBinding_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewWhereClauseBinding_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewWhereClauseBinding_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewWhereClauseBinding(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewWhereClauseBinding(requestBody:GetNewWhereClauseBinding_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewWhereClauseBinding_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetNewWhereClauseBinding", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewWhereClauseBinding_output)
           })
       .catch((error) => {
           reject(error)
@@ -4301,30 +5107,37 @@ export function post_GetNewWhereClauseBinding(requestBody:any, epicorHeaders?:He
    Summary: Invoke method GetNewWhereClauseToken
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewWhereClauseToken
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewWhereClauseToken_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewWhereClauseToken_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewWhereClauseToken_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewWhereClauseToken(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewWhereClauseToken(requestBody:GetNewWhereClauseToken_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewWhereClauseToken_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetNewWhereClauseToken", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewWhereClauseToken_output)
           })
       .catch((error) => {
           reject(error)
@@ -4336,30 +5149,37 @@ export function post_GetNewWhereClauseToken(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method GetNewContextValidation
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewContextValidation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewContextValidation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewContextValidation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewContextValidation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewContextValidation(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewContextValidation(requestBody:GetNewContextValidation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewContextValidation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetNewContextValidation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewContextValidation_output)
           })
       .catch((error) => {
           reject(error)
@@ -4371,30 +5191,37 @@ export function post_GetNewContextValidation(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4406,7 +5233,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -4430,15 +5257,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4450,7 +5284,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -4474,15 +5308,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -4494,30 +5335,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -4529,30 +5377,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ContextMenuDataSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -4563,71 +5418,88 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AlternateKeyBindingRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_AlternateKeyBindingRow[],
+   "value":Ice_Tablesets_AlternateKeyBindingRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AlternateKeyLikeRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_AlternateKeyLikeRow[],
+   "value":Ice_Tablesets_AlternateKeyLikeRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_AlternateKeyRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_AlternateKeyRow[],
+   "value":Ice_Tablesets_AlternateKeyRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuItemRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ContextMenuItemRow[],
+   "value":Ice_Tablesets_ContextMenuItemRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuItemTempRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ContextMenuItemTempRow[],
+   "value":Ice_Tablesets_ContextMenuItemTempRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ContextMenuListRow[],
+   "value":Ice_Tablesets_ContextMenuListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ContextMenuRow[],
+   "value":Ice_Tablesets_ContextMenuRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextMenuTempRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ContextMenuTempRow[],
+   "value":Ice_Tablesets_ContextMenuTempRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ContextValidationRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ContextValidationRow[],
+   "value":Ice_Tablesets_ContextValidationRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_LaunchOptionRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_LaunchOptionRow[],
+   "value":Ice_Tablesets_LaunchOptionRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SearchOptionRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_SearchOptionRow[],
+   "value":Ice_Tablesets_SearchOptionRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_WhereClauseBindingRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_WhereClauseBindingRow[],
+   "value":Ice_Tablesets_WhereClauseBindingRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_WhereClauseTokenRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_WhereClauseTokenRow[],
+   "value":Ice_Tablesets_WhereClauseTokenRow,
 }
 
 export interface Ice_Tablesets_AlternateKeyBindingRow{
@@ -4979,6 +5851,23 @@ export interface Ice_Tablesets_WhereClauseTokenRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -5280,7 +6169,7 @@ export interface GetNewAlternateKeyBinding_input{
 export interface GetNewAlternateKeyBinding_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 
@@ -5300,7 +6189,7 @@ export interface GetNewAlternateKeyLike_input{
 export interface GetNewAlternateKeyLike_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 
@@ -5322,7 +6211,7 @@ export interface GetNewAlternateKey_input{
 export interface GetNewAlternateKey_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 
@@ -5340,7 +6229,7 @@ export interface GetNewContextMenuItem_input{
 export interface GetNewContextMenuItem_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 
@@ -5356,7 +6245,7 @@ export interface GetNewContextMenu_input{
 export interface GetNewContextMenu_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 
@@ -5374,7 +6263,7 @@ export interface GetNewContextValidation_input{
 export interface GetNewContextValidation_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 
@@ -5394,7 +6283,7 @@ export interface GetNewLaunchOption_input{
 export interface GetNewLaunchOption_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 
@@ -5414,7 +6303,7 @@ export interface GetNewSearchOption_input{
 export interface GetNewSearchOption_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 
@@ -5436,7 +6325,7 @@ export interface GetNewWhereClauseBinding_input{
 export interface GetNewWhereClauseBinding_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 
@@ -5460,7 +6349,7 @@ export interface GetNewWhereClauseToken_input{
 export interface GetNewWhereClauseToken_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 
@@ -6010,7 +6899,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtContextMenuDataTableset[],
+   ds:Ice_Tablesets_UpdExtContextMenuDataTableset,
    errorsOccurred:boolean,
 }
 }
@@ -6025,7 +6914,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ContextMenuDataTableset[],
+   ds:Ice_Tablesets_ContextMenuDataTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.FreightServiceSvc
 // Description: Add your summary for this object here
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,6 +111,23 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
@@ -85,30 +135,37 @@ export function get_metadata(epicorHeaders?:Headers){
    Summary: Invoke method BuildCustFreightRequest
    Description: Build the customer freight request
    OperationID: BuildCustFreightRequest
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildCustFreightRequest_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildCustFreightRequest_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildCustFreightRequest_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildCustFreightRequest(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildCustFreightRequest(requestBody:BuildCustFreightRequest_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildCustFreightRequest_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/BuildCustFreightRequest", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildCustFreightRequest_output)
           })
       .catch((error) => {
           reject(error)
@@ -120,7 +177,7 @@ export function post_BuildCustFreightRequest(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method UpdateTimeOut
    Description: UpdateTimeOut in http calls
    OperationID: UpdateTimeOut
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateTimeOut_output
@@ -133,15 +190,22 @@ export function post_UpdateTimeOut(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateTimeOut_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/UpdateTimeOut", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateTimeOut_output)
           })
       .catch((error) => {
           reject(error)
@@ -153,30 +217,37 @@ export function post_UpdateTimeOut(epicorHeaders?:Headers){
    Summary: Invoke method LogManifestMsg
    Description: Create Manifest Log File
    OperationID: LogManifestMsg
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/LogManifestMsg_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/LogManifestMsg_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/LogManifestMsg_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LogManifestMsg(requestBody:any, epicorHeaders?:Headers){
+export function post_LogManifestMsg(requestBody:LogManifestMsg_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<LogManifestMsg_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/LogManifestMsg", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as LogManifestMsg_output)
           })
       .catch((error) => {
           reject(error)
@@ -188,30 +259,37 @@ export function post_LogManifestMsg(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method BuildGenUnfreightManifest
    Description: UnFreigth Manifest
    OperationID: BuildGenUnfreightManifest
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildGenUnfreightManifest_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildGenUnfreightManifest_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildGenUnfreightManifest_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildGenUnfreightManifest(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildGenUnfreightManifest(requestBody:BuildGenUnfreightManifest_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildGenUnfreightManifest_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/BuildGenUnfreightManifest", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildGenUnfreightManifest_output)
           })
       .catch((error) => {
           reject(error)
@@ -223,30 +301,37 @@ export function post_BuildGenUnfreightManifest(requestBody:any, epicorHeaders?:H
    Summary: Invoke method BuildMasterPackFreightRequest
    Description: Build the freight request based upon the masterpack
    OperationID: BuildMasterPackFreightRequest
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildMasterPackFreightRequest_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildMasterPackFreightRequest_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildMasterPackFreightRequest_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildMasterPackFreightRequest(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildMasterPackFreightRequest(requestBody:BuildMasterPackFreightRequest_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildMasterPackFreightRequest_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/BuildMasterPackFreightRequest", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildMasterPackFreightRequest_output)
           })
       .catch((error) => {
           reject(error)
@@ -258,30 +343,37 @@ export function post_BuildMasterPackFreightRequest(requestBody:any, epicorHeader
    Summary: Invoke method BuildMiscFreightRequest
    Description: build the miscellaneous shipment freight request
    OperationID: BuildMiscFreightRequest
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildMiscFreightRequest_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildMiscFreightRequest_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildMiscFreightRequest_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildMiscFreightRequest(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildMiscFreightRequest(requestBody:BuildMiscFreightRequest_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildMiscFreightRequest_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/BuildMiscFreightRequest", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildMiscFreightRequest_output)
           })
       .catch((error) => {
           reject(error)
@@ -293,30 +385,37 @@ export function post_BuildMiscFreightRequest(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method BuildSubFreightRequest
    Description: build the subcontract freight request
    OperationID: BuildSubFreightRequest
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildSubFreightRequest_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildSubFreightRequest_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildSubFreightRequest_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildSubFreightRequest(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildSubFreightRequest(requestBody:BuildSubFreightRequest_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildSubFreightRequest_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/BuildSubFreightRequest", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildSubFreightRequest_output)
           })
       .catch((error) => {
           reject(error)
@@ -328,30 +427,37 @@ export function post_BuildSubFreightRequest(requestBody:any, epicorHeaders?:Head
    Summary: Invoke method BuildTransFreightRequest
    Description: build the transfer freight request
    OperationID: BuildTransFreightRequest
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildTransFreightRequest_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildTransFreightRequest_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildTransFreightRequest_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildTransFreightRequest(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildTransFreightRequest(requestBody:BuildTransFreightRequest_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildTransFreightRequest_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/BuildTransFreightRequest", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildTransFreightRequest_output)
           })
       .catch((error) => {
           reject(error)
@@ -363,30 +469,37 @@ export function post_BuildTransFreightRequest(requestBody:any, epicorHeaders?:He
    Summary: Invoke method UpdateFreightedShipment
    Description: Update the freighted shipment
    OperationID: UpdateFreightedShipment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateFreightedShipment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateFreightedShipment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateFreightedShipment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateFreightedShipment(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateFreightedShipment(requestBody:UpdateFreightedShipment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateFreightedShipment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/UpdateFreightedShipment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateFreightedShipment_output)
           })
       .catch((error) => {
           reject(error)
@@ -398,30 +511,37 @@ export function post_UpdateFreightedShipment(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method UpdateUnFreightedShipment
    Description: Unfreight a shipment
    OperationID: UpdateUnFreightedShipment
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateUnFreightedShipment_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateUnFreightedShipment_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateUnFreightedShipment_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateUnFreightedShipment(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateUnFreightedShipment(requestBody:UpdateUnFreightedShipment_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateUnFreightedShipment_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/UpdateUnFreightedShipment", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateUnFreightedShipment_output)
           })
       .catch((error) => {
           reject(error)
@@ -433,30 +553,37 @@ export function post_UpdateUnFreightedShipment(requestBody:any, epicorHeaders?:H
    Summary: Invoke method FreightCarton
    Description: Call for Manifest Freight Carton
    OperationID: FreightCarton
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FreightCarton_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FreightCarton_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FreightCarton_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FreightCarton(requestBody:any, epicorHeaders?:Headers){
+export function post_FreightCarton(requestBody:FreightCarton_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FreightCarton_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/FreightCarton", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FreightCarton_output)
           })
       .catch((error) => {
           reject(error)
@@ -468,30 +595,37 @@ export function post_FreightCarton(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UnfreightCarton
    Description: Call for Manifest Unfreight Carton
    OperationID: UnfreightCarton
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnfreightCarton_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnfreightCarton_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnfreightCarton_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnfreightCarton(requestBody:any, epicorHeaders?:Headers){
+export function post_UnfreightCarton(requestBody:UnfreightCarton_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnfreightCarton_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.FreightServiceSvc/UnfreightCarton", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnfreightCarton_output)
           })
       .catch((error) => {
           reject(error)
@@ -502,11 +636,45 @@ export function post_UnfreightCarton(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////

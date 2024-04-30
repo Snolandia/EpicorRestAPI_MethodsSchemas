@@ -1,11 +1,30 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.QuoteAsmSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -14,7 +33,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -32,7 +51,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -46,7 +72,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -64,7 +90,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -85,10 +118,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmRow
    */  
 export function get_QuoteAsms(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -103,7 +136,14 @@ export function get_QuoteAsms(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmRow)
           })
@@ -117,15 +157,15 @@ export function get_QuoteAsms(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteAsms
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteAsmRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteAsmRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteAsmRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteAsmRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteAsms(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteAsms(requestBody:Erp_Tablesets_QuoteAsmRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -139,7 +179,14 @@ export function post_QuoteAsms(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -160,10 +207,10 @@ export function post_QuoteAsms(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteAsmRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteAsmRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -178,7 +225,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteAsmRow)
           })
@@ -196,15 +250,15 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq(Company:str
       @param QuoteNum Desc: QuoteNum   Required: True
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteAsmRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteAsmRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, requestBody:Erp_Tablesets_QuoteAsmRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -218,7 +272,14 @@ export function patch_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq(Company:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -236,7 +297,7 @@ export function patch_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq(Company:s
       @param QuoteNum Desc: QuoteNum   Required: True
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -255,7 +316,14 @@ export function delete_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -279,10 +347,10 @@ export function delete_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq(Company:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmInspRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmInspRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmInsps(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -297,7 +365,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmIns
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmInspRow)
           })
@@ -318,10 +393,10 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmIns
       @param PlanSeq Desc: PlanSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteAsmInspRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteAsmInspRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmInsps_Company_QuoteNum_QuoteLine_AssemblySeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, PlanSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -336,7 +411,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmIns
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteAsmInspRow)
           })
@@ -361,10 +443,10 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmIns
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteMtls(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -379,7 +461,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteMtls(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlRow)
           })
@@ -401,10 +490,10 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteMtls(C
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteMtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteMtlRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -419,7 +508,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteMtls_C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteMtlRow)
           })
@@ -444,10 +540,10 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteMtls_C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteOprs(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -462,7 +558,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteOprs(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprRow)
           })
@@ -484,10 +587,10 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteOprs(C
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -502,7 +605,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteOprs_C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprRow)
           })
@@ -526,10 +636,10 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteOprs_C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmRefDesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmRefDesRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmRefDes(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -544,7 +654,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmRef
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmRefDesRow)
           })
@@ -566,10 +683,10 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmRef
       @param RefDesSeq Desc: RefDesSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteAsmRefDesRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteAsmRefDesRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_RefDesSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, RefDesSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -584,7 +701,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmRef
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteAsmRefDesRow)
           })
@@ -608,10 +732,10 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmRef
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmAttchRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmAttches(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -626,7 +750,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmAtt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmAttchRow)
           })
@@ -647,10 +778,10 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmAtt
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteAsmAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteAsmAttchRow
    */  
 export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmAttches_Company_QuoteNum_QuoteLine_AssemblySeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -665,7 +796,14 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmAtt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteAsmAttchRow)
           })
@@ -685,10 +823,10 @@ export function get_QuoteAsms_Company_QuoteNum_QuoteLine_AssemblySeq_QuoteAsmAtt
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmInspRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmInspRow
    */  
 export function get_QuoteAsmInsps(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -703,7 +841,14 @@ export function get_QuoteAsmInsps(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmInspRow)
           })
@@ -717,15 +862,15 @@ export function get_QuoteAsmInsps(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteAsmInsps
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteAsmInspRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteAsmInspRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteAsmInspRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteAsmInspRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteAsmInsps(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteAsmInsps(requestBody:Erp_Tablesets_QuoteAsmInspRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -739,7 +884,14 @@ export function post_QuoteAsmInsps(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -760,10 +912,10 @@ export function post_QuoteAsmInsps(requestBody:any, epicorHeaders?:Headers){
       @param PlanSeq Desc: PlanSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteAsmInspRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteAsmInspRow
    */  
 export function get_QuoteAsmInsps_Company_QuoteNum_QuoteLine_AssemblySeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, PlanSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -778,7 +930,14 @@ export function get_QuoteAsmInsps_Company_QuoteNum_QuoteLine_AssemblySeq_PlanSeq
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteAsmInspRow)
           })
@@ -797,15 +956,15 @@ export function get_QuoteAsmInsps_Company_QuoteNum_QuoteLine_AssemblySeq_PlanSeq
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param PlanSeq Desc: PlanSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteAsmInspRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteAsmInspRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteAsmInsps_Company_QuoteNum_QuoteLine_AssemblySeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, PlanSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteAsmInsps_Company_QuoteNum_QuoteLine_AssemblySeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, PlanSeq:string, requestBody:Erp_Tablesets_QuoteAsmInspRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -819,7 +978,14 @@ export function patch_QuoteAsmInsps_Company_QuoteNum_QuoteLine_AssemblySeq_PlanS
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -838,7 +1004,7 @@ export function patch_QuoteAsmInsps_Company_QuoteNum_QuoteLine_AssemblySeq_PlanS
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param PlanSeq Desc: PlanSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -857,7 +1023,14 @@ export function delete_QuoteAsmInsps_Company_QuoteNum_QuoteLine_AssemblySeq_Plan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -878,10 +1051,10 @@ export function delete_QuoteAsmInsps_Company_QuoteNum_QuoteLine_AssemblySeq_Plan
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlRow
    */  
 export function get_QuoteMtls(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -896,7 +1069,14 @@ export function get_QuoteMtls(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlRow)
           })
@@ -910,15 +1090,15 @@ export function get_QuoteMtls(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteMtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteMtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteMtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteMtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteMtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteMtls(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteMtls(requestBody:Erp_Tablesets_QuoteMtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -932,7 +1112,14 @@ export function post_QuoteMtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -954,10 +1141,10 @@ export function post_QuoteMtls(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteMtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteMtlRow
    */  
 export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -972,7 +1159,14 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteMtlRow)
           })
@@ -991,15 +1185,15 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq(Comp
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteMtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteMtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, requestBody:Erp_Tablesets_QuoteMtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1013,7 +1207,14 @@ export function patch_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq(Co
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1032,7 +1233,7 @@ export function patch_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq(Co
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1051,7 +1252,14 @@ export function delete_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1076,10 +1284,10 @@ export function delete_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlInspRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlInspRow
    */  
 export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_QuoteMtlInsps(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1094,7 +1302,14 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlInspRow)
           })
@@ -1116,10 +1331,10 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
       @param PlanSeq Desc: PlanSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteMtlInspRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteMtlInspRow
    */  
 export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_QuoteMtlInsps_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, PlanSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1134,7 +1349,14 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteMtlInspRow)
           })
@@ -1159,10 +1381,10 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlRefDesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlRefDesRow
    */  
 export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_QuoteMtlRefDes(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1177,7 +1399,14 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlRefDesRow)
           })
@@ -1199,10 +1428,10 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
       @param RefDesSeq Desc: RefDesSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteMtlRefDesRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteMtlRefDesRow
    */  
 export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_QuoteMtlRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_RefDesSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, RefDesSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1217,7 +1446,14 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteMtlRefDesRow)
           })
@@ -1242,10 +1478,10 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlAttchRow
    */  
 export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_QuoteMtlAttches(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1260,7 +1496,14 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlAttchRow)
           })
@@ -1282,10 +1525,10 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteMtlAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteMtlAttchRow
    */  
 export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_QuoteMtlAttches_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1300,7 +1543,14 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteMtlAttchRow)
           })
@@ -1320,10 +1570,10 @@ export function get_QuoteMtls_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_Quot
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlInspRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlInspRow
    */  
 export function get_QuoteMtlInsps(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1338,7 +1588,14 @@ export function get_QuoteMtlInsps(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlInspRow)
           })
@@ -1352,15 +1609,15 @@ export function get_QuoteMtlInsps(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteMtlInsps
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteMtlInspRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteMtlInspRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteMtlInspRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteMtlInspRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteMtlInsps(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteMtlInsps(requestBody:Erp_Tablesets_QuoteMtlInspRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1374,7 +1631,14 @@ export function post_QuoteMtlInsps(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1396,10 +1660,10 @@ export function post_QuoteMtlInsps(requestBody:any, epicorHeaders?:Headers){
       @param PlanSeq Desc: PlanSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteMtlInspRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteMtlInspRow
    */  
 export function get_QuoteMtlInsps_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, PlanSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1414,7 +1678,14 @@ export function get_QuoteMtlInsps_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteMtlInspRow)
           })
@@ -1434,15 +1705,15 @@ export function get_QuoteMtlInsps_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
       @param PlanSeq Desc: PlanSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteMtlInspRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteMtlInspRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteMtlInsps_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, PlanSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteMtlInsps_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, PlanSeq:string, requestBody:Erp_Tablesets_QuoteMtlInspRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1456,7 +1727,14 @@ export function patch_QuoteMtlInsps_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSe
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1476,7 +1754,7 @@ export function patch_QuoteMtlInsps_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSe
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
       @param PlanSeq Desc: PlanSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1495,7 +1773,14 @@ export function delete_QuoteMtlInsps_Company_QuoteNum_QuoteLine_AssemblySeq_MtlS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1515,10 +1800,10 @@ export function delete_QuoteMtlInsps_Company_QuoteNum_QuoteLine_AssemblySeq_MtlS
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlRefDesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlRefDesRow
    */  
 export function get_QuoteMtlRefDes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1533,7 +1818,14 @@ export function get_QuoteMtlRefDes(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlRefDesRow)
           })
@@ -1547,15 +1839,15 @@ export function get_QuoteMtlRefDes(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteMtlRefDes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteMtlRefDesRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteMtlRefDesRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteMtlRefDesRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteMtlRefDesRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteMtlRefDes(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteMtlRefDes(requestBody:Erp_Tablesets_QuoteMtlRefDesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1569,7 +1861,14 @@ export function post_QuoteMtlRefDes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1591,10 +1890,10 @@ export function post_QuoteMtlRefDes(requestBody:any, epicorHeaders?:Headers){
       @param RefDesSeq Desc: RefDesSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteMtlRefDesRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteMtlRefDesRow
    */  
 export function get_QuoteMtlRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_RefDesSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, RefDesSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1609,7 +1908,14 @@ export function get_QuoteMtlRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteMtlRefDesRow)
           })
@@ -1629,15 +1935,15 @@ export function get_QuoteMtlRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
       @param RefDesSeq Desc: RefDesSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteMtlRefDesRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteMtlRefDesRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteMtlRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_RefDesSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, RefDesSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteMtlRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_RefDesSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, RefDesSeq:string, requestBody:Erp_Tablesets_QuoteMtlRefDesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1651,7 +1957,14 @@ export function patch_QuoteMtlRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlS
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1671,7 +1984,7 @@ export function patch_QuoteMtlRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlS
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
       @param RefDesSeq Desc: RefDesSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1690,7 +2003,14 @@ export function delete_QuoteMtlRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_Mtl
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1710,10 +2030,10 @@ export function delete_QuoteMtlRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_Mtl
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteMtlAttchRow
    */  
 export function get_QuoteMtlAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1728,7 +2048,14 @@ export function get_QuoteMtlAttches(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlAttchRow)
           })
@@ -1742,15 +2069,15 @@ export function get_QuoteMtlAttches(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteMtlAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteMtlAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteMtlAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteMtlAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteMtlAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteMtlAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteMtlAttches(requestBody:Erp_Tablesets_QuoteMtlAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1764,7 +2091,14 @@ export function post_QuoteMtlAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1786,10 +2120,10 @@ export function post_QuoteMtlAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteMtlAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteMtlAttchRow
    */  
 export function get_QuoteMtlAttches_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1804,7 +2138,14 @@ export function get_QuoteMtlAttches_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteMtlAttchRow)
           })
@@ -1824,15 +2165,15 @@ export function get_QuoteMtlAttches_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSe
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteMtlAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteMtlAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteMtlAttches_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteMtlAttches_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, DrawingSeq:string, requestBody:Erp_Tablesets_QuoteMtlAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1846,7 +2187,14 @@ export function patch_QuoteMtlAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Mtl
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1866,7 +2214,7 @@ export function patch_QuoteMtlAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Mtl
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1885,7 +2233,14 @@ export function delete_QuoteMtlAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Mt
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1906,10 +2261,10 @@ export function delete_QuoteMtlAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Mt
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprRow
    */  
 export function get_QuoteOprs(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1924,7 +2279,14 @@ export function get_QuoteOprs(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprRow)
           })
@@ -1938,15 +2300,15 @@ export function get_QuoteOprs(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteOprs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteOprRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteOprRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteOprs(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteOprs(requestBody:Erp_Tablesets_QuoteOprRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1960,7 +2322,14 @@ export function post_QuoteOprs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1982,10 +2351,10 @@ export function post_QuoteOprs(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2000,7 +2369,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprRow)
           })
@@ -2019,15 +2395,15 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq(Comp
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, requestBody:Erp_Tablesets_QuoteOprRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2041,7 +2417,14 @@ export function patch_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq(Co
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2060,7 +2443,7 @@ export function patch_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq(Co
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2079,7 +2462,14 @@ export function delete_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2105,10 +2495,10 @@ export function delete_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq(C
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprActionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprActionRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_QuoteOprActions(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2123,7 +2513,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprActionRow)
           })
@@ -2146,10 +2543,10 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprActionRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprActionRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_ActionSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, ActionSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2164,7 +2561,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprActionRow)
           })
@@ -2189,10 +2593,10 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprInspRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprInspRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_QuoteOprInsps(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2207,7 +2611,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprInspRow)
           })
@@ -2229,10 +2640,10 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
       @param PlanSeq Desc: PlanSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprInspRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprInspRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_QuoteOprInsps_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, PlanSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2247,7 +2658,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprInspRow)
           })
@@ -2272,10 +2690,10 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOpDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOpDtlRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_QuoteOpDtls(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2290,7 +2708,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOpDtlRow)
           })
@@ -2312,10 +2737,10 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
       @param OpDtlSeq Desc: OpDtlSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOpDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOpDtlRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_QuoteOpDtls_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_OpDtlSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, OpDtlSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2330,7 +2755,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOpDtlRow)
           })
@@ -2355,10 +2787,10 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprMachParamRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprMachParamRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_QuoteOprMachParams(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2373,7 +2805,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprMachParamRow)
           })
@@ -2395,10 +2834,10 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
       @param MachParamSeq Desc: MachParamSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprMachParamRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprMachParamRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_QuoteOprMachParams_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_MachParamSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, MachParamSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2413,7 +2852,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprMachParamRow)
           })
@@ -2438,10 +2884,10 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprAttchRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_QuoteOprAttches(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2456,7 +2902,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprAttchRow)
           })
@@ -2478,10 +2931,10 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprAttchRow
    */  
 export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_QuoteOprAttches_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2496,7 +2949,14 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprAttchRow)
           })
@@ -2517,10 +2977,10 @@ export function get_QuoteOprs_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Quot
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprActionRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprActionRow
    */  
 export function get_QuoteOprActions(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2535,7 +2995,14 @@ export function get_QuoteOprActions(select?:string, expand?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprActionRow)
           })
@@ -2549,15 +3016,15 @@ export function get_QuoteOprActions(select?:string, expand?:string, filter?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteOprActions
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprActionRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprActionRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteOprActionRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteOprActionRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteOprActions(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteOprActions(requestBody:Erp_Tablesets_QuoteOprActionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2571,7 +3038,14 @@ export function post_QuoteOprActions(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2594,10 +3068,10 @@ export function post_QuoteOprActions(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprActionRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprActionRow
    */  
 export function get_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_ActionSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, ActionSeq:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2612,7 +3086,14 @@ export function get_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprActionRow)
           })
@@ -2632,15 +3113,15 @@ export function get_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSe
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
       @param ActionSeq Desc: ActionSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprActionRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprActionRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_ActionSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, ActionSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_ActionSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, ActionSeq:string, requestBody:Erp_Tablesets_QuoteOprActionRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2654,7 +3135,14 @@ export function patch_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_Opr
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2674,7 +3162,7 @@ export function patch_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_Opr
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
       @param ActionSeq Desc: ActionSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2693,7 +3181,14 @@ export function delete_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_Op
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2719,10 +3214,10 @@ export function delete_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_Op
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprActionParamRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprActionParamRow
    */  
 export function get_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_ActionSeq_QuoteOprActionParams(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, ActionSeq:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2737,7 +3232,14 @@ export function get_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprActionParamRow)
           })
@@ -2760,10 +3262,10 @@ export function get_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSe
       @param ActionParamSeq Desc: ActionParamSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprActionParamRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprActionParamRow
    */  
 export function get_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_ActionSeq_QuoteOprActionParams_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_ActionSeq_ActionParamSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, ActionSeq:string, ActionParamSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2778,7 +3280,14 @@ export function get_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprActionParamRow)
           })
@@ -2798,10 +3307,10 @@ export function get_QuoteOprActions_Company_QuoteNum_QuoteLine_AssemblySeq_OprSe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprActionParamRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprActionParamRow
    */  
 export function get_QuoteOprActionParams(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -2816,7 +3325,14 @@ export function get_QuoteOprActionParams(select?:string, filter?:string, orderby
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprActionParamRow)
           })
@@ -2830,15 +3346,15 @@ export function get_QuoteOprActionParams(select?:string, filter?:string, orderby
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteOprActionParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprActionParamRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprActionParamRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteOprActionParamRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteOprActionParamRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteOprActionParams(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteOprActionParams(requestBody:Erp_Tablesets_QuoteOprActionParamRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2852,7 +3368,14 @@ export function post_QuoteOprActionParams(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2875,10 +3398,10 @@ export function post_QuoteOprActionParams(requestBody:any, epicorHeaders?:Header
       @param ActionParamSeq Desc: ActionParamSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprActionParamRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprActionParamRow
    */  
 export function get_QuoteOprActionParams_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_ActionSeq_ActionParamSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, ActionSeq:string, ActionParamSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -2893,7 +3416,14 @@ export function get_QuoteOprActionParams_Company_QuoteNum_QuoteLine_AssemblySeq_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprActionParamRow)
           })
@@ -2914,15 +3444,15 @@ export function get_QuoteOprActionParams_Company_QuoteNum_QuoteLine_AssemblySeq_
       @param OprSeq Desc: OprSeq   Required: True
       @param ActionSeq Desc: ActionSeq   Required: True
       @param ActionParamSeq Desc: ActionParamSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprActionParamRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprActionParamRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteOprActionParams_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_ActionSeq_ActionParamSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, ActionSeq:string, ActionParamSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteOprActionParams_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_ActionSeq_ActionParamSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, ActionSeq:string, ActionParamSeq:string, requestBody:Erp_Tablesets_QuoteOprActionParamRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -2936,7 +3466,14 @@ export function patch_QuoteOprActionParams_Company_QuoteNum_QuoteLine_AssemblySe
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2957,7 +3494,7 @@ export function patch_QuoteOprActionParams_Company_QuoteNum_QuoteLine_AssemblySe
       @param OprSeq Desc: OprSeq   Required: True
       @param ActionSeq Desc: ActionSeq   Required: True
       @param ActionParamSeq Desc: ActionParamSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -2976,7 +3513,14 @@ export function delete_QuoteOprActionParams_Company_QuoteNum_QuoteLine_AssemblyS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -2996,10 +3540,10 @@ export function delete_QuoteOprActionParams_Company_QuoteNum_QuoteLine_AssemblyS
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprInspRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprInspRow
    */  
 export function get_QuoteOprInsps(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -3014,7 +3558,14 @@ export function get_QuoteOprInsps(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprInspRow)
           })
@@ -3028,15 +3579,15 @@ export function get_QuoteOprInsps(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteOprInsps
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprInspRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprInspRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteOprInspRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteOprInspRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteOprInsps(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteOprInsps(requestBody:Erp_Tablesets_QuoteOprInspRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -3050,7 +3601,14 @@ export function post_QuoteOprInsps(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3072,10 +3630,10 @@ export function post_QuoteOprInsps(requestBody:any, epicorHeaders?:Headers){
       @param PlanSeq Desc: PlanSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprInspRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprInspRow
    */  
 export function get_QuoteOprInsps_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, PlanSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -3090,7 +3648,14 @@ export function get_QuoteOprInsps_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprInspRow)
           })
@@ -3110,15 +3675,15 @@ export function get_QuoteOprInsps_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
       @param PlanSeq Desc: PlanSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprInspRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprInspRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteOprInsps_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, PlanSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteOprInsps_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_PlanSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, PlanSeq:string, requestBody:Erp_Tablesets_QuoteOprInspRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -3132,7 +3697,14 @@ export function patch_QuoteOprInsps_Company_QuoteNum_QuoteLine_AssemblySeq_OprSe
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3152,7 +3724,7 @@ export function patch_QuoteOprInsps_Company_QuoteNum_QuoteLine_AssemblySeq_OprSe
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
       @param PlanSeq Desc: PlanSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -3171,7 +3743,14 @@ export function delete_QuoteOprInsps_Company_QuoteNum_QuoteLine_AssemblySeq_OprS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3191,10 +3770,10 @@ export function delete_QuoteOprInsps_Company_QuoteNum_QuoteLine_AssemblySeq_OprS
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOpDtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOpDtlRow
    */  
 export function get_QuoteOpDtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -3209,7 +3788,14 @@ export function get_QuoteOpDtls(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOpDtlRow)
           })
@@ -3223,15 +3809,15 @@ export function get_QuoteOpDtls(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteOpDtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOpDtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOpDtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteOpDtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteOpDtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteOpDtls(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteOpDtls(requestBody:Erp_Tablesets_QuoteOpDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -3245,7 +3831,14 @@ export function post_QuoteOpDtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3267,10 +3860,10 @@ export function post_QuoteOpDtls(requestBody:any, epicorHeaders?:Headers){
       @param OpDtlSeq Desc: OpDtlSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOpDtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOpDtlRow
    */  
 export function get_QuoteOpDtls_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_OpDtlSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, OpDtlSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -3285,7 +3878,14 @@ export function get_QuoteOpDtls_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Op
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOpDtlRow)
           })
@@ -3305,15 +3905,15 @@ export function get_QuoteOpDtls_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_Op
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
       @param OpDtlSeq Desc: OpDtlSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOpDtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOpDtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteOpDtls_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_OpDtlSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, OpDtlSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteOpDtls_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_OpDtlSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, OpDtlSeq:string, requestBody:Erp_Tablesets_QuoteOpDtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -3327,7 +3927,14 @@ export function patch_QuoteOpDtls_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3347,7 +3954,7 @@ export function patch_QuoteOpDtls_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
       @param OpDtlSeq Desc: OpDtlSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -3366,7 +3973,14 @@ export function delete_QuoteOpDtls_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3386,10 +4000,10 @@ export function delete_QuoteOpDtls_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprMachParamRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprMachParamRow
    */  
 export function get_QuoteOprMachParams(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -3404,7 +4018,14 @@ export function get_QuoteOprMachParams(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprMachParamRow)
           })
@@ -3418,15 +4039,15 @@ export function get_QuoteOprMachParams(select?:string, filter?:string, orderby?:
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteOprMachParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprMachParamRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprMachParamRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteOprMachParamRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteOprMachParamRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteOprMachParams(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteOprMachParams(requestBody:Erp_Tablesets_QuoteOprMachParamRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -3440,7 +4061,14 @@ export function post_QuoteOprMachParams(requestBody:any, epicorHeaders?:Headers)
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3462,10 +4090,10 @@ export function post_QuoteOprMachParams(requestBody:any, epicorHeaders?:Headers)
       @param MachParamSeq Desc: MachParamSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprMachParamRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprMachParamRow
    */  
 export function get_QuoteOprMachParams_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_MachParamSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, MachParamSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -3480,7 +4108,14 @@ export function get_QuoteOprMachParams_Company_QuoteNum_QuoteLine_AssemblySeq_Op
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprMachParamRow)
           })
@@ -3500,15 +4135,15 @@ export function get_QuoteOprMachParams_Company_QuoteNum_QuoteLine_AssemblySeq_Op
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
       @param MachParamSeq Desc: MachParamSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprMachParamRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprMachParamRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteOprMachParams_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_MachParamSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, MachParamSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteOprMachParams_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_MachParamSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, MachParamSeq:string, requestBody:Erp_Tablesets_QuoteOprMachParamRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -3522,7 +4157,14 @@ export function patch_QuoteOprMachParams_Company_QuoteNum_QuoteLine_AssemblySeq_
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3542,7 +4184,7 @@ export function patch_QuoteOprMachParams_Company_QuoteNum_QuoteLine_AssemblySeq_
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
       @param MachParamSeq Desc: MachParamSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -3561,7 +4203,14 @@ export function delete_QuoteOprMachParams_Company_QuoteNum_QuoteLine_AssemblySeq
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3581,10 +4230,10 @@ export function delete_QuoteOprMachParams_Company_QuoteNum_QuoteLine_AssemblySeq
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteOprAttchRow
    */  
 export function get_QuoteOprAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -3599,7 +4248,14 @@ export function get_QuoteOprAttches(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprAttchRow)
           })
@@ -3613,15 +4269,15 @@ export function get_QuoteOprAttches(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteOprAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteOprAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteOprAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteOprAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteOprAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteOprAttches(requestBody:Erp_Tablesets_QuoteOprAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -3635,7 +4291,14 @@ export function post_QuoteOprAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3657,10 +4320,10 @@ export function post_QuoteOprAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteOprAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteOprAttchRow
    */  
 export function get_QuoteOprAttches_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -3675,7 +4338,14 @@ export function get_QuoteOprAttches_Company_QuoteNum_QuoteLine_AssemblySeq_OprSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteOprAttchRow)
           })
@@ -3695,15 +4365,15 @@ export function get_QuoteOprAttches_Company_QuoteNum_QuoteLine_AssemblySeq_OprSe
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteOprAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteOprAttches_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteOprAttches_Company_QuoteNum_QuoteLine_AssemblySeq_OprSeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, OprSeq:string, DrawingSeq:string, requestBody:Erp_Tablesets_QuoteOprAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -3717,7 +4387,14 @@ export function patch_QuoteOprAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Opr
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3737,7 +4414,7 @@ export function patch_QuoteOprAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Opr
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param OprSeq Desc: OprSeq   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -3756,7 +4433,14 @@ export function delete_QuoteOprAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Op
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3776,10 +4460,10 @@ export function delete_QuoteOprAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Op
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmRefDesRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmRefDesRow
    */  
 export function get_QuoteAsmRefDes(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -3794,7 +4478,14 @@ export function get_QuoteAsmRefDes(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmRefDesRow)
           })
@@ -3808,15 +4499,15 @@ export function get_QuoteAsmRefDes(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteAsmRefDes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteAsmRefDesRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteAsmRefDesRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteAsmRefDesRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteAsmRefDesRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteAsmRefDes(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteAsmRefDes(requestBody:Erp_Tablesets_QuoteAsmRefDesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -3830,7 +4521,14 @@ export function post_QuoteAsmRefDes(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3852,10 +4550,10 @@ export function post_QuoteAsmRefDes(requestBody:any, epicorHeaders?:Headers){
       @param RefDesSeq Desc: RefDesSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteAsmRefDesRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteAsmRefDesRow
    */  
 export function get_QuoteAsmRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_RefDesSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, RefDesSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -3870,7 +4568,14 @@ export function get_QuoteAsmRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteAsmRefDesRow)
           })
@@ -3890,15 +4595,15 @@ export function get_QuoteAsmRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
       @param RefDesSeq Desc: RefDesSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteAsmRefDesRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteAsmRefDesRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteAsmRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_RefDesSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, RefDesSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteAsmRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlSeq_RefDesSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, MtlSeq:string, RefDesSeq:string, requestBody:Erp_Tablesets_QuoteAsmRefDesRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -3912,7 +4617,14 @@ export function patch_QuoteAsmRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlS
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3932,7 +4644,7 @@ export function patch_QuoteAsmRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_MtlS
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
       @param RefDesSeq Desc: RefDesSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -3951,7 +4663,14 @@ export function delete_QuoteAsmRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_Mtl
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -3971,10 +4690,10 @@ export function delete_QuoteAsmRefDes_Company_QuoteNum_QuoteLine_AssemblySeq_Mtl
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmAttchRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmAttchRow
    */  
 export function get_QuoteAsmAttches(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -3989,7 +4708,14 @@ export function get_QuoteAsmAttches(select?:string, filter?:string, orderby?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmAttchRow)
           })
@@ -4003,15 +4729,15 @@ export function get_QuoteAsmAttches(select?:string, filter?:string, orderby?:str
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteAsmAttches
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteAsmAttchRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteAsmAttchRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteAsmAttchRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteAsmAttchRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteAsmAttches(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteAsmAttches(requestBody:Erp_Tablesets_QuoteAsmAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -4025,7 +4751,14 @@ export function post_QuoteAsmAttches(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -4046,10 +4779,10 @@ export function post_QuoteAsmAttches(requestBody:any, epicorHeaders?:Headers){
       @param DrawingSeq Desc: DrawingSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteAsmAttchRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteAsmAttchRow
    */  
 export function get_QuoteAsmAttches_Company_QuoteNum_QuoteLine_AssemblySeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, DrawingSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -4064,7 +4797,14 @@ export function get_QuoteAsmAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Drawi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteAsmAttchRow)
           })
@@ -4083,15 +4823,15 @@ export function get_QuoteAsmAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Drawi
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteAsmAttchRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteAsmAttchRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteAsmAttches_Company_QuoteNum_QuoteLine_AssemblySeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, DrawingSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteAsmAttches_Company_QuoteNum_QuoteLine_AssemblySeq_DrawingSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, DrawingSeq:string, requestBody:Erp_Tablesets_QuoteAsmAttchRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -4105,7 +4845,14 @@ export function patch_QuoteAsmAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Dra
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -4124,7 +4871,7 @@ export function patch_QuoteAsmAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Dra
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param DrawingSeq Desc: DrawingSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -4143,7 +4890,14 @@ export function delete_QuoteAsmAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Dr
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -4163,10 +4917,10 @@ export function delete_QuoteAsmAttches_Company_QuoteNum_QuoteLine_AssemblySeq_Dr
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteStageRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteStageRow
    */  
 export function get_QuoteStages(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -4181,7 +4935,14 @@ export function get_QuoteStages(select?:string, filter?:string, orderby?:string,
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteStageRow)
           })
@@ -4195,15 +4956,15 @@ export function get_QuoteStages(select?:string, filter?:string, orderby?:string,
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_QuoteStages
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteStageRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.QuoteStageRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.QuoteStageRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.QuoteStageRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteStages(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteStages(requestBody:Erp_Tablesets_QuoteStageRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -4217,7 +4978,14 @@ export function post_QuoteStages(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -4238,10 +5006,10 @@ export function post_QuoteStages(requestBody:any, epicorHeaders?:Headers){
       @param StageSeq Desc: StageSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.QuoteStageRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.QuoteStageRow
    */  
 export function get_QuoteStages_Company_QuoteNum_QuoteLine_AssemblySeq_StageSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, StageSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -4256,7 +5024,14 @@ export function get_QuoteStages_Company_QuoteNum_QuoteLine_AssemblySeq_StageSeq(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_QuoteStageRow)
           })
@@ -4275,15 +5050,15 @@ export function get_QuoteStages_Company_QuoteNum_QuoteLine_AssemblySeq_StageSeq(
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param StageSeq Desc: StageSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteStageRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.QuoteStageRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_QuoteStages_Company_QuoteNum_QuoteLine_AssemblySeq_StageSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, StageSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_QuoteStages_Company_QuoteNum_QuoteLine_AssemblySeq_StageSeq(Company:string, QuoteNum:string, QuoteLine:string, AssemblySeq:string, StageSeq:string, requestBody:Erp_Tablesets_QuoteStageRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -4297,7 +5072,14 @@ export function patch_QuoteStages_Company_QuoteNum_QuoteLine_AssemblySeq_StageSe
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -4316,7 +5098,7 @@ export function patch_QuoteStages_Company_QuoteNum_QuoteLine_AssemblySeq_StageSe
       @param QuoteLine Desc: QuoteLine   Required: True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param StageSeq Desc: StageSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -4335,7 +5117,14 @@ export function delete_QuoteStages_Company_QuoteNum_QuoteLine_AssemblySeq_StageS
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -4355,10 +5144,10 @@ export function delete_QuoteStages_Company_QuoteNum_QuoteLine_AssemblySeq_StageS
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.QuoteAsmListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -4373,7 +5162,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmListRow)
           })
@@ -4385,6 +5181,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -4411,7 +5224,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -4588,15 +5401,22 @@ export function get_GetRows(whereClauseQuoteAsm:string, whereClauseQuoteAsmAttch
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -4611,7 +5431,7 @@ export function get_GetRows(whereClauseQuoteAsm:string, whereClauseQuoteAsmAttch
    Required: True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -4653,15 +5473,22 @@ export function get_GetByID(quoteNum:string, quoteLine:string, assemblySeq:strin
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4676,7 +5503,7 @@ export function get_GetByID(quoteNum:string, quoteLine:string, assemblySeq:strin
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -4718,15 +5545,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -4738,30 +5572,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4773,7 +5614,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -4797,15 +5638,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -4817,7 +5665,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -4841,15 +5689,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -4861,30 +5716,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -4896,30 +5758,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -4930,30 +5799,37 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method GetCodeDescList
    OperationID: GetCodeDescList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCodeDescList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCodeDescList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCodeDescList(requestBody:GetCodeDescList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCodeDescList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetCodeDescList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCodeDescList_output)
           })
       .catch((error) => {
           reject(error)
@@ -4965,30 +5841,37 @@ export function post_GetCodeDescList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method AddRefDesRange
    Description: Creates new QuoteMtlRefDes records based on the QuoteMtl dataset fields.
    OperationID: AddRefDesRange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AddRefDesRange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AddRefDesRange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AddRefDesRange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AddRefDesRange(requestBody:any, epicorHeaders?:Headers){
+export function post_AddRefDesRange(requestBody:AddRefDesRange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AddRefDesRange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/AddRefDesRange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AddRefDesRange_output)
           })
       .catch((error) => {
           reject(error)
@@ -5001,30 +5884,37 @@ export function post_AddRefDesRange(requestBody:any, epicorHeaders?:Headers){
    Description: This method takes the records built in BuildAppendDetails that are marked as append
 and writes them to the database.  It will return the updated dataset.
    OperationID: AppendDetails
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/AppendDetails_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/AppendDetails_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/AppendDetails_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_AppendDetails(requestBody:any, epicorHeaders?:Headers){
+export function post_AppendDetails(requestBody:AppendDetails_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<AppendDetails_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/AppendDetails", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as AppendDetails_output)
           })
       .catch((error) => {
           reject(error)
@@ -5036,30 +5926,37 @@ export function post_AppendDetails(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method BuildAppendDetails
    Description: This method returns the information that can be appended for approval
    OperationID: BuildAppendDetails
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/BuildAppendDetails_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/BuildAppendDetails_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/BuildAppendDetails_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_BuildAppendDetails(requestBody:any, epicorHeaders?:Headers){
+export function post_BuildAppendDetails(requestBody:BuildAppendDetails_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<BuildAppendDetails_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/BuildAppendDetails", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as BuildAppendDetails_output)
           })
       .catch((error) => {
           reject(error)
@@ -5073,30 +5970,37 @@ export function post_BuildAppendDetails(requestBody:any, epicorHeaders?:Headers)
 to see if the labor and burden rates need to be reset.  Blank is a valid entry for
 Capability ID.
    OperationID: ChangeOpDtlCapability
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOpDtlCapability_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOpDtlCapability_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOpDtlCapability_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOpDtlCapability(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOpDtlCapability(requestBody:ChangeOpDtlCapability_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOpDtlCapability_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOpDtlCapability", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOpDtlCapability_output)
           })
       .catch((error) => {
           reject(error)
@@ -5108,30 +6012,37 @@ export function post_ChangeOpDtlCapability(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ChangeOperAutoReceive
    Description: Verification when changing the AutoReceive field
    OperationID: ChangeOperAutoReceive
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOperAutoReceive_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOperAutoReceive_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOperAutoReceive_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOperAutoReceive(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOperAutoReceive(requestBody:ChangeOperAutoReceive_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOperAutoReceive_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOperAutoReceive", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOperAutoReceive_output)
           })
       .catch((error) => {
           reject(error)
@@ -5143,30 +6054,37 @@ export function post_ChangeOperAutoReceive(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method ChangeOperLaborEntryMethod
    Description: Verification when changing the LaborEntryMethod field
    OperationID: ChangeOperLaborEntryMethod
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOperLaborEntryMethod_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOperLaborEntryMethod_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOperLaborEntryMethod_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOperLaborEntryMethod(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOperLaborEntryMethod(requestBody:ChangeOperLaborEntryMethod_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOperLaborEntryMethod_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOperLaborEntryMethod", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOperLaborEntryMethod_output)
           })
       .catch((error) => {
           reject(error)
@@ -5180,30 +6098,37 @@ export function post_ChangeOperLaborEntryMethod(requestBody:any, epicorHeaders?:
 QuoteOpDtl with the default labor and burden rates from the appropriate resource
 or resource group if the QuoteOpDtl.OverrideRates is set to false.
    OperationID: ChangeOpDtlOverrideRates
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOpDtlOverrideRates_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOpDtlOverrideRates_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOpDtlOverrideRates_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOpDtlOverrideRates(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOpDtlOverrideRates(requestBody:ChangeOpDtlOverrideRates_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOpDtlOverrideRates_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOpDtlOverrideRates", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOpDtlOverrideRates_output)
           })
       .catch((error) => {
           reject(error)
@@ -5217,30 +6142,37 @@ export function post_ChangeOpDtlOverrideRates(requestBody:any, epicorHeaders?:He
 with the default labor and burden rates from the new resource group.  Blank is a valid
 entry for Resource Group ID.
    OperationID: ChangeOpDtlResourceGrpID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOpDtlResourceGrpID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOpDtlResourceGrpID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOpDtlResourceGrpID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOpDtlResourceGrpID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOpDtlResourceGrpID(requestBody:ChangeOpDtlResourceGrpID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOpDtlResourceGrpID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOpDtlResourceGrpID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOpDtlResourceGrpID_output)
           })
       .catch((error) => {
           reject(error)
@@ -5254,30 +6186,37 @@ export function post_ChangeOpDtlResourceGrpID(requestBody:any, epicorHeaders?:He
 with the default labor and burden rates from the new resource.  Blank is a valid
 entry for Resource ID.
    OperationID: ChangeOpDtlResourceID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOpDtlResourceID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOpDtlResourceID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOpDtlResourceID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOpDtlResourceID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOpDtlResourceID(requestBody:ChangeOpDtlResourceID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOpDtlResourceID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOpDtlResourceID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOpDtlResourceID_output)
           })
       .catch((error) => {
           reject(error)
@@ -5291,30 +6230,37 @@ export function post_ChangeOpDtlResourceID(requestBody:any, epicorHeaders?:Heade
 Production Operation Detail.
 This method should run when the QuoteOpr.PrimaryProdOpDtl field changes.
    OperationID: ChangeOperPrimaryProdOpDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOperPrimaryProdOpDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOperPrimaryProdOpDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOperPrimaryProdOpDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOperPrimaryProdOpDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOperPrimaryProdOpDtl(requestBody:ChangeOperPrimaryProdOpDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOperPrimaryProdOpDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOperPrimaryProdOpDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOperPrimaryProdOpDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -5328,30 +6274,37 @@ export function post_ChangeOperPrimaryProdOpDtl(requestBody:any, epicorHeaders?:
 Setup Operation Detail.
 This method should run when the QuoteOpr.PrimarySetupOpDtl field changes.
    OperationID: ChangeOperPrimarySetupOpDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOperPrimarySetupOpDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOperPrimarySetupOpDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOperPrimarySetupOpDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOperPrimarySetupOpDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOperPrimarySetupOpDtl(requestBody:ChangeOperPrimarySetupOpDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOperPrimarySetupOpDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOperPrimarySetupOpDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOperPrimarySetupOpDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -5365,30 +6318,37 @@ export function post_ChangeOperPrimarySetupOpDtl(requestBody:any, epicorHeaders?
 field changes.  It updates the vendor price breaks as well.  This method should run when
 the field ttQuoteMtl.PurPoint changes.
    OperationID: ChangeMtlPurPoint
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeMtlPurPoint_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeMtlPurPoint_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeMtlPurPoint_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeMtlPurPoint(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeMtlPurPoint(requestBody:ChangeMtlPurPoint_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeMtlPurPoint_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeMtlPurPoint", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeMtlPurPoint_output)
           })
       .catch((error) => {
           reject(error)
@@ -5402,30 +6362,37 @@ export function post_ChangeMtlPurPoint(requestBody:any, epicorHeaders?:Headers){
 field changes.  It updates the vendor price breaks as well.  This method should run when
 the field ttQuoteOpr.PurPoint changes.
    OperationID: ChangeOperPurPoint
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOperPurPoint_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOperPurPoint_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOperPurPoint_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOperPurPoint(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOperPurPoint(requestBody:ChangeOperPurPoint_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOperPurPoint_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOperPurPoint", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOperPurPoint_output)
           })
       .catch((error) => {
           reject(error)
@@ -5439,30 +6406,37 @@ export function post_ChangeOperPurPoint(requestBody:any, epicorHeaders?:Headers)
 field changes.  It updates the vendor price breaks as well.  This method should run when
 the field ttQuoteOpr.VendorNumVendorID changes.
    OperationID: ChangeOperVendorID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOperVendorID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOperVendorID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOperVendorID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOperVendorID(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOperVendorID(requestBody:ChangeOperVendorID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOperVendorID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOperVendorID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOperVendorID_output)
           })
       .catch((error) => {
           reject(error)
@@ -5474,30 +6448,37 @@ export function post_ChangeOperVendorID(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ChangeOpMtlReqQty
    Description: Method to call when changing the OpMtlReqQty.
    OperationID: ChangeOpMtlReqQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOpMtlReqQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOpMtlReqQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOpMtlReqQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOpMtlReqQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOpMtlReqQty(requestBody:ChangeOpMtlReqQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOpMtlReqQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOpMtlReqQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOpMtlReqQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -5509,30 +6490,37 @@ export function post_ChangeOpMtlReqQty(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeOpMtlSalvageReqQty
    Description: Method to call when changing the QuoteMtl.SalvageQtyPer.
    OperationID: ChangeOpMtlSalvageReqQty
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeOpMtlSalvageReqQty_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeOpMtlSalvageReqQty_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeOpMtlSalvageReqQty_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeOpMtlSalvageReqQty(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeOpMtlSalvageReqQty(requestBody:ChangeOpMtlSalvageReqQty_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeOpMtlSalvageReqQty_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeOpMtlSalvageReqQty", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeOpMtlSalvageReqQty_output)
           })
       .catch((error) => {
           reject(error)
@@ -5545,30 +6533,37 @@ export function post_ChangeOpMtlSalvageReqQty(requestBody:any, epicorHeaders?:He
    Description: This methods updates the QuoteAsmbl Required Quantity.
 This method should run when the QuoteAsmbl.QtyPer field changes.
    OperationID: ChangeQuoteAsmblQtyPer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteAsmblQtyPer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteAsmblQtyPer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteAsmblQtyPer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteAsmblQtyPer(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteAsmblQtyPer(requestBody:ChangeQuoteAsmblQtyPer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteAsmblQtyPer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteAsmblQtyPer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteAsmblQtyPer_output)
           })
       .catch((error) => {
           reject(error)
@@ -5582,30 +6577,37 @@ export function post_ChangeQuoteAsmblQtyPer(requestBody:any, epicorHeaders?:Head
 the same RefDes value if the QuoteAsmbl.ValRefDes = true. This method should
 run before changing the QuoteAsmbl.ValRefDes.
    OperationID: ChangeQuoteAsmblValRefDes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteAsmblValRefDes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteAsmblValRefDes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteAsmblValRefDes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteAsmblValRefDes(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteAsmblValRefDes(requestBody:ChangeQuoteAsmblValRefDes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteAsmblValRefDes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteAsmblValRefDes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteAsmblValRefDes_output)
           })
       .catch((error) => {
           reject(error)
@@ -5618,30 +6620,37 @@ export function post_ChangeQuoteAsmblValRefDes(requestBody:any, epicorHeaders?:H
    Description: This methods assigns QuoteAsm.RDEndNum field when QuoteAsm.ReqRefDes changes.
 This method should run when the QuoteAsm.ReqRefDes changes.
    OperationID: ChangeQuoteAsmReqRefDes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteAsmReqRefDes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteAsmReqRefDes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteAsmReqRefDes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteAsmReqRefDes(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteAsmReqRefDes(requestBody:ChangeQuoteAsmReqRefDes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteAsmReqRefDes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteAsmReqRefDes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteAsmReqRefDes_output)
           })
       .catch((error) => {
           reject(error)
@@ -5655,30 +6664,37 @@ export function post_ChangeQuoteAsmReqRefDes(requestBody:any, epicorHeaders?:Hea
 Est Unit Cost value changes.
 This method should run when the QuoteMtl.EstUnitCost changes.
    OperationID: ChangeQuoteMtlEstUnitCost
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlEstUnitCost_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlEstUnitCost_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteMtlEstUnitCost_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteMtlEstUnitCost(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteMtlEstUnitCost(requestBody:ChangeQuoteMtlEstUnitCost_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteMtlEstUnitCost_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteMtlEstUnitCost", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteMtlEstUnitCost_output)
           })
       .catch((error) => {
           reject(error)
@@ -5690,30 +6706,37 @@ export function post_ChangeQuoteMtlEstUnitCost(requestBody:any, epicorHeaders?:H
    Summary: Invoke method ChangeQuoteMtlLinkToContract
    Description: This method should run when the JobMtl.LinkToContract changes.
    OperationID: ChangeQuoteMtlLinkToContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlLinkToContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlLinkToContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteMtlLinkToContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteMtlLinkToContract(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteMtlLinkToContract(requestBody:ChangeQuoteMtlLinkToContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteMtlLinkToContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteMtlLinkToContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteMtlLinkToContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -5727,30 +6750,37 @@ export function post_ChangeQuoteMtlLinkToContract(requestBody:any, epicorHeaders
 Mtl Burden Rate value changes.
 This method should run when the QuoteMtl.MtlBurRate changes.
    OperationID: ChangeQuoteMtlMtlBurRate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlMtlBurRate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlMtlBurRate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteMtlMtlBurRate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteMtlMtlBurRate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteMtlMtlBurRate(requestBody:ChangeQuoteMtlMtlBurRate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteMtlMtlBurRate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteMtlMtlBurRate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteMtlMtlBurRate_output)
           })
       .catch((error) => {
           reject(error)
@@ -5763,30 +6793,37 @@ export function post_ChangeQuoteMtlMtlBurRate(requestBody:any, epicorHeaders?:He
    Description: This method validates if transaction exists and updates fields based on value of Misc. Charge flag.
 This method should run when the QuoteMtl.MiscCharge field changes.
    OperationID: ChangeQuoteMtlMiscCharge
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlMiscCharge_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlMiscCharge_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteMtlMiscCharge_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteMtlMiscCharge(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteMtlMiscCharge(requestBody:ChangeQuoteMtlMiscCharge_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteMtlMiscCharge_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteMtlMiscCharge", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteMtlMiscCharge_output)
           })
       .catch((error) => {
           reject(error)
@@ -5799,30 +6836,37 @@ export function post_ChangeQuoteMtlMiscCharge(requestBody:any, epicorHeaders?:He
    Description: This methods assigns QuoteMtl.RDEndNum field when QuoteMtl.ReqRefDes changes.
 This method should run when the QuoteMtl.ReqRefDes changes.
    OperationID: ChangeQuoteMtlReqRefDes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlReqRefDes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlReqRefDes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteMtlReqRefDes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteMtlReqRefDes(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteMtlReqRefDes(requestBody:ChangeQuoteMtlReqRefDes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteMtlReqRefDes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteMtlReqRefDes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteMtlReqRefDes_output)
           })
       .catch((error) => {
           reject(error)
@@ -5836,30 +6880,37 @@ export function post_ChangeQuoteMtlReqRefDes(requestBody:any, epicorHeaders?:Hea
 Salvage Mtl Burden Rate value changes.
 This method should run when the ECOMtl.SalvageMtlBurRate changes.
    OperationID: ChangeQuoteMtlSalvageMtlBurUnitRate
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlSalvageMtlBurUnitRate_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlSalvageMtlBurUnitRate_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteMtlSalvageMtlBurUnitRate_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteMtlSalvageMtlBurUnitRate(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteMtlSalvageMtlBurUnitRate(requestBody:ChangeQuoteMtlSalvageMtlBurUnitRate_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteMtlSalvageMtlBurUnitRate_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteMtlSalvageMtlBurUnitRate", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteMtlSalvageMtlBurUnitRate_output)
           })
       .catch((error) => {
           reject(error)
@@ -5872,30 +6923,37 @@ export function post_ChangeQuoteMtlSalvageMtlBurUnitRate(requestBody:any, epicor
    Description: This methods assigns associated fields when ECOMtl.SalvagePartNum changes.
 This method should run when the ECOMtl.SalvagePartNum changes.
    OperationID: ChangeQuoteMtlSalvagePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlSalvagePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlSalvagePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteMtlSalvagePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteMtlSalvagePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteMtlSalvagePartNum(requestBody:ChangeQuoteMtlSalvagePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteMtlSalvagePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteMtlSalvagePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteMtlSalvagePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -5909,30 +6967,37 @@ export function post_ChangeQuoteMtlSalvagePartNum(requestBody:any, epicorHeaders
 Salvage Unit Credit value changes.
 This method should run when the ECOMtl.SalvageUnitCredit changes.
    OperationID: ChangeQuoteMtlSalvageUnitCredit
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlSalvageUnitCredit_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlSalvageUnitCredit_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteMtlSalvageUnitCredit_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteMtlSalvageUnitCredit(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteMtlSalvageUnitCredit(requestBody:ChangeQuoteMtlSalvageUnitCredit_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteMtlSalvageUnitCredit_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteMtlSalvageUnitCredit", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteMtlSalvageUnitCredit_output)
           })
       .catch((error) => {
           reject(error)
@@ -5946,30 +7011,37 @@ export function post_ChangeQuoteMtlSalvageUnitCredit(requestBody:any, epicorHead
 OprSeq field is changing.
 This method should run before changing the QuoteOpr.OprSeq and not when a new record.
    OperationID: ChangeQuoteOprOprSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteOprOprSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteOprOprSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteOprOprSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteOprOprSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteOprOprSeq(requestBody:ChangeQuoteOprOprSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteOprOprSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteOprOprSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteOprOprSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -5981,30 +7053,37 @@ export function post_ChangeQuoteOprOprSeq(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method CheckConfigurationAndGetConfigType
    Description: This method checks if a part must be configured prior to a GetDetails.
    OperationID: CheckConfigurationAndGetConfigType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckConfigurationAndGetConfigType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckConfigurationAndGetConfigType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckConfigurationAndGetConfigType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckConfigurationAndGetConfigType(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckConfigurationAndGetConfigType(requestBody:CheckConfigurationAndGetConfigType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckConfigurationAndGetConfigType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/CheckConfigurationAndGetConfigType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckConfigurationAndGetConfigType_output)
           })
       .catch((error) => {
           reject(error)
@@ -6016,30 +7095,37 @@ export function post_CheckConfigurationAndGetConfigType(requestBody:any, epicorH
    Summary: Invoke method checkQuotePartConfiguration
    Description: Checks if the Part of the Quote Line needs configuration and return information needed for the configuration call.
    OperationID: checkQuotePartConfiguration
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/checkQuotePartConfiguration_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/checkQuotePartConfiguration_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/checkQuotePartConfiguration_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_checkQuotePartConfiguration(requestBody:any, epicorHeaders?:Headers){
+export function post_checkQuotePartConfiguration(requestBody:checkQuotePartConfiguration_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<checkQuotePartConfiguration_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/checkQuotePartConfiguration", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as checkQuotePartConfiguration_output)
           })
       .catch((error) => {
           reject(error)
@@ -6051,30 +7137,37 @@ export function post_checkQuotePartConfiguration(requestBody:any, epicorHeaders?
    Summary: Invoke method CheckConfiguration
    Description: This method checks if a part must be configured prior to a GetDetails.
    OperationID: CheckConfiguration
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckConfiguration_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckConfiguration_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckConfiguration_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckConfiguration(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckConfiguration(requestBody:CheckConfiguration_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckConfiguration_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/CheckConfiguration", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckConfiguration_output)
           })
       .catch((error) => {
           reject(error)
@@ -6086,30 +7179,37 @@ export function post_CheckConfiguration(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method CheckConfigurationAndGetConfigInfo
    Description: This method checks if a part must be configured prior to a GetDetails and retrieves information related to the configuration.
    OperationID: CheckConfigurationAndGetConfigInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckConfigurationAndGetConfigInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckConfigurationAndGetConfigInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckConfigurationAndGetConfigInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckConfigurationAndGetConfigInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckConfigurationAndGetConfigInfo(requestBody:CheckConfigurationAndGetConfigInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckConfigurationAndGetConfigInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/CheckConfigurationAndGetConfigInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckConfigurationAndGetConfigInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -6122,30 +7222,37 @@ export function post_CheckConfigurationAndGetConfigInfo(requestBody:any, epicorH
    Description: This method validated the value of Primary Production Operation Detail.
 This method should run when the QuoteOpr.PrimaryProdOpDtl is changing.
    OperationID: CheckOperPrimaryProdOpDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckOperPrimaryProdOpDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckOperPrimaryProdOpDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckOperPrimaryProdOpDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckOperPrimaryProdOpDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckOperPrimaryProdOpDtl(requestBody:CheckOperPrimaryProdOpDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckOperPrimaryProdOpDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/CheckOperPrimaryProdOpDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckOperPrimaryProdOpDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -6158,30 +7265,37 @@ export function post_CheckOperPrimaryProdOpDtl(requestBody:any, epicorHeaders?:H
    Description: This method validated the value of Primary Setup Operation Detail.
 This method should run when the QuoteOpr.PrimarySetupOpDtl is changing.
    OperationID: CheckOperPrimarySetupOpDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckOperPrimarySetupOpDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckOperPrimarySetupOpDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckOperPrimarySetupOpDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckOperPrimarySetupOpDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckOperPrimarySetupOpDtl(requestBody:CheckOperPrimarySetupOpDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckOperPrimarySetupOpDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/CheckOperPrimarySetupOpDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckOperPrimarySetupOpDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -6195,30 +7309,37 @@ export function post_CheckOperPrimarySetupOpDtl(requestBody:any, epicorHeaders?:
 materials that are on hold or inactive.  Quote cannot be engineered or Quoted
 until these errors are taken care of
    OperationID: CheckPartErrors
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPartErrors_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPartErrors_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPartErrors_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPartErrors(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPartErrors(requestBody:CheckPartErrors_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPartErrors_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/CheckPartErrors", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPartErrors_output)
           })
       .catch((error) => {
           reject(error)
@@ -6232,30 +7353,37 @@ export function post_CheckPartErrors(requestBody:any, epicorHeaders?:Headers){
 GetPartInfo or Update methods are run.  This returns all the questions that
 need to be asked before a part can be changed.
    OperationID: CheckPrePartInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckPrePartInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckPrePartInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckPrePartInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckPrePartInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckPrePartInfo(requestBody:CheckPrePartInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckPrePartInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/CheckPrePartInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckPrePartInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -6267,30 +7395,37 @@ export function post_CheckPrePartInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CollapseAssembly
    Description: Collapses any single Quote Assembly except Assembly 0
    OperationID: CollapseAssembly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CollapseAssembly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CollapseAssembly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CollapseAssembly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CollapseAssembly(requestBody:any, epicorHeaders?:Headers){
+export function post_CollapseAssembly(requestBody:CollapseAssembly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CollapseAssembly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/CollapseAssembly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CollapseAssembly_output)
           })
       .catch((error) => {
           reject(error)
@@ -6302,30 +7437,37 @@ export function post_CollapseAssembly(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method QuoteAsmChildDelete
    Description: Deletes the QuoteAsm child records
    OperationID: QuoteAsmChildDelete
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/QuoteAsmChildDelete_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/QuoteAsmChildDelete_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/QuoteAsmChildDelete_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteAsmChildDelete(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteAsmChildDelete(requestBody:QuoteAsmChildDelete_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<QuoteAsmChildDelete_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/QuoteAsmChildDelete", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as QuoteAsmChildDelete_output)
           })
       .catch((error) => {
           reject(error)
@@ -6338,30 +7480,37 @@ export function post_QuoteAsmChildDelete(requestBody:any, epicorHeaders?:Headers
    Description: The method deletes all assemblies and their subassemblies, materials and operations
 while leaving the base assembly sequence alone.
    OperationID: DeleteAllAssembly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteAllAssembly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteAllAssembly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteAllAssembly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteAllAssembly(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteAllAssembly(requestBody:DeleteAllAssembly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteAllAssembly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/DeleteAllAssembly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteAllAssembly_output)
           })
       .catch((error) => {
           reject(error)
@@ -6373,30 +7522,37 @@ export function post_DeleteAllAssembly(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method DeleteRefDesRange
    Description: Deletes QuoteMtlRefDes records based on the QuoteMtl dataset fields.
    OperationID: DeleteRefDesRange
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteRefDesRange_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteRefDesRange_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteRefDesRange_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteRefDesRange(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteRefDesRange(requestBody:DeleteRefDesRange_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteRefDesRange_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/DeleteRefDesRange", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteRefDesRange_output)
           })
       .catch((error) => {
           reject(error)
@@ -6409,7 +7565,7 @@ export function post_DeleteRefDesRange(requestBody:any, epicorHeaders?:Headers){
    Description: This method returns whether or not the supplier price list option
 is enabled.  This is based on security rights for the user.
    OperationID: EnableSupplierPriceList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/EnableSupplierPriceList_output
@@ -6422,15 +7578,22 @@ export function post_EnableSupplierPriceList(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<EnableSupplierPriceList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/EnableSupplierPriceList", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as EnableSupplierPriceList_output)
           })
       .catch((error) => {
           reject(error)
@@ -6441,30 +7604,37 @@ export function post_EnableSupplierPriceList(epicorHeaders?:Headers){
    /**  
    Summary: Invoke method FindAsm
    OperationID: FindAsm
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindAsm_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindAsm_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindAsm_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindAsm(requestBody:any, epicorHeaders?:Headers){
+export function post_FindAsm(requestBody:FindAsm_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindAsm_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/FindAsm", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindAsm_output)
           })
       .catch((error) => {
           reject(error)
@@ -6477,30 +7647,37 @@ export function post_FindAsm(requestBody:any, epicorHeaders?:Headers){
    Description: This method updates the related operation description when the RelatedOperation field
 changes. To be run before update.
    OperationID: GetAsmOprInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAsmOprInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAsmOprInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAsmOprInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAsmOprInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAsmOprInfo(requestBody:GetAsmOprInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAsmOprInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetAsmOprInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAsmOprInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -6513,30 +7690,37 @@ export function post_GetAsmOprInfo(requestBody:any, epicorHeaders?:Headers){
    Description: This method updates the dataset with Part Defaults when the PartNum or Revision field
 changes. To be run before update. CheckPrePartInfo should be run first
    OperationID: GetAsmPartInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAsmPartInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAsmPartInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAsmPartInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAsmPartInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAsmPartInfo(requestBody:GetAsmPartInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAsmPartInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetAsmPartInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAsmPartInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -6548,30 +7732,37 @@ export function post_GetAsmPartInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBasePartAndConfigType
    Description: Retrieve the based configured part and config type
    OperationID: GetBasePartAndConfigType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBasePartAndConfigType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBasePartAndConfigType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBasePartAndConfigType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBasePartAndConfigType(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBasePartAndConfigType(requestBody:GetBasePartAndConfigType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBasePartAndConfigType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetBasePartAndConfigType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBasePartAndConfigType_output)
           })
       .catch((error) => {
           reject(error)
@@ -6584,30 +7775,37 @@ export function post_GetBasePartAndConfigType(requestBody:any, epicorHeaders?:He
    Description: This method will retrieve the base configured part number to be passed
 to configuration entry
    OperationID: GetBasePartForConfig
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetBasePartForConfig_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetBasePartForConfig_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBasePartForConfig_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetBasePartForConfig(requestBody:any, epicorHeaders?:Headers){
+export function post_GetBasePartForConfig(requestBody:GetBasePartForConfig_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBasePartForConfig_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetBasePartForConfig", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBasePartForConfig_output)
           })
       .catch((error) => {
           reject(error)
@@ -6618,30 +7816,37 @@ export function post_GetBasePartForConfig(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method GetMtlConfigPartRev
    OperationID: GetMtlConfigPartRev
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMtlConfigPartRev_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMtlConfigPartRev_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMtlConfigPartRev_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMtlConfigPartRev(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMtlConfigPartRev(requestBody:GetMtlConfigPartRev_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMtlConfigPartRev_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetMtlConfigPartRev", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMtlConfigPartRev_output)
           })
       .catch((error) => {
           reject(error)
@@ -6652,30 +7857,37 @@ export function post_GetMtlConfigPartRev(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method GetMtlConfigPartRevAndConfigType
    OperationID: GetMtlConfigPartRevAndConfigType
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMtlConfigPartRevAndConfigType_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMtlConfigPartRevAndConfigType_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMtlConfigPartRevAndConfigType_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMtlConfigPartRevAndConfigType(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMtlConfigPartRevAndConfigType(requestBody:GetMtlConfigPartRevAndConfigType_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMtlConfigPartRevAndConfigType_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetMtlConfigPartRevAndConfigType", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMtlConfigPartRevAndConfigType_output)
           })
       .catch((error) => {
           reject(error)
@@ -6691,30 +7903,37 @@ This methods will return the dataset for QuoteAsm.  The method will return the
 records related to the assembly provided and the first child level assemblies related to
 the input inputted assembly.
    OperationID: GetDatasetForTreeByRef
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDatasetForTreeByRef_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDatasetForTreeByRef_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDatasetForTreeByRef_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDatasetForTreeByRef(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDatasetForTreeByRef(requestBody:GetDatasetForTreeByRef_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDatasetForTreeByRef_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetDatasetForTreeByRef", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDatasetForTreeByRef_output)
           })
       .catch((error) => {
           reject(error)
@@ -6728,30 +7947,37 @@ export function post_GetDatasetForTreeByRef(requestBody:any, epicorHeaders?:Head
 records related to the assembly provided and the first child level assemblies related to
 the input inputted assembly.
    OperationID: GetDatasetForTree
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDatasetForTree_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDatasetForTree_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDatasetForTree_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDatasetForTree(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDatasetForTree(requestBody:GetDatasetForTree_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDatasetForTree_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetDatasetForTree", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDatasetForTree_output)
           })
       .catch((error) => {
           reject(error)
@@ -6764,30 +7990,37 @@ export function post_GetDatasetForTree(requestBody:any, epicorHeaders?:Headers){
    Description: This methods will return the dataset for QuoteAsm.  The method will return the
 records related to all the assemblies specified in assemblySeqList
    OperationID: GetDatasetForTreeRefresh
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDatasetForTreeRefresh_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDatasetForTreeRefresh_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDatasetForTreeRefresh_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDatasetForTreeRefresh(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDatasetForTreeRefresh(requestBody:GetDatasetForTreeRefresh_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDatasetForTreeRefresh_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetDatasetForTreeRefresh", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDatasetForTreeRefresh_output)
           })
       .catch((error) => {
           reject(error)
@@ -6803,30 +8036,37 @@ be created regardless if the part is in error or not.  If there are errors, the
 quote cannot be "quoted" unless all parts are fixed.  To find the parts in error
 run CheckPartErrors
    OperationID: GetDetails
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetDetails_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetDetails_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDetails_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetDetails(requestBody:any, epicorHeaders?:Headers){
+export function post_GetDetails(requestBody:GetDetails_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDetails_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetDetails", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDetails_output)
           })
       .catch((error) => {
           reject(error)
@@ -6838,30 +8078,37 @@ export function post_GetDetails(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetMtlBuyItInfo
    Description: This method updates Vendor and LeadTime when BuyIt is checked
    OperationID: GetMtlBuyItInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMtlBuyItInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMtlBuyItInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMtlBuyItInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMtlBuyItInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMtlBuyItInfo(requestBody:GetMtlBuyItInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMtlBuyItInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetMtlBuyItInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMtlBuyItInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -6873,30 +8120,37 @@ export function post_GetMtlBuyItInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetMtlDirectInfo
    Description: This method updates Vendor and LeadTime when BuyIt is checked
    OperationID: GetMtlDirectInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMtlDirectInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMtlDirectInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMtlDirectInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMtlDirectInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMtlDirectInfo(requestBody:GetMtlDirectInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMtlDirectInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetMtlDirectInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMtlDirectInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -6908,30 +8162,37 @@ export function post_GetMtlDirectInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetMtlOprInfo
    Description: This method defaults the EstScrap fields when the QuoteMtl.RelatedOperation changes
    OperationID: GetMtlOprInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMtlOprInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMtlOprInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMtlOprInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMtlOprInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMtlOprInfo(requestBody:GetMtlOprInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMtlOprInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetMtlOprInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMtlOprInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -6942,30 +8203,37 @@ export function post_GetMtlOprInfo(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method CheckQuoteMtlPartNum
    OperationID: CheckQuoteMtlPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckQuoteMtlPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckQuoteMtlPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckQuoteMtlPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckQuoteMtlPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckQuoteMtlPartNum(requestBody:CheckQuoteMtlPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckQuoteMtlPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/CheckQuoteMtlPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckQuoteMtlPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -6978,30 +8246,37 @@ export function post_CheckQuoteMtlPartNum(requestBody:any, epicorHeaders?:Header
    Description: This method updates the dataset with Part Defaults when the PartNum field changes.
 To be run after partNum changes but before update. CheckPrePartInfo should be run first
    OperationID: GetMtlPartInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMtlPartInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMtlPartInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMtlPartInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMtlPartInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMtlPartInfo(requestBody:GetMtlPartInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMtlPartInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetMtlPartInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMtlPartInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -7013,30 +8288,37 @@ export function post_GetMtlPartInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetMtlVendorInfo
    Description: This method defaults the Vendor fields when the VendorNumVendorID field is changed
    OperationID: GetMtlVendorInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMtlVendorInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMtlVendorInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMtlVendorInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMtlVendorInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMtlVendorInfo(requestBody:GetMtlVendorInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMtlVendorInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetMtlVendorInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMtlVendorInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -7049,30 +8331,37 @@ export function post_GetMtlVendorInfo(requestBody:any, epicorHeaders?:Headers){
    Description: This method creates a new Assembly after prompting for the AsemblySeq and BOMLevel
 as well as the QuoteLine and QuoteNum fields. This is to replace the standard GetNewQuoteAsm
    OperationID: GetNewAssembly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewAssembly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewAssembly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewAssembly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewAssembly(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewAssembly(requestBody:GetNewAssembly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewAssembly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewAssembly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewAssembly_output)
           })
       .catch((error) => {
           reject(error)
@@ -7085,30 +8374,37 @@ export function post_GetNewAssembly(requestBody:any, epicorHeaders?:Headers){
    Description: This method creates a new Operation after prompting for the SubConType as well as the
 AssemblySeq, QuoteLine and QuoteNum fields. This is to replace the standard GetNewQuoteOpr
    OperationID: GetNewOperation
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewOperation_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewOperation_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewOperation_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewOperation(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewOperation(requestBody:GetNewOperation_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewOperation_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewOperation", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewOperation_output)
           })
       .catch((error) => {
           reject(error)
@@ -7121,30 +8417,37 @@ export function post_GetNewOperation(requestBody:any, epicorHeaders?:Headers){
    Description: This method defaults the OpStd information when the OpCode field changes.
 Updates the burden rates as well.
    OperationID: GetOprOpCodeInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetOprOpCodeInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetOprOpCodeInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOprOpCodeInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetOprOpCodeInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetOprOpCodeInfo(requestBody:GetOprOpCodeInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOprOpCodeInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetOprOpCodeInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOprOpCodeInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -7156,30 +8459,37 @@ export function post_GetOprOpCodeInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetOprOpStdInfo
    Description: This method defaults Operation Standard information when OpStdId changes
    OperationID: GetOprOpStdInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetOprOpStdInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetOprOpStdInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOprOpStdInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetOprOpStdInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetOprOpStdInfo(requestBody:GetOprOpStdInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOprOpStdInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetOprOpStdInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOprOpStdInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -7192,30 +8502,37 @@ export function post_GetOprOpStdInfo(requestBody:any, epicorHeaders?:Headers){
    Description: This method updates the dataset with Part Defaults when the PartNum field changes.
 To be run after partNum changes but before update. CheckPrePartInfo should be run first
    OperationID: GetOprPartInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetOprPartInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetOprPartInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOprPartInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetOprPartInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetOprPartInfo(requestBody:GetOprPartInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOprPartInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetOprPartInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOprPartInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -7227,30 +8544,37 @@ export function post_GetOprPartInfo(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetOprStdFormatInfo
    Description: This method updates the dataset after the StdFormat field changes.  Can be run on the ColumnChanged event
    OperationID: GetOprStdFormatInfo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetOprStdFormatInfo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetOprStdFormatInfo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetOprStdFormatInfo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetOprStdFormatInfo(requestBody:any, epicorHeaders?:Headers){
+export function post_GetOprStdFormatInfo(requestBody:GetOprStdFormatInfo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetOprStdFormatInfo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetOprStdFormatInfo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetOprStdFormatInfo_output)
           })
       .catch((error) => {
           reject(error)
@@ -7265,7 +8589,7 @@ AllowPurchasingInfo = Security.CheckSecurityAccess("bo.Part.AllowPurchasingInfo"
 PreventQQChange = EQSyst.PreventQQChange
 SiteExternalMES = PlantConfCtrl.ExternalMES
    OperationID: GetQuoteEngUIDefaults
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQuoteEngUIDefaults_output
@@ -7278,15 +8602,22 @@ export function post_GetQuoteEngUIDefaults(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQuoteEngUIDefaults_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetQuoteEngUIDefaults", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQuoteEngUIDefaults_output)
           })
       .catch((error) => {
           reject(error)
@@ -7299,30 +8630,37 @@ export function post_GetQuoteEngUIDefaults(epicorHeaders?:Headers){
    Description: This methods allows for the insertion of an engineering assembly for drag/drop functionality,
 validates a QuoteAsm record exists for the parent
    OperationID: InsertBOMAsm
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertBOMAsm_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertBOMAsm_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertBOMAsm_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertBOMAsm(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertBOMAsm(requestBody:InsertBOMAsm_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertBOMAsm_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertBOMAsm", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertBOMAsm_output)
           })
       .catch((error) => {
           reject(error)
@@ -7335,30 +8673,37 @@ export function post_InsertBOMAsm(requestBody:any, epicorHeaders?:Headers){
    Description: This methods allows for the insertion of an engineering material for drag/drop functionality,
 validates a JobAsmbl record exists for the parent
    OperationID: InsertBOMMtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertBOMMtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertBOMMtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertBOMMtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertBOMMtl(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertBOMMtl(requestBody:InsertBOMMtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertBOMMtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertBOMMtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertBOMMtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -7371,30 +8716,37 @@ export function post_InsertBOMMtl(requestBody:any, epicorHeaders?:Headers){
    Description: This methods allows for the insertion of an engineering operation for drag/drop functionality,
 validates a JobAsmbl record exists for the parent
    OperationID: InsertBOMOper
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertBOMOper_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertBOMOper_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertBOMOper_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertBOMOper(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertBOMOper(requestBody:InsertBOMOper_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertBOMOper_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertBOMOper", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertBOMOper_output)
           })
       .catch((error) => {
           reject(error)
@@ -7407,30 +8759,37 @@ export function post_InsertBOMOper(requestBody:any, epicorHeaders?:Headers){
    Description: This methods allows for the insertion on a material for drag/drop functionality,
 validates a QuoteAsm record exists and the part is valid.
    OperationID: InsertMaterial
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertMaterial_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertMaterial_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertMaterial_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertMaterial(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertMaterial(requestBody:InsertMaterial_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertMaterial_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertMaterial", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertMaterial_output)
           })
       .catch((error) => {
           reject(error)
@@ -7443,30 +8802,37 @@ export function post_InsertMaterial(requestBody:any, epicorHeaders?:Headers){
    Description: This method allows for the insertion of Capability on an operation to create
 operation detail for drag/drop functionality.
    OperationID: InsertOpDtlCapability
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertOpDtlCapability_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertOpDtlCapability_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertOpDtlCapability_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertOpDtlCapability(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertOpDtlCapability(requestBody:InsertOpDtlCapability_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertOpDtlCapability_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertOpDtlCapability", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertOpDtlCapability_output)
           })
       .catch((error) => {
           reject(error)
@@ -7479,30 +8845,37 @@ export function post_InsertOpDtlCapability(requestBody:any, epicorHeaders?:Heade
    Description: This method allows for the insertion of Resource on an operation to create
 operation detail for drag/drop functionality.
    OperationID: InsertOpDtlResource
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertOpDtlResource_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertOpDtlResource_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertOpDtlResource_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertOpDtlResource(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertOpDtlResource(requestBody:InsertOpDtlResource_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertOpDtlResource_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertOpDtlResource", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertOpDtlResource_output)
           })
       .catch((error) => {
           reject(error)
@@ -7515,30 +8888,37 @@ export function post_InsertOpDtlResource(requestBody:any, epicorHeaders?:Headers
    Description: This method allows for the insertion of Resource Group on an operation to create
 operation detail for drag/drop functionality.
    OperationID: InsertOpDtlResourceGrp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertOpDtlResourceGrp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertOpDtlResourceGrp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertOpDtlResourceGrp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertOpDtlResourceGrp(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertOpDtlResourceGrp(requestBody:InsertOpDtlResourceGrp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertOpDtlResourceGrp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertOpDtlResourceGrp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertOpDtlResourceGrp_output)
           })
       .catch((error) => {
           reject(error)
@@ -7552,30 +8932,37 @@ export function post_InsertOpDtlResourceGrp(requestBody:any, epicorHeaders?:Head
 using operation code as input.  This would eventually replace the original InsertOperation
 method where work center code is the input.
    OperationID: InsertOperationOP
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertOperationOP_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertOperationOP_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertOperationOP_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertOperationOP(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertOperationOP(requestBody:InsertOperationOP_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertOperationOP_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertOperationOP", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertOperationOP_output)
           })
       .catch((error) => {
           reject(error)
@@ -7588,30 +8975,37 @@ export function post_InsertOperationOP(requestBody:any, epicorHeaders?:Headers){
    Description: This method allows for the insertion of Capability on an assembly to create
 QuoteOpr/QuoteOpDtl for drag/drop functionality.
    OperationID: InsertOperCapability
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertOperCapability_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertOperCapability_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertOperCapability_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertOperCapability(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertOperCapability(requestBody:InsertOperCapability_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertOperCapability_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertOperCapability", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertOperCapability_output)
           })
       .catch((error) => {
           reject(error)
@@ -7624,30 +9018,37 @@ export function post_InsertOperCapability(requestBody:any, epicorHeaders?:Header
    Description: This method allows for the insertion of ResourceGroup on an assembly to create
 QuoteOpr/QuoteOpDtl for drag/drop functionality.
    OperationID: InsertOperResGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertOperResGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertOperResGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertOperResGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertOperResGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertOperResGroup(requestBody:InsertOperResGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertOperResGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertOperResGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertOperResGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -7660,30 +9061,37 @@ export function post_InsertOperResGroup(requestBody:any, epicorHeaders?:Headers)
    Description: This method allows for the insertion of Resource on an assembly to create
 QuoteOpr/QuoteOpDtl for drag/drop functionality.
    OperationID: InsertOperResource
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertOperResource_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertOperResource_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertOperResource_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertOperResource(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertOperResource(requestBody:InsertOperResource_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertOperResource_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertOperResource", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertOperResource_output)
           })
       .catch((error) => {
           reject(error)
@@ -7696,30 +9104,37 @@ export function post_InsertOperResource(requestBody:any, epicorHeaders?:Headers)
    Description: This methods allows for the insertion of a subassembly for drag/drop functionality,
 validates a QuoteAsm record exists and the part is valid.
    OperationID: InsertSubAssembly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertSubAssembly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertSubAssembly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertSubAssembly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertSubAssembly(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertSubAssembly(requestBody:InsertSubAssembly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertSubAssembly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertSubAssembly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertSubAssembly_output)
           })
       .catch((error) => {
           reject(error)
@@ -7732,30 +9147,37 @@ export function post_InsertSubAssembly(requestBody:any, epicorHeaders?:Headers){
    Description: This methods allows for the insertion of a subassembly for drag/drop functionality,
 validates a QuoteAsm record exists and the part is valid.
    OperationID: InsertNewSubAssembly
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/InsertNewSubAssembly_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/InsertNewSubAssembly_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/InsertNewSubAssembly_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_InsertNewSubAssembly(requestBody:any, epicorHeaders?:Headers){
+export function post_InsertNewSubAssembly(requestBody:InsertNewSubAssembly_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<InsertNewSubAssembly_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/InsertNewSubAssembly", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as InsertNewSubAssembly_output)
           })
       .catch((error) => {
           reject(error)
@@ -7767,30 +9189,37 @@ export function post_InsertNewSubAssembly(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ValidateLinkToContractData
    Description: Validate Parts allowed for Planning Contracts.
    OperationID: ValidateLinkToContractData
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateLinkToContractData_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateLinkToContractData_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateLinkToContractData_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateLinkToContractData(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateLinkToContractData(requestBody:ValidateLinkToContractData_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateLinkToContractData_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ValidateLinkToContractData", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateLinkToContractData_output)
           })
       .catch((error) => {
           reject(error)
@@ -7802,30 +9231,37 @@ export function post_ValidateLinkToContractData(requestBody:any, epicorHeaders?:
    Summary: Invoke method CheckChangeJobAsmblParent
    Description: This method validates validates the new Parent field
    OperationID: CheckChangeJobAsmblParent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CheckChangeJobAsmblParent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CheckChangeJobAsmblParent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CheckChangeJobAsmblParent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CheckChangeJobAsmblParent(requestBody:any, epicorHeaders?:Headers){
+export function post_CheckChangeJobAsmblParent(requestBody:CheckChangeJobAsmblParent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CheckChangeJobAsmblParent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/CheckChangeJobAsmblParent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CheckChangeJobAsmblParent_output)
           })
       .catch((error) => {
           reject(error)
@@ -7838,30 +9274,37 @@ export function post_CheckChangeJobAsmblParent(requestBody:any, epicorHeaders?:H
    Description: This method validates the new Parent field and populates defaults associated with the Parent.
 This method should run when the JobAsmbl.Parent field changes.
    OperationID: ChangeJobAsmblParent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeJobAsmblParent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeJobAsmblParent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeJobAsmblParent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeJobAsmblParent(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeJobAsmblParent(requestBody:ChangeJobAsmblParent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeJobAsmblParent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeJobAsmblParent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeJobAsmblParent_output)
           })
       .catch((error) => {
           reject(error)
@@ -7873,30 +9316,37 @@ export function post_ChangeJobAsmblParent(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method QuoteOprInitSNReqSubCon
    Description: Method required to set the initial value of QuoteOpr.SNRequiredSubConShip
    OperationID: QuoteOprInitSNReqSubCon
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/QuoteOprInitSNReqSubCon_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/QuoteOprInitSNReqSubCon_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/QuoteOprInitSNReqSubCon_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_QuoteOprInitSNReqSubCon(requestBody:any, epicorHeaders?:Headers){
+export function post_QuoteOprInitSNReqSubCon(requestBody:QuoteOprInitSNReqSubCon_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<QuoteOprInitSNReqSubCon_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/QuoteOprInitSNReqSubCon", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as QuoteOprInitSNReqSubCon_output)
           })
       .catch((error) => {
           reject(error)
@@ -7909,30 +9359,37 @@ export function post_QuoteOprInitSNReqSubCon(requestBody:any, epicorHeaders?:Hea
    Description: This method updates the columns SNRequiredOpr and SNRequiredSubConShip when the main Part
 changes. If the new part number is not serial tracked and those fields were set as true previuosly, they must be set to false.
    OperationID: ValidateSNReqValues
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSNReqValues_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSNReqValues_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSNReqValues_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSNReqValues(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSNReqValues(requestBody:ValidateSNReqValues_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSNReqValues_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ValidateSNReqValues", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSNReqValues_output)
           })
       .catch((error) => {
           reject(error)
@@ -7944,30 +9401,37 @@ export function post_ValidateSNReqValues(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ValidateInspection
    Description: Method to validate the Inspection control fields. (EQM)
    OperationID: ValidateInspection
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateInspection_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateInspection_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateInspection_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateInspection(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateInspection(requestBody:ValidateInspection_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateInspection_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ValidateInspection", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateInspection_output)
           })
       .catch((error) => {
           reject(error)
@@ -7979,30 +9443,37 @@ export function post_ValidateInspection(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ValidatePartToLinkToContract
    Description: Validate Parts allowed for Planning Contracts.
    OperationID: ValidatePartToLinkToContract
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidatePartToLinkToContract_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidatePartToLinkToContract_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidatePartToLinkToContract_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidatePartToLinkToContract(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidatePartToLinkToContract(requestBody:ValidatePartToLinkToContract_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidatePartToLinkToContract_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ValidatePartToLinkToContract", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidatePartToLinkToContract_output)
           })
       .catch((error) => {
           reject(error)
@@ -8016,30 +9487,37 @@ export function post_ValidatePartToLinkToContract(requestBody:any, epicorHeaders
 VendPart and VendPBrk tables have been updated. It will also update the
 LeadTime and Unit Cost fields as well.
    OperationID: RefreshMtlPriceBreak
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshMtlPriceBreak_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshMtlPriceBreak_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshMtlPriceBreak_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshMtlPriceBreak(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshMtlPriceBreak(requestBody:RefreshMtlPriceBreak_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshMtlPriceBreak_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/RefreshMtlPriceBreak", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshMtlPriceBreak_output)
           })
       .catch((error) => {
           reject(error)
@@ -8053,30 +9531,37 @@ export function post_RefreshMtlPriceBreak(requestBody:any, epicorHeaders?:Header
 VendPart and VendPBrk tables have been updated. It will also update the
 LeadTime and Unit Cost fields as well.
    OperationID: RefreshOprPriceBreak
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RefreshOprPriceBreak_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RefreshOprPriceBreak_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RefreshOprPriceBreak_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RefreshOprPriceBreak(requestBody:any, epicorHeaders?:Headers){
+export function post_RefreshOprPriceBreak(requestBody:RefreshOprPriceBreak_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RefreshOprPriceBreak_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/RefreshOprPriceBreak", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RefreshOprPriceBreak_output)
           })
       .catch((error) => {
           reject(error)
@@ -8088,30 +9573,37 @@ export function post_RefreshOprPriceBreak(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ResequenceMaterial
    Description: This method resequences Material for an assembly by sequence, part or bubble
    OperationID: ResequenceMaterial
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ResequenceMaterial_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ResequenceMaterial_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ResequenceMaterial_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ResequenceMaterial(requestBody:any, epicorHeaders?:Headers){
+export function post_ResequenceMaterial(requestBody:ResequenceMaterial_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ResequenceMaterial_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ResequenceMaterial", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ResequenceMaterial_output)
           })
       .catch((error) => {
           reject(error)
@@ -8123,30 +9615,37 @@ export function post_ResequenceMaterial(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method ResequenceOperations
    Description: This method resequences the operations of an assembly by 10's
    OperationID: ResequenceOperations
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ResequenceOperations_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ResequenceOperations_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ResequenceOperations_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ResequenceOperations(requestBody:any, epicorHeaders?:Headers){
+export function post_ResequenceOperations(requestBody:ResequenceOperations_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ResequenceOperations_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ResequenceOperations", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ResequenceOperations_output)
           })
       .catch((error) => {
           reject(error)
@@ -8158,30 +9657,37 @@ export function post_ResequenceOperations(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ChangeQuoteOprIUM
    Description: procedure for changing QuoteOpr.IUM field
    OperationID: ChangeQuoteOprIUM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteOprIUM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteOprIUM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteOprIUM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteOprIUM(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteOprIUM(requestBody:ChangeQuoteOprIUM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteOprIUM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteOprIUM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteOprIUM_output)
           })
       .catch((error) => {
           reject(error)
@@ -8193,30 +9699,37 @@ export function post_ChangeQuoteOprIUM(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeQuoteOprQtyPer
    Description: procedure for changing QuoteOpr.QtyPer field
    OperationID: ChangeQuoteOprQtyPer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteOprQtyPer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteOprQtyPer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteOprQtyPer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteOprQtyPer(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteOprQtyPer(requestBody:ChangeQuoteOprQtyPer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteOprQtyPer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteOprQtyPer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteOprQtyPer_output)
           })
       .catch((error) => {
           reject(error)
@@ -8228,30 +9741,37 @@ export function post_ChangeQuoteOprQtyPer(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method ChangeQuoteMtlIUM
    Description: procedure for changing QuoteMtl.IUM field
    OperationID: ChangeQuoteMtlIUM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlIUM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlIUM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteMtlIUM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteMtlIUM(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteMtlIUM(requestBody:ChangeQuoteMtlIUM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteMtlIUM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteMtlIUM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteMtlIUM_output)
           })
       .catch((error) => {
           reject(error)
@@ -8263,30 +9783,37 @@ export function post_ChangeQuoteMtlIUM(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method ChangeQuoteMtlSalvageUM
    Description: procedure for changing QuoteMtl.SalvageUM field
    OperationID: ChangeQuoteMtlSalvageUM
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlSalvageUM_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteMtlSalvageUM_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteMtlSalvageUM_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteMtlSalvageUM(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteMtlSalvageUM(requestBody:ChangeQuoteMtlSalvageUM_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteMtlSalvageUM_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteMtlSalvageUM", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteMtlSalvageUM_output)
           })
       .catch((error) => {
           reject(error)
@@ -8299,30 +9826,37 @@ export function post_ChangeQuoteMtlSalvageUM(requestBody:any, epicorHeaders?:Hea
    Description: Validates SNRequiredOpr flag to avoid to set it false if the prior operation has the flag set to true
 The flag cannot be set to true if the part is not serial tracked also.
    OperationID: ChangeQuoteOprSNRequiredOpr
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeQuoteOprSNRequiredOpr_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeQuoteOprSNRequiredOpr_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeQuoteOprSNRequiredOpr_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeQuoteOprSNRequiredOpr(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeQuoteOprSNRequiredOpr(requestBody:ChangeQuoteOprSNRequiredOpr_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeQuoteOprSNRequiredOpr_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeQuoteOprSNRequiredOpr", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeQuoteOprSNRequiredOpr_output)
           })
       .catch((error) => {
           reject(error)
@@ -8334,30 +9868,37 @@ export function post_ChangeQuoteOprSNRequiredOpr(requestBody:any, epicorHeaders?
    Summary: Invoke method ChangeSubcontractPartNum
    Description: Check if SNRequiredOpr column is enabled/disabled on Subcontract Detail panel on UI
    OperationID: ChangeSubcontractPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangeSubcontractPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangeSubcontractPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangeSubcontractPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangeSubcontractPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangeSubcontractPartNum(requestBody:ChangeSubcontractPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangeSubcontractPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/ChangeSubcontractPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangeSubcontractPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -8369,7 +9910,7 @@ export function post_ChangeSubcontractPartNum(requestBody:any, epicorHeaders?:He
    Summary: Invoke method JobPartBeforeGetNew
    Description: Validates if JobHead.PartNum is serial tracked, additional JobParts cannot be added.
    OperationID: JobPartBeforeGetNew
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/JobPartBeforeGetNew_output
@@ -8382,15 +9923,22 @@ export function post_JobPartBeforeGetNew(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<JobPartBeforeGetNew_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/JobPartBeforeGetNew", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as JobPartBeforeGetNew_output)
           })
       .catch((error) => {
           reject(error)
@@ -8402,7 +9950,7 @@ export function post_JobPartBeforeGetNew(epicorHeaders?:Headers){
    Summary: Invoke method GetProjectRoles
    Description: Returns list of Project Roles
    OperationID: GetProjectRoles
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetProjectRoles_output
@@ -8415,15 +9963,22 @@ export function post_GetProjectRoles(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetProjectRoles_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetProjectRoles", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetProjectRoles_output)
           })
       .catch((error) => {
           reject(error)
@@ -8435,30 +9990,37 @@ export function post_GetProjectRoles(epicorHeaders?:Headers){
    Summary: Invoke method GetQuoteMtlIsMtlConfigurationOn
    Description: After Material was configured we need to check if was success to display the correct Materials Tree Context Menu option (Configure or Configuration)
    OperationID: GetQuoteMtlIsMtlConfigurationOn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetQuoteMtlIsMtlConfigurationOn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQuoteMtlIsMtlConfigurationOn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetQuoteMtlIsMtlConfigurationOn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetQuoteMtlIsMtlConfigurationOn(requestBody:any, epicorHeaders?:Headers){
+export function post_GetQuoteMtlIsMtlConfigurationOn(requestBody:GetQuoteMtlIsMtlConfigurationOn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetQuoteMtlIsMtlConfigurationOn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetQuoteMtlIsMtlConfigurationOn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetQuoteMtlIsMtlConfigurationOn_output)
           })
       .catch((error) => {
           reject(error)
@@ -8475,30 +10037,37 @@ This method will also return a BasePartNum and BaseRevisionNum.  If the BasePart
 isn't null then use this as the default part number for GetDetails.
 This is called from GetDetailsEntry
    OperationID: PreGetDetails
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PreGetDetails_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PreGetDetails_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PreGetDetails_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PreGetDetails(requestBody:any, epicorHeaders?:Headers){
+export function post_PreGetDetails(requestBody:PreGetDetails_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PreGetDetails_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/PreGetDetails", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PreGetDetails_output)
           })
       .catch((error) => {
           reject(error)
@@ -8510,30 +10079,37 @@ export function post_PreGetDetails(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method FindQuoteMtlByPLMMtlSeq
    Description: Allows PLM Users to get QuoteMtl's AsmSeq and MtlSeq by sending the unique-per-line value PLMMtlSeq
    OperationID: FindQuoteMtlByPLMMtlSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/FindQuoteMtlByPLMMtlSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/FindQuoteMtlByPLMMtlSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/FindQuoteMtlByPLMMtlSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_FindQuoteMtlByPLMMtlSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_FindQuoteMtlByPLMMtlSeq(requestBody:FindQuoteMtlByPLMMtlSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<FindQuoteMtlByPLMMtlSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/FindQuoteMtlByPLMMtlSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as FindQuoteMtlByPLMMtlSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -8545,30 +10121,37 @@ export function post_FindQuoteMtlByPLMMtlSeq(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method OnChangingAttributeSetQuoteAsm
    Description: Call this method when the QuoteAsm attribute set changes
    OperationID: OnChangingAttributeSetQuoteAsm
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingAttributeSetQuoteAsm_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingAttributeSetQuoteAsm_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingAttributeSetQuoteAsm_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingAttributeSetQuoteAsm(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingAttributeSetQuoteAsm(requestBody:OnChangingAttributeSetQuoteAsm_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingAttributeSetQuoteAsm_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/OnChangingAttributeSetQuoteAsm", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingAttributeSetQuoteAsm_output)
           })
       .catch((error) => {
           reject(error)
@@ -8580,30 +10163,37 @@ export function post_OnChangingAttributeSetQuoteAsm(requestBody:any, epicorHeade
    Summary: Invoke method OnChangingAttributeSetQuoteMtl
    Description: Call this method when the QuoteMtl attribute set changes
    OperationID: OnChangingAttributeSetQuoteMtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingAttributeSetQuoteMtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingAttributeSetQuoteMtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingAttributeSetQuoteMtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingAttributeSetQuoteMtl(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingAttributeSetQuoteMtl(requestBody:OnChangingAttributeSetQuoteMtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingAttributeSetQuoteMtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/OnChangingAttributeSetQuoteMtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingAttributeSetQuoteMtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -8615,30 +10205,37 @@ export function post_OnChangingAttributeSetQuoteMtl(requestBody:any, epicorHeade
    Summary: Invoke method OnChangingAttributeSetQuoteOpr
    Description: Call this method when the QuoteOpr attribute set changes
    OperationID: OnChangingAttributeSetQuoteOpr
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingAttributeSetQuoteOpr_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingAttributeSetQuoteOpr_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingAttributeSetQuoteOpr_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingAttributeSetQuoteOpr(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingAttributeSetQuoteOpr(requestBody:OnChangingAttributeSetQuoteOpr_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingAttributeSetQuoteOpr_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/OnChangingAttributeSetQuoteOpr", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingAttributeSetQuoteOpr_output)
           })
       .catch((error) => {
           reject(error)
@@ -8650,30 +10247,37 @@ export function post_OnChangingAttributeSetQuoteOpr(requestBody:any, epicorHeade
    Summary: Invoke method OnChangingNumberOfPiecesQuoteMtl
    Description: Call this method when the QuoteMtl Number Of Pieces changes to calculate a new tran qty
    OperationID: OnChangingNumberOfPiecesQuoteMtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingNumberOfPiecesQuoteMtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingNumberOfPiecesQuoteMtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingNumberOfPiecesQuoteMtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingNumberOfPiecesQuoteMtl(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingNumberOfPiecesQuoteMtl(requestBody:OnChangingNumberOfPiecesQuoteMtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingNumberOfPiecesQuoteMtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/OnChangingNumberOfPiecesQuoteMtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingNumberOfPiecesQuoteMtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -8685,30 +10289,37 @@ export function post_OnChangingNumberOfPiecesQuoteMtl(requestBody:any, epicorHea
    Summary: Invoke method OnChangingNumberOfPiecesQuoteOpr
    Description: Call this method when the QuoteOpr Number Of Pieces changes to calculate a new tran qty
    OperationID: OnChangingNumberOfPiecesQuoteOpr
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingNumberOfPiecesQuoteOpr_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingNumberOfPiecesQuoteOpr_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingNumberOfPiecesQuoteOpr_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingNumberOfPiecesQuoteOpr(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingNumberOfPiecesQuoteOpr(requestBody:OnChangingNumberOfPiecesQuoteOpr_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingNumberOfPiecesQuoteOpr_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/OnChangingNumberOfPiecesQuoteOpr", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingNumberOfPiecesQuoteOpr_output)
           })
       .catch((error) => {
           reject(error)
@@ -8720,30 +10331,37 @@ export function post_OnChangingNumberOfPiecesQuoteOpr(requestBody:any, epicorHea
    Summary: Invoke method OnChangingMtlRevisionNum
    Description: Call this method when the Revision changes to maintain inventory tracking
    OperationID: OnChangingMtlRevisionNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingMtlRevisionNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingMtlRevisionNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingMtlRevisionNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingMtlRevisionNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingMtlRevisionNum(requestBody:OnChangingMtlRevisionNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingMtlRevisionNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/OnChangingMtlRevisionNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingMtlRevisionNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -8755,30 +10373,37 @@ export function post_OnChangingMtlRevisionNum(requestBody:any, epicorHeaders?:He
    Summary: Invoke method OnChangingQuoteOprRevisionNum
    Description: Call this method when the Revision changes to maintain inventory tracking
    OperationID: OnChangingQuoteOprRevisionNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingQuoteOprRevisionNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingQuoteOprRevisionNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingQuoteOprRevisionNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingQuoteOprRevisionNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingQuoteOprRevisionNum(requestBody:OnChangingQuoteOprRevisionNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingQuoteOprRevisionNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/OnChangingQuoteOprRevisionNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingQuoteOprRevisionNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -8790,30 +10415,37 @@ export function post_OnChangingQuoteOprRevisionNum(requestBody:any, epicorHeader
    Summary: Invoke method OnChangingSalvageRevisionNum
    Description: Call this method when the Revision changes to maintain inventory tracking
    OperationID: OnChangingSalvageRevisionNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/OnChangingSalvageRevisionNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/OnChangingSalvageRevisionNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/OnChangingSalvageRevisionNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_OnChangingSalvageRevisionNum(requestBody:any, epicorHeaders?:Headers){
+export function post_OnChangingSalvageRevisionNum(requestBody:OnChangingSalvageRevisionNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<OnChangingSalvageRevisionNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/OnChangingSalvageRevisionNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as OnChangingSalvageRevisionNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -8825,30 +10457,37 @@ export function post_OnChangingSalvageRevisionNum(requestBody:any, epicorHeaders
    Summary: Invoke method GetNewQuoteAsm
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteAsm
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteAsm_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteAsm_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteAsm_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteAsm(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteAsm(requestBody:GetNewQuoteAsm_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteAsm_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteAsm", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteAsm_output)
           })
       .catch((error) => {
           reject(error)
@@ -8860,30 +10499,37 @@ export function post_GetNewQuoteAsm(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewQuoteAsmAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteAsmAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteAsmAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteAsmAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteAsmAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteAsmAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteAsmAttch(requestBody:GetNewQuoteAsmAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteAsmAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteAsmAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteAsmAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -8895,30 +10541,37 @@ export function post_GetNewQuoteAsmAttch(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewQuoteAsmInsp
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteAsmInsp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteAsmInsp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteAsmInsp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteAsmInsp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteAsmInsp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteAsmInsp(requestBody:GetNewQuoteAsmInsp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteAsmInsp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteAsmInsp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteAsmInsp_output)
           })
       .catch((error) => {
           reject(error)
@@ -8930,30 +10583,37 @@ export function post_GetNewQuoteAsmInsp(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewQuoteMtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteMtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteMtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteMtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteMtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteMtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteMtl(requestBody:GetNewQuoteMtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteMtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteMtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteMtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -8965,30 +10625,37 @@ export function post_GetNewQuoteMtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewQuoteMtlAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteMtlAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteMtlAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteMtlAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteMtlAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteMtlAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteMtlAttch(requestBody:GetNewQuoteMtlAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteMtlAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteMtlAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteMtlAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -9000,30 +10667,37 @@ export function post_GetNewQuoteMtlAttch(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewQuoteMtlInsp
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteMtlInsp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteMtlInsp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteMtlInsp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteMtlInsp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteMtlInsp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteMtlInsp(requestBody:GetNewQuoteMtlInsp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteMtlInsp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteMtlInsp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteMtlInsp_output)
           })
       .catch((error) => {
           reject(error)
@@ -9035,30 +10709,37 @@ export function post_GetNewQuoteMtlInsp(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewQuoteMtlRefDes
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteMtlRefDes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteMtlRefDes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteMtlRefDes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteMtlRefDes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteMtlRefDes(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteMtlRefDes(requestBody:GetNewQuoteMtlRefDes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteMtlRefDes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteMtlRefDes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteMtlRefDes_output)
           })
       .catch((error) => {
           reject(error)
@@ -9070,30 +10751,37 @@ export function post_GetNewQuoteMtlRefDes(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewQuoteOpr
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteOpr
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOpr_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOpr_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteOpr_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteOpr(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteOpr(requestBody:GetNewQuoteOpr_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteOpr_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteOpr", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteOpr_output)
           })
       .catch((error) => {
           reject(error)
@@ -9105,30 +10793,37 @@ export function post_GetNewQuoteOpr(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewQuoteOprAttch
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteOprAttch
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOprAttch_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOprAttch_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteOprAttch_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteOprAttch(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteOprAttch(requestBody:GetNewQuoteOprAttch_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteOprAttch_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteOprAttch", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteOprAttch_output)
           })
       .catch((error) => {
           reject(error)
@@ -9140,30 +10835,37 @@ export function post_GetNewQuoteOprAttch(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewQuoteOprAction
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteOprAction
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOprAction_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOprAction_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteOprAction_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteOprAction(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteOprAction(requestBody:GetNewQuoteOprAction_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteOprAction_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteOprAction", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteOprAction_output)
           })
       .catch((error) => {
           reject(error)
@@ -9175,30 +10877,37 @@ export function post_GetNewQuoteOprAction(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewQuoteOprActionParam
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteOprActionParam
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOprActionParam_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOprActionParam_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteOprActionParam_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteOprActionParam(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteOprActionParam(requestBody:GetNewQuoteOprActionParam_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteOprActionParam_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteOprActionParam", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteOprActionParam_output)
           })
       .catch((error) => {
           reject(error)
@@ -9210,30 +10919,37 @@ export function post_GetNewQuoteOprActionParam(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewQuoteOprInsp
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteOprInsp
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOprInsp_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOprInsp_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteOprInsp_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteOprInsp(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteOprInsp(requestBody:GetNewQuoteOprInsp_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteOprInsp_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteOprInsp", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteOprInsp_output)
           })
       .catch((error) => {
           reject(error)
@@ -9245,30 +10961,37 @@ export function post_GetNewQuoteOprInsp(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewQuoteOpDtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteOpDtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOpDtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOpDtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteOpDtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteOpDtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteOpDtl(requestBody:GetNewQuoteOpDtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteOpDtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteOpDtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteOpDtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -9280,30 +11003,37 @@ export function post_GetNewQuoteOpDtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewQuoteOprMachParam
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteOprMachParam
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOprMachParam_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteOprMachParam_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteOprMachParam_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteOprMachParam(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteOprMachParam(requestBody:GetNewQuoteOprMachParam_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteOprMachParam_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteOprMachParam", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteOprMachParam_output)
           })
       .catch((error) => {
           reject(error)
@@ -9315,30 +11045,37 @@ export function post_GetNewQuoteOprMachParam(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewQuoteAsmRefDes
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteAsmRefDes
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteAsmRefDes_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteAsmRefDes_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteAsmRefDes_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteAsmRefDes(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteAsmRefDes(requestBody:GetNewQuoteAsmRefDes_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteAsmRefDes_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteAsmRefDes", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteAsmRefDes_output)
           })
       .catch((error) => {
           reject(error)
@@ -9350,30 +11087,37 @@ export function post_GetNewQuoteAsmRefDes(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewQuoteStage
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewQuoteStage
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewQuoteStage_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewQuoteStage_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewQuoteStage_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewQuoteStage(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewQuoteStage(requestBody:GetNewQuoteStage_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewQuoteStage_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.QuoteAsmSvc/GetNewQuoteStage", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewQuoteStage_output)
           })
       .catch((error) => {
           reject(error)
@@ -9384,91 +11128,108 @@ export function post_GetNewQuoteStage(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteAsmAttchRow[],
+   "value":Erp_Tablesets_QuoteAsmAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmInspRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteAsmInspRow[],
+   "value":Erp_Tablesets_QuoteAsmInspRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteAsmListRow[],
+   "value":Erp_Tablesets_QuoteAsmListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmRefDesRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteAsmRefDesRow[],
+   "value":Erp_Tablesets_QuoteAsmRefDesRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteAsmRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteAsmRow[],
+   "value":Erp_Tablesets_QuoteAsmRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteMtlAttchRow[],
+   "value":Erp_Tablesets_QuoteMtlAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlInspRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteMtlInspRow[],
+   "value":Erp_Tablesets_QuoteMtlInspRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlRefDesRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteMtlRefDesRow[],
+   "value":Erp_Tablesets_QuoteMtlRefDesRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteMtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteMtlRow[],
+   "value":Erp_Tablesets_QuoteMtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOpDtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteOpDtlRow[],
+   "value":Erp_Tablesets_QuoteOpDtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprActionParamRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteOprActionParamRow[],
+   "value":Erp_Tablesets_QuoteOprActionParamRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprActionRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteOprActionRow[],
+   "value":Erp_Tablesets_QuoteOprActionRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprAttchRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteOprAttchRow[],
+   "value":Erp_Tablesets_QuoteOprAttchRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprInspRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteOprInspRow[],
+   "value":Erp_Tablesets_QuoteOprInspRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprMachParamRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteOprMachParamRow[],
+   "value":Erp_Tablesets_QuoteOprMachParamRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteOprRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteOprRow[],
+   "value":Erp_Tablesets_QuoteOprRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_QuoteStageRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_QuoteStageRow[],
+   "value":Erp_Tablesets_QuoteStageRow,
 }
 
 export interface Erp_Tablesets_QuoteAsmAttchRow{
@@ -10856,6 +12617,23 @@ export interface Erp_Tablesets_QuoteStageRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -10892,7 +12670,7 @@ export interface AddRefDesRange_input{
 export interface AddRefDesRange_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -10979,7 +12757,7 @@ export interface ChangeJobAsmblParent_input{
 export interface ChangeJobAsmblParent_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -10996,7 +12774,7 @@ export interface ChangeMtlPurPoint_input{
 export interface ChangeMtlPurPoint_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11013,7 +12791,7 @@ export interface ChangeOpDtlCapability_input{
 export interface ChangeOpDtlCapability_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11027,7 +12805,7 @@ export interface ChangeOpDtlOverrideRates_input{
 export interface ChangeOpDtlOverrideRates_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11044,7 +12822,7 @@ export interface ChangeOpDtlResourceGrpID_input{
 export interface ChangeOpDtlResourceGrpID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11061,7 +12839,7 @@ export interface ChangeOpDtlResourceID_input{
 export interface ChangeOpDtlResourceID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11075,7 +12853,7 @@ export interface ChangeOpMtlReqQty_input{
 export interface ChangeOpMtlReqQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11089,7 +12867,7 @@ export interface ChangeOpMtlSalvageReqQty_input{
 export interface ChangeOpMtlSalvageReqQty_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11106,7 +12884,7 @@ export interface ChangeOperAutoReceive_input{
 export interface ChangeOperAutoReceive_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11123,7 +12901,7 @@ export interface ChangeOperLaborEntryMethod_input{
 export interface ChangeOperLaborEntryMethod_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11137,7 +12915,7 @@ export interface ChangeOperPrimaryProdOpDtl_input{
 export interface ChangeOperPrimaryProdOpDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11151,7 +12929,7 @@ export interface ChangeOperPrimarySetupOpDtl_input{
 export interface ChangeOperPrimarySetupOpDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11168,7 +12946,7 @@ export interface ChangeOperPurPoint_input{
 export interface ChangeOperPurPoint_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11185,7 +12963,7 @@ export interface ChangeOperVendorID_input{
 export interface ChangeOperVendorID_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11199,7 +12977,7 @@ export interface ChangeQuoteAsmReqRefDes_input{
 export interface ChangeQuoteAsmReqRefDes_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11213,7 +12991,7 @@ export interface ChangeQuoteAsmblQtyPer_input{
 export interface ChangeQuoteAsmblQtyPer_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11243,7 +13021,7 @@ export interface ChangeQuoteMtlEstUnitCost_input{
 export interface ChangeQuoteMtlEstUnitCost_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11257,7 +13035,7 @@ export interface ChangeQuoteMtlIUM_input{
 export interface ChangeQuoteMtlIUM_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11271,7 +13049,7 @@ export interface ChangeQuoteMtlLinkToContract_input{
 export interface ChangeQuoteMtlLinkToContract_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11285,7 +13063,7 @@ export interface ChangeQuoteMtlMiscCharge_input{
 export interface ChangeQuoteMtlMiscCharge_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11302,7 +13080,7 @@ export interface ChangeQuoteMtlMtlBurRate_input{
 export interface ChangeQuoteMtlMtlBurRate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11316,7 +13094,7 @@ export interface ChangeQuoteMtlReqRefDes_input{
 export interface ChangeQuoteMtlReqRefDes_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11333,7 +13111,7 @@ export interface ChangeQuoteMtlSalvageMtlBurUnitRate_input{
 export interface ChangeQuoteMtlSalvageMtlBurUnitRate_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11350,7 +13128,7 @@ export interface ChangeQuoteMtlSalvagePartNum_input{
 export interface ChangeQuoteMtlSalvagePartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11364,7 +13142,7 @@ export interface ChangeQuoteMtlSalvageUM_input{
 export interface ChangeQuoteMtlSalvageUM_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11381,7 +13159,7 @@ export interface ChangeQuoteMtlSalvageUnitCredit_input{
 export interface ChangeQuoteMtlSalvageUnitCredit_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11395,7 +13173,7 @@ export interface ChangeQuoteOprIUM_input{
 export interface ChangeQuoteOprIUM_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11412,7 +13190,7 @@ export interface ChangeQuoteOprOprSeq_input{
 export interface ChangeQuoteOprOprSeq_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11426,7 +13204,7 @@ export interface ChangeQuoteOprQtyPer_input{
 export interface ChangeQuoteOprQtyPer_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11443,7 +13221,7 @@ export interface ChangeQuoteOprSNRequiredOpr_input{
 export interface ChangeQuoteOprSNRequiredOpr_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11460,7 +13238,7 @@ export interface ChangeSubcontractPartNum_input{
 export interface ChangeSubcontractPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11625,7 +13403,7 @@ export interface CheckOperPrimaryProdOpDtl_input{
 export interface CheckOperPrimaryProdOpDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11642,7 +13420,7 @@ export interface CheckOperPrimarySetupOpDtl_input{
 export interface CheckOperPrimarySetupOpDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11702,7 +13480,7 @@ export interface CheckQuoteMtlPartNum_input{
 export interface CheckQuoteMtlPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -11783,7 +13561,7 @@ export interface DeleteRefDesRange_input{
 export interface DeleteRefDesRange_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -13661,7 +15439,7 @@ export interface GetAsmOprInfo_input{
 export interface GetAsmOprInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -13679,7 +15457,7 @@ export interface GetAsmPartInfo_input{
 export interface GetAsmPartInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -13793,7 +15571,7 @@ export interface GetDatasetForTreeByRef_input{
 export interface GetDatasetForTreeByRef_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -13927,7 +15705,7 @@ export interface GetMtlBuyItInfo_input{
 export interface GetMtlBuyItInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -13978,7 +15756,7 @@ export interface GetMtlDirectInfo_input{
 export interface GetMtlDirectInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -13995,7 +15773,7 @@ export interface GetMtlOprInfo_input{
 export interface GetMtlOprInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14012,7 +15790,7 @@ export interface GetMtlPartInfo_input{
 export interface GetMtlPartInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14029,7 +15807,7 @@ export interface GetMtlVendorInfo_input{
 export interface GetMtlVendorInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14060,7 +15838,7 @@ export interface GetNewAssembly_input{
 export interface GetNewAssembly_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14086,7 +15864,7 @@ export interface GetNewOperation_input{
 export interface GetNewOperation_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14106,7 +15884,7 @@ export interface GetNewQuoteAsmAttch_input{
 export interface GetNewQuoteAsmAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14126,7 +15904,7 @@ export interface GetNewQuoteAsmInsp_input{
 export interface GetNewQuoteAsmInsp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14148,7 +15926,7 @@ export interface GetNewQuoteAsmRefDes_input{
 export interface GetNewQuoteAsmRefDes_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14166,7 +15944,7 @@ export interface GetNewQuoteAsm_input{
 export interface GetNewQuoteAsm_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14188,7 +15966,7 @@ export interface GetNewQuoteMtlAttch_input{
 export interface GetNewQuoteMtlAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14210,7 +15988,7 @@ export interface GetNewQuoteMtlInsp_input{
 export interface GetNewQuoteMtlInsp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14232,7 +16010,7 @@ export interface GetNewQuoteMtlRefDes_input{
 export interface GetNewQuoteMtlRefDes_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14252,7 +16030,7 @@ export interface GetNewQuoteMtl_input{
 export interface GetNewQuoteMtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14274,7 +16052,7 @@ export interface GetNewQuoteOpDtl_input{
 export interface GetNewQuoteOpDtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14298,7 +16076,7 @@ export interface GetNewQuoteOprActionParam_input{
 export interface GetNewQuoteOprActionParam_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14320,7 +16098,7 @@ export interface GetNewQuoteOprAction_input{
 export interface GetNewQuoteOprAction_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14342,7 +16120,7 @@ export interface GetNewQuoteOprAttch_input{
 export interface GetNewQuoteOprAttch_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14364,7 +16142,7 @@ export interface GetNewQuoteOprInsp_input{
 export interface GetNewQuoteOprInsp_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14386,7 +16164,7 @@ export interface GetNewQuoteOprMachParam_input{
 export interface GetNewQuoteOprMachParam_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14406,7 +16184,7 @@ export interface GetNewQuoteOpr_input{
 export interface GetNewQuoteOpr_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14426,7 +16204,7 @@ export interface GetNewQuoteStage_input{
 export interface GetNewQuoteStage_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14444,7 +16222,7 @@ export interface GetOprOpCodeInfo_output{
 parameters : {
       /**  output parameters  */  
    RefreshMessage:string,
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14458,7 +16236,7 @@ export interface GetOprOpStdInfo_input{
 export interface GetOprOpStdInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14475,7 +16253,7 @@ export interface GetOprPartInfo_input{
 export interface GetOprPartInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14489,7 +16267,7 @@ export interface GetOprStdFormatInfo_input{
 export interface GetOprStdFormatInfo_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -14514,7 +16292,7 @@ export interface GetQuoteMtlIsMtlConfigurationOn_input{
 export interface GetQuoteMtlIsMtlConfigurationOn_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15001,7 +16779,7 @@ export interface OnChangingAttributeSetQuoteAsm_input{
 export interface OnChangingAttributeSetQuoteAsm_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15017,7 +16795,7 @@ export interface OnChangingAttributeSetQuoteMtl_input{
 export interface OnChangingAttributeSetQuoteMtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15033,7 +16811,7 @@ export interface OnChangingAttributeSetQuoteOpr_input{
 export interface OnChangingAttributeSetQuoteOpr_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15049,7 +16827,7 @@ export interface OnChangingMtlRevisionNum_input{
 export interface OnChangingMtlRevisionNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15067,7 +16845,7 @@ export interface OnChangingNumberOfPiecesQuoteMtl_input{
 export interface OnChangingNumberOfPiecesQuoteMtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15085,7 +16863,7 @@ export interface OnChangingNumberOfPiecesQuoteOpr_input{
 export interface OnChangingNumberOfPiecesQuoteOpr_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15101,7 +16879,7 @@ export interface OnChangingQuoteOprRevisionNum_input{
 export interface OnChangingQuoteOprRevisionNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15117,7 +16895,7 @@ export interface OnChangingSalvageRevisionNum_input{
 export interface OnChangingSalvageRevisionNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15177,7 +16955,7 @@ export interface QuoteOprInitSNReqSubCon_input{
 export interface QuoteOprInitSNReqSubCon_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15212,7 +16990,7 @@ export interface RefreshMtlPriceBreak_input{
 export interface RefreshMtlPriceBreak_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15246,7 +17024,7 @@ export interface RefreshOprPriceBreak_input{
 export interface RefreshOprPriceBreak_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15310,7 +17088,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtQuoteAsmTableset[],
+   ds:Erp_Tablesets_UpdExtQuoteAsmTableset,
    errorsOccurred:boolean,
 }
 }
@@ -15325,7 +17103,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15351,7 +17129,7 @@ export interface ValidateInspection_input{
 export interface ValidateInspection_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 
@@ -15413,7 +17191,7 @@ export interface ValidateSNReqValues_input{
 export interface ValidateSNReqValues_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_QuoteAsmTableset[],
+   ds:Erp_Tablesets_QuoteAsmTableset,
 }
 }
 

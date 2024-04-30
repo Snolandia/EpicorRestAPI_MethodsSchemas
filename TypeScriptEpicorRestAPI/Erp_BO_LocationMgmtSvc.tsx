@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.LocationMgmtSvc
 // Description: class LocationMgmtSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationInventoryRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationInventoryRow
    */  
 export function get_LocationMgmts(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_LocationMgmts(select?:string, expand?:string, filter?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationInventoryRow)
           })
@@ -118,15 +158,15 @@ export function get_LocationMgmts(select?:string, expand?:string, filter?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LocationMgmts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LocationInventoryRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LocationInventoryRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LocationInventoryRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LocationInventoryRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LocationMgmts(requestBody:any, epicorHeaders?:Headers){
+export function post_LocationMgmts(requestBody:Erp_Tablesets_LocationInventoryRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_LocationMgmts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_LocationMgmts(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LocationInventoryRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LocationInventoryRow
    */  
 export function get_LocationMgmts_Company_LocationNum(Company:string, LocationNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_LocationMgmts_Company_LocationNum(Company:string, LocationNu
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LocationInventoryRow)
           })
@@ -193,15 +247,15 @@ export function get_LocationMgmts_Company_LocationNum(Company:string, LocationNu
    OperationID: UpdateExt_LocationMgmt
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LocationNum Desc: LocationNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LocationInventoryRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LocationInventoryRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LocationMgmts_Company_LocationNum(Company:string, LocationNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LocationMgmts_Company_LocationNum(Company:string, LocationNum:string, requestBody:Erp_Tablesets_LocationInventoryRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_LocationMgmts_Company_LocationNum(Company:string, Location
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_LocationMgmts_Company_LocationNum(Company:string, Location
    OperationID: DeleteUpdateExt_LocationMgmt
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LocationNum Desc: LocationNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_LocationMgmts_Company_LocationNum(Company:string, Locatio
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -272,10 +340,10 @@ export function delete_LocationMgmts_Company_LocationNum(Company:string, Locatio
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationInventoryAddressRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationInventoryAddressRow
    */  
 export function get_LocationMgmts_Company_LocationNum_LocationInventoryAddresses(Company:string, LocationNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -290,7 +358,14 @@ export function get_LocationMgmts_Company_LocationNum_LocationInventoryAddresses
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationInventoryAddressRow)
           })
@@ -309,10 +384,10 @@ export function get_LocationMgmts_Company_LocationNum_LocationInventoryAddresses
       @param AddressType Desc: AddressType   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LocationInventoryAddressRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LocationInventoryAddressRow
    */  
 export function get_LocationMgmts_Company_LocationNum_LocationInventoryAddresses_Company_LocationNum_AddressType(Company:string, LocationNum:string, AddressType:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -327,7 +402,14 @@ export function get_LocationMgmts_Company_LocationNum_LocationInventoryAddresses
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LocationInventoryAddressRow)
           })
@@ -349,10 +431,10 @@ export function get_LocationMgmts_Company_LocationNum_LocationInventoryAddresses
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationMtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationMtlRow
    */  
 export function get_LocationMgmts_Company_LocationNum_LocationMtls(Company:string, LocationNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -367,7 +449,14 @@ export function get_LocationMgmts_Company_LocationNum_LocationMtls(Company:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationMtlRow)
           })
@@ -388,10 +477,10 @@ export function get_LocationMgmts_Company_LocationNum_LocationMtls(Company:strin
       @param MtlSeq Desc: MtlSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LocationMtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LocationMtlRow
    */  
 export function get_LocationMgmts_Company_LocationNum_LocationMtls_Company_LocationNum_JobNum_AssemblySeq_MtlSeq(Company:string, LocationNum:string, JobNum:string, AssemblySeq:string, MtlSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -406,7 +495,14 @@ export function get_LocationMgmts_Company_LocationNum_LocationMtls_Company_Locat
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LocationMtlRow)
           })
@@ -428,10 +524,10 @@ export function get_LocationMgmts_Company_LocationNum_LocationMtls_Company_Locat
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationTranRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationTranRow
    */  
 export function get_LocationMgmts_Company_LocationNum_LocationTrans(Company:string, LocationNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -446,7 +542,14 @@ export function get_LocationMgmts_Company_LocationNum_LocationTrans(Company:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationTranRow)
           })
@@ -465,10 +568,10 @@ export function get_LocationMgmts_Company_LocationNum_LocationTrans(Company:stri
       @param LocationSeqNum Desc: LocationSeqNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LocationTranRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LocationTranRow
    */  
 export function get_LocationMgmts_Company_LocationNum_LocationTrans_Company_LocationNum_LocationSeqNum(Company:string, LocationNum:string, LocationSeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -483,7 +586,14 @@ export function get_LocationMgmts_Company_LocationNum_LocationTrans_Company_Loca
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LocationTranRow)
           })
@@ -505,10 +615,10 @@ export function get_LocationMgmts_Company_LocationNum_LocationTrans_Company_Loca
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationWarrantyTranRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationWarrantyTranRow
    */  
 export function get_LocationMgmts_Company_LocationNum_LocationWarrantyTrans(Company:string, LocationNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -523,7 +633,14 @@ export function get_LocationMgmts_Company_LocationNum_LocationWarrantyTrans(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationWarrantyTranRow)
           })
@@ -542,10 +659,10 @@ export function get_LocationMgmts_Company_LocationNum_LocationWarrantyTrans(Comp
       @param WarrantySeqNum Desc: WarrantySeqNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LocationWarrantyTranRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LocationWarrantyTranRow
    */  
 export function get_LocationMgmts_Company_LocationNum_LocationWarrantyTrans_Company_LocationNum_WarrantySeqNum(Company:string, LocationNum:string, WarrantySeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -560,7 +677,14 @@ export function get_LocationMgmts_Company_LocationNum_LocationWarrantyTrans_Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LocationWarrantyTranRow)
           })
@@ -580,10 +704,10 @@ export function get_LocationMgmts_Company_LocationNum_LocationWarrantyTrans_Comp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationInventoryAddressRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationInventoryAddressRow
    */  
 export function get_LocationInventoryAddresses(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -598,7 +722,14 @@ export function get_LocationInventoryAddresses(select?:string, filter?:string, o
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationInventoryAddressRow)
           })
@@ -612,15 +743,15 @@ export function get_LocationInventoryAddresses(select?:string, filter?:string, o
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LocationInventoryAddresses
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LocationInventoryAddressRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LocationInventoryAddressRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LocationInventoryAddressRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LocationInventoryAddressRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LocationInventoryAddresses(requestBody:any, epicorHeaders?:Headers){
+export function post_LocationInventoryAddresses(requestBody:Erp_Tablesets_LocationInventoryAddressRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -634,7 +765,14 @@ export function post_LocationInventoryAddresses(requestBody:any, epicorHeaders?:
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -653,10 +791,10 @@ export function post_LocationInventoryAddresses(requestBody:any, epicorHeaders?:
       @param AddressType Desc: AddressType   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LocationInventoryAddressRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LocationInventoryAddressRow
    */  
 export function get_LocationInventoryAddresses_Company_LocationNum_AddressType(Company:string, LocationNum:string, AddressType:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -671,7 +809,14 @@ export function get_LocationInventoryAddresses_Company_LocationNum_AddressType(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LocationInventoryAddressRow)
           })
@@ -688,15 +833,15 @@ export function get_LocationInventoryAddresses_Company_LocationNum_AddressType(C
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LocationNum Desc: LocationNum   Required: True   Allow empty value : True
       @param AddressType Desc: AddressType   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LocationInventoryAddressRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LocationInventoryAddressRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LocationInventoryAddresses_Company_LocationNum_AddressType(Company:string, LocationNum:string, AddressType:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LocationInventoryAddresses_Company_LocationNum_AddressType(Company:string, LocationNum:string, AddressType:string, requestBody:Erp_Tablesets_LocationInventoryAddressRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -710,7 +855,14 @@ export function patch_LocationInventoryAddresses_Company_LocationNum_AddressType
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -727,7 +879,7 @@ export function patch_LocationInventoryAddresses_Company_LocationNum_AddressType
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LocationNum Desc: LocationNum   Required: True   Allow empty value : True
       @param AddressType Desc: AddressType   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -746,7 +898,14 @@ export function delete_LocationInventoryAddresses_Company_LocationNum_AddressTyp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -766,10 +925,10 @@ export function delete_LocationInventoryAddresses_Company_LocationNum_AddressTyp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationMtlRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationMtlRow
    */  
 export function get_LocationMtls(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -784,7 +943,14 @@ export function get_LocationMtls(select?:string, filter?:string, orderby?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationMtlRow)
           })
@@ -798,15 +964,15 @@ export function get_LocationMtls(select?:string, filter?:string, orderby?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LocationMtls
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LocationMtlRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LocationMtlRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LocationMtlRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LocationMtlRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LocationMtls(requestBody:any, epicorHeaders?:Headers){
+export function post_LocationMtls(requestBody:Erp_Tablesets_LocationMtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -820,7 +986,14 @@ export function post_LocationMtls(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -841,10 +1014,10 @@ export function post_LocationMtls(requestBody:any, epicorHeaders?:Headers){
       @param MtlSeq Desc: MtlSeq   Required: True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LocationMtlRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LocationMtlRow
    */  
 export function get_LocationMtls_Company_LocationNum_JobNum_AssemblySeq_MtlSeq(Company:string, LocationNum:string, JobNum:string, AssemblySeq:string, MtlSeq:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -859,7 +1032,14 @@ export function get_LocationMtls_Company_LocationNum_JobNum_AssemblySeq_MtlSeq(C
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LocationMtlRow)
           })
@@ -878,15 +1058,15 @@ export function get_LocationMtls_Company_LocationNum_JobNum_AssemblySeq_MtlSeq(C
       @param JobNum Desc: JobNum   Required: True   Allow empty value : True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LocationMtlRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LocationMtlRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LocationMtls_Company_LocationNum_JobNum_AssemblySeq_MtlSeq(Company:string, LocationNum:string, JobNum:string, AssemblySeq:string, MtlSeq:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LocationMtls_Company_LocationNum_JobNum_AssemblySeq_MtlSeq(Company:string, LocationNum:string, JobNum:string, AssemblySeq:string, MtlSeq:string, requestBody:Erp_Tablesets_LocationMtlRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -900,7 +1080,14 @@ export function patch_LocationMtls_Company_LocationNum_JobNum_AssemblySeq_MtlSeq
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -919,7 +1106,7 @@ export function patch_LocationMtls_Company_LocationNum_JobNum_AssemblySeq_MtlSeq
       @param JobNum Desc: JobNum   Required: True   Allow empty value : True
       @param AssemblySeq Desc: AssemblySeq   Required: True
       @param MtlSeq Desc: MtlSeq   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -938,7 +1125,14 @@ export function delete_LocationMtls_Company_LocationNum_JobNum_AssemblySeq_MtlSe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -958,10 +1152,10 @@ export function delete_LocationMtls_Company_LocationNum_JobNum_AssemblySeq_MtlSe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationTranRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationTranRow
    */  
 export function get_LocationTrans(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -976,7 +1170,14 @@ export function get_LocationTrans(select?:string, filter?:string, orderby?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationTranRow)
           })
@@ -990,15 +1191,15 @@ export function get_LocationTrans(select?:string, filter?:string, orderby?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LocationTrans
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LocationTranRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LocationTranRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LocationTranRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LocationTranRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LocationTrans(requestBody:any, epicorHeaders?:Headers){
+export function post_LocationTrans(requestBody:Erp_Tablesets_LocationTranRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1012,7 +1213,14 @@ export function post_LocationTrans(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1031,10 +1239,10 @@ export function post_LocationTrans(requestBody:any, epicorHeaders?:Headers){
       @param LocationSeqNum Desc: LocationSeqNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LocationTranRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LocationTranRow
    */  
 export function get_LocationTrans_Company_LocationNum_LocationSeqNum(Company:string, LocationNum:string, LocationSeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1049,7 +1257,14 @@ export function get_LocationTrans_Company_LocationNum_LocationSeqNum(Company:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LocationTranRow)
           })
@@ -1066,15 +1281,15 @@ export function get_LocationTrans_Company_LocationNum_LocationSeqNum(Company:str
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LocationNum Desc: LocationNum   Required: True   Allow empty value : True
       @param LocationSeqNum Desc: LocationSeqNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LocationTranRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LocationTranRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LocationTrans_Company_LocationNum_LocationSeqNum(Company:string, LocationNum:string, LocationSeqNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LocationTrans_Company_LocationNum_LocationSeqNum(Company:string, LocationNum:string, LocationSeqNum:string, requestBody:Erp_Tablesets_LocationTranRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1088,7 +1303,14 @@ export function patch_LocationTrans_Company_LocationNum_LocationSeqNum(Company:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1105,7 +1327,7 @@ export function patch_LocationTrans_Company_LocationNum_LocationSeqNum(Company:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LocationNum Desc: LocationNum   Required: True   Allow empty value : True
       @param LocationSeqNum Desc: LocationSeqNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1124,7 +1346,14 @@ export function delete_LocationTrans_Company_LocationNum_LocationSeqNum(Company:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1144,10 +1373,10 @@ export function delete_LocationTrans_Company_LocationNum_LocationSeqNum(Company:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationWarrantyTranRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationWarrantyTranRow
    */  
 export function get_LocationWarrantyTrans(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1162,7 +1391,14 @@ export function get_LocationWarrantyTrans(select?:string, filter?:string, orderb
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationWarrantyTranRow)
           })
@@ -1176,15 +1412,15 @@ export function get_LocationWarrantyTrans(select?:string, filter?:string, orderb
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_LocationWarrantyTrans
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LocationWarrantyTranRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Erp.Tablesets.LocationWarrantyTranRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Erp.Tablesets.LocationWarrantyTranRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Erp.Tablesets.LocationWarrantyTranRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_LocationWarrantyTrans(requestBody:any, epicorHeaders?:Headers){
+export function post_LocationWarrantyTrans(requestBody:Erp_Tablesets_LocationWarrantyTranRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1198,7 +1434,14 @@ export function post_LocationWarrantyTrans(requestBody:any, epicorHeaders?:Heade
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1217,10 +1460,10 @@ export function post_LocationWarrantyTrans(requestBody:any, epicorHeaders?:Heade
       @param WarrantySeqNum Desc: WarrantySeqNum   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Erp.Tablesets.LocationWarrantyTranRow
+      200 Desc: OK => reference #/components/schemas/Erp.Tablesets.LocationWarrantyTranRow
    */  
 export function get_LocationWarrantyTrans_Company_LocationNum_WarrantySeqNum(Company:string, LocationNum:string, WarrantySeqNum:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1235,7 +1478,14 @@ export function get_LocationWarrantyTrans_Company_LocationNum_WarrantySeqNum(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Erp_Tablesets_LocationWarrantyTranRow)
           })
@@ -1252,15 +1502,15 @@ export function get_LocationWarrantyTrans_Company_LocationNum_WarrantySeqNum(Com
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LocationNum Desc: LocationNum   Required: True   Allow empty value : True
       @param WarrantySeqNum Desc: WarrantySeqNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Erp.Tablesets.LocationWarrantyTranRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Erp.Tablesets.LocationWarrantyTranRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_LocationWarrantyTrans_Company_LocationNum_WarrantySeqNum(Company:string, LocationNum:string, WarrantySeqNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_LocationWarrantyTrans_Company_LocationNum_WarrantySeqNum(Company:string, LocationNum:string, WarrantySeqNum:string, requestBody:Erp_Tablesets_LocationWarrantyTranRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1274,7 +1524,14 @@ export function patch_LocationWarrantyTrans_Company_LocationNum_WarrantySeqNum(C
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1291,7 +1548,7 @@ export function patch_LocationWarrantyTrans_Company_LocationNum_WarrantySeqNum(C
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param LocationNum Desc: LocationNum   Required: True   Allow empty value : True
       @param WarrantySeqNum Desc: WarrantySeqNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1310,7 +1567,14 @@ export function delete_LocationWarrantyTrans_Company_LocationNum_WarrantySeqNum(
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1330,10 +1594,10 @@ export function delete_LocationWarrantyTrans_Company_LocationNum_WarrantySeqNum(
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationInventoryListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Erp.Tablesets.LocationInventoryListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1348,7 +1612,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationInventoryListRow)
           })
@@ -1360,6 +1631,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1375,7 +1663,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1453,15 +1741,22 @@ export function get_GetRows(whereClauseLocationInventory:string, whereClauseLoca
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1474,7 +1769,7 @@ export function get_GetRows(whereClauseLocationInventory:string, whereClauseLoca
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1498,15 +1793,22 @@ export function get_GetByID(locationNum:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1521,7 +1823,7 @@ export function get_GetByID(locationNum:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1563,15 +1865,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1583,30 +1892,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method ChangedLocationWarrantyTranPartNum
    Description: Called when the Part is changed
    OperationID: ChangedLocationWarrantyTranPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangedLocationWarrantyTranPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangedLocationWarrantyTranPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangedLocationWarrantyTranPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangedLocationWarrantyTranPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangedLocationWarrantyTranPartNum(requestBody:ChangedLocationWarrantyTranPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangedLocationWarrantyTranPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/ChangedLocationWarrantyTranPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangedLocationWarrantyTranPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1618,30 +1934,37 @@ export function post_ChangedLocationWarrantyTranPartNum(requestBody:any, epicorH
    Summary: Invoke method GetCurrentAddress
    Description: Returns the address of the requested type: L=Location, O=Owner, S=Sold To
    OperationID: GetCurrentAddress
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetCurrentAddress_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetCurrentAddress_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetCurrentAddress_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetCurrentAddress(requestBody:any, epicorHeaders?:Headers){
+export function post_GetCurrentAddress(requestBody:GetCurrentAddress_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetCurrentAddress_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetCurrentAddress", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetCurrentAddress_output)
           })
       .catch((error) => {
           reject(error)
@@ -1653,30 +1976,37 @@ export function post_GetCurrentAddress(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewCustomerAddress
    Description: Update Order Header information with values from the Sold To when the Sold To is changed.
    OperationID: GetNewCustomerAddress
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewCustomerAddress_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewCustomerAddress_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewCustomerAddress_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewCustomerAddress(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewCustomerAddress(requestBody:GetNewCustomerAddress_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewCustomerAddress_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetNewCustomerAddress", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewCustomerAddress_output)
           })
       .catch((error) => {
           reject(error)
@@ -1688,30 +2018,37 @@ export function post_GetNewCustomerAddress(requestBody:any, epicorHeaders?:Heade
    Summary: Invoke method GetNewOTMFAddress
    Description: Update Order Header information with values from the Sold To when the Sold To is changed.
    OperationID: GetNewOTMFAddress
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewOTMFAddress_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewOTMFAddress_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewOTMFAddress_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewOTMFAddress(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewOTMFAddress(requestBody:GetNewOTMFAddress_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewOTMFAddress_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetNewOTMFAddress", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewOTMFAddress_output)
           })
       .catch((error) => {
           reject(error)
@@ -1723,30 +2060,37 @@ export function post_GetNewOTMFAddress(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetLocationWarrantyTran
    Description: Get Location Warranty Transaction
    OperationID: GetLocationWarrantyTran
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetLocationWarrantyTran_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetLocationWarrantyTran_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetLocationWarrantyTran_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetLocationWarrantyTran(requestBody:any, epicorHeaders?:Headers){
+export function post_GetLocationWarrantyTran(requestBody:GetLocationWarrantyTran_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetLocationWarrantyTran_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetLocationWarrantyTran", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetLocationWarrantyTran_output)
           })
       .catch((error) => {
           reject(error)
@@ -1757,30 +2101,37 @@ export function post_GetLocationWarrantyTran(requestBody:any, epicorHeaders?:Hea
    /**  
    Summary: Invoke method ChangedPartNum
    OperationID: ChangedPartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangedPartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangedPartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangedPartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangedPartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangedPartNum(requestBody:ChangedPartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangedPartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/ChangedPartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangedPartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1791,30 +2142,37 @@ export function post_ChangedPartNum(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ChangedWarrantyCode
    OperationID: ChangedWarrantyCode
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ChangedWarrantyCode_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ChangedWarrantyCode_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ChangedWarrantyCode_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ChangedWarrantyCode(requestBody:any, epicorHeaders?:Headers){
+export function post_ChangedWarrantyCode(requestBody:ChangedWarrantyCode_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ChangedWarrantyCode_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/ChangedWarrantyCode", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ChangedWarrantyCode_output)
           })
       .catch((error) => {
           reject(error)
@@ -1825,30 +2183,37 @@ export function post_ChangedWarrantyCode(requestBody:any, epicorHeaders?:Headers
    /**  
    Summary: Invoke method ValidateCustomer
    OperationID: ValidateCustomer
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateCustomer_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateCustomer_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateCustomer_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateCustomer(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateCustomer(requestBody:ValidateCustomer_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateCustomer_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/ValidateCustomer", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateCustomer_output)
           })
       .catch((error) => {
           reject(error)
@@ -1859,30 +2224,37 @@ export function post_ValidateCustomer(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ValidateShipTo
    OperationID: ValidateShipTo
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateShipTo_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateShipTo_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateShipTo_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateShipTo(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateShipTo(requestBody:ValidateShipTo_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateShipTo_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/ValidateShipTo", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateShipTo_output)
           })
       .catch((error) => {
           reject(error)
@@ -1893,30 +2265,37 @@ export function post_ValidateShipTo(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ValidatePartNum
    OperationID: ValidatePartNum
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidatePartNum_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidatePartNum_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidatePartNum_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidatePartNum(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidatePartNum(requestBody:ValidatePartNum_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidatePartNum_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/ValidatePartNum", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidatePartNum_output)
           })
       .catch((error) => {
           reject(error)
@@ -1927,30 +2306,37 @@ export function post_ValidatePartNum(requestBody:any, epicorHeaders?:Headers){
    /**  
    Summary: Invoke method ValidateSerialNumber
    OperationID: ValidateSerialNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateSerialNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateSerialNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateSerialNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateSerialNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateSerialNumber(requestBody:ValidateSerialNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateSerialNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/ValidateSerialNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateSerialNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -1961,30 +2347,37 @@ export function post_ValidateSerialNumber(requestBody:any, epicorHeaders?:Header
    /**  
    Summary: Invoke method ValidateMaterialOrigSerialNumber
    OperationID: ValidateMaterialOrigSerialNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateMaterialOrigSerialNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateMaterialOrigSerialNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateMaterialOrigSerialNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateMaterialOrigSerialNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateMaterialOrigSerialNumber(requestBody:ValidateMaterialOrigSerialNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateMaterialOrigSerialNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/ValidateMaterialOrigSerialNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateMaterialOrigSerialNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -1996,30 +2389,37 @@ export function post_ValidateMaterialOrigSerialNumber(requestBody:any, epicorHea
    Summary: Invoke method ValidateMaterialLotNumber
    Description: This method validates Lot number that user can enter in case if multiple lots came up in Original Part search
    OperationID: ValidateMaterialLotNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateMaterialLotNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateMaterialLotNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateMaterialLotNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateMaterialLotNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateMaterialLotNumber(requestBody:ValidateMaterialLotNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateMaterialLotNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/ValidateMaterialLotNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateMaterialLotNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -2030,30 +2430,37 @@ export function post_ValidateMaterialLotNumber(requestBody:any, epicorHeaders?:H
    /**  
    Summary: Invoke method ValidateIDNumber
    OperationID: ValidateIDNumber
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateIDNumber_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateIDNumber_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateIDNumber_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateIDNumber(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateIDNumber(requestBody:ValidateIDNumber_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateIDNumber_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/ValidateIDNumber", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateIDNumber_output)
           })
       .catch((error) => {
           reject(error)
@@ -2065,30 +2472,37 @@ export function post_ValidateIDNumber(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewLocationInventory
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLocationInventory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLocationInventory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLocationInventory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLocationInventory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLocationInventory(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLocationInventory(requestBody:GetNewLocationInventory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLocationInventory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetNewLocationInventory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLocationInventory_output)
           })
       .catch((error) => {
           reject(error)
@@ -2100,30 +2514,37 @@ export function post_GetNewLocationInventory(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method GetNewLocationInventoryAddress
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLocationInventoryAddress
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLocationInventoryAddress_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLocationInventoryAddress_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLocationInventoryAddress_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLocationInventoryAddress(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLocationInventoryAddress(requestBody:GetNewLocationInventoryAddress_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLocationInventoryAddress_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetNewLocationInventoryAddress", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLocationInventoryAddress_output)
           })
       .catch((error) => {
           reject(error)
@@ -2135,30 +2556,37 @@ export function post_GetNewLocationInventoryAddress(requestBody:any, epicorHeade
    Summary: Invoke method GetNewLocationMtl
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLocationMtl
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLocationMtl_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLocationMtl_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLocationMtl_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLocationMtl(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLocationMtl(requestBody:GetNewLocationMtl_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLocationMtl_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetNewLocationMtl", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLocationMtl_output)
           })
       .catch((error) => {
           reject(error)
@@ -2170,30 +2598,37 @@ export function post_GetNewLocationMtl(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewLocationTran
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLocationTran
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLocationTran_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLocationTran_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLocationTran_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLocationTran(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLocationTran(requestBody:GetNewLocationTran_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLocationTran_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetNewLocationTran", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLocationTran_output)
           })
       .catch((error) => {
           reject(error)
@@ -2205,30 +2640,37 @@ export function post_GetNewLocationTran(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewLocationWarrantyTran
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewLocationWarrantyTran
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewLocationWarrantyTran_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewLocationWarrantyTran_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewLocationWarrantyTran_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewLocationWarrantyTran(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewLocationWarrantyTran(requestBody:GetNewLocationWarrantyTran_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewLocationWarrantyTran_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetNewLocationWarrantyTran", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewLocationWarrantyTran_output)
           })
       .catch((error) => {
           reject(error)
@@ -2240,30 +2682,37 @@ export function post_GetNewLocationWarrantyTran(requestBody:any, epicorHeaders?:
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2275,7 +2724,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2299,15 +2748,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2319,7 +2775,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2343,15 +2799,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2363,30 +2826,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2398,30 +2868,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.LocationMgmtSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2432,36 +2909,53 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationInventoryAddressRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LocationInventoryAddressRow[],
+   "value":Erp_Tablesets_LocationInventoryAddressRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationInventoryListRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LocationInventoryListRow[],
+   "value":Erp_Tablesets_LocationInventoryListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationInventoryRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LocationInventoryRow[],
+   "value":Erp_Tablesets_LocationInventoryRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationMtlRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LocationMtlRow[],
+   "value":Erp_Tablesets_LocationMtlRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationTranRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LocationTranRow[],
+   "value":Erp_Tablesets_LocationTranRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Erp_Tablesets_LocationWarrantyTranRow{
    "odatametadata":string,
-   "value":Erp_Tablesets_LocationWarrantyTranRow[],
+   "value":Erp_Tablesets_LocationWarrantyTranRow,
 }
 
 export interface Erp_Tablesets_LocationInventoryAddressRow{
@@ -3128,6 +3622,23 @@ export interface Erp_Tablesets_LocationWarrantyTranRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -3140,7 +3651,7 @@ export interface ChangedLocationWarrantyTranPartNum_input{
 export interface ChangedLocationWarrantyTranPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -3154,7 +3665,7 @@ export interface ChangedPartNum_input{
 export interface ChangedPartNum_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -3168,7 +3679,7 @@ export interface ChangedWarrantyCode_input{
 export interface ChangedWarrantyCode_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -3913,7 +4424,7 @@ export interface GetCurrentAddress_input{
 export interface GetCurrentAddress_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -3962,7 +4473,7 @@ export interface GetNewCustomerAddress_input{
 export interface GetNewCustomerAddress_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -3978,7 +4489,7 @@ export interface GetNewLocationInventoryAddress_input{
 export interface GetNewLocationInventoryAddress_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -3992,7 +4503,7 @@ export interface GetNewLocationInventory_input{
 export interface GetNewLocationInventory_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -4012,7 +4523,7 @@ export interface GetNewLocationMtl_input{
 export interface GetNewLocationMtl_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -4028,7 +4539,7 @@ export interface GetNewLocationTran_input{
 export interface GetNewLocationTran_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -4044,7 +4555,7 @@ export interface GetNewLocationWarrantyTran_input{
 export interface GetNewLocationWarrantyTran_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -4058,7 +4569,7 @@ export interface GetNewOTMFAddress_input{
 export interface GetNewOTMFAddress_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 
@@ -4140,7 +4651,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_UpdExtLocationInventoryTableset[],
+   ds:Erp_Tablesets_UpdExtLocationInventoryTableset,
    errorsOccurred:boolean,
 }
 }
@@ -4155,7 +4666,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_LocationInventoryTableset[],
+   ds:Erp_Tablesets_LocationInventoryTableset,
 }
 }
 

@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.ImportMgmtSvc
 // Description: ImportMgmtSvc
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportGroupRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportGroupRow
    */  
 export function get_ImportMgmts(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_ImportMgmts(select?:string, expand?:string, filter?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportGroupRow)
           })
@@ -118,15 +158,15 @@ export function get_ImportMgmts(select?:string, expand?:string, filter?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ImportMgmts
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportGroupRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportGroupRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ImportGroupRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ImportGroupRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportMgmts(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportMgmts(requestBody:Ice_Tablesets_ImportGroupRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_ImportMgmts(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -159,10 +206,10 @@ export function post_ImportMgmts(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportGroupRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportGroupRow
    */  
 export function get_ImportMgmts_Company_GroupID(Company:string, GroupID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -177,7 +224,14 @@ export function get_ImportMgmts_Company_GroupID(Company:string, GroupID:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportGroupRow)
           })
@@ -193,15 +247,15 @@ export function get_ImportMgmts_Company_GroupID(Company:string, GroupID:string, 
    OperationID: UpdateExt_ImportMgmt
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportGroupRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportGroupRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ImportMgmts_Company_GroupID(Company:string, GroupID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ImportMgmts_Company_GroupID(Company:string, GroupID:string, requestBody:Ice_Tablesets_ImportGroupRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -215,7 +269,14 @@ export function patch_ImportMgmts_Company_GroupID(Company:string, GroupID:string
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -231,7 +292,7 @@ export function patch_ImportMgmts_Company_GroupID(Company:string, GroupID:string
    OperationID: DeleteUpdateExt_ImportMgmt
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -250,7 +311,14 @@ export function delete_ImportMgmts_Company_GroupID(Company:string, GroupID:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -273,10 +341,10 @@ export function delete_ImportMgmts_Company_GroupID(Company:string, GroupID:strin
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportFileRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportFileRow
    */  
 export function get_ImportMgmts_Company_GroupID_ImportFiles(Company:string, GroupID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -291,7 +359,14 @@ export function get_ImportMgmts_Company_GroupID_ImportFiles(Company:string, Grou
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportFileRow)
           })
@@ -311,10 +386,10 @@ export function get_ImportMgmts_Company_GroupID_ImportFiles(Company:string, Grou
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportFileRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportFileRow
    */  
 export function get_ImportMgmts_Company_GroupID_ImportFiles_Company_GroupID_FileID(Company:string, GroupID:string, FileID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -329,7 +404,14 @@ export function get_ImportMgmts_Company_GroupID_ImportFiles_Company_GroupID_File
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportFileRow)
           })
@@ -350,10 +432,10 @@ export function get_ImportMgmts_Company_GroupID_ImportFiles_Company_GroupID_File
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportFileRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportFileRow
    */  
 export function get_ImportFiles(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -368,7 +450,14 @@ export function get_ImportFiles(select?:string, expand?:string, filter?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportFileRow)
           })
@@ -382,15 +471,15 @@ export function get_ImportFiles(select?:string, expand?:string, filter?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ImportFiles
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportFileRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportFileRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ImportFileRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ImportFileRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportFiles(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportFiles(requestBody:Ice_Tablesets_ImportFileRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -404,7 +493,14 @@ export function post_ImportFiles(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -424,10 +520,10 @@ export function post_ImportFiles(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportFileRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportFileRow
    */  
 export function get_ImportFiles_Company_GroupID_FileID(Company:string, GroupID:string, FileID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -442,7 +538,14 @@ export function get_ImportFiles_Company_GroupID_FileID(Company:string, GroupID:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportFileRow)
           })
@@ -459,15 +562,15 @@ export function get_ImportFiles_Company_GroupID_FileID(Company:string, GroupID:s
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param FileID Desc: FileID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportFileRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportFileRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ImportFiles_Company_GroupID_FileID(Company:string, GroupID:string, FileID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ImportFiles_Company_GroupID_FileID(Company:string, GroupID:string, FileID:string, requestBody:Ice_Tablesets_ImportFileRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -481,7 +584,14 @@ export function patch_ImportFiles_Company_GroupID_FileID(Company:string, GroupID
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -498,7 +608,7 @@ export function patch_ImportFiles_Company_GroupID_FileID(Company:string, GroupID
       @param Company Desc: Company   Required: True   Allow empty value : True
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param FileID Desc: FileID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -517,7 +627,14 @@ export function delete_ImportFiles_Company_GroupID_FileID(Company:string, GroupI
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -541,10 +658,10 @@ export function delete_ImportFiles_Company_GroupID_FileID(Company:string, GroupI
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportDocumentRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportDocumentRow
    */  
 export function get_ImportFiles_Company_GroupID_FileID_ImportDocuments(Company:string, GroupID:string, FileID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -559,7 +676,14 @@ export function get_ImportFiles_Company_GroupID_FileID_ImportDocuments(Company:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportDocumentRow)
           })
@@ -580,10 +704,10 @@ export function get_ImportFiles_Company_GroupID_FileID_ImportDocuments(Company:s
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportDocumentRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportDocumentRow
    */  
 export function get_ImportFiles_Company_GroupID_FileID_ImportDocuments_Company_GroupID_FileID_DocumentNumber(Company:string, GroupID:string, FileID:string, DocumentNumber:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -598,7 +722,14 @@ export function get_ImportFiles_Company_GroupID_FileID_ImportDocuments_Company_G
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportDocumentRow)
           })
@@ -622,10 +753,10 @@ export function get_ImportFiles_Company_GroupID_FileID_ImportDocuments_Company_G
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportExecutionPlanRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportExecutionPlanRow
    */  
 export function get_ImportFiles_Company_GroupID_FileID_ImportExecutionPlans(Company:string, GroupID:string, FileID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -640,7 +771,14 @@ export function get_ImportFiles_Company_GroupID_FileID_ImportExecutionPlans(Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportExecutionPlanRow)
           })
@@ -662,10 +800,10 @@ export function get_ImportFiles_Company_GroupID_FileID_ImportExecutionPlans(Comp
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportExecutionPlanRow
    */  
 export function get_ImportFiles_Company_GroupID_FileID_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -680,7 +818,14 @@ export function get_ImportFiles_Company_GroupID_FileID_ImportExecutionPlans_Comp
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportExecutionPlanRow)
           })
@@ -701,10 +846,10 @@ export function get_ImportFiles_Company_GroupID_FileID_ImportExecutionPlans_Comp
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportDocumentRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportDocumentRow
    */  
 export function get_ImportDocuments(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -719,7 +864,14 @@ export function get_ImportDocuments(select?:string, expand?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportDocumentRow)
           })
@@ -733,15 +885,15 @@ export function get_ImportDocuments(select?:string, expand?:string, filter?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ImportDocuments
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportDocumentRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportDocumentRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ImportDocumentRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ImportDocumentRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportDocuments(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportDocuments(requestBody:Ice_Tablesets_ImportDocumentRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -755,7 +907,14 @@ export function post_ImportDocuments(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -776,10 +935,10 @@ export function post_ImportDocuments(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportDocumentRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportDocumentRow
    */  
 export function get_ImportDocuments_Company_GroupID_FileID_DocumentNumber(Company:string, GroupID:string, FileID:string, DocumentNumber:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -794,7 +953,14 @@ export function get_ImportDocuments_Company_GroupID_FileID_DocumentNumber(Compan
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportDocumentRow)
           })
@@ -812,15 +978,15 @@ export function get_ImportDocuments_Company_GroupID_FileID_DocumentNumber(Compan
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param FileID Desc: FileID   Required: True   Allow empty value : True
       @param DocumentNumber Desc: DocumentNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportDocumentRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportDocumentRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ImportDocuments_Company_GroupID_FileID_DocumentNumber(Company:string, GroupID:string, FileID:string, DocumentNumber:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ImportDocuments_Company_GroupID_FileID_DocumentNumber(Company:string, GroupID:string, FileID:string, DocumentNumber:string, requestBody:Ice_Tablesets_ImportDocumentRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -834,7 +1000,14 @@ export function patch_ImportDocuments_Company_GroupID_FileID_DocumentNumber(Comp
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -852,7 +1025,7 @@ export function patch_ImportDocuments_Company_GroupID_FileID_DocumentNumber(Comp
       @param GroupID Desc: GroupID   Required: True   Allow empty value : True
       @param FileID Desc: FileID   Required: True   Allow empty value : True
       @param DocumentNumber Desc: DocumentNumber   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -871,7 +1044,14 @@ export function delete_ImportDocuments_Company_GroupID_FileID_DocumentNumber(Com
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -896,10 +1076,10 @@ export function delete_ImportDocuments_Company_GroupID_FileID_DocumentNumber(Com
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportTaskRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportTaskRow
    */  
 export function get_ImportDocuments_Company_GroupID_FileID_DocumentNumber_ImportTasks(Company:string, GroupID:string, FileID:string, DocumentNumber:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -914,7 +1094,14 @@ export function get_ImportDocuments_Company_GroupID_FileID_DocumentNumber_Import
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportTaskRow)
           })
@@ -937,10 +1124,10 @@ export function get_ImportDocuments_Company_GroupID_FileID_DocumentNumber_Import
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportTaskRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportTaskRow
    */  
 export function get_ImportDocuments_Company_GroupID_FileID_DocumentNumber_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_TaskID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, TaskID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -955,7 +1142,14 @@ export function get_ImportDocuments_Company_GroupID_FileID_DocumentNumber_Import
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportTaskRow)
           })
@@ -976,10 +1170,10 @@ export function get_ImportDocuments_Company_GroupID_FileID_DocumentNumber_Import
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportTaskRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportTaskRow
    */  
 export function get_ImportTasks(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -994,7 +1188,14 @@ export function get_ImportTasks(select?:string, expand?:string, filter?:string, 
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportTaskRow)
           })
@@ -1008,15 +1209,15 @@ export function get_ImportTasks(select?:string, expand?:string, filter?:string, 
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ImportTasks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportTaskRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportTaskRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ImportTaskRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ImportTaskRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportTasks(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportTasks(requestBody:Ice_Tablesets_ImportTaskRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1030,7 +1231,14 @@ export function post_ImportTasks(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1053,10 +1261,10 @@ export function post_ImportTasks(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportTaskRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportTaskRow
    */  
 export function get_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_TaskID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, TaskID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1071,7 +1279,14 @@ export function get_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionP
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportTaskRow)
           })
@@ -1091,15 +1306,15 @@ export function get_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionP
       @param DocumentNumber Desc: DocumentNumber   Required: True   Allow empty value : True
       @param ExecutionPlanID Desc: ExecutionPlanID   Required: True   Allow empty value : True
       @param TaskID Desc: TaskID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportTaskRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportTaskRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_TaskID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, TaskID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_TaskID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, TaskID:string, requestBody:Ice_Tablesets_ImportTaskRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1113,7 +1328,14 @@ export function patch_ImportTasks_Company_GroupID_FileID_DocumentNumber_Executio
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1133,7 +1355,7 @@ export function patch_ImportTasks_Company_GroupID_FileID_DocumentNumber_Executio
       @param DocumentNumber Desc: DocumentNumber   Required: True   Allow empty value : True
       @param ExecutionPlanID Desc: ExecutionPlanID   Required: True   Allow empty value : True
       @param TaskID Desc: TaskID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1152,7 +1374,14 @@ export function delete_ImportTasks_Company_GroupID_FileID_DocumentNumber_Executi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1178,10 +1407,10 @@ export function delete_ImportTasks_Company_GroupID_FileID_DocumentNumber_Executi
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportTaskLogRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportTaskLogRow
    */  
 export function get_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_TaskID_ImportTaskLogs(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, TaskID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1196,7 +1425,14 @@ export function get_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionP
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportTaskLogRow)
           })
@@ -1219,10 +1455,10 @@ export function get_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionP
       @param LogID Desc: LogID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportTaskLogRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportTaskLogRow
    */  
 export function get_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_TaskID_ImportTaskLogs_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_TaskID_LogID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, TaskID:string, LogID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1237,7 +1473,14 @@ export function get_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionP
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportTaskLogRow)
           })
@@ -1257,10 +1500,10 @@ export function get_ImportTasks_Company_GroupID_FileID_DocumentNumber_ExecutionP
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportTaskLogRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportTaskLogRow
    */  
 export function get_ImportTaskLogs(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1275,7 +1518,14 @@ export function get_ImportTaskLogs(select?:string, filter?:string, orderby?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportTaskLogRow)
           })
@@ -1289,15 +1539,15 @@ export function get_ImportTaskLogs(select?:string, filter?:string, orderby?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ImportTaskLogs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportTaskLogRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportTaskLogRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ImportTaskLogRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ImportTaskLogRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportTaskLogs(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportTaskLogs(requestBody:Ice_Tablesets_ImportTaskLogRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1311,7 +1561,14 @@ export function post_ImportTaskLogs(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1334,10 +1591,10 @@ export function post_ImportTaskLogs(requestBody:any, epicorHeaders?:Headers){
       @param LogID Desc: LogID   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportTaskLogRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportTaskLogRow
    */  
 export function get_ImportTaskLogs_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_TaskID_LogID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, TaskID:string, LogID:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1352,7 +1609,14 @@ export function get_ImportTaskLogs_Company_GroupID_FileID_DocumentNumber_Executi
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportTaskLogRow)
           })
@@ -1373,15 +1637,15 @@ export function get_ImportTaskLogs_Company_GroupID_FileID_DocumentNumber_Executi
       @param ExecutionPlanID Desc: ExecutionPlanID   Required: True   Allow empty value : True
       @param TaskID Desc: TaskID   Required: True   Allow empty value : True
       @param LogID Desc: LogID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportTaskLogRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportTaskLogRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ImportTaskLogs_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_TaskID_LogID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, TaskID:string, LogID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ImportTaskLogs_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_TaskID_LogID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, TaskID:string, LogID:string, requestBody:Ice_Tablesets_ImportTaskLogRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1395,7 +1659,14 @@ export function patch_ImportTaskLogs_Company_GroupID_FileID_DocumentNumber_Execu
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1416,7 +1687,7 @@ export function patch_ImportTaskLogs_Company_GroupID_FileID_DocumentNumber_Execu
       @param ExecutionPlanID Desc: ExecutionPlanID   Required: True   Allow empty value : True
       @param TaskID Desc: TaskID   Required: True   Allow empty value : True
       @param LogID Desc: LogID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1435,7 +1706,14 @@ export function delete_ImportTaskLogs_Company_GroupID_FileID_DocumentNumber_Exec
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1456,10 +1734,10 @@ export function delete_ImportTaskLogs_Company_GroupID_FileID_DocumentNumber_Exec
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportExecutionPlanRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportExecutionPlanRow
    */  
 export function get_ImportExecutionPlans(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1474,7 +1752,14 @@ export function get_ImportExecutionPlans(select?:string, expand?:string, filter?
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportExecutionPlanRow)
           })
@@ -1488,15 +1773,15 @@ export function get_ImportExecutionPlans(select?:string, expand?:string, filter?
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ImportExecutionPlans
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ImportExecutionPlanRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportExecutionPlans(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportExecutionPlans(requestBody:Ice_Tablesets_ImportExecutionPlanRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1510,7 +1795,14 @@ export function post_ImportExecutionPlans(requestBody:any, epicorHeaders?:Header
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1532,10 +1824,10 @@ export function post_ImportExecutionPlans(requestBody:any, epicorHeaders?:Header
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportExecutionPlanRow
    */  
 export function get_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1550,7 +1842,14 @@ export function get_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_E
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportExecutionPlanRow)
           })
@@ -1569,15 +1868,15 @@ export function get_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_E
       @param FileID Desc: FileID   Required: True   Allow empty value : True
       @param DocumentNumber Desc: DocumentNumber   Required: True   Allow empty value : True
       @param ExecutionPlanID Desc: ExecutionPlanID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, requestBody:Ice_Tablesets_ImportExecutionPlanRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1591,7 +1890,14 @@ export function patch_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1610,7 +1916,7 @@ export function patch_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber
       @param FileID Desc: FileID   Required: True   Allow empty value : True
       @param DocumentNumber Desc: DocumentNumber   Required: True   Allow empty value : True
       @param ExecutionPlanID Desc: ExecutionPlanID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1629,7 +1935,14 @@ export function delete_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumbe
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1654,10 +1967,10 @@ export function delete_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumbe
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportExecutionPlanDependencyRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportExecutionPlanDependencyRow
    */  
 export function get_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_ImportExecutionPlanDependencies(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1672,7 +1985,14 @@ export function get_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_E
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportExecutionPlanDependencyRow)
           })
@@ -1694,10 +2014,10 @@ export function get_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_E
       @param DependsOn Desc: DependsOn   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanDependencyRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportExecutionPlanDependencyRow
    */  
 export function get_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_ImportExecutionPlanDependencies_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_DependsOn(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, DependsOn:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1712,7 +2032,14 @@ export function get_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_E
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportExecutionPlanDependencyRow)
           })
@@ -1732,10 +2059,10 @@ export function get_ImportExecutionPlans_Company_GroupID_FileID_DocumentNumber_E
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportExecutionPlanDependencyRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportExecutionPlanDependencyRow
    */  
 export function get_ImportExecutionPlanDependencies(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1750,7 +2077,14 @@ export function get_ImportExecutionPlanDependencies(select?:string, filter?:stri
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportExecutionPlanDependencyRow)
           })
@@ -1764,15 +2098,15 @@ export function get_ImportExecutionPlanDependencies(select?:string, filter?:stri
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_ImportExecutionPlanDependencies
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanDependencyRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanDependencyRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanDependencyRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.ImportExecutionPlanDependencyRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ImportExecutionPlanDependencies(requestBody:any, epicorHeaders?:Headers){
+export function post_ImportExecutionPlanDependencies(requestBody:Ice_Tablesets_ImportExecutionPlanDependencyRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1786,7 +2120,14 @@ export function post_ImportExecutionPlanDependencies(requestBody:any, epicorHead
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1808,10 +2149,10 @@ export function post_ImportExecutionPlanDependencies(requestBody:any, epicorHead
       @param DependsOn Desc: DependsOn   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanDependencyRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.ImportExecutionPlanDependencyRow
    */  
 export function get_ImportExecutionPlanDependencies_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_DependsOn(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, DependsOn:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -1826,7 +2167,14 @@ export function get_ImportExecutionPlanDependencies_Company_GroupID_FileID_Docum
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_ImportExecutionPlanDependencyRow)
           })
@@ -1846,15 +2194,15 @@ export function get_ImportExecutionPlanDependencies_Company_GroupID_FileID_Docum
       @param DocumentNumber Desc: DocumentNumber   Required: True   Allow empty value : True
       @param ExecutionPlanID Desc: ExecutionPlanID   Required: True   Allow empty value : True
       @param DependsOn Desc: DependsOn   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanDependencyRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.ImportExecutionPlanDependencyRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_ImportExecutionPlanDependencies_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_DependsOn(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, DependsOn:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_ImportExecutionPlanDependencies_Company_GroupID_FileID_DocumentNumber_ExecutionPlanID_DependsOn(Company:string, GroupID:string, FileID:string, DocumentNumber:string, ExecutionPlanID:string, DependsOn:string, requestBody:Ice_Tablesets_ImportExecutionPlanDependencyRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1868,7 +2216,14 @@ export function patch_ImportExecutionPlanDependencies_Company_GroupID_FileID_Doc
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1888,7 +2243,7 @@ export function patch_ImportExecutionPlanDependencies_Company_GroupID_FileID_Doc
       @param DocumentNumber Desc: DocumentNumber   Required: True   Allow empty value : True
       @param ExecutionPlanID Desc: ExecutionPlanID   Required: True   Allow empty value : True
       @param DependsOn Desc: DependsOn   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1907,7 +2262,14 @@ export function delete_ImportExecutionPlanDependencies_Company_GroupID_FileID_Do
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1927,10 +2289,10 @@ export function delete_ImportExecutionPlanDependencies_Company_GroupID_FileID_Do
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportGroupListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.ImportGroupListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1945,7 +2307,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportGroupListRow)
           })
@@ -1957,6 +2326,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1974,7 +2360,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -2070,15 +2456,22 @@ export function get_GetRows(whereClauseImportGroup:string, whereClauseImportFile
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -2091,7 +2484,7 @@ export function get_GetRows(whereClauseImportGroup:string, whereClauseImportFile
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -2115,15 +2508,22 @@ export function get_GetByID(groupID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2138,7 +2538,7 @@ export function get_GetByID(groupID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -2180,15 +2580,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -2200,30 +2607,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method GetNewGroup
    Description: GetNewGroup - generates a new group
    OperationID: GetNewGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewGroup(requestBody:GetNewGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetNewGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -2235,30 +2649,37 @@ export function post_GetNewGroup(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewFile
    Description: creates a new file and a Group if needed
    OperationID: GetNewFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewFile(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewFile(requestBody:GetNewFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetNewFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2270,30 +2691,37 @@ export function post_GetNewFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UploadFilesAndImport
    Description: Upload files And launches the import proces
    OperationID: UploadFilesAndImport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UploadFilesAndImport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UploadFilesAndImport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UploadFilesAndImport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UploadFilesAndImport(requestBody:any, epicorHeaders?:Headers){
+export function post_UploadFilesAndImport(requestBody:UploadFilesAndImport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UploadFilesAndImport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/UploadFilesAndImport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UploadFilesAndImport_output)
           })
       .catch((error) => {
           reject(error)
@@ -2305,30 +2733,37 @@ export function post_UploadFilesAndImport(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetIntQueID
    Description: get IntQueID for the Document we want to edit in Workbench
    OperationID: GetIntQueID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetIntQueID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetIntQueID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetIntQueID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetIntQueID(requestBody:any, epicorHeaders?:Headers){
+export function post_GetIntQueID(requestBody:GetIntQueID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetIntQueID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetIntQueID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetIntQueID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2340,30 +2775,37 @@ export function post_GetIntQueID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method CancelImport
    Description: CancelImport method - this method calls cancel method from Import BO
    OperationID: CancelImport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CancelImport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CancelImport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CancelImport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CancelImport(requestBody:any, epicorHeaders?:Headers){
+export function post_CancelImport(requestBody:CancelImport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CancelImport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/CancelImport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CancelImport_output)
           })
       .catch((error) => {
           reject(error)
@@ -2375,30 +2817,37 @@ export function post_CancelImport(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method PauseImport
    Description: PauseImport method - this method calls pause method from Import BO
    OperationID: PauseImport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PauseImport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PauseImport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PauseImport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PauseImport(requestBody:any, epicorHeaders?:Headers){
+export function post_PauseImport(requestBody:PauseImport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PauseImport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/PauseImport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PauseImport_output)
           })
       .catch((error) => {
           reject(error)
@@ -2410,30 +2859,37 @@ export function post_PauseImport(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method RestartImport
    Description: RestartImport method - this method calls restart method from Import BO
    OperationID: RestartImport
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RestartImport_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RestartImport_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RestartImport_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RestartImport(requestBody:any, epicorHeaders?:Headers){
+export function post_RestartImport(requestBody:RestartImport_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RestartImport_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/RestartImport", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RestartImport_output)
           })
       .catch((error) => {
           reject(error)
@@ -2445,30 +2901,37 @@ export function post_RestartImport(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewImportGroup
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewImportGroup
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewImportGroup_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewImportGroup_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewImportGroup_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewImportGroup(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewImportGroup(requestBody:GetNewImportGroup_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewImportGroup_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetNewImportGroup", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewImportGroup_output)
           })
       .catch((error) => {
           reject(error)
@@ -2480,30 +2943,37 @@ export function post_GetNewImportGroup(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewImportFile
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewImportFile
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewImportFile_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewImportFile_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewImportFile_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewImportFile(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewImportFile(requestBody:GetNewImportFile_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewImportFile_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetNewImportFile", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewImportFile_output)
           })
       .catch((error) => {
           reject(error)
@@ -2515,30 +2985,37 @@ export function post_GetNewImportFile(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewImportDocument
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewImportDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewImportDocument_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewImportDocument_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewImportDocument_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewImportDocument(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewImportDocument(requestBody:GetNewImportDocument_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewImportDocument_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetNewImportDocument", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewImportDocument_output)
           })
       .catch((error) => {
           reject(error)
@@ -2550,30 +3027,37 @@ export function post_GetNewImportDocument(requestBody:any, epicorHeaders?:Header
    Summary: Invoke method GetNewImportTask
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewImportTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewImportTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewImportTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewImportTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewImportTask(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewImportTask(requestBody:GetNewImportTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewImportTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetNewImportTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewImportTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -2585,30 +3069,37 @@ export function post_GetNewImportTask(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewImportTaskLog
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewImportTaskLog
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewImportTaskLog_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewImportTaskLog_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewImportTaskLog_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewImportTaskLog(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewImportTaskLog(requestBody:GetNewImportTaskLog_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewImportTaskLog_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetNewImportTaskLog", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewImportTaskLog_output)
           })
       .catch((error) => {
           reject(error)
@@ -2620,30 +3111,37 @@ export function post_GetNewImportTaskLog(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewImportExecutionPlan
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewImportExecutionPlan
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewImportExecutionPlan_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewImportExecutionPlan_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewImportExecutionPlan_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewImportExecutionPlan(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewImportExecutionPlan(requestBody:GetNewImportExecutionPlan_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewImportExecutionPlan_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetNewImportExecutionPlan", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewImportExecutionPlan_output)
           })
       .catch((error) => {
           reject(error)
@@ -2655,30 +3153,37 @@ export function post_GetNewImportExecutionPlan(requestBody:any, epicorHeaders?:H
    Summary: Invoke method GetNewImportExecutionPlanDependency
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewImportExecutionPlanDependency
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewImportExecutionPlanDependency_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewImportExecutionPlanDependency_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewImportExecutionPlanDependency_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewImportExecutionPlanDependency(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewImportExecutionPlanDependency(requestBody:GetNewImportExecutionPlanDependency_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewImportExecutionPlanDependency_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetNewImportExecutionPlanDependency", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewImportExecutionPlanDependency_output)
           })
       .catch((error) => {
           reject(error)
@@ -2690,30 +3195,37 @@ export function post_GetNewImportExecutionPlanDependency(requestBody:any, epicor
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2725,7 +3237,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -2749,15 +3261,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -2769,7 +3288,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -2793,15 +3312,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -2813,30 +3339,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -2848,30 +3381,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.ImportMgmtSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2882,46 +3422,63 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportDocumentRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ImportDocumentRow[],
+   "value":Ice_Tablesets_ImportDocumentRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportExecutionPlanDependencyRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ImportExecutionPlanDependencyRow[],
+   "value":Ice_Tablesets_ImportExecutionPlanDependencyRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportExecutionPlanRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ImportExecutionPlanRow[],
+   "value":Ice_Tablesets_ImportExecutionPlanRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportFileRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ImportFileRow[],
+   "value":Ice_Tablesets_ImportFileRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportGroupListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ImportGroupListRow[],
+   "value":Ice_Tablesets_ImportGroupListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportGroupRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ImportGroupRow[],
+   "value":Ice_Tablesets_ImportGroupRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportTaskLogRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ImportTaskLogRow[],
+   "value":Ice_Tablesets_ImportTaskLogRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_ImportTaskRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_ImportTaskRow[],
+   "value":Ice_Tablesets_ImportTaskRow,
 }
 
 export interface Ice_Tablesets_ImportDocumentRow{
@@ -3208,6 +3765,23 @@ export interface Ice_Tablesets_ImportTaskRow{
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -3318,7 +3892,7 @@ export interface GetNewFile_input{
 export interface GetNewFile_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ImportMgmtTableset[],
+   ds:Ice_Tablesets_ImportMgmtTableset,
 }
 }
 
@@ -3332,7 +3906,7 @@ export interface GetNewGroup_input{
 export interface GetNewGroup_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ImportMgmtTableset[],
+   ds:Ice_Tablesets_ImportMgmtTableset,
 }
 }
 
@@ -3350,7 +3924,7 @@ export interface GetNewImportDocument_input{
 export interface GetNewImportDocument_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ImportMgmtTableset[],
+   ds:Ice_Tablesets_ImportMgmtTableset,
 }
 }
 
@@ -3372,7 +3946,7 @@ export interface GetNewImportExecutionPlanDependency_input{
 export interface GetNewImportExecutionPlanDependency_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ImportMgmtTableset[],
+   ds:Ice_Tablesets_ImportMgmtTableset,
 }
 }
 
@@ -3392,7 +3966,7 @@ export interface GetNewImportExecutionPlan_input{
 export interface GetNewImportExecutionPlan_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ImportMgmtTableset[],
+   ds:Ice_Tablesets_ImportMgmtTableset,
 }
 }
 
@@ -3408,7 +3982,7 @@ export interface GetNewImportFile_input{
 export interface GetNewImportFile_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ImportMgmtTableset[],
+   ds:Ice_Tablesets_ImportMgmtTableset,
 }
 }
 
@@ -3422,7 +3996,7 @@ export interface GetNewImportGroup_input{
 export interface GetNewImportGroup_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ImportMgmtTableset[],
+   ds:Ice_Tablesets_ImportMgmtTableset,
 }
 }
 
@@ -3446,7 +4020,7 @@ export interface GetNewImportTaskLog_input{
 export interface GetNewImportTaskLog_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ImportMgmtTableset[],
+   ds:Ice_Tablesets_ImportMgmtTableset,
 }
 }
 
@@ -3468,7 +4042,7 @@ export interface GetNewImportTask_input{
 export interface GetNewImportTask_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ImportMgmtTableset[],
+   ds:Ice_Tablesets_ImportMgmtTableset,
 }
 }
 
@@ -3891,7 +4465,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtImportMgmtTableset[],
+   ds:Ice_Tablesets_UpdExtImportMgmtTableset,
    errorsOccurred:boolean,
 }
 }
@@ -3906,7 +4480,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_ImportMgmtTableset[],
+   ds:Ice_Tablesets_ImportMgmtTableset,
 }
 }
 

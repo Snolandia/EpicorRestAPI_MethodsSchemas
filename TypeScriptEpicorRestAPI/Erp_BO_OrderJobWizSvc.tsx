@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Erp.BO.OrderJobWizSvc
 // Description: JWJobHead
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -78,36 +111,60 @@ export function get_metadata(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
 
    /**  
    Summary: Invoke method getNextOpDtlSeq
    OperationID: getNextOpDtlSeq
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/getNextOpDtlSeq_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/getNextOpDtlSeq_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/getNextOpDtlSeq_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_getNextOpDtlSeq(requestBody:any, epicorHeaders?:Headers){
+export function post_getNextOpDtlSeq(requestBody:getNextOpDtlSeq_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<getNextOpDtlSeq_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OrderJobWizSvc/getNextOpDtlSeq", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as getNextOpDtlSeq_output)
           })
       .catch((error) => {
           reject(error)
@@ -122,30 +179,37 @@ This method will process any and all records where the ttJWJobOrderDtl.JobChkBox
 ttJWOrderRel.RelJobChkBox is set to true.
 This method will also process the getDetails, Schedule and Release booleans.
    OperationID: CreateJobs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/CreateJobs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/CreateJobs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/CreateJobs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_CreateJobs(requestBody:any, epicorHeaders?:Headers){
+export function post_CreateJobs(requestBody:CreateJobs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<CreateJobs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OrderJobWizSvc/CreateJobs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as CreateJobs_output)
           })
       .catch((error) => {
           reject(error)
@@ -161,30 +225,37 @@ related releases. The dataset also includes open jobs for any part in the detail
 The client my need to filter the job dataset to represent only the jobs relevant to the
 part on the detail. Index constraints on the xsd, did not allow me to do that in the BL.
    OperationID: GetMatrix
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetMatrix_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetMatrix_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetMatrix_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetMatrix(requestBody:any, epicorHeaders?:Headers){
+export function post_GetMatrix(requestBody:GetMatrix_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetMatrix_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OrderJobWizSvc/GetMatrix", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetMatrix_output)
           })
       .catch((error) => {
           reject(error)
@@ -196,30 +267,37 @@ export function post_GetMatrix(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method Link
    Description: Creates link between selected release and selected job .
    OperationID: Link
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Link_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Link_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Link_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Link(requestBody:any, epicorHeaders?:Headers){
+export function post_Link(requestBody:Link_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Link_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OrderJobWizSvc/Link", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Link_output)
           })
       .catch((error) => {
           reject(error)
@@ -241,30 +319,37 @@ ttJWJobOrderDtl.DetailChkBox = Get All methods for all dtl lines, Selectall must
 ttJWJobOrderDtl.ScheduleAll  = Schedule all jobs, DetailChkBox must be checked
 ttJWJobOrderDtl.ReleaseAll   = Release all jobs,  ScheduleAll  must be checked
    OperationID: SelectAll
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SelectAll_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SelectAll_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SelectAll_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SelectAll(requestBody:any, epicorHeaders?:Headers){
+export function post_SelectAll(requestBody:SelectAll_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SelectAll_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OrderJobWizSvc/SelectAll", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SelectAll_output)
           })
       .catch((error) => {
           reject(error)
@@ -276,30 +361,37 @@ export function post_SelectAll(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UnLink
    Description: Unlink releases to Jobs .
    OperationID: UnLink
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UnLink_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UnLink_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UnLink_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UnLink(requestBody:any, epicorHeaders?:Headers){
+export function post_UnLink(requestBody:UnLink_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UnLink_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OrderJobWizSvc/UnLink", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UnLink_output)
           })
       .catch((error) => {
           reject(error)
@@ -312,30 +404,37 @@ export function post_UnLink(requestBody:any, epicorHeaders?:Headers){
    Description: Gather all of the parts that are flagged to create jobs, and display the
 ones in a message that won't be getting details.
    OperationID: ValidateJobs
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ValidateJobs_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ValidateJobs_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ValidateJobs_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ValidateJobs(requestBody:any, epicorHeaders?:Headers){
+export function post_ValidateJobs(requestBody:ValidateJobs_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ValidateJobs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OrderJobWizSvc/ValidateJobs", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ValidateJobs_output)
           })
       .catch((error) => {
           reject(error)
@@ -347,7 +446,7 @@ export function post_ValidateJobs(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetPlantConfCtrlUse3rdPartySched
    Description: Get the Use3rdPartySched field from PlantConfCtrl table.
    OperationID: GetPlantConfCtrlUse3rdPartySched
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetPlantConfCtrlUse3rdPartySched_output
@@ -360,15 +459,22 @@ export function post_GetPlantConfCtrlUse3rdPartySched(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetPlantConfCtrlUse3rdPartySched_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.OrderJobWizSvc/GetPlantConfCtrlUse3rdPartySched", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetPlantConfCtrlUse3rdPartySched_output)
           })
       .catch((error) => {
           reject(error)
@@ -379,11 +485,45 @@ export function post_GetPlantConfCtrlUse3rdPartySched(epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
@@ -397,7 +537,7 @@ export interface CreateJobs_input{
 export interface CreateJobs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_OrderJobWizTableset[],
+   ds:Erp_Tablesets_OrderJobWizTableset,
    pErrorMessages:string,
 }
 }
@@ -600,7 +740,7 @@ export interface Link_input{
 export interface Link_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_OrderJobWizTableset[],
+   ds:Erp_Tablesets_OrderJobWizTableset,
 }
 }
 
@@ -637,7 +777,7 @@ export interface UnLink_input{
 export interface UnLink_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_OrderJobWizTableset[],
+   ds:Erp_Tablesets_OrderJobWizTableset,
 }
 }
 
@@ -651,7 +791,7 @@ export interface ValidateJobs_input{
 export interface ValidateJobs_output{
 parameters : {
       /**  output parameters  */  
-   ds:Erp_Tablesets_OrderJobWizTableset[],
+   ds:Erp_Tablesets_OrderJobWizTableset,
    WarnMsg:string,
 }
 }

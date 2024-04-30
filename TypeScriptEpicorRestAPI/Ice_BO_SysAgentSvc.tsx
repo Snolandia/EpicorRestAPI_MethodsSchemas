@@ -1,12 +1,31 @@
 import * as configEpicorSchemas from "./configEpicorSchemas"
 
 
+/** 
 // Title: Ice.BO.SysAgentSvc
 // Description: SysAgent main object
 // Version: v1
+*/ 
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // OData methods:
 //////////////////////////////////////////////////////////////////////////
@@ -15,7 +34,7 @@ import * as configEpicorSchemas from "./configEpicorSchemas"
    Summary: Get service document
    Description: Get service document for the service
    OperationID: GetServiceDocument
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: OK => application/json
@@ -33,7 +52,14 @@ export function getServiceDocument(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as JSON)
           })
@@ -47,7 +73,7 @@ export function getServiceDocument(epicorHeaders?:Headers){
    Summary: Get metadata document
    Description: Get service ODATA metadata in XML format
    OperationID: GetMetadata
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       200 Desc: Returns metadata document => content
@@ -65,7 +91,14 @@ export function get_metadata(epicorHeaders?:Headers){
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -86,10 +119,10 @@ export function get_metadata(epicorHeaders?:Headers){
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentRow
    */  
 export function get_SysAgents(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -104,7 +137,14 @@ export function get_SysAgents(select?:string, expand?:string, filter?:string, or
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentRow)
           })
@@ -118,15 +158,15 @@ export function get_SysAgents(select?:string, expand?:string, filter?:string, or
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SysAgents
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.SysAgentRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.SysAgentRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.SysAgentRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.SysAgentRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SysAgents(requestBody:any, epicorHeaders?:Headers){
+export function post_SysAgents(requestBody:Ice_Tablesets_SysAgentRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -140,7 +180,14 @@ export function post_SysAgents(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -158,10 +205,10 @@ export function post_SysAgents(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.SysAgentRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.SysAgentRow
    */  
 export function get_SysAgents_AgentID(AgentID:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -176,7 +223,14 @@ export function get_SysAgents_AgentID(AgentID:string, select?:string, expand?:st
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_SysAgentRow)
           })
@@ -191,15 +245,15 @@ export function get_SysAgents_AgentID(AgentID:string, select?:string, expand?:st
    Description: Calls UpdateExt to update SysAgent. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: UpdateExt_SysAgent
       @param AgentID Desc: AgentID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.SysAgentRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.SysAgentRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SysAgents_AgentID(AgentID:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SysAgents_AgentID(AgentID:string, requestBody:Ice_Tablesets_SysAgentRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -213,7 +267,14 @@ export function patch_SysAgents_AgentID(AgentID:string, requestBody:any, epicorH
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -228,7 +289,7 @@ export function patch_SysAgents_AgentID(AgentID:string, requestBody:any, epicorH
    Description: Call UpdateExt to delete SysAgent item. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li><li>String parameters should be specified in single quotes</li></ul></div>
    OperationID: DeleteUpdateExt_SysAgent
       @param AgentID Desc: AgentID   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -247,7 +308,14 @@ export function delete_SysAgents_AgentID(AgentID:string, epicorHeaders?:Headers)
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -269,10 +337,10 @@ export function delete_SysAgents_AgentID(AgentID:string, epicorHeaders?:Headers)
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentSchedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentSchedRow
    */  
 export function get_SysAgents_AgentID_SysAgentScheds(AgentID:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -287,7 +355,14 @@ export function get_SysAgents_AgentID_SysAgentScheds(AgentID:string, select?:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentSchedRow)
           })
@@ -306,10 +381,10 @@ export function get_SysAgents_AgentID_SysAgentScheds(AgentID:string, select?:str
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.SysAgentSchedRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.SysAgentSchedRow
    */  
 export function get_SysAgents_AgentID_SysAgentScheds_AgentID_AgentSchedNum(AgentID:string, AgentSchedNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -324,7 +399,14 @@ export function get_SysAgents_AgentID_SysAgentScheds_AgentID_AgentSchedNum(Agent
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_SysAgentSchedRow)
           })
@@ -345,10 +427,10 @@ export function get_SysAgents_AgentID_SysAgentScheds_AgentID_AgentSchedNum(Agent
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentSchedRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentSchedRow
    */  
 export function get_SysAgentScheds(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -363,7 +445,14 @@ export function get_SysAgentScheds(select?:string, expand?:string, filter?:strin
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentSchedRow)
           })
@@ -377,15 +466,15 @@ export function get_SysAgentScheds(select?:string, expand?:string, filter?:strin
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SysAgentScheds
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.SysAgentSchedRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.SysAgentSchedRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.SysAgentSchedRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.SysAgentSchedRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SysAgentScheds(requestBody:any, epicorHeaders?:Headers){
+export function post_SysAgentScheds(requestBody:Ice_Tablesets_SysAgentSchedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -399,7 +488,14 @@ export function post_SysAgentScheds(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -418,10 +514,10 @@ export function post_SysAgentScheds(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.SysAgentSchedRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.SysAgentSchedRow
    */  
 export function get_SysAgentScheds_AgentID_AgentSchedNum(AgentID:string, AgentSchedNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -436,7 +532,14 @@ export function get_SysAgentScheds_AgentID_AgentSchedNum(AgentID:string, AgentSc
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_SysAgentSchedRow)
           })
@@ -452,15 +555,15 @@ export function get_SysAgentScheds_AgentID_AgentSchedNum(AgentID:string, AgentSc
    OperationID: UpdateExt_SysAgentSched
       @param AgentID Desc: AgentID   Required: True   Allow empty value : True
       @param AgentSchedNum Desc: AgentSchedNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.SysAgentSchedRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.SysAgentSchedRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SysAgentScheds_AgentID_AgentSchedNum(AgentID:string, AgentSchedNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SysAgentScheds_AgentID_AgentSchedNum(AgentID:string, AgentSchedNum:string, requestBody:Ice_Tablesets_SysAgentSchedRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -474,7 +577,14 @@ export function patch_SysAgentScheds_AgentID_AgentSchedNum(AgentID:string, Agent
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -490,7 +600,7 @@ export function patch_SysAgentScheds_AgentID_AgentSchedNum(AgentID:string, Agent
    OperationID: DeleteUpdateExt_SysAgentSched
       @param AgentID Desc: AgentID   Required: True   Allow empty value : True
       @param AgentSchedNum Desc: AgentSchedNum   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -509,7 +619,14 @@ export function delete_SysAgentScheds_AgentID_AgentSchedNum(AgentID:string, Agen
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -532,10 +649,10 @@ export function delete_SysAgentScheds_AgentID_AgentSchedNum(AgentID:string, Agen
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentTaskRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentTaskRow
    */  
 export function get_SysAgentScheds_AgentID_AgentSchedNum_SysAgentTasks(AgentID:string, AgentSchedNum:string, select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -550,7 +667,14 @@ export function get_SysAgentScheds_AgentID_AgentSchedNum_SysAgentTasks(AgentID:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentTaskRow)
           })
@@ -570,10 +694,10 @@ export function get_SysAgentScheds_AgentID_AgentSchedNum_SysAgentTasks(AgentID:s
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.SysAgentTaskRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.SysAgentTaskRow
    */  
 export function get_SysAgentScheds_AgentID_AgentSchedNum_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum(AgentID:string, AgentSchedNum:string, AgentTaskNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -588,7 +712,14 @@ export function get_SysAgentScheds_AgentID_AgentSchedNum_SysAgentTasks_AgentID_A
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_SysAgentTaskRow)
           })
@@ -609,10 +740,10 @@ export function get_SysAgentScheds_AgentID_AgentSchedNum_SysAgentTasks_AgentID_A
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentTaskRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentTaskRow
    */  
 export function get_SysAgentTasks(select?:string, expand?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -627,7 +758,14 @@ export function get_SysAgentTasks(select?:string, expand?:string, filter?:string
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentTaskRow)
           })
@@ -641,15 +779,15 @@ export function get_SysAgentTasks(select?:string, expand?:string, filter?:string
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SysAgentTasks
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.SysAgentTaskRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.SysAgentTaskRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.SysAgentTaskRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.SysAgentTaskRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SysAgentTasks(requestBody:any, epicorHeaders?:Headers){
+export function post_SysAgentTasks(requestBody:Ice_Tablesets_SysAgentTaskRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -663,7 +801,14 @@ export function post_SysAgentTasks(requestBody:any, epicorHeaders?:Headers){
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -683,10 +828,10 @@ export function post_SysAgentTasks(requestBody:any, epicorHeaders?:Headers){
       @param select Desc: Odata select comma delimited list of fields
       @param expand Desc: Odata expand to child
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.SysAgentTaskRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.SysAgentTaskRow
    */  
 export function get_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum(AgentID:string, AgentSchedNum:string, AgentTaskNum:string, select?:string, expand?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -701,7 +846,14 @@ export function get_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum(AgentID:str
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_SysAgentTaskRow)
           })
@@ -718,15 +870,15 @@ export function get_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum(AgentID:str
       @param AgentID Desc: AgentID   Required: True   Allow empty value : True
       @param AgentSchedNum Desc: AgentSchedNum   Required: True   Allow empty value : True
       @param AgentTaskNum Desc: AgentTaskNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.SysAgentTaskRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.SysAgentTaskRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum(AgentID:string, AgentSchedNum:string, AgentTaskNum:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum(AgentID:string, AgentSchedNum:string, AgentTaskNum:string, requestBody:Ice_Tablesets_SysAgentTaskRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -740,7 +892,14 @@ export function patch_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum(AgentID:s
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -757,7 +916,7 @@ export function patch_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum(AgentID:s
       @param AgentID Desc: AgentID   Required: True   Allow empty value : True
       @param AgentSchedNum Desc: AgentSchedNum   Required: True   Allow empty value : True
       @param AgentTaskNum Desc: AgentTaskNum   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -776,7 +935,14 @@ export function delete_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum(AgentID:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -799,10 +965,10 @@ export function delete_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum(AgentID:
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentTaskParamRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentTaskParamRow
    */  
 export function get_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum_SysAgentTaskParams(AgentID:string, AgentSchedNum:string, AgentTaskNum:string, select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -817,7 +983,14 @@ export function get_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum_SysAgentTas
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentTaskParamRow)
           })
@@ -837,10 +1010,10 @@ export function get_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum_SysAgentTas
       @param ParamName Desc: ParamName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.SysAgentTaskParamRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.SysAgentTaskParamRow
    */  
 export function get_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum_SysAgentTaskParams_AgentID_AgentSchedNum_AgentTaskNum_ParamName(AgentID:string, AgentSchedNum:string, AgentTaskNum:string, ParamName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -855,7 +1028,14 @@ export function get_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum_SysAgentTas
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_SysAgentTaskParamRow)
           })
@@ -875,10 +1055,10 @@ export function get_SysAgentTasks_AgentID_AgentSchedNum_AgentTaskNum_SysAgentTas
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentTaskParamRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentTaskParamRow
    */  
 export function get_SysAgentTaskParams(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -893,7 +1073,14 @@ export function get_SysAgentTaskParams(select?:string, filter?:string, orderby?:
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentTaskParamRow)
           })
@@ -907,15 +1094,15 @@ export function get_SysAgentTaskParams(select?:string, filter?:string, orderby?:
    Summary: Calls UpdateExt to create new item for the service
    Description: Calls UpdateExt to create new item for the service. <div>OData-specific rules:<ul><li>OData $-parameters data are case-sensitive</li></ul></div>
    OperationID: NewUpdateExt_SysAgentTaskParams
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.SysAgentTaskParamRow
+      @param requestBody  Desc: Input parameters  => reference#/components/schemas/Ice.Tablesets.SysAgentTaskParamRow
    Returns: 
-      201 Desc: Resource is created. Operation is successful.  => reference#/components/schemas/Ice.Tablesets.SysAgentTaskParamRow
+      201 Desc: Resource is created. Operation is successful.  => reference #/components/schemas/Ice.Tablesets.SysAgentTaskParamRow
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SysAgentTaskParams(requestBody:any, epicorHeaders?:Headers){
+export function post_SysAgentTaskParams(requestBody:Ice_Tablesets_SysAgentTaskParamRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -929,7 +1116,14 @@ export function post_SysAgentTaskParams(requestBody:any, epicorHeaders?:Headers)
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -949,10 +1143,10 @@ export function post_SysAgentTaskParams(requestBody:any, epicorHeaders?:Headers)
       @param ParamName Desc: ParamName   Required: True   Allow empty value : True
       @param select Desc: Odata select comma delimited list of fields
       @param filter Desc: Odata filter results
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Ice.Tablesets.SysAgentTaskParamRow
+      200 Desc: OK => reference #/components/schemas/Ice.Tablesets.SysAgentTaskParamRow
    */  
 export function get_SysAgentTaskParams_AgentID_AgentSchedNum_AgentTaskNum_ParamName(AgentID:string, AgentSchedNum:string, AgentTaskNum:string, ParamName:string, select?:string, filter?:string, epicorHeaders?:Headers){
 
@@ -967,7 +1161,14 @@ export function get_SysAgentTaskParams_AgentID_AgentSchedNum_AgentTaskNum_ParamN
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Ice_Tablesets_SysAgentTaskParamRow)
           })
@@ -985,15 +1186,15 @@ export function get_SysAgentTaskParams_AgentID_AgentSchedNum_AgentTaskNum_ParamN
       @param AgentSchedNum Desc: AgentSchedNum   Required: True   Allow empty value : True
       @param AgentTaskNum Desc: AgentTaskNum   Required: True
       @param ParamName Desc: ParamName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
-      :param requestBody: Desc: input params  => reference#/components/schemas/Ice.Tablesets.SysAgentTaskParamRow
+      @param requestBody  Desc: input params  => reference#/components/schemas/Ice.Tablesets.SysAgentTaskParamRow
    Returns: 
       204 Desc: No Content. Operation is successful.
       400 Desc: Unable to deserialize entity. Input data is not in correct format.
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function patch_SysAgentTaskParams_AgentID_AgentSchedNum_AgentTaskNum_ParamName(AgentID:string, AgentSchedNum:string, AgentTaskNum:string, ParamName:string, requestBody:any, epicorHeaders?:Headers){
+export function patch_SysAgentTaskParams_AgentID_AgentSchedNum_AgentTaskNum_ParamName(AgentID:string, AgentSchedNum:string, AgentTaskNum:string, ParamName:string, requestBody:Ice_Tablesets_SysAgentTaskParamRow, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
@@ -1007,7 +1208,14 @@ export function patch_SysAgentTaskParams_AgentID_AgentSchedNum_AgentTaskNum_Para
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1025,7 +1233,7 @@ export function patch_SysAgentTaskParams_AgentID_AgentSchedNum_AgentTaskNum_Para
       @param AgentSchedNum Desc: AgentSchedNum   Required: True   Allow empty value : True
       @param AgentTaskNum Desc: AgentTaskNum   Required: True
       @param ParamName Desc: ParamName   Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
       204 Desc: No Content. Operation is successful.
@@ -1044,7 +1252,14 @@ export function delete_SysAgentTaskParams_AgentID_AgentSchedNum_AgentTaskNum_Par
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as any)
           })
@@ -1064,10 +1279,10 @@ export function delete_SysAgentTaskParams_AgentID_AgentSchedNum_AgentTaskNum_Par
       @param top Desc: Odata top results
       @param skip Desc: Odata skip results
       @param inlinecount Desc: Odata.count value
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas headers
    Returns: 
-      200 Desc: OK => reference#/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentListRow
+      200 Desc: OK => reference #/components/schemas/Epicor.RESTApi.Help.ODataSetResponse_System.Collections.Generic.List_Ice.Tablesets.SysAgentListRow
    */  
 export function get_List(select?:string, filter?:string, orderby?:string, top?:string, skip?:string, inlinecount?:string, epicorHeaders?:Headers){
 
@@ -1082,7 +1297,14 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
          resolve(data as Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentListRow)
           })
@@ -1094,6 +1316,23 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 // Custom methods:
 //////////////////////////////////////////////////////////////////////////
@@ -1108,7 +1347,7 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
    Required: True   Allow empty value : True
    Required: True
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetRows_output
@@ -1177,15 +1416,22 @@ export function get_GetRows(whereClauseSysAgent:string, whereClauseSysAgentSched
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetRows_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetRows" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)
@@ -1198,7 +1444,7 @@ export function get_GetRows(whereClauseSysAgent:string, whereClauseSysAgentSched
    Description: Returns a DataSet given the primary key.
    OperationID: Get_GetByID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByID_output
@@ -1222,15 +1468,22 @@ export function get_GetByID(agentID:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetByID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1245,7 +1498,7 @@ export function get_GetByID(agentID:string, epicorHeaders?:Headers){
       @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
       @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
       @param absolutePage Desc: Page of rows to return.   Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetList_output
@@ -1287,15 +1540,22 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetList" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1307,30 +1567,37 @@ export function get_GetList(whereClause:string, pageSize:string, absolutePage:st
    Summary: Invoke method SetSysAgentStatusToStarted
    Description: Sets the given SysAgent to a status of started. Also sets the NextRunOn date of any of the agent's schedules with a type of 'Startup'.
    OperationID: SetSysAgentStatusToStarted
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetSysAgentStatusToStarted_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetSysAgentStatusToStarted_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetSysAgentStatusToStarted_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetSysAgentStatusToStarted(requestBody:any, epicorHeaders?:Headers){
+export function post_SetSysAgentStatusToStarted(requestBody:SetSysAgentStatusToStarted_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetSysAgentStatusToStarted_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/SetSysAgentStatusToStarted", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetSysAgentStatusToStarted_output)
           })
       .catch((error) => {
           reject(error)
@@ -1342,30 +1609,37 @@ export function post_SetSysAgentStatusToStarted(requestBody:any, epicorHeaders?:
    Summary: Invoke method SetSysAgentStatusToStopped
    Description: Sets the system agent status to stopped.
    OperationID: SetSysAgentStatusToStopped
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/SetSysAgentStatusToStopped_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/SetSysAgentStatusToStopped_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/SetSysAgentStatusToStopped_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_SetSysAgentStatusToStopped(requestBody:any, epicorHeaders?:Headers){
+export function post_SetSysAgentStatusToStopped(requestBody:SetSysAgentStatusToStopped_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<SetSysAgentStatusToStopped_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/SetSysAgentStatusToStopped", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as SetSysAgentStatusToStopped_output)
           })
       .catch((error) => {
           reject(error)
@@ -1377,30 +1651,37 @@ export function post_SetSysAgentStatusToStopped(requestBody:any, epicorHeaders?:
    Summary: Invoke method GetByIdForTaskAgent
    Description: Gets the SysAgent record and its associated schedules for use by the task agent.
    OperationID: GetByIdForTaskAgent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetByIdForTaskAgent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetByIdForTaskAgent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetByIdForTaskAgent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetByIdForTaskAgent(requestBody:any, epicorHeaders?:Headers){
+export function post_GetByIdForTaskAgent(requestBody:GetByIdForTaskAgent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetByIdForTaskAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetByIdForTaskAgent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetByIdForTaskAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -1412,30 +1693,37 @@ export function post_GetByIdForTaskAgent(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method ResetScheduleProcessingStartedOn
    Description: Deletes the SysAgentSchedProcessing record for the given schedule.
    OperationID: ResetScheduleProcessingStartedOn
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/ResetScheduleProcessingStartedOn_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/ResetScheduleProcessingStartedOn_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/ResetScheduleProcessingStartedOn_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_ResetScheduleProcessingStartedOn(requestBody:any, epicorHeaders?:Headers){
+export function post_ResetScheduleProcessingStartedOn(requestBody:ResetScheduleProcessingStartedOn_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<ResetScheduleProcessingStartedOn_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/ResetScheduleProcessingStartedOn", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as ResetScheduleProcessingStartedOn_output)
           })
       .catch((error) => {
           reject(error)
@@ -1447,30 +1735,37 @@ export function post_ResetScheduleProcessingStartedOn(requestBody:any, epicorHea
    Summary: Invoke method PurgeTaskHistory
    Description: Purges the SysTask rows that have History set to true and are older than our purge date.
    OperationID: PurgeTaskHistory
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PurgeTaskHistory_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PurgeTaskHistory_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PurgeTaskHistory_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PurgeTaskHistory(requestBody:any, epicorHeaders?:Headers){
+export function post_PurgeTaskHistory(requestBody:PurgeTaskHistory_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PurgeTaskHistory_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/PurgeTaskHistory", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PurgeTaskHistory_output)
           })
       .catch((error) => {
           reject(error)
@@ -1482,30 +1777,37 @@ export function post_PurgeTaskHistory(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method PurgeReports
    Description: Purges reports and their associated data that are older than the specified purge date.
    OperationID: PurgeReports
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/PurgeReports_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/PurgeReports_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/PurgeReports_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_PurgeReports(requestBody:any, epicorHeaders?:Headers){
+export function post_PurgeReports(requestBody:PurgeReports_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<PurgeReports_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/PurgeReports", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as PurgeReports_output)
           })
       .catch((error) => {
           reject(error)
@@ -1517,30 +1819,37 @@ export function post_PurgeReports(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetAgentSchedList
    Description: To return a dataset of SysAgentSched records for a given agent id.
    OperationID: GetAgentSchedList
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetAgentSchedList_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetAgentSchedList_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetAgentSchedList_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetAgentSchedList(requestBody:any, epicorHeaders?:Headers){
+export function post_GetAgentSchedList(requestBody:GetAgentSchedList_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetAgentSchedList_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetAgentSchedList", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetAgentSchedList_output)
           })
       .catch((error) => {
           reject(error)
@@ -1552,7 +1861,7 @@ export function post_GetAgentSchedList(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetSchedListForDefaultAgent
    Description: Get list of schedules for default agent.
    OperationID: GetSchedListForDefaultAgent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetSchedListForDefaultAgent_output
@@ -1565,15 +1874,22 @@ export function post_GetSchedListForDefaultAgent(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetSchedListForDefaultAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetSchedListForDefaultAgent", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetSchedListForDefaultAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -1585,7 +1901,7 @@ export function post_GetSchedListForDefaultAgent(epicorHeaders?:Headers){
    Summary: Invoke method GetDefaultTaskAgentID
    Description: Returns the default Task Agent ID.
    OperationID: GetDefaultTaskAgentID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultTaskAgentID_output
@@ -1598,15 +1914,22 @@ export function post_GetDefaultTaskAgentID(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultTaskAgentID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetDefaultTaskAgentID", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultTaskAgentID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1618,7 +1941,7 @@ export function post_GetDefaultTaskAgentID(epicorHeaders?:Headers){
    Summary: Invoke method GetDefaultTaskAgent
    Description: Gets the default task agent.  If no SysAgent record exists will return an empty tableset.
    OperationID: GetDefaultTaskAgent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetDefaultTaskAgent_output
@@ -1631,15 +1954,22 @@ export function post_GetDefaultTaskAgent(epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetDefaultTaskAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetDefaultTaskAgent", {
           method: 'post',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetDefaultTaskAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -1651,30 +1981,37 @@ export function post_GetDefaultTaskAgent(epicorHeaders?:Headers){
    Summary: Invoke method RetryTask
    Description: Queues a task to be reran at configured intervals set up to the maximum amount of allowed attempts.
    OperationID: RetryTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/RetryTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/RetryTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/RetryTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_RetryTask(requestBody:any, epicorHeaders?:Headers){
+export function post_RetryTask(requestBody:RetryTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<RetryTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/RetryTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as RetryTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -1686,30 +2023,37 @@ export function post_RetryTask(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewSysAgent
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewSysAgent
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSysAgent_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSysAgent_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSysAgent_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSysAgent(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSysAgent(requestBody:GetNewSysAgent_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSysAgent_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetNewSysAgent", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSysAgent_output)
           })
       .catch((error) => {
           reject(error)
@@ -1721,30 +2065,37 @@ export function post_GetNewSysAgent(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetNewSysAgentSched
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewSysAgentSched
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSysAgentSched_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSysAgentSched_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSysAgentSched_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSysAgentSched(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSysAgentSched(requestBody:GetNewSysAgentSched_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSysAgentSched_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetNewSysAgentSched", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSysAgentSched_output)
           })
       .catch((error) => {
           reject(error)
@@ -1756,30 +2107,37 @@ export function post_GetNewSysAgentSched(requestBody:any, epicorHeaders?:Headers
    Summary: Invoke method GetNewSysAgentTask
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewSysAgentTask
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSysAgentTask_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSysAgentTask_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSysAgentTask_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSysAgentTask(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSysAgentTask(requestBody:GetNewSysAgentTask_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSysAgentTask_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetNewSysAgentTask", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSysAgentTask_output)
           })
       .catch((error) => {
           reject(error)
@@ -1791,30 +2149,37 @@ export function post_GetNewSysAgentTask(requestBody:any, epicorHeaders?:Headers)
    Summary: Invoke method GetNewSysAgentTaskParam
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewSysAgentTaskParam
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/GetNewSysAgentTaskParam_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetNewSysAgentTaskParam_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetNewSysAgentTaskParam_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_GetNewSysAgentTaskParam(requestBody:any, epicorHeaders?:Headers){
+export function post_GetNewSysAgentTaskParam(requestBody:GetNewSysAgentTaskParam_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetNewSysAgentTaskParam_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetNewSysAgentTaskParam", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetNewSysAgentTaskParam_output)
           })
       .catch((error) => {
           reject(error)
@@ -1826,30 +2191,37 @@ export function post_GetNewSysAgentTaskParam(requestBody:any, epicorHeaders?:Hea
    Summary: Invoke method DeleteByID
    Description: Deletes a row given its ID.
    OperationID: DeleteByID
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/DeleteByID_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/DeleteByID_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
+export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<DeleteByID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/DeleteByID", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as DeleteByID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1861,7 +2233,7 @@ export function post_DeleteByID(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowID
    OperationID: Get_GetBySysRowID
    Required: True   Allow empty value : True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowID_output
@@ -1885,15 +2257,22 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowID_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetBySysRowID" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowID_output)
           })
       .catch((error) => {
           reject(error)
@@ -1905,7 +2284,7 @@ export function get_GetBySysRowID(id:string, epicorHeaders?:Headers){
    Summary: Invoke method GetBySysRowIDs
    OperationID: Get_GetBySysRowIDs
    Required: True
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
    Returns: 
       200 Desc: OK => reference#/components/schemas/GetBySysRowIDs_output
@@ -1929,15 +2308,22 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<GetBySysRowIDs_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/GetBySysRowIDs" + params, {
           method: 'get',
           headers: headers,
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as GetBySysRowIDs_output)
           })
       .catch((error) => {
           reject(error)
@@ -1949,30 +2335,37 @@ export function get_GetBySysRowIDs(ids:string, epicorHeaders?:Headers){
    Summary: Invoke method Update
    Description: Commits the DataSet changes to the data store.
    OperationID: Update
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/Update_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/Update_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/Update_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_Update(requestBody:any, epicorHeaders?:Headers){
+export function post_Update(requestBody:Update_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<Update_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/Update", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as Update_output)
           })
       .catch((error) => {
           reject(error)
@@ -1984,30 +2377,37 @@ export function post_Update(requestBody:any, epicorHeaders?:Headers){
    Summary: Invoke method UpdateExt
    Description: Apply input data to service by calling GetByID/GetNew/Update methods.
    OperationID: UpdateExt
-      :param epicorHeaders: A string representing the epicor log in information to be used, 
+      @param epicorHeaders A string representing the epicor log in information to be used, 
          already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      :param requestBody: Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/UpdateExt_input
    Returns: 
       200 Desc: OK => reference#/components/schemas/UpdateExt_output
       500 Desc: Internal server error. Server is unable to process the request.
    */  
-export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
+export function post_UpdateExt(requestBody:UpdateExt_input, epicorHeaders?:Headers){
 
    var headers = configEpicorSchemas.epicorHeaders
    if(typeof epicorHeaders !== 'undefined'){
          headers = epicorHeaders
    }
 
-   return (new Promise<any>((resolve, reject) => {
+   return (new Promise<UpdateExt_output>((resolve, reject) => {
       const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.SysAgentSvc/UpdateExt", {
           method: 'post',
           headers: headers,
           body: JSON.stringify(requestBody)
       })
       fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
       .then((data) => {
-         resolve(data as any)
+         resolve(data as UpdateExt_output)
           })
       .catch((error) => {
           reject(error)
@@ -2018,31 +2418,48 @@ export function post_UpdateExt(requestBody:any, epicorHeaders?:Headers){
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // OData Schemas:
 //////////////////////////////////////////////////////////////////////////
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentListRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_SysAgentListRow[],
+   "value":Ice_Tablesets_SysAgentListRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_SysAgentRow[],
+   "value":Ice_Tablesets_SysAgentRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentSchedRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_SysAgentSchedRow[],
+   "value":Ice_Tablesets_SysAgentSchedRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentTaskParamRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_SysAgentTaskParamRow[],
+   "value":Ice_Tablesets_SysAgentTaskParamRow,
 }
 
 export interface Epicor_RESTApi_Help_ODataSetResponse_System_Collections_Generic_List_Ice_Tablesets_SysAgentTaskRow{
    "odatametadata":string,
-   "value":Ice_Tablesets_SysAgentTaskRow[],
+   "value":Ice_Tablesets_SysAgentTaskRow,
 }
 
 export interface Ice_Tablesets_SysAgentListRow{
@@ -2303,6 +2720,23 @@ Example: Epicor.Mfg.UI.xx/xxxxxxx.dll  */
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Custom Schemas:
 //////////////////////////////////////////////////////////////////////////
    /** Required : 
@@ -2420,7 +2854,7 @@ export interface GetNewSysAgentSched_input{
 export interface GetNewSysAgentSched_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_SysAgentTableset[],
+   ds:Ice_Tablesets_SysAgentTableset,
 }
 }
 
@@ -2440,7 +2874,7 @@ export interface GetNewSysAgentTaskParam_input{
 export interface GetNewSysAgentTaskParam_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_SysAgentTableset[],
+   ds:Ice_Tablesets_SysAgentTableset,
 }
 }
 
@@ -2458,7 +2892,7 @@ export interface GetNewSysAgentTask_input{
 export interface GetNewSysAgentTask_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_SysAgentTableset[],
+   ds:Ice_Tablesets_SysAgentTableset,
 }
 }
 
@@ -2472,7 +2906,7 @@ export interface GetNewSysAgent_input{
 export interface GetNewSysAgent_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_SysAgentTableset[],
+   ds:Ice_Tablesets_SysAgentTableset,
 }
 }
 
@@ -2967,7 +3401,7 @@ export interface UpdateExt_output{
    returnObj:Ice_BOUpdErrorTableset[],
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_UpdExtSysAgentTableset[],
+   ds:Ice_Tablesets_UpdExtSysAgentTableset,
    errorsOccurred:boolean,
 }
 }
@@ -2982,7 +3416,7 @@ export interface Update_input{
 export interface Update_output{
 parameters : {
       /**  output parameters  */  
-   ds:Ice_Tablesets_SysAgentTableset[],
+   ds:Ice_Tablesets_SysAgentTableset,
 }
 }
 
